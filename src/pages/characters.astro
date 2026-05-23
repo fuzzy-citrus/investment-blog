@@ -1,0 +1,278 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { characters, blogMeta, teamLabels } from '../data/characters';
+import type { Team } from '../data/characters';
+
+const founder = characters.filter(c => c.team === 'founder');
+const manager = characters.filter(c => c.team === 'manager');
+const teamA = characters.filter(c => c.team === 'teamA');
+const teamB = characters.filter(c => c.team === 'teamB');
+const cross = characters.filter(c => c.team === 'cross');
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title="メンバー一覧 | バリュー商会" description="バリュー商会の投資担当メンバー紹介" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>メンバー一覧</h1>
+			<p class="lead">バリュー商会の投資担当たちをご紹介します。</p>
+
+			<!-- 創業者・課長 -->
+			<section class="top-members">
+				{[...founder, ...manager].map(c => (
+					<div class="card card-top" style={`background: ${c.avatarColor}`}>
+						<div class="avatar" style={`background: white`}>{c.emoji}</div>
+						<div class="card-body">
+							<div class="card-meta">{c.title}</div>
+							<h2 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h2>
+							<p class="species">{c.species}</p>
+							<blockquote>{c.quote}</blockquote>
+							<p class="catchphrase">{c.catchphrase}</p>
+							<div class="tags">
+								{c.tags.map(t => <span class="tag">{t}</span>)}
+							</div>
+						</div>
+					</div>
+				))}
+			</section>
+
+			<!-- バリュー発掘班 -->
+			<section class="team-section">
+				<h2 class="team-label">📊 {teamLabels['teamA']}</h2>
+				<div class="card-grid">
+					{teamA.map(c => (
+						<div class="card" style={`background: ${c.avatarColor}`}>
+							<div class="avatar">{c.emoji}</div>
+							<div class="card-body">
+								<div class="card-meta">{c.title}</div>
+								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
+								<p class="species">{c.species}</p>
+								<blockquote>{c.quote}</blockquote>
+								<div class="tags">
+									{c.tags.map(t => <span class="tag">{t}</span>)}
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- インカム・優待班 -->
+			<section class="team-section">
+				<h2 class="team-label">💴 {teamLabels['teamB']}</h2>
+				<div class="card-grid">
+					{teamB.map(c => (
+						<div class="card" style={`background: ${c.avatarColor}`}>
+							<div class="avatar">{c.emoji}</div>
+							<div class="card-body">
+								<div class="card-meta">{c.title}</div>
+								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
+								<p class="species">{c.species}</p>
+								<blockquote>{c.quote}</blockquote>
+								<div class="tags">
+									{c.tags.map(t => <span class="tag">{t}</span>)}
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- 横断サポート -->
+			<section class="team-section">
+				<h2 class="team-label">🔍 {teamLabels['cross']}</h2>
+				<div class="card-grid">
+					{cross.map(c => (
+						<div class="card" style={`background: ${c.avatarColor}`}>
+							<div class="avatar">{c.emoji}</div>
+							<div class="card-body">
+								<div class="card-meta">{c.title}</div>
+								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
+								<p class="species">{c.species}</p>
+								<blockquote>{c.quote}</blockquote>
+								<div class="tags">
+									{c.tags.map(t => <span class="tag">{t}</span>)}
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- ライバル陣営 -->
+			<section class="rival-section">
+				<h2 class="team-label rival-label">⚔️ ライバル陣営</h2>
+				<div class="card-grid">
+					{blogMeta.rivals.map(r => (
+						<div class="card rival-card">
+							<div class="avatar rival-avatar">{r.emoji}</div>
+							<div class="card-body">
+								<h3 class="card-name">{r.name}</h3>
+								<p class="species">{r.subtitle}</p>
+								<p class="rival-members">
+									{r.members.join('・')}
+								</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 3em 1em;
+	}
+	h1 {
+		font-size: 2em;
+		color: var(--accent-dark);
+		margin-bottom: 0.2em;
+	}
+	.lead {
+		color: rgb(var(--gray));
+		margin-bottom: 2.5em;
+	}
+
+	/* 創業者・課長 */
+	.top-members {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.2em;
+		margin-bottom: 3em;
+	}
+	.card-top {
+		border: 2px solid var(--accent);
+	}
+
+	/* チームセクション */
+	.team-section {
+		margin-bottom: 3em;
+	}
+	.team-label {
+		font-size: 1.2em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin-bottom: 1em;
+	}
+	.card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1em;
+	}
+
+	/* カード共通 */
+	.card {
+		border-radius: 10px;
+		padding: 1.2em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8em;
+		box-shadow: 0 1px 4px rgba(0,0,0,8%);
+	}
+	.avatar {
+		font-size: 2.4em;
+		width: 2em;
+		height: 2em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: white;
+		border-radius: 50%;
+		box-shadow: 0 1px 3px rgba(0,0,0,10%);
+	}
+	.card-body {
+		flex: 1;
+	}
+	.card-meta {
+		font-size: 0.75em;
+		color: var(--accent-dark);
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		margin-bottom: 0.2em;
+	}
+	.card-name {
+		font-size: 1.05em;
+		margin: 0 0 0.2em;
+		color: rgb(var(--black));
+	}
+	.reading {
+		font-size: 0.75em;
+		font-weight: 400;
+		color: rgb(var(--gray));
+	}
+	.species {
+		font-size: 0.82em;
+		color: rgb(var(--gray));
+		margin: 0 0 0.6em;
+	}
+	blockquote {
+		border-left: 3px solid var(--accent);
+		padding: 0.2em 0 0.2em 0.8em;
+		margin: 0 0 0.6em;
+		font-size: 0.85em;
+		font-style: italic;
+		color: rgb(var(--gray-dark));
+	}
+	.catchphrase {
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+		margin: 0 0 0.5em;
+	}
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3em;
+	}
+	.tag {
+		background: white;
+		color: var(--accent-dark);
+		font-size: 0.72em;
+		padding: 0.15em 0.55em;
+		border-radius: 4px;
+		font-weight: 600;
+		border: 1px solid var(--accent);
+	}
+
+	/* ライバル */
+	.rival-section {
+		border: 2px dashed rgb(var(--gray-light));
+		border-radius: 10px;
+		padding: 1.5em;
+	}
+	.rival-label {
+		border-left-color: #aaa;
+		color: rgb(var(--gray-dark));
+	}
+	.rival-card {
+		background: #f9f9f9;
+	}
+	.rival-avatar {
+		background: #f0f0f0;
+	}
+	.rival-members {
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+		margin: 0;
+	}
+
+	@media (max-width: 720px) {
+		.top-members {
+			grid-template-columns: 1fr;
+		}
+		.card-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
