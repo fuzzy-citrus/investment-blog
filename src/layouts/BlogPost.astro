@@ -154,6 +154,22 @@ const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro
 				color: rgb(var(--gray));
 			}
 			.last-updated-on { font-style: italic; }
+			.stock-analysis-link {
+				padding: 0.6em 1.5em;
+				background: rgba(0,0,0,0.25);
+				border-top: 1px solid rgba(255,255,255,0.06);
+			}
+			.stock-analysis-link a {
+				font-size: 0.78em;
+				color: #5dcca8;
+				text-decoration: none;
+				font-weight: 600;
+				letter-spacing: 0.02em;
+			}
+			.stock-analysis-link a:hover {
+				color: #a0e8d0;
+				text-decoration: underline;
+			}
 			@media (max-width: 720px) {
 				.stock-kpis { grid-template-columns: repeat(3, 1fr); }
 				.stock-name { font-size: 1.3em; }
@@ -205,6 +221,11 @@ const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro
 									<div class="kpi-label">修正PBR</div>
 									<div class="kpi-value red">{stockCard.modifiedPBR}</div>
 								</div>
+							</div>
+							<div class="stock-analysis-link">
+								<a href={`/analysis/${stockCard.ticker === '9036' ? 'tobu-network-9036' : stockCard.ticker}.html`} target="_blank" rel="noopener">
+									📊 完全版分析資料を見る（全タブ展開）→
+								</a>
 							</div>
 						</div>
 					</div>
