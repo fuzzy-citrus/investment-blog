@@ -41,6 +41,10 @@ import Footer from '../components/Footer.astro';
 				<p>
 					インデックスに物足りなくなった人、米株の乱高下にやや疲れた人、「もう少し地に足のついた投資がしたい」と思い始めた人のための、ゆるくて地味で時々熱い記録。
 				</p>
+				<div class="amateur-note">
+					<span class="amateur-icon">🙏</span>
+					<p>ブログ運営は素人ちゃんなので多少変なところには目をつぶって、暖かい目で応援してもらえると嬉しいです。週1回以上は銘柄分析も交えて更新していきたいところ。</p>
+				</div>
 			</section>
 
 			<section class="section">
@@ -132,6 +136,36 @@ import Footer from '../components/Footer.astro';
 					<div class="rival-card">
 						<div class="rival-head">🚀 <strong>モメンタムチンパンジー組合 米国支部</strong></div>
 						<p>結果を出してるから怖い。円安局面では完全に負けていた時期もあった。でも日本のインフレ環境では、日本の割安実物資産が見直される局面が来ると信じている。</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section stance-section">
+				<h2>分析スタンスと期待株価の算出について</h2>
+				<p>
+					このブログに掲載している「期待株価」は、複数のAIを活用した詳細分析をもとに、ベア・ベース・ブルの3ケースそれぞれについて確率と目標株価を想定し、確率加重平均として算出した参考値です。
+				</p>
+				<div class="stance-cards">
+					<div class="stance-card">
+						<div class="stance-icon">🤖</div>
+						<div>
+							<strong>AIを活用した多角分析</strong>
+							<p>複数のAIツールで有価証券報告書・株主構造・財務データを読み込み、ベア（悲観）・ベース（標準）・ブル（楽観）の3シナリオを設定。各シナリオへの確率を割り当てて加重平均を「期待株価」として算出しています。</p>
+						</div>
+					</div>
+					<div class="stance-card">
+						<div class="stance-icon">⚠️</div>
+						<div>
+							<strong>バイアスと免責について</strong>
+							<p>すでに保有・注目している銘柄を分析することが多く、強気バイアスがかかっている可能性があります。「まったく根拠なし」ではありませんが、プロの投資アドバイスでもありません。最終的な投資判断はご自身の責任でお願いします。</p>
+						</div>
+					</div>
+					<div class="stance-card">
+						<div class="stance-icon">📋</div>
+						<div>
+							<strong>一次情報へのこだわり</strong>
+							<p>AIによるハルシネーション（事実と異なる情報の生成）を防ぐため、有報・TDnet開示・株主名簿の実数値を一次情報として確認するプロセスを設けています。それでも誤りがあればご指摘ください。</p>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -311,6 +345,45 @@ import Footer from '../components/Footer.astro';
 	}
 	.rival-head { margin-bottom: 0.4em; font-size: 0.95em; }
 	.rival-card p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; }
+
+	/* 素人ちゃんノート */
+	.amateur-note {
+		display: flex;
+		gap: 0.7em;
+		align-items: flex-start;
+		background: var(--accent-light);
+		border-radius: 8px;
+		padding: 0.8em 1em;
+		margin-top: 1em;
+	}
+	.amateur-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 0.1em; }
+	.amateur-note p {
+		font-size: 0.85em;
+		color: var(--accent-dark);
+		margin: 0;
+		line-height: 1.7;
+	}
+
+	/* 分析スタンス */
+	.stance-section {}
+	.stance-cards {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8em;
+		margin-top: 0.8em;
+	}
+	.stance-card {
+		display: flex;
+		gap: 0.9em;
+		align-items: flex-start;
+		background: #f7f9fc;
+		border: 1px solid #e4e8ef;
+		border-radius: 8px;
+		padding: 0.9em 1.1em;
+	}
+	.stance-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 0.1em; }
+	.stance-card strong { display: block; font-size: 0.88em; color: rgb(var(--black)); margin-bottom: 0.3em; }
+	.stance-card p { font-size: 0.82em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.7; }
 
 	/* メンバーリンク */
 	.members-link {

@@ -32,6 +32,11 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</section>
 
+			<div class="method-note">
+				<span class="method-icon">🤖</span>
+				<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。参考値であり投資勧誘ではありません。 <a href="/about#分析スタンス">詳しくはAboutへ →</a></p>
+			</div>
+
 			<section class="posts-section">
 				<h2>最新記事</h2>
 				<ul class="post-list">
@@ -110,6 +115,25 @@ const posts = (await getCollection('blog')).sort(
 		border-radius: 4px;
 		font-weight: 600;
 	}
+	.method-note {
+		display: flex;
+		gap: 0.6em;
+		align-items: flex-start;
+		background: #f4f6f9;
+		border: 1px solid #dde1e8;
+		border-left: 3px solid var(--accent);
+		border-radius: 6px;
+		padding: 0.65em 0.9em;
+		margin-bottom: 2em;
+		font-size: 0.82em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.6;
+	}
+	.method-icon { font-size: 1.1em; flex-shrink: 0; margin-top: 0.1em; }
+	.method-note p { margin: 0; }
+	.method-note a { color: var(--accent); text-decoration: none; font-weight: 600; }
+	.method-note a:hover { color: var(--accent-dark); }
+
 	.posts-section, .members-teaser {
 		margin-bottom: 3em;
 	}
