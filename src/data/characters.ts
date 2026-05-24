@@ -25,6 +25,33 @@ export interface Character {
   analysisFrames: AnalysisFrame[];
 }
 
+export interface RivalMember {
+  id: string;
+  name: string;
+  reading: string;
+  title: string;
+  emoji: string;
+  avatarColor: string;
+  quote: string;
+  description: string;
+  tags: string[];
+  speechSample: string;
+  numataReaction: string;
+}
+
+export interface RivalOrg {
+  id: string;
+  name: string;
+  subtitle: string;
+  emoji: string;
+  tagline: string;
+  pastSelf: string;
+  respects: string;
+  toSurpass: string;
+  members: RivalMember[];
+}
+
+// ── キャラクター ──────────────────────────────────────────
 export const characters: Character[] = [
   // ── FOUNDER ──────────────────────────────────────────────
   {
@@ -128,8 +155,8 @@ export const characters: Character[] = [
     quote: "これ、誰も見てないですよね？　じゃあ拾います",
     tags: ["低PBR専門", "修正NC計算", "小型株猟師"],
     description:
-      "カワウソは石の下に餌を隠す。拾造は有報の注記・固定資産台帳・隠れた含み益を探す。時価総額50億円以下の誰も見ていない小型株を主戦場とし、PBR0.3倍以下でスクリーニングをかけてから「なぜこんなに安いのか」を一つずつ潰していく。一見地味な運送会社・不動産保有会社に宝が眠っていると信じ、夜見の財務分析と組み合わせて修正NC計算を組み立てる。沼田課長に初めてPBR0.21倍案件を提示した時、課長の目が初めて輝いたと本人は記憶している。",
-    relation: "沼田課長に対してフラットに「拾いました」と報告する数少ないメンバー。夜見と二人三脚で数値を作り、待伏に出口シナリオを依頼する流れを作っている。守田に全部反対されることが多くて若干凹む。",
+      "カワウソは石の下に餌を隠す。拾造は有報の注記・固定資産台帳・隠れた含み益を探す。時価総額50億円以下の誰も見ていない小型株を主戦場とし、PBR0.3倍以下でスクリーニングをかけてから「なぜこんなに安いのか」を一つずつ潰していく。一見地味な運送会社・不動産保有会社に宝が眠っていると信じ、夜見の財務分析と組み合わせて修正NC計算を組み立てる。",
+    relation: "沼田課長に初めてPBR0.21倍案件を提示した時、課長の目が初めて輝いたと本人は記憶している。夜見と二人三脚で数値を作り、待伏に出口シナリオを依頼する流れを作っている。守田に全部反対されることが多くて若干凹む。",
     analysisFrames: [
       {
         icon: "💰",
@@ -332,6 +359,124 @@ export const characters: Character[] = [
   },
 ];
 
+// ── ライバル陣営（フル） ──────────────────────────────────
+export const rivalOrgs: RivalOrg[] = [
+  {
+    id: "index-religion",
+    name: "インデックス宗教法人",
+    subtitle: "総本山オルカン",
+    emoji: "⛩️",
+    tagline: "「信じれば報われる。ただし20年後に」",
+    pastSelf:
+      "迷走期に一度帰依した。低コスト・全世界分散・長期複利——これがベースラインとして正しいのはわかっている。インデックスを否定したら嘘になる。かつての自分はここにいた。",
+    respects:
+      "感情を排除した積立規律。低コストの徹底。暴落に動じない信念の強さ。これらは本物だ。",
+    toSurpass:
+      "個別株にしかない非対称リスク——TOB・水準訂正による数倍リターン——はインデックスでは決して得られない。そこに勝負する意味がある。",
+    members: [
+      {
+        id: "zensekai-bouzu",
+        name: "住職・全世界坊主",
+        reading: "ぜんせかいぼうず",
+        title: "インデックス宗教法人トップ",
+        emoji: "🧘",
+        avatarColor: "#EEF5FF",
+        quote: "分散は徳、コストは罪",
+        description:
+          "オルカン一本を説く宗教法人のトップ。信者に「余計なことをするな」と繰り返す。穏やかな笑顔で「あなたの個別株、長期で勝てますか？」と問いかけてくる。反論できないのが最大の脅威。",
+        tags: ["全世界分散", "低コスト原理主義", "長期不動"],
+        speechSample: "信託報酬0.0582%。これが真理です。あなたの売買手数料は今年いくらでしたか？",
+        numataReaction: "……正しいのはわかってる。でも物足りないんだ",
+      },
+      {
+        id: "tsumitate-hitsuji",
+        name: "信者その一・積立ひつじ",
+        reading: "つみたてひつじ",
+        title: "模範的積立NISA信者",
+        emoji: "🐑",
+        avatarColor: "#F5F0FF",
+        quote: "毎月5万、考えない、見ない",
+        description:
+          "群れをなして積立を続けるひつじ信者。相場暴落でも「長期では上がる」と信じて何もしない。実は資産形成では最強クラスかもしれないが、面白みが一切ない。個別株民を「かわいそう」という目で見てくる。",
+        tags: ["積立NISA民", "暴落無視", "感情ゼロ"],
+        speechSample: "今月も積立完了。特に何もしません。TOBってなんですか？",
+        numataReaction: "お前が一番強い気がして悔しい",
+      },
+      {
+        id: "orukan-oumu",
+        name: "布教係・オルカン鸚鵡",
+        reading: "おうむ",
+        title: "SNSインフルエンサー（自動布教型）",
+        emoji: "🦜",
+        avatarColor: "#F0FFF4",
+        quote: "オルカン一択！　オルカン一択！",
+        description:
+          "SNSで「オルカン最強論」を布教するインフルエンサー的存在。自分では何も考えず、受け売りを大声で繰り返す。個別株民を見ると「ギャンブラー！」と叫ぶ。悪気はない。",
+        tags: ["SNS布教型", "受け売り100%", "思考停止"],
+        speechSample: "個別株はギャンブル！　オルカン！　オルカン！　長期！　複利！",
+        numataReaction: "うるさい。でも半分は正しい",
+      },
+    ],
+  },
+  {
+    id: "momentum-chimp",
+    name: "モメンタムチンパンジー組合",
+    subtitle: "米国支部",
+    emoji: "🚀",
+    tagline: "「強いものを掴め。落ちるナイフは拾うな」",
+    pastSelf:
+      "円安局面で完全に負けていた時期がある。米国モメンタムの威力は本物だと認めている。あの頃の自分はここにいた。",
+    respects:
+      "モメンタムの威力と資本市場の深さ。成長を素直に取りに行く判断力。感情なく「強いものに乗る」シンプルさ。",
+    toSurpass:
+      "割安日本個別株の非対称リスク——修正PBR0.2倍の含み益、TOB/MBO確率95%——これはモメンタム投資では絶対に到達できない非対称構造だ。",
+    members: [
+      {
+        id: "tech-bancho",
+        name: "テック番長",
+        reading: "てっくばんちょう",
+        title: "モメンタム純粋派リーダー",
+        emoji: "🦍",
+        avatarColor: "#FFF3E0",
+        quote: "上がるから買う。それだけだ",
+        description:
+          "論理より勢い。「なぜ上がるか」は考えない、「上がっているから買う」。NVDAだMAGAだと騒ぎながら結果を出し続けるので怖い。バリュー株の話をすると「で、それ今年何％上がりましたか？」と聞いてくる。",
+        tags: ["モメンタム純粋派", "テック集中", "下がったら売り"],
+        speechSample: "NVDA今年+180%。あなたの東部ネットワークは？",
+        numataReaction: "……それ言わないでくれ",
+      },
+      {
+        id: "rebanas-kozaru",
+        name: "レバナス小猿",
+        reading: "ればなすこざる",
+        title: "QQQ3倍信者・過激派",
+        emoji: "🐒",
+        avatarColor: "#FFF0F0",
+        quote: "3倍レバで10年。これが答えだ",
+        description:
+          "QQQ3倍レバレッジETFを信仰する過激派。長期では上がり続けると信じて逆張りしない。暴落時に「これが試練だ」と言いながら追加購入する姿勢は尊敬するが、バリュー株の含み益論を話しても「わからない」とキョトンとする。",
+        tags: ["レバレッジETF", "NASDAQ3倍", "強気一辺倒"],
+        speechSample: "暴落？　チャンスですよ？　追加で3倍レバ買いました",
+        numataReaction: "お前の神経は鋼でできてるのか",
+      },
+      {
+        id: "dollar-taka",
+        name: "ドル建て鷹",
+        reading: "どるだてたか",
+        title: "ドル資産信者・為替ヘッジ否定派",
+        emoji: "🦅",
+        avatarColor: "#EBF5FF",
+        quote: "円は信用できない。ドル一択",
+        description:
+          "日本円を「沈みゆく船」と見なし、資産のほぼ全てをドル建てで保有する鷹派。円安局面では無双したが、円高に振れると沈黙する。日本個別株を「通貨リスク付きの割安ゴミ」と切り捨てるが、修正PBR0.21倍論を聞いた時だけ少し表情が変わる。",
+        tags: ["ドル資産信者", "円安恩恵", "為替ヘッジ不要論"],
+        speechSample: "あなたの資産、ドル建てで換算するといくらですか？",
+        numataReaction: "それ聞かれると正直しんどい。でも日本株のインフレヘッジ論で返す",
+      },
+    ],
+  },
+];
+
 // ── ブログ概要 ────────────────────────────────────────────
 export const blogMeta = {
   name: "バリュー商会",
@@ -349,24 +494,6 @@ export const blogMeta = {
     investmentYears: 9,
     tobCount: 20,
   },
-  rivals: [
-    {
-      id: "index-religion",
-      name: "インデックス宗教法人",
-      subtitle: "総本山オルカン",
-      emoji: "⛩️",
-      members: ["住職", "積立ひつじ", "オルカン鸚鵡"],
-      comment: "正しい。間違いなく正しい。でも物足りない。",
-    },
-    {
-      id: "momentum-chimp",
-      name: "モメンタムチンパンジー組合",
-      subtitle: "米国支部",
-      emoji: "🚀",
-      members: ["テック番長", "レバナス小猿", "ドル建て鷹"],
-      comment: "結果を出してるから怖い。でも日本のインフレ環境では割安実物資産が見直される局面が来ると信じている。",
-    },
-  ],
 };
 
 export const teamLabels: Record<Team, string> = {

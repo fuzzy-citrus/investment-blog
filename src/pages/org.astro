@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { characters, blogMeta, teamLabels } from '../data/characters';
+import { characters, rivalOrgs, teamLabels } from '../data/characters';
 
 const founder = characters.find(c => c.team === 'founder')!;
 const manager = characters.find(c => c.team === 'manager')!;
@@ -118,19 +118,25 @@ const cross   = characters.filter(c => c.team === 'cross');
 
         <!-- RIVALS -->
         <div class="tier rivals-tier">
-          <div class="tier-label rivals-label">RIVALS</div>
+          <div class="tier-label rivals-label">⚔️ RIVALS — 過去の自分であり好敵手</div>
           <div class="row row-rivals">
-            {blogMeta.rivals.map(r => (
+            {rivalOrgs.map(org => (
               <div class="card card-rival">
                 <div class="rival-head">
-                  <span class="rival-emoji">{r.emoji}</span>
+                  <span class="rival-emoji">{org.emoji}</span>
                   <div>
-                    <strong class="sm">{r.name}</strong>
-                    <div class="species">{r.subtitle}</div>
+                    <strong class="sm">{org.name}</strong>
+                    <div class="species">{org.subtitle}</div>
+                    <div class="rival-tagline">{org.tagline}</div>
                   </div>
                 </div>
-                <div class="rival-members">
-                  {r.members.map(m => <span class="rival-member">{m}</span>)}
+                <p class="rival-past">{org.pastSelf}</p>
+                <div class="rival-chips">
+                  {org.members.map(m => (
+                    <span class="rival-chip">
+                      {m.emoji} {m.name}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
@@ -258,12 +264,21 @@ const cross   = characters.filter(c => c.team === 'cross');
 
   /* ライバル */
   .rivals-tier { margin-top: 1.5em; }
-  .rival-head { display: flex; align-items: center; gap: 0.5em; margin-bottom: 0.4em; }
-  .rival-emoji { font-size: 1.4em; }
-  .rival-members { display: flex; gap: 0.4em; flex-wrap: wrap; }
-  .rival-member {
-    font-size: 0.7em; color: rgb(var(--gray));
-    background: #f0f0f0; padding: 0.1em 0.45em; border-radius: 3px;
+  .rivals-label { font-size: 0.7em; color: #888; }
+  .row-rivals { gap: 0.7em; width: 100%; }
+  .row-rivals .card { flex: 1 1 0; }
+  .rival-head { display: flex; align-items: flex-start; gap: 0.5em; margin-bottom: 0.5em; }
+  .rival-emoji { font-size: 1.6em; flex-shrink: 0; margin-top: 0.1em; }
+  .rival-tagline { font-size: 0.66em; color: rgb(var(--gray)); font-style: italic; margin-top: 0.15em; }
+  .rival-past {
+    font-size: 0.7em; color: rgb(var(--gray)); line-height: 1.55; margin: 0;
+    border-left: 2px solid #ccc; padding-left: 0.5em;
+    font-style: italic;
+  }
+  .rival-chips { display: flex; gap: 0.3em; flex-wrap: wrap; margin-top: 0.2em; }
+  .rival-chip {
+    font-size: 0.68em; color: rgb(var(--gray-dark));
+    background: #ececec; padding: 0.1em 0.5em; border-radius: 3px;
   }
 
   @media (max-width: 720px) {

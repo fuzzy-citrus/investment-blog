@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { characters, blogMeta, teamLabels } from '../data/characters';
+import { characters, rivalOrgs, teamLabels } from '../data/characters';
 
 const founder  = characters.filter(c => c.team === 'founder');
 const manager  = characters.filter(c => c.team === 'manager');
@@ -87,25 +87,71 @@ const sections = [
       ))}
 
       {/* ── ライバル陣営 ── */}
-      <section class="rival-section">
+      <section class="rival-outer">
         <h2 class="team-heading rival-heading">⚔️ ライバル陣営</h2>
-        <div class="rival-grid">
-          {blogMeta.rivals.map(r => (
-            <div class="rival-card">
-              <div class="rival-head">
-                <span class="rival-emoji">{r.emoji}</span>
+        <p class="rival-intro">
+          彼らはかつての自分の一面であり、良さを認めたうえで超えていくべき好敵手。
+        </p>
+
+        {rivalOrgs.map(org => (
+          <div class="rival-org">
+
+            {/* 組織ヘッダー */}
+            <div class="rival-org-header">
+              <div class="rival-org-title-row">
+                <span class="rival-org-emoji">{org.emoji}</span>
                 <div>
-                  <div class="rival-name">{r.name}</div>
-                  <div class="rival-subtitle">{r.subtitle}</div>
+                  <div class="rival-org-name">{org.name}　{org.subtitle}</div>
+                  <div class="rival-org-tagline">{org.tagline}</div>
                 </div>
               </div>
-              <p class="rival-comment">{r.comment}</p>
-              <div class="rival-members">
-                {r.members.map(m => <span class="rival-member">{m}</span>)}
+              <div class="rival-org-meta">
+                <div class="rival-meta-item past-self">
+                  <span class="rival-meta-label">🪞 過去の自分として</span>
+                  <p>{org.pastSelf}</p>
+                </div>
+                <div class="rival-org-sub-grid">
+                  <div class="rival-meta-item">
+                    <span class="rival-meta-label">👍 認める良さ</span>
+                    <p>{org.respects}</p>
+                  </div>
+                  <div class="rival-meta-item">
+                    <span class="rival-meta-label">🎯 超えるべき点</span>
+                    <p>{org.toSurpass}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+
+            {/* メンバーカード */}
+            <div class="rival-members-grid">
+              {org.members.map(m => (
+                <div class="rival-member-card" style={`background: ${m.avatarColor}`}>
+                  <div class="rival-mc-header">
+                    <div class="rival-mc-avatar" style="background: white">{m.emoji}</div>
+                    <div>
+                      <div class="rival-mc-title">{m.title}</div>
+                      <div class="rival-mc-name">{m.name}
+                        <span class="rival-mc-reading">（{m.reading}）</span>
+                      </div>
+                      <div class="rival-mc-quote">「{m.quote}」</div>
+                    </div>
+                  </div>
+                  <p class="rival-mc-desc">{m.description}</p>
+                  <div class="rival-mc-tags">
+                    {m.tags.map(t => <span class="rival-tag">{t}</span>)}
+                  </div>
+                  <div class="rival-mc-speech-block">
+                    <div class="speech-label">口調サンプル</div>
+                    <blockquote class="rival-mc-speech">「{m.speechSample}」</blockquote>
+                    <p class="rival-mc-numata">沼田さん：「{m.numataReaction}」</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        ))}
       </section>
     </main>
     <Footer />
@@ -288,55 +334,185 @@ const sections = [
     margin: 0;
   }
 
-  /* ライバル */
-  .rival-section {
-    border: 2px dashed rgb(var(--gray-light));
-    border-radius: 10px;
-    padding: 1.4em;
+  /* ライバル陣営 */
+  .rival-outer { margin-top: 1em; }
+  .rival-heading {
+    border-left-color: #999;
+    color: rgb(var(--gray-dark));
   }
-  .rival-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8em;
+  .rival-intro {
+    font-size: 0.85em;
+    color: rgb(var(--gray));
+    font-style: italic;
+    margin: -0.5em 0 1.5em;
   }
-  .rival-card {
-    background: #fafafa;
-    border-radius: 8px;
-    padding: 1em 1.1em;
+
+  .rival-org {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.8em;
   }
-  .rival-head {
+
+  /* 組織ヘッダー */
+  .rival-org-header {
+    background: #f4f6f9;
+    padding: 1.2em 1.4em 1em;
+    border-bottom: 1px solid #dde1e8;
+  }
+  .rival-org-title-row {
     display: flex;
     align-items: center;
-    gap: 0.6em;
-    margin-bottom: 0.5em;
+    gap: 0.8em;
+    margin-bottom: 1em;
   }
-  .rival-emoji { font-size: 1.6em; }
-  .rival-name {
-    font-size: 0.88em;
+  .rival-org-emoji { font-size: 2.2em; }
+  .rival-org-name {
+    font-size: 1.05em;
     font-weight: 700;
-    color: rgb(var(--gray-dark));
+    color: rgb(var(--black));
+    line-height: 1.3;
   }
-  .rival-subtitle {
-    font-size: 0.72em;
+  .rival-org-tagline {
+    font-size: 0.78em;
     color: rgb(var(--gray));
+    font-style: italic;
+    margin-top: 0.1em;
   }
-  .rival-comment {
+  .rival-org-meta { display: flex; flex-direction: column; gap: 0.7em; }
+  .rival-org-sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6em;
+  }
+  .rival-meta-item {
+    background: white;
+    border-radius: 7px;
+    padding: 0.6em 0.8em;
+    border: 1px solid #e4e8ef;
+  }
+  .rival-meta-item.past-self {
+    border-left: 3px solid #9aa5c0;
+  }
+  .rival-meta-label {
+    display: block;
+    font-size: 0.65em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #7a8499;
+    margin-bottom: 0.3em;
+  }
+  .rival-meta-item p {
     font-size: 0.8em;
     color: rgb(var(--gray-dark));
-    line-height: 1.6;
-    margin: 0 0 0.6em;
+    line-height: 1.65;
+    margin: 0;
   }
-  .rival-members {
+
+  /* メンバーカードグリッド */
+  .rival-members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .rival-member-card {
+    padding: 1em 1.1em 1em;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+  .rival-member-card:last-child { border-right: none; }
+
+  .rival-mc-header {
+    display: flex;
+    gap: 0.7em;
+    align-items: flex-start;
+  }
+  .rival-mc-avatar {
+    font-size: 1.6em;
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,10%);
+  }
+  .rival-mc-title {
+    font-size: 0.62em;
+    font-weight: 700;
+    color: #7a8499;
+    margin-bottom: 0.1em;
+    letter-spacing: 0.04em;
+  }
+  .rival-mc-name {
+    font-size: 0.88em;
+    font-weight: 700;
+    color: rgb(var(--black));
+    line-height: 1.3;
+  }
+  .rival-mc-reading {
+    font-size: 0.78em;
+    font-weight: 400;
+    color: rgb(var(--gray));
+  }
+  .rival-mc-quote {
+    font-size: 0.75em;
+    color: rgb(var(--gray));
+    font-style: italic;
+    margin-top: 0.2em;
+    line-height: 1.4;
+  }
+  .rival-mc-desc {
+    font-size: 0.79em;
+    color: rgb(var(--gray-dark));
+    line-height: 1.7;
+    margin: 0;
+  }
+  .rival-mc-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3em;
+    gap: 0.25em;
   }
-  .rival-member {
-    font-size: 0.68em;
-    background: #eee;
+  .rival-tag {
+    font-size: 0.65em;
+    background: rgba(0,0,0,0.06);
     color: rgb(var(--gray-dark));
-    padding: 0.1em 0.5em;
+    padding: 0.15em 0.5em;
     border-radius: 3px;
+    font-weight: 600;
+  }
+  .rival-mc-speech-block {
+    background: rgba(255,255,255,0.65);
+    border-radius: 6px;
+    padding: 0.6em 0.75em;
+    margin-top: auto;
+  }
+  .speech-label {
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #9aa5c0;
+    margin-bottom: 0.3em;
+    text-transform: uppercase;
+  }
+  .rival-mc-speech {
+    font-size: 0.78em;
+    font-style: italic;
+    color: rgb(var(--gray-dark));
+    border-left: 2px solid #bbc3d4;
+    padding-left: 0.6em;
+    margin: 0 0 0.4em;
+    line-height: 1.55;
+  }
+  .rival-mc-numata {
+    font-size: 0.73em;
+    color: rgb(var(--gray));
+    font-style: italic;
+    margin: 0;
+    padding-left: 0.1em;
   }
 
   @media (max-width: 600px) {
