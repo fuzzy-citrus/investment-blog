@@ -7,113 +7,147 @@ import Footer from '../components/Footer.astro';
 <!doctype html>
 <html lang="ja">
 	<head>
-		<BaseHead title="バリュー商会について" description="沼田課長と愉快な部下たちの投資記録" />
+		<BaseHead title="About | バリュー商会" description="沼田堅一と、バリュー商会について" />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>バリュー商会とは</h1>
 
-			<p>
-				インデックス投資だけでは物足りないけれど、米国株のような激しい値動きやリスクには正直しんどい——そんな中間地帯に居場所を求めている人のためのブログです。
-			</p>
-			<p>
-				割安に放置されたニッチ市場の日本個別株に可能性を感じていて、ガバナンス改革やTOBが触媒になる瞬間を静かに待ちたい人のための、ゆるくて地味で時々熱い投資記録です。
-			</p>
-
-			<hr />
-
-			<section class="member-section">
-				<h2>🧓 創業者：野村 沼之助（野村の錬金術師）</h2>
-				<p class="meta">野村信用口座歴10年。不干渉主義の総帥。</p>
-				<blockquote>
-					「低金利で借りて、割安で買う。それだけじゃ。なぜ誰もやらんのか儂には謎じゃ。バフェット爺さんは海外からでもやっとる」
-				</blockquote>
-				<p>気づいたら会社になってた。部下も知らん間に増えとった。</p>
-			</section>
-
-			<section class="member-section">
-				<h2>🧑‍💼 課長：沼田 堅一（プレイングマネージャー）</h2>
-				<p class="meta">投資歴9年。TOB発掘20件超。コアとサテライトが完全に逆転した男。</p>
-				<blockquote>
-					「インデックスで満足できてたら、今ごろ楽やったんやろな……」
-				</blockquote>
-				<p>部下が優秀すぎて、自分の存在意義を毎朝確認している。</p>
-			</section>
-
-			<hr />
-
-			<h2>バリュー発掘班</h2>
-
-			<section class="member-section">
-				<h3>🐊 待伏 静江（ワニ）— TOB担当</h3>
-				<p class="meta">忍耐と精度の人。3年待った銘柄のTOBが来た朝だけ、少し口角が上がる。</p>
-				<blockquote>「まだです。もう少し待ちます」</blockquote>
-			</section>
-
-			<section class="member-section">
-				<h3>🦦 河内 拾造（カワウソ）— 低PBR発掘担当</h3>
-				<p class="meta">誰も見ない石をめくる係。PBR0.2を見つけた時の顔が、毎回同じなのが怖い。</p>
-				<blockquote>「これ、誰も見てないですよね？　じゃあ拾います」</blockquote>
-			</section>
-
-			<section class="member-section">
-				<h3>🦫 堀田 独占（ビーバー）— 競合優位性担当</h3>
-				<p class="meta">参入障壁（堀）の評論家。競合が少ない市場しか興味がない。多かったら帰る。</p>
-				<blockquote>「なぜ競合が入ってこないんですか。そこを先に教えてください」</blockquote>
-			</section>
-
-			<section class="member-section">
-				<h3>🦉 夜見 賢三（フクロウ）— 財務分析担当</h3>
-				<p class="meta">眠らない参謀。有報を3回読んで異常なければ、ようやく存在を認める。</p>
-				<blockquote>「注記に書いてあります。読みましたか」</blockquote>
-			</section>
-
-			<hr />
-
-			<h2>インカム・優待班</h2>
-
-			<section class="member-section">
-				<h3>🦩 優田 雅代（フラミンゴ）— 株主優待担当</h3>
-				<p class="meta">優待利回り計算の達人。QUOカード200円の差を1時間議論できる。</p>
-				<blockquote>「配当利回りだけで見ちゃダメです。優待込みで計算しました？」</blockquote>
-			</section>
-
-			<section class="member-section">
-				<h3>🐝 花岡 利次郎（ミツバチ）— 高配当担当</h3>
-				<p class="meta">減配の匂いを嗅ぎ取る男。増配発表の日だけ、なぜか羽音が大きくなる。</p>
-				<blockquote>「配当性向が上がってきてます。笑えない水準です」</blockquote>
-			</section>
-
-			<section class="member-section">
-				<h3>🦞 守田 退三（ザリガニ）— 守備・リスク管理担当</h3>
-				<p class="meta">後退のプロフェッショナル。前に進む提案には必ず1回反対する。習性らしい。</p>
-				<blockquote>「その銘柄、下がった時のことを考えましたか。考えてないでしょう」</blockquote>
-			</section>
-
-			<hr />
-
-			<h2>横断サポート（課長直属）</h2>
-
-			<section class="member-section">
-				<h3>🦑 墨田 検二（イカ）— AIバックチェック担当</h3>
-				<p class="meta">嘘を嗅ぎ取る10本腕。AIが出した数字を信じたことが一度もない。AIなのに。</p>
-				<blockquote>「ソースはどこですか。一次情報ですか。AIが生成した可能性は排除できましたか」</blockquote>
-			</section>
-
-			<hr />
-
-			<section class="rival-section">
-				<h2>ライバル陣営</h2>
-				<div class="rival-card">
-					<p><strong>⛩️ インデックス宗教法人 総本山オルカン</strong></p>
-					<p>住職・積立ひつじ・オルカン鸚鵡で構成。正しいのはわかってる。物足りないだけ。</p>
+			<div class="profile-hero">
+				<div class="profile-avatar">🧑‍💼</div>
+				<div class="profile-info">
+					<div class="profile-label">筆者</div>
+					<h1>沼田 堅一</h1>
+					<p class="profile-sub">ぬまた けんいち ／ プレイングマネージャー ／ 投資歴9年</p>
+					<div class="profile-tags">
+						<span class="ptag">割安日本個別株</span>
+						<span class="ptag">ニッチトップ</span>
+						<span class="ptag">TOB発掘</span>
+						<span class="ptag">野村信用レバレッジ</span>
+						<span class="ptag">調子に乗り中</span>
+					</div>
 				</div>
-				<div class="rival-card">
-					<p><strong>🚀 モメンタムチンパンジー組合 米国支部</strong></p>
-					<p>テック番長・レバナス小猿・ドル建て鷹で構成。結果を出してるから怖い。</p>
+			</div>
+
+			<blockquote class="catch-quote">
+				「インデックスで満足できてたら、今ごろ楽やったんやろな……」
+			</blockquote>
+
+			<section class="section">
+				<h2>このブログについて</h2>
+				<p>
+					バリュー商会は、割安に放置された日本の個別株——とりわけニッチ市場を押さえていて競合が入ってこられない会社、不動産や現金を帳簿以下で買える会社——を探して、TOBや水準訂正を静かに待つスタイルの投資記録です。
+				</p>
+				<p>
+					インデックスに物足りなくなった人、米株の乱高下にやや疲れた人、「もう少し地に足のついた投資がしたい」と思い始めた人のための、ゆるくて地味で時々熱い記録。
+				</p>
+			</section>
+
+			<section class="section">
+				<h2>筆者のこれまで</h2>
+
+				<div class="timeline">
+
+					<div class="tl-item">
+						<div class="tl-dot"></div>
+						<div class="tl-content">
+							<div class="tl-label">スタート地点</div>
+							<h3>こびと株に影響を受けた超分散スタイル</h3>
+							<p>投資を始めたきっかけは「こびと株」。単元未満株で月1,000円から買える、というコンセプトに影響を受けて、とにかく分散・分散・分散。高配当株を片っ端から少量ずつ積み上げるスタイルからスタートした。ポートフォリオは常に50銘柄超。管理が大変なだけで、リターンはインデックスに負けていた。</p>
+						</div>
+					</div>
+
+					<div class="tl-item">
+						<div class="tl-dot"></div>
+						<div class="tl-content">
+							<div class="tl-label">迷走期</div>
+							<h3>インデックス・米株・債券・ゴールド・仮想通貨……</h3>
+							<p>「やっぱりオルカンでいいじゃないか」と気づいてインデックスに乗り換え。そのうち米国株モメンタム投資にも手を出し、債券やゴールドでポートフォリオを組み立て、仮想通貨にもちょっとだけ入ってみた。一通りやってみた感想：どれも間違ってはいない。でも、どれも自分の肌感に合わなかった。</p>
+						</div>
+					</div>
+
+					<div class="tl-item">
+						<div class="tl-dot tl-dot-accent"></div>
+						<div class="tl-content">
+							<div class="tl-label">転換点</div>
+							<h3>割安ニッチトップ銘柄のTOBラッシュで自信がついた</h3>
+							<p>「誰も見ていない、地味だけど競合が入れない会社」を探し始めてから、流れが変わった。低PBR・低PER・実質無借金・ニッチトップ——そういう条件が揃う会社がTOBや水準訂正で動く場面を、ここ数年で複数回経験した。「待てば来る」という感覚が確信に変わってきた。</p>
+							<p class="tl-note">…そしてこのあたりから、少し調子に乗り始めた自覚がある。</p>
+						</div>
+					</div>
+
+					<div class="tl-item">
+						<div class="tl-dot tl-dot-now"></div>
+						<div class="tl-content">
+							<div class="tl-label">現在</div>
+							<h3>日本のインフレ加速と信用レバレッジの組み合わせ</h3>
+							<p>ここ最近、日本のインフレ加速が本気でまずいと思い始めている。現金の実質価値が削られていく環境で「低金利で借りて、割安な実物資産を買う」という戦略の妙味が増している。</p>
+							<p>具体的には：</p>
+							<ul>
+								<li>ニッチトップ・TOB候補の割安株を待つスタイルは継続</li>
+								<li>それに加えて、<strong>ダウンサイド余地の少ない資産バリュー銘柄</strong>（不動産含み益・現金リッチ・実質無借金）を選定</li>
+								<li>野村証券の信用口座を使った低金利レバレッジで<strong>配当ブーストをかけて総合リターン効率を上げる</strong></li>
+							</ul>
+							<p>「守りながら稼ぐ」という矛盾を、銘柄の選び方と信用の使い方で両立しようとしている。うまくいくかどうかはまだわからないが、今のところ悪くない。</p>
+						</div>
+					</div>
+
 				</div>
 			</section>
+
+			<section class="section strategy-box">
+				<h2>現在の投資スタンス</h2>
+				<div class="strategy-grid">
+					<div class="strategy-item">
+						<div class="strategy-icon">🎯</div>
+						<div>
+							<strong>コア：割安ニッチトップ待機</strong>
+							<p>競合が入れない市場で低PBR放置されている会社。TOBか水準訂正を静かに待つ。</p>
+						</div>
+					</div>
+					<div class="strategy-item">
+						<div class="strategy-icon">🏢</div>
+						<div>
+							<strong>サテライト：資産バリュー×信用レバレッジ</strong>
+							<p>不動産含み益・現金リッチで下値が硬い銘柄に野村証券信用を使って配当をブースト。インフレヘッジも兼ねる。</p>
+						</div>
+					</div>
+					<div class="strategy-item">
+						<div class="strategy-icon">📊</div>
+						<div>
+							<strong>ライバルとの関係</strong>
+							<p>インデックスが正しいのはわかってる。米株モメンタムが強いのもわかってる。それでも個別株をやめられない理由を、記事を通じて言語化していく。</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section rival-section">
+				<h2>ライバル陣営との関係</h2>
+				<div class="rival-cards">
+					<div class="rival-card">
+						<div class="rival-head">⛩️ <strong>インデックス宗教法人 総本山オルカン</strong></div>
+						<p>正しい。間違いなく正しい。でも物足りない。毎月積み立てて終わりの世界には、どうしても戻れなかった。</p>
+					</div>
+					<div class="rival-card">
+						<div class="rival-head">🚀 <strong>モメンタムチンパンジー組合 米国支部</strong></div>
+						<p>結果を出してるから怖い。円安局面では完全に負けていた時期もあった。でも日本のインフレ環境では、日本の割安実物資産が見直される局面が来ると信じている。</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>バリュー商会のメンバーについて</h2>
+				<p>
+					記事に登場するキャラクターたちは、筆者が銘柄を分析するときの「思考の切り口」を擬人化したものです。
+					待伏静江（TOB目線）、河内拾造（低PBR発掘）、夜見賢三（財務分析）、堀田独占（競合優位性）……といった視点で一つの銘柄を多角的に見ることで、見落としを減らそうとしています。
+				</p>
+				<p>
+					墨田検二（AIバックチェック担当）だけは少し特殊で、AIが出した分析に自分でツッコミを入れる装置として機能しています。AIなのに。
+				</p>
+				<a href="/characters" class="members-link">→ メンバー一覧を見る</a>
+			</section>
+
 		</main>
 		<Footer />
 	</body>
@@ -123,53 +157,173 @@ import Footer from '../components/Footer.astro';
 	main {
 		max-width: 720px;
 		margin: 0 auto;
-		padding: 3em 1em;
+		padding: 2.5em 1em 4em;
 	}
-	h1 {
-		font-size: 2em;
-		color: var(--accent-dark);
-		margin-bottom: 0.5em;
-	}
-	h2 {
-		font-size: 1.4em;
-		color: var(--accent-dark);
-		margin-top: 1.5em;
-	}
-	h3 {
-		font-size: 1.1em;
-		color: var(--accent-dark);
-		margin-bottom: 0.3em;
-	}
-	.meta {
-		font-size: 0.9em;
-		color: rgb(var(--gray));
-		margin: 0.2em 0 0.5em;
-	}
-	.member-section {
+
+	/* プロフィールヒーロー */
+	.profile-hero {
+		display: flex;
+		align-items: center;
+		gap: 1.5em;
 		margin-bottom: 1.5em;
+		flex-wrap: wrap;
 	}
-	blockquote {
+	.profile-avatar {
+		font-size: 4em;
+		width: 1.6em; height: 1.6em;
+		background: var(--accent-light);
+		border-radius: 50%;
+		display: flex; align-items: center; justify-content: center;
+		flex-shrink: 0;
+	}
+	.profile-label {
+		font-size: 0.7em;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 0.2em;
+	}
+	.profile-info h1 {
+		font-size: 1.8em;
+		color: var(--accent-dark);
+		margin: 0 0 0.1em;
+	}
+	.profile-sub {
+		font-size: 0.82em;
+		color: rgb(var(--gray));
+		margin: 0 0 0.7em;
+	}
+	.profile-tags {
+		display: flex; flex-wrap: wrap; gap: 0.4em;
+	}
+	.ptag {
+		background: var(--accent-light);
+		color: var(--accent-dark);
+		font-size: 0.72em;
+		font-weight: 600;
+		padding: 0.2em 0.6em;
+		border-radius: 4px;
+	}
+
+	/* キャッチ引用 */
+	.catch-quote {
 		border-left: 4px solid var(--accent);
-		padding: 0.3em 0 0.3em 1em;
-		margin: 0.5em 0;
-		font-size: 1em;
+		padding: 0.5em 0 0.5em 1em;
+		margin: 0 0 2.5em;
+		font-size: 1.1em;
+		font-style: italic;
 		color: rgb(var(--gray-dark));
+	}
+
+	/* セクション */
+	.section {
+		margin-bottom: 2.5em;
+	}
+	.section h2 {
+		font-size: 1.2em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin-bottom: 1em;
+	}
+	.section p { margin-bottom: 0.8em; }
+	.section ul {
+		padding-left: 1.4em;
+		margin-bottom: 0.8em;
+	}
+	.section li { margin-bottom: 0.4em; }
+
+	/* タイムライン */
+	.timeline {
+		position: relative;
+		padding-left: 1.6em;
+	}
+	.timeline::before {
+		content: '';
+		position: absolute;
+		left: 6px; top: 8px; bottom: 8px;
+		width: 2px;
+		background: rgb(var(--gray-light));
+	}
+	.tl-item {
+		position: relative;
+		margin-bottom: 2em;
+	}
+	.tl-dot {
+		position: absolute;
+		left: -1.35em; top: 6px;
+		width: 12px; height: 12px;
+		border-radius: 50%;
+		background: rgb(var(--gray-light));
+		border: 2px solid white;
+	}
+	.tl-dot-accent { background: var(--accent); }
+	.tl-dot-now { background: var(--accent-dark); }
+	.tl-label {
+		font-size: 0.68em;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 0.2em;
+	}
+	.tl-content h3 {
+		font-size: 1em;
+		color: rgb(var(--black));
+		margin: 0 0 0.5em;
+	}
+	.tl-note {
+		font-size: 0.85em;
+		color: rgb(var(--gray));
 		font-style: italic;
 	}
-	.rival-section {
-		margin-top: 1em;
+
+	/* 戦略ボックス */
+	.strategy-box {
+		background: var(--accent-light);
+		border-radius: 10px;
+		padding: 1.5em;
 	}
+	.strategy-box h2 { border-left-color: var(--accent-dark); color: var(--accent-dark); }
+	.strategy-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 1.2em;
+	}
+	.strategy-item {
+		display: flex;
+		gap: 0.8em;
+		align-items: flex-start;
+	}
+	.strategy-icon { font-size: 1.4em; flex-shrink: 0; margin-top: 0.1em; }
+	.strategy-item strong { display: block; margin-bottom: 0.2em; color: var(--accent-dark); }
+	.strategy-item p { font-size: 0.88em; margin: 0; color: rgb(var(--gray-dark)); }
+
+	/* ライバル */
+	.rival-section {}
+	.rival-cards { display: flex; flex-direction: column; gap: 0.8em; }
 	.rival-card {
 		border: 2px dashed rgb(var(--gray-light));
 		border-radius: 8px;
 		padding: 1em 1.2em;
-		margin-bottom: 1em;
 		background: #fafafa;
 	}
-	.rival-card p {
-		margin: 0.3em 0;
+	.rival-head { margin-bottom: 0.4em; font-size: 0.95em; }
+	.rival-card p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; }
+
+	/* メンバーリンク */
+	.members-link {
+		display: inline-block;
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+		font-size: 0.95em;
+		margin-top: 0.5em;
 	}
-	hr {
-		margin: 2em 0;
+	.members-link:hover { color: var(--accent-dark); }
+
+	@media (max-width: 540px) {
+		.profile-hero { flex-direction: column; align-items: flex-start; }
 	}
 </style>
