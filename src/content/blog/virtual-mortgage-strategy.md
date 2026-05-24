@@ -175,4 +175,14 @@ pubDate: "2026-05-25"
 
 ---
 
+## モデル全貌（Excelデータ完全版）
+
+前提条件・2%/4%/6%成長の年次推移・シナリオ比較・グラフを含む全シートをそのまま掲載しています。
+
+<div style="margin: 0.5em 0 1.5em;">
+  <iframe src="/analysis/virtual-mortgage-model.html" width="100%" height="520" style="border:1px solid #dde3ec; border-radius:8px; display:block;" loading="lazy" title="仮想住宅ローン戦法 10年運用複利モデル"></iframe>
+</div>
+
+---
+
 *本記事は情報提供を目的としており、投資勧誘ではありません。信用取引はリスクを伴い、元本を上回る損失が生じる可能性があります。投資判断はご自身の責任でお願いします。*
