@@ -3,276 +3,345 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { characters, blogMeta, teamLabels } from '../data/characters';
-import type { Team } from '../data/characters';
 
-const founder = characters.filter(c => c.team === 'founder');
-const manager = characters.filter(c => c.team === 'manager');
-const teamA = characters.filter(c => c.team === 'teamA');
-const teamB = characters.filter(c => c.team === 'teamB');
-const cross = characters.filter(c => c.team === 'cross');
+const founder  = characters.filter(c => c.team === 'founder');
+const manager  = characters.filter(c => c.team === 'manager');
+const teamA    = characters.filter(c => c.team === 'teamA');
+const teamB    = characters.filter(c => c.team === 'teamB');
+const cross    = characters.filter(c => c.team === 'cross');
+
+const sections = [
+  { key: 'founder', icon: '🏛️', label: teamLabels['founder'], members: founder },
+  { key: 'manager', icon: '📋', label: teamLabels['manager'], members: manager },
+  { key: 'teamA',   icon: '📊', label: teamLabels['teamA'],   members: teamA  },
+  { key: 'teamB',   icon: '💴', label: teamLabels['teamB'],   members: teamB  },
+  { key: 'cross',   icon: '🔍', label: teamLabels['cross'],   members: cross  },
+];
 ---
 
 <!doctype html>
 <html lang="ja">
-	<head>
-		<BaseHead title="メンバー一覧 | バリュー商会" description="バリュー商会の投資担当メンバー紹介" />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>メンバー一覧</h1>
-			<p class="lead">バリュー商会の投資担当たちをご紹介します。</p>
+  <head>
+    <BaseHead title="メンバー一覧 | バリュー商会" description="バリュー商会の投資担当メンバー紹介" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="page-header">
+        <h1>メンバー一覧</h1>
+        <p class="lead">バリュー商会の投資担当たちをご紹介します。</p>
+      </div>
 
-			<!-- 創業者・課長 -->
-			<section class="top-members">
-				{[...founder, ...manager].map(c => (
-					<div class="card card-top" style={`background: ${c.avatarColor}`}>
-						<div class="avatar" style={`background: white`}>{c.emoji}</div>
-						<div class="card-body">
-							<div class="card-meta">{c.title}</div>
-							<h2 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h2>
-							<p class="species">{c.species}</p>
-							<blockquote>{c.quote}</blockquote>
-							<p class="catchphrase">{c.catchphrase}</p>
-							<div class="tags">
-								{c.tags.map(t => <span class="tag">{t}</span>)}
-							</div>
-						</div>
-					</div>
-				))}
-			</section>
+      {sections.map(sec => (
+        <section class="team-section">
+          <h2 class="team-heading">
+            <span class="team-icon">{sec.icon}</span>
+            {sec.label}
+          </h2>
 
-			<!-- バリュー発掘班 -->
-			<section class="team-section">
-				<h2 class="team-label">📊 {teamLabels['teamA']}</h2>
-				<div class="card-grid">
-					{teamA.map(c => (
-						<div class="card" style={`background: ${c.avatarColor}`}>
-							<div class="avatar">{c.emoji}</div>
-							<div class="card-body">
-								<div class="card-meta">{c.title}</div>
-								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
-								<p class="species">{c.species}</p>
-								<blockquote>{c.quote}</blockquote>
-								<div class="tags">
-									{c.tags.map(t => <span class="tag">{t}</span>)}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
+          {sec.members.map(c => (
+            <div class="char-card" id={c.id} style={`--card-color: ${c.avatarColor}`}>
 
-			<!-- インカム・優待班 -->
-			<section class="team-section">
-				<h2 class="team-label">💴 {teamLabels['teamB']}</h2>
-				<div class="card-grid">
-					{teamB.map(c => (
-						<div class="card" style={`background: ${c.avatarColor}`}>
-							<div class="avatar">{c.emoji}</div>
-							<div class="card-body">
-								<div class="card-meta">{c.title}</div>
-								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
-								<p class="species">{c.species}</p>
-								<blockquote>{c.quote}</blockquote>
-								<div class="tags">
-									{c.tags.map(t => <span class="tag">{t}</span>)}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
+              {/* ── ヘッダー行 ── */}
+              <div class="char-header">
+                <div class="char-avatar" style={`background: ${c.avatarColor}`}>
+                  {c.emoji}
+                </div>
+                <div class="char-info">
+                  <div class="char-role">{c.title}</div>
+                  <h3 class="char-name">
+                    {c.name}
+                    <span class="char-reading">（{c.reading}）</span>
+                  </h3>
+                  <p class="char-species">{c.species}</p>
+                  <blockquote class="char-quote">「{c.quote}」</blockquote>
+                  <div class="char-tags">
+                    {c.tags.map(t => <span class="tag">{t}</span>)}
+                  </div>
+                </div>
+              </div>
 
-			<!-- 横断サポート -->
-			<section class="team-section">
-				<h2 class="team-label">🔍 {teamLabels['cross']}</h2>
-				<div class="card-grid">
-					{cross.map(c => (
-						<div class="card" style={`background: ${c.avatarColor}`}>
-							<div class="avatar">{c.emoji}</div>
-							<div class="card-body">
-								<div class="card-meta">{c.title}</div>
-								<h3 class="card-name">{c.name} <span class="reading">（{c.reading}）</span></h3>
-								<p class="species">{c.species}</p>
-								<blockquote>{c.quote}</blockquote>
-								<div class="tags">
-									{c.tags.map(t => <span class="tag">{t}</span>)}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
+              {/* ── キャラクター像 ── */}
+              <div class="char-body">
+                <div class="section-label">キャラクター像</div>
+                <p class="char-desc">{c.description}</p>
 
-			<!-- ライバル陣営 -->
-			<section class="rival-section">
-				<h2 class="team-label rival-label">⚔️ ライバル陣営</h2>
-				<div class="card-grid">
-					{blogMeta.rivals.map(r => (
-						<div class="card rival-card">
-							<div class="avatar rival-avatar">{r.emoji}</div>
-							<div class="card-body">
-								<h3 class="card-name">{r.name}</h3>
-								<p class="species">{r.subtitle}</p>
-								<p class="rival-members">
-									{r.members.join('・')}
-								</p>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-		</main>
-		<Footer />
-	</body>
+                <div class="section-label relation-label">沼田課長・チームとの関係性</div>
+                <p class="char-relation">{c.relation}</p>
+
+                {/* ── 分析フレーム ── */}
+                <div class="section-label">得意な分析フレーム</div>
+                <div class={`frames-grid frames-${c.analysisFrames.length}`}>
+                  {c.analysisFrames.map(f => (
+                    <div class="frame-card">
+                      <div class="frame-title">{f.icon} {f.title}</div>
+                      <p class="frame-body">{f.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </section>
+      ))}
+
+      {/* ── ライバル陣営 ── */}
+      <section class="rival-section">
+        <h2 class="team-heading rival-heading">⚔️ ライバル陣営</h2>
+        <div class="rival-grid">
+          {blogMeta.rivals.map(r => (
+            <div class="rival-card">
+              <div class="rival-head">
+                <span class="rival-emoji">{r.emoji}</span>
+                <div>
+                  <div class="rival-name">{r.name}</div>
+                  <div class="rival-subtitle">{r.subtitle}</div>
+                </div>
+              </div>
+              <p class="rival-comment">{r.comment}</p>
+              <div class="rival-members">
+                {r.members.map(m => <span class="rival-member">{m}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	main {
-		max-width: 860px;
-		margin: 0 auto;
-		padding: 3em 1em;
-	}
-	h1 {
-		font-size: 2em;
-		color: var(--accent-dark);
-		margin-bottom: 0.2em;
-	}
-	.lead {
-		color: rgb(var(--gray));
-		margin-bottom: 2.5em;
-	}
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5em 1em 4em;
+  }
 
-	/* 創業者・課長 */
-	.top-members {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.2em;
-		margin-bottom: 3em;
-	}
-	.card-top {
-		border: 2px solid var(--accent);
-	}
+  .page-header { margin-bottom: 2.5em; }
+  .page-header h1 {
+    font-size: 1.6em;
+    color: var(--accent-dark);
+    margin-bottom: 0.2em;
+  }
+  .lead { color: rgb(var(--gray)); font-size: 0.9em; }
 
-	/* チームセクション */
-	.team-section {
-		margin-bottom: 3em;
-	}
-	.team-label {
-		font-size: 1.2em;
-		color: var(--accent-dark);
-		border-left: 4px solid var(--accent);
-		padding-left: 0.6em;
-		margin-bottom: 1em;
-	}
-	.card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-		gap: 1em;
-	}
+  /* チームセクション */
+  .team-section { margin-bottom: 3em; }
+  .team-heading {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--accent-dark);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6em;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .rival-heading {
+    border-left-color: #aaa;
+    color: rgb(var(--gray-dark));
+  }
+  .team-icon { font-size: 1em; }
 
-	/* カード共通 */
-	.card {
-		border-radius: 10px;
-		padding: 1.2em;
-		display: flex;
-		flex-direction: column;
-		gap: 0.8em;
-		box-shadow: 0 1px 4px rgba(0,0,0,8%);
-	}
-	.avatar {
-		font-size: 2.4em;
-		width: 2em;
-		height: 2em;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: white;
-		border-radius: 50%;
-		box-shadow: 0 1px 3px rgba(0,0,0,10%);
-	}
-	.card-body {
-		flex: 1;
-	}
-	.card-meta {
-		font-size: 0.75em;
-		color: var(--accent-dark);
-		font-weight: 700;
-		letter-spacing: 0.03em;
-		margin-bottom: 0.2em;
-	}
-	.card-name {
-		font-size: 1.05em;
-		margin: 0 0 0.2em;
-		color: rgb(var(--black));
-	}
-	.reading {
-		font-size: 0.75em;
-		font-weight: 400;
-		color: rgb(var(--gray));
-	}
-	.species {
-		font-size: 0.82em;
-		color: rgb(var(--gray));
-		margin: 0 0 0.6em;
-	}
-	blockquote {
-		border-left: 3px solid var(--accent);
-		padding: 0.2em 0 0.2em 0.8em;
-		margin: 0 0 0.6em;
-		font-size: 0.85em;
-		font-style: italic;
-		color: rgb(var(--gray-dark));
-	}
-	.catchphrase {
-		font-size: 0.8em;
-		color: rgb(var(--gray));
-		margin: 0 0 0.5em;
-	}
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.3em;
-	}
-	.tag {
-		background: white;
-		color: var(--accent-dark);
-		font-size: 0.72em;
-		padding: 0.15em 0.55em;
-		border-radius: 4px;
-		font-weight: 600;
-		border: 1px solid var(--accent);
-	}
+  /* キャラクターカード */
+  .char-card {
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-top: 3px solid var(--accent);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.2em;
+    box-shadow: 0 1px 4px rgba(0,0,0,5%);
+  }
 
-	/* ライバル */
-	.rival-section {
-		border: 2px dashed rgb(var(--gray-light));
-		border-radius: 10px;
-		padding: 1.5em;
-	}
-	.rival-label {
-		border-left-color: #aaa;
-		color: rgb(var(--gray-dark));
-	}
-	.rival-card {
-		background: #f9f9f9;
-	}
-	.rival-avatar {
-		background: #f0f0f0;
-	}
-	.rival-members {
-		font-size: 0.85em;
-		color: rgb(var(--gray));
-		margin: 0;
-	}
+  /* ヘッダー行 */
+  .char-header {
+    display: flex;
+    gap: 1.2em;
+    align-items: flex-start;
+    padding: 1.2em 1.4em 1em;
+    background: var(--card-color, #f5fdf8);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .char-avatar {
+    font-size: 2.2em;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,12%);
+    flex-shrink: 0;
+  }
+  .char-info { flex: 1; min-width: 0; }
+  .char-role {
+    font-size: 0.68em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent-dark);
+    margin-bottom: 0.15em;
+    text-transform: uppercase;
+  }
+  .char-name {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 0.1em;
+    line-height: 1.3;
+  }
+  .char-reading {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: rgb(var(--gray));
+  }
+  .char-species {
+    font-size: 0.78em;
+    color: rgb(var(--gray));
+    margin: 0 0 0.5em;
+  }
+  .char-quote {
+    border-left: 3px solid var(--accent);
+    padding: 0.2em 0 0.2em 0.7em;
+    margin: 0 0 0.6em;
+    font-size: 0.83em;
+    font-style: italic;
+    color: rgb(var(--gray-dark));
+    line-height: 1.5;
+  }
+  .char-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+  }
+  .tag {
+    background: white;
+    color: var(--accent-dark);
+    font-size: 0.68em;
+    padding: 0.15em 0.55em;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid var(--accent);
+  }
 
-	@media (max-width: 720px) {
-		.top-members {
-			grid-template-columns: 1fr;
-		}
-		.card-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  /* ボディ */
+  .char-body {
+    padding: 1em 1.4em 1.2em;
+  }
+  .section-label {
+    font-size: 0.65em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--gray));
+    margin-bottom: 0.4em;
+    margin-top: 1em;
+  }
+  .char-body .section-label:first-child { margin-top: 0; }
+  .char-desc {
+    font-size: 0.85em;
+    color: rgb(var(--gray-dark));
+    line-height: 1.75;
+    margin: 0;
+  }
+  .relation-label { color: var(--accent-dark); }
+  .char-relation {
+    font-size: 0.82em;
+    color: rgb(var(--gray));
+    line-height: 1.7;
+    margin: 0;
+    font-style: italic;
+    border-left: 2px solid rgb(var(--gray-light));
+    padding-left: 0.7em;
+  }
+
+  /* 分析フレームグリッド */
+  .frames-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6em;
+    margin-top: 0.2em;
+  }
+  .frames-1 { grid-template-columns: 1fr; }
+  .frames-3 { grid-template-columns: 1fr 1fr; }
+
+  .frame-card {
+    background: #f7f9fc;
+    border: 1px solid #e8edf2;
+    border-radius: 7px;
+    padding: 0.7em 0.9em;
+  }
+  .frame-title {
+    font-size: 0.78em;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin-bottom: 0.35em;
+  }
+  .frame-body {
+    font-size: 0.76em;
+    color: rgb(var(--gray-dark));
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ライバル */
+  .rival-section {
+    border: 2px dashed rgb(var(--gray-light));
+    border-radius: 10px;
+    padding: 1.4em;
+  }
+  .rival-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8em;
+  }
+  .rival-card {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 1em 1.1em;
+  }
+  .rival-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 0.5em;
+  }
+  .rival-emoji { font-size: 1.6em; }
+  .rival-name {
+    font-size: 0.88em;
+    font-weight: 700;
+    color: rgb(var(--gray-dark));
+  }
+  .rival-subtitle {
+    font-size: 0.72em;
+    color: rgb(var(--gray));
+  }
+  .rival-comment {
+    font-size: 0.8em;
+    color: rgb(var(--gray-dark));
+    line-height: 1.6;
+    margin: 0 0 0.6em;
+  }
+  .rival-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+  }
+  .rival-member {
+    font-size: 0.68em;
+    background: #eee;
+    color: rgb(var(--gray-dark));
+    padding: 0.1em 0.5em;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 600px) {
+    .char-header { flex-direction: column; gap: 0.8em; }
+    .frames-grid { grid-template-columns: 1fr; }
+    .rival-grid  { grid-template-columns: 1fr; }
+  }
 </style>
