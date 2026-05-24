@@ -5,7 +5,6 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -13,101 +12,287 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="ブログ | バリュー商会" description="バリュー商会の投資記録" />
 		<style>
 			main {
-				width: 960px;
+				max-width: 860px;
+				margin: 0 auto;
+				padding: 2.5em 1em 4em;
 			}
-			ul {
+			h1 {
+				font-size: 1.4em;
+				color: var(--accent-dark);
+				border-left: 4px solid var(--accent);
+				padding-left: 0.6em;
+				margin-bottom: 1.5em;
+			}
+			.post-list {
 				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
+				flex-direction: column;
+				gap: 1em;
+				list-style: none;
 				padding: 0;
+				margin: 0;
 			}
-			ul li {
-				width: calc(50% - 1rem);
+
+			/* 通常記事カード */
+			.post-card {
+				border: 1.5px solid #e0e0e0;
+				border-radius: 10px;
+				overflow: hidden;
+				background: white;
+				box-shadow: 0 1px 4px rgba(0,0,0,5%);
+				transition: box-shadow 0.2s;
 			}
-			ul li * {
+			.post-card:hover {
+				box-shadow: 0 4px 12px rgba(0,0,0,10%);
+			}
+			.post-card a {
+				display: flex;
+				align-items: stretch;
 				text-decoration: none;
-				transition: 0.2s ease;
+				color: inherit;
 			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
+			.post-card img {
+				width: 220px;
+				height: 140px;
+				object-fit: cover;
+				flex-shrink: 0;
 			}
-			ul li:first-child img {
-				width: 100%;
+			.post-card-body {
+				padding: 1em 1.2em;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 0.4em;
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
+			.post-card .post-title {
+				font-size: 1em;
+				font-weight: 700;
 				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
+				line-height: 1.4;
 				margin: 0;
+			}
+			.post-card .post-desc {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.5;
+			}
+			.post-card .post-date {
+				font-size: 0.75em;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			.post-card:hover .post-title {
+				color: var(--accent-dark);
 			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
+
+			/* 銘柄分析カード */
+			.stock-card {
+				border-radius: 10px;
+				overflow: hidden;
+				box-shadow: 0 1px 4px rgba(0,0,0,8%);
+				transition: box-shadow 0.2s;
 			}
+			.stock-card:hover {
+				box-shadow: 0 4px 14px rgba(0,0,0,18%);
+			}
+			.stock-card a {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+				background: #1a2535;
+			}
+			.stock-card-header {
+				padding: 1em 1.3em 0.8em;
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.stock-card-left {}
+			.stock-card-badge {
+				font-size: 0.6em;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.35);
+				margin-bottom: 0.3em;
+			}
+			.stock-card-name {
+				font-size: 1.15em;
+				font-weight: 700;
+				color: white;
+				line-height: 1.2;
+			}
+			.stock-card-ticker {
+				color: #e8803a;
+				font-size: 0.85em;
+			}
+			.stock-card-category {
+				display: inline-block;
+				background: rgba(29,158,117,0.2);
+				border: 1px solid rgba(29,158,117,0.35);
+				color: #5dcca8;
+				font-size: 0.65em;
+				font-weight: 700;
+				padding: 0.15em 0.6em;
+				border-radius: 3px;
+				margin-top: 0.35em;
+				letter-spacing: 0.03em;
+			}
+			.stock-card-verdict {
+				text-align: right;
+			}
+			.stock-card-verdict-label {
+				font-size: 0.6em;
+				color: rgba(255,255,255,0.35);
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				margin-bottom: 0.2em;
+			}
+			.stock-card-target {
+				font-size: 1.5em;
+				font-weight: 700;
+				color: #5dcca8;
+				line-height: 1;
+			}
+			.stock-card-upside {
+				font-size: 0.75em;
+				color: rgba(255,255,255,0.45);
+				margin-top: 0.15em;
+			}
+			.stock-card-desc {
+				padding: 0 1.3em 0.8em;
+				font-size: 0.78em;
+				color: rgba(255,255,255,0.45);
+				line-height: 1.5;
+			}
+			.stock-card-kpis {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 1px;
+				background: rgba(255,255,255,0.06);
+			}
+			.sc-kpi {
+				background: rgba(10,15,25,0.5);
+				padding: 0.6em 0.8em;
+			}
+			.sc-kpi-label {
+				font-size: 0.58em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.28);
+				margin-bottom: 0.25em;
+			}
+			.sc-kpi-value {
+				font-size: 0.95em;
+				font-weight: 700;
+				font-variant-numeric: tabular-nums;
+				color: white;
+			}
+			.sc-kpi-value.green { color: #5dcca8; }
+			.sc-kpi-value.red   { color: #e06868; }
+			.sc-kpi-value.amber { color: #e8803a; }
+			.stock-card-footer {
+				padding: 0.55em 1.3em;
+				background: rgba(0,0,0,0.2);
+				font-size: 0.7em;
+				color: rgba(255,255,255,0.3);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.stock-card:hover .stock-card-name {
+				color: #a0e8d0;
+			}
+
 			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+				.post-card a { flex-direction: column; }
+				.post-card img { width: 100%; height: 180px; }
+				.stock-card-kpis { grid-template-columns: repeat(3, 1fr); }
+				.stock-card-header { flex-direction: column; gap: 0.5em; }
+				.stock-card-verdict { text-align: left; }
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
+			<h1>ブログ記事一覧</h1>
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li>
+						{post.data.stockCard ? (
+							/* 銘柄分析カード */
+							<div class="stock-card">
+								<a href={`/blog/${post.id}/`}>
+									<div class="stock-card-header">
+										<div class="stock-card-left">
+											<div class="stock-card-badge">銘柄分析 — {post.data.stockCard.category}</div>
+											<div class="stock-card-name">
+												{post.data.stockCard.companyName}
+												<span class="stock-card-ticker">（{post.data.stockCard.ticker}）</span>
+											</div>
+											<div class="stock-card-category">{post.data.stockCard.category}</div>
+										</div>
+										<div class="stock-card-verdict">
+											<div class="stock-card-verdict-label">期待価格</div>
+											<div class="stock-card-target">{post.data.stockCard.targetPrice.toLocaleString()}円</div>
+											<div class="stock-card-upside">現在比 {post.data.stockCard.upside}</div>
+										</div>
+									</div>
+									<div class="stock-card-desc">{post.data.description}</div>
+									<div class="stock-card-kpis">
+										<div class="sc-kpi">
+											<div class="sc-kpi-label">現在株価</div>
+											<div class="sc-kpi-value amber">{post.data.stockCard.currentPrice.toLocaleString()}円</div>
+										</div>
+										<div class="sc-kpi">
+											<div class="sc-kpi-label">期待価格</div>
+											<div class="sc-kpi-value green">{post.data.stockCard.targetPrice.toLocaleString()}円</div>
+										</div>
+										<div class="sc-kpi">
+											<div class="sc-kpi-label">期待リターン</div>
+											<div class="sc-kpi-value green">{post.data.stockCard.upside}</div>
+										</div>
+										<div class="sc-kpi">
+											<div class="sc-kpi-label">最大下落</div>
+											<div class="sc-kpi-value red">{post.data.stockCard.downside}</div>
+										</div>
+										<div class="sc-kpi">
+											<div class="sc-kpi-label">修正PBR</div>
+											<div class="sc-kpi-value red">{post.data.stockCard.modifiedPBR}</div>
+										</div>
+									</div>
+									<div class="stock-card-footer">
+										<FormattedDate date={post.data.pubDate} />
+										<span>→ 分析を読む</span>
+									</div>
+								</a>
+							</div>
+						) : (
+							/* 通常記事カード */
+							<div class="post-card">
 								<a href={`/blog/${post.id}/`}>
 									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+										<Image width={220} height={140} src={post.data.heroImage} alt="" />
 									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+									<div class="post-card-body">
+										<h4 class="post-title">{post.data.title}</h4>
+										<p class="post-desc">{post.data.description}</p>
+										<p class="post-date"><FormattedDate date={post.data.pubDate} /></p>
+									</div>
 								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+							</div>
+						)}
+					</li>
+				))}
+			</ul>
 		</main>
 		<Footer />
 	</body>
