@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神栄（3004）最終投資分析 v3 — 2026.05</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--rd2:#d84040;
+  --gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;
+  --bl:#153480;--bl2:#1e48b8;
+  --sem:#c46814;--sem2:#e88020;
+  --fuel:#7a1a6a;--fuel2:#a83090;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+
+/* ── HERO ── */
+.hero{background:var(--ink2);color:rgba(246,245,239,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:320px;height:320px;border:1px solid rgba(255,255,255,.04);border-radius:50%}
+.hero-top{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:22px}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font:700 34px/1.06 var(--head);letter-spacing:-.025em}
+.hero-title em{color:var(--sem2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);margin-top:6px;line-height:1.65}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;flex:1;min-width:320px}
+.kpi{background:rgba(17,18,23,.3);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.fu{color:#d090c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:14px;background:rgba(36,144,84,.12);border:1px solid rgba(36,144,84,.25);border-radius:var(--r);padding:12px 18px}
+.verdict-score{font:700 42px/1 var(--mono);color:var(--gn2)}
+.verdict-text{font-size:12px;color:rgba(246,245,239,.7);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+/* ── MAIN NAV (chapter tabs) ── */
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 15px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+
+/* ── BODY ── */
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-rd{background:#fce8e8;color:var(--rd)}.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-sem{background:#fef0e0;color:var(--sem)}.cb-fu{background:#f5e0f5;color:var(--fuel)}
+
+/* ── SUB TABS ── */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.g5,.hero-kpis{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+@media(max-width:450px){.g2,.g3,.g4,.g5,.hero-kpis{grid-template-columns:1fr}}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px 18px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-sem{border-left:3px solid var(--sem)}.card-fu{border-left:3px solid var(--fuel)}
+.card-dk{background:var(--ink2);color:rgba(246,245,239,.85);border:none}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}
+.card-hi-fu{background:#f8f0f8;border:.5px solid #d0a0c8}
+.card-sem-bg{background:#fef8f0;border:.5px solid #f0c880}
+
+/* ── METRIC ── */
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.sem{color:var(--sem)}.mc-v.fu{color:var(--fuel)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-sem{color:var(--sem);font-weight:600}.hi-fu{color:var(--fuel);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* ── BADGE ── */
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-rd{background:#fce8e8;color:var(--rd)}.bd-gn{background:#dff0e8;color:var(--gn)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-sem{background:#fef0e0;color:var(--sem)}.bd-fu{background:#f5e0f5;color:var(--fuel)}
+
+/* ── BAR ── */
+.bgrp{margin-bottom:11px}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden;height:12px;min-height:12px}
+.bfill{border-radius:2px;height:12px;min-height:12px;display:block;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── TIMELINE ── */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.tl-dot.rd{background:var(--rd)}.tl-dot.am{background:var(--am)}.tl-dot.bl{background:var(--bl)}.tl-dot.gn{background:var(--gn)}.tl-dot.sem{background:var(--sem)}.tl-dot.fu{background:var(--fuel)}
+.tl-date{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px}
+.tl-text{font-size:12px;line-height:1.65}
+
+/* ── FUEL METER ── */
+.fuel-meter{display:grid;grid-template-columns:160px 1fr 80px;align-items:center;gap:10px;margin-bottom:9px}
+.fuel-label{font-size:11px;color:var(--ink2)}
+.fuel-track{height:10px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.fuel-fill{height:100%;border-radius:2px}
+.fuel-val{font:600 11px/1 var(--mono);text-align:right}
+
+/* ── SCENARIO BOX ── */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden}
+.sc-col{padding:14px 15px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-bottom:7px;margin-bottom:8px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}.sc-lbl.base{border-color:var(--am);color:var(--am)}.sc-lbl.bull{border-color:var(--gn);color:var(--gn)}
+.sc-prob{font:600 34px/1 var(--mono);margin-bottom:4px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--gn)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:10px}
+.sc-li{font-size:11px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+
+/* ── CONCLUSION ── */
+.conc{background:var(--ink);color:rgba(246,245,239,.82);border-radius:var(--r);padding:28px 32px}
+.conc-head{font:700 17px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:14px}
+.conc-head span{color:var(--sem2)}
+.conc-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.conc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-body{font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)}
+.conc-body strong{color:rgba(246,245,239,.95)}
+
+/* ── MISC ── */
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.warn{background:#f8f0f8;border:.5px solid #d0a0c8;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--fuel);line-height:1.65;margin-bottom:12px}
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.spacer{height:14px}
+
+/* ── PRICE RANGE ── */
+.pr-track{display:flex;height:16px;border-radius:8px;overflow:hidden;margin-bottom:7px}
+.pr-labels{display:flex;font:500 10px/1 var(--mono);color:var(--ink3)}
+.pr-labels span{flex:1;text-align:center;padding:2px}
+</style>
+<style>
+/* ─── 明るめ背景オーバーライド ─── */
+:root{
+  --bg:#f8f7f2;--bg2:#f0ede4;--bg3:#e4e0d6;
+  --ink:#0d0f14;--ink2:#1e2028;--ink3:#56585f;
+  --gn:#1a6038;--gn2:#228048;
+  --am:#7a4a08;--am2:#ac6810;
+  --bl:#102878;--bl2:#1840a8;
+  --rd:#a02828;--rd2:#c83838;
+  --sem:#b05810;--sem2:#d87018;
+  --tl:#0d7a60;--tl2:#0f9878;
+  --pur:#5a3a9a;--pur2:#7a54c0;
+  --rule:rgba(13,15,20,.08);
+}
+body{background:var(--bg);color:var(--ink)}
+.hero{background:linear-gradient(135deg,#1a1e2e 0%,#0d1020 100%)}
+.mnav{background:#1a1e2e;border-bottom:1px solid rgba(255,255,255,.05)}
+.conc{background:#1a1e2e}
+.card{background:#fff;border:.5px solid #e8e4da;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-hi-gn{background:#f0f9f4;border:.5px solid #90d0a8}
+.card-hi-rd{background:#fdf2f2;border:.5px solid #e0a0a0}
+.card-hi-bl{background:#f0f4fc;border:.5px solid #90b0e8}
+.card-hi-am{background:#fffbf0;border:.5px solid #e8c870}
+/* extra helpers */
+.notice-gn{background:#eaf7f0;border:.5px solid #70c898;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.notice-gn strong{color:var(--gn2)}
+.notice-rd{background:#fdf0f0;border:.5px solid #d09090;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:12px}
+.notice-rd strong{color:var(--rd2)}
+.notice-bl{background:#f0f4fc;border:.5px solid #90b0e8;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--bl);line-height:1.65;margin-bottom:12px}
+.notice-bl strong{color:var(--bl2)}
+.notice-tl{background:#eaf7f4;border:.5px solid #70c8b0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--tl);line-height:1.65;margin-bottom:12px}
+.notice-tl strong{color:var(--tl2)}
+.card-tl{border-left:3px solid var(--tl)}
+.card-pu{border-left:3px solid var(--pur)}
+.mc-v.tl{color:var(--tl)}.mc-v.pu{color:var(--pur)}
+.hi-tl{color:var(--tl);font-weight:600}.hi-pu{color:var(--pur);font-weight:600}
+.bd-tl{background:#eaf7f4;color:var(--tl)}.bd-pu{background:#f2eeff;color:var(--pur)}
+/* scenario colors */
+.sc-lbl.bull{border-color:var(--tl);color:var(--tl)}
+.sc-prob.bull{color:var(--tl)}
+/* gain bar */
+.gain-meter{display:grid;grid-template-columns:190px 1fr 100px;align-items:center;gap:10px;margin-bottom:8px}
+.gain-label{font-size:11px;color:var(--ink2)}
+.gain-track{height:9px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.gain-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.gain-val{font:600 11px/1 var(--mono);text-align:right}
+/* risk severity */
+.rsev-hi{background:#fce8e8;color:var(--rd);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-mi{background:#fef3e0;color:var(--am);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-lo{background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-tl{background:#eaf7f4;color:var(--tl);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-top">
+    <div style="flex:1;min-width:260px">
+      <p class="hero-label">Final Research — 2026.05 — Ver.3（全分析完全統合版）</p>
+      <h1 class="hero-title">神栄株式会社 <em>（3004）</em><br>最終総合投資分析</h1>
+      <p class="hero-sub">2026年5月14日 本決算反映 ／ 政策保有株現在時価80.3億円 ／ 含み益31億円（税前）／ 東証改革カタリスト完全分析</p>
+    </div>
+    <div class="hero-verdict">
+      <div class="verdict-score" style="color:#68c890;font-size:36px;line-height:1">◎</div>
+      <div class="verdict-text">
+        <strong>積極的買い検討 ─ 期待リターン年率+26%（3年）</strong><br>
+        PER 4.35倍・利回り 5.21%・修正PBR 0.71〜0.73倍の三重割安。<br>
+        政策保有株が時価総額の91%。事業+資産+東証改革の複合バリュー。<br>
+        100万円投資で91.2万円分の金融株ポートフォリオへの間接エクスポージャー。
+      </div>
+    </div>
+  </div>
+  <div class="hero-kpis">
+    <div class="kpi"><div class="kpi-l">現在株価</div><div class="kpi-v am">¥2,112</div><div class="kpi-s">時価総額 約88億円</div></div>
+    <div class="kpi"><div class="kpi-l">予想PER（来期）</div><div class="kpi-v gn">4.35倍</div><div class="kpi-s">EPS≒486円（来期正常化）</div></div>
+    <div class="kpi"><div class="kpi-l">確定配当利回り</div><div class="kpi-v gn">5.21%</div><div class="kpi-s">110円確定・3期連続増配</div></div>
+    <div class="kpi"><div class="kpi-l">修正PBR（含み益後）</div><div class="kpi-v gn">0.71〜0.73倍</div><div class="kpi-s">修正BPS 2,892〜2,996円</div></div>
+    <div class="kpi" style="border-top:3px solid #68c890"><div class="kpi-l">政策保有株現在時価</div><div class="kpi-v gn">80.3億円</div><div class="kpi-s">時価総額88億の91.2%</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)"><div class="kpi-l">3年期待リターン</div><div class="kpi-v am">+100%</div><div class="kpi-s">年率+26%（含み益・利上げ反映）</div></div>
+  </div>
+</header>
+
+<!-- MAIN NAV -->
+<nav class="mnav" id="mnav">
+  <button class="mnb on"  onclick="showChapter('c0',this)">⚡ 0. カタリスト</button>
+  <button class="mnb" onclick="showChapter('c1',this)">1. 決算・バリュエーション</button>
+  <button class="mnb" onclick="showChapter('c2',this)">2. 含み益資産の精査</button>
+  <button class="mnb" onclick="showChapter('c3',this)">3. 金融株エクスポージャー</button>
+  <button class="mnb" onclick="showChapter('c4',this)">4. 利上げ効果</button>
+  <button class="mnb" onclick="showChapter('c5',this)">5. 燃料高・インフレ</button>
+  <button class="mnb" onclick="showChapter('c6',this)">6. 配当方針</button>
+  <button class="mnb" onclick="showChapter('c7',this)">7. センサー世界首位</button>
+  <button class="mnb" onclick="showChapter('c8',this)">8. 株価下落の解剖</button>
+  <button class="mnb" onclick="showChapter('c9',this)">9. 東証改革・ガバナンス</button>
+  <button class="mnb" onclick="showChapter('c10',this)">10. リスク分析</button>
+  <button class="mnb" onclick="showChapter('c11',this)">🏁 11. 最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══ C0: カタリスト ══ -->
+<div class="chapter active" id="c0">
+<div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">カタリスト ─ なぜ神栄（3004）株は今これほど割安なのか</h2><span class="ch-badge cb-gn">6つの構造的割安</span></div>
+
+<!-- ─ リードコピー ─ -->
+<div style="background:linear-gradient(135deg,#1a1e2e 0%,#0d1428 100%);border-radius:6px;padding:22px 26px;margin-bottom:18px;color:rgba(246,245,239,.85)">
+  <div style="font:700 13px/1 var(--head);color:rgba(246,245,239,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Investment Thesis — なぜ今、なぜ神栄か</div>
+  <div style="font:700 18px/1.45 var(--head);letter-spacing:-.01em;margin-bottom:10px">現株価¥2,112は「事業価値がほぼゼロ評価」を前提にした異常な水準だ。<br>世界首位のセンサー技術・高配当・資産厚み・東証改革の追い風が揃いながら、<br>PER4.35倍・修正PBR0.71倍という極端な低評価で放置されている。</div>
+  <div style="font-size:11px;color:rgba(246,245,239,.38);line-height:1.7">時価総額88億円に対し政策保有株の現在時価だけで80.3億円（91.2%）に達する。残りの事業部分（食品商社＋湿度センサー世界首位）はたった7.7億円の評価しか与えられていない。これは市場が神栄を「ただの含み益貯金箱」として過小評価している証拠であり、同時に価値が顕在化したとき最も大きなリターンが得られる構造でもある。</div>
+</div>
+
+<!-- ─ 6大割安ポイント（メインビジュアル） ─ -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+
+  <!-- ① 時価総額の9割を保有株が担保 -->
+  <div style="background:#fff;border:.5px solid #c8e8d8;border-radius:6px;overflow:hidden">
+    <div style="background:var(--gn);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ①</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">保有株式が時価総額の91%を担保<br>事業価値がほぼゼロ評価</div>
+    </div>
+    <div style="padding:13px 14px">
+      <!-- ビジュアルゲージ -->
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>政策保有株5銘柄の現在時価</span><span class="hi-gn mono">80.3億円</span></div>
+        <div style="background:#e8f5ef;border-radius:3px;height:14px;overflow:hidden"><div style="width:91.2%;height:100%;background:var(--gn);border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font:700 10px/1 var(--mono);color:#fff">91.2%</span></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:3px"><span>神栄の時価総額</span><span class="mono">88億円</span></div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">三菱UFJ・三井住友FG・京都FG・りそなHD・MS&ADの5銘柄で<strong>80.3億円</strong>。神栄株を<strong>100万円分購入すると、事業価値（センサー・食品）とは別に91.2万円相当の金融株ポートフォリオが間接的に付いてくる</strong>計算になる。残りの8.8万円分で食品商社＋湿度センサー世界首位の事業を丸ごと手に入れているに等しい。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-gn">含み益税前+31億円</span>
+        <span class="badge bd-gn">税後+21.6億（+564円/株）</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 世界首位×異常に低いPER -->
+  <div style="background:#fff;border:.5px solid #c8d8f0;border-radius:6px;overflow:hidden">
+    <div style="background:var(--bl);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ②</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">世界首位のニッチトップ<br>「堀の深さ」に対してPERが異常に低い</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center">
+        <div style="text-align:center;flex:1;background:#f0f4fc;border-radius:4px;padding:8px 4px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">神栄 来期PER</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--bl)">4.35倍</div>
+        </div>
+        <div style="font-size:18px;color:var(--ink3)">vs</div>
+        <div style="text-align:center;flex:1;background:#fef3e0;border-radius:4px;padding:8px 4px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">同業平均PER</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--am)">12〜15倍</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">1970年から55年間、湿度センサーで<strong>世界シェアNo.1</strong>を維持。スマートフォン落下試験機の世界デファクトスタンダードでもある。<strong>55年間誰も奪えなかった技術的参入障壁</strong>を持つ企業がPER4.35倍（同業の1/3以下）というのは明らかな過小評価。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-bl">湿度センサー55年世界首位</span>
+        <span class="badge bd-bl">市場CAGR+7〜11%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 高配当×低配当性向 -->
+  <div style="background:#fff;border:.5px solid #f0d898;border-radius:6px;overflow:hidden">
+    <div style="background:var(--am);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ③</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">高配当かつ低配当性向<br>財務良好・増配余力が大きい</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fffbf0;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">確定配当利回り</div>
+          <div style="font:700 24px/1 var(--mono);color:var(--am)">5.21%</div>
+          <div style="font-size:9px;color:var(--ink3)">110円確定</div>
+        </div>
+        <div style="background:#fffbf0;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">配当性向</div>
+          <div style="font:700 24px/1 var(--mono);color:var(--gn)">31%</div>
+          <div style="font-size:9px;color:var(--ink3)">目標30%と整合</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">配当利回り5.21%と高配当でありながら配当性向は31%と低水準。FCF（+6.6億円）が配当総額（4.3億円）を大幅に上回り<strong>増配余力は十分</strong>。復配後3年で40→110円と<strong>2.75倍に増配</strong>しており、経営陣の株主還元コミットメントは明確。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-am">3期連続増配確定</span>
+        <span class="badge bd-gn">FCF>配当総額</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 赤字事業整理済み -->
+  <div style="background:#fff;border:.5px solid #c8e8d8;border-radius:6px;overflow:hidden">
+    <div style="background:var(--tl);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ④</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">赤字事業整理済み<br>今後の収益性向上・キャッシュ積み上がり</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fdf2f2;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--rd);margin-bottom:2px">コンデンサ赤字（過去）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--rd)">年▲1億円超</div>
+          <div style="font-size:9px;color:var(--ink3)">2026/3期で完全処理</div>
+        </div>
+        <div style="background:#eaf7f0;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--tl);margin-bottom:2px">売却益（今期1Q）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--tl)">+5.19億円</div>
+          <div style="font-size:9px;color:var(--ink3)">MS&AD売却・特別利益</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">神栄キャパシタ（コンデンサ事業）が3期連続赤字の末に2026/3期で完全撤退・処理完了。来期（2027/3期）から年間1億円超の赤字要因が消滅し<strong>構造的に利益が増える</strong>。今期1Qに政策保有株（MS&AD）売却益5.19億円が特別利益として計上予定。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-tl">赤字事業消滅</span>
+        <span class="badge bd-am">今期EPS≒486円見込み</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 東証ガバナンス改革直撃 -->
+  <div style="background:#fff;border:.5px solid #f0d8c8;border-radius:6px;overflow:hidden">
+    <div style="background:var(--sem);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ⑤</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">東証ガバナンス改革が直撃<br>「キャッシュリッチの説明義務」が株価を押し上げる</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="background:#fef8f0;border-radius:4px;padding:10px;margin-bottom:10px">
+        <div style="font-size:11px;color:var(--sem);font-weight:600;margin-bottom:5px">東証の要請（2023年3月〜継続中）</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">PBR1倍割れ企業に対し「政策保有株の縮減計画・資本効率の改善・具体的KPIの開示」を毎月更新で公表することを義務付け。神栄は<strong>PBR0.85倍・政策保有株55.48億円</strong>という典型的なターゲット。</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">この「外圧」が：①政策保有株売却→売却益→BPS改善→PBR1倍接近、②増配・自己株買い圧力→株価底上げ、③機関投資家・アクティビストの注目増加、という<strong>株価押し上げサイクルを制度的に担保</strong>している。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-sem">経過措置終了2025/3〜</span>
+        <span class="badge bd-am">毎月開示一覧に掲載</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 隠れAI・半導体銘柄 -->
+  <div style="background:#fff;border:.5px solid #e0d0f0;border-radius:6px;overflow:hidden">
+    <div style="background:var(--pur);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">割安ポイント ⑥</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">隠れAI・データセンター銘柄<br>冷却効率に湿度センサーが必須になる</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:flex;gap:8px;margin-bottom:10px;align-items:stretch">
+        <div style="flex:1;background:#f4f0fc;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--pur);margin-bottom:2px">AI DC市場CAGR</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--pur)">+30%超</div>
+          <div style="font-size:9px;color:var(--ink3)">世界規模で急拡大中</div>
+        </div>
+        <div style="flex:1;background:#f4f0fc;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--pur);margin-bottom:2px">湿度センサー市場CAGR</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--pur)">+7〜11%</div>
+          <div style="font-size:9px;color:var(--ink3)">2024〜2029年予測</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">AIサーバーの冷却効率管理には<strong>高精度湿度センサーが必須</strong>。熱暴走を防ぐため室内の温湿度をリアルタイムで精密制御する需要が爆発的に増加。神栄テクノロジーの世界シェアNo.1技術が直接受益する構造。<strong>「AI銘柄」として再評価されていない最後の隠れた銘柄。</strong></div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-pu">AIデータセンター直接受益</span>
+        <span class="badge bd-pu">EV車内センサーも成長</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /6cards grid -->
+
+<!-- ─ まとめバー ─ -->
+<div style="background:var(--ink2);border-radius:6px;padding:16px 20px;margin-bottom:16px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;text-align:center">
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">修正PBR</div><div style="font:700 20px/1 var(--mono);color:#68c890">0.71倍</div><div style="font-size:9px;color:rgba(246,245,239,.22)">含み益加算後の実質割安度</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">来期PER</div><div style="font:700 20px/1 var(--mono);color:#68c890">4.35倍</div><div style="font-size:9px;color:rgba(246,245,239,.22)">正常化EPS486円ベース</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">配当利回り</div><div style="font:700 20px/1 var(--mono);color:#e8b870">5.21%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">110円確定・増配余力大</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">清算価値</div><div style="font:700 20px/1 var(--mono);color:#68c890">618円</div><div style="font-size:9px;color:rgba(246,245,239,.22)">株価の下値フロア（最悪）</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">政策保有株比率</div><div style="font:700 20px/1 var(--mono);color:#68c890">91.2%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">事業は実質タダ評価</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">3年期待リターン</div><div style="font:700 20px/1 var(--mono);color:#e8b870">+100%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">年率+26%（含み益反映）</div></div>
+</div>
+
+<!-- ─ 補足：カタリストカレンダーと非対称リスク ─ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+  <div class="card">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">★ カタリストカレンダー（2026〜2027年）</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">✓ 2026年5月14日（完了）</div><div class="tl-text">本決算：増益・増配・特損処理完了。エントリー根拠確定済み。</div></div>
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">2026年6月末</div><div class="tl-text">配当110円の権利確定。MS&ADの売却益（5.19億円）が1Qに計上予定。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">★ 2026年7月31日（最重要）</div><div class="tl-text">1Q決算：コンデンサ赤字消滅の初確認＋売却益計上。数字が変わる最初の決算。</div></div>
+      <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-date">2026年後半</div><div class="tl-text">日銀追加利上げ観測。銀行株高→含み益拡大→BPS+125〜198円自動改善。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">2027年5月</div><div class="tl-text">創立140周年＋中計最終年決算。IR強化・追加株主還元が期待される節目。</div></div>
+      <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-date">継続監視：ホルムズ情勢</div><div class="tl-text">解消→食品採算急改善（上振れ）。長期化→EPS下振れ▲50〜100円（要注意）。</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">非対称リスク構造（ダウンサイド vs アップサイド）</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+      <div style="background:#fdf2f2;border-left:3px solid var(--rd);border-radius:3px;padding:10px 12px">
+        <div style="font:700 10px/1 var(--mono);color:var(--rd);letter-spacing:.08em;margin-bottom:4px">BEAR（15%・¥1,300）</div>
+        <div style="font-size:11px;color:var(--ink2)">最悪ケースでも配当込み損失<strong style="color:var(--rd)">▲22.8%</strong>に限定。清算価値618円が下値フロア。</div>
+      </div>
+      <div style="background:#fffbf0;border-left:3px solid var(--am);border-radius:3px;padding:10px 12px">
+        <div style="font:700 10px/1 var(--mono);color:var(--am);letter-spacing:.08em;margin-bottom:4px">BASE（55%・¥3,500）</div>
+        <div style="font-size:11px;color:var(--ink2)">中計達成＋利上げ2回で配当込み<strong style="color:var(--am)">+82.8%</strong>。最も蓋然性が高いシナリオ。</div>
+      </div>
+      <div style="background:#eaf7f0;border-left:3px solid var(--tl);border-radius:3px;padding:10px 12px">
+        <div style="font:700 10px/1 var(--mono);color:var(--tl);letter-spacing:.08em;margin-bottom:4px">BULL（30%・¥5,800）</div>
+        <div style="font-size:11px;color:var(--ink2)">AI需要爆発＋含み益顕在化で配当込み<strong style="color:var(--tl)">+193%</strong>。利上げ×東証改革の複合効果。</div>
+      </div>
+    </div>
+    <div style="background:#f0f9f4;border-radius:4px;padding:10px 12px;text-align:center">
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">確率加重 3年期待リターン</div>
+      <div style="font:700 28px/1 var(--mono);color:var(--gn)">+100%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">年率換算 +26%/年</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /c0 -->
+
+<!-- ══ C1: 決算・バリュエーション ══ -->
+<div class="chapter" id="c1">
+<div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">決算・バリュエーション ─ 2026年5月14日 本決算確定値</h2><span class="ch-badge cb-gn">増益＋3期連続増配確定</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c1','a',this)">決算推移</button>
+  <button class="stab" onclick="showTab('c1','b',this)">バリュエーション比較</button>
+  <button class="stab" onclick="showTab('c1','c',this)">理論株価・IRBANK算定</button>
+</div>
+<div class="spanel active" id="c1-a">
+  <div class="notice"><strong>2026/5/14 本決算確定：</strong>純利益+6%増・配当110円（+20円増配）を特別損失を吸収しつつ達成。「復配後3期連続増配」確定。コンデンサ赤字は今期で完全処理済み。</div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>期</th><th class="r">売上高(億)</th><th class="r">経常利益(億)</th><th class="r">純利益(億)</th><th class="r">EPS(円)</th><th class="r">BPS(円)</th><th class="r">配当(円)</th><th class="r">自己資本比率</th></tr></thead>
+      <tbody>
+        <tr><td>2024/3期（最高益）</td><td class="r mono">403</td><td class="r mono hi-gn">19.1</td><td class="r mono hi-gn">16.6</td><td class="r mono hi-gn">405</td><td class="r mono">1,861</td><td class="r mono">90</td><td class="r mono">28.7%</td></tr>
+        <tr><td>2025/3期（実績）</td><td class="r mono">401</td><td class="r mono hi-rd">14.3</td><td class="r mono hi-rd">13.2</td><td class="r mono hi-rd">325</td><td class="r mono">2,248</td><td class="r mono">90</td><td class="r mono">31.9%</td></tr>
+        <tr style="background:#f0f9f4"><td><strong>2026/3期（本決算確定）</strong></td><td class="r mono hi-gn"><strong>430</strong></td><td class="r mono hi-gn"><strong>17.2</strong></td><td class="r mono hi-gn"><strong>14.0(+6%)</strong></td><td class="r mono hi-gn"><strong>≒354</strong></td><td class="r mono hi-gn"><strong>≒2,500</strong></td><td class="r mono hi-gn"><strong>110✓</strong></td><td class="r mono hi-gn"><strong>≒36%</strong></td></tr>
+        <tr><td>2027/3期（来期予想）</td><td class="r mono">450+</td><td class="r mono hi-gn">21〜23</td><td class="r mono hi-gn">19〜20</td><td class="r mono hi-gn">≒486</td><td class="r mono hi-gn">≒2,750</td><td class="r mono hi-gn">120〜130</td><td class="r mono hi-gn">38%+</td></tr>
+      </tbody>
+    </table>
+    <p class="note">来期(2027/3期)はコンデンサ赤字（年1億超）消滅＋政保株売却益5.19億円（1Q特別利益）がWで業績を押し上げ。SBIアプリのPER4.35倍は来期正常化EPS≒486円ベース。</p>
+  </div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">来期予想PER</div><div class="mc-v gn">4.35倍</div><div class="mc-s">EPS≒486円（SBI一致）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">確定配当利回り</div><div class="mc-v am">5.21%</div><div class="mc-s">110円確定・来期増配期待</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">実績ROE</div><div class="mc-v bl">14%</div><div class="mc-s">中計目標12%超を先行達成</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">自己資本比率</div><div class="mc-v tl">36.1%</div><div class="mc-s">前期31.9%→+4.2pt改善</div></div>
+  </div>
+</div>
+<div class="spanel" id="c1-b">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">PER・PBRの対比（スタンダード市場平均比）</div>
+      <div class="bgrp"><div class="blrow"><span>神栄 来期PER（4.35倍）</span><span class="hi-gn mono">4.35倍</span></div><div class="btrack"><div class="bfill" style="width:30%;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>東証スタンダード平均 PER</span><span class="hi-am mono">約13倍</span></div><div class="btrack"><div class="bfill" style="width:87%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>神栄 修正PBR（含み益加算後）</span><span class="hi-tl mono">0.71〜0.73倍</span></div><div class="btrack"><div class="bfill" style="width:73%;background:var(--tl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>東証スタンダード平均 PBR</span><span class="hi-am mono">約1.3倍</span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>神栄 配当利回り</span><span class="hi-gn mono">5.21%</span></div><div class="btrack"><div class="bfill" style="width:52%;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>東証スタンダード平均 配当利回り</span><span class="hi-am mono">約2.1%</span></div><div class="btrack"><div class="bfill" style="width:21%;background:var(--am)"></div></div></div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">IRBANK価値算定（はっしゃん式）</div>
+      <table class="tbl"><tbody>
+        <tr><td>2025/3期 財産価値</td><td class="r mono hi-gn">74.8億円</td></tr>
+        <tr><td>2026/3期 財産価値（最新）</td><td class="r mono hi-gn">101.0億円</td></tr>
+        <tr><td>2026/3期 株主価値（算定）</td><td class="r mono hi-gn">145億円（1株3,704円）</td></tr>
+        <tr><td>2027/3期 1株価値（予想）</td><td class="r mono hi-gn">4,225円</td></tr>
+        <tr><td>現株価2,112円との乖離</td><td class="r"><span class="badge bd-gn">▲50%割安</span></td></tr>
+      </tbody></table>
+      <p class="note">はっしゃん式：財産価値（流動資産×0.85−負債）＋収益価値（EPS×10）の合計。</p>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c1-c">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">複数手法による理論株価（2026年5月現在）</div>
+    <div class="bgrp"><div class="blrow"><span>PER法（EPS486×PER9倍）</span><span class="hi-gn mono">¥4,374</span></div><div class="btrack"><div class="bfill" style="width:88%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>PER法（EPS486×PER8倍）</span><span class="hi-gn mono">¥3,888</span></div><div class="btrack"><div class="bfill" style="width:78%;background:var(--gn2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>修正純資産法（修正BPS2,944×1.2倍）</span><span class="hi-am mono">¥3,533</span></div><div class="btrack"><div class="bfill" style="width:71%;background:var(--am)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>PBR法（BPS2,500×1.2倍）</span><span class="hi-am mono">¥3,000</span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--am2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>DDM法（配当120円÷4%）</span><span class="hi-am mono">¥3,000</span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--am2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span style="color:var(--rd)">現在株価（参考）</span><span class="hi-rd mono">¥2,112</span></div><div class="btrack"><div class="bfill" style="width:42%;background:var(--rd)"></div></div></div>
+  </div>
+  <div class="notice-gn">理論株価の中央値レンジは<strong>¥3,000〜4,400</strong>（現株価比+42〜+108%）。修正純資産法では+67%の上値余地。</div>
+</div>
+</div>
+
+<!-- ══ C2: 含み益資産の精査 ══ -->
+<div class="chapter" id="c2">
+<div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">含み益資産の精査 ─ 有報注記確定値＋現在株価で計算</h2><span class="ch-badge cb-bl">5銘柄確定計算</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c2','a',this)">政策保有株・銘柄別計算</button>
+  <button class="stab" onclick="showTab('c2','b',this)">固定資産・土地含み益</button>
+  <button class="stab" onclick="showTab('c2','c',this)">修正BPS・清算3シナリオ</button>
+</div>
+<div class="spanel active" id="c2-a">
+  <div class="warn" style="margin-bottom:14px"><strong>衝撃の発見：</strong>政策保有株5銘柄の現在時価（80.3億円）が神栄の時価総額（88億円）の91.2%に達する。含み益31億円（税引前）は年間純利益14億円の2.2倍。利上げ継続でこれがさらに拡大する。</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">政策保有株5銘柄 含み益詳細（2026年5月現在株価・有報確定株数で計算）</div>
+    <table class="tbl">
+      <thead><tr><th>銘柄（コード）</th><th>株数</th><th>分割</th><th class="r">有報帳簿<br>（2025/3末）</th><th class="r">換算株価</th><th class="r">現在株価</th><th class="r">現在時価</th><th class="r">含み益（税前）</th><th class="r">含み率</th><th class="r">含み益（税後）</th></tr></thead>
+      <tbody>
+        <tr><td><strong>三菱UFJフィナンシャルG（8306）</strong></td><td class="mono" style="font-size:11px">903,330</td><td><span class="badge bd-bl">なし</span></td><td class="r mono">18.16億</td><td class="r mono">≒2,010円</td><td class="r mono hi-am"><strong>3,112円</strong></td><td class="r mono hi-gn">28.11億</td><td class="r mono hi-gn"><strong>+9.95億</strong></td><td class="r mono hi-gn">+54.8%</td><td class="r mono hi-gn">+6.94億</td></tr>
+        <tr><td><strong>三井住友フィナンシャルG（8316）</strong><br><span style="font-size:10px;color:var(--ink3)">分割後株数</span></td><td class="mono" style="font-size:11px">256,140</td><td><span class="badge bd-am">1→3(24/10)</span></td><td class="r mono">9.72億</td><td class="r mono">≒3,795円</td><td class="r mono hi-am"><strong>6,091円</strong></td><td class="r mono hi-gn">15.60億</td><td class="r mono hi-gn"><strong>+5.88億</strong></td><td class="r mono hi-gn">+60.5%</td><td class="r mono hi-gn">+4.10億</td></tr>
+        <tr><td><strong>京都フィナンシャルG（5844）</strong></td><td class="mono" style="font-size:11px">386,760</td><td><span class="badge bd-bl">なし</span></td><td class="r mono">8.80億</td><td class="r mono">≒2,275円</td><td class="r mono hi-am"><strong>4,486円</strong></td><td class="r mono hi-gn">17.35億</td><td class="r mono hi-gn"><strong>+8.55億</strong></td><td class="r mono hi-gn">+97.2%</td><td class="r mono hi-gn">+5.96億</td></tr>
+        <tr><td><strong>りそなホールディングス（8308）</strong></td><td class="mono" style="font-size:11px">495,723</td><td><span class="badge bd-bl">なし</span></td><td class="r mono">6.37億</td><td class="r mono">≒1,285円</td><td class="r mono hi-am"><strong>2,158円</strong></td><td class="r mono hi-gn">10.70億</td><td class="r mono hi-gn"><strong>+4.33億</strong></td><td class="r mono hi-gn">+67.9%</td><td class="r mono hi-gn">+3.02億</td></tr>
+        <tr><td><span style="color:var(--rd)"><strong>MS&ADインシュアランスGHD（8725）</strong></span><br><span style="font-size:10px;color:var(--rd)">★売却確定（2026年6月）</span></td><td class="mono" style="font-size:11px">193,101</td><td><span class="badge bd-am">1→3(24/4)</span></td><td class="r mono">6.22億</td><td class="r mono">≒3,221円</td><td class="r mono hi-am"><strong>4,423円</strong></td><td class="r mono hi-rd">8.54億</td><td class="r mono hi-rd"><strong>+2.32億</strong></td><td class="r mono hi-gn">+37.3%</td><td class="r mono hi-rd">売却益計上</td></tr>
+        <tr style="background:#f0f9f4;font-weight:700"><td><strong>5銘柄 合計</strong></td><td>—</td><td>—</td><td class="r mono hi-am">49.27億</td><td>—</td><td>—</td><td class="r mono hi-gn" style="font-size:15px"><strong>80.30億</strong></td><td class="r mono hi-gn" style="font-size:15px"><strong>+31.03億</strong></td><td class="r mono hi-gn">+63%</td><td class="r mono hi-gn"><strong>+21.64億</strong></td></tr>
+        <tr><td>残り6銘柄（ノザワ等）</td><td colspan="3">帳簿6.17億（現株価データなし）</td><td colspan="6" style="font-size:11px;color:var(--ink3)">全11銘柄帳簿計55.48億円（有報確定値✓）</td></tr>
+      </tbody>
+    </table>
+    <p class="note">分割：三井住友FG(8316)は2024年10月1→3分割、MS&AD(8725)は2024年4月1→3分割。帳簿は有報第157期（2025年3月31日）の時価。含み益(税後)は実効税率30.3%を適用。</p>
+  </div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">5銘柄現在時価</div><div class="mc-v gn">80.3億</div><div class="mc-s">時価総額88億の91.2%</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">含み益（税引前）</div><div class="mc-v am">+31.0億</div><div class="mc-s">年間純利益14億の2.2倍</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">含み益（税引後）</div><div class="mc-v bl">+21.6億</div><div class="mc-s">+564円/株のBPS実質加算</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">最大含み益（京都FG）</div><div class="mc-v tl">+97.2%</div><div class="mc-s">+8.55億円・含み率最高</div></div>
+  </div>
+</div>
+<div class="spanel" id="c2-b">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">有形固定資産の内訳（有報第157期 確定値）</div>
+      <table class="tbl">
+        <thead><tr><th>項目</th><th class="r">取得価額</th><th class="r">減価償却累計</th><th class="r">帳簿純額</th><th class="r">償却率</th></tr></thead>
+        <tbody>
+          <tr><td>建物及び構築物</td><td class="r mono">62.1億</td><td class="r mono">37.9億</td><td class="r mono">24.2億</td><td class="r mono hi-am">61%</td></tr>
+          <tr><td>機械装置及び運搬具</td><td class="r mono">20.9億</td><td class="r mono">20.1億</td><td class="r mono hi-rd">0.8億</td><td class="r mono hi-rd">96%</td></tr>
+          <tr style="background:#fffbf0"><td><strong>土地 ★含み益内包</strong></td><td class="r mono hi-gn">12.1億（帳簿）</td><td class="r mono">0（償却なし）</td><td class="r mono hi-gn">12.1億</td><td class="r mono hi-gn">0%</td></tr>
+          <tr><td>その他有形固定資産</td><td class="r mono">12.3億</td><td class="r mono">11.0億</td><td class="r mono">1.3億</td><td class="r mono hi-rd">89%</td></tr>
+          <tr style="font-weight:700"><td>合計</td><td class="r mono hi-am">107.4億</td><td class="r mono">69.0億</td><td class="r mono hi-am">38.4億</td><td class="r mono hi-am">64%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">土地は取得原価のまま（減価償却なし）。神戸・阪神エリア中心で実態時価が帳簿を上回る蓋然性大。取得価額107.4億円のうち64%が償却済み。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">含み益サマリー（確定＋推定）</div>
+      <div class="card-hi-gn" style="padding:14px;border-radius:var(--r);margin-bottom:12px">
+        <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+          <div style="text-align:center"><div style="font-size:10px;color:var(--ink3)">政策保有株5銘柄（税後・確定）</div><div style="font:700 26px/1 var(--mono);color:var(--gn)">+21.64億</div><div style="font-size:10px;color:var(--ink3)">+564円/株</div></div>
+          <div style="font-size:22px;color:var(--ink3)">+</div>
+          <div style="text-align:center"><div style="font-size:10px;color:var(--ink3)">土地含み益（税後推定）</div><div style="font:700 26px/1 var(--mono);color:var(--am)">+2〜6億</div><div style="font-size:10px;color:var(--ink3)">+50〜160円/株</div></div>
+          <div style="font-size:22px;color:var(--ink3)">≈</div>
+          <div style="text-align:center"><div style="font-size:10px;color:var(--ink3)">含み益合計（税後）</div><div style="font:700 22px/1 var(--mono);color:var(--tl)">+23〜28億</div><div style="font-size:11px;font-weight:600;color:var(--am)">+600〜730円/株</div></div>
+        </div>
+      </div>
+      <table class="tbl"><tbody>
+        <tr><td>土地帳簿価格（取得原価）</td><td class="r mono">12.1億円</td></tr>
+        <tr><td>推定時価（神戸・阪神エリア）</td><td class="r mono hi-am">15〜20億円</td></tr>
+        <tr><td>土地含み益（税引前推定）</td><td class="r mono hi-gn">+3〜8億円</td></tr>
+        <tr><td>土地含み益（税引後推定）</td><td class="r mono hi-gn">+2〜6億円（+50〜160円/株）</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c2-c">
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">会計上のPBR</div><div class="mc-v rd">0.85倍</div><div class="mc-s">BPS 2,500円 ÷ 株価2,112円</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">修正BPS（含み益加算）</div><div class="mc-v am">2,892〜2,996円</div><div class="mc-s">+600〜730円加算（確定値）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">修正PBR（確定計算）</div><div class="mc-v tl">0.71〜0.73倍</div><div class="mc-s">含み益加算後のさらなる割安</div></div>
+  </div>
+  <div class="sc-grid" style="margin-bottom:14px">
+    <div class="sc-col">
+      <div class="sc-lbl bear">SCENARIO A ─ 保守的清算価値</div>
+      <div class="sc-prob bear" style="font-size:20px">23.7億円</div>
+      <div class="sc-sub">1株≒618円が下値フロア</div>
+      <div class="sc-li">現金・預金 +11.5億</div>
+      <div class="sc-li">売掛金×90% +52.7億</div>
+      <div class="sc-li">在庫×50%（清算割引） +47.6億</div>
+      <div class="sc-li">政策保有株★現在時価 +80.3億</div>
+      <div class="sc-li">土地（帳簿） +12.1億</div>
+      <div class="sc-li">建物×30%（清算） +7.3億</div>
+      <div class="sc-li">負債合計 ▲187.8億</div>
+      <p class="note">在庫50%・建物30%の最悪ケースでも1株618円確保。完全債務超過にならない。</p>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">SCENARIO B ─ 修正純資産</div>
+      <div class="sc-prob base" style="font-size:20px">111〜115億円</div>
+      <div class="sc-sub">修正BPS 2,892〜2,996円</div>
+      <div class="sc-li">会計上の純資産 +87.9億</div>
+      <div class="sc-li">5銘柄含み益（税後・確定） +21.6億</div>
+      <div class="sc-li">土地含み益（税後推定） +2〜6億</div>
+      <div class="sc-li">修正PBR → 0.71〜0.73倍</div>
+      <p class="note">最も現実的な評価。含み益加算で修正PBRはさらに低下。</p>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">SCENARIO C ─ 事業価値加算</div>
+      <div class="sc-prob bull" style="font-size:20px">145〜165億円</div>
+      <div class="sc-sub">1株価値 3,704〜4,225円</div>
+      <div class="sc-li">修正純資産（Bシナリオ） +113億</div>
+      <div class="sc-li">事業収益価値（EPS486×PER8倍）</div>
+      <div class="sc-li">現株価比の割安率 ▲43〜50%</div>
+      <div class="sc-li">時価総額の1.65〜1.87倍</div>
+      <p class="note">IRBANKのはっしゃん式と整合。事業+資産の包括的評価。</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C3: 金融株エクスポージャー ══ -->
+<div class="chapter" id="c3">
+<div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">金融保険株の間接エクスポージャー ─ 100万円投資で何が得られるか</h2><span class="ch-badge cb-bl">利上げ恩恵の定量化</span></div>
+
+<div class="notice-tl"><strong>神栄株100万円を買うと：</strong>時価総額88億円に対し政策保有株の現在時価は80.3億円（91.2%）。100万円の投資で約91.2万円分の銀行・保険株ポートフォリオへの間接エクスポージャーを得る計算。事業部分（センサー・食品）は実質的に「8.8万円分（ほぼ無料）」でついてくる。</div>
+
+<div class="card" style="margin-bottom:14px">
+  <div style="font-size:11px;font-weight:500;margin-bottom:12px">100万円投資した場合の間接金融株エクスポージャー（時価ベース）</div>
+  <table class="tbl">
+    <thead><tr><th>銘柄</th><th>業種</th><th class="r">神栄時価総額比</th><th class="r">100万円あたり<br>間接保有額</th><th>利上げ感応度</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td><strong>㈱三菱UFJフィナンシャルG</strong></td><td>メガバンク</td><td class="r mono">31.9%</td><td class="r mono hi-gn"><strong>31.9万円</strong></td><td><span class="badge bd-gn">◎ 極めて高い</span></td><td style="font-size:11px">NIM改善で利上げ直接恩恵。+0.25%で株高+5〜10%期待</td></tr>
+      <tr><td><strong>㈱三井住友フィナンシャルG</strong></td><td>メガバンク</td><td class="r mono">17.7%</td><td class="r mono hi-gn"><strong>17.7万円</strong></td><td><span class="badge bd-gn">◎ 極めて高い</span></td><td style="font-size:11px">海外事業多角化で安定。利上げ恩恵メガバンク2位</td></tr>
+      <tr><td><strong>㈱京都フィナンシャルG</strong></td><td>地銀</td><td class="r mono">19.7%</td><td class="r mono hi-gn"><strong>19.7万円</strong></td><td><span class="badge bd-am">○ 高い</span></td><td style="font-size:11px">含み益+97.2%で最高値上がり銘柄。地銀は融資利回り改善</td></tr>
+      <tr><td><strong>㈱りそなホールディングス</strong></td><td>銀行</td><td class="r mono">12.2%</td><td class="r mono hi-gn"><strong>12.2万円</strong></td><td><span class="badge bd-am">○ 高い</span></td><td style="font-size:11px">住宅ローン・中堅向け融資の金利改善</td></tr>
+      <tr><td><span style="color:var(--rd)"><strong>MS&ADインシュアランスGHD</strong></span><br><span style="font-size:10px;color:var(--rd)">★売却確定</span></td><td>損保</td><td class="r mono">9.7%</td><td class="r mono hi-rd"><strong>9.7万円→売却済</strong></td><td><span class="badge bd-bl">△ 中程度</span></td><td style="font-size:11px">売却益5.19億円が2026年6月に特別利益計上</td></tr>
+      <tr style="background:#f0f9f4;font-weight:700"><td>金融株 合計（5銘柄）</td><td>—</td><td class="r mono hi-gn"><strong>91.2%</strong></td><td class="r mono hi-gn"><strong>91.2万円</strong></td><td>—</td><td style="font-size:11px;font-weight:600">100万円で91.2万円分の金融株に間接エクスポージャー</td></tr>
+      <tr><td>神栄の事業（センサー・食品）</td><td>—</td><td class="r mono">8.8%</td><td class="r mono hi-am">8.8万円</td><td>—</td><td style="font-size:11px">湿度センサ世界首位+食品商社が「ほぼ無料」で付随</td></tr>
+    </tbody>
+  </table>
+  <p class="note">比率の算出：各銘柄現在時価÷神栄時価総額88億円。100万円×比率で間接保有相当額を算出。間接エクスポージャーであり直接保有ではない点に注意。</p>
+</div>
+
+<div class="g2" style="margin-bottom:14px">
+  <div class="card card-gn">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">神栄経由（間接）で銀行株を持つ3つの優位性</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">①割安に取得できる</div><div class="tl-text">修正PBR0.71〜0.73倍の神栄経由で間接保有するため、三菱UFJを直接購入するより実質的に割安。</div></div>
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">②高配当5.21%が付随</div><div class="tl-text">三菱UFJ直接保有の利回り（約2.4%）より神栄の5.21%の方がはるかに高い。金融株エクスポージャー+高配当の両取り。</div></div>
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">③センサー事業が「タダ」でついてくる</div><div class="tl-text">湿度センサ世界首位×AI需要拡大という成長事業が実質コストほぼゼロで付随する非対称な収益機会。</div></div>
+    </div>
+  </div>
+  <div class="card card-am">
+    <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px">利上げが間接エクスポージャーに与える複合効果</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">Step 1 ─ 日銀追加利上げ（+0.25%）</div><div class="tl-text">三菱UFJ・三井住友FG・りそなHDの株価が5〜15%上昇。メガバンクのNIM（純利息収益率）が改善。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">Step 2 ─ 神栄の含み益が自動拡大</div><div class="tl-text">保有株高→投資有価証券評価額増加→その他有価証券評価差額金拡大→BPS改善（+125〜198円/回）。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">Step 3 ─ 修正PBRが1倍に接近</div><div class="tl-text">BPS改善→修正PBRが1倍に近づく→東証1倍改善要請と合わさり株価見直し圧力が高まる。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">Step 4 ─ 売却益の顕在化が加速</div><div class="tl-text">保有株高→売却好機→特別利益計上→1株利益改善→株価上昇のカタリストに。</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C4: 利上げ効果 ══ -->
+<div class="chapter" id="c4">
+<div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">利上げ効果分析 ─ 日銀政策が神栄の資産価値に与える複合影響</h2><span class="ch-badge cb-am">利上げが味方になる構造</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c4','a',this)">利上げ現状と軌跡</button>
+  <button class="stab" onclick="showTab('c4','b',this)">銀行株感応度・BPS試算</button>
+  <button class="stab" onclick="showTab('c4','c',this)">複合効果・食品事業への影響</button>
+</div>
+<div class="spanel active" id="c4-a">
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">日銀の利上げ軌跡（2024〜2025年）</div>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-date">2024年3月 ─ マイナス金利解除</div><div class="tl-text">政策金利を0%〜0.1%へ。17年ぶりの利上げ。メガバンク株が急騰し神栄の含み益が拡大開始。</div></div>
+        <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-date">2024年7月 ─ 0.25%へ引き上げ</div><div class="tl-text">円安抑制と物価上昇が動機。銀行株がさらに高騰し神栄の投資有価証券評価額が増加。</div></div>
+        <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-date">2024年12月 ─ 0.5%へ引き上げ</div><div class="tl-text">「年2回の利上げ」ペースが定着。メガバンク3行の年間業績が大幅改善。</div></div>
+        <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">2025年3月 ─ 0.75%へ引き上げ</div><div class="tl-text">3年で実質4回の利上げ。神栄の保有5銘柄の現在時価（80.3億）はこの恩恵を受けた結果。</div></div>
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">2025〜2026年（見通し）</div><div class="tl-text">インフレ継続・賃上げ定着で1.0〜1.5%への段階的引き上げが市場コンセンサス。神栄の含み益がさらに拡大する見込み。</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">利上げが神栄に与えるネット効果</div>
+      <div class="card-hi-gn" style="padding:13px;border-radius:var(--r);margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">プラス効果（大）</div>
+        <table class="tbl"><tbody>
+          <tr><td>保有銀行株の株価上昇</td><td class="r mono hi-gn">BPS+125〜198円/回（+0.25%）</td></tr>
+          <tr><td>円高→食品輸入コスト低下</td><td class="r mono hi-gn">1円/ドルで▲0.3〜0.5億円改善</td></tr>
+          <tr><td>政策保有株の売却機会創出</td><td class="r mono hi-gn">株高→売却益→特別利益</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card-hi-rd" style="padding:13px;border-radius:var(--r)">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">マイナス効果（小）</div>
+        <table class="tbl"><tbody>
+          <tr><td>借入金利上昇</td><td class="r mono hi-am">有利子負債133億×0.25%≒3,300万円/回</td></tr>
+          <tr><td>高配当株の相対魅力低下</td><td class="r mono hi-am">無リスク金利上昇で相対的に影響</td></tr>
+        </tbody></table>
+      </div>
+      <p class="note">銀行株BPS改善（+125〜198円/回）vs 利払い増（▲3,300万円/回）。プラス効果が圧倒的に大きい。利上げは神栄に「追い風」。</p>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c4-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">利上げ回数別・修正BPSへの累積効果試算</div>
+    <table class="tbl">
+      <thead><tr><th>シナリオ</th><th class="r">政策金利</th><th class="r">銀行株時価増（4銘柄）</th><th class="r">BPS追加改善（税後）</th><th class="r">修正BPS（累積）</th><th class="r">修正PBR<br>（株価2,112円）</th></tr></thead>
+      <tbody>
+        <tr style="background:#f0f9f4"><td><strong>現在（ベース）</strong></td><td class="r mono">0.75%</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono hi-gn"><strong>2,892〜2,996円</strong></td><td class="r mono hi-gn"><strong>0.71〜0.73倍</strong></td></tr>
+        <tr><td>利上げ+1回（+0.25%）</td><td class="r mono">1.00%</td><td class="r mono hi-gn">+4.8〜7.6億</td><td class="r mono hi-gn">+125〜198円/株</td><td class="r mono hi-gn">3,017〜3,194円</td><td class="r mono hi-gn">0.66〜0.70倍</td></tr>
+        <tr><td>利上げ+2回（+0.50%）</td><td class="r mono">1.25%</td><td class="r mono hi-gn">+9.6〜15.2億</td><td class="r mono hi-gn">+250〜396円/株</td><td class="r mono hi-gn">3,142〜3,392円</td><td class="r mono hi-gn">0.62〜0.67倍</td></tr>
+        <tr><td>利上げ+3回（+0.75%）</td><td class="r mono">1.50%</td><td class="r mono hi-gn">+14.4〜22.8億</td><td class="r mono hi-gn">+375〜594円/株</td><td class="r mono hi-gn">3,267〜3,590円</td><td class="r mono hi-gn">0.59〜0.65倍</td></tr>
+      </tbody>
+    </table>
+    <p class="note">銀行株感応度はメガバンク+0.25%あたり+7〜11%上昇（過去実績の保守的下限）。税引後は実効税率30.3%を適用。利上げが進むほど修正PBRの割安度がさらに拡大する逆説的構造。</p>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">保有4銀行株の利上げ感応度比較（神栄保有分）</div>
+    <div class="gain-meter"><div class="gain-label">三菱UFJ（8306）<br><span style="font-size:10px;color:var(--ink3)">903,330株 / 現時価28.1億</span></div><div class="gain-track"><div class="gain-fill" style="width:90%;background:var(--gn)"></div></div><div class="gain-val hi-gn">◎◎◎ 感応度最高</div></div>
+    <div class="gain-meter"><div class="gain-label">三井住友FG（8316）<br><span style="font-size:10px;color:var(--ink3)">256,140株 / 現時価15.6億</span></div><div class="gain-track"><div class="gain-fill" style="width:85%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">◎◎◎ 感応度最高</div></div>
+    <div class="gain-meter"><div class="gain-label">京都フィナンシャルG（5844）<br><span style="font-size:10px;color:var(--ink3)">386,760株 / 現時価17.3億</span></div><div class="gain-track"><div class="gain-fill" style="width:70%;background:var(--am)"></div></div><div class="gain-val hi-am">◎◎ 感応度高</div></div>
+    <div class="gain-meter"><div class="gain-label">りそなHD（8308）<br><span style="font-size:10px;color:var(--ink3)">495,723株 / 現時価10.7億</span></div><div class="gain-track"><div class="gain-fill" style="width:65%;background:var(--am2)"></div></div><div class="gain-val hi-am">◎◎ 感応度高</div></div>
+  </div>
+</div>
+<div class="spanel" id="c4-c">
+  <div class="notice-tl"><strong>利上げ継続は「含み益拡大→東証圧力→政策保有株売却→株主還元」のサイクルを加速させる：</strong>利上げ+0.25%ごとにBPSが+125〜198円改善し、東証1倍ラインまでの距離が縮まる。市場参加者がこれを認識し始めると「利上げ≒神栄の資産価値増加」として株価に織り込まれる。</div>
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">為替感応度（食品輸入コストへの影響）</div>
+      <table class="tbl">
+        <thead><tr><th>想定レート</th><th class="r">前提比差</th><th class="r">食品コスト影響</th><th class="r">EPS変動</th></tr></thead>
+        <tbody>
+          <tr><td class="hi-tl">¥130〜135（急速円高）</td><td class="r mono hi-gn">▲20〜25円</td><td class="r mono hi-gn">コスト▲10〜15億</td><td class="r mono hi-gn">+70〜120円</td></tr>
+          <tr><td class="hi-gn">¥140〜145（緩やかな円高）</td><td class="r mono hi-gn">▲10〜15円</td><td class="r mono hi-gn">コスト▲5〜8億</td><td class="r mono hi-gn">+40〜75円</td></tr>
+          <tr style="background:#fffbf0"><td class="hi-am">¥150〜155（現状・前提）</td><td class="r mono">±0</td><td class="r mono">—（基準）</td><td class="r mono">—</td></tr>
+          <tr><td class="hi-rd">¥160〜165（2024年水準）</td><td class="r mono hi-rd">+10〜15円</td><td class="r mono hi-rd">コスト+6〜10億</td><td class="r mono hi-rd">▲50〜100円</td></tr>
+        </tbody>
+      </table>
+      <p class="note">1円/ドルの円安で経常利益に▲0.3〜0.5億円の影響。日銀利上げ継続→円高トレンドは食品事業にもプラス。「利上げ≒食品コスト改善」という逆説的な好循環。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">利上げ継続が株価押し上げに働く3つのチャンネル</div>
+      <div class="bgrp"><div class="blrow"><span>①銀行株高→含み益拡大→BPS改善</span><span class="hi-gn mono">+125〜198円/回</span></div><div class="btrack"><div class="bfill" style="width:95%;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>②円高→食品輸入コスト低下→利益改善</span><span class="hi-gn mono">+40〜120円EPS改善</span></div><div class="btrack"><div class="bfill" style="width:75%;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>③政策保有株売却好機→特別利益</span><span class="hi-am mono">年5〜10億円規模</span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="color:var(--rd)">▲借入金利上昇コスト</span><span class="hi-rd mono">▲3,300万円/回</span></div><div class="btrack"><div class="bfill" style="width:8%;background:var(--rd)"></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C5: 燃料高・インフレ ══ -->
+<div class="chapter" id="c5">
+<div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">燃料高・インフレ加速 ─ ホルムズ海峡封鎖という現在進行中のリスク</h2><span class="ch-badge cb-fu">2026年3月〜継続中</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c5','a',this)">ホルムズ封鎖の実態</button>
+  <button class="stab" onclick="showTab('c5','b',this)">神栄への影響経路・試算</button>
+  <button class="stab" onclick="showTab('c5','c',this)">インフレ逆説（プラス効果）</button>
+</div>
+<div class="spanel active" id="c5-a">
+  <div class="warn"><strong>現在進行中（2026年5月）：</strong>2026年2月28日の米・イスラエルによるイラン攻撃を受け、ホルムズ海峡が事実上封鎖。大手海運4社（マースク・ハパックロイド等）および日本の大手3海運会社も通航を停止。OPECバスケット価格は前年比+76.9%の異常水準。封鎖状態の解消は見通しが立っていない（2026年5月時点）。</div>
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card card-fu"><div style="font-size:11px;font-weight:500;color:var(--fuel);margin-bottom:10px">ホルムズ封鎖の数値</div>
+      <table class="tbl"><tbody>
+        <tr><td>日本の原油中東依存度</td><td class="r mono hi-fu">94%</td></tr>
+        <tr><td>ホルムズ経由依存度</td><td class="r mono hi-fu">93%</td></tr>
+        <tr><td>WTI原油（2026/5現在）</td><td class="r mono hi-fu">100〜110ドル/bbl</td></tr>
+        <tr><td>OPECバスケット（前年比）</td><td class="r mono hi-fu">+76.9%</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card card-rd"><div style="font-size:11px;font-weight:500;color:var(--rd);margin-bottom:10px">日本への直接インフレ影響</div>
+      <table class="tbl"><tbody>
+        <tr><td>食品価格前年比（2026/1）</td><td class="r mono hi-rd">+3.9%</td></tr>
+        <tr><td>2026年4月の食品値上げ品目数</td><td class="r mono hi-rd">2,798品目</td></tr>
+        <tr><td>2025年通年の値上げ品目数</td><td class="r mono hi-rd">20,609品目（前年+65%）</td></tr>
+        <tr><td>再エネ賦課金</td><td class="r mono hi-rd">4.18円/kWh（過去最高）</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card card-gn"><div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">神栄の対応力</div>
+      <table class="tbl"><tbody>
+        <tr><td>値上げ転嫁の実績</td><td class="r"><span class="badge bd-gn">2026/3期で確認済</span></td></tr>
+        <tr><td>政府の緊急補助措置</td><td class="r"><span class="badge bd-gn">ガソリン170円/L補助継続</span></td></tr>
+        <tr><td>電子関連への影響</td><td class="r"><span class="badge bd-gn">センサーは影響軽微</span></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c5-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">神栄への影響経路（5チャンネル）と原油価格シナリオ別試算</div>
+    <table class="tbl">
+      <thead><tr><th>シナリオ</th><th class="r">WTI原油</th><th>ホルムズ状況</th><th class="r">経常利益影響</th><th class="r">EPS変動</th></tr></thead>
+      <tbody>
+        <tr><td class="hi-gn"><strong>楽観（早期解消）</strong></td><td class="r mono hi-gn">60〜70ドル</td><td><span class="badge bd-gn">正常化</span></td><td class="r mono hi-gn">+1〜2億円</td><td class="r mono hi-gn">+25〜50円</td></tr>
+        <tr style="background:#fffbf0"><td class="hi-am"><strong>ベース（現状維持）</strong></td><td class="r mono hi-am">80〜100ドル</td><td><span class="badge bd-am">部分解消</span></td><td class="r mono">±0〜▲1億</td><td class="r mono">±0〜▲25円</td></tr>
+        <tr><td class="hi-rd"><strong>警戒（夏まで継続）</strong></td><td class="r mono hi-rd">100〜120ドル</td><td><span class="badge bd-rd">封鎖継続</span></td><td class="r mono hi-rd">▲2〜4億円</td><td class="r mono hi-rd">▲50〜100円</td></tr>
+        <tr><td class="hi-fu"><strong>最悪（年末まで封鎖）</strong></td><td class="r mono hi-fu">120ドル超</td><td><span class="badge bd-fu">長期封鎖</span></td><td class="r mono hi-fu">▲4〜7億円</td><td class="r mono hi-fu">▲100〜180円</td></tr>
+      </tbody>
+    </table>
+    <p class="note">最悪シナリオのEPS下振れ▲180円でも来期EPS486円−180円=306円でPER6.9倍。ベアシナリオには陥らない。封鎖が早期解消されれば転嫁効果がプラスに働く逆転カタリストに。</p>
+  </div>
+</div>
+<div class="spanel" id="c5-c">
+  <div class="card-hi-gn" style="padding:14px;border-radius:var(--r);margin-bottom:14px">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">逆説：インフレ・燃料高は神栄の「隠れた資産価値」をさらに拡大させる</div>
+    <div class="g2">
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>①銀行株含み益拡大：</strong>インフレ→日銀利上げ継続→メガバンク株高→神栄の投資有価証券評価額が増加。インフレが「神栄の含み益を育てる」構造。</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>②食品値上げの許容環境：</strong>インフレ環境では消費者・流通業者が値上げを受け入れやすく、神栄の冷凍食品事業の採算改善が進みやすい。2026年3月期の「値上げ浸透」がまさにその証拠。</div>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">銀行株高→BPS改善</div><div class="mc-v gn">+125〜198円/回</div><div class="mc-s">利上げ+0.25%ごとのBPS上昇</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">円高→食品コスト低下</div><div class="mc-v am">▲0.3〜0.5億/円</div><div class="mc-s">1円/ドル円高での改善効果</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">インフレ→値上げ容易</div><div class="mc-v tl">2026/3期で確認済</div><div class="mc-s">値上げ浸透が業績回復の主因</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C6: 配当方針 ══ -->
+<div class="chapter" id="c6">
+<div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">配当方針・実績 ─ 4年連続無配からの劇的V字回復</h2><span class="ch-badge cb-gn">3期連続増配確定</span></div>
+<div class="g2" style="margin-bottom:14px">
+  <div class="card">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">公式配当方針（有価証券報告書より）</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85;margin-bottom:12px">「<strong>株主への利益還元を経営の最重要課題</strong>」として、業績・配当性向・戦略投資・財務健全性のバランスを総合勘案。中計「チャレンジプロジェクト2026」において<strong>連結配当性向30%程度を目標</strong>として明記。</div>
+    <table class="tbl"><tbody>
+      <tr><td>配当性向（2026/3期）</td><td class="r mono hi-gn">31.1%（目標30%と整合）</td></tr>
+      <tr><td>FCF（フリーキャッシュフロー）</td><td class="r mono hi-gn">+6.6億円（配当総額4.3億を上回る）</td></tr>
+      <tr><td>来期の継続可能性</td><td class="r"><span class="badge bd-gn">高（コンデンサ赤字消滅でFCF改善）</span></td></tr>
+      <tr><td>減配リスク（現時点）</td><td class="r"><span class="badge bd-gn">極めて低い</span></td></tr>
+    </tbody></table>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">配当推移（2019〜2027年3月期）</div>
+    <div class="bgrp"><div class="blrow"><span style="color:var(--rd)">2019〜2022（4期連続無配）</span><span class="hi-rd mono">¥0</span></div><div class="btrack"><div class="bfill" style="width:0%;background:var(--rd)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>2023（復配）</span><span class="hi-gn mono">¥40</span></div><div class="btrack"><div class="bfill" style="width:36%;background:var(--gn2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>2024（最高益・大幅増配）</span><span class="hi-gn mono">¥80</span></div><div class="btrack"><div class="bfill" style="width:73%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>2025（減益も増配継続）</span><span class="hi-gn mono">¥90</span></div><div class="btrack"><div class="bfill" style="width:82%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span><strong>2026（確定・+20円増配）</strong></span><span class="hi-gn mono"><strong>¥110</strong></span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>2027（予想・正常化増配）</span><span class="hi-am mono">¥120〜130（予想）</span></div><div class="btrack"><div class="bfill" style="width:100%;opacity:.6;background:var(--am)"></div></div></div>
+    <p class="note">復配後3年で40→110円（2.75倍）。減益年（2025/3期）でも増配継続した経営陣の強いコミットメントが確認されている。</p>
+  </div>
+</div>
+<div class="notice-gn">FCF（+6.6億円）が配当総額（4.3億円）を大幅上回っており財務的な裏付けがある。コンデンサ赤字消滅でFCFはさらに改善見込み。<strong>2019〜2022年の4期連続無配の再現リスクは現時点では極めて低い。</strong></div>
+</div>
+
+<!-- ══ C7: センサー世界首位 ══ -->
+<div class="chapter" id="c7">
+<div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">湿度センサー世界首位 ─ 55年間変わらない技術的競争優位</h2><span class="ch-badge cb-gn">世界シェアNo.1</span></div>
+<div class="g2" style="margin-bottom:14px">
+  <div class="card card-gn">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">神栄テクノロジー：なぜ55年間世界首位を維持できるか</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">1970年、業界初の金属酸化物型（HMR型）湿度センサを製品化。以来55年間「シンエイ・ヒューメント」で世界首位シェアを維持。<br><br>①長年蓄積した素材・製造プロセスの特許とノウハウ<br>②家電・自動車・気象計測での50年超の採用実績と信頼<br>③スマートフォン落下試験機の世界デファクトスタンダード化<br>④2024年グッドデザイン・ベスト100受賞（CRDS微量水分計）<br><br><strong>参入障壁が極めて高く、中国・台湾メーカーが10〜20年で追いつける類の競争優位ではない。株価が下落しても技術的競争優位は一切変わらない。</strong></div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">湿度センサーの成長ドライバー</div>
+    <table class="tbl"><tbody>
+      <tr><td>市場CAGR（2024〜2029年）</td><td class="r mono hi-gn">+7〜11%</td></tr>
+      <tr><td>AIデータセンター冷却環境センシング</td><td class="r"><span class="badge bd-gn">急増中</span></td></tr>
+      <tr><td>EV車内空調センシング（快適性）</td><td class="r"><span class="badge bd-gn">EV普及で拡大</span></td></tr>
+      <tr><td>スマートビルディング・HVAC</td><td class="r"><span class="badge bd-am">継続成長</span></td></tr>
+      <tr><td>精密農業・垂直農場</td><td class="r"><span class="badge bd-am">新用途</span></td></tr>
+      <tr><td>医薬品GMP対応計測</td><td class="r"><span class="badge bd-bl">規制需要</span></td></tr>
+      <tr><td>コンデンサ撤退でセンサーに集中</td><td class="r"><span class="badge bd-gn">経営資源集中</span></td></tr>
+    </tbody></table>
+  </div>
+</div>
+<div class="notice-gn"><strong>コンデンサ事業（神栄キャパシタ）撤退の意義：</strong>3期連続赤字だった事業を完全処理し、センサー事業に経営資源が集中できる体制に。赤字事業消滅→年間1億円超のコスト削減→センサー部門の収益性向上。AIデータセンター需要の急拡大と重なり、タイミングとして最良の時期に撤退が完了した。</div>
+</div>
+
+<!-- ══ C8: 株価下落の解剖 ══ -->
+<div class="chapter" id="c8">
+<div class="ch-head"><span class="ch-num">08</span><h2 class="ch-title">株価下落の解剖 ─ 高値3,500円超から▲39%に至った5つの要因</h2><span class="ch-badge cb-rd">過剰悲観の実態</span></div>
+<div class="card" style="margin-bottom:14px">
+  <div style="font-size:11px;font-weight:500;margin-bottom:12px">株価推移マップ（概算）</div>
+  <div class="bgrp"><div class="blrow"><span>2024年5月（最高益発表後・ピーク）</span><span class="hi-gn mono">¥3,500前後</span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--gn)"></div></div></div>
+  <div class="bgrp"><div class="blrow"><span>2024年夏〜秋（減益見通し嫌気）</span><span class="hi-am mono">¥2,800〜3,000</span></div><div class="btrack"><div class="bfill" style="width:82%;background:var(--am)"></div></div></div>
+  <div class="bgrp"><div class="blrow"><span>2024年12月〜（日銀利上げ・円高圧力）</span><span class="hi-am mono">¥2,300〜2,600</span></div><div class="btrack"><div class="bfill" style="width:70%;background:var(--am2)"></div></div></div>
+  <div class="bgrp"><div class="blrow"><span>2025年4月（トランプ関税ショック・最安値）</span><span class="hi-rd mono">¥1,500〜1,700</span></div><div class="btrack"><div class="bfill" style="width:43%;background:var(--rd)"></div></div></div>
+  <div class="bgrp"><div class="blrow"><span><strong>2025年5月14日〜現在（決算好転・回復）</strong></span><span class="hi-am mono"><strong>¥2,100〜2,200（現在）</strong></span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--am)"></div></div></div>
+</div>
+<div class="g2">
+  <div class="card">
+    <div style="font-size:11px;font-weight:500;margin-bottom:10px">下落5要因の整理</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-date">①業績要因（内部）</div><div class="tl-text">最高益→▲25%減益という急落で期待剥落。円安によるコスト圧迫が予想を超えた。<strong>→ 解消中</strong></div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">②マクロ（為替・関税）</div><div class="tl-text">日銀利上げ＋トランプ関税ショックによる急速な円高。食品輸入商社に直撃。<strong>→ 一定解消</strong></div></div>
+      <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-date">③ガバナンス（コンデンサ問題）</div><div class="tl-text">子会社を3期連続赤字のまま放置し特別損失計上。経営への不信感。<strong>→ 処理完了</strong></div></div>
+      <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-date">④需給（低流動性）</div><div class="tl-text">東証スタンダード・時価総額80億円の極小流動性。個人の売りが株価に直撃。<strong>→ 構造的継続</strong></div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">⑤センチメント</div><div class="tl-text">AI株診断「売り」シグナル・みんかぶ目標株価1,424円が悲観を増幅。<strong>→ 転換中</strong></div></div>
+    </div>
+  </div>
+  <div class="card card-gn">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">下落要因の「継続性」判定</div>
+    <table class="tbl"><tbody>
+      <tr><td>①業績要因</td><td><span class="rsev-lo">解消中</span></td><td style="font-size:11px">特損処理済。来期EPS486円で正常化。</td></tr>
+      <tr><td>②為替・関税要因</td><td><span class="rsev-mi">部分継続</span></td><td style="font-size:11px">日銀利上げで円高方向。食品コストにはプラス。</td></tr>
+      <tr><td>③ガバナンス</td><td><span class="rsev-lo">改善済み</span></td><td style="font-size:11px">コンデンサ撤退で課題処理完了。</td></tr>
+      <tr><td>④需給・低流動性</td><td><span class="rsev-hi">構造的継続</span></td><td style="font-size:11px">スタンダード市場の低流動性は変わらない。</td></tr>
+      <tr><td>⑤センチメント</td><td><span class="rsev-lo">転換中</span></td><td style="font-size:11px">増配・増益発表後にセンチメント改善。</td></tr>
+    </tbody></table>
+    <p class="note"><strong>「構造的に継続」するのは低流動性リスクのみ。</strong>業績・ガバナンス・センチメントの3要因は解消方向。株価は「過剰な悲観の織り込み」から正常化へ向かう段階。</p>
+  </div>
+</div>
+</div>
+
+<!-- ══ C9: 東証改革・ガバナンス ══ -->
+<div class="chapter" id="c9">
+<div class="ch-head"><span class="ch-num">09</span><h2 class="ch-title">東証改革・ガバナンス強化 ─ 上場維持基準・キャッシュリッチ説明義務・株価押し上げ効果</h2><span class="ch-badge cb-am">外圧が追い風になる逆説</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c9','a',this)">上場維持基準の適合チェック</button>
+  <button class="stab" onclick="showTab('c9','b',this)">キャッシュリッチへの説明義務</button>
+  <button class="stab" onclick="showTab('c9','c',this)">株価押し上げの5メカニズム</button>
+  <button class="stab" onclick="showTab('c9','d',this)">ガバナンス改善ロードマップ</button>
+</div>
+<div class="spanel active" id="c9-a">
+  <div class="notice-gn"><strong>2025年3月〜経過措置終了・本来基準が完全適用：</strong>東証は2022年4月の市場再編以降に適用してきた経過措置を2025年3月1日に終了。以後、本来の上場維持基準の判定が適用されている。神栄（3月末決算）の最初の基準日は2025年3月31日。</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">スタンダード市場・上場維持基準への適合チェック</div>
+    <table class="tbl">
+      <thead><tr><th>基準項目</th><th class="r">スタンダード維持基準</th><th class="r">神栄の現状（推定）</th><th>判定</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>流通株式時価総額</td><td class="r mono">10億円以上</td><td class="r mono hi-gn">≒35〜40億円</td><td><span class="rsev-lo">✅ 適合</span></td><td style="font-size:11px">基準の3〜4倍。大幅余裕あり。</td></tr>
+        <tr><td>流通株式比率</td><td class="r mono">25%以上</td><td class="r mono hi-gn">≒35〜45%（推定）</td><td><span class="rsev-lo">✅ 適合</span></td><td style="font-size:11px">政策保有株縮減で改善方向。</td></tr>
+        <tr><td>流通株式数</td><td class="r mono">2,000単位以上</td><td class="r mono hi-am">≒150〜170万株（推定）</td><td><span class="rsev-mi">△ グレーゾーン</span></td><td style="font-size:11px">大株主・役員保有分を除くと要確認。政策保有株縮減で改善。</td></tr>
+        <tr><td>株主数</td><td class="r mono">400人以上</td><td class="r mono hi-gn">数千人以上（推定）</td><td><span class="rsev-lo">✅ 適合</span></td><td style="font-size:11px">—</td></tr>
+        <tr><td>純資産の額</td><td class="r mono">プラス（正）</td><td class="r mono hi-gn">87.9億円（プラス）</td><td><span class="rsev-lo">✅ 適合</span></td><td style="font-size:11px">十分なプラス。</td></tr>
+        <tr><td>売買高（月間）</td><td class="r mono">10売買単位以上</td><td class="r mono hi-gn">毎日数十〜数百単位</td><td><span class="rsev-lo">✅ 適合</span></td><td style="font-size:11px">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g2">
+    <div class="notice-tl"><strong>✅ 重大な上場廃止リスクなし（現時点の判断）：</strong>流通株式時価総額は基準の3〜4倍。純資産は十分なプラス。神栄は「上場廃止の危機」にあるのではなく、改革圧力を受けて価値が顕在化する段階にある。<strong>上場維持基準は「売り材料」ではなく「安心して長期保有できる構造確認」の材料。</strong></div>
+    <div class="notice"><strong>△ 流通株式数に潜在的な課題：</strong>大株主（メディパルHD・主要取引先・役員）の保有分を除くと流通株式数が東証定義の「2,000単位（200万株）」を下回る可能性がある。ただし政策保有株の縮減・売却→市場放出によって流通株式比率が改善するため、東証の要請が流通株増加→売買活性化→株価発見機能向上という好循環につながる。</div>
+  </div>
+</div>
+<div class="spanel" id="c9-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">東証が神栄に求めていること ─ プライム・スタンダード全上場会社対象</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:10px">2023年3月 東証の要請内容（現在も継続・毎月開示企業一覧を更新）</div>
+        <table class="tbl"><tbody>
+          <tr><td>①自社の資本コストの認識・把握</td><td class="r"><span class="badge bd-am">定量開示が必要</span></td></tr>
+          <tr><td>②PBR1倍割れの原因分析</td><td class="r"><span class="badge bd-am">政策保有株・過剰現金・低収益</span></td></tr>
+          <tr><td>③具体的な改善計画の開示（KPI・期限）</td><td class="r"><span class="badge bd-rd">「検討中」では不十分</span></td></tr>
+          <tr><td>④進捗の定期開示（東証が毎月公表）</td><td class="r"><span class="badge bd-rd">外部から丸見え</span></td></tr>
+        </tbody></table>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:10px">神栄の核心課題（説明義務の具体的内容）</div>
+        <table class="tbl"><tbody>
+          <tr><td>政策保有株55.48億円の保有合理性</td><td class="r"><span class="badge bd-rd">毎年の有報開示義務</span></td></tr>
+          <tr><td>純資産87.9億円の有効活用計画</td><td class="r"><span class="badge bd-am">「なぜ保有し続けるか」説明必要</span></td></tr>
+          <tr><td>PBR0.85倍の具体的改善スケジュール</td><td class="r"><span class="badge bd-am">KPI・期限の明示が必要</span></td></tr>
+          <tr><td>神栄の対応実績（実施済み）</td><td class="r"><span class="badge bd-gn">MS&AD売却・3期連続増配・自己資本36%</span></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="notice-gn">神栄はすでに①MS&AD売却（売却益5.19億円）②3期連続増配（40→110円）③自己資本比率36%への改善④中計での配当性向30%KPI明示という具体的対応を実施しており、東証の要請への対応が着実に進んでいる。</div>
+</div>
+<div class="spanel" id="c9-c">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">東証改革が神栄の株価を押し上げる5つのメカニズム</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:grid;grid-template-columns:30px 1fr 100px;gap:10px;align-items:start;padding:13px;background:#f0f9f4;border-left:4px solid var(--tl);border-radius:4px">
+        <div style="font:700 18px/1 var(--mono);color:var(--tl)">①</div>
+        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">政策保有株売却→売却益→BPS改善→PBR1倍接近（最強メカニズム）</div><div style="font-size:11px;color:var(--ink3)">東証のCGコードが政策保有株縮減を促す→売却益（含み益実現）→特別利益→BPS改善→修正PBRが1倍に近づく→株価上昇圧力。MS&AD売却は既に実行済み。残り10銘柄の縮減が継続。</div></div>
+        <div style="text-align:right"><span class="rsev-tl">影響度：極大</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:30px 1fr 100px;gap:10px;align-items:start;padding:13px;background:#fffbf0;border-left:4px solid var(--am);border-radius:4px">
+        <div style="font:700 18px/1 var(--mono);color:var(--am)">②</div>
+        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">増配・自己株買い圧力→株価底上げ（インカム競争力強化）</div><div style="font-size:11px;color:var(--ink3)">「現金を株主に返せ」という東証圧力→売却益を原資とした特別配当・自己株買いが継続するプレッシャー。配当利回り5.21%がさらに向上すれば利回り投資家の需要が高まり株価の下支えが強化。</div></div>
+        <div style="text-align:right"><span class="rsev-mi">影響度：大</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:30px 1fr 100px;gap:10px;align-items:start;padding:13px;background:#f0f4fc;border-left:4px solid var(--bl);border-radius:4px">
+        <div style="font:700 18px/1 var(--mono);color:var(--bl)">③</div>
+        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">東証「開示企業一覧」掲載→機関投資家・アクティビスト注目</div><div style="font-size:11px;color:var(--ink3)">東証は2024年1月から開示企業一覧を毎月更新・公表。「低PBR×高配当×政策保有株過多」は機関投資家・バリュー投資家・アクティビストファンドが最もアプローチしやすい典型類型。外部圧力が株主還元加速を促す。</div></div>
+        <div style="text-align:right"><span class="rsev-mi">影響度：中〜大</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:30px 1fr 100px;gap:10px;align-items:start;padding:13px;background:#fef3e0;border-left:4px solid var(--am2);border-radius:4px">
+        <div style="font:700 18px/1 var(--mono);color:var(--am2)">④</div>
+        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">流通株式増加→売買活性化→価格発見機能向上</div><div style="font-size:11px;color:var(--ink3)">政策保有株の縮減→自社株買い→消却→EPS/BPS改善、または相互持合い解消→流通株式比率向上→機関投資家が組み入れやすい銘柄に変化。低流動性が最大のリスクだが、東証改革がこれを構造的に改善する。</div></div>
+        <div style="text-align:right"><span class="rsev-mi">影響度：中</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:30px 1fr 100px;gap:10px;align-items:start;padding:13px;background:#f2eeff;border-left:4px solid var(--pur);border-radius:4px">
+        <div style="font:700 18px/1 var(--mono);color:var(--pur)">⑤</div>
+        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">「低PBR銘柄の再評価テーマ」としての市場全体の恩恵</div><div style="font-size:11px;color:var(--ink3)">2024〜2026年にかけて「東証改革関連の低PBR銘柄」テーマが市場全体のパフォーマンスを牽引。神栄（PBR0.85倍→修正PBR0.71倍）はこのテーマに最も合致する銘柄の一つ。大型株での改革が進むほど中小型バリュー株への資金波及効果が期待される。</div></div>
+        <div style="text-align:right"><span class="rsev-mi">影響度：中</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c9-d">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">神栄のガバナンス改善ロードマップ ─ 現在地と今後の課題・株価へのインパクト</div>
+    <table class="tbl">
+      <thead><tr><th>項目</th><th>現状評価</th><th>実施済みの対応</th><th>残課題・今後の期待</th><th class="r">株価インパクト</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PBR1倍改善</strong></td><td><span class="rsev-mi">対応中</span></td><td style="font-size:11px">3期連続増配・自己資本36%・MS&AD売却確定</td><td style="font-size:11px">政策保有株縮減加速・PBR1倍超への具体的KPI開示</td><td class="r hi-gn">大：1倍到達なら株価2,500円以上</td></tr>
+        <tr><td><strong>政策保有株縮減</strong></td><td><span class="rsev-lo">着手済み</span></td><td style="font-size:11px">MS&AD売却確定（売却益5.19億円）・有報で保有合理性を毎年説明</td><td style="font-size:11px">残り10銘柄の縮減計画・期限の明示。年間1〜2銘柄売却のペース</td><td class="r hi-gn">大：毎売却で特別利益・増配の好循環</td></tr>
+        <tr><td><strong>IR・情報開示</strong></td><td><span class="rsev-hi">要改善</span></td><td style="font-size:11px">決算短信・有報は適時開示。アナリストカバレッジ・機関投資家対話は乏しい</td><td style="font-size:11px">決算説明会実施・英文開示強化。創立140周年（2027年）をIR刷新の契機に</td><td class="r hi-gn">大：認知度向上が最も手薄で最も効果的</td></tr>
+        <tr><td><strong>流通株式の改善</strong></td><td><span class="rsev-mi">潜在課題</span></td><td style="font-size:11px">政策保有株縮減で相互持合い解消が進行中</td><td style="font-size:11px">自己株消却・政策保有株縮減→流通株増加→売買活性化。プライム移行も長期目標に</td><td class="r hi-am">中：流動性改善は価値ギャップ縮小の鍵</td></tr>
+        <tr><td><strong>コーポレートガバナンス</strong></td><td><span class="rsev-lo">概ね充足</span></td><td style="font-size:11px">スタンダード市場の要件を充足。独立社外取締役は基準適合と推定</td><td style="font-size:11px">コンデンサ3期赤字放置のような意思決定を防ぐ監督機能の強化が課題</td><td class="r">小〜中：ガバナンス信頼性への貢献</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="conc" style="padding:20px 24px">
+    <div style="font:700 15px/1.1 var(--head);color:rgba(246,245,239,.95);margin-bottom:12px">東証改革・ガバナンス視点の総合評価 <span style="color:var(--sem2)">─ 「外圧が追い風」の逆説</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px">上場廃止リスク評価</div><div style="font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)">流通株式時価総額35〜40億円はスタンダード基準（10億円）の3〜4倍。純資産87.9億円はプラス。<strong style="color:rgba(246,245,239,.95)">上場廃止リスクは極めて低く、改革圧力を受けて価値が顕在化する段階にある。</strong>上場維持基準は売り材料ではなく安心して長期保有できる構造の確認材料。</div></div>
+      <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px">「アナリスト不在」という最後のフロンティア</div><div style="font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)">機関投資家・証券アナリストのカバレッジがほぼ皆無。これが最大の割安の原因であり同時に最大の機会。<strong style="color:rgba(246,245,239,.95)">東証改革による強制的な開示充実で現在の割安が「価値の再評価」として一気に株価に反映される可能性がある。誰も見ていない最後のフロンティア。</strong></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C10: リスク分析 ══ -->
+<div class="chapter" id="c10">
+<div class="ch-head"><span class="ch-num">10</span><h2 class="ch-title">リスク完全分析 ─ 継続性・深刻度・対応策の総覧</h2><span class="ch-badge cb-rd">6リスク詳細</span></div>
+<div class="card" style="margin-bottom:14px">
+  <table class="tbl">
+    <thead><tr><th>リスク</th><th>深刻度</th><th>継続性</th><th class="r">業績影響（最悪）</th><th>神栄の対応力</th></tr></thead>
+    <tbody>
+      <tr><td><strong>①ホルムズ封鎖・食品輸入コスト</strong></td><td><span class="rsev-hi">高</span></td><td><span class="rsev-mi">部分継続</span></td><td class="r mono hi-rd">▲4〜7億円/年</td><td style="font-size:11px">値上げ転嫁実績あり（2026/3期確認）。政府補助措置が一定緩和。早期解消なら上振れ要因。</td></tr>
+      <tr><td><strong>②急速な円安再来（160円超）</strong></td><td><span class="rsev-hi">高</span></td><td><span class="rsev-lo">低い</span></td><td class="r mono hi-rd">▲4〜6億円/年</td><td style="font-size:11px">日銀利上げ継続で中期円高方向。2024年水準への再突入リスクは現時点で低い。</td></tr>
+      <tr><td><strong>③低流動性（東証スタンダード）</strong></td><td><span class="rsev-mi">中</span></td><td><span class="rsev-hi">構造的継続</span></td><td class="r mono hi-am">株価変動大</td><td style="font-size:11px">分割買い（複数日・指値）で対応。東証改革による流通株式比率改善が長期的に解消に向かう。</td></tr>
+      <tr><td><strong>④車載センサー需要低迷</strong></td><td><span class="rsev-mi">中</span></td><td><span class="rsev-mi">短期継続</span></td><td class="r mono hi-am">▲1〜2億円/年</td><td style="font-size:11px">EV普及→車内快適センサ需要回復。AI DCセンサが代替成長エンジン。2027/3期以降改善期待。</td></tr>
+      <tr><td><strong>⑤センサー市場の競合激化</strong></td><td><span class="rsev-lo">低</span></td><td><span class="rsev-mi">中長期</span></td><td class="r mono">シェア喪失リスク</td><td style="font-size:11px">55年間の技術蓄積・特許・顧客実績で高参入障壁。中国勢が追いつくには10〜20年以上必要。</td></tr>
+      <tr><td><strong>⑥配当減配リスク</strong></td><td><span class="rsev-lo">低</span></td><td><span class="rsev-lo">低い</span></td><td class="r mono">利回り低下</td><td style="font-size:11px">FCF+6.6億が配当総額4.3億を上回る。コンデンサ赤字消滅でFCFさらに改善。4期連続無配の再現リスク極めて低い。</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="notice-gn">総合評価：6つのリスクのうち「構造的に継続する深刻なリスク」は低流動性のみ。最大の業績リスクだったコンデンサ特損は2026/3期で完全処理済み。<strong>現株価2,112円はリスクを過剰に織り込んでいる状態と判断する。</strong></div>
+</div>
+
+<!-- ══ C11: 最終判断 ══ -->
+<div class="chapter" id="c11">
+<div class="ch-head"><span class="ch-num">11</span><h2 class="ch-title">最終投資判断 ─ ３年シナリオ・期待値・買い戦略の総括</h2><span class="ch-badge cb-gn">◎ 積極的買い検討</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c11','a',this)">3年シナリオ</button>
+  <button class="stab" onclick="showTab('c11','b',this)">期待値計算</button>
+  <button class="stab" onclick="showTab('c11','c',this)">買い戦略・フェーズ計画</button>
+  <button class="stab" onclick="showTab('c11','d',this)">総合スコア・最終判断</button>
+</div>
+
+<div class="spanel active" id="c11-a">
+  <div class="notice"><strong>シナリオの前提（含み益・利上げ効果反映版）：</strong>出発点：2026/3期確定EPS≒354円・BPS≒2,500円・配当110円。含み益（税引後21.6億円・+564円/株）と利上げ効果（追加+125〜198円/回）を反映した修正版。ホルムズ封鎖長期化リスクを反映してベア確率を15%に引き上げ。</div>
+  <div class="sc-grid" style="margin-bottom:14px">
+    <div class="sc-col">
+      <div class="sc-lbl bear">▼ ベアシナリオ（15%）</div>
+      <div class="sc-prob bear">¥1,300</div>
+      <div class="sc-sub">配当+330円込み損失▲22.8%</div>
+      <div class="sc-li">ホルムズ封鎖が2026年末まで継続</div>
+      <div class="sc-li">EPS200円台まで下振れ（▲180円×2年）</div>
+      <div class="sc-li">銀行株急落（利上げ打ち止め・景気後退）</div>
+      <div class="sc-li">円安再来で食品採算悪化</div>
+      <div class="sc-li">含み益縮小でBPS改善止まる</div>
+      <div class="sc-li">配当 100円×3年＝300円（維持）</div>
+      <p class="note">最悪でも清算価値1株618円が下値フロア。配当込み損失は▲22.8%程度に限定される非対称性。</p>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">◆ ベースシナリオ（55%）</div>
+      <div class="sc-prob base">¥3,500</div>
+      <div class="sc-sub">配当+360円込みリターン+82.8%</div>
+      <div class="sc-li">ホルムズ封鎖が2026年夏ごろ解消</div>
+      <div class="sc-li">EPS486円→2028/3期EPS450円で安定</div>
+      <div class="sc-li">利上げ+2回（+0.5%）で銀行株+10〜15%</div>
+      <div class="sc-li">含み益税引後+25〜30億円に拡大</div>
+      <div class="sc-li">政策保有株売却→配当増加継続</div>
+      <div class="sc-li">配当 110→120→130円×3年＝360円</div>
+      <p class="note">中計「55億円累計経常利益」達成ペース。含み益顕在化で修正PBRが0.8倍台まで改善し株価上昇圧力。</p>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">▲ ブルシナリオ（30%）</div>
+      <div class="sc-prob bull">¥5,800</div>
+      <div class="sc-sub">配当+390円込みリターン+193%</div>
+      <div class="sc-li">AI DCセンサー需要が爆発的成長</div>
+      <div class="sc-li">EPS550〜600円まで急回復</div>
+      <div class="sc-li">利上げ+3〜4回で銀行株含み益+15〜25億拡大</div>
+      <div class="sc-li">東証圧力→政策保有株一括売却加速</div>
+      <div class="sc-li">売却益→大型増配・自己株買いで株価急騰</div>
+      <div class="sc-li">配当 130→140→150円×3年＝390円</div>
+      <p class="note">IRBANK算定1株価値4,225円を超過。PER10倍×EPS580円=5,800円。含み益顕在化が最強のカタリスト。</p>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c11-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">期待値シミュレーション（確率加重・含み益・利上げ効果反映版）</div>
+    <table class="tbl">
+      <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">3年後株価</th><th class="r">株価リターン</th><th class="r">3年累積配当</th><th class="r">トータルリターン</th><th class="r">期待値寄与</th></tr></thead>
+      <tbody>
+        <tr><td class="hi-rd"><strong>ベア（悲観）</strong></td><td class="r mono">15%</td><td class="r mono hi-rd">¥1,300</td><td class="r mono hi-rd">▲38.4%</td><td class="r mono">+¥330</td><td class="r mono hi-rd">▲22.8%</td><td class="r mono hi-rd">▲3.4%</td></tr>
+        <tr><td class="hi-am"><strong>ベース（標準）</strong></td><td class="r mono">55%</td><td class="r mono hi-am">¥3,500</td><td class="r mono hi-am">+65.7%</td><td class="r mono">+¥360</td><td class="r mono hi-am">+82.8%</td><td class="r mono hi-am">+45.5%</td></tr>
+        <tr><td class="hi-tl"><strong>ブル（強気）</strong></td><td class="r mono">30%</td><td class="r mono hi-tl">¥5,800</td><td class="r mono hi-tl">+174.6%</td><td class="r mono">+¥390</td><td class="r mono hi-tl">+193.1%</td><td class="r mono hi-tl">+57.9%</td></tr>
+        <tr style="background:#f0f9f4;font-weight:700"><td colspan="5" style="text-align:right;font-size:13px;color:var(--gn)">3年間 期待値トータルリターン</td><td class="r mono hi-gn" style="font-size:18px"><strong>+100.0%</strong></td><td></td></tr>
+        <tr style="background:#f0f9f4"><td colspan="5" style="text-align:right;font-size:12px;color:var(--ink3)">年率換算（複利）</td><td colspan="2" class="r mono hi-tl" style="font-size:18px"><strong>+26.0%/年</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g3">
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">3年期待リターン</div><div class="mc-v gn">+100%</div><div class="mc-s">確率加重トータル（含み益反映版）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">年率期待リターン</div><div class="mc-v am">+26%/年</div><div class="mc-s">複利換算（修正後）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">最悪ケース損失</div><div class="mc-v tl">▲22.8%</div><div class="mc-s">配当込み。清算価値618円が下値フロア</div></div>
+  </div>
+</div>
+
+<div class="spanel" id="c11-c">
+  <div class="notice"><strong>基本方針：「分割買い×配当受取×含み益顕在化待ち」の3本柱。</strong>低流動性のため一度に大量購入は厳禁。3〜4回に分けて購入し、配当（年110〜130円）を受け取りながら含み益の顕在化（政策保有株売却→増配・自己株買い）を待つ。</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">フェーズ別購入計画 ＆ カタリストカレンダー</div>
+    <table class="tbl">
+      <thead><tr><th>フェーズ</th><th>タイミング</th><th class="r">価格帯</th><th class="r">割合</th><th>根拠・ポイント</th></tr></thead>
+      <tbody>
+        <tr style="background:#f0f9f4"><td><strong>▶ 第1弾（今すぐ）</strong></td><td>2026年5月〜</td><td class="r mono hi-gn">¥2,050〜2,200</td><td class="r mono">35%</td><td style="font-size:11px">本決算確認済・PER4.35倍・利回り5.21%・修正PBR0.73倍。最もリスクリワードが良いエントリー。</td></tr>
+        <tr><td>第2弾（調整時）</td><td>ホルムズ懸念等での押し目</td><td class="r mono hi-am">¥1,900〜2,050</td><td class="r mono">30%</td><td style="font-size:11px">配当利回り5.5〜5.8%超。BPS比▲24〜▲16%。指値を入れて待機。</td></tr>
+        <tr><td>第3弾（上昇確認後）</td><td>★2026年7月末 1Q決算後</td><td class="r mono hi-am">¥2,400〜2,600</td><td class="r mono">25%</td><td style="font-size:11px">コンデンサ赤字消滅効果・政保株売却益が初めて数字に現れる最重要イベント後に追加。</td></tr>
+        <tr><td>利食い第1弾</td><td>ベースシナリオ達成時</td><td class="r mono hi-gn">¥3,200〜3,500</td><td class="r mono">▲30%</td><td style="font-size:11px">含み益30%を確定。残りを継続保有してブルシナリオを狙う。</td></tr>
+        <tr><td>利食い最終</td><td>ブルシナリオ達成時</td><td class="r mono hi-gn">¥4,500〜5,800</td><td class="r mono">▲70%</td><td style="font-size:11px">修正PBR1倍接近・センサー事業再評価のタイミング。</td></tr>
+        <tr style="background:#fdf2f2"><td style="color:var(--rd)"><strong>損切りライン</strong></td><td>新たな重大悪材料発生</td><td class="r mono hi-rd">¥1,650割れ</td><td class="r mono hi-rd">全量</td><td style="font-size:11px">清算価値618円の2.7倍・BPS比▲34%。追加の重大悪材料確認後のエスケープ。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card-rd">
+    <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">⚠ 最重要注意事項（低流動性銘柄の売買）</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">①<strong>1日の出来高が数千〜1万株程度。</strong>一度に100株超の注文を出すと自分で株価を動かしてしまう。複数日に分けて指値注文を活用すること。<br>②配当権利落ち日（3月末・9月末）前後は株価変動が大きくなりやすい。<br>③ホルムズ封鎖の解消状況を定期的にモニタリングし、夏以降継続なら一部ポジション縮小を検討。<br>④本レポートは情報提供のみを目的としており、投資判断はご自身の責任でお願いします。</div>
+  </div>
+</div>
+
+<div class="spanel" id="c11-d">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">総合スコア（7項目評価）</div>
+    <div class="gain-meter"><div class="gain-label">バリュエーション魅力度（PER4.35倍・利回り5.21%）</div><div class="gain-track"><div class="gain-fill" style="width:95%;background:var(--gn)"></div></div><div class="gain-val hi-gn">95/100</div></div>
+    <div class="gain-meter"><div class="gain-label">含み益・資産性（政策保有株時価総額の91%）</div><div class="gain-track"><div class="gain-fill" style="width:90%;background:var(--gn)"></div></div><div class="gain-val hi-gn">90/100</div></div>
+    <div class="gain-meter"><div class="gain-label">競争優位性（センサー世界首位55年）</div><div class="gain-track"><div class="gain-fill" style="width:85%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">85/100</div></div>
+    <div class="gain-meter"><div class="gain-label">業績回復力（コンデンサ赤字消滅・正常化EPS486円）</div><div class="gain-track"><div class="gain-fill" style="width:78%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">78/100</div></div>
+    <div class="gain-meter"><div class="gain-label">株主還元（確定配当110円・3期連続増配）</div><div class="gain-track"><div class="gain-fill" style="width:82%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">82/100</div></div>
+    <div class="gain-meter"><div class="gain-label">東証改革・ガバナンス（外圧が追い風に）</div><div class="gain-track"><div class="gain-fill" style="width:72%;background:var(--am)"></div></div><div class="gain-val hi-am">72/100</div></div>
+    <div class="gain-meter"><div class="gain-label">流動性・市場評価（低流動性が唯一の構造的課題）</div><div class="gain-track"><div class="gain-fill" style="width:38%;background:var(--rd)"></div></div><div class="gain-val hi-rd">38/100</div></div>
+    <div class="gain-meter" style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--rule)"><div class="gain-label"><strong>総合スコア（加重平均）</strong></div><div class="gain-track"><div class="gain-fill" style="width:80%;background:var(--tl)"></div></div><div class="gain-val hi-tl"><strong>80/100</strong></div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-head">最終投資判断 <span>─ 神栄（3004）: ◎ 積極的買い検討</span></div>
+    <div class="conc-3">
+      <div>
+        <div class="conc-lbl">買いを支持する核心根拠</div>
+        <div class="conc-body">
+          <strong>①三重の割安：</strong>PER4.35倍・利回り5.21%・修正PBR0.71〜0.73倍<br>
+          <strong>②資産が事業を凌駕：</strong>政策保有株80.3億円（時価総額の91.2%）<br>
+          <strong>③利上げが含み益を育てる：</strong>銀行株高→BPS+125〜198円/回<br>
+          <strong>④東証改革が外圧として機能：</strong>政策保有株縮減サイクルが制度的に担保<br>
+          <strong>⑤湿度センサー世界首位55年は不変：</strong>AI DC・EV需要で加速中<br>
+          <strong>⑥3期連続増配確定：</strong>特損を吸収しての増配コミット
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">含み益・利上げ加味後の期待値</div>
+        <div class="conc-body">
+          <strong>3年期待リターン：+100%（年率+26%）</strong><br><br>
+          ベア（15%）：▲22.8%（配当込み・清算価値618円が守る）<br>
+          ベース（55%）：+82.8%（中計達成+利上げ2回）<br>
+          ブル（30%）：+193.1%（AI需要+含み益顕在化+東証改革）<br><br>
+          <strong>100万円投資で91.2万円分の銀行・保険株エクスポージャー＋センサー事業が実質無料で付随する非対称な機会。</strong>
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">最重要監視ポイント</div>
+        <div class="conc-body">
+          <strong>①ホルムズ海峡の解消時期</strong>（ブルへの最短経路）<br>
+          <strong>②2026年7月末 1Q決算</strong>（コンデンサ赤字消滅・売却益初確認）<br>
+          <strong>③日銀の次回利上げ</strong>（BPS+125〜198円自動改善）<br>
+          <strong>④政策保有株縮減状況</strong>（売却益→配当のサイクル）<br>
+          <strong>⑤創立140周年IR強化</strong>（2027年・認知度向上）<br><br>
+          損切りライン：¥1,650（BPS比▲34%・事前設定で感情排除）
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</main>
+
+<footer style="background:#1a1e2e;color:rgba(246,245,239,.22);text-align:center;padding:16px;font:500 9px/1 var(--mono);letter-spacing:.07em">
+本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br>
+Data: 神栄㈱ 有価証券報告書第157期（2025年6月20日提出・EDINET）/ 2026年5月14日 本決算短信（JPX/TDNET）/ IRBANK価値算定 / 各種適時開示 / 提供株価データ（2026年5月）/ 帝国データバンク / 東証「資本コストや株価を意識した経営の実現に向けた対応」開示企業一覧 / 2026.05 — Ver.3
+</footer>
+
+<script>
+function showChapter(id,btn){
+  document.querySelectorAll('.chapter').forEach(ch=>ch.classList.remove('active'));
+  document.querySelectorAll('.mnb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+}
+function showTab(chapId,panelId,btn){
+  const chap=document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  chap.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(chapId+'-'+panelId)?.classList.add('active');
+  btn.classList.add('on');
+}
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bfill,.gain-fill,.fuel-fill').forEach(f=>{
+        const w=f.style.width;f.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=w));
+      });
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>
