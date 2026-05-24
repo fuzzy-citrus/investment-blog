@@ -4,11 +4,11 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { characters, blogMeta, teamLabels } from '../data/characters';
 
-const founder  = characters.find(c => c.team === 'founder')!;
-const manager  = characters.find(c => c.team === 'manager')!;
-const teamA    = characters.filter(c => c.team === 'teamA');
-const teamB    = characters.filter(c => c.team === 'teamB');
-const cross    = characters.filter(c => c.team === 'cross');
+const founder = characters.find(c => c.team === 'founder')!;
+const manager = characters.find(c => c.team === 'manager')!;
+const teamA   = characters.filter(c => c.team === 'teamA');
+const teamB   = characters.filter(c => c.team === 'teamB');
+const cross   = characters.filter(c => c.team === 'cross');
 ---
 
 <!doctype html>
@@ -19,7 +19,6 @@ const cross    = characters.filter(c => c.team === 'cross');
   <body>
     <Header />
     <main>
-      <!-- サイトタイトル -->
       <div class="org-title">
         <h1>バリュー商会</h1>
         <p class="subtitle">割安日本個別株・TOB発掘・競合優位性・インカム運用</p>
@@ -31,15 +30,12 @@ const cross    = characters.filter(c => c.team === 'cross');
         <!-- FOUNDER -->
         <div class="tier">
           <div class="tier-label">FOUNDER</div>
-          <div class="cards-row single">
+          <div class="row row-single">
             <div class="card card-founder">
-              <div class="card-avatar" style={`background:${founder.avatarColor}`}>{founder.emoji}</div>
-              <div class="card-content">
-                <div class="card-name-row">
-                  <span class="card-name">{founder.name}</span>
-                  <span class="card-species">{founder.species}</span>
-                </div>
-                <p class="card-catch">{founder.catchphrase}</p>
+              <div class="avatar" style={`background:${founder.avatarColor}`}>{founder.emoji}</div>
+              <div class="body">
+                <div class="name-row"><strong>{founder.name}</strong><span class="species">{founder.species}</span></div>
+                <p class="catch">{founder.catchphrase}</p>
                 <blockquote>「{founder.quote}」</blockquote>
                 <div class="tags">{founder.tags.map(t => <span class="tag">{t}</span>)}</div>
               </div>
@@ -52,15 +48,12 @@ const cross    = characters.filter(c => c.team === 'cross');
         <!-- MANAGER -->
         <div class="tier">
           <div class="tier-label">MANAGER</div>
-          <div class="cards-row single">
+          <div class="row row-single">
             <div class="card card-manager">
-              <div class="card-avatar" style={`background:${manager.avatarColor}`}>{manager.emoji}</div>
-              <div class="card-content">
-                <div class="card-name-row">
-                  <span class="card-name">{manager.name}</span>
-                  <span class="card-species">{manager.species}</span>
-                </div>
-                <p class="card-catch">{manager.catchphrase}</p>
+              <div class="avatar" style={`background:${manager.avatarColor}`}>{manager.emoji}</div>
+              <div class="body">
+                <div class="name-row"><strong>{manager.name}</strong><span class="species">{manager.species}</span></div>
+                <p class="catch">{manager.catchphrase}</p>
                 <blockquote>「{manager.quote}」</blockquote>
                 <div class="tags">{manager.tags.map(t => <span class="tag">{t}</span>)}</div>
               </div>
@@ -70,19 +63,16 @@ const cross    = characters.filter(c => c.team === 'cross');
 
         <div class="connector"><div class="line"></div></div>
 
-        <!-- TEAM A -->
+        <!-- TEAM A : 4枚横並び -->
         <div class="tier">
           <div class="tier-label">TEAM A — {teamLabels['teamA']}</div>
-          <div class="cards-row multi">
+          <div class="row row-4">
             {teamA.map(c => (
-              <div class="card card-member">
-                <div class="card-avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
-                <div class="card-content">
-                  <div class="card-name-row">
-                    <span class="card-name sm">{c.name}</span>
-                    <span class="card-species">{c.title} ／ {c.species.split('／')[0]}</span>
-                  </div>
-                  <p class="card-catch sm">{c.catchphrase}</p>
+              <div class="card card-sm">
+                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class="body">
+                  <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
+                  <p class="catch sm">{c.catchphrase}</p>
                   <blockquote class="sm">「{c.quote}」</blockquote>
                   <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
                 </div>
@@ -93,19 +83,31 @@ const cross    = characters.filter(c => c.team === 'cross');
 
         <div class="connector"><div class="line"></div></div>
 
-        <!-- TEAM B -->
+        <!-- TEAM B (3枚) + CROSS (1枚) 横並び -->
         <div class="tier">
-          <div class="tier-label">TEAM B — {teamLabels['teamB']}</div>
-          <div class="cards-row multi">
+          <div class="tier-label-group">
+            <span class="tier-label inline">TEAM B — {teamLabels['teamB']}</span>
+            <span class="tier-label-sep">／</span>
+            <span class="tier-label inline cross-label">CROSS 横断</span>
+          </div>
+          <div class="row row-4">
             {teamB.map(c => (
-              <div class="card card-member">
-                <div class="card-avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
-                <div class="card-content">
-                  <div class="card-name-row">
-                    <span class="card-name sm">{c.name}</span>
-                    <span class="card-species">{c.title} ／ {c.species.split('／')[0]}</span>
-                  </div>
-                  <p class="card-catch sm">{c.catchphrase}</p>
+              <div class="card card-sm">
+                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class="body">
+                  <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
+                  <p class="catch sm">{c.catchphrase}</p>
+                  <blockquote class="sm">「{c.quote}」</blockquote>
+                  <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
+                </div>
+              </div>
+            ))}
+            {cross.map(c => (
+              <div class="card card-sm card-cross">
+                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class="body">
+                  <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
+                  <p class="catch sm">{c.catchphrase}</p>
                   <blockquote class="sm">「{c.quote}」</blockquote>
                   <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
                 </div>
@@ -113,41 +115,18 @@ const cross    = characters.filter(c => c.team === 'cross');
             ))}
           </div>
         </div>
-
-        <div class="connector"><div class="line"></div></div>
-
-        <!-- CROSS -->
-        {cross.map(c => (
-          <div class="tier">
-            <div class="tier-label cross-label">CROSS 横断</div>
-            <div class="cards-row single">
-              <div class="card card-cross">
-                <div class="card-avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
-                <div class="card-content">
-                  <div class="card-name-row">
-                    <span class="card-name">{c.name}</span>
-                    <span class="card-species">{c.title} ／ {c.species}</span>
-                  </div>
-                  <p class="card-catch">{c.catchphrase}</p>
-                  <blockquote>「{c.quote}」</blockquote>
-                  <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
 
         <!-- RIVALS -->
         <div class="tier rivals-tier">
           <div class="tier-label rivals-label">RIVALS</div>
-          <div class="cards-row multi rivals-row">
+          <div class="row row-rivals">
             {blogMeta.rivals.map(r => (
               <div class="card card-rival">
-                <div class="rival-header">
+                <div class="rival-head">
                   <span class="rival-emoji">{r.emoji}</span>
                   <div>
-                    <div class="card-name sm">{r.name}</div>
-                    <div class="card-species">{r.subtitle}</div>
+                    <strong class="sm">{r.name}</strong>
+                    <div class="species">{r.subtitle}</div>
                   </div>
                 </div>
                 <div class="rival-members">
@@ -166,199 +145,132 @@ const cross    = characters.filter(c => c.team === 'cross');
 
 <style>
   main {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 2em 1em 4em;
+    font-size: 14px;
   }
 
   /* タイトル */
   .org-title {
     text-align: center;
-    margin-bottom: 2.5em;
+    margin-bottom: 2em;
   }
-  .org-title h1 {
-    font-size: 2em;
-    color: var(--accent-dark);
-    margin-bottom: 0.2em;
-  }
-  .subtitle {
-    font-size: 0.85em;
-    color: rgb(var(--gray));
-    margin: 0.1em 0;
-  }
-  .tagline {
-    font-size: 0.8em;
-    color: rgb(var(--gray));
-    margin: 0.2em 0 0;
-  }
+  .org-title h1 { font-size: 1.8em; color: var(--accent-dark); margin-bottom: 0.2em; }
+  .subtitle  { font-size: 0.8em; color: rgb(var(--gray)); margin: 0.1em 0; }
+  .tagline   { font-size: 0.75em; color: rgb(var(--gray)); margin: 0.2em 0 0; }
 
-  /* 組織図全体 */
-  .org-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
+  /* 組織図 */
+  .org-chart { display: flex; flex-direction: column; align-items: center; gap: 0; }
 
   /* コネクター */
-  .connector {
-    display: flex;
-    justify-content: center;
-    height: 32px;
-  }
-  .connector .line {
-    width: 2px;
-    height: 100%;
-    background: #ccc;
-  }
+  .connector { display: flex; justify-content: center; height: 24px; }
+  .connector .line { width: 2px; height: 100%; background: #ccc; }
 
   /* 各段 */
-  .tier {
-    width: 100%;
-  }
+  .tier { width: 100%; margin-bottom: 0; }
+
   .tier-label {
     text-align: center;
-    font-size: 0.72em;
+    font-size: 0.65em;
     font-weight: 700;
     letter-spacing: 0.12em;
     color: rgb(var(--gray));
-    margin-bottom: 0.6em;
     text-transform: uppercase;
+    margin-bottom: 0.5em;
   }
-  .cross-label { color: #1D9E75; }
+  .tier-label-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    margin-bottom: 0.5em;
+  }
+  .tier-label.inline { margin-bottom: 0; }
+  .tier-label-sep { font-size: 0.65em; color: rgb(var(--gray)); }
+  .cross-label { color: var(--accent); }
   .rivals-label { color: #999; }
 
   /* カード行 */
-  .cards-row {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    flex-wrap: wrap;
-  }
-  .cards-row.single .card {
-    width: min(480px, 100%);
-  }
-  .cards-row.multi {
-    align-items: stretch;
-  }
-  .cards-row.multi .card {
-    flex: 1 1 180px;
-    max-width: 220px;
-  }
-  .rivals-row .card {
-    flex: 1 1 260px;
-    max-width: 340px;
-  }
+  .row { display: flex; justify-content: center; gap: 0.7em; }
+  .row-single .card { width: min(400px, 100%); }
+  .row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7em; width: 100%; }
+  .row-rivals { gap: 0.7em; }
+  .row-rivals .card { flex: 1 1 220px; max-width: 320px; }
 
   /* カード基本 */
   .card {
     background: white;
     border: 1.5px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 1em 1.1em;
+    border-radius: 8px;
+    padding: 0.7em 0.8em;
     display: flex;
     flex-direction: column;
-    gap: 0.6em;
-    box-shadow: 0 1px 4px rgba(0,0,0,5%);
+    gap: 0.5em;
+    box-shadow: 0 1px 3px rgba(0,0,0,5%);
   }
   .card-founder { border-color: var(--accent); border-width: 2px; }
   .card-manager { border-color: #6ba4d4; border-width: 2px; }
-  .card-cross   { border-color: var(--accent); border-style: dashed; width: min(640px, 100%); }
-  .card-rival   { border: 2px dashed #ccc; background: #fafafa; }
+  .card-cross   { border-color: var(--accent); border-style: dashed; }
+  .card-rival   { border: 1.5px dashed #ccc; background: #fafafa; }
 
   /* アバター */
-  .card-avatar {
-    font-size: 2em;
-    width: 2.2em;
-    height: 2.2em;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    align-self: flex-start;
-  }
-  .card-avatar.sm {
+  .avatar {
     font-size: 1.6em;
-    width: 2em;
-    height: 2em;
+    width: 2em; height: 2em;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; align-self: flex-start;
   }
+  .avatar.sm { font-size: 1.3em; }
 
   /* カード内テキスト */
-  .card-content { flex: 1; }
-  .card-name-row {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    margin-bottom: 0.3em;
+  .body { flex: 1; }
+  .name-row {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4em;
+    margin-bottom: 0.25em;
   }
-  .card-name {
-    font-size: 1.05em;
-    font-weight: 700;
-    color: rgb(var(--black));
-  }
-  .card-name.sm { font-size: 0.95em; }
-  .card-species {
-    font-size: 0.75em;
-    color: rgb(var(--gray));
-  }
-  .card-catch {
-    font-size: 0.8em;
-    color: rgb(var(--gray-dark));
-    margin: 0 0 0.4em;
-    line-height: 1.5;
-  }
-  .card-catch.sm { font-size: 0.75em; }
+  strong      { font-size: 0.95em; color: rgb(var(--black)); }
+  strong.sm   { font-size: 0.88em; }
+  .species    { font-size: 0.7em; color: rgb(var(--gray)); }
+  .catch      { font-size: 0.75em; color: rgb(var(--gray-dark)); margin: 0 0 0.3em; line-height: 1.4; }
+  .catch.sm   { font-size: 0.7em; }
 
   blockquote {
-    border-left: 3px solid var(--accent);
-    padding: 0.2em 0 0.2em 0.7em;
-    margin: 0 0 0.5em;
-    font-size: 0.82em;
+    border-left: 2px solid var(--accent);
+    padding: 0.15em 0 0.15em 0.6em;
+    margin: 0 0 0.4em;
+    font-size: 0.75em;
     font-style: italic;
     color: rgb(var(--gray-dark));
   }
-  blockquote.sm { font-size: 0.78em; }
+  blockquote.sm { font-size: 0.7em; }
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3em;
-  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.25em; }
   .tag {
     background: var(--accent-light);
     color: var(--accent-dark);
-    font-size: 0.7em;
-    padding: 0.15em 0.55em;
-    border-radius: 4px;
+    font-size: 0.65em;
+    padding: 0.12em 0.45em;
+    border-radius: 3px;
     font-weight: 600;
   }
 
   /* ライバル */
   .rivals-tier { margin-top: 1.5em; }
-  .rival-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
-    margin-bottom: 0.5em;
-  }
-  .rival-emoji { font-size: 1.6em; }
-  .rival-members {
-    display: flex;
-    gap: 0.5em;
-    flex-wrap: wrap;
-  }
+  .rival-head { display: flex; align-items: center; gap: 0.5em; margin-bottom: 0.4em; }
+  .rival-emoji { font-size: 1.4em; }
+  .rival-members { display: flex; gap: 0.4em; flex-wrap: wrap; }
   .rival-member {
-    font-size: 0.78em;
-    color: rgb(var(--gray));
-    background: #f0f0f0;
-    padding: 0.15em 0.5em;
-    border-radius: 4px;
+    font-size: 0.7em; color: rgb(var(--gray));
+    background: #f0f0f0; padding: 0.1em 0.45em; border-radius: 3px;
   }
 
   @media (max-width: 720px) {
-    .cards-row.multi .card { max-width: 100%; flex-basis: 100%; }
-    .rivals-row .card { max-width: 100%; flex-basis: 100%; }
+    .row-4 { grid-template-columns: repeat(2, 1fr); }
+    .row-rivals .card { max-width: 100%; flex-basis: 100%; }
+  }
+  @media (max-width: 480px) {
+    .row-4 { grid-template-columns: 1fr; }
   }
 </style>
