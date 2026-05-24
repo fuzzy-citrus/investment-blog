@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro.props;
 ---
 
 <html lang="ja">
@@ -29,6 +29,112 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
 			}
+			/* ストックカードヒーロー */
+			.stock-hero {
+				background: #1a2535;
+				padding: 2em 0;
+			}
+			.stock-hero-inner {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 0 1.5em;
+			}
+			.stock-hero-top {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+				gap: 1.5em;
+				flex-wrap: wrap;
+				margin-bottom: 1.2em;
+			}
+			.stock-badge {
+				font-size: 0.65em;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.4);
+				margin-bottom: 0.4em;
+			}
+			.stock-name {
+				font-size: 1.6em;
+				font-weight: 700;
+				color: white;
+				line-height: 1.2;
+			}
+			.stock-ticker {
+				font-size: 0.9em;
+				color: #e8803a;
+				font-weight: 600;
+			}
+			.stock-category {
+				display: inline-block;
+				background: rgba(29,158,117,0.2);
+				border: 1px solid rgba(29,158,117,0.4);
+				color: #5dcca8;
+				font-size: 0.7em;
+				font-weight: 700;
+				padding: 0.2em 0.7em;
+				border-radius: 3px;
+				margin-top: 0.4em;
+			}
+			.stock-verdict {
+				background: rgba(29,158,117,0.12);
+				border: 1px solid rgba(29,158,117,0.3);
+				border-radius: 8px;
+				padding: 0.8em 1.2em;
+				text-align: center;
+				min-width: 160px;
+			}
+			.verdict-label {
+				font-size: 0.65em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.35);
+				margin-bottom: 0.3em;
+			}
+			.verdict-price {
+				font-size: 1.8em;
+				font-weight: 700;
+				color: #5dcca8;
+				line-height: 1;
+			}
+			.verdict-upside {
+				font-size: 0.8em;
+				color: rgba(255,255,255,0.5);
+				margin-top: 0.2em;
+			}
+			.stock-kpis {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 1px;
+				background: rgba(255,255,255,0.07);
+				border-radius: 6px;
+				overflow: hidden;
+			}
+			.kpi {
+				background: rgba(10,15,25,0.4);
+				padding: 0.7em 0.8em;
+			}
+			.kpi-label {
+				font-size: 0.6em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.3);
+				margin-bottom: 0.3em;
+			}
+			.kpi-value {
+				font-size: 1.05em;
+				font-weight: 700;
+				color: white;
+				font-variant-numeric: tabular-nums;
+			}
+			.kpi-value.green { color: #5dcca8; }
+			.kpi-value.red   { color: #e06868; }
+			.kpi-value.amber { color: #e8803a; }
+			.kpi-value.blue  { color: #7ab0e8; }
+			/* prose */
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
@@ -42,15 +148,16 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				text-align: center;
 				line-height: 1;
 			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
+			.title h1 { margin: 0 0 0.5em 0; }
 			.date {
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
-			.last-updated-on {
-				font-style: italic;
+			.last-updated-on { font-style: italic; }
+			@media (max-width: 720px) {
+				.stock-kpis { grid-template-columns: repeat(3, 1fr); }
+				.stock-name { font-size: 1.3em; }
+				.verdict-price { font-size: 1.4em; }
 			}
 		</style>
 	</head>
@@ -59,20 +166,62 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
+				{stockCard ? (
+					<div class="stock-hero">
+						<div class="stock-hero-inner">
+							<div class="stock-hero-top">
+								<div>
+									<div class="stock-badge">銘柄分析 — {stockCard.category}</div>
+									<div class="stock-name">
+										{stockCard.companyName}
+										<span class="stock-ticker">（{stockCard.ticker}）</span>
+									</div>
+									<div class="stock-category">{stockCard.category}</div>
+								</div>
+								<div class="stock-verdict">
+									<div class="verdict-label">期待価格</div>
+									<div class="verdict-price">{stockCard.targetPrice.toLocaleString()}円</div>
+									<div class="verdict-upside">現在比 {stockCard.upside}</div>
+								</div>
+							</div>
+							<div class="stock-kpis">
+								<div class="kpi">
+									<div class="kpi-label">現在株価</div>
+									<div class="kpi-value amber">{stockCard.currentPrice.toLocaleString()}円</div>
+								</div>
+								<div class="kpi">
+									<div class="kpi-label">期待価格</div>
+									<div class="kpi-value green">{stockCard.targetPrice.toLocaleString()}円</div>
+								</div>
+								<div class="kpi">
+									<div class="kpi-label">期待リターン</div>
+									<div class="kpi-value green">{stockCard.upside}</div>
+								</div>
+								<div class="kpi">
+									<div class="kpi-label">最大下落</div>
+									<div class="kpi-value red">{stockCard.downside}</div>
+								</div>
+								<div class="kpi">
+									<div class="kpi-label">修正PBR</div>
+									<div class="kpi-value red">{stockCard.modifiedPBR}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				) : (
+					<div class="hero-image">
+						{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					</div>
+				)}
 				<div class="prose">
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+							{updatedDate && (
+								<div class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)}
 						</div>
 						<h1>{title}</h1>
 						<hr />
