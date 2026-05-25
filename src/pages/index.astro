@@ -60,6 +60,53 @@ const posts = (await getCollection('blog')).sort(
 				<p class="about-note">※このブログは自身の投資手法や成績を振り返り、今後に活かす場所として活用しています。</p>
 			</section>
 
+			<section class="asset-status">
+				<div class="asset-header">
+					<span class="asset-launch-badge">🚀 スタートライン — 2026年5月</span>
+					<span class="asset-account">野村証券 実口座</span>
+				</div>
+				<div class="asset-main">
+					<div class="asset-amounts">
+						<div class="asset-now-block">
+							<div class="asset-now-label">現在総資産</div>
+							<div class="asset-now-val">約 <strong>5,000万円</strong></div>
+						</div>
+						<div class="asset-arrow-block">
+							<svg viewBox="0 0 60 20" class="asset-arrow-svg"><path d="M0 10 L48 10 M40 4 L52 10 L40 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</div>
+						<div class="asset-goal-block">
+							<div class="asset-goal-label">2030年末 目標</div>
+							<div class="asset-goal-val"><strong>2億円</strong></div>
+						</div>
+					</div>
+					<div class="asset-bar-wrap">
+						<div class="asset-bar">
+							<div class="asset-bar-fill">
+								<span class="asset-bar-now">NOW<br/>25%</span>
+							</div>
+							<div class="asset-bar-goal">2億</div>
+						</div>
+						<div class="asset-bar-scale">
+							<span>0</span><span>5,000万</span><span>1億</span><span>1.5億</span><span>2億</span>
+						</div>
+					</div>
+				</div>
+				<div class="asset-holdings-label">📋 主要ポジション（2026年5月現在）</div>
+				<div class="asset-holdings">
+					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">東部ネット<span class="h-code">9036</span></span><span class="h-qty">26,600株 · ¥3,836万</span><span class="h-ret pos">+18.5%</span></div>
+					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">ウエストHD<span class="h-code">1407</span></span><span class="h-qty">300株 · ¥87万</span><span class="h-ret pos">+97.7%</span></div>
+					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">信越化<span class="h-code">4063</span></span><span class="h-qty">100株 · ¥71万</span><span class="h-ret pos">+41.0%</span></div>
+					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">TYK<span class="h-code">5363</span></span><span class="h-qty">1,000株 · ¥64万</span><span class="h-ret pos">+51.0%</span></div>
+					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">オリックス<span class="h-code">8591</span></span><span class="h-qty">100株 · ¥63万</span><span class="h-ret pos">+101.9%</span></div>
+					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">ソニーG<span class="h-code">6758</span></span><span class="h-qty">200株</span><span class="h-ret pos">+¥51,600</span></div>
+					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">神栄<span class="h-code">3004</span></span><span class="h-qty">1,500株</span><span class="h-ret pos">+¥43,600</span></div>
+					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">東部ネット<span class="h-code">9036</span></span><span class="h-qty">300株</span><span class="h-ret pos">+¥40,300</span></div>
+					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">日ペイントH<span class="h-code">4612</span></span><span class="h-qty">800株</span><span class="h-ret pos">+¥32,930</span></div>
+					<div class="holding more">他多数 — バリュー株・テーマ株・テクニカル銘柄を実際に売買しながら更新中</div>
+				</div>
+				<p class="asset-disclaimer">※ 野村証券の実口座での保有。記事更新に合わせて随時更新します。投資勧誘ではありません。</p>
+			</section>
+
 			<div class="method-note">
 				<span class="method-icon">🤖</span>
 				<div>
@@ -104,6 +151,183 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
+	/* ── Asset Status ── */
+	.asset-status {
+		background: linear-gradient(135deg, #1a3a1c 0%, #0f2610 100%);
+		border-radius: 12px;
+		padding: 1.4em 1.5em;
+		margin-bottom: 2em;
+		color: #fff;
+		position: relative;
+		overflow: hidden;
+	}
+	.asset-status::before {
+		content: '📈';
+		position: absolute;
+		right: -10px;
+		bottom: -15px;
+		font-size: 7em;
+		opacity: 0.05;
+		line-height: 1;
+		pointer-events: none;
+	}
+	.asset-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.1em;
+		flex-wrap: wrap;
+		gap: 0.4em;
+	}
+	.asset-launch-badge {
+		background: rgba(126,217,87,0.18);
+		border: 1px solid rgba(126,217,87,0.4);
+		color: #a0e870;
+		font-size: 0.72em;
+		font-weight: 700;
+		padding: 0.25em 0.8em;
+		border-radius: 999px;
+		letter-spacing: 0.04em;
+	}
+	.asset-account {
+		font-size: 0.68em;
+		color: rgba(255,255,255,0.4);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+	}
+	.asset-main { margin-bottom: 1.2em; }
+	.asset-amounts {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		margin-bottom: 0.9em;
+		flex-wrap: wrap;
+	}
+	.asset-now-label, .asset-goal-label {
+		font-size: 0.62em;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.45);
+		margin-bottom: 0.2em;
+	}
+	.asset-now-val {
+		font-size: 1.05em;
+		color: #fff;
+	}
+	.asset-now-val strong { font-size: 1.35em; color: #7ed957; }
+	.asset-goal-val { font-size: 1.05em; color: #fff; }
+	.asset-goal-val strong { font-size: 1.35em; color: #e8b84b; }
+	.asset-arrow-block { flex: 1; min-width: 40px; max-width: 80px; }
+	.asset-arrow-svg { width: 100%; color: rgba(255,255,255,0.3); }
+	.asset-bar-wrap { }
+	.asset-bar {
+		background: rgba(255,255,255,0.1);
+		border-radius: 6px;
+		height: 28px;
+		position: relative;
+		overflow: visible;
+		margin-bottom: 0.35em;
+	}
+	.asset-bar-fill {
+		width: 25%;
+		height: 100%;
+		background: linear-gradient(90deg, #2c7a2e, #7ed957);
+		border-radius: 6px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.asset-bar-now {
+		position: absolute;
+		right: -30px;
+		top: -2px;
+		font-size: 0.5em;
+		font-weight: 700;
+		color: #7ed957;
+		text-align: center;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+	.asset-bar-goal {
+		position: absolute;
+		right: 6px;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 0.6em;
+		font-weight: 700;
+		color: rgba(255,255,255,0.4);
+	}
+	.asset-bar-scale {
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.58em;
+		color: rgba(255,255,255,0.3);
+		padding: 0 2px;
+	}
+	.asset-holdings-label {
+		font-size: 0.7em;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		color: rgba(255,255,255,0.5);
+		margin-bottom: 0.5em;
+		padding-top: 0.8em;
+		border-top: 1px solid rgba(255,255,255,0.1);
+	}
+	.asset-holdings {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25em;
+		margin-bottom: 0.9em;
+	}
+	.holding {
+		display: flex;
+		align-items: center;
+		gap: 0.55em;
+		font-size: 0.78em;
+		padding: 0.3em 0;
+		border-bottom: 1px solid rgba(255,255,255,0.05);
+		flex-wrap: wrap;
+	}
+	.h-badge {
+		font-size: 0.7em;
+		font-weight: 700;
+		padding: 0.1em 0.5em;
+		border-radius: 3px;
+		flex-shrink: 0;
+	}
+	.holding.cash .h-badge { background: rgba(29,158,117,0.3); color: #7ed957; }
+	.holding.margin .h-badge { background: rgba(232,184,75,0.2); color: #e8b84b; }
+	.h-name {
+		font-weight: 600;
+		color: rgba(255,255,255,0.9);
+		flex: 1;
+		min-width: 80px;
+	}
+	.h-code {
+		font-size: 0.82em;
+		color: rgba(255,255,255,0.4);
+		margin-left: 0.3em;
+		font-weight: 400;
+	}
+	.h-qty { color: rgba(255,255,255,0.5); flex-shrink: 0; }
+	.h-ret { font-weight: 700; flex-shrink: 0; }
+	.h-ret.pos { color: #7ed957; }
+	.holding.more {
+		font-size: 0.72em;
+		color: rgba(255,255,255,0.35);
+		font-style: italic;
+		border-bottom: none;
+		padding-top: 0.4em;
+	}
+	.asset-disclaimer {
+		font-size: 0.65em;
+		color: rgba(255,255,255,0.3);
+		margin: 0;
+		line-height: 1.5;
+	}
+	/* ── About Blog ── */
 	.about-blog {
 		margin-bottom: 2.5em;
 		padding: 1.4em 1.2em;
