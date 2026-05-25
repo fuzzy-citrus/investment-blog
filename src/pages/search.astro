@@ -25,17 +25,14 @@ import Header from '../components/Header.astro';
 			#search {
 				margin-bottom: 2em;
 			}
-			.pagefind-ui__search-input {
-				border: 1.5px solid #ccd8cc !important;
-				border-radius: 8px !important;
-				font-size: 1em !important;
-			}
-			.pagefind-ui__search-input:focus {
-				border-color: var(--accent) !important;
-				outline: none !important;
-			}
-			.pagefind-ui__result-link {
-				color: var(--accent-dark) !important;
+			.search-unavailable {
+				display: none;
+				padding: 1em;
+				background: #f8faf8;
+				border: 1px solid #dde8dd;
+				border-radius: 8px;
+				font-size: 0.88em;
+				color: rgb(96, 115, 159);
 			}
 		</style>
 	</head>
@@ -44,20 +41,34 @@ import Header from '../components/Header.astro';
 		<main>
 			<h1>🔍 記事検索</h1>
 			<div id="search"></div>
+			<p class="search-unavailable" id="search-unavailable">
+				検索インデックスを読み込み中です。デプロイ済みのサイトでご利用ください。
+			</p>
 		</main>
 		<Footer />
-		<script src="/pagefind/pagefind-ui.js" is:inline></script>
 		<script is:inline>
-			window.addEventListener('DOMContentLoaded', () => {
-				new PagefindUI({
-					element: '#search',
-					showImages: false,
-					translations: {
-						placeholder: '銘柄名・キーワードで検索...',
-						zero_results: '「[SEARCH_TERM]」に一致する記事が見つかりませんでした',
-					},
-				});
-			});
+			function initPagefind() {
+				if (typeof PagefindUI !== 'undefined') {
+					new PagefindUI({
+						element: '#search',
+						showImages: false,
+						translations: {
+							placeholder: '銘柄名・キーワードで検索...',
+							zero_results: '「[SEARCH_TERM]」に一致する記事が見つかりませんでした',
+						},
+					});
+				} else {
+					document.getElementById('search-unavailable').style.display = 'block';
+				}
+			}
+
+			var s = document.createElement('script');
+			s.src = '/pagefind/pagefind-ui.js';
+			s.onload = initPagefind;
+			s.onerror = function() {
+				document.getElementById('search-unavailable').style.display = 'block';
+			};
+			document.head.appendChild(s);
 		</script>
 	</body>
 </html>
