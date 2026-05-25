@@ -149,6 +149,16 @@ stockCard:
 
 ---
 
+## 実際の保有ポジション
+
+<div style="max-width:680px;margin:1em 0;">
+  <img src="/images/tobu-network-position.png" alt="東部ネットワーク（9036）保有ポジション" style="width:100%;border-radius:8px;border:1px solid #dde3ec;" />
+</div>
+
+現在株価1,442円（取得コスト平均1,216円）、26,600株・評価額3,836万円・評価益+601万円（+18.5%）。順調に上がっているので、買い増しは現状では考えていない。
+
+---
+
 ## 深掘り分析資料
 
 上記はエッセンス版です。株主構造・IR・中計・最新決算・燃料リスク・MBO布石・買収価格シナリオ等を含む完全版分析資料はこちら：
