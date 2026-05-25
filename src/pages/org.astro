@@ -131,6 +131,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           <div class="tier-label rivals-label">⚔️ RIVALS — 過去の自分であり好敵手</div>
           <div class="row row-rivals">
             {rivalOrgs.map(org => (
+              <a href={`/characters#${org.id}`} class="card-link">
               <div class="card card-rival">
                 <div class="rival-head">
                   <span class="rival-emoji">{org.emoji}</span>
@@ -149,6 +150,7 @@ const cross   = characters.filter(c => c.team === 'cross');
                   ))}
                 </div>
               </div>
+              </a>
             ))}
           </div>
         </div>
