@@ -67,26 +67,24 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 				<div class="asset-main">
 					<div class="asset-amounts">
-						<div class="asset-now-block">
-							<div class="asset-now-label">現在総資産（2026年5月）</div>
-							<div class="asset-now-val"><strong>4,474万円</strong></div>
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">現在総資産（2026年5月）</div>
+							<div class="asset-amt-val val-now"><strong>4,474万円</strong></div>
 							<div class="asset-now-sub">評価損益 <span class="pos">+816万円</span></div>
 						</div>
-						<div class="asset-arrow-block">
-							<svg viewBox="0 0 60 20" class="asset-arrow-svg"><path d="M0 10 L48 10 M40 4 L52 10 L40 16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<div class="asset-amt-arrow">
+							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
 						</div>
-						<div class="asset-goal-block">
-							<div class="asset-mid-row">
-								<div class="asset-mid-item">
-									<div class="asset-goal-label">中間目標 2028年</div>
-									<div class="asset-mid-val"><strong>1億円</strong></div>
-								</div>
-								<div class="asset-mid-sep">→</div>
-								<div class="asset-mid-item">
-									<div class="asset-goal-label">最終目標 2030年</div>
-									<div class="asset-goal-val"><strong>2億円</strong></div>
-								</div>
-							</div>
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">中間目標 2028年</div>
+							<div class="asset-amt-val val-mid"><strong>1億円</strong></div>
+						</div>
+						<div class="asset-amt-arrow">
+							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</div>
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">最終目標 2030年</div>
+							<div class="asset-amt-val val-goal"><strong>2億円</strong></div>
 						</div>
 					</div>
 					<div class="asset-bar-wrap">
@@ -224,27 +222,34 @@ const posts = (await getCollection('blog')).sort(
 	.asset-amounts {
 		display: flex;
 		align-items: center;
-		gap: 1em;
+		gap: 0;
 		margin-bottom: 0.9em;
-		flex-wrap: wrap;
 	}
-	.asset-now-label, .asset-goal-label {
-		font-size: 0.62em;
+	.asset-amt-block {
+		flex: 1;
+		min-width: 0;
+	}
+	.asset-amt-arrow {
+		flex: 0 0 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 2px;
+	}
+	.asset-amt-label {
+		font-size: 0.6em;
 		font-weight: 700;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: rgba(255,255,255,0.45);
 		margin-bottom: 0.2em;
+		white-space: nowrap;
 	}
-	.asset-now-val {
-		font-size: 1.05em;
-		color: #fff;
-	}
-	.asset-now-val strong { font-size: 1.35em; color: #7ed957; }
-	.asset-goal-val { font-size: 1.05em; color: #fff; }
-	.asset-goal-val strong { font-size: 1.35em; color: #e8b84b; }
-	.asset-arrow-block { flex: 1; min-width: 40px; max-width: 80px; }
-	.asset-arrow-svg { width: 100%; color: rgba(255,255,255,0.3); }
+	.asset-amt-val { font-size: 1.05em; color: #fff; }
+	.asset-amt-val strong { font-size: 1.35em; }
+	.val-now strong  { color: #7ed957; }
+	.val-mid strong  { color: #a0c8ff; }
+	.val-goal strong { color: #e8b84b; }
 	.asset-bar-wrap { }
 	.asset-bar {
 		background: rgba(255,255,255,0.1);
@@ -275,19 +280,6 @@ const posts = (await getCollection('blog')).sort(
 		line-height: 1.2;
 		white-space: nowrap;
 	}
-	.asset-mid-row {
-		display: flex;
-		align-items: center;
-		gap: 0.5em;
-	}
-	.asset-mid-item { flex: 1; }
-	.asset-mid-sep {
-		font-size: 0.75em;
-		color: rgba(255,255,255,0.3);
-		flex-shrink: 0;
-	}
-	.asset-mid-val { font-size: 1.05em; color: #fff; }
-	.asset-mid-val strong { font-size: 1.35em; color: #a0c8ff; }
 	.asset-bar-mid-marker {
 		position: absolute;
 		left: 50%;
