@@ -95,20 +95,8 @@ const posts = (await getCollection('blog')).sort(
 				<div class="asset-chart-wrap">
 					<img src="/images/nomura-asset-chart.png" alt="野村証券 資産推移チャート（2025年3月〜2026年4月）" class="asset-chart-img" />
 				</div>
-				<div class="asset-holdings-label">📋 主要ポジション（2026年5月現在）</div>
-				<div class="asset-holdings">
-					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">東部ネット<span class="h-code">9036</span></span><span class="h-qty">26,600株 · ¥3,836万</span><span class="h-ret pos">+18.5%</span></div>
-					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">ウエストHD<span class="h-code">1407</span></span><span class="h-qty">300株 · ¥87万</span><span class="h-ret pos">+97.7%</span></div>
-					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">信越化<span class="h-code">4063</span></span><span class="h-qty">100株 · ¥71万</span><span class="h-ret pos">+41.0%</span></div>
-					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">TYK<span class="h-code">5363</span></span><span class="h-qty">1,000株 · ¥64万</span><span class="h-ret pos">+51.0%</span></div>
-					<div class="holding cash"><span class="h-badge">現物</span><span class="h-name">オリックス<span class="h-code">8591</span></span><span class="h-qty">100株 · ¥63万</span><span class="h-ret pos">+101.9%</span></div>
-					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">ソニーG<span class="h-code">6758</span></span><span class="h-qty">200株</span><span class="h-ret pos">+¥51,600</span></div>
-					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">神栄<span class="h-code">3004</span></span><span class="h-qty">1,500株</span><span class="h-ret pos">+¥43,600</span></div>
-					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">東部ネット<span class="h-code">9036</span></span><span class="h-qty">300株</span><span class="h-ret pos">+¥40,300</span></div>
-					<div class="holding margin"><span class="h-badge">信用</span><span class="h-name">日ペイントH<span class="h-code">4612</span></span><span class="h-qty">800株</span><span class="h-ret pos">+¥32,930</span></div>
-					<div class="holding more">他多数 — バリュー株・テーマ株・テクニカル銘柄を実際に売買しながら更新中</div>
-				</div>
-				<p class="asset-disclaimer">※ 野村証券の実口座での保有。記事更新に合わせて随時更新します。投資勧誘ではありません。</p>
+				<p class="asset-update-rule">📅 資産推移は毎月第1営業日に更新します。</p>
+				<p class="asset-disclaimer">※ 野村証券の実口座。投資勧誘ではありません。</p>
 			</section>
 
 			<div class="method-note">
@@ -283,60 +271,12 @@ const posts = (await getCollection('blog')).sort(
 		display: block;
 		border-radius: 0;
 	}
-	.asset-holdings-label {
-		font-size: 0.7em;
-		font-weight: 700;
-		letter-spacing: 0.06em;
-		color: rgba(255,255,255,0.5);
-		margin-bottom: 0.5em;
-		padding-top: 0.8em;
+	.asset-update-rule {
+		font-size: 0.68em;
+		color: rgba(255,255,255,0.45);
+		margin: 0.6em 0 0.3em;
+		padding-top: 0.7em;
 		border-top: 1px solid rgba(255,255,255,0.1);
-	}
-	.asset-holdings {
-		display: flex;
-		flex-direction: column;
-		gap: 0.25em;
-		margin-bottom: 0.9em;
-	}
-	.holding {
-		display: flex;
-		align-items: center;
-		gap: 0.55em;
-		font-size: 0.78em;
-		padding: 0.3em 0;
-		border-bottom: 1px solid rgba(255,255,255,0.05);
-		flex-wrap: wrap;
-	}
-	.h-badge {
-		font-size: 0.7em;
-		font-weight: 700;
-		padding: 0.1em 0.5em;
-		border-radius: 3px;
-		flex-shrink: 0;
-	}
-	.holding.cash .h-badge { background: rgba(29,158,117,0.3); color: #7ed957; }
-	.holding.margin .h-badge { background: rgba(232,184,75,0.2); color: #e8b84b; }
-	.h-name {
-		font-weight: 600;
-		color: rgba(255,255,255,0.9);
-		flex: 1;
-		min-width: 80px;
-	}
-	.h-code {
-		font-size: 0.82em;
-		color: rgba(255,255,255,0.4);
-		margin-left: 0.3em;
-		font-weight: 400;
-	}
-	.h-qty { color: rgba(255,255,255,0.5); flex-shrink: 0; }
-	.h-ret { font-weight: 700; flex-shrink: 0; }
-	.h-ret.pos { color: #7ed957; }
-	.holding.more {
-		font-size: 0.72em;
-		color: rgba(255,255,255,0.35);
-		font-style: italic;
-		border-bottom: none;
-		padding-top: 0.4em;
 	}
 	.asset-disclaimer {
 		font-size: 0.65em;

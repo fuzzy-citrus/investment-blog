@@ -30,6 +30,7 @@ const sections = [
       <div class="page-header">
         <h1>メンバー一覧</h1>
         <p class="lead">バリュー商会の投資担当たちをご紹介します。</p>
+        <a href="/org" class="org-link">🗂 組織図で見る →</a>
       </div>
 
       {sections.map(sec => (
@@ -171,7 +172,19 @@ const sections = [
     color: var(--accent-dark);
     margin-bottom: 0.2em;
   }
-  .lead { color: rgb(var(--gray)); font-size: 0.9em; }
+  .lead { color: rgb(var(--gray)); font-size: 0.9em; margin-bottom: 0.6em; }
+  .org-link {
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 0.2em 0.7em;
+    margin-top: 0.3em;
+  }
+  .org-link:hover { background: var(--accent-light); }
 
   /* チームセクション */
   .team-section { margin-bottom: 3em; }

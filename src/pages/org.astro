@@ -31,6 +31,7 @@ const cross   = characters.filter(c => c.team === 'cross');
         <div class="tier">
           <div class="tier-label">FOUNDER</div>
           <div class="row row-single">
+            <a href={`/characters#${founder.id}`} class="card-link">
             <div class="card card-founder">
               <div class="avatar" style={`background:${founder.avatarColor}`}>{founder.emoji}</div>
               <div class="body">
@@ -40,6 +41,7 @@ const cross   = characters.filter(c => c.team === 'cross');
                 <div class="tags">{founder.tags.map(t => <span class="tag">{t}</span>)}</div>
               </div>
             </div>
+            </a>
           </div>
         </div>
 
@@ -49,6 +51,7 @@ const cross   = characters.filter(c => c.team === 'cross');
         <div class="tier">
           <div class="tier-label">MANAGER</div>
           <div class="row row-single">
+            <a href={`/characters#${manager.id}`} class="card-link">
             <div class="card card-manager">
               <div class="avatar" style={`background:${manager.avatarColor}`}>{manager.emoji}</div>
               <div class="body">
@@ -58,6 +61,7 @@ const cross   = characters.filter(c => c.team === 'cross');
                 <div class="tags">{manager.tags.map(t => <span class="tag">{t}</span>)}</div>
               </div>
             </div>
+            </a>
           </div>
         </div>
 
@@ -68,6 +72,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           <div class="tier-label">TEAM A — {teamLabels['teamA']}</div>
           <div class="row row-4">
             {teamA.map(c => (
+              <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
                 <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
                 <div class="body">
@@ -77,6 +82,7 @@ const cross   = characters.filter(c => c.team === 'cross');
                   <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
                 </div>
               </div>
+              </a>
             ))}
           </div>
         </div>
@@ -92,6 +98,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           </div>
           <div class="row row-4">
             {teamB.map(c => (
+              <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
                 <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
                 <div class="body">
@@ -101,8 +108,10 @@ const cross   = characters.filter(c => c.team === 'cross');
                   <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
                 </div>
               </div>
+              </a>
             ))}
             {cross.map(c => (
+              <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm card-cross">
                 <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
                 <div class="body">
@@ -112,6 +121,7 @@ const cross   = characters.filter(c => c.team === 'cross');
                   <div class="tags">{c.tags.map(t => <span class="tag">{t}</span>)}</div>
                 </div>
               </div>
+              </a>
             ))}
           </div>
         </div>
@@ -199,10 +209,22 @@ const cross   = characters.filter(c => c.team === 'cross');
 
   /* カード行 */
   .row { display: flex; justify-content: center; gap: 0.7em; }
-  .row-single .card { width: min(400px, 100%); }
+  .row-single .card { width: 100%; }
   .row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7em; width: 100%; }
   .row-rivals { gap: 0.7em; }
   .row-rivals .card { flex: 1 1 220px; max-width: 320px; }
+
+  /* カードリンク */
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border-radius: 8px;
+  }
+  .card-link:hover { transform: translateY(-2px); }
+  .card-link:hover .card { box-shadow: 0 4px 12px rgba(0,0,0,12%); border-color: var(--accent); }
+  .row-single .card-link { width: min(400px, 100%); }
 
   /* カード基本 */
   .card {
