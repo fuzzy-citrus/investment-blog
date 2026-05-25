@@ -46,7 +46,7 @@ const posts = (await getCollection('blog')).sort(
 						<span class="about-icon">🎯</span>
 						<div>
 							<div class="about-label">目標</div>
-							<div class="about-text"><strong>2030年までにバリュー商会の資産を2億円以上に。</strong>ブログの成長＝実際の運用成績です。</div>
+							<div class="about-text"><strong>バリュー商会の資産推移＝筆者本人の運用成績です。</strong>2030年までに2億円以上を目指します。<br /><span class="about-note-inline">※注目銘柄は紹介しますがポジション全部の公開はしてません。インデックスやテーマ株・モメンタムも時々混ざるのでブレは多少あります。</span></div>
 						</div>
 					</div>
 					<div class="about-item">
@@ -327,6 +327,13 @@ const posts = (await getCollection('blog')).sort(
 		font-size: 0.85em;
 		color: rgb(var(--gray-dark));
 		line-height: 1.65;
+	}
+	.about-note-inline {
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+		display: block;
+		margin-top: 0.4em;
+		line-height: 1.6;
 	}
 	.about-note {
 		font-size: 0.76em;
