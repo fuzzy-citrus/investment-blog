@@ -88,13 +88,22 @@ const posts = (await getCollection('blog')).sort(
 			.post-card:hover .post-title {
 				color: var(--accent-dark);
 			}
-			.card-highlight {
-				color: var(--accent-dark);
+			:global(.card-highlight) {
+				color: #1a7a4a;
 				font-weight: 700;
 			}
-			.card-note {
-				font-size: 0.9em;
+			:global(.card-prereq) {
+				font-size: 0.82em;
+				color: rgb(var(--gray-dark));
+				display: block;
+				margin-top: 0.3em;
+				line-height: 1.65;
+			}
+			:global(.card-note) {
+				font-size: 0.82em;
 				color: rgb(var(--gray));
+				display: block;
+				margin-top: 0.15em;
 			}
 
 			/* 銘柄分析カード */
