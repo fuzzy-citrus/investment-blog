@@ -88,6 +88,14 @@ const posts = (await getCollection('blog')).sort(
 			.post-card:hover .post-title {
 				color: var(--accent-dark);
 			}
+			.card-highlight {
+				color: var(--accent-dark);
+				font-weight: 700;
+			}
+			.card-note {
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+			}
 
 			/* 銘柄分析カード */
 			.stock-card {
@@ -284,7 +292,10 @@ const posts = (await getCollection('blog')).sort(
 									)}
 									<div class="post-card-body">
 										<h4 class="post-title">{post.data.title}</h4>
-										<p class="post-desc">{post.data.description}</p>
+										{post.data.cardDesc
+											? <p class="post-desc" set:html={post.data.cardDesc} />
+											: <p class="post-desc">{post.data.description}</p>
+										}
 										<p class="post-date"><FormattedDate date={post.data.pubDate} /></p>
 									</div>
 								</a>
