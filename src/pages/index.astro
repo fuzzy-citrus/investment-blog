@@ -32,6 +32,34 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</section>
 
+			<section class="about-blog">
+				<h2>バリュー商会とは</h2>
+				<div class="about-grid">
+					<div class="about-item">
+						<span class="about-icon">🧑‍💼</span>
+						<div>
+							<div class="about-label">運営者</div>
+							<div class="about-text">保有資産約5,000万円。野村の錬金術士（見習い）こと沼田堅一課長を主人公に、バリュー商会の資産を実際の投資成績と直結させて育てていく実践記録です。</div>
+						</div>
+					</div>
+					<div class="about-item">
+						<span class="about-icon">🎯</span>
+						<div>
+							<div class="about-label">目標</div>
+							<div class="about-text"><strong>2030年までにバリュー商会の資産を2億円以上に。</strong>ブログの成長＝実際の運用成績です。</div>
+						</div>
+					</div>
+					<div class="about-item">
+						<span class="about-icon">📊</span>
+						<div>
+							<div class="about-label">投資スタンス</div>
+							<div class="about-text">メインはバリュー株・TOB発掘・低PBR。サテライトでテーマ株やテクニカルトレードも実践勉強中なので結構勝手に動きます。紹介銘柄・戦略は野村証券の口座で実際に売買しながら更新します。</div>
+						</div>
+					</div>
+				</div>
+				<p class="about-note">※このブログは自身の投資手法や成績を振り返り、今後に活かす場所として活用しています。</p>
+			</section>
+
 			<div class="method-note">
 				<span class="method-icon">🤖</span>
 				<div>
@@ -76,6 +104,56 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
+	.about-blog {
+		margin-bottom: 2.5em;
+		padding: 1.4em 1.2em;
+		background: #f8faf8;
+		border: 1px solid #dde8dd;
+		border-radius: 10px;
+	}
+	.about-blog h2 {
+		font-size: 1.1em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin: 0 0 1em;
+	}
+	.about-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85em;
+		margin-bottom: 0.9em;
+	}
+	.about-item {
+		display: flex;
+		gap: 0.75em;
+		align-items: flex-start;
+	}
+	.about-icon {
+		font-size: 1.3em;
+		flex-shrink: 0;
+		margin-top: 0.05em;
+	}
+	.about-label {
+		font-size: 0.7em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--accent-dark);
+		text-transform: uppercase;
+		margin-bottom: 0.2em;
+	}
+	.about-text {
+		font-size: 0.85em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.65;
+	}
+	.about-note {
+		font-size: 0.76em;
+		color: rgb(var(--gray));
+		margin: 0;
+		padding-top: 0.8em;
+		border-top: 1px dashed #ccd8cc;
+	}
 	.hero {
 		text-align: center;
 		padding: 3em 1em 2em;
