@@ -1,19 +1,43 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Giscus from '../components/Giscus.astro';
 import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro.props;
+
+const allPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.filter(p => p.data.title !== title)
+	.slice(0, 3);
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	"headline": title,
+	"description": description,
+	"datePublished": pubDate.toISOString(),
+	"dateModified": (updatedDate ?? pubDate).toISOString(),
+	"author": { "@type": "Person", "name": "沼底バリュー商会" },
+	"publisher": {
+		"@type": "Organization",
+		"name": "沼底バリュー商会",
+		"url": Astro.site?.toString() ?? ""
+	},
+	"inLanguage": "ja",
+	"url": Astro.url.toString(),
+};
 ---
 
 <html lang="ja">
 	<head>
 		<BaseHead title={title} description={description} />
+		<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -181,6 +205,47 @@ const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro
 				.stock-name { font-size: 1.3em; }
 				.verdict-price { font-size: 1.4em; }
 			}
+			/* ── Related posts ── */
+			.related-posts {
+				max-width: 720px;
+				margin: 2.5em auto 0;
+				padding: 0 1.5em 1em;
+			}
+			.related-title {
+				font-size: 1em;
+				color: var(--accent-dark);
+				border-left: 4px solid var(--accent);
+				padding-left: 0.6em;
+				margin-bottom: 0.8em;
+			}
+			.related-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.1em;
+			}
+			.related-list a {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1em;
+				padding: 0.55em 0.4em;
+				text-decoration: none;
+				color: rgb(var(--gray-dark));
+				border-bottom: 1px solid rgb(var(--gray-light));
+				font-size: 0.88em;
+			}
+			.related-list a:hover { color: var(--accent-dark); }
+			.related-post-title { flex: 1; }
+			.related-post-date { font-size: 0.85em; color: rgb(var(--gray)); white-space: nowrap; }
+			/* ── Comments ── */
+			.comments-wrap {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 0 1.5em 3em;
+			}
 		</style>
 	</head>
 
@@ -256,6 +321,26 @@ const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro
 					<slot />
 				</div>
 			</article>
+
+			{allPosts.length > 0 && (
+				<aside class="related-posts">
+					<h2 class="related-title">関連記事</h2>
+					<ul class="related-list">
+						{allPosts.map(p => (
+							<li>
+								<a href={`/blog/${p.id}/`}>
+									<span class="related-post-title">{p.data.title}</span>
+									<span class="related-post-date"><FormattedDate date={p.data.pubDate} /></span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</aside>
+			)}
+
+			<div class="comments-wrap">
+				<Giscus />
+			</div>
 		</main>
 		<Footer />
 	</body>

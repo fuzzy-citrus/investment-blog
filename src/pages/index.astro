@@ -1,4 +1,5 @@
 ---
+import Giscus from '../components/Giscus.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -59,7 +60,7 @@ const posts = (await getCollection('blog')).sort(
 					<div class="about-item">
 						<span class="about-icon">🏦</span>
 						<div>
-							<div class="about-label">信用レバレッジ活用</div>
+							<div class="about-label">野村の錬金術（低金利レバレッジ）</div>
 							<div class="about-text">野村証券の信用金利は<strong>年1.43%</strong>。配当利回りが<strong>1.79%以上</strong>あれば、税金を考慮しても利ザヤでプラスの追加収益が見込めます。そこそこの配当利回りでも<strong>配当性向が低くキャッシュを溜め込んでいるニッチトップ銘柄</strong>なら積極的に集める方針。下値余地が小さく、信用金利を配当で上回れる銘柄を狙い撃ちします。</div>
 						</div>
 					</div>
@@ -224,6 +225,12 @@ const posts = (await getCollection('blog')).sort(
 					<span title="墨田 検二（AIバックチェック担当）">🦑</span>
 				</div>
 				<a href="/characters" class="all-posts-link">メンバー一覧を見る →</a>
+			</section>
+
+			<section class="home-comments">
+				<h2>コメント・ご意見</h2>
+				<p class="home-comments-desc">記事の感想・銘柄への意見・質問など、お気軽にどうぞ。</p>
+				<Giscus term="ホーム全体コメント" />
 			</section>
 		</main>
 		<Footer />
@@ -673,6 +680,14 @@ const posts = (await getCollection('blog')).sort(
 	}
 	.member-emojis span {
 		cursor: default;
+	}
+	.home-comments {
+		margin-bottom: 3em;
+	}
+	.home-comments-desc {
+		font-size: 0.88em;
+		color: rgb(var(--gray));
+		margin: -0.4em 0 0;
 	}
 	/* ── Theme Pillars ── */
 	.theme-pillars {
