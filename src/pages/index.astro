@@ -22,7 +22,7 @@ const posts = (await getCollection('blog')).sort(
 			<section class="hero">
 				<div class="hero-badge">🏢 バリュー商会</div>
 				<h1>沼田課長と愉快な部下たちの<br />投資記録</h1>
-				<p class="hero-desc">インフレ適応術<br/>〜低金利×中レバレッジ×高安全域〜</p>
+				<p class="hero-desc">〜低金利×中レバレッジ×高安全域〜</p>
 				<div class="hero-tags">
 					<span class="tag">割安日本個別株</span>
 					<span class="tag">TOB発掘</span>
@@ -59,7 +59,7 @@ const posts = (await getCollection('blog')).sort(
 					<div class="about-item">
 						<span class="about-icon">🏦</span>
 						<div>
-							<div class="about-label">野村の錬金術（低金利レバレッジ）</div>
+							<div class="about-label">信用レバレッジ活用</div>
 							<div class="about-text">野村証券の信用金利は<strong>年1.43%</strong>。配当利回りが<strong>1.79%以上</strong>あれば、税金を考慮しても利ザヤでプラスの追加収益が見込めます。そこそこの配当利回りでも<strong>配当性向が低くキャッシュを溜め込んでいるニッチトップ銘柄</strong>なら積極的に集める方針。下値余地が小さく、信用金利を配当で上回れる銘柄を狙い撃ちします。</div>
 						</div>
 					</div>
@@ -162,7 +162,8 @@ const posts = (await getCollection('blog')).sort(
 					<img src="/images/nomura-asset-chart.png" alt="野村証券 資産推移チャート（2025年3月〜2026年4月）" class="asset-chart-img" />
 				</div>
 				<p class="asset-update-rule">📅 資産推移は毎月第1営業日に更新します。</p>
-				<p class="asset-disclaimer">※ 野村証券の実口座。投資勧誘ではありません。</p>
+				<p class="asset-brand-note">📊 この資産推移は沼底バリュー商会（筆者本人）の野村証券実口座の運用成績です。</p>
+				<p class="asset-disclaimer">※ 投資勧誘ではありません。</p>
 			</section>
 
 			<section class="watchlist">
@@ -385,12 +386,18 @@ const posts = (await getCollection('blog')).sort(
 		display: block;
 		border-radius: 0;
 	}
+	.asset-brand-note {
+		font-size: 0.72em;
+		color: rgba(255,255,255,0.6);
+		margin: 0.8em 0 0.2em;
+		padding-top: 0.7em;
+		border-top: 1px solid rgba(255,255,255,0.1);
+		font-weight: 600;
+	}
 	.asset-update-rule {
 		font-size: 0.68em;
 		color: rgba(255,255,255,0.45);
-		margin: 0.6em 0 0.3em;
-		padding-top: 0.7em;
-		border-top: 1px solid rgba(255,255,255,0.1);
+		margin: 0.3em 0 0.3em;
 	}
 	.asset-disclaimer {
 		font-size: 0.65em;
