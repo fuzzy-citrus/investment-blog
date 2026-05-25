@@ -111,6 +111,27 @@ const posts = (await getCollection('blog')).sort(
 				<p class="asset-disclaimer">※ 野村証券の実口座。投資勧誘ではありません。</p>
 			</section>
 
+			<section class="watchlist">
+				<div class="watchlist-header">
+					<span class="watchlist-title">📋 紹介銘柄 現況レポート</span>
+					<span class="watchlist-updated">2026年5月更新</span>
+				</div>
+				<div class="watchlist-rows">
+					<a href="/blog/tobu-network-9036/" class="wl-row">
+						<span class="wl-rating rA-plus">A<sup>+</sup></span>
+						<span class="wl-name">東部ネットワーク <span class="wl-code">9036</span></span>
+						<span class="wl-status"><span class="wl-dot green"></span>継続強気ホールド — 基本出口まで保有</span>
+						<span class="wl-arrow">→</span>
+					</a>
+					<a href="/blog/shinyei-3004/" class="wl-row">
+						<span class="wl-rating rA">A</span>
+						<span class="wl-name">神栄 <span class="wl-code">3004</span></span>
+						<span class="wl-status"><span class="wl-dot yellow"></span>依然割安継続 — 下がればロット追加検討</span>
+						<span class="wl-arrow">→</span>
+					</a>
+				</div>
+			</section>
+
 			<div class="method-note">
 				<span class="method-icon">🤖</span>
 				<div>
@@ -329,6 +350,98 @@ const posts = (await getCollection('blog')).sort(
 		margin: 0;
 		line-height: 1.5;
 	}
+	/* ── Watchlist ── */
+	.watchlist {
+		margin-bottom: 2em;
+		border: 1px solid #dde3ec;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+	.watchlist-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.55em 1em;
+		background: #f0f4f0;
+		border-bottom: 1px solid #dde3ec;
+	}
+	.watchlist-title {
+		font-size: 0.78em;
+		font-weight: 700;
+		color: var(--accent-dark);
+		letter-spacing: 0.04em;
+	}
+	.watchlist-updated {
+		font-size: 0.65em;
+		color: rgb(var(--gray));
+	}
+	.watchlist-rows { display: flex; flex-direction: column; }
+	.wl-row {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
+		padding: 0.7em 1em;
+		text-decoration: none;
+		color: rgb(var(--gray-dark));
+		border-bottom: 1px solid #f0f2f5;
+		transition: background 0.12s;
+		flex-wrap: wrap;
+	}
+	.wl-row:last-child { border-bottom: none; }
+	.wl-row:hover { background: #f5faf5; }
+	.wl-rating {
+		font-size: 0.78em;
+		font-weight: 800;
+		min-width: 2.4em;
+		text-align: center;
+		padding: 0.15em 0.5em;
+		border-radius: 4px;
+		flex-shrink: 0;
+		letter-spacing: 0.02em;
+	}
+	.wl-rating sup { font-size: 0.7em; }
+	.rA-plus { background: #fff4cc; color: #8a6a00; border: 1px solid #e8c840; }
+	.rA      { background: #e6f5ee; color: var(--accent-dark); border: 1px solid #a8d8bc; }
+	.wl-name {
+		font-size: 0.85em;
+		font-weight: 700;
+		min-width: 120px;
+		flex-shrink: 0;
+	}
+	.wl-code {
+		font-size: 0.8em;
+		font-weight: 400;
+		color: rgb(var(--gray));
+		margin-left: 0.3em;
+	}
+	.wl-status {
+		font-size: 0.82em;
+		color: rgb(var(--gray-dark));
+		flex: 1;
+		display: flex;
+		align-items: center;
+		gap: 0.45em;
+	}
+	.wl-dot {
+		width: 7px; height: 7px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+	.wl-dot.green  { background: #3cb86a; }
+	.wl-dot.yellow { background: #e8b84b; }
+	.wl-arrow {
+		font-size: 0.85em;
+		color: var(--accent);
+		font-weight: 700;
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+	@media (max-width: 520px) {
+		.wl-row { gap: 0.5em; }
+		.wl-status { flex-basis: 100%; }
+		.wl-arrow { display: none; }
+	}
+
 	/* ── About Blog ── */
 	.about-blog {
 		margin-bottom: 2.5em;
