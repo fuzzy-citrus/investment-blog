@@ -1,0 +1,63 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title="記事検索 | 沼底バリュー商会" description="沼底バリュー商会の記事を検索" />
+		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+		<style>
+			main {
+				max-width: 740px;
+				margin: 0 auto;
+				padding: 2.5em 1em 4em;
+			}
+			h1 {
+				font-size: 1.4em;
+				color: var(--accent-dark);
+				border-left: 4px solid var(--accent);
+				padding-left: 0.6em;
+				margin-bottom: 1.5em;
+			}
+			#search {
+				margin-bottom: 2em;
+			}
+			.pagefind-ui__search-input {
+				border: 1.5px solid #ccd8cc !important;
+				border-radius: 8px !important;
+				font-size: 1em !important;
+			}
+			.pagefind-ui__search-input:focus {
+				border-color: var(--accent) !important;
+				outline: none !important;
+			}
+			.pagefind-ui__result-link {
+				color: var(--accent-dark) !important;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🔍 記事検索</h1>
+			<div id="search"></div>
+		</main>
+		<Footer />
+		<script src="/pagefind/pagefind-ui.js" is:inline></script>
+		<script is:inline>
+			window.addEventListener('DOMContentLoaded', () => {
+				new PagefindUI({
+					element: '#search',
+					showImages: false,
+					translations: {
+						placeholder: '銘柄名・キーワードで検索...',
+						zero_results: '「[SEARCH_TERM]」に一致する記事が見つかりませんでした',
+					},
+				});
+			});
+		</script>
+	</body>
+</html>
