@@ -6,7 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "blog-comments"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "9f737ab5-2f51-45bb-8892-62c156a99af8"
 
 [vars]
-ALLOWED_ORIGIN = "https://example.com"
+ALLOWED_ORIGIN = "https://investment-blog.fuzzy-citrus-yk02.workers.dev"

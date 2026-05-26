@@ -12,7 +12,7 @@ const CORS = (origin: string) => ({
 function json(data: unknown, status = 200, origin = '*') {
 	return new Response(JSON.stringify(data), {
 		status,
-		headers: { 'Content-Type': 'application/json', ...CORS(origin) },
+		headers: { 'Content-Type': 'application/json; charset=utf-8', ...CORS(origin) },
 	});
 }
 

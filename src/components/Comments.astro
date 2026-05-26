@@ -3,7 +3,7 @@ interface Props {
   pageId: string;
 }
 const { pageId } = Astro.props;
-const COMMENTS_API = import.meta.env.PUBLIC_COMMENTS_API ?? '';
+const COMMENTS_API = 'https://investment-blog-comments.fuzzy-citrus-yk02.workers.dev';
 ---
 
 <section class="comments-section">
