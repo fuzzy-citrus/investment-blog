@@ -185,6 +185,12 @@ const posts = (await getCollection('blog')).sort(
 						<span class="wl-status"><span class="wl-dot yellow"></span>依然割安継続 — 下がればロット追加検討</span>
 						<span class="wl-arrow">→</span>
 					</a>
+					<a href="/blog/kitazato-368A/" class="wl-row">
+						<span class="wl-rating rA-minus">A<sup>−</sup></span>
+						<span class="wl-name">北里コーポレーション <span class="wl-code">368A</span></span>
+						<span class="wl-status"><span class="wl-dot yellow"></span>強気継続で監視 — 下落で買い増し検討</span>
+						<span class="wl-arrow">→</span>
+					</a>
 				</div>
 			</section>
 
@@ -462,8 +468,9 @@ const posts = (await getCollection('blog')).sort(
 		letter-spacing: 0.02em;
 	}
 	.wl-rating sup { font-size: 0.7em; }
-	.rA-plus { background: #fff4cc; color: #8a6a00; border: 1px solid #e8c840; }
-	.rA      { background: #e6f5ee; color: var(--accent-dark); border: 1px solid #a8d8bc; }
+	.rA-plus  { background: #fff4cc; color: #8a6a00; border: 1px solid #e8c840; }
+	.rA       { background: #e6f5ee; color: var(--accent-dark); border: 1px solid #a8d8bc; }
+	.rA-minus { background: #eef5ee; color: #3a7a58; border: 1px solid #b8d8c4; }
 	.wl-name {
 		font-size: 0.85em;
 		font-weight: 700;
