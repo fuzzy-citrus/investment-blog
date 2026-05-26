@@ -1,0 +1,227 @@
+---
+interface Props {
+  pageId: string;
+}
+const { pageId } = Astro.props;
+const COMMENTS_API = import.meta.env.PUBLIC_COMMENTS_API ?? '';
+---
+
+<section class="comments-section">
+  <h2 class="comments-heading">コメント</h2>
+
+  {COMMENTS_API ? (
+    <>
+      <div id="comments-list" class="comments-list">
+        <p class="loading-msg">コメントを読み込み中…</p>
+      </div>
+
+      <form id="comment-form" class="comment-form" novalidate>
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="form-row">
+          <label for="comment-author">名前（任意）</label>
+          <input type="text" id="comment-author" name="author" maxlength="80" placeholder="名無しさん" />
+        </div>
+        <div class="form-row">
+          <label for="comment-body">コメント <span class="required">*</span></label>
+          <textarea id="comment-body" name="body" rows="4" maxlength="2000" placeholder="コメントを入力してください" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn">送信</button>
+          <span id="form-msg" class="form-msg"></span>
+        </div>
+      </form>
+    </>
+  ) : (
+    <p class="no-api-msg">（コメント機能は本番環境でご利用いただけます）</p>
+  )}
+</section>
+
+<script define:vars={{ COMMENTS_API, pageId }}>
+  if (COMMENTS_API) {
+    const api = COMMENTS_API.replace(/\/$/, '');
+    const list = document.getElementById('comments-list');
+    const form = document.getElementById('comment-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formMsg = document.getElementById('form-msg');
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    function renderComments(comments) {
+      if (!comments.length) {
+        list.innerHTML = '<p class="no-comments">まだコメントはありません。最初のコメントを書いてみましょう！</p>';
+        return;
+      }
+      list.innerHTML = comments.map(c => `
+        <div class="comment-item">
+          <div class="comment-meta">
+            <span class="comment-author">${escHtml(c.author || '名無しさん')}</span>
+            <span class="comment-date">${c.created_at ? c.created_at.slice(0,10) : ''}</span>
+          </div>
+          <div class="comment-body">${escHtml(c.body)}</div>
+        </div>
+      `).join('');
+    }
+
+    async function loadComments() {
+      try {
+        const res = await fetch(`${api}/comments?page=${encodeURIComponent(pageId)}`);
+        const data = await res.json();
+        renderComments(Array.isArray(data) ? data : []);
+      } catch {
+        list.innerHTML = '<p class="error-msg">コメントの読み込みに失敗しました。</p>';
+      }
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = form.querySelector('[name="body"]').value.trim();
+      const author = form.querySelector('[name="author"]').value.trim();
+      const website = form.querySelector('[name="website"]').value;
+
+      if (!body) {
+        formMsg.textContent = 'コメントを入力してください。';
+        formMsg.className = 'form-msg error';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中…';
+      formMsg.textContent = '';
+
+      try {
+        const res = await fetch(`${api}/comments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ page: pageId, author, body, website }),
+        });
+        if (res.ok) {
+          form.reset();
+          formMsg.textContent = 'コメントを送信しました！';
+          formMsg.className = 'form-msg success';
+          await loadComments();
+        } else {
+          formMsg.textContent = '送信に失敗しました。もう一度お試しください。';
+          formMsg.className = 'form-msg error';
+        }
+      } catch {
+        formMsg.textContent = '通信エラーが発生しました。';
+        formMsg.className = 'form-msg error';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '送信';
+      }
+    });
+
+    loadComments();
+  }
+</script>
+
+<style>
+  .comments-section {
+    margin-top: 2.5em;
+    padding-top: 2em;
+    border-top: 1px solid rgb(var(--gray-light));
+  }
+  .comments-heading {
+    font-size: 1.1em;
+    color: var(--accent-dark);
+    border-left: 4px solid var(--accent);
+    padding-left: 0.6em;
+    margin-bottom: 1.2em;
+  }
+  .hp-field {
+    display: none !important;
+  }
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
+  }
+  .comment-item {
+    background: rgb(var(--gray-light), 0.4);
+    border-radius: 6px;
+    padding: 0.8em 1em;
+  }
+  .comment-meta {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+    margin-bottom: 0.4em;
+  }
+  .comment-author {
+    font-weight: 700;
+    font-size: 0.88em;
+    color: var(--accent-dark);
+  }
+  .comment-date {
+    font-size: 0.78em;
+    color: rgb(var(--gray));
+  }
+  .comment-body {
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: rgb(var(--gray-dark));
+  }
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+  }
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+  }
+  .form-row label {
+    font-size: 0.82em;
+    font-weight: 700;
+    color: rgb(var(--gray));
+  }
+  .required { color: #e06868; }
+  .form-row input,
+  .form-row textarea {
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 5px;
+    padding: 0.5em 0.7em;
+    font-size: 0.9em;
+    font-family: inherit;
+    color: rgb(var(--gray-dark));
+    background: white;
+    resize: vertical;
+    transition: border-color 0.15s;
+  }
+  .form-row input:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+  button[type="submit"] {
+    padding: 0.5em 1.6em;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button[type="submit"]:hover { background: var(--accent-dark); }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-msg { font-size: 0.85em; }
+  .form-msg.success { color: #1d9e75; }
+  .form-msg.error   { color: #e06868; }
+  .loading-msg, .no-comments, .error-msg, .no-api-msg {
+    font-size: 0.88em;
+    color: rgb(var(--gray));
+    font-style: italic;
+  }
+</style>

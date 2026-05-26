@@ -1,5 +1,5 @@
 ---
-import Giscus from '../components/Giscus.astro';
+import Comments from '../components/Comments.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -230,7 +230,7 @@ const posts = (await getCollection('blog')).sort(
 			<section class="home-comments">
 				<h2>コメント・ご意見</h2>
 				<p class="home-comments-desc">記事の感想・銘柄への意見・質問など、お気軽にどうぞ。</p>
-				<Giscus term="ホーム全体コメント" />
+				<Comments pageId="home" />
 			</section>
 		</main>
 		<Footer />
