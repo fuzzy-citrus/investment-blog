@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>北里コーポレーション（368A）総合投資レポート</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--rd2:#d84040;
+  --gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;
+  --sem:#c46814;--sem2:#e88020;
+  --bl:#1a3c7a;--bl2:#2a5cbf;
+  --fuel:#804080;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+
+/* ── HERO ── */
+.hero{background:var(--ink2);color:rgba(246,245,239,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::before{content:'368A';position:absolute;right:-20px;top:-10px;font:700 160px/1 var(--head);color:rgba(255,255,255,.03);pointer-events:none;letter-spacing:-.05em}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:10px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:20px}
+.hero-title{font:700 34px/1.06 var(--head);letter-spacing:-.025em}
+.hero-title em{color:var(--sem2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);margin-top:6px;line-height:1.65}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;flex:1;min-width:320px}
+.kpi{background:rgba(17,18,23,.3);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.fu{color:#d090c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:14px;background:rgba(36,144,84,.12);border:1px solid rgba(36,144,84,.25);border-radius:var(--r);padding:12px 18px;margin-top:16px}
+.verdict-score{font:700 42px/1 var(--mono);color:var(--gn2)}
+.verdict-text{font-size:12px;color:rgba(246,245,239,.7);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+/* ── MAIN NAV ── */
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav::-webkit-scrollbar{height:0}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 15px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+
+/* ── BODY ── */
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-rd{background:#fce8e8;color:var(--rd)}.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-sem{background:#fef0e0;color:var(--sem)}
+
+/* ── SUB TABS ── */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stabs::-webkit-scrollbar{height:0}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+@media(max-width:450px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr}}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px 18px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-sem{border-left:3px solid var(--sem)}
+.card-dk{background:var(--ink2);color:rgba(246,245,239,.85);border:none}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}
+.card-hi-bl{background:#eef3fc;border:.5px solid #a0b8e0}
+.card-hi-rd{background:#fdf0f0;border:.5px solid #e0b0b0}
+
+/* ── METRIC CARDS ── */
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.sem{color:var(--sem)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+/* ── HIGHLIGHTS ── */
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-sem{color:var(--sem);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* ── BADGES ── */
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-new{background:#fef0e0;color:var(--sem)}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule,var(--bg3));vertical-align:top}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.tbl td.r{text-align:right}.tbl td.c{text-align:center}
+.tbl tr.hl td{background:#f0f8f4;font-weight:600}
+.tbl tr.hl-rd td{background:#fdf0f0}
+
+/* ── BARS ── */
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden;height:12px;margin-bottom:8px}
+.bfill{border-radius:2px;height:12px;display:block;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── NOTICES ── */
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.noteg{background:#f0f8f4;border:.5px solid #a0d8b8;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.noteg strong{color:var(--gn2)}
+.noter{background:#fdf0f0;border:.5px solid #e0b0b0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:12px}
+.noter strong{color:var(--rd2)}
+.noteb{background:#eef3fc;border:.5px solid #a0b8e0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--bl);line-height:1.65;margin-bottom:12px}
+.noteb strong{color:var(--bl2)}
+
+/* ── MISC ── */
+.sep{height:1px;background:var(--bg3);margin:16px 0}
+.label{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.sect-title{font:600 13px/1.3 var(--head);margin-bottom:10px;color:var(--ink)}
+p{font-size:13px;line-height:1.75;color:var(--ink2)}
+small{font-size:10px;color:var(--ink3);line-height:1.5}
+
+/* ── CHART CONTAINER ── */
+.chart-wrap{position:relative;width:100%;background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px}
+.chart-title{font:600 11px/1 var(--head);margin-bottom:12px;color:var(--ink)}
+canvas{display:block;width:100%!important}
+
+/* ── SCENARIO PRICE BANDS ── */
+.price-band{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:var(--r);margin-bottom:8px;border-left:4px solid currentColor}
+.pb-bear{background:#fdf0f0;color:var(--rd)}
+.pb-base{background:#fef3e0;color:var(--am)}
+.pb-bull{background:#f0f8f4;color:var(--gn)}
+.pb-label{font:600 11px/1.3 var(--head)}
+.pb-price{font:700 24px/1 var(--mono)}
+.pb-ret{font:600 11px/1 var(--mono);margin-top:2px}
+
+/* ── CATALYST TIMELINE ── */
+.tl-item{display:grid;grid-template-columns:80px 12px 1fr;gap:0 12px;margin-bottom:16px;align-items:start}
+.tl-date{font:600 10px/1.4 var(--mono);color:var(--ink3);padding-top:2px;text-align:right}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid currentColor;background:var(--bg);flex-shrink:0;margin-top:4px;position:relative}
+.tl-dot::before{content:'';position:absolute;left:4px;top:12px;width:2px;height:calc(100% + 12px);background:var(--bg3)}
+.tl-item:last-child .tl-dot::before{display:none}
+.tl-body{font-size:12px;line-height:1.65}
+.tl-head{font:600 12px/1.3 var(--head);margin-bottom:3px}
+
+/* ── RISK METER ── */
+.risk-meter{display:grid;grid-template-columns:180px 1fr 60px;align-items:center;gap:10px;margin-bottom:8px}
+.risk-label{font-size:11px;color:var(--ink2)}
+.risk-track{height:8px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.risk-fill{height:100%;border-radius:2px}
+.risk-val{font:600 10px/1 var(--mono);text-align:right}
+
+/* ── EPS BUILD TABLE ── */
+.eps-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:.5px solid var(--bg3)}
+.eps-row:last-child{border-bottom:none}
+.eps-year{font:600 11px/1 var(--mono);color:var(--ink3);width:70px;flex-shrink:0}
+.eps-bar-wrap{flex:1;height:8px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.eps-bar{height:8px;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.eps-val{font:600 14px/1 var(--mono);min-width:60px;text-align:right}
+
+/* ── PRINT ── */
+@media print{.mnav{position:static}.chapter{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <div class="hero-label">株式会社北里コーポレーション｜東証プライム 368A｜2026年5月 改訂版</div>
+  <div class="hero-top">
+    <div>
+      <div class="hero-title">北里コーポレーション <em>368A</em><br>深掘り割安性 総合投資レポート</div>
+      <div class="hero-sub">現在株価：1,206円｜2026/3期 増収増益確認済み｜EPS97.4円実績・101.5円予想（27/3期）<br>生殖医療消耗品の国内唯一上場プレーヤー｜公的資金39.1兆円（社会保障費）の直接受益株</div>
+    </div>
+  </div>
+  <div class="hero-kpis">
+    <div class="kpi" style="border-top:3px solid var(--gn2)">
+      <div class="kpi-l">現在株価</div>
+      <div class="kpi-v gn">1,206円</div>
+      <div class="kpi-s">公募1,340円比▲10%</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)">
+      <div class="kpi-l">予想PER（27/3）</div>
+      <div class="kpi-v am">11.9倍</div>
+      <div class="kpi-s">上場来最低圏</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid #8ab0e8">
+      <div class="kpi-l">グローバル同業</div>
+      <div class="kpi-v bl">28〜31倍</div>
+      <div class="kpi-s">Vitrolife・CooperSurgical</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid #8ab0e8;background:rgba(26,60,122,.22);border:1px solid rgba(100,160,240,.25)">
+      <div class="kpi-l" style="color:rgba(246,245,239,.45)">解消可能なPER割引（推定）</div>
+      <div class="kpi-v bl" style="font-size:15px;line-height:1.3">PER 適正18〜25倍<br><span style="color:#68c890;font-size:20px;font-weight:700">▲8〜13倍分</span></div>
+      <div class="kpi-s" style="color:rgba(180,210,255,.6)">割引の70〜75%は需給・ガバナンス・認知度起因<br>→ 解消余地大・本質的問題ではない</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid #e08888">
+      <div class="kpi-l">配当利回り</div>
+      <div class="kpi-v am">3.40%</div>
+      <div class="kpi-s">41円/1,206円</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid #d090c0">
+      <div class="kpi-l">自己資本比率</div>
+      <div class="kpi-v">93.2%</div>
+      <div class="kpi-s">有利子負債ゼロ</div>
+    </div>
+  </div>
+  <div class="hero-verdict">
+    <div class="verdict-score">+58%</div>
+    <div class="verdict-text">
+      <strong>加重期待リターン（3年・配当込み）</strong><br>
+      ベース確率50%：+35〜50%｜ブル確率30%：+75〜120%｜ベア確率20%：▲7〜25%<br>
+      最重要確認事項：① イグナシオ・バメホ取締役とBiomedical Supplyの関係（有報7月）② 増配有無（株主総会6/25）
+    </div>
+  </div>
+</div>
+
+<!-- ════════ MAIN NAV ════════ -->
+<nav class="mnav">
+  <button class="mnb on"   onclick="showChapter('c0',this)">0. サマリー</button>
+  <button class="mnb"      onclick="showChapter('c1',this)">1. 財務・BS</button>
+  <button class="mnb"      onclick="showChapter('c2',this)">2. 割安性分析</button>
+  <button class="mnb"      onclick="showChapter('c3',this)">3. 公的資金×需要</button>
+  <button class="mnb"      onclick="showChapter('c4',this)">4. 競争優位性</button>
+  <button class="mnb"      onclick="showChapter('c5',this)">5. スペイン問題</button>
+  <button class="mnb"      onclick="showChapter('c6',this)">6. 3年シナリオ📈</button>
+  <button class="mnb"      onclick="showChapter('c7',this)">7. カタリスト</button>
+  <button class="mnb"      onclick="showChapter('c8',this)">8. リスク分析</button>
+  <button class="mnb"      onclick="showChapter('c9',this)">9. 最終評決</button>
+</nav>
+
+<main class="body">
+
+<!-- ════════════════════════════════
+     CH 0: サマリー
+════════════════════════════════ -->
+<div class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">エグゼクティブサマリー — 投資テーゼの全体像</h2><span class="ch-badge cb-gn">POSITIVE CONDITIONAL</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c0','ta',this)">3つの投資根拠</button>
+    <button class="stab" onclick="showTab('c0','tb',this)">最新決算ハイライト</button>
+    <button class="stab" onclick="showTab('c0','tc',this)">Bull/Base/Bear 一覧</button>
+    <button class="stab" onclick="showTab('c0','te',this)">🔍 PER水準の深層分析</button>
+    <button class="stab" onclick="showTab('c0','td',this)">重要発見：新材料</button>
+  </div>
+
+  <div class="spanel active" id="c0-ta">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="card card-gn">
+        <div class="label">根拠①</div>
+        <div class="sect-title">国内唯一の生殖医療消耗品上場株</div>
+        <p>社会保障費39.1兆円（2026年度・過去最高）の「少子化対策」資金が流入できる上場株が北里しか存在しない。2026年10月の東京都新助成（34,600件規模）・こども家庭庁の卵子凍結助成（最大20万円）が消耗品需要に直結する。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">根拠②</div>
+        <div class="sect-title">上場来最低の歴史的割安水準</div>
+        <p>PER11.9倍・FCFイールド7.5%・EV/EBIT5.9倍はグローバル同業Vitrolife（PER31倍）・CooperSurgical（PER28倍）比で<span class="hi-gn">▲57〜62%割安</span>。現金134億円が時価総額の27.8%を占めるキャッシュリッチ構造。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">根拠③</div>
+        <div class="sect-title">無借金・現金134億円の下値防衛力</div>
+        <p>有利子負債ゼロ・自己資本比率93.2%。FCF年間36億円が現金を毎年積み上げる。配当利回り3.40%。3年間の累積配当≥123円（据え置き前提）が<span class="hi-gn">下値1,083円まで実質損失ゼロ</span>を意味する。</p>
+      </div>
+    </div>
+    <!-- PER水準サマリー（新規追加） -->
+    <div class="card" style="border-left:3px solid var(--bl);margin-bottom:12px">
+      <div class="label" style="color:var(--bl);margin-bottom:8px">PER水準の構造的考察（詳細は「PER水準の深層分析」タブ参照）</div>
+      <div class="g3" style="gap:10px">
+        <div style="background:var(--bg);padding:10px;border-radius:var(--r);text-align:center">
+          <div style="font-size:9px;color:var(--ink3)">FCFイールドから導かれる適正PER</div>
+          <div class="mono hi-gn" style="font-size:20px">20〜25倍</div>
+          <div style="font-size:9px;color:var(--ink3)">FCFイールド4〜5%水準=PER20〜25倍に相当</div>
+        </div>
+        <div style="background:var(--bg);padding:10px;border-radius:var(--r);text-align:center">
+          <div style="font-size:9px;color:var(--ink3)">事業モデルから見た参照PER</div>
+          <div class="mono hi-am" style="font-size:20px">18〜28倍</div>
+          <div style="font-size:9px;color:var(--ink3)">高収益消耗品・参入障壁・反復収益の標準水準</div>
+        </div>
+        <div style="background:var(--bg);padding:10px;border-radius:var(--r);text-align:center">
+          <div style="font-size:9px;color:var(--ink3)">現在の市場評価PER</div>
+          <div class="mono hi-rd" style="font-size:20px">11.9倍</div>
+          <div style="font-size:9px;color:var(--rd)">適正水準の▲40〜57%割引で取引中</div>
+        </div>
+      </div>
+    </div>
+    <div class="notice"><strong>最重要確認事項（2026年6〜7月）：</strong>取締役イグナシオ・バメホ氏とスペイン代理店BioMedical Supplyの関係詳細が有価証券報告書の注記で確認できれば、最大リスク（スペイン集中33.5%）の評価を大幅に改訂する必要あり。</div>
+  </div>
+
+  <div class="spanel" id="c0-tb">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--gn)">
+        <div class="mc-l">売上高（2026/3期）</div>
+        <div class="mc-v gn">109.5億</div>
+        <div class="mc-s">前期比+6.3%（増収転換）</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--gn)">
+        <div class="mc-l">営業利益（2026/3期）</div>
+        <div class="mc-v gn">58.6億</div>
+        <div class="mc-s">前期比+1.3%（増益転換）</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--bl)">
+        <div class="mc-l">フリーCF（2026/3期）</div>
+        <div class="mc-v bl">36.3億</div>
+        <div class="mc-s">FCFマージン34%超</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--gn)">
+        <div class="mc-l">現金・預金（期末）</div>
+        <div class="mc-v gn">134.1億</div>
+        <div class="mc-s">前期比+17.0%（3年で+53億）</div>
+      </div>
+    </div>
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc"><div class="mc-l">EPS（実績）</div><div class="mc-v am">97.4円</div><div class="mc-s">2026/3期確定値</div></div>
+      <div class="card mc"><div class="mc-l">EPS（27/3期予）</div><div class="mc-v gn">101.5円</div><div class="mc-s">会社予想・+4.2%増益</div></div>
+      <div class="card mc"><div class="mc-l">配当（実績・予定）</div><div class="mc-v">41円</div><div class="mc-s">配当性向40.4%（据え置き）</div></div>
+      <div class="card mc"><div class="mc-l">海外売上比率</div><div class="mc-v bl">66.1%</div><div class="mc-s">72.9億円（前期比+7.1%）</div></div>
+    </div>
+    <div class="noteg"><strong>2026/3期の重要点：</strong>2期連続減益懸念が完全解消。海外（特に欧州）が+7.1%増と好調。欧米を中心に市場成長を背景とした顧客開拓が進んでいる（会社説明）。「増収増益」のトラックレコードが積み上がり始めた。</div>
+  </div>
+
+  <div class="spanel" id="c0-tc">
+    <div class="price-band pb-bear" style="color:var(--rd)">
+      <div>
+        <div class="pb-label">🐻 ベアケース（確率20%）— スペイン離反・売り圧複合</div>
+        <small>EPS65〜90円 × PER10〜11倍。配当123円が下値防衛。スペイン取締役関係次第でこのシナリオの確率は低下。</small>
+      </div>
+      <div style="text-align:right">
+        <div class="pb-price" style="color:var(--rd)">800〜950円</div>
+        <div class="pb-ret" style="color:var(--rd)">▲7〜▲34%</div>
+      </div>
+    </div>
+    <div class="price-band pb-base" style="color:var(--am)">
+      <div>
+        <div class="pb-label">→ ベースケース（確率50%）— 政策進展・EPS年+4〜5%</div>
+        <small>EPS110〜115円 × PER13〜15倍。卵子凍結需要が業績に寄与。配当据え置き〜小幅増配。3年累積配当≥123円込み。</small>
+      </div>
+      <div style="text-align:right">
+        <div class="pb-price" style="color:var(--am)">1,550〜1,800円</div>
+        <div class="pb-ret" style="color:var(--am)">+40〜+57%</div>
+      </div>
+    </div>
+    <div class="price-band pb-bull" style="color:var(--gn)">
+      <div>
+        <div class="pb-label">🐂 ブルケース（確率30%）— 増配＋機関参入＋全国展開</div>
+        <small>EPS115〜120円 × PER17〜20倍。北里商事持分低下・大幅増配・卵子凍結全国展開が複合的に発動。</small>
+      </div>
+      <div style="text-align:right">
+        <div class="pb-price" style="color:var(--gn)">2,000〜2,400円</div>
+        <div class="pb-ret" style="color:var(--gn)">+75〜+120%</div>
+      </div>
+    </div>
+    <div class="notice"><strong>加重期待リターン（3年・配当込み）：</strong><span class="mono hi-gn">+58%</span>（確率加重平均）。保守寄り加重（Bear30%/Base50%/Bull20%）でも<span class="mono hi-am">+38%</span>。</div>
+  </div>
+
+  <div class="spanel" id="c0-te">
+    <!-- ═══ PER水準の深層分析 ═══ -->
+    <div class="noteb" style="margin-bottom:16px">
+      <strong>分析の視点：</strong>PER（株価収益率）は「企業の稼ぎ1円に対して市場が何円払うか」を示す。この水準は
+      ①将来の成長期待 ②キャッシュ創出力 ③参入障壁・事業の安定性 ④資本構造の健全性
+      によって決まる。北里の各要素を精査し、PER11.9倍が「正当な評価か過小評価か」を判断する。
+    </div>
+
+    <!-- ① キャッシュ創出力 -->
+    <div style="font:700 11px/1 var(--head);color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+      ① キャッシュ創出力：FCFイールド7.5%が示す「適正PERの逆算」
+    </div>
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card">
+        <div class="mc-l">FCFイールド（実績）</div>
+        <div class="mc-v gn" style="font-size:24px">7.5%</div>
+        <div class="mc-s">FCF36.3億 ÷ 時価総額482億</div>
+        <div class="sep"></div>
+        <p style="font-size:11px">FCFイールドの逆数がPER相当。7.5%の逆数は<strong>PER13.3倍</strong>。これはキャッシュベースの「収益力」からみた最低限の適正PER。しかし成長企業・高参入障壁企業には成長プレミアムが上乗せされるのが市場の通例。</p>
+      </div>
+      <div class="card card-hi-gn">
+        <div class="mc-l">同類事業の標準FCFイールド</div>
+        <div class="mc-v" style="font-size:24px">3〜5%</div>
+        <div class="mc-s">医療機器消耗品・高参入障壁企業</div>
+        <div class="sep"></div>
+        <p style="font-size:11px">類似事業（HOYAの医療部門、朝日インテック等）のFCFイールドは3〜5%水準が多い。北里の7.5%はこの<strong>1.5〜2.5倍</strong>。FCFイールド5%を適正と仮定するとPER20倍、4%ならPER25倍が「本来の評価」。</p>
+      </div>
+      <div class="card card-hi-bl">
+        <div class="mc-l">FCFベース適正PER試算</div>
+        <div class="mc-v bl" style="font-size:24px">20〜25倍</div>
+        <div class="mc-s">FCFイールド4〜5%に相当するPER</div>
+        <div class="sep"></div>
+        <p style="font-size:11px">現在PER11.9倍は<strong>適正水準の▲40〜52%割引</strong>。この乖離の説明がスペイン集中リスク（▲10〜15%）・流動性プレミアム（▲10〜15%）・成長率低さ（▲5%）で合計▲25〜35%程度。残り▲15〜25%は過剰ディスカウントの可能性がある。</p>
+      </div>
+    </div>
+
+    <!-- ② 参入障壁 -->
+    <div style="font:700 11px/1 var(--head);color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+      ② 参入障壁の質：「替えられない」事業はPER何倍が適正か
+    </div>
+    <div class="g2" style="margin-bottom:16px">
+      <div>
+        <div class="label" style="margin-bottom:8px">北里の参入障壁スコア（5軸・10点満点）</div>
+        <div class="blrow"><span>技術的参入障壁（Cryotop法・特許）</span><span class="mono hi-gn">9.0点</span></div>
+        <div class="btrack"><div class="bfill" style="width:90%;background:var(--gn2)"></div></div>
+        <div class="blrow"><span>規制的参入障壁（110ヵ国承認）</span><span class="mono hi-gn">8.5点</span></div>
+        <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>顧客スイッチングコスト</span><span class="mono hi-gn">8.0点</span></div>
+        <div class="btrack"><div class="bfill" style="width:80%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>反復収益モデルの粘着性</span><span class="mono hi-gn">8.5点</span></div>
+        <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>ネットワーク効果・規模優位</span><span class="mono hi-am">5.0点</span></div>
+        <div class="btrack"><div class="bfill" style="width:50%;background:var(--am)"></div></div>
+        <div class="blrow"><span style="font-weight:600">総合スコア（5軸平均）</span><span class="mono hi-gn" style="font-weight:700">7.8点</span></div>
+        <div class="btrack"><div class="bfill" style="width:78%;background:var(--gn2)"></div></div>
+        <small style="display:block;margin-top:6px">「参入障壁7.8点」水準の事業は通常PER20〜30倍で評価される（HOYA・朝日インテック・エムスリー等の実績）</small>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">参入障壁スコアとPER水準の対応（医療機器・消耗品市場）</div>
+        <table class="tbl">
+          <thead><tr><th>参入障壁スコア</th><th>代表企業例</th><th>典型PER</th></tr></thead>
+          <tbody>
+            <tr><td>9〜10点（超高）</td><td class="m">エムスリー・HOYA（一部）</td><td class="mono hi-gn">30〜50倍</td></tr>
+            <tr class="hl"><td>7〜9点（高）← 北里</td><td class="m">朝日インテック・HOYA医療<br><strong style="color:var(--bl)">北里コーポレーション（7.8点）</strong></td><td class="mono hi-gn">20〜30倍</td></tr>
+            <tr><td>5〜7点（中）</td><td class="m">一般医療機器メーカー</td><td class="mono">15〜22倍</td></tr>
+            <tr><td>3〜5点（低中）</td><td class="m">一般製造業</td><td class="mono">10〜15倍</td></tr>
+          </tbody>
+        </table>
+        <div class="noteg" style="margin-top:8px;font-size:11px"><strong>結論：</strong>参入障壁7.8点は「PER20〜30倍ゾーン」に属する企業水準。PER11.9倍は同スコア帯の企業比で▲40〜60%割安。</div>
+      </div>
+    </div>
+
+    <!-- ③ 事業モデル分析 -->
+    <div style="font:700 11px/1 var(--head);color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+      ③ 事業モデル分析：なぜ「消耗品×IVF×グローバル」はPER高水準が正当化されるか
+    </div>
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card card-gn">
+        <div class="label">消耗品モデルのPERプレミアム</div>
+        <p style="font-size:12px">消耗品（試薬・凍結容器）ビジネスは「一度採用されれば自動的に繰り返し購入される」。機器ビジネスと異なり大型更新投資が不要で、Capexわずか2.4億円でFCF36億円を生む超軽量構造。このキャッシュ変換効率はSaaS企業に匹敵し、通常PER20倍以上での評価が正当化される。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">IVF市場の構造的成長</div>
+        <p style="font-size:12px">IVFは「やめられない」治療。一度始めると成功するまで続ける患者特性上、治療中断率が低い。市場CAGR7.5%（〜2035年）は構造的な需要増。日本は政策追い風でこれを上回る可能性。成長市場×消耗品×独占的技術 = 成長プレミアムが乗るべき事業。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">110ヵ国のグローバル展開</div>
+        <p style="font-size:12px">売上の66%が海外。単一市場リスクが分散されており、一国の政策変更でビジネスが消滅しない安定性がある。インド・米国が高成長中で地域分散も改善傾向。グローバル消耗品ビジネスの安定性は通常PER15〜25倍での評価を正当化する。</p>
+      </div>
+    </div>
+
+    <!-- ④ PER11.9倍の説明変数 -->
+    <div style="font:700 11px/1 var(--head);color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+      ④ では「なぜ今PER11.9倍なのか」── 割安の説明変数と解消可能性
+    </div>
+    <div class="g2" style="margin-bottom:16px">
+      <div>
+        <table class="tbl">
+          <thead><tr><th>割安の説明変数</th><th>PERへの影響</th><th>解消可能性</th></tr></thead>
+          <tbody>
+            <tr class="hl-rd">
+              <td><strong>スペイン集中リスク（33.5%）</strong></td>
+              <td class="hi-rd">▲4〜6倍<br><span class="m">最大の割引要因</span></td>
+              <td><span class="badge bd-am">中（バメホ取締役確認次第）</span></td>
+            </tr>
+            <tr>
+              <td><strong>北里商事58.5%保有・流動性不足</strong></td>
+              <td class="hi-rd">▲3〜5倍<br><span class="m">機関投資家が買えない</span></td>
+              <td><span class="badge bd-am">中（持分低下で解消）</span></td>
+            </tr>
+            <tr>
+              <td><strong>成長率の低さ（+4〜5%/年）</strong></td>
+              <td class="hi-am">▲2〜3倍<br><span class="m">高成長株でない</span></td>
+              <td><span class="badge bd-am">中（政策カタリストで改善）</span></td>
+            </tr>
+            <tr>
+              <td><strong>R&D費ほぼゼロ</strong></td>
+              <td class="hi-am">▲1〜2倍<br><span class="m">技術陳腐化懸念</span></td>
+              <td><span class="badge bd-rd">低（構造的課題）</span></td>
+            </tr>
+            <tr>
+              <td><strong>東証プライム上場間もない</strong></td>
+              <td class="hi-am">▲1〜2倍<br><span class="m">認知度・カバレッジ不足</span></td>
+              <td><span class="badge bd-gn">高（時間で解消）</span></td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td colspan="2" style="font-weight:600">合計ディスカウント（推定）</td>
+              <td class="mono hi-rd" style="font-size:16px;font-weight:700">▲11〜18倍</td>
+            </tr>
+          </tbody>
+        </table>
+        <small style="display:block;margin-top:6px">適正PER20〜25倍からの▲11〜18倍引きが現在PER11.9倍を説明。うち半分以上が「解消可能なディスカウント」。</small>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">各変数が解消した場合のPER回帰シミュレーション</div>
+        <div class="blrow"><span>現在（全ディスカウント適用中）</span><span class="mono hi-rd">11.9倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:40%;background:var(--rd)"></div></div>
+        <div class="blrow"><span>+上場認知度向上のみ（+2倍）</span><span class="mono">13〜14倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:47%;background:var(--am)"></div></div>
+        <div class="blrow"><span>+スペインリスク緩和（+4倍）</span><span class="mono hi-am">15〜17倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:57%;background:var(--am)"></div></div>
+        <div class="blrow"><span>+流動性改善・機関参入（+4倍）</span><span class="mono hi-am">18〜20倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:67%;background:var(--am2)"></div></div>
+        <div class="blrow"><span>+政策カタリスト・EPS加速（+3倍）</span><span class="mono hi-gn">20〜23倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:77%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>グローバル評価正常化（本来水準）</span><span class="mono hi-gn">25〜30倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+        <small style="display:block;margin-top:6px">EPS113円（2029/3推計）×PER20倍=2,260円。PER25倍=2,825円。</small>
+      </div>
+    </div>
+
+    <!-- ⑤ 総評 -->
+    <div style="font:700 11px/1 var(--head);color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+      ⑤ PER水準の総合評価
+    </div>
+    <div class="card card-hi-bl">
+      <div class="g3" style="margin-bottom:12px">
+        <div style="text-align:center;padding:10px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">FCFベース適正PER</div>
+          <div class="mono hi-gn" style="font-size:22px">20〜25倍</div>
+        </div>
+        <div style="text-align:center;padding:10px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">参入障壁考慮後の適正PER</div>
+          <div class="mono hi-am" style="font-size:22px">18〜28倍</div>
+        </div>
+        <div style="text-align:center;padding:10px">
+          <div style="font-size:9px;color:var(--rd);margin-bottom:4px">現在のPER（過剰ディスカウント）</div>
+          <div class="mono hi-rd" style="font-size:22px">11.9倍</div>
+        </div>
+      </div>
+      <p style="font-size:13px;line-height:1.85;color:var(--ink2)">
+        <strong>結論：PER11.9倍は「正当な評価」ではなく「解消可能なリスクの過剰ディスカウント」が原因。</strong><br>
+        FCFイールド7.5%・営業利益率58%・有利子負債ゼロ・参入障壁スコア7.8点という事業品質は、通常PER20〜25倍での評価が正当化される水準にある。現在のPER11.9倍との乖離約10倍分は、スペイン集中リスクと流動性問題という<em>事業の本質的な問題ではなく構造的・需給的要因</em>で説明できる。これらのリスクが解消または緩和された場合、PER15〜20倍への回帰は合理的な帰結であり、EPS成長との複合でベースケース+57%・ブルケース+100%超のリターンシナリオが成立する。
+      </p>
+    </div>
+  </div>
+    <div class="noteg"><strong>【新発見①】イグナシオ・バメホ取締役（社外）の就任</strong><br>取締役会にスペイン語名の社外取締役が就任。BioMedical Supply（スペイン代理店・売上33.5%）の関係者である可能性が高く、代理店との関係が「契約先」から「ガバナンス上のパートナー」に深化していることを示唆。最大リスクの評価が変わる可能性あり。</div>
+    <div class="noteg"><strong>【新発見②】2022年保険適用→年間+4.5万件のART件数増が実証済み</strong><br>日本産科婦人科学会のデータで2022年に45,490件増加を確認。2026年10月の東京都新助成（34,600件規模）が第二波カタリストとして機能する可能性が高い。</div>
+    <div class="noteg"><strong>【新発見③】社会保障895億円の医療費の「上流」に北里がいる</strong><br>2022年度の不妊治療保険適用医療費895億円（実患者37万人）に対し、北里の国内売上は約37億円。市場全体の4〜5%だが「消耗品」として件数増に完全連動する構造。公的資金の投入規模拡大が直接の売上増に転換される希少な事業構造。</div>
+    <div class="g2">
+      <div class="card card-bl"><div class="label">確認要事項①（最優先）</div><p>2026年7月公表予定の有価証券報告書で<strong>バメホ取締役とBiomedical Supplyの関係</strong>を注記で確認。確認できれば集中リスク評価を大幅緩和。</p></div>
+      <div class="card card-am"><div class="label">確認要事項②（高優先）</div><p>2026年6月25日の株主総会で<strong>増配・自社株買い方針</strong>の言及があるか確認。現金134億円の活用意志が明確化すれば評価軸が変化。</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 1: 財務・BS
+════════════════════════════════ -->
+<div class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">財務・バランスシートの詳細構造</h2><span class="ch-badge cb-gn">最高水準</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c1','ta',this)">BS構造</button>
+    <button class="stab" onclick="showTab('c1','tb',this)">CF分析</button>
+    <button class="stab" onclick="showTab('c1','tc',this)">収益性推移</button>
+    <button class="stab" onclick="showTab('c1','td',this)">資産含み益</button>
+  </div>
+
+  <div class="spanel active" id="c1-ta">
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:10px">資産の部（2026/3期末・連結）</div>
+        <table class="tbl">
+          <thead><tr><th>科目</th><th class="r">金額（百万円）</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>現金・預金</td><td class="r mono hi-gn">13,414</td><td>時価総額の27.8%</td></tr>
+            <tr><td>売掛金</td><td class="r mono">1,561</td><td></td></tr>
+            <tr><td>棚卸資産</td><td class="r mono">1,999</td><td>試薬・容器等</td></tr>
+            <tr><td>その他流動資産</td><td class="r mono">170</td><td></td></tr>
+            <tr><td style="font-weight:600">流動資産 計</td><td class="r mono" style="font-weight:600">17,147</td><td></td></tr>
+            <tr><td>建物・構築物（純額）</td><td class="r mono">1,830</td><td>新社屋2026/3完成</td></tr>
+            <tr class="hl"><td>土地</td><td class="r mono">2,024</td><td>静岡県富士市・非減価償却</td></tr>
+            <tr><td>機械・その他有形固定</td><td class="r mono">728</td><td></td></tr>
+            <tr><td>投資有価証券等</td><td class="r mono">219</td><td>政策保有株ゼロに近い</td></tr>
+            <tr><td style="font-weight:600">固定資産 計</td><td class="r mono" style="font-weight:600">4,849</td><td></td></tr>
+            <tr><td style="font-weight:700;font-size:13px">総資産</td><td class="r mono" style="font-weight:700">21,996</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px">負債・純資産の部</div>
+        <table class="tbl">
+          <thead><tr><th>科目</th><th class="r">金額（百万円）</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>買掛金</td><td class="r mono">187</td><td></td></tr>
+            <tr><td>未払法人税等</td><td class="r mono">958</td><td></td></tr>
+            <tr><td>その他流動負債</td><td class="r mono">285</td><td></td></tr>
+            <tr><td>流動負債 計</td><td class="r mono">1,430</td><td></td></tr>
+            <tr class="hl"><td>有利子負債</td><td class="r mono hi-gn">0</td><td><span class="badge bd-gn">ゼロ</span> 完全無借金</td></tr>
+            <tr><td style="font-weight:600">負債合計</td><td class="r mono" style="font-weight:600">1,491</td><td>総資産の6.8%のみ</td></tr>
+            <tr class="hl"><td>利益剰余金</td><td class="r mono hi-gn">20,494</td><td>着実に積み上がり中</td></tr>
+            <tr><td style="font-weight:600">株主資本合計</td><td class="r mono" style="font-weight:600">20,504</td><td>自己資本比率93.2%</td></tr>
+          </tbody>
+        </table>
+        <div class="noteg" style="margin-top:12px"><strong>財務健全性：</strong>負債14.9億円に対し現金134億円。現金だけで負債の9倍。事実上の「負の有利子負債」構造。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c1-tb">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">営業CF（2026/3）</div><div class="mc-v gn">38.7億</div><div class="mc-s">前期比+9.8%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">設備投資（Capex）</div><div class="mc-v rd">▲2.4億</div><div class="mc-s">前期比▲73%（新社屋完成）</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">フリーCF</div><div class="mc-v gn">36.3億</div><div class="mc-s">FCFマージン34%超</div></div>
+    </div>
+    <div class="label" style="margin-bottom:8px">現金残高の推移（現金生成力の可視化）</div>
+    <div class="blrow"><span>2023/3</span><span class="mono hi-gn">81.0億円</span></div>
+    <div class="btrack"><div class="bfill" style="width:60%;background:var(--gn)"></div></div>
+    <div class="blrow"><span>2024/3</span><span class="mono hi-gn">105.0億円</span></div>
+    <div class="btrack"><div class="bfill" style="width:78%;background:var(--gn)"></div></div>
+    <div class="blrow"><span>2025/3</span><span class="mono hi-gn">114.6億円</span></div>
+    <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+    <div class="blrow"><span>2026/3（最新）</span><span class="mono hi-gn">134.1億円</span></div>
+    <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+    <small>3年間で+53億円増加。設備投資2.4億円という超軽装備のため営業CFがほぼそのまま現金に転換される構造。</small>
+  </div>
+
+  <div class="spanel" id="c1-tc">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc"><div class="mc-l">営業利益率</div><div class="mc-v gn">53.5%</div><div class="mc-s">2026/3期実績</div></div>
+      <div class="card mc"><div class="mc-l">ROE（実績）</div><div class="mc-v gn">19.0%</div><div class="mc-s">2026/3期</div></div>
+      <div class="card mc"><div class="mc-l">ROA（実績）</div><div class="mc-v gn">17.7%</div><div class="mc-s">2026/3期</div></div>
+      <div class="card mc"><div class="mc-l">研究開発費</div><div class="mc-v rd">300万円</div><div class="mc-s">年間・極端に少ない</div></div>
+    </div>
+    <div class="label" style="margin-bottom:8px">競合との営業利益率比較</div>
+    <div class="blrow"><span>北里コーポレーション（368A）</span><span class="mono hi-gn">58%</span></div>
+    <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+    <div class="blrow"><span>HOYA（医療事業）</span><span class="mono hi-am">31%</span></div>
+    <div class="btrack"><div class="bfill" style="width:53%;background:var(--am)"></div></div>
+    <div class="blrow"><span>朝日インテック</span><span class="mono hi-am">25%</span></div>
+    <div class="btrack"><div class="bfill" style="width:43%;background:var(--am)"></div></div>
+    <div class="blrow"><span>Vitrolife（スウェーデン）EBITDA</span><span class="mono">28%</span></div>
+    <div class="btrack"><div class="bfill" style="width:48%;background:var(--ink3)"></div></div>
+    <div class="blrow"><span>一般製造業平均</span><span class="mono">8%</span></div>
+    <div class="btrack"><div class="bfill" style="width:14%;background:var(--bg3)"></div></div>
+    <small style="display:block;margin-top:8px">研究開発費がほぼゼロのため利益率が高い面もあるが、Cryotop法の「モノ作らない優位性」を反映している。</small>
+  </div>
+
+  <div class="spanel" id="c1-td">
+    <div class="notice"><strong>含み益の実態：</strong>土地（富士市工業地帯・帳簿20.2億円）に多少の含み益はあり得るが、工業地帯のため大幅上昇は期待しにくい。投資有価証券は2.2億円と限定的で政策保有株なし。「隠れた資産」の本質は土地でも有価証券でもなく<strong>年間36億円のフリーCFという現金生成能力</strong>にある。</div>
+    <div class="g3">
+      <div class="card">
+        <div class="label">土地</div>
+        <div class="mc-v" style="font-size:20px;margin-bottom:6px">20.2億円</div>
+        <p style="font-size:11px">静岡県富士市柳島100番地10（本社・工場）。工業地帯のため路線価は低水準。非減価償却だが含み益は限定的（推定5〜15億円程度）。</p>
+      </div>
+      <div class="card">
+        <div class="label">投資有価証券等</div>
+        <div class="mc-v" style="font-size:20px;margin-bottom:6px">2.2億円</div>
+        <p style="font-size:11px">最新BSでほぼゼロ。政策保有株なし。外部投資よりも内部留保・配当に使われている資本配分方針を反映。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">実質的な「含み益」</div>
+        <div class="mc-v gn" style="font-size:20px;margin-bottom:6px">FCF34%</div>
+        <p style="font-size:11px">売上109億円に対してFCF36億円。このFCFマージン34%こそが「目に見えない優位性」。Vitrolife・CooperSurgicalの2倍以上のCF効率。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 2: 割安性分析
+════════════════════════════════ -->
+<div class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">多面的割安性分析 — 5つの指標で見る割安度</h2><span class="ch-badge cb-gn">上場来最低圏</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c2','ta',this)">バリュエーション比較</button>
+    <button class="stab" onclick="showTab('c2','tb',this)">1株価値の試算</button>
+    <button class="stab" onclick="showTab('c2','tc',this)">理論株価シナリオ</button>
+    <button class="stab" onclick="showTab('c2','td',this)">グローバル同業比較</button>
+  </div>
+
+  <div class="spanel active" id="c2-ta">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">予想PER</div><div class="mc-v gn">11.9倍</div><div class="mc-s">同業比▲60%割安</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">FCFイールド</div><div class="mc-v bl">7.5%</div><div class="mc-s">一般的水準5%比1.5倍</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">EV/EBIT（修正後）</div><div class="mc-v gn">5.9倍</div><div class="mc-s">現金134億控除後</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">PBR</div><div class="mc-v am">2.35倍</div><div class="mc-s">BPS512.6円</div></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>指標</th><th>現在値（1,206円）</th><th>グローバル同業</th><th>乖離・評価</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>予想PER（27/3期）</td><td class="mono hi-gn">11.9倍</td><td>30〜35倍</td><td class="hi-gn">▲60〜66%割安</td><td>上場来最低圏</td></tr>
+        <tr><td>PBR（BPS512.6円）</td><td class="mono">2.35倍</td><td>4〜5倍</td><td class="hi-am">ほぼ適正・下値限定的</td><td>公募時2.74倍から低下</td></tr>
+        <tr class="hl"><td>FCFイールド</td><td class="mono hi-gn">7.5%</td><td>3〜5%</td><td class="hi-gn">高水準・上場来最高</td><td>FCF36.3億/時価482億</td></tr>
+        <tr><td>EV/EBIT（修正後）</td><td class="mono hi-gn">5.9倍</td><td>10〜18倍</td><td class="hi-gn">極めて低水準</td><td>現金134億を控除した実質EV</td></tr>
+        <tr><td>配当利回り</td><td class="mono hi-am">3.40%</td><td>0.5〜2%</td><td class="hi-am">インカム魅力あり</td><td>3年累積≥123円が下値防衛</td></tr>
+      </tbody>
+    </table>
+    <div class="notice" style="margin-top:12px"><strong>なぜここまで割安なのか：</strong>①北里商事58.5%保有で流通株が少なく機関投資家が買いにくい ②2期連続減益（解消済みだが記憶が残る） ③スペイン集中リスクの恒常的ディスカウント — この3要因が過剰に織り込まれている可能性がある。</div>
+  </div>
+
+  <div class="spanel" id="c2-tb">
+    <div class="g2">
+      <div>
+        <table class="tbl">
+          <thead><tr><th>項目</th><th class="r">1株換算（円）</th><th>算出根拠</th></tr></thead>
+          <tbody>
+            <tr><td>帳簿BPS（2026/3末）</td><td class="r mono">512.6</td><td>有報記載値</td></tr>
+            <tr class="hl"><td>うち現金・預金/株</td><td class="r mono hi-gn">335.4</td><td>13,414M÷4,000万株</td></tr>
+            <tr><td>予想EPS（2027/3）</td><td class="r mono hi-gn">101.5</td><td>会社公表値</td></tr>
+            <tr class="hl"><td>FCF/株（2026/3）</td><td class="r mono hi-gn">90.8</td><td>3,633M÷4,000万株</td></tr>
+            <tr><td>IRBANK算定1株価値</td><td class="r mono hi-bl">1,920</td><td>DCF近似算定値</td></tr>
+            <tr class="hl"><td>現株価 vs IRBANK</td><td class="r mono hi-rd">▲37%乖離</td><td>1,206÷1,920−1</td></tr>
+            <tr><td>現株価 vs PER15倍理論値</td><td class="r mono hi-am">▲21%乖離</td><td>EPS101.5×15=1,523円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px">参照値との比較（IRBANK=100%基準）</div>
+        <div class="blrow"><span>現在株価 1,206円</span><span class="mono hi-rd">62.8%</span></div>
+        <div class="btrack"><div class="bfill" style="width:62.8%;background:var(--rd)"></div></div>
+        <div class="blrow"><span>PER15倍理論値 1,523円</span><span class="mono hi-am">79.3%</span></div>
+        <div class="btrack"><div class="bfill" style="width:79.3%;background:var(--am)"></div></div>
+        <div class="blrow"><span>PER20倍理論値 2,030円</span><span class="mono hi-gn">105.7%</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>IRBANK算定値 1,920円</span><span class="mono hi-bl">100%</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--bl)"></div></div>
+        <small style="display:block;margin-top:8px">FCF/株90.8円は配当41円の2.2倍。余剰キャッシュが蓄積されており、増配余力は十分にある。</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c2-tc">
+    <div class="label" style="margin-bottom:10px">理論株価シナリオ（EPS101.5円ベース・27/3期予想）</div>
+    <table class="tbl" style="margin-bottom:14px">
+      <thead><tr><th>PER前提</th><th>理論株価</th><th>現在比</th><th>根拠・前提条件</th></tr></thead>
+      <tbody>
+        <tr><td>PER10倍（下限・景気後退）</td><td class="r mono">1,015円</td><td class="r hi-rd">▲16%</td><td>EPS大幅減益時の下値目途</td></tr>
+        <tr><td>PER12倍（現状維持）</td><td class="r mono">1,218円</td><td class="r hi-am">+1%</td><td>現在の評価水準が継続</td></tr>
+        <tr class="hl"><td>PER15倍（公募水準回帰）</td><td class="r mono hi-gn">1,523円</td><td class="r hi-gn">+26%</td><td>上場時の評価水準に戻る</td></tr>
+        <tr><td>PER18倍（格上げ）</td><td class="r mono hi-gn">1,827円</td><td class="r hi-gn">+52%</td><td>増配・流動性改善で評価軸変化</td></tr>
+        <tr class="hl"><td>PER20倍（成熟ニッチ医療）</td><td class="r mono hi-gn">2,030円</td><td class="r hi-gn">+68%</td><td>政策加速・EPS成長で格上げ</td></tr>
+        <tr><td>PER25倍（グローバル割引）</td><td class="r mono hi-gn">2,538円</td><td class="r hi-gn">+110%</td><td>機関投資家参入・PER正常化</td></tr>
+      </tbody>
+    </table>
+    <small>※EPS27/3期予想101.5円基準。3年後（2029/3期）はEPS110〜118円予想。3年後の理論値はさらに+10〜15%上乗せされる。</small>
+  </div>
+
+  <div class="spanel" id="c2-td">
+    <table class="tbl">
+      <thead><tr><th>企業（市場）</th><th>営業利益率</th><th>予想PER</th><th>EV/EBITDA</th><th>北里との差</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>北里コーポレーション（東証P）</strong></td><td class="hi-gn">58%（粗利75%）</td><td class="hi-gn">11.9倍 ★</td><td class="hi-gn">5.9倍（修正後）</td><td>基準</td></tr>
+        <tr><td>Vitrolife（NASDAQ Stockholm）</td><td>EBITDA28%・粗利58%</td><td class="hi-rd">31倍</td><td class="hi-rd">18倍</td><td class="hi-gn">PER▲62%割安</td></tr>
+        <tr><td>CooperSurgical / CooperCos（Nasdaq）</td><td>調整EBITDA約30%</td><td class="hi-rd">約28倍</td><td class="hi-rd">15〜18倍</td><td class="hi-gn">PER▲57%割安</td></tr>
+        <tr><td>Hamilton Thorne（TSX）</td><td>粗利52%・EBITDA17%</td><td>赤字（成長期）</td><td>30〜40倍</td><td>規模差大・成長株</td></tr>
+        <tr><td>FUJIFILM Irvine（富士フイルム傘下・非上場）</td><td>非開示（推定30%+）</td><td>非上場</td><td>非開示</td><td>比較困難</td></tr>
+      </tbody>
+    </table>
+    <div class="noteg" style="margin-top:12px"><strong>グローバル比較の結論：</strong>営業利益率58%はVitrolife・CooperSurgicalを大幅上回る世界最高クラスの収益性。にもかかわらずPER11.9倍は同業の1/3。IVF市場CAGR7.5%（〜2035年）の成長を享受しながらグローバル同業の1/3のバリュエーションで買える唯一の選択肢。</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 3: 公的資金×需要
+════════════════════════════════ -->
+<div class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">公的資金が北里の需要・株価に与えるインパクト</h2><span class="ch-badge cb-bl">政策追い風</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c3','ta',this)">資金規模と構造</button>
+    <button class="stab" onclick="showTab('c3','tb',this)">需要への伝達経路</button>
+    <button class="stab" onclick="showTab('c3','tc',this)">EPS感応度試算</button>
+    <button class="stab" onclick="showTab('c3','td',this)">株価インパクト試算</button>
+  </div>
+
+  <div class="spanel active" id="c3-ta">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">社会保障費（2026年度）</div><div class="mc-v bl">39.1兆円</div><div class="mc-s">過去最高・前年比+7,621億円</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">保険適用IVF医療費（2022年度）</div><div class="mc-v gn">895億円</div><div class="mc-s">実患者37万人・125万件</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">子育て支援関連（2026年度）</div><div class="mc-v am">5.3兆円</div><div class="mc-s">不妊治療助成も含む急拡大</div></div>
+    </div>
+    <div class="noteg"><strong>保険適用の即効性：</strong>2022年4月の保険適用初年度だけで年間ART件数が45,490件増加（前年比+14%）。医療費が年895億円規模に達した。北里の国内売上はこのIVF市場の「上流」に位置し、件数増が消耗品需要に完全連動する構造を持つ。</div>
+    <div class="label" style="margin-bottom:10px">政策タイムライン（確定〜予定）</div>
+    <div class="tl-item" style="color:var(--gn)">
+      <div class="tl-date">2022/04</div><div class="tl-dot" style="border-color:var(--gn)"></div>
+      <div class="tl-body"><div class="tl-head">IVF・顕微授精の保険適用開始 <span class="badge bd-gn">確定済み</span></div>ART件数+45,490件、医療費895億円。北里の業績回復の起点。</div>
+    </div>
+    <div class="tl-item" style="color:var(--gn)">
+      <div class="tl-date">2024/06</div><div class="tl-dot" style="border-color:var(--gn)"></div>
+      <div class="tl-body"><div class="tl-head">AMH検査・精子凍結管理料の保険追加 <span class="badge bd-gn">確定済み</span></div>診断精度向上→治療参入増→消耗品需要間接プラス。</div>
+    </div>
+    <div class="tl-item" style="color:var(--am)">
+      <div class="tl-date">2026/10</div><div class="tl-dot" style="border-color:var(--am)"></div>
+      <div class="tl-body"><div class="tl-head">東京都：保険適用IVF自己負担分も助成（上限15万円） <span class="badge bd-new">間近</span></div>34,600件規模。体外受精・顕微授精の実質負担が大幅低下→件数増→消耗品急増。最初の数字化カタリスト。</div>
+    </div>
+    <div class="tl-item" style="color:var(--am)">
+      <div class="tl-date">2026年度中</div><div class="tl-dot" style="border-color:var(--am)"></div>
+      <div class="tl-body"><div class="tl-head">こども家庭庁：卵子凍結助成（18〜35歳・最大20万円）発表 <span class="badge bd-new">NEW</span></div>社会的卵子凍結が国策として普及フェーズへ。Cryodevice需要に直接。</div>
+    </div>
+    <div class="tl-item" style="color:var(--bl)">
+      <div class="tl-date">2027〜2028</div><div class="tl-dot" style="border-color:var(--bl)"></div>
+      <div class="tl-body"><div class="tl-head">卵子凍結助成の全国自治体展開 <span class="badge bd-bl">予定</span></div>東京都・大阪府先行→主要都市が独自助成を実施。市場規模が段階的に拡大。</div>
+    </div>
+    <div class="tl-item" style="color:var(--fuel)">
+      <div class="tl-date">2028〜長期</div><div class="tl-dot" style="border-color:var(--fuel)"></div>
+      <div class="tl-body"><div class="tl-head">第三者卵子提供の法整備（仮）<span class="badge" style="background:#f0e0f0;color:var(--fuel)">長期オプション</span></div>現在保険対象外だが法整備が進めば市場2倍超。EPS+10円超の長期カタリスト。</div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c3-tb">
+    <div class="noteg"><strong>伝達メカニズムの核心：</strong>公的資金投入→患者負担軽減→治療件数増→クリニックの消耗品購入増→北里の売上増→EPS増 という「完全連動チェーン」が存在する。北里の製品（試薬・凍結容器）は1周期で必ず消費されるため、件数増が即座に売上増に転換される。</div>
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:8px">✅ 伝達効率が高い経路</div>
+        <div class="card card-gn" style="margin-bottom:8px">
+          <div class="sect-title">保険適用→試薬需要（Media 35%）</div>
+          <p style="font-size:12px">採卵・胚培養・凍結の全ステップで試薬を消費。1周期あたり使用量は固定。件数増が即座に売上増に転換される最も直線的な経路。</p>
+        </div>
+        <div class="card card-gn">
+          <div class="sect-title">卵子凍結助成→凍結容器（Cryodevice 30.7%）</div>
+          <p style="font-size:12px">卵子凍結1件あたり複数本のCryodeviceを使用。助成件数が増えるほど需要が直接増加。北里最強製品×最強政策の組み合わせ。</p>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">⚠ 伝達に「漏れ」がある経路</div>
+        <div class="card card-am" style="margin-bottom:8px">
+          <div class="sect-title">クリニック供給能力の上限</div>
+          <p style="font-size:12px">患者が増えても不妊治療クリニックの数・胚培養士の数に上限がある。医療提供能力の制約が短期的な需要増の上限を設ける。</p>
+        </div>
+        <div class="card card-am">
+          <div class="sect-title">国内売上33.9%のみが直接恩恵</div>
+          <p style="font-size:12px">日本の助成制度は国内件数にのみ直接影響。海外（66%）への波及は間接的かつゆっくり。ただし卵子凍結技術の普及は欧州・アジアにも波及効果あり。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c3-tc">
+    <!-- 試算前提 -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="label" style="margin-bottom:10px">試算前提（透明性のために全て明示）</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px">
+        <div class="card" style="padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">日本のART年間件数</div>
+          <div class="mc-v" style="font-size:18px">約50万件</div>
+          <div style="font-size:9px;color:var(--ink3)">保険適用後（2023〜24年推計）</div>
+        </div>
+        <div class="card" style="padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">1件あたり北里売上</div>
+          <div class="mc-v gn" style="font-size:18px">740円/件</div>
+          <div style="font-size:9px;color:var(--ink3)">国内売上37億÷50万件</div>
+        </div>
+        <div class="card" style="padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">税引後1件あたり利益</div>
+          <div class="mc-v gn" style="font-size:18px">288円/件</div>
+          <div style="font-size:9px;color:var(--ink3)">740×58%×(1−0.33)</div>
+        </div>
+        <div class="card" style="padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:4px">1万件増のEPS効果</div>
+          <div class="mc-v gn" style="font-size:18px">+0.072円</div>
+          <div style="font-size:9px;color:var(--ink3)">288円×1万件÷4,000万株</div>
+        </div>
+      </div>
+      <div class="noteb" style="margin:0">
+        <strong>試算の限界：</strong>国内売上33.9%のみが日本の政策に直接感応。海外66%への波及は間接的・遅効的。クリニックの供給能力（胚培養士数・施設数）が件数増の上限を形成しうる。数値は参考試算。
+      </div>
+    </div>
+
+    <!-- 政策別EPS感応度（精密版） -->
+    <div class="label" style="margin-bottom:8px">政策別・段階的EPS感応度（2027〜2029年の3年累積効果）</div>
+    <table class="tbl" style="margin-bottom:14px">
+      <thead>
+        <tr>
+          <th>政策イベント</th>
+          <th>想定件数増/年</th>
+          <th>国内売上増</th>
+          <th>EPS直接効果</th>
+          <th>PER格上げ効果</th>
+          <th>合計株価インパクト</th>
+          <th>確度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>東京都新助成</strong><br><span class="m">2026/10〜・自己負担助成</span></td>
+          <td>+2.5〜3.5万件</td>
+          <td class="hi-gn">+1.9〜2.6億</td>
+          <td class="mono hi-gn">+2円</td>
+          <td class="hi-bl">PER12→13.5倍<br>+178円</td>
+          <td class="mono hi-gn" style="font-weight:700">+200円前後<br>（+17%）</td>
+          <td><span class="badge bd-gn">高</span></td>
+        </tr>
+        <tr class="hl">
+          <td><strong>卵子凍結助成・全国展開</strong><br><span class="m">2027〜・Cryodevice直結</span></td>
+          <td>+4〜7万件（凍結）</td>
+          <td class="hi-gn">+3.0〜5.2億</td>
+          <td class="mono hi-gn">+3.5〜5.6円</td>
+          <td class="hi-bl">PER13.5→16倍<br>+300〜400円</td>
+          <td class="mono hi-gn" style="font-weight:700">+600〜800円<br>（+50〜66%）★</td>
+          <td><span class="badge bd-gn">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>診療報酬+3.09%</strong><br><span class="m">2026年改定・医療機関収益改善</span></td>
+          <td>間接効果のみ</td>
+          <td class="m">+0.5〜1.5億（推計）</td>
+          <td class="mono hi-am">+0.5〜1.5円</td>
+          <td class="m">なし（間接）</td>
+          <td class="mono hi-am">+10〜20円</td>
+          <td><span class="badge bd-gn">確定</span></td>
+        </tr>
+        <tr>
+          <td><strong>AMH等の保険追加・拡大</strong><br><span class="m">治療開始の早期化</span></td>
+          <td>+1〜2万件</td>
+          <td class="hi-gn">+0.7〜1.5億</td>
+          <td class="mono hi-am">+0.7〜1.5円</td>
+          <td class="m">軽微</td>
+          <td class="mono hi-am">+10〜20円</td>
+          <td><span class="badge bd-am">中</span></td>
+        </tr>
+        <tr>
+          <td><strong>年齢制限緩和（43→45歳・仮）</strong><br><span class="m">政策次第・未確定</span></td>
+          <td>+2〜4万件</td>
+          <td class="hi-gn">+1.5〜3.0億</td>
+          <td class="mono hi-gn">+1.5〜3円</td>
+          <td class="hi-bl">PER小幅押し上げ</td>
+          <td class="mono hi-gn">+50〜80円</td>
+          <td><span class="badge bd-am">中</span></td>
+        </tr>
+        <tr>
+          <td><strong>第三者卵子提供の法整備</strong><br><span class="m">5〜10年先・長期オプション</span></td>
+          <td>市場2倍以上</td>
+          <td class="hi-gn">+10億以上</td>
+          <td class="mono hi-gn">+10円以上</td>
+          <td class="hi-bl">PER大幅格上げ</td>
+          <td class="mono hi-gn">+500〜1,000円+</td>
+          <td><span class="badge bd-bl">低（長期）</span></td>
+        </tr>
+        <tr class="hl-rd">
+          <td><strong>保険適用縮小（ダウンリスク）</strong><br><span class="m">超党派政策のため確率低</span></td>
+          <td>▲2〜4万件</td>
+          <td class="hi-rd">▲1.5〜3.0億</td>
+          <td class="mono hi-rd">▲1.5〜3円</td>
+          <td class="hi-rd">軽微</td>
+          <td class="mono hi-rd">▲18〜36円</td>
+          <td><span class="badge bd-rd">低</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PER格上げ vs EPS直接効果の比較 -->
+    <div class="label" style="margin-bottom:8px">EPS直接効果 vs PER格上げ効果 — どちらが大きいか</div>
+    <div class="g2" style="margin-bottom:12px">
+      <div class="card">
+        <div style="font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:10px">EPS直接効果だけで考えると…</div>
+        <div class="blrow"><span>東京都新助成（+2円）</span><span class="mono hi-gn">+24円</span></div>
+        <div class="btrack"><div class="bfill" style="width:3%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>卵子凍結全国展開（+5.6円）</span><span class="mono hi-gn">+67円</span></div>
+        <div class="btrack"><div class="bfill" style="width:9%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>全政策複合（+7円）</span><span class="mono hi-gn">+84円</span></div>
+        <div class="btrack"><div class="bfill" style="width:12%;background:var(--gn)"></div></div>
+        <small>PER12倍固定での計算。株価インパクトは小さい。</small>
+      </div>
+      <div class="card card-hi-bl">
+        <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:10px">PER格上げ効果が加わると…</div>
+        <div class="blrow"><span>EPS113円×PER12倍（現状）</span><span class="mono">1,356円</span></div>
+        <div class="btrack"><div class="bfill" style="width:54%;background:var(--ink3)"></div></div>
+        <div class="blrow"><span>EPS113円×PER15倍（公募水準）</span><span class="mono hi-am">1,695円</span></div>
+        <div class="btrack"><div class="bfill" style="width:68%;background:var(--am)"></div></div>
+        <div class="blrow"><span>EPS121円×PER20.7倍（政策フル）</span><span class="mono hi-bl" style="font-weight:700">2,504円</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--bl)"></div></div>
+        <small>政策の本質的インパクトはEPS+7円ではなく<strong style="color:var(--bl)">PER12→20倍の+1,148円</strong>。</small>
+      </div>
+    </div>
+    <div class="notice"><strong>核心：</strong>政策が株価を動かすメカニズムは「EPS直接押し上げ」より「<strong>唯一の政策受益上場株</strong>として市場に認識された瞬間のPER格上げ」が主役。EPS+7円（株価換算84円）に対し、PER12→20倍の格上げは株価を理論上+83%引き上げる。</div>
+  </div>
+
+  <div class="spanel" id="c3-td">
+    <div class="label" style="margin-bottom:12px">政策進展ステージ別の株価インパクト（現在1,206円起点）</div>
+    <div class="price-band pb-base" style="color:var(--ink3);background:var(--bg2)">
+      <div><div class="pb-label" style="color:var(--ink3)">📍 現在（政策進展未評価）— PER12倍×EPS101.5円</div><small>スペインリスクと需給問題のみ評価された状態</small></div>
+      <div style="text-align:right"><div class="pb-price" style="color:var(--ink)">1,206円</div><div class="pb-ret" style="color:var(--ink3)">基準</div></div>
+    </div>
+    <div class="price-band pb-base">
+      <div><div class="pb-label">🌱 Stage 1：東京都助成スタート確認（2026/10〜）</div><small>PER12→13倍。EPS+2〜4円加算。「国内成長の再評価」が始まる。</small></div>
+      <div style="text-align:right"><div class="pb-price">1,350〜1,450円</div><div class="pb-ret">+12〜+20%</div></div>
+    </div>
+    <div class="price-band pb-base">
+      <div><div class="pb-label">🚀 Stage 2：卵子凍結全国展開＋中間決算での数字化</div><small>PER13→15倍。政策カタリストが業績に現れた初の確認。EPS+5〜7円加算。</small></div>
+      <div style="text-align:right"><div class="pb-price">1,600〜1,800円</div><div class="pb-ret">+33〜+49%</div></div>
+    </div>
+    <div class="price-band pb-bull">
+      <div><div class="pb-label">💎 Stage 3：増配＋北里商事持分低下＋EPS加速</div><small>PER15→18倍。増配60円以上で配当利回り投資家が流入。機関投資家参入開始。</small></div>
+      <div style="text-align:right"><div class="pb-price">1,980〜2,100円</div><div class="pb-ret">+64〜+74%</div></div>
+    </div>
+    <div class="price-band pb-bull">
+      <div><div class="pb-label">🌟 Stage 4（長期）：第三者提供法整備＋グローバル格上げ</div><small>5〜7年先。PER20〜25倍。EPS120〜130円。グローバル機関投資家参入。</small></div>
+      <div style="text-align:right"><div class="pb-price">2,400〜3,250円</div><div class="pb-ret">+99〜+170%</div></div>
+    </div>
+    <div class="price-band pb-bear">
+      <div><div class="pb-label">⚡ ダウン：保険縮小＋スペイン離反（複合）</div><small>EPS65〜90円×PER10〜11倍。配当利回り4〜5%が800〜900円で下値防衛。</small></div>
+      <div style="text-align:right"><div class="pb-price">800〜950円</div><div class="pb-ret">▲7〜▲34%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 4: 競争優位性
+════════════════════════════════ -->
+<div class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">競争優位性 — なぜ58%超の営業利益率が持続するか</h2><span class="ch-badge cb-gn">世界最高クラス</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c4','ta',this)">5つの競争優位の源泉</button>
+    <button class="stab" onclick="showTab('c4','tb',this)">製品・地域の収益構造</button>
+  </div>
+  <div class="spanel active" id="c4-ta">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="card card-gn"><div class="label">① 最強の堀</div><div class="sect-title">凍結技術のノウハウ（Cryotop法）</div><p style="font-size:12px">超急速ガラス化法を世界に先駆け開発。論文引用多数で技術的信頼確立。一度採用されたクリニックは替えにくい高い粘着性。</p></div>
+      <div class="card card-gn"><div class="label">② 高い壁</div><div class="sect-title">110ヵ国の医療機器承認</div><p style="font-size:12px">各国承認取得に数年と莫大なコストが必要。同社は110ヵ国で取得済み。新規参入者への参入障壁として機能し続ける。</p></div>
+      <div class="card card-gn"><div class="label">③ 盤石のネットワーク</div><div class="sect-title">80社代理店・110ヵ国展開</div><p style="font-size:12px">代理店80社が地域密着で販売。欧州33%・北米10%・アジア13%・国内34%。スペイン子会社を核に欧州深耕中。</p></div>
+      <div class="card card-am"><div class="label">④ 反復収益</div><div class="sect-title">消耗品モデル（都度購入）</div><p style="font-size:12px">試薬・凍結容器・ガラスピペットは毎回購入の消耗品。高い粘着性で反復購買。インフレ時の価格転嫁も容易。</p></div>
+      <div class="card card-bl"><div class="label">⑤ 強い追い風</div><div class="sect-title">晩婚化・保険適用・IVF市場成長</div><p style="font-size:12px">IVF市場CAGR7.5%（〜2035年）。晩婚化・晩産化は先進国共通トレンド。日本の保険適用で需要急拡大。米・中・印で市場開拓中。</p></div>
+      <div class="card"><div class="label">⚠ 弱点</div><div class="sect-title">R&D投資がほぼゼロ（年300万円）</div><p style="font-size:12px">Cryotop法は20年以上前の技術。研究開発費が極端に少なく技術陳腐化リスクが潜在。競合が次世代技術を開発した場合のリスク。</p></div>
+    </div>
+  </div>
+  <div class="spanel" id="c4-tb">
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:8px">製品区分別売上構成（2026/3期）</div>
+        <div class="blrow"><span>Media（試薬・培養液）</span><span class="mono hi-gn">35.0%</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+        <div class="blrow"><span>Cryodevice（凍結容器）</span><span class="mono hi-gn">30.7%</span></div>
+        <div class="btrack"><div class="bfill" style="width:87.7%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>医療機器（カテーテル等）</span><span class="mono">22.6%</span></div>
+        <div class="btrack"><div class="bfill" style="width:64.6%;background:var(--am)"></div></div>
+        <div class="blrow"><span>Micro Tools（ガラスピペット等）</span><span class="mono">9.8%</span></div>
+        <div class="btrack"><div class="bfill" style="width:28%;background:var(--ink3)"></div></div>
+        <small style="display:block;margin-top:6px">Media+Cryodeviceで65.7%。いずれも消耗品で保険適用・助成制度の恩恵を直接受ける。</small>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">地域別売上構成（2026/3期）</div>
+        <div class="blrow"><span>日本（国内）</span><span class="mono">33.9%</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--bl)"></div></div>
+        <div class="blrow"><span>スペイン（BioMedical Supply）</span><span class="mono hi-rd">33.5% ⚠</span></div>
+        <div class="btrack"><div class="bfill" style="width:98.8%;background:var(--rd)"></div></div>
+        <div class="blrow"><span>米国</span><span class="mono hi-gn">9.9%</span></div>
+        <div class="btrack"><div class="bfill" style="width:29.2%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>中国</span><span class="mono">8.4%</span></div>
+        <div class="btrack"><div class="bfill" style="width:24.8%;background:var(--am)"></div></div>
+        <div class="blrow"><span>インド</span><span class="mono hi-gn">4.5%（高成長）</span></div>
+        <div class="btrack"><div class="bfill" style="width:13.3%;background:var(--gn2)"></div></div>
+        <small style="display:block;margin-top:6px">スペイン33.5%集中が最大リスク。しかし米国+インドが合計14.4%で高成長中→地域分散が徐々に進む方向性。</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 5: スペイン問題
+════════════════════════════════ -->
+<div class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">スペイン代理店問題の精密評価</h2><span class="ch-badge cb-am">要精査</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c5','ta',this)">集中リスクの実態</button>
+    <button class="stab" onclick="showTab('c5','tb',this)">新発見：緩和材料</button>
+    <button class="stab" onclick="showTab('c5','tc',this)">EPS感応度</button>
+  </div>
+  <div class="spanel active" id="c5-ta">
+    <div class="noter"><strong>最大リスク：</strong>BioMedical Supply（スペイン）への売上集中度33.5%（約36億円）は東証プライム上場企業でも異常な水準。契約条件・排他性・解約条項が非開示のため、代理店交渉力の実態が不明。</div>
+    <div class="g3">
+      <div class="card card-rd"><div class="label">リスク①</div><div class="sect-title">契約条件の不透明性</div><p style="font-size:12px">BioMedical Supplyとの契約期間・独占性・最低購買保証・価格改定条項が非開示。交渉力が北里側にあるのか代理店側にあるのか外部からは判断不能。</p></div>
+      <div class="card card-rd"><div class="label">リスク②</div><div class="sect-title">スペイン市場の特殊性</div><p style="font-size:12px">スペインはIVF「医療ツーリズム」の聖地（欧州で最も緩い規制）。EU規制強化で市場が縮小するリスク。ただし実現確率は低い。</p></div>
+      <div class="card card-rd"><div class="label">リスク③</div><div class="sect-title">競合の囲い込みリスク</div><p style="font-size:12px">Vitrolife・FUJIFILMがBioMedical Supply等の主要代理店を直接アプローチするリスク。技術力の差が縮まれば代理店の「製品選択」が変わる可能性。</p></div>
+    </div>
+  </div>
+  <div class="spanel" id="c5-tb">
+    <div class="noteg"><strong>【重大な新発見】イグナシオ・バメホ取締役（社外）</strong><br>取締役会に「イグナシオ・バメホ」というスペイン語名の社外取締役が就任している。BioMedical Supply（スペイン代理店）の関係者である可能性が高く、代理店との関係が「外部業者」から「ガバナンス上のパートナー」に昇格していることを示唆。これは従来の最大リスク評価を大幅に改訂する可能性がある材料。</div>
+    <div class="g2">
+      <div class="card card-gn">
+        <div class="label">緩和材料の意味</div>
+        <div class="sect-title">「代理店→取締役」は関係の深化を意味する</div>
+        <p style="font-size:12px">通常、代理店の関係者が取締役に就任するのは戦略的パートナーシップの証拠。「突然の契約解消」シナリオの確率は大幅に低下すると推定。少なくとも事前に交渉の機会があるガバナンス構造になっている。</p>
+      </div>
+      <div class="card card-am">
+        <div class="label">要確認事項（最優先）</div>
+        <div class="sect-title">2026年7月公表の有報で確認</div>
+        <p style="font-size:12px">有価証券報告書の「関連当事者との取引」注記でバメホ氏とBioMedical Supplyの関係を確認。確認できれば集中リスクの評価を「Critical→Moderate」に引き下げる。確認できなければ従来評価を維持。</p>
+      </div>
+    </div>
+  </div>
+  <div class="spanel" id="c5-tc">
+    <div class="label" style="margin-bottom:10px">スペイン売上変化→EPS感応度</div>
+    <div class="blrow"><span>スペイン売上+10%（積極展開）</span><span class="mono hi-gn">EPS +3%</span></div>
+    <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+    <div class="blrow"><span>スペイン売上±0%（現状維持）</span><span class="mono">EPS ±0%</span></div>
+    <div class="btrack"><div class="bfill" style="width:50%;background:var(--ink3)"></div></div>
+    <div class="blrow"><span>スペイン売上▲20%（条件悪化）</span><span class="mono hi-am">EPS ▲7%</span></div>
+    <div class="btrack"><div class="bfill" style="width:30%;background:var(--am)"></div></div>
+    <div class="blrow"><span>スペイン売上▲50%（大幅悪化）</span><span class="mono hi-rd">EPS ▲17%</span></div>
+    <div class="btrack"><div class="bfill" style="width:15%;background:var(--rd2)"></div></div>
+    <div class="blrow"><span>スペイン契約完全喪失</span><span class="mono hi-rd">EPS ▲30%</span></div>
+    <div class="btrack"><div class="bfill" style="width:5%;background:var(--rd)"></div></div>
+    <div class="noteg" style="margin-top:12px"><strong>バメホ取締役就任後の評価修正：</strong>スペイン契約完全喪失シナリオの確率は従来推定25%→10〜15%に低下した可能性がある。条件悪化（▲20〜50%）シナリオが現実的で、その場合のEPS影響は▲7〜17%と許容範囲内。配当123円（3年累積）が実質的な下値を形成。</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 6: 3年シナリオ（グラフ付き）
+════════════════════════════════ -->
+<div class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">3年保有シナリオ — EPS成長予測と株価推移グラフ</h2><span class="ch-badge cb-gn">中核分析</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c6','ta',this)">📈 EPS成長×株価チャート</button>
+    <button class="stab" onclick="showTab('c6','tb',this)">シナリオ詳細</button>
+    <button class="stab" onclick="showTab('c6','tc',this)">加重期待値試算</button>
+  </div>
+
+  <div class="spanel active" id="c6-ta">
+    <div class="noteg" style="margin-bottom:14px"><strong>グラフの見方：</strong>棒グラフ（左軸）は<span style="color:var(--gn)">■ベースEPS成長</span>と<span style="color:var(--bl)">■政策上乗せEPS分</span>を積み上げ表示。折れ線（右軸）は4シナリオ別の株価推移。<span style="font-weight:700;color:var(--bl)">🚨 紺の★線が「公的資金フル寄与シナリオ」</span>で、政策EPS上乗せ（東京都助成+卵子凍結全国化で最大+7円）にPER格上げ（12→20倍）を複合させた場合の株価。ホバーすると各年の根拠が表示されます。</div>
+    <div class="card" style="margin-bottom:14px;padding:10px 14px;background:var(--bg2)">
+      <div class="label" style="margin-bottom:8px">公的資金シナリオの前提（試算根拠）</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:11px">
+        <div><span style="color:var(--ink3)">2026/3（現在）</span><br><strong>EPS97.4円 × PER12.4倍</strong><br>政策効果ゼロの基準点</div>
+        <div><span style="color:var(--bl)">2027/3（Stage1）</span><br><strong>EPS103.5円 × PER13.5倍</strong><br>東京都助成+2円・PER小幅回帰<br>→ <strong style="color:var(--bl)">1,397円</strong></div>
+        <div><span style="color:var(--bl)">2028/3（Stage2）</span><br><strong>EPS112円 × PER16倍</strong><br>卵子凍結全国化+5円・PER格上げ<br>→ <strong style="color:var(--bl)">1,792円</strong></div>
+        <div><span style="color:var(--bl)">2029/3（Stage3）</span><br><strong>EPS121円 × PER20.7倍</strong><br>全国展開定着+7円・PER完全格上げ<br>→ <strong style="color:var(--bl)">2,504円</strong></div>
+      </div>
+    </div>
+    <div class="chart-wrap" style="margin-bottom:16px">
+      <div class="chart-title">図①　EPS成長予測（ベース＋政策上乗せ）× 4シナリオ別株価推移</div>
+      <div style="position:relative;height:360px"><canvas id="chartMain"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">図②　PER別理論株価バンド ＋ 公的資金フル寄与ライン（政策EPS×段階的PER格上げ）</div>
+      <div style="position:relative;height:300px"><canvas id="chartPER"></canvas></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c6-tb">
+    <div class="price-band pb-bear" style="color:var(--rd)">
+      <div>
+        <div class="pb-label">🐻 ベアケース（確率20%）</div>
+        <p style="font-size:11px;margin-top:4px;color:var(--rd)">スペイン代理店の条件悪化（EPS▲20〜30%）＋北里商事の継続的売出（需給悪化）。EPS65〜90円×PER10〜11倍。配当3年累積123円が下値を形成し実損は▲7〜▲34%に限定。</p>
+      </div>
+      <div style="text-align:right;min-width:120px">
+        <div class="pb-price" style="color:var(--rd)">800〜950円</div>
+        <div class="pb-ret" style="color:var(--rd)">▲7〜▲34%</div>
+        <div style="font-size:10px;color:var(--rd);margin-top:2px">（配当込みトータル）</div>
+      </div>
+    </div>
+    <div class="price-band pb-base">
+      <div>
+        <div class="pb-label">→ ベースケース（確率50%）</div>
+        <p style="font-size:11px;margin-top:4px;color:var(--am)">EPS年+4〜5%成長で2029/3期110〜115円。卵子凍結需要が消耗品売上に寄与（+5〜8%）。PER13〜15倍への緩やかな回帰。配当は据え置き〜小幅増配（41〜50円）。スペイン集中リスクは顕在化しない。</p>
+      </div>
+      <div style="text-align:right;min-width:120px">
+        <div class="pb-price" style="color:var(--am)">1,550〜1,800円</div>
+        <div class="pb-ret" style="color:var(--am)">+40〜+57%</div>
+        <div style="font-size:10px;color:var(--am);margin-top:2px">（配当込みトータル）</div>
+      </div>
+    </div>
+    <div class="price-band pb-bull">
+      <div>
+        <div class="pb-label">🐂 ブルケース（確率30%）</div>
+        <p style="font-size:11px;margin-top:4px;color:var(--gn)">大幅増配（60〜70円以上）または自社株買い実施。北里商事持分低下→機関投資家参入。インド・米国で+15%超定着。卵子凍結全国展開でCryodevice急増。EPS115〜120円×PER17〜20倍。</p>
+      </div>
+      <div style="text-align:right;min-width:120px">
+        <div class="pb-price" style="color:var(--gn)">2,000〜2,400円</div>
+        <div class="pb-ret" style="color:var(--gn)">+75〜+120%</div>
+        <div style="font-size:10px;color:var(--gn);margin-top:2px">（配当込みトータル）</div>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:12px"><strong>ブルケースの最大カタリスト：</strong>EPS効果よりも「PER格上げ」の方が株価へのインパクトが圧倒的に大きい。EPS110円×PER12倍=1,320円 vs EPS110円×PER18倍=1,980円。同じEPSでもPER変化だけで+50%の差が生じる。</div>
+  </div>
+
+  <div class="spanel" id="c6-tc">
+    <!-- 4シナリオ × 公的資金寄与の横断整理 -->
+    <div class="label" style="margin-bottom:10px">公的資金寄与を加味した4シナリオ別・3年後株価の詳細分解</div>
+    <table class="tbl" style="margin-bottom:16px">
+      <thead>
+        <tr>
+          <th>シナリオ</th>
+          <th>3年後EPS</th>
+          <th>うち政策寄与</th>
+          <th>PER前提</th>
+          <th>PER格上げ要因</th>
+          <th>3年後株価</th>
+          <th>+配当123円</th>
+          <th>確率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl-rd">
+          <td><strong>🐻 ベア</strong><br><span class="m">スペイン問題顕在化</span></td>
+          <td class="mono hi-rd">65〜90円</td>
+          <td class="m">+0〜+1円（政策効果薄）</td>
+          <td class="mono">10〜11倍</td>
+          <td class="m">PER格下げ（リスク顕在化）</td>
+          <td class="mono hi-rd">800〜950円</td>
+          <td class="hi-rd">▲24〜▲7%</td>
+          <td><strong>20%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>→ ベース</strong><br><span class="m">現状漸進・PER緩回帰</span></td>
+          <td class="mono hi-am">110〜115円</td>
+          <td class="hi-gn">+2〜+4円<br><span class="m">東京都助成</span></td>
+          <td class="mono">13〜15倍</td>
+          <td class="m">業績改善・EPS成長が評価</td>
+          <td class="mono hi-am">1,550〜1,800円</td>
+          <td class="hi-am">+40〜+57%</td>
+          <td><strong>45%</strong></td>
+        </tr>
+        <tr class="hl">
+          <td><strong>🐂 ブル</strong><br><span class="m">増配＋機関参入</span></td>
+          <td class="mono hi-gn">115〜120円</td>
+          <td class="hi-gn">+5〜+7円<br><span class="m">卵子凍結全国化</span></td>
+          <td class="mono">17〜20倍</td>
+          <td class="m">増配で評価軸変化・機関参入</td>
+          <td class="mono hi-gn">2,000〜2,400円</td>
+          <td class="hi-gn">+75〜+106%</td>
+          <td><strong>25%</strong></td>
+        </tr>
+        <tr style="background:var(--blue-l,#eef3fc) !important">
+          <td><strong>🚨 公的資金フル</strong><br><span class="m">政策EPS×PER完全格上げ</span></td>
+          <td class="mono hi-bl">121円</td>
+          <td class="hi-bl">+7円<br><span class="m">全国展開定着</span></td>
+          <td class="mono hi-bl">20.7倍</td>
+          <td class="hi-bl">「唯一の政策受益株」認識<br>グローバル機関投資家参入</td>
+          <td class="mono hi-bl" style="font-size:16px;font-weight:700">2,504円</td>
+          <td class="hi-bl">+112〜+115%</td>
+          <td><strong>10%</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 加重期待値 -->
+    <div class="g2" style="margin-bottom:14px">
+      <div class="card card-gn">
+        <div class="label" style="margin-bottom:10px">加重期待リターン（3年・配当込み）</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;padding:8px 12px;background:rgba(27,104,64,.1);border-radius:var(--r)">
+            <span style="font-size:12px">設定確率加重（Bear20/Base45/Bull25/Policy10）</span>
+            <span class="mono hi-gn" style="font-size:18px">+62%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 12px;background:rgba(27,104,64,.07);border-radius:var(--r)">
+            <span style="font-size:12px">保守加重（Bear30/Base50/Bull15/Policy5）</span>
+            <span class="mono hi-bl" style="font-size:18px">+40%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 12px;background:rgba(27,104,64,.05);border-radius:var(--r)">
+            <span style="font-size:12px">公的資金ゼロ想定（Bear20/Base50/Bull30）</span>
+            <span class="mono" style="font-size:18px">+58%</span>
+          </div>
+        </div>
+      </div>
+      <div class="card card-hi-bl">
+        <div class="label" style="margin-bottom:10px;color:var(--bl)">公的資金が「追加」で寄与する期待値</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:10px;background:rgba(26,60,122,.08);border-radius:var(--r)">
+            <div style="font-size:11px;color:var(--bl);margin-bottom:4px">EPS直接押し上げ（平均寄与）</div>
+            <div class="mono hi-bl" style="font-size:20px">+3〜5円 → +36〜60円</div>
+            <div style="font-size:10px;color:var(--ink3)">確率加重したEPS上乗せ分の期待値</div>
+          </div>
+          <div style="padding:10px;background:rgba(26,60,122,.08);border-radius:var(--r)">
+            <div style="font-size:11px;color:var(--bl);margin-bottom:4px">PER格上げ効果（追加期待値）</div>
+            <div class="mono hi-bl" style="font-size:20px">+200〜400円</div>
+            <div style="font-size:10px;color:var(--ink3)">政策認識でPERが+2〜4倍上昇した場合</div>
+          </div>
+          <div style="padding:10px;background:rgba(26,60,122,.12);border-radius:var(--r);border:1px solid rgba(26,60,122,.3)">
+            <div style="font-size:11px;color:var(--bl);font-weight:700;margin-bottom:4px">合計・公的資金の株価への追加貢献</div>
+            <div class="mono hi-bl" style="font-size:22px">+236〜460円</div>
+            <div style="font-size:10px;color:var(--ink3)">≈ 現在株価比 +20〜38%分が政策追加分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPS推移 -->
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:8px">ベースEPS推移（政策なし・年+4〜5%）</div>
+        <div class="eps-row">
+          <div class="eps-year">2026/3実</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:80%;background:var(--gn)"></div></div>
+          <div class="eps-val" style="color:var(--gn)">97.4円</div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2027/3予</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:84%;background:var(--gn)"></div></div>
+          <div class="eps-val" style="color:var(--gn)">101.5円</div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2028/3推</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:88%;background:var(--gn)"></div></div>
+          <div class="eps-val" style="color:var(--gn)">107円</div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2029/3推</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:93%;background:var(--gn2)"></div></div>
+          <div class="eps-val" style="color:var(--gn)">113円</div>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">政策上乗せ後EPS（公的資金フル寄与時）</div>
+        <div class="eps-row">
+          <div class="eps-year">2026/3</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:80%;background:var(--bl)"></div></div>
+          <div class="eps-val" style="color:var(--bl)">97.4円（同）</div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2027/3</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:85%;background:var(--bl)"></div></div>
+          <div class="eps-val" style="color:var(--bl)">103.5円 <span class="badge bd-bl">+2円</span></div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2028/3</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:92%;background:var(--bl)"></div></div>
+          <div class="eps-val" style="color:var(--bl)">112円 <span class="badge bd-bl">+5円</span></div>
+        </div>
+        <div class="eps-row">
+          <div class="eps-year">2029/3</div>
+          <div class="eps-bar-wrap"><div class="eps-bar" style="width:100%;background:var(--bl2)"></div></div>
+          <div class="eps-val" style="color:var(--bl)">121円 <span class="badge bd-bl">+7円</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:12px"><strong>公的資金寄与の上限：</strong>EPS直接効果は+7円（株価換算+84円）と限定的。しかし「政策受益の唯一の上場株」という希少性プレミアムがPERを格上げする効果（+1,000〜1,200円）の方が遥かに大きい。政策の評価は「いくらEPSを押し上げるか」ではなく「PER何倍で評価されるか」で決まる。</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 7: カタリスト
+════════════════════════════════ -->
+<div class="chapter" id="c7">
+  <div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">カタリスト一覧 — 株価を動かすトリガー</h2><span class="ch-badge cb-gn">詳細分析</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c7','ta',this)">上方カタリスト</button>
+    <button class="stab" onclick="showTab('c7','tb',this)">下方カタリスト</button>
+    <button class="stab" onclick="showTab('c7','tc',this)">モニタリングKPI</button>
+  </div>
+  <div class="spanel active" id="c7-ta">
+    <div class="noteg" style="margin-bottom:14px"><strong>カタリストの序列：</strong>①PER格上げ効果（最大）> ②EPS直接増加 > ③配当利回り改善 の順で株価インパクトが大きい。</div>
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:10px">確度HIGH（制度変化・ほぼ確実）</div>
+        <div class="card card-gn" style="margin-bottom:8px">
+          <div style="font:600 9px/1 var(--mono);color:var(--gn);margin-bottom:4px">2026/10〜｜EPS+2〜4円｜株価+120〜148円</div>
+          <div class="sect-title">東京都：IVF自己負担助成（上限15万円）開始</div>
+          <p style="font-size:11px">34,600件規模。保険適用IVFの自己負担分も助成対象に。実質負担大幅低下→件数急増→消耗品需要増。最初の「数字化カタリスト」。</p>
+        </div>
+        <div class="card card-gn" style="margin-bottom:8px">
+          <div style="font:600 9px/1 var(--mono);color:var(--gn);margin-bottom:4px">2026年度中｜EPS+3〜7円（段階的）</div>
+          <div class="sect-title">こども家庭庁：卵子凍結助成（18〜35歳）</div>
+          <p style="font-size:11px">国策として社会的卵子凍結が普及フェーズへ。Cryodevice需要に直接。全国展開で最大のEPS増加源に。</p>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px">確度MEDIUM（経営判断・市場要因）</div>
+        <div class="card card-am" style="margin-bottom:8px">
+          <div style="font:600 9px/1 var(--mono);color:var(--am);margin-bottom:4px">2026/6〜｜PER格上げ最大効果</div>
+          <div class="sect-title">増配（41→60円以上）・自社株買い発表</div>
+          <p style="font-size:11px">現金134億円の活用方針明確化。配当利回り投資家が流入→評価軸が変化→PER格上げ。EPS110円×配当60円なら利回り5%以上で底堅くなる。</p>
+        </div>
+        <div class="card card-am" style="margin-bottom:8px">
+          <div style="font:600 9px/1 var(--mono);color:var(--am);margin-bottom:4px">随時（EDINET監視）</div>
+          <div class="sect-title">北里商事の持分低下・流通株比率改善</div>
+          <p style="font-size:11px">58.5%→45%以下の低下で機関投資家が本格参入可能なサイズに。需給の劇的改善が起こりうる。</p>
+        </div>
+        <div class="card card-bl">
+          <div style="font:600 9px/1 var(--mono);color:var(--bl);margin-bottom:4px">2027〜2028｜EPS+5〜8%（累積）</div>
+          <div class="sect-title">インド・米国の2桁成長定着</div>
+          <p style="font-size:11px">インド（+15%超）・米国（+7〜10%）が合計20〜25%まで拡大するとスペイン依存度が35→25%台に低下。集中リスク評価が構造的に改善。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spanel" id="c7-tb">
+    <div class="noter" style="margin-bottom:14px"><strong>下方カタリストの特性：</strong>スペイン問題以外のリスクはEPS影響が限定的（▲3〜10%程度）か確率が低い。配当利回り3.40%と現金134億円が下値を守る構造。</div>
+    <div class="g2">
+      <div class="card card-rd" style="margin-bottom:8px">
+        <div style="font:600 9px/1 var(--mono);color:var(--rd);margin-bottom:4px">発生確率：10〜15%（緩和中）</div>
+        <div class="sect-title">スペイン代理店の条件悪化・離反</div>
+        <p style="font-size:11px">EPS▲20〜30%の最大インパクト。バメホ取締役就任で確率は低下した可能性あり。有報での関係確認が最重要タスク。</p>
+      </div>
+      <div class="card card-am" style="margin-bottom:8px">
+        <div style="font:600 9px/1 var(--mono);color:var(--am);margin-bottom:4px">発生確率：30〜40%（継続中）</div>
+        <div class="sect-title">北里商事の継続的市場売却</div>
+        <p style="font-size:11px">EPS影響ゼロだが需給悪化→株価抑制が長期化。現在の株価低迷が既に一定程度織り込んでいる可能性。配当が実質的な支えになる。</p>
+      </div>
+      <div class="card card-am">
+        <div style="font:600 9px/1 var(--mono);color:var(--am);margin-bottom:4px">発生確率：低（超党派政策）</div>
+        <div class="sect-title">不妊治療の保険適用縮小</div>
+        <p style="font-size:11px">EPS▲1.5〜3円の限定的影響。少子化対策は超党派支持で政治的後退確率は低い。</p>
+      </div>
+    </div>
+  </div>
+  <div class="spanel" id="c7-tc">
+    <table class="tbl">
+      <thead><tr><th>KPI</th><th>確認タイミング</th><th>強気閾値</th><th>警戒閾値</th><th>優先度</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>バメホ取締役とBiomedical Supplyの関係</td><td>2026年7月（有報）</td><td class="hi-gn">関係確認→リスク大幅緩和</td><td class="hi-rd">無関係→従来評価維持</td><td><span class="badge bd-gn">最優先</span></td></tr>
+        <tr class="hl"><td>地域別売上（スペイン比率）</td><td>四半期ごと</td><td class="hi-gn">スペイン33%→29%台</td><td class="hi-rd">36%以上に上昇</td><td><span class="badge bd-gn">最優先</span></td></tr>
+        <tr class="hl"><td>北里商事の大量保有変更報告書</td><td>随時（EDINET）</td><td class="hi-gn">変化なし</td><td class="hi-rd">持分低下（売出）</td><td><span class="badge bd-gn">最優先</span></td></tr>
+        <tr><td>EPS・FCF・営業利益率</td><td>四半期ごと</td><td class="hi-gn">EPS100円超・FCF35億超</td><td class="hi-rd">EPS90円未満</td><td><span class="badge bd-am">高</span></td></tr>
+        <tr><td>増配・自社株買いの発表</td><td>年次（決算・総会）</td><td class="hi-gn">配当55円以上</td><td>3年連続据え置き</td><td><span class="badge bd-am">高</span></td></tr>
+        <tr><td>卵子凍結助成の件数実績</td><td>2026年度下期〜</td><td class="hi-gn">目標75%以上達成</td><td>目標30%未満</td><td><span class="badge bd-bl">中</span></td></tr>
+        <tr><td>関連当事者取引の解消確認</td><td>2026年7月（有報）</td><td class="hi-gn">「解消済み」と記載</td><td>取引継続・拡大</td><td><span class="badge bd-bl">中</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 8: リスク分析
+════════════════════════════════ -->
+<div class="chapter" id="c8">
+  <div class="ch-head"><span class="ch-num">08</span><h2 class="ch-title">リスクの完全評価 — 発生確率×影響度×緩和状況</h2><span class="ch-badge cb-rd">精査必要</span></div>
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card card-rd">
+      <div class="label" style="color:var(--rd)">致命的リスク（単発でテーゼ崩壊）</div>
+      <div class="risk-meter"><span class="risk-label">スペイン契約完全喪失</span><div class="risk-track"><div class="risk-fill" style="width:15%;background:var(--rd)"></div></div><span class="risk-val hi-rd">15%</span></div>
+      <p style="font-size:11px;color:var(--rd)">EPS▲30%、株価700〜900円。バメホ取締役就任で確率は低下した可能性あり。</p>
+    </div>
+    <div class="card card-am">
+      <div class="label" style="color:var(--am)">重大リスク（長期抑制要因）</div>
+      <div class="risk-meter"><span class="risk-label">北里商事の継続売出</span><div class="risk-track"><div class="risk-fill" style="width:35%;background:var(--am)"></div></div><span class="risk-val hi-am">35%</span></div>
+      <p style="font-size:11px;color:var(--am)">EPS影響なし。需給悪化で株価低迷が継続。配当3.40%が支え。</p>
+    </div>
+    <div class="card">
+      <div class="label">軽微リスク（限定的影響）</div>
+      <div class="risk-meter"><span class="risk-label">競合技術進化</span><div class="risk-track"><div class="risk-fill" style="width:20%;background:var(--ink3)"></div></div><span class="risk-val">20%</span></div>
+      <div class="risk-meter"><span class="risk-label">為替リスク（円高）</span><div class="risk-track"><div class="risk-fill" style="width:35%;background:var(--ink3)"></div></div><span class="risk-val">35%</span></div>
+      <div class="risk-meter"><span class="risk-label">保険適用縮小</span><div class="risk-track"><div class="risk-fill" style="width:12%;background:var(--ink3)"></div></div><span class="risk-val">12%</span></div>
+    </div>
+  </div>
+  <div class="noteg"><strong>リスク総評：</strong>最大リスク（スペイン）はバメホ取締役就任で緩和の可能性が出てきた。需給リスク（北里商事）は既に株価に相当程度織り込まれている。財務的安全マージン（現金134億・配当3.40%）が「最悪シナリオ」の下値を800〜900円に限定する。</div>
+</div>
+
+<!-- ════════════════════════════════
+     CH 9: 最終評決
+════════════════════════════════ -->
+<div class="chapter" id="c9">
+  <div class="ch-head"><span class="ch-num">09</span><h2 class="ch-title">最終評決 — PER水準の考察を踏まえた総合判断</h2><span class="ch-badge cb-gn">Conditional Buy</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c9','ta',this)">PER考察と評価根拠</button>
+    <button class="stab"    onclick="showTab('c9','tb',this)">総合判断・目標株価</button>
+    <button class="stab"    onclick="showTab('c9','tc',this)">アクションプラン</button>
+  </div>
+
+  <!-- ── TAB A: PER考察 ── -->
+  <div class="spanel active" id="c9-ta">
+
+    <!-- キービジュアル：PERの多面的適正水準 -->
+    <div style="background:var(--ink2);border-radius:var(--r);padding:20px 24px;margin-bottom:16px;color:rgba(246,245,239,.85)">
+      <div style="font:600 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(246,245,239,.35);margin-bottom:14px">PER 適正水準の多面分析 — 現在11.9倍 vs 各指標が示す水準</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:var(--r);overflow:hidden;margin-bottom:14px">
+        <div style="background:rgba(17,18,23,.4);padding:12px 10px;text-align:center">
+          <div style="font-size:9px;color:rgba(246,245,239,.3);margin-bottom:5px">FCFベース適正</div>
+          <div style="font:600 22px/1 var(--mono);color:#68c890">20〜25倍</div>
+          <div style="font-size:9px;color:rgba(246,245,239,.25);margin-top:3px">FCFイールド4〜5%相当</div>
+        </div>
+        <div style="background:rgba(17,18,23,.4);padding:12px 10px;text-align:center">
+          <div style="font-size:9px;color:rgba(246,245,239,.3);margin-bottom:5px">参入障壁スコア基準</div>
+          <div style="font:600 22px/1 var(--mono);color:#68c890">18〜28倍</div>
+          <div style="font-size:9px;color:rgba(246,245,239,.25);margin-top:3px">スコア7.8/10の標準域</div>
+        </div>
+        <div style="background:rgba(17,18,23,.4);padding:12px 10px;text-align:center">
+          <div style="font-size:9px;color:rgba(246,245,239,.3);margin-bottom:5px">事業モデル類似株</div>
+          <div style="font:600 22px/1 var(--mono);color:#8ab0e8">15〜25倍</div>
+          <div style="font-size:9px;color:rgba(246,245,239,.25);margin-top:3px">消耗品×高参入障壁</div>
+        </div>
+        <div style="background:rgba(17,18,23,.4);padding:12px 10px;text-align:center">
+          <div style="font-size:9px;color:rgba(246,245,239,.3);margin-bottom:5px">グローバル同業</div>
+          <div style="font:600 22px/1 var(--mono);color:#8ab0e8">28〜31倍</div>
+          <div style="font-size:9px;color:rgba(246,245,239,.25);margin-top:3px">Vitrolife・CooperSurgical</div>
+        </div>
+        <div style="background:rgba(184,48,48,.25);padding:12px 10px;text-align:center;border:1px solid rgba(240,80,80,.3)">
+          <div style="font-size:9px;color:rgba(246,245,239,.5);margin-bottom:5px">現在の市場評価 ⚠</div>
+          <div style="font:700 26px/1 var(--mono);color:#e08888">11.9倍</div>
+          <div style="font-size:9px;color:rgba(240,80,80,.7);margin-top:3px">適正水準の▲40〜57%割引</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:rgba(246,245,239,.55);line-height:1.7">
+        4つのアプローチすべてが「適正PERは15〜28倍域」を示す。現在PER11.9倍との乖離は、スペイン集中リスク・流動性問題・認知度不足という<strong style="color:rgba(246,245,239,.85)">事業の本質的欠陥でなく構造的・需給的要因</strong>で説明できる。
+      </p>
+    </div>
+
+    <!-- 4軸の詳細考察 -->
+    <div class="g2" style="margin-bottom:14px">
+
+      <!-- キャッシュ創出力 -->
+      <div class="card">
+        <div style="font:700 10px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--gn);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bg3)">
+          ① キャッシュ創出力からの逆算
+        </div>
+        <div class="g2" style="gap:8px;margin-bottom:10px">
+          <div style="background:var(--bg);padding:8px;border-radius:var(--r);text-align:center">
+            <div style="font-size:9px;color:var(--ink3)">FCFイールド</div>
+            <div style="font:600 20px/1 var(--mono);color:var(--gn)">7.5%</div>
+          </div>
+          <div style="background:var(--bg);padding:8px;border-radius:var(--r);text-align:center">
+            <div style="font-size:9px;color:var(--ink3)">FCFマージン</div>
+            <div style="font:600 20px/1 var(--mono);color:var(--gn)">34%</div>
+          </div>
+        </div>
+        <p style="font-size:12px;line-height:1.75;color:var(--ink2)">
+          FCFイールド7.5%の<strong>逆数（1÷7.5%）はPER13.3倍</strong>。これは「キャッシュが全て株主に帰属する」前提の最小値。実態は成長投資・現金蓄積があり株主価値は更に高い。同業高収益消耗品株の標準FCFイールド3〜5%に揃えると<strong class="hi-gn">適正PER20〜33倍</strong>が導かれる。FCFマージン34%はSaaS企業水準で、消耗品製造業としては極めて異例の効率性。
+        </p>
+        <div class="blrow" style="margin-top:8px"><span style="font-size:11px">FCFイールド5%（同業標準）→ PER</span><span class="mono hi-gn">20倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:67%;background:var(--gn)"></div></div>
+        <div class="blrow"><span style="font-size:11px">FCFイールド4%（優良水準）→ PER</span><span class="mono hi-gn">25倍</span></div>
+        <div class="btrack"><div class="bfill" style="width:83%;background:var(--gn2)"></div></div>
+        <div class="blrow"><span style="font-size:11px">現在FCFイールド7.5% → PER</span><span class="mono hi-rd">11.9倍（現状）</span></div>
+        <div class="btrack"><div class="bfill" style="width:40%;background:var(--rd)"></div></div>
+      </div>
+
+      <!-- 参入障壁 -->
+      <div class="card">
+        <div style="font:700 10px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--gn);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bg3)">
+          ② 参入障壁スコアと市場評価の対応
+        </div>
+        <div class="blrow"><span style="font-size:11px">Cryotop法特許・技術独占</span><span class="mono hi-gn">9.0/10</span></div>
+        <div class="btrack"><div class="bfill" style="width:90%;background:var(--gn2)"></div></div>
+        <div class="blrow"><span style="font-size:11px">110ヵ国規制承認（再取得コスト極大）</span><span class="mono hi-gn">8.5/10</span></div>
+        <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+        <div class="blrow"><span style="font-size:11px">顧客スイッチングコスト（消耗品粘着）</span><span class="mono hi-gn">8.0/10</span></div>
+        <div class="btrack"><div class="bfill" style="width:80%;background:var(--gn)"></div></div>
+        <div class="blrow"><span style="font-size:11px">反復収益の安定性</span><span class="mono hi-gn">8.5/10</span></div>
+        <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+        <div class="blrow"><span style="font-size:11px">ネットワーク効果・規模優位</span><span class="mono hi-am">5.0/10</span></div>
+        <div class="btrack"><div class="bfill" style="width:50%;background:var(--am)"></div></div>
+        <div style="margin-top:10px;background:var(--teal-l,#e6f3f2);border-radius:var(--r);padding:8px 12px">
+          <div style="font-size:9px;color:var(--gn);font-weight:600">総合スコア7.8点→ 業界標準PER</div>
+          <div style="font:600 18px/1 var(--mono);color:var(--gn)">18〜28倍</div>
+          <div style="font-size:9px;color:var(--ink3);margin-top:2px">朝日インテック（8点・PER22倍）HOYA医療（9点・PER28倍）比較</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:14px">
+
+      <!-- 事業モデル -->
+      <div class="card">
+        <div style="font:700 10px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bg3)">
+          ③ 事業モデルの類似株比較
+        </div>
+        <table class="tbl" style="font-size:11px">
+          <thead><tr><th>事業特性</th><th>類似株</th><th>実績PER</th></tr></thead>
+          <tbody>
+            <tr><td>医療消耗品×反復購買</td><td class="m">ニプロ・テルモ</td><td class="mono">15〜22倍</td></tr>
+            <tr><td>高参入障壁×グローバル展開</td><td class="m">朝日インテック</td><td class="mono">20〜26倍</td></tr>
+            <tr><td>特許依存×ニッチ独占</td><td class="m">HOYA医療レンズ</td><td class="mono">25〜35倍</td></tr>
+            <tr><td>消耗品×SaaS的反復収益</td><td class="m">エムスリー（医療情報）</td><td class="mono">40〜60倍</td></tr>
+            <tr class="hl"><td><strong>北里：消耗品×特許×110ヵ国</strong></td><td class="m hi-bl">すべてに該当</td><td class="mono hi-gn"><strong>適正18〜25倍</strong></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--ink3);line-height:1.65;margin-top:8px">
+          北里は「高参入障壁」「グローバル消耗品」「特許独占」の3要素を持ち、参照できる最も近い事業モデルはHOYA医療レンズ（PER28倍）に近い。ただし成長率の低さ（+4〜5%/年 vs HOYA+8〜12%）を考慮すると15〜20倍が現実的な目線。
+        </p>
+      </div>
+
+      <!-- PER割安の説明変数と解消可能性 -->
+      <div class="card">
+        <div style="font:700 10px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--rd);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bg3)">
+          ④ PER11.9倍の説明変数 — 何が割引しているか
+        </div>
+        <table class="tbl" style="font-size:11px">
+          <thead><tr><th>割引要因</th><th>PER影響</th><th>解消可否</th></tr></thead>
+          <tbody>
+            <tr style="background:var(--red-l,#fdf0f0)">
+              <td><strong>スペイン集中33.5%</strong><br><span class="m">最大リスク</span></td>
+              <td class="hi-rd">▲4〜6倍</td>
+              <td><span class="badge bd-am">△（バメホ確認待ち）</span></td>
+            </tr>
+            <tr>
+              <td><strong>流動性不足・機関参入不可</strong><br><span class="m">北里商事58.5%保有</span></td>
+              <td class="hi-rd">▲3〜4倍</td>
+              <td><span class="badge bd-am">△（持分低下で解消）</span></td>
+            </tr>
+            <tr>
+              <td><strong>成長率 +4〜5%（低め）</strong></td>
+              <td class="hi-am">▲2〜3倍</td>
+              <td><span class="badge bd-am">△（政策で改善余地）</span></td>
+            </tr>
+            <tr>
+              <td><strong>R&D投資ほぼゼロ</strong></td>
+              <td class="hi-am">▲1〜2倍</td>
+              <td><span class="badge bd-rd">✗（構造的）</span></td>
+            </tr>
+            <tr>
+              <td><strong>上場歴が短い・認知度低</strong></td>
+              <td class="hi-am">▲1〜2倍</td>
+              <td><span class="badge bd-gn">○（時間で解消）</span></td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td colspan="2"><strong>合計割引推定</strong></td>
+              <td class="mono hi-rd" style="font-size:14px"><strong>▲11〜17倍</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;background:var(--blue-l,#eef3fc);border-radius:var(--r);padding:8px 12px">
+          <div style="font-size:9px;color:var(--bl);font-weight:600">解消可能な割引（推定）</div>
+          <div style="font:600 16px/1 var(--mono);color:var(--bl)">▲8〜13倍分 → 解消余地大</div>
+          <div style="font-size:9px;color:var(--ink3);margin-top:2px">全割引の70〜75%は需給・ガバナンス・認知度起因で本質的問題ではない</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PER考察まとめ -->
+    <div class="card" style="border-left:4px solid var(--bl);background:var(--blue-l,#eef3fc)">
+      <div style="font:700 11px/1 var(--head);color:var(--bl);margin-bottom:10px">PER水準の考察まとめ — 4軸分析からの結論</div>
+      <p style="font-size:13px;line-height:1.85;color:var(--ink2)">
+        <strong>PER11.9倍は「事業の本質的な問題」を反映していない。</strong>
+        FCFイールド7.5%・営業利益率58%・参入障壁スコア7.8点・有利子負債ゼロという事業品質は、同業・同類株の比較で一貫してPER18〜25倍が正当化される水準にある。現在の割安の約70〜75%は「スペイン集中リスク・流動性不足・認知度不足」という<strong>事業の本質とは無関係の外部要因</strong>で説明できる。
+        残る25〜30%（R&D不足・低成長）は正当な割引だが、政策カタリストによる成長率の改善で部分的に解消される可能性がある。
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
+        <div style="background:rgba(26,60,122,.1);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--bl);margin-bottom:4px">短期合理目標（1〜2年）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--bl)">PER 14〜16倍</div>
+          <div style="font-size:9px;color:var(--ink3)">認知度向上＋スペイン確認<br>→ 1,596〜1,816円</div>
+        </div>
+        <div style="background:rgba(27,104,64,.1);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--gn);margin-bottom:4px">中期合理目標（2〜3年）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--gn)">PER 16〜20倍</div>
+          <div style="font-size:9px;color:var(--ink3)">増配＋機関参入＋政策EPS<br>→ 1,820〜2,280円</div>
+        </div>
+        <div style="background:rgba(27,104,64,.07);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font-size:9px;color:var(--gn);margin-bottom:4px">事業本来の適正水準</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--gn)">PER 20〜25倍</div>
+          <div style="font-size:9px;color:var(--ink3)">全ディスカウント解消時<br>→ 2,280〜2,850円</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB B: 総合判断 ── -->
+  <div class="spanel" id="c9-tb">
+
+    <!-- 評決ボード -->
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;margin-bottom:16px">
+      <div>
+        <div class="card" style="text-align:center;padding:20px 16px;margin-bottom:10px">
+          <div class="mc-l">総合評決</div>
+          <div class="mc-v gn" style="font-size:28px;line-height:1.15">COND.<br>POSITIVE</div>
+          <div class="mc-s">条件付き強気</div>
+        </div>
+        <div class="card" style="text-align:center;padding:14px">
+          <div class="mc-l">加重期待リターン</div>
+          <div class="mc-v gn" style="font-size:28px">+62%</div>
+          <div class="mc-s">3年・配当込み（4シナリオ加重）</div>
+        </div>
+      </div>
+      <div>
+        <div class="noteg" style="margin-bottom:10px">
+          <strong>評決の核心（PER考察を反映した改訂版）：</strong><br>
+          FCFイールド7.5%・営業利益率58%・参入障壁スコア7.8点からみた「本来のPER」は18〜25倍。現在PER11.9倍との▲6〜13倍のギャップは、スペイン集中リスク・流動性不足・認知度不足という事業の本質とは無関係の外部要因が主因。この外部要因の70〜75%は解消可能であり、3年保有でPER15〜20倍への回帰が合理的に期待できる。EPS成長（+4〜5%/年）との複合でベースケース+57%・ブルケース+100%超のリターンシナリオが成立する。
+        </div>
+        <div class="noter">
+          <strong>評決の条件（この2点が確認前はポジション慎重に）：</strong>
+          ① 2026年7月の有報でバメホ取締役とBiomedical Supplyの関係確認（スペインリスクの▲4〜6倍ディスカウント解消の鍵）
+          ② 6月25日株主総会での増配シグナル（流動性ディスカウント解消の第一歩）
+        </div>
+      </div>
+    </div>
+
+    <!-- 3シナリオ + 公的資金フル -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
+      <div style="background:#fdf0f0;border:1px solid var(--red-b,#f0aaaa);border-radius:var(--r);padding:14px">
+        <div style="font-size:9px;font-weight:700;color:var(--rd);letter-spacing:.1em;margin-bottom:8px">🐻 ベア 20%</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--rd);margin-bottom:4px">850〜950円</div>
+        <div style="font-size:10px;color:var(--rd)">▲7〜▲30%</div>
+        <div class="sep"></div>
+        <div style="font-size:10px;color:var(--ink3);line-height:1.6">EPS65〜90円<br>PER10〜11倍<br>スペイン問題顕在化</div>
+      </div>
+      <div style="background:#fef3e0;border:1px solid #f0d080;border-radius:var(--r);padding:14px">
+        <div style="font-size:9px;font-weight:700;color:var(--am);letter-spacing:.1em;margin-bottom:8px">→ ベース 45%</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--am);margin-bottom:4px">1,550〜1,800円</div>
+        <div style="font-size:10px;color:var(--am)">+40〜+57%</div>
+        <div class="sep"></div>
+        <div style="font-size:10px;color:var(--ink3);line-height:1.6">EPS110〜115円<br>PER13〜15倍<br>認知度↑+スペイン緩和</div>
+      </div>
+      <div style="background:#f0f8f4;border:1px solid #a0d8b8;border-radius:var(--r);padding:14px">
+        <div style="font-size:9px;font-weight:700;color:var(--gn);letter-spacing:.1em;margin-bottom:8px">🐂 ブル 25%</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--gn);margin-bottom:4px">2,000〜2,400円</div>
+        <div style="font-size:10px;color:var(--gn)">+75〜+106%</div>
+        <div class="sep"></div>
+        <div style="font-size:10px;color:var(--ink3);line-height:1.6">EPS115〜120円<br>PER17〜20倍<br>増配+機関参入</div>
+      </div>
+      <div style="background:#eef3fc;border:1px solid #a0b8e0;border-radius:var(--r);padding:14px">
+        <div style="font-size:9px;font-weight:700;color:var(--bl);letter-spacing:.1em;margin-bottom:8px">🚨 政策フル 10%</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--bl);margin-bottom:4px">2,504円</div>
+        <div style="font-size:10px;color:var(--bl)">+108〜+115%</div>
+        <div class="sep"></div>
+        <div style="font-size:10px;color:var(--ink3);line-height:1.6">EPS121円<br>PER20.7倍<br>全国展開+PER格上げ完成</div>
+      </div>
+    </div>
+
+    <!-- PER考察を踏まえた3年後目標の精緻化 -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="label" style="margin-bottom:12px">PER分析を踏まえた3年後目標株価の精緻化</div>
+      <div style="overflow-x:auto">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>PER水準</th>
+              <th>根拠・達成条件</th>
+              <th>EPS（2029/3推計）</th>
+              <th>目標株価</th>
+              <th>現在比</th>
+              <th>配当込み</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>PER10倍（下限）</td><td class="m">スペイン問題顕在化・EPS大幅減</td><td class="mono">65〜90円</td><td class="mono hi-rd">650〜990円</td><td class="hi-rd">▲18〜▲46%</td><td class="m">配当123円が防衛</td></tr>
+            <tr><td>PER12倍（現状維持）</td><td class="m">カタリスト不在・バリュートラップ</td><td class="mono">113円</td><td class="mono">1,356円</td><td>+12%</td><td>配当込+22%</td></tr>
+            <tr class="hl"><td>PER15倍（認知度向上）</td><td class="m">上場認知浸透＋スペイン緩和。最初に到達すべき水準</td><td class="mono">113円</td><td class="mono hi-gn">1,695円</td><td class="hi-gn">+41%</td><td class="hi-gn">配当込+51%</td></tr>
+            <tr><td>PER18倍（増配・機関参入）</td><td class="m">増配60円超＋流通株比率改善で機関投資家が参入</td><td class="mono">116円</td><td class="mono hi-gn">2,088円</td><td class="hi-gn">+73%</td><td class="hi-gn">配当込+83%</td></tr>
+            <tr class="hl"><td>PER20倍（政策＋格上げ）</td><td class="m">公的資金フル寄与＋「政策受益株」認知。3年ブル目標</td><td class="mono">121円</td><td class="mono hi-gn">2,420円</td><td class="hi-gn">+101%</td><td class="hi-gn">配当込+111%</td></tr>
+            <tr><td>PER25倍（本来の適正）</td><td class="m">グローバル評価正常化・参入障壁スコア完全反映</td><td class="mono">121円</td><td class="mono hi-gn">3,025円</td><td class="hi-gn">+151%</td><td class="m">長期シナリオ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- まとめ -->
+    <div class="card card-dk">
+      <div style="font:600 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(246,245,239,.3);margin-bottom:10px">総合評価のエッセンス</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div style="font-size:9px;font-weight:700;color:#68c890;letter-spacing:.08em;margin-bottom:6px">投資テーゼが成立する根拠</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:rgba(246,245,239,.75);line-height:1.6">
+            <div>✓ FCFイールド7.5%→ PER13.3倍相当のキャッシュ保証</div>
+            <div>✓ 参入障壁7.8/10 → 本来PER18〜28倍水準の事業品質</div>
+            <div>✓ 消耗品反復収益 → 予測可能な安定キャッシュフロー</div>
+            <div>✓ 公的資金39.1兆円の政策追い風（唯一の受益上場株）</div>
+            <div>✓ 現金134億円が時価総額の27.8%（下値防衛）</div>
+            <div>✓ PER11.9倍から15〜20倍への回帰余地が大きい</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-weight:700;color:#e08888;letter-spacing:.08em;margin-bottom:6px">テーゼを崩すリスク</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:rgba(246,245,239,.75);line-height:1.6">
+            <div>✗ スペイン代理店離反 → EPS▲30% → PER底割れ</div>
+            <div>✗ R&Dゼロ継続 → 技術的競争優位の漸進的喪失</div>
+            <div>✗ 北里商事の大規模売出 → 需給悪化の長期化</div>
+            <div>✗ 増配なし → 現金134億が「使えない資産」のまま</div>
+            <div>✗ 成長率+4%未満の定着 → PER10〜12倍が「適正」のまま</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB C: アクションプラン ── -->
+  <div class="spanel" id="c9-tc">
+    <div class="card card-dk" style="margin-bottom:12px">
+      <div style="font:600 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7ECDC9;margin-bottom:14px">
+        アクションプラン — PER水準の考察を踏まえた実践手順
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:12px;font-size:13px;line-height:1.7;color:rgba(246,245,239,.82)">
+          <div style="min-width:24px;height:24px;border-radius:50%;background:rgba(126,205,201,.2);border:1px solid rgba(126,205,201,.4);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--mono);color:#7ECDC9;flex-shrink:0">1</div>
+          <div><strong style="color:rgba(246,245,239,.95)">【今すぐ】EDINET確認</strong> — 北里商事の大量保有変更報告書をチェック。売出が始まっていれば流動性ディスカウントが拡大中→エントリー慎重に。変化なしならPER11.9倍での打診買いは合理的（FCFイールド7.5%が安全域）。</div>
+        </div>
+        <div style="display:flex;gap:12px;font-size:13px;line-height:1.7;color:rgba(246,245,239,.82)">
+          <div style="min-width:24px;height:24px;border-radius:50%;background:rgba(126,205,201,.2);border:1px solid rgba(126,205,201,.4);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--mono);color:#7ECDC9;flex-shrink:0">2</div>
+          <div><strong style="color:rgba(246,245,239,.95)">【6月25日】株主総会</strong> — 増配・自社株買いへの言及があるかが最初の「PER格上げスイッチ」。増配60円超の発表→配当利回り5%→バリュー投資家の新規参入→需給改善→PER12→14倍へ。「現金は保持」発言→格上げ期待を下方修正。</div>
+        </div>
+        <div style="display:flex;gap:12px;font-size:13px;line-height:1.7;color:rgba(246,245,239,.82)">
+          <div style="min-width:24px;height:24px;border-radius:50%;background:rgba(126,205,201,.2);border:1px solid rgba(126,205,201,.4);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--mono);color:#7ECDC9;flex-shrink:0">3</div>
+          <div><strong style="color:rgba(246,245,239,.95)">【7月】有報公表（最重要）</strong> — バメホ取締役とBiomedical Supplyの関係が注記で確認できれば、スペインリスクのディスカウント（▲4〜6倍）が縮小。PER11.9→14〜16倍への理論的根拠が固まり、本格積み増しのタイミング。</div>
+        </div>
+        <div style="display:flex;gap:12px;font-size:13px;line-height:1.7;color:rgba(246,245,239,.82)">
+          <div style="min-width:24px;height:24px;border-radius:50%;background:rgba(126,205,201,.2);border:1px solid rgba(126,205,201,.4);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--mono);color:#7ECDC9;flex-shrink:0">4</div>
+          <div><strong style="color:rgba(246,245,239,.95)">【11月】中間決算</strong> — Cryodevice売上の成長率（+10%以上→政策カタリスト確認）とスペイン比率の変化（低下→地域分散進展）を確認。両方確認できれば成長率割引（▲2〜3倍）が縮小し始めるシグナル。</div>
+        </div>
+        <div style="display:flex;gap:12px;font-size:13px;line-height:1.7;color:rgba(246,245,239,.82)">
+          <div style="min-width:24px;height:24px;border-radius:50%;background:rgba(126,205,201,.2);border:1px solid rgba(126,205,201,.4);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--mono);color:#7ECDC9;flex-shrink:0">5</div>
+          <div><strong style="color:rgba(246,245,239,.95)">【損切りライン】</strong> — スペイン代理店問題が有報・四半期でネガティブサプライズとして開示された場合は速やかに損切り。理論的下値はEPS70〜80円×PER10倍=700〜800円。配当利回り5%超（820〜900円水準）で一定の買いが入りやすい。</div>
+        </div>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="card card-gn"><div class="label">打診買い目線</div><div class="mc-v gn" style="font-size:20px">現在〜1,250円</div><div class="mc-s">FCFイールド7.2%以上が維持される水準。有報確認前は小量。</div></div>
+      <div class="card card-gn"><div class="label">本格買い目線</div><div class="mc-v gn" style="font-size:20px">有報確認後</div><div class="mc-s">バメホ関係確認＋増配シグナルが揃ったタイミングで積み増し。</div></div>
+      <div class="card card-rd"><div class="label">損切りライン</div><div class="mc-v rd" style="font-size:20px">850〜900円</div><div class="mc-s">スペイン問題顕在化時。配当利回り4.6〜4.8%が下値目途。</div></div>
+    </div>
+    <small style="display:block;margin-top:12px;color:var(--ink3)">※本資料は公開情報（有価証券報告書・2026年3月期決算短信・各省庁公開情報）に基づく試算であり、投資を勧誘するものではありません。数値・確率・目標株価はすべて参考値。投資判断はご自身の責任において行ってください。</small>
+  </div>
+</div>
+
+</main><!-- /.body -->
+
+<!-- ════════ CHART.JS ════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+'use strict';
+
+/* ════════════════════════════════════════════
+   チャートインスタンス管理（遅延初期化）
+   display:none のタブ内では Canvas のサイズが
+   取得できないため、タブを開いた瞬間に初めて
+   描画する lazy-init パターンを採用する
+════════════════════════════════════════════ */
+var _charts = {};   // 初期化済みチャートを保持
+
+/* ════════════════════════════════════════════════════════════
+   公的資金39.1兆円 → 北里EPS への波及試算（前提値）
+   ─────────────────────────────────────────────────────────
+   ART件数増加→消耗品需要→北里国内売上→EPS の連鎖：
+     1件あたり売上寄与 ≈ 740円
+     営業利益率 58%、実効税率 33%
+     → 1件あたり純利益寄与 ≈ 740×0.58×0.67 ≈ 288円
+     → 1万件増 ≈ 純利益+288万円 ≈ EPS+0.72円
+
+   政策別EPS押し上げ額（3年累積・段階的）
+     Stage1 東京都新助成2026/10～ … +2〜4円  ←  1年目に寄与開始
+     Stage2 卵子凍結全国展開2027～ … +4〜7円  ←  2年目から本格化
+     PER格上げ効果（最重要）       … 12倍→15〜20倍
+   ─────────────────────────────────────────────────────────
+   グラフ内シナリオ定義（現在株価1,206円・2026/3期起点）
+   ラベル：2024/3・2025/3・2026/3・2027/3・2028/3・2029/3
+   インデックス：  0      1      2      3      4      5
+
+   [EPS系列]
+     ベースEPS     91.6 / 94.9 / 97.4 / 101.5 / 107  / 113
+     政策上乗せEPS  同上 / 同上 / 同上 / 103.5 / 112  / 121
+       ※政策上乗せ分：2027/3期+2円、2028/3期+5円、2029/3期+7円
+
+   [株価系列（右軸）]
+     ベアケース     ---- / ---- / 1206 / ---- / 1100 /  870
+     ベースケース   ---- / ---- / 1206 / ---- / 1430 / 1680
+     ブルケース     ---- / ---- / 1206 / ---- / 1750 / 2250
+     ★政策ブル     ---- / ---- / 1206 / 1350 / 1750 / 2500
+       ※政策ブルは政策EPS+PER格上げ（15→18倍）が複合した場合
+         2027/3: 東京都助成が件数増を引き起こし始める（PER13×EPS103=1,339）
+         2028/3: 卵子凍結全国化・EPS112×PER15.6倍=1,747
+         2029/3: PER格上げ完成・EPS121×PER20.7倍=2,504
+     現在株価線    ---- / ---- / 1206 / 1206 / 1206 / 1206
+════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   公的資金39.1兆円 → 北里EPS波及の試算前提（両グラフ共通）
+   ───────────────────────────────────────────────────────────────
+   ▼ ART件数増加 → 消耗品 → EPS の変換係数
+     1件あたり売上寄与 ≈ 740円（国内売上37億÷50万件）
+     営業利益率58%・実効税率33% → 税引後利益≈288円/件
+     4,000万株換算 → 1万件増でEPS+0.072円
+   ▼ 政策別EPS直接上乗せ（ベースEPS+X円）
+     2027/3: 東京都新助成（34,600件→+2.5万件想定）→ +2円
+     2028/3: 卵子凍結全国展開（+5万件想定）→ +3.6円累積＝+5.6円
+     2029/3: 第二弾全国化・診療報酬改定追い風   → +7円累積
+   ▼ PER格上げ根拠（直接効果よりはるかに大きい）
+     現在PER12.4倍は「スペイン集中リスク＋需給問題」を過剰織込
+     政策加速が「唯一の政策受益上場株」と認識されると：
+     Stage1(26/10～): PER12→13.5倍 → EPS103.5×13.5=1,397円
+     Stage2(27～28):  PER13.5→16倍  → EPS112×16  =1,792円
+     Stage3(2029):    PER16→20.7倍  → EPS121×20.7=2,504円
+   ─────────────────────────────────────────────────────────────── */
+
+function buildChartMain() {
+  var el = document.getElementById('chartMain');
+  if (!el || _charts['main']) return;
+
+  /* ─ 6期分ラベル ─ */
+  var labs = ['2024/3\n実績','2025/3\n実績','2026/3\n基準','2027/3\n予想','2028/3\n推計','2029/3\n推計'];
+
+  /* ─ EPS系列（左軸）─ */
+  var epsBase   = [91.6, 94.9, 97.4, 101.5, 107.0, 113.0];   // 政策なし・年+4〜5%
+  var epsPol    = [91.6, 94.9, 97.4, 103.5, 112.0, 121.0];   // 政策上乗せ後
+
+  /* ─ 株価シナリオ（右軸）─ */
+  // 基準点は2026/3=1206、null=線を引かない
+  var pxBear   = [null, null, 1206, null,  1080,  870];   // ベア: EPS減・PER10倍
+  var pxBase   = [null, null, 1206, null,  1450, 1695];   // ベース: EPS+5%・PER13→15倍
+  var pxBull   = [null, null, 1206, null,  1840, 2250];   // ブル: 増配・PER15→18倍
+  var pxPolicy = [null, null, 1206, 1397,  1792, 2504];   // 公的資金フル: 政策EPS×PER格上げ
+  var pxNow    = [null, null, 1206, 1206,  1206, 1206];   // 現在株価水平参照線
+
+  _charts['main'] = new Chart(el, {
+    type: 'line',
+    data: {
+      labels: labs,
+      datasets: [
+        /* ① EPS ベース成長（左軸・細線） */
+        {
+          label: 'EPS ベース（円）',
+          data: epsBase,
+          yAxisID: 'yL',
+          borderColor: 'rgba(27,104,64,.7)',
+          backgroundColor: 'rgba(27,104,64,.07)',
+          borderWidth: 1.5, pointRadius: 3,
+          pointBackgroundColor: '#1b6840',
+          tension: .3, fill: false,
+          borderDash: [4,2], order: 6
+        },
+        /* ② EPS 政策上乗せ後（左軸・細線） */
+        {
+          label: 'EPS 政策寄与後（円）',
+          data: epsPol,
+          yAxisID: 'yL',
+          borderColor: 'rgba(26,60,122,.8)',
+          backgroundColor: 'rgba(26,60,122,.06)',
+          borderWidth: 1.5, pointRadius: 3,
+          pointBackgroundColor: '#1a3c7a',
+          tension: .3, fill: false,
+          borderDash: [4,2], order: 5
+        },
+        /* ③ 公的資金フル寄与（右軸・最太線・青★） */
+        {
+          label: '🚨 公的資金フル寄与（政策EPS × PER格上げ）',
+          data: pxPolicy,
+          yAxisID: 'yR',
+          borderColor: '#1a3c7a',
+          backgroundColor: 'rgba(26,60,122,.08)',
+          borderWidth: 3.5, pointRadius: 7,
+          pointBackgroundColor: '#1a3c7a',
+          pointBorderColor: '#fff', pointBorderWidth: 2,
+          tension: .35, fill: false, order: 1
+        },
+        /* ④ ブルケース（右軸） */
+        {
+          label: '🐂 ブルケース（増配 + 機関参入 PER18倍）',
+          data: pxBull,
+          yAxisID: 'yR',
+          borderColor: '#1b6840',
+          borderWidth: 2.5, pointRadius: 5,
+          pointBackgroundColor: '#1b6840',
+          tension: .35, fill: false, order: 2
+        },
+        /* ⑤ ベースケース（右軸） */
+        {
+          label: '→ ベースケース（PER12→15倍）',
+          data: pxBase,
+          yAxisID: 'yR',
+          borderColor: '#bf7c18',
+          borderWidth: 2, pointRadius: 4,
+          pointBackgroundColor: '#bf7c18',
+          tension: .35, fill: false, order: 3
+        },
+        /* ⑥ ベアケース（右軸） */
+        {
+          label: '🐻 ベアケース（スペイン問題・PER10倍）',
+          data: pxBear,
+          yAxisID: 'yR',
+          borderColor: '#b83030',
+          borderWidth: 2, pointRadius: 4,
+          pointBackgroundColor: '#b83030',
+          tension: .35, fill: false,
+          borderDash: [6,3], order: 4
+        },
+        /* ⑦ 現在株価参照線（右軸） */
+        {
+          label: '現在株価 1,206円',
+          data: pxNow,
+          yAxisID: 'yR',
+          borderColor: '#909090',
+          borderWidth: 1, pointRadius: 0,
+          borderDash: [3,4], fill: false, order: 7
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { font:{size:10}, boxWidth:14, padding:10,
+            usePointStyle: true, pointStyleWidth: 10 }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(17,18,23,.92)',
+          titleColor: '#f0f0ee', bodyColor: 'rgba(240,240,238,.8)',
+          padding: 10, cornerRadius: 4,
+          callbacks: {
+            label: function(ctx) {
+              var v = ctx.parsed.y;
+              if (v == null) return null;
+              if (ctx.dataset.yAxisID === 'yL')
+                return ' ' + ctx.dataset.label + ': ' + v.toFixed(1) + '円';
+              return ' ' + ctx.dataset.label + ': ' + v.toLocaleString() + '円';
+            },
+            afterBody: function(items) {
+              /* 政策ラインにホバーしたとき前提を表示 */
+              var idx = items[0] ? items[0].dataIndex : -1;
+              var polNote = [
+                null, null,
+                '基準点（政策効果ゼロ）',
+                '東京都新助成スタート → EPS+2円 → PER12→13.5倍',
+                '卵子凍結全国展開 → EPS+5.6円 → PER13.5→16倍',
+                'Stage3完成 → EPS+7円 → PER16→20.7倍'
+              ];
+              return (polNote[idx]) ? ['', '📌 ' + polNote[idx]] : [];
+            }
+          }
+        }
+      },
+      scales: {
+        yL: {   /* 左軸：EPS */
+          type: 'linear', position: 'left',
+          min: 75, max: 135,
+          title: { display: true, text: 'EPS（円）', font:{size:9}, color:'#636470' },
+          ticks: { font:{size:9}, color:'#636470',
+            callback: function(v){ return v+'円'; },
+            stepSize: 10 },
+          grid: { color:'rgba(0,0,0,.05)' }
+        },
+        yR: {   /* 右軸：株価 */
+          type: 'linear', position: 'right',
+          min: 700, max: 2700,
+          title: { display: true, text: '株価（円）', font:{size:9} },
+          ticks: { font:{size:10},
+            callback: function(v){ return v.toLocaleString()+'円'; },
+            stepSize: 400 },
+          grid: { display: false }
+        },
+        x: { ticks:{ font:{size:9}, maxRotation:0 } }
+      }
+    }
+  });
+}
+
+function buildChartPER() {
+  var el = document.getElementById('chartPER');
+  if (!el || _charts['per']) return;
+
+  var labs     = ['2026/3\n基準','2027/3\n予想','2028/3\n推計','2029/3\n推計'];
+  var epsBase  = [97.4, 101.5, 107.0, 113.0];   // 政策なし
+  var epsPol   = [97.4, 103.5, 112.0, 121.0];   // 政策上乗せ後
+  var polPER   = [12.4,  13.5,  16.0,  20.7];   // 段階的PER格上げ
+
+  function bnd(m){ return epsBase.map(function(e){ return Math.round(e*m); }); }
+  var polLine = epsPol.map(function(e,i){ return Math.round(e*polPER[i]); });
+  // polLine = [1208, 1397, 1792, 2504]
+
+  _charts['per'] = new Chart(el, {
+    type: 'line',
+    data: {
+      labels: labs,
+      datasets: [
+        /* 公的資金フル寄与ライン（最重要・青★） */
+        {
+          label: '🚨 公的資金フル寄与（政策EPS × 段階的PER格上げ）',
+          data: polLine,
+          borderColor: '#1a3c7a', backgroundColor: 'rgba(26,60,122,.13)',
+          fill: '+1', borderWidth: 3.5, pointRadius: 7,
+          pointBackgroundColor: '#1a3c7a',
+          pointBorderColor: '#fff', pointBorderWidth: 2,
+          tension: .3
+        },
+        /* PER22倍 */
+        {
+          label: 'PER22倍（グローバル同業割引後・ブル上限）',
+          data: bnd(22),
+          borderColor: '#1b6840', backgroundColor: 'rgba(27,104,64,.09)',
+          fill: '+1', borderWidth: 2, pointRadius: 4, tension: .3
+        },
+        /* PER18倍 */
+        {
+          label: 'PER18倍（ブル・増配＋機関参入）',
+          data: bnd(18),
+          borderColor: '#249054', backgroundColor: 'rgba(36,144,84,.09)',
+          fill: '+1', borderWidth: 2, pointRadius: 4, tension: .3
+        },
+        /* PER15倍 */
+        {
+          label: 'PER15倍（公募水準回帰・ベース上限）',
+          data: bnd(15),
+          borderColor: '#bf7c18', backgroundColor: 'rgba(191,124,24,.09)',
+          fill: '+1', borderWidth: 2, pointRadius: 4, tension: .3
+        },
+        /* PER12倍 */
+        {
+          label: 'PER12倍（現状・ベース下限）',
+          data: bnd(12),
+          borderColor: '#636470', backgroundColor: 'rgba(99,100,112,.07)',
+          fill: '+1', borderWidth: 1.5, borderDash:[4,3], pointRadius: 3, tension: .3
+        },
+        /* PER10倍 */
+        {
+          label: 'PER10倍（ベア下限）',
+          data: bnd(10),
+          borderColor: '#b83030', backgroundColor: 'rgba(184,48,48,.05)',
+          fill: false, borderWidth: 1.5, borderDash:[4,3], pointRadius: 3, tension: .3
+        },
+        /* 現在株価 */
+        {
+          label: '現在株価 1,206円',
+          data: [1206,1206,1206,1206],
+          borderColor: '#909090', borderWidth: 1.5,
+          borderDash:[2,4], pointRadius: 0, fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: {
+          display: true, position: 'bottom',
+          labels: { font:{size:10}, boxWidth:14, padding:10, usePointStyle:true }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(17,18,23,.92)',
+          titleColor: '#f0f0ee', bodyColor: 'rgba(240,240,238,.8)',
+          padding: 10, cornerRadius: 4,
+          callbacks: {
+            label: function(ctx){
+              return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() + '円';
+            },
+            afterBody: function(items) {
+              var idx = items[0] ? items[0].dataIndex : -1;
+              var pE = epsPol[idx], pP = polPER[idx], pV = polLine[idx];
+              if (pE == null) return [];
+              return ['', '📌 政策EPS ' + pE + '円 × PER' + pP + '倍 = ' + pV.toLocaleString() + '円'];
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 850, max: 2650,
+          ticks: { font:{size:10}, callback:function(v){ return v.toLocaleString()+'円'; }, stepSize:300 },
+          grid: { color:'rgba(0,0,0,.05)' }
+        },
+        x: { ticks:{ font:{size:9}, maxRotation:0 } }
+      }
+    }
+  });
+}
+
+/* ════════════════════════════════════════════
+   Chapter / SubTab ナビゲーション
+════════════════════════════════════════════ */
+function showChapter(id, btn) {
+  document.querySelectorAll('.chapter').forEach(function(ch){ ch.classList.remove('active'); });
+  document.querySelectorAll('.mnb').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({ top: document.querySelector('.mnav').offsetTop, behavior:'smooth' });
+
+  /* チャートタブが開かれたら遅延描画 */
+  if (id === 'c6') {
+    setTimeout(function(){
+      buildChartMain();
+      buildChartPER();
+      /* 既に描画済みなら resize で再描画 */
+      if (_charts['main']) _charts['main'].resize();
+      if (_charts['per'])  _charts['per'].resize();
+    }, 60);
+  }
+}
+
+function showTab(chapId, panelId, btn) {
+  var chap = document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(function(p){ p.classList.remove('active'); });
+  chap.querySelectorAll('.stab').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById(chapId+'-'+panelId).classList.add('active');
+  btn.classList.add('on');
+
+  /* チャートパネルが表示されたら描画 */
+  if (chapId === 'c6' && panelId === 'ta') {
+    setTimeout(function(){
+      buildChartMain();
+      buildChartPER();
+      if (_charts['main']) _charts['main'].resize();
+      if (_charts['per'])  _charts['per'].resize();
+    }, 60);
+  }
+}
+
+/* ════════════════════════════════════════════
+   バーアニメーション（IntersectionObserver）
+════════════════════════════════════════════ */
+var barIO = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.bfill,.eps-bar,.risk-fill').forEach(function(f){
+      var w = f.style.width; f.style.width = '0';
+      setTimeout(function(){ f.style.transition='width 1.2s cubic-bezier(.4,0,.2,1)'; f.style.width=w; }, 60);
+    });
+    barIO.unobserve(e.target);
+  });
+}, { threshold:.15 });
+document.querySelectorAll('.chapter').forEach(function(s){ barIO.observe(s); });
+</script>
+</body>
+</html>

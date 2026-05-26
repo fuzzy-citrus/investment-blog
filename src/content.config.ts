@@ -20,7 +20,7 @@ const blog = defineCollection({
 				upside: z.string(),
 				downside: z.string(),
 				modifiedPBR: z.string(),
-				delistProb: z.string(),
+				delistProb: z.string().optional(),
 				category: z.string(),
 			}).optional(),
 		}),
