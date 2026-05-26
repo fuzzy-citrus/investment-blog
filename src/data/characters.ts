@@ -146,7 +146,7 @@ export const characters: Character[] = [
     id: "kawachi",
     name: "河内 拾造",
     reading: "かわち しゅうぞう",
-    title: "低PBR発掘担当",
+    title: "割安発掘担当",
     team: "teamA",
     species: "カワウソ ／ 誰も見ない石をめくる係",
     emoji: "🦦",
