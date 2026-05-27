@@ -12,6 +12,7 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
 		cardDesc: z.string().optional(),
+			noteUrl: z.string().url().optional(),
 			stockCard: z.object({
 				ticker: z.string(),
 				companyName: z.string(),

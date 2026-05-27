@@ -3,6 +3,7 @@ import Comments from '../components/Comments.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import BookSidebar from '../components/BookSidebar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -16,20 +17,21 @@ const posts = (await getCollection('blog')).sort(
 <html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="hero">
 				<div class="hero-badge">🏢 バリュー商会</div>
-				<h1>沼田課長と愉快な部下たちの<br />投資記録</h1>
-				<p class="hero-desc">〜低金利×中レバレッジ×高安全域〜</p>
+				<h1>沼田課長の投資記録</h1>
+				<p class="hero-desc">〜 低金利 × 中レバレッジ × 高安全域 〜</p>
 				<div class="hero-tags">
 					<span class="tag">割安日本個別株</span>
 					<span class="tag">TOB発掘</span>
 					<span class="tag">低配当性向・増配余力大</span>
-					<span class="tag">高配当・優待</span>
-					<span class="tag">ガバナンス改革</span>
+					<span class="tag">東証ガバナンス改革</span>
 				</div>
 			</section>
 
@@ -40,7 +42,7 @@ const posts = (await getCollection('blog')).sort(
 						<span class="about-icon">🧑‍💼</span>
 						<div>
 							<div class="about-label">運営者</div>
-							<div class="about-text">保有資産約5,000万円。野村の錬金術士（見習い）こと沼田堅一課長を主人公に、バリュー商会の資産を実際の投資成績と直結させて育てていく実践記録です。</div>
+							<div class="about-text">保有資産約5,000万円。野村流錬金術を駆使する沼田堅一課長を主人公に、バリュー商会の資産を実際の投資成績と直結させて育てていく実践記録です。</div>
 						</div>
 					</div>
 					<div class="about-item">
@@ -54,7 +56,7 @@ const posts = (await getCollection('blog')).sort(
 						<span class="about-icon">📊</span>
 						<div>
 							<div class="about-label">投資スタンス</div>
-							<div class="about-text">メインはバリュー株・TOB発掘・低PBR。紹介銘柄・戦略は野村証券の口座で実際に売買しながら更新します。</div>
+							<div class="about-text">メインはバリュー株・TOB発掘・割安発掘。紹介銘柄・戦略は野村証券の口座で実際に売買しながら更新します。</div>
 						</div>
 					</div>
 					<div class="about-item">
@@ -94,7 +96,7 @@ const posts = (await getCollection('blog')).sort(
 						<polygon points="43,37 51,45 43,54 35,45" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
 					</svg>
 					<span class="tp-title">割安宝探し</span>
-					<span class="tp-desc">低PBR・不動産含み益<br/>隠れた価値を掘り出す</span>
+					<span class="tp-desc">割安発掘・不動産含み益<br/>隠れた価値を掘り出す</span>
 				</div>
 				<div class="tp-item">
 					<svg viewBox="0 0 60 60" class="tp-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,7 +164,7 @@ const posts = (await getCollection('blog')).sort(
 				<div class="asset-chart-wrap">
 					<img src="/images/nomura-asset-chart.png" alt="野村証券 資産推移チャート（2025年3月〜2026年4月）" class="asset-chart-img" />
 				</div>
-				<p class="asset-update-rule">📅 資産推移は毎月第1営業日に更新します。</p>
+				<p class="asset-update-rule">📅 月初に前月末の成績が反映されます</p>
 				<p class="asset-brand-note">📊 この資産推移は沼底バリュー商会（筆者本人）の野村証券実口座の運用成績です。</p>
 				<p class="asset-disclaimer">※ 投資勧誘ではありません。</p>
 			</section>
@@ -185,7 +187,7 @@ const posts = (await getCollection('blog')).sort(
 						<span class="wl-status"><span class="wl-dot yellow"></span>依然割安継続 — 下がればロット追加検討</span>
 						<span class="wl-arrow">→</span>
 					</a>
-					<a href="/blog/kitazato-368A/" class="wl-row">
+					<a href="/blog/kitazato-368a/" class="wl-row">
 						<span class="wl-rating rA-minus">A<sup>−</sup></span>
 						<span class="wl-name">北里コーポレーション <span class="wl-code">368A</span></span>
 						<span class="wl-status"><span class="wl-dot yellow"></span>強気継続で監視 — 下落で買い増し検討</span>
@@ -219,18 +221,42 @@ const posts = (await getCollection('blog')).sort(
 
 			<section class="members-teaser">
 				<h2>メンバー紹介</h2>
-				<p>バリュー商会には個性豊かな動物担当たちがいます。</p>
+				<p>バリュー商会には個性豊かな分析担当がいます</p>
 				<div class="member-emojis">
-					<span title="待伏 静江（TOB担当）">🐊</span>
-					<span title="河内 拾造（低PBR担当）">🦦</span>
-					<span title="堀田 独占（競合優位性担当）">🦫</span>
-					<span title="夜見 賢三（財務分析担当）">🦉</span>
-					<span title="優田 雅代（株主優待担当）">🦩</span>
-					<span title="花岡 利次郎（高配当担当）">🐝</span>
-					<span title="守田 退三（リスク管理担当）">🦞</span>
-					<span title="墨田 検二（AIバックチェック担当）">🦑</span>
+					<a href="/characters#machibuse" class="member-item">
+						<span title="待伏 静江">🐊</span>
+						<span class="member-role">TOB発掘</span>
+					</a>
+					<a href="/characters#kawachi" class="member-item">
+						<span title="河内 拾造">🦦</span>
+						<span class="member-role">割安発掘</span>
+					</a>
+					<a href="/characters#hotta" class="member-item">
+						<span title="堀田 独占">🦫</span>
+						<span class="member-role">競合優位性</span>
+					</a>
+					<a href="/characters#yomi" class="member-item">
+						<span title="夜見 賢三">🦉</span>
+						<span class="member-role">財務分析</span>
+					</a>
+					<a href="/characters#yuda" class="member-item">
+						<span title="優田 雅代">🦩</span>
+						<span class="member-role">株主優待</span>
+					</a>
+					<a href="/characters#hanaoka" class="member-item">
+						<span title="花岡 利次郎">🐝</span>
+						<span class="member-role">高配当</span>
+					</a>
+					<a href="/characters#morita" class="member-item">
+						<span title="守田 退三">🦞</span>
+						<span class="member-role">リスク管理</span>
+					</a>
+					<a href="/characters#sumida" class="member-item">
+						<span title="墨田 検二">🦑</span>
+						<span class="member-role">AIチェック</span>
+					</a>
 				</div>
-				<a href="/characters" class="all-posts-link">メンバー一覧を見る →</a>
+				<a href="/org" class="all-posts-link">組織図で見る →</a>
 			</section>
 
 			<section class="home-comments">
@@ -240,6 +266,8 @@ const posts = (await getCollection('blog')).sort(
 			</section>
 		</main>
 		<Footer />
+
+		<BookSidebar />
 	</body>
 </html>
 
@@ -680,13 +708,37 @@ const posts = (await getCollection('blog')).sort(
 	}
 	.member-emojis {
 		display: flex;
-		gap: 0.8em;
-		flex-wrap: wrap;
-		font-size: 2.5em;
-		margin: 0.5em 0 1em;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		gap: 0.3em;
+		margin: 0.8em 0 1em;
 	}
-	.member-emojis span {
+	.member-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.4em;
+		flex: 1;
+		text-decoration: none;
+		color: inherit;
+		border-radius: 8px;
+		padding: 0.3em 0;
+		transition: background 0.15s;
+	}
+	.member-item:hover {
+		background: rgba(29,158,117,0.08);
+	}
+	.member-item span:first-child {
+		font-size: 2em;
 		cursor: default;
+		line-height: 1;
+	}
+	.member-role {
+		font-size: 0.62em;
+		color: rgb(var(--gray));
+		text-align: center;
+		line-height: 1.3;
+		word-break: keep-all;
 	}
 	.home-comments {
 		margin-bottom: 3em;

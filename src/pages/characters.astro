@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BookSidebar from '../components/BookSidebar.astro';
 import { characters, rivalOrgs, teamLabels } from '../data/characters';
 
 const founder  = characters.filter(c => c.team === 'founder');
@@ -155,6 +156,7 @@ const sections = [
         ))}
       </section>
     </main>
+    <BookSidebar />
     <Footer />
   </body>
 </html>
@@ -348,10 +350,17 @@ const sections = [
   }
 
   /* ライバル陣営 */
-  .rival-outer { margin-top: 1em; }
+  .rival-outer {
+    margin-top: 3.5em;
+    padding: 1.8em 1.5em 1.5em;
+    background: #fffdf5;
+    border: 1px solid #e8d9a0;
+    border-top: 4px solid #c9992a;
+    border-radius: 10px;
+  }
   .rival-heading {
-    border-left-color: #999;
-    color: rgb(var(--gray-dark));
+    border-left-color: #c9992a;
+    color: #7a5c00;
   }
   .rival-intro {
     font-size: 0.85em;

@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BookSidebar from '../components/BookSidebar.astro';
 ---
 
 <!doctype html>
@@ -93,7 +94,7 @@ import Footer from '../components/Footer.astro';
 						<div class="strategy-icon">🎯</div>
 						<div>
 							<strong>コア：割安ニッチトップ待機</strong>
-							<p>競合が入れない市場で低PBR放置されている会社。TOBか水準訂正を静かに待つ。</p>
+							<p>競合が入れない市場で割安放置されている会社。TOBか水準訂正を静かに待つ。</p>
 						</div>
 					</div>
 					<div class="strategy-item">
@@ -147,7 +148,7 @@ import Footer from '../components/Footer.astro';
 				<h2>バリュー商会のメンバーについて</h2>
 				<p>
 					記事に登場するキャラクターたちは、筆者が銘柄を分析するときの「思考の切り口」を擬人化したものです。
-					待伏静江（TOB目線）、河内拾造（低PBR発掘）、夜見賢三（財務分析）、堀田独占（競合優位性）……といった視点で一つの銘柄を多角的に見ることで、見落としを減らそうとしています。
+					待伏静江（TOB目線）、河内拾造（割安発掘）、夜見賢三（財務分析）、堀田独占（競合優位性）……といった視点で一つの銘柄を多角的に見ることで、見落としを減らそうとしています。
 				</p>
 				<p>
 					墨田検二（AIバックチェック担当）だけは少し特殊で、AIが出した分析に自分でツッコミを入れる装置として機能しています。AIなのに。
@@ -158,18 +159,19 @@ import Footer from '../components/Footer.astro';
 			<section class="section rival-section">
 				<h2>ライバル陣営との関係</h2>
 				<div class="rival-cards">
-					<div class="rival-card">
+					<a href="/characters#index-religion" class="rival-card">
 						<div class="rival-head">⛩️ <strong>インデックス宗教法人 総本山オルカン</strong></div>
 						<p>正しい。間違いなく正しい。でも物足りない。毎月積み立てて終わりの世界には、どうしても戻れなかった。</p>
-					</div>
-					<div class="rival-card">
+					</a>
+					<a href="/characters#momentum-chimp" class="rival-card">
 						<div class="rival-head">🚀 <strong>モメンタムチンパンジー組合 米国支部</strong></div>
 						<p>結果を出してるから怖い。円安局面では完全に負けていた時期もあった。でも日本のインフレ環境では、日本の割安実物資産が見直される局面が来ると信じている。</p>
-					</div>
+					</a>
 				</div>
 			</section>
 
 		</main>
+		<BookSidebar />
 		<Footer />
 	</body>
 </html>
@@ -329,6 +331,14 @@ import Footer from '../components/Footer.astro';
 		border-radius: 8px;
 		padding: 1em 1.2em;
 		background: #fafafa;
+		text-decoration: none;
+		color: inherit;
+		display: block;
+		transition: border-color 0.15s, background 0.15s;
+	}
+	.rival-card:hover {
+		border-color: var(--accent);
+		background: #f0f6f2;
 	}
 	.rival-head { margin-bottom: 0.4em; font-size: 0.95em; }
 	.rival-card p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; }

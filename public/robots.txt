@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://numasoko-value.com/sitemap-index.xml

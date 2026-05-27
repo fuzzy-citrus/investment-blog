@@ -119,6 +119,16 @@ input {
 }
 table {
 	width: 100%;
+	border-collapse: collapse;
+}
+th, td {
+	border: 1px solid #c8cdd4;
+	padding: 0.45em 0.7em;
+	text-align: left;
+}
+thead th {
+	background: #eef1f4;
+	font-weight: 700;
 }
 img {
 	max-width: 100%;

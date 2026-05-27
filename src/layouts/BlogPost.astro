@@ -6,10 +6,11 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
 import Header from '../components/Header.astro';
+import BookSidebar from '../components/BookSidebar.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, stockCard } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, stockCard, noteUrl } = Astro.props;
 
 const allPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -240,6 +241,84 @@ const articleJsonLd = {
 			.related-list a:hover { color: var(--accent-dark); }
 			.related-post-title { flex: 1; }
 			.related-post-date { font-size: 0.85em; color: rgb(var(--gray)); white-space: nowrap; }
+			/* ── 楽天市場 banner ── */
+			.rakuten-bar {
+				background: #f5f5f5;
+				border-bottom: 1px solid #e8e8e8;
+				padding: 0.7em 1.5em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.8em;
+				flex-wrap: wrap;
+			}
+			.rakuten-bar-label {
+				font-size: 0.62em;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				color: #999;
+				text-transform: uppercase;
+				white-space: nowrap;
+			}
+			.rakuten-bar a img {
+				display: block;
+				max-height: 40px;
+				width: auto;
+			}
+			.rakuten-bar-note {
+				font-size: 0.6em;
+				color: #bbb;
+				white-space: nowrap;
+			}
+			/* ── note CTA ── */
+			.note-cta {
+				max-width: 720px;
+				margin: 1.5em auto 0;
+				padding: 0 1.5em;
+			}
+			.note-cta-box {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1em;
+				background: linear-gradient(135deg, #1a2535 0%, #0f3a2a 100%);
+				border-radius: 10px;
+				padding: 1.2em 1.5em;
+				flex-wrap: wrap;
+			}
+			.note-cta-text { flex: 1; }
+			.note-cta-label {
+				font-size: 0.65em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: #5dcca8;
+				margin-bottom: 0.3em;
+			}
+			.note-cta-title {
+				font-size: 0.95em;
+				font-weight: 700;
+				color: white;
+				line-height: 1.35;
+			}
+			.note-cta-desc {
+				font-size: 0.72em;
+				color: rgba(255,255,255,0.55);
+				margin-top: 0.2em;
+			}
+			.note-cta-btn {
+				display: inline-block;
+				background: #5dcca8;
+				color: #0f2820;
+				font-size: 0.82em;
+				font-weight: 700;
+				padding: 0.6em 1.4em;
+				border-radius: 6px;
+				text-decoration: none;
+				white-space: nowrap;
+				transition: background 0.15s;
+			}
+			.note-cta-btn:hover { background: #7de0be; }
 			/* ── Comments ── */
 			.comments-wrap {
 				max-width: 720px;
@@ -338,10 +417,24 @@ const articleJsonLd = {
 				</aside>
 			)}
 
+{noteUrl && (
+				<div class="note-cta">
+					<a class="note-cta-box" href={noteUrl} target="_blank" rel="noopener">
+						<div class="note-cta-text">
+							<div class="note-cta-label">note 有料記事</div>
+							<div class="note-cta-title">完全版分析レポートを読む</div>
+							<div class="note-cta-desc">シナリオ試算・リスク完全版・財務モデル含む深掘り版</div>
+						</div>
+						<span class="note-cta-btn">読みに行く →</span>
+					</a>
+				</div>
+			)}
+
 			<div class="comments-wrap">
 				<Comments pageId={Astro.url.pathname} />
 			</div>
 		</main>
+		<BookSidebar />
 		<Footer />
 	</body>
 </html>

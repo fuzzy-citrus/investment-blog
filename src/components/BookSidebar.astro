@@ -1,0 +1,170 @@
+---
+---
+<!-- 筆者の本棚：左右サイドバー（1100px以上表示・JS でローテーション） -->
+<div id="bs-left" class="bs-wrap bs-left">
+	<p class="bs-note">📖 実際に読んで<br>学びがあった本</p>
+</div>
+<div id="bs-right" class="bs-wrap bs-right">
+	<p class="bs-note">📖 実際に読んで<br>学びがあった本</p>
+</div>
+<img src="https://www15.a8.net/0.gif?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT" width="1" height="1" alt="" style="display:none;" />
+
+<script>
+const BOOKS = [
+  {
+    priority: true,
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F17770405%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F21178360%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0355/9784065350355_1_2.jpg?_ex=64x64',
+    alt: 'わが投資術',
+    title: 'わが投資術<br>市場は誰に微笑むか',
+    price: '¥1,980',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F18234675%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F21609678%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1504/9784478121504_1_5.jpg?_ex=64x64',
+    alt: '50万円を50億円に増やした',
+    title: '50万円を50億円に増やした<br>投資家の父から娘への教え',
+    price: '¥1,870',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F16915229%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F20490363%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4131/9784478114131_1_2.jpg?_ex=64x64',
+    alt: 'サイコロジー・オブ・マネー',
+    title: 'サイコロジー・オブ・マネー<br>富のマインドセット',
+    price: '¥1,870',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F5263811%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F12684510%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1226/9784478001226.jpg?_ex=64x64',
+    alt: 'まぐれ',
+    title: 'まぐれ<br>投資家はなぜ運を実力と勘違いするのか',
+    price: '¥2,640',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F17490187%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F20946346%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6982/9784478116982_1_10.jpg?_ex=64x64',
+    alt: 'JUST KEEP BUYING',
+    title: 'JUST KEEP BUYING<br>富が増え続ける法則',
+    price: '¥1,870',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q0724.2bo11c45.g00q0724.2bo12179%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fbook%252F18365783%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fbook%252Fi%252F21733931%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1368/9784478121368_1_2.jpg?_ex=64x64',
+    alt: 'THE WEALTH LADDER',
+    title: 'THE WEALTH LADDER<br>富の階段',
+    price: '¥1,980',
+  },
+  {
+    href: 'https://rpx.a8.net/svt/ejp?a8mat=4B3ZN9+2G46B6+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00q63a4.2bo11514.g00q63a4.2bo120ae%2Fa26052617885_4B3ZN9_2G46B6_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fneowing-r%252Fneobk-3158396%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fneowing-r%252Fi%252F15905583%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283',
+    img: 'https://thumbnail.image.rakuten.co.jp/@0_mall/neowing-r/cabinet/item_img_2138/neobk-3158396.jpg?_ex=64x64',
+    alt: 'アート・オブ・スペンディングマネー',
+    title: 'アート・オブ・スペンディングマネー<br>お金をどう使うべきか',
+    price: '¥1,980',
+  },
+];
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderBook(b) {
+  return `<a class="bs-book" href="${b.href}" rel="nofollow" target="_blank">
+    <img class="bs-img" src="${b.img}" alt="${b.alt}">
+    <span class="bs-title">${b.title}</span>
+    <span class="bs-price">${b.price}</span>
+    <span class="bs-cta">楽天市場で見る →</span>
+  </a>`;
+}
+
+const priority = BOOKS.filter(b => b.priority);
+const rest = shuffle(BOOKS.filter(b => !b.priority));
+// わが投資術 固定 + ランダム5冊、合計6冊を3/3に分割
+const pool = [...priority, ...rest].slice(0, 6);
+
+const leftEl = document.getElementById('bs-left');
+const rightEl = document.getElementById('bs-right');
+if (leftEl) leftEl.insertAdjacentHTML('beforeend', pool.slice(0, 3).map(renderBook).join(''));
+if (rightEl) rightEl.insertAdjacentHTML('beforeend', pool.slice(3, 6).map(renderBook).join(''));
+</script>
+
+<style is:global>
+	.bs-wrap {
+		position: fixed;
+		top: 86px;
+		width: calc((100vw - 760px) / 2 - 20px);
+		max-width: 152px;
+		max-height: calc(100vh - 104px);
+		overflow-y: auto;
+		scrollbar-width: none;
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.28em;
+		z-index: 10;
+		background: #f0f5f2;
+		border: 1px solid rgba(29, 158, 117, 0.18);
+		border-radius: 10px;
+		padding: 0.5em 0.4em 0.6em;
+	}
+	.bs-wrap::-webkit-scrollbar { display: none; }
+	.bs-left  { left: 8px; }
+	.bs-right { right: 8px; }
+	@media (min-width: 1100px) {
+		.bs-wrap { display: flex; }
+	}
+	.bs-note {
+		font-size: 0.62em;
+		font-weight: 700;
+		color: #1a2535;
+		margin: 0;
+		text-align: center;
+		line-height: 1.5;
+		border-bottom: 2px solid var(--accent, #1d9e75);
+		padding-bottom: 0.5em;
+		width: 100%;
+	}
+	.bs-book {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.2em;
+		text-decoration: none;
+		background: white;
+		border: 1px solid #ddd;
+		border-radius: 7px;
+		padding: 0.4em 0.4em;
+		width: 100%;
+		box-sizing: border-box;
+		transition: box-shadow 0.15s;
+	}
+	.bs-book:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+	.bs-img {
+		width: 46px;
+		max-height: 62px;
+		object-fit: contain;
+		object-position: top;
+		border-radius: 3px;
+	}
+	.bs-title {
+		font-size: 0.56em;
+		color: #1a2535;
+		font-weight: 600;
+		text-align: center;
+		line-height: 1.45;
+	}
+	.bs-price {
+		font-size: 0.65em;
+		font-weight: 700;
+		color: #C00;
+	}
+	.bs-cta {
+		font-size: 0.55em;
+		color: #bf0000;
+		font-weight: 600;
+	}
+</style>
