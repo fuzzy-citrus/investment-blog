@@ -235,6 +235,37 @@ const posts = (await getCollection('blog')).sort(
 				color: #a0e8d0;
 			}
 
+			/* フィルタータブ */
+			.filter-bar {
+				display: flex;
+				gap: 0.5em;
+				margin-bottom: 1.5em;
+				flex-wrap: wrap;
+			}
+			.filter-btn {
+				padding: 0.4em 1.1em;
+				border-radius: 20px;
+				border: 1.5px solid #ccc;
+				background: white;
+				font-size: 0.85em;
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+				cursor: pointer;
+				transition: background 0.15s, border-color 0.15s, color 0.15s;
+			}
+			.filter-btn:hover {
+				border-color: var(--accent);
+				color: var(--accent-dark);
+			}
+			.filter-btn.active {
+				background: var(--accent-dark);
+				border-color: var(--accent-dark);
+				color: white;
+			}
+			.post-list li[data-hidden] {
+				display: none;
+			}
+
 			@media (max-width: 720px) {
 				.post-card a { flex-direction: column; }
 				.post-card img { width: 100%; height: 180px; }
@@ -247,10 +278,15 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
-			<h1>ブログ記事一覧</h1>
+			<h1>銘柄＆戦略の紹介</h1>
+			<div class="filter-bar">
+				<button class="filter-btn" data-filter="stock">銘柄紹介</button>
+				<button class="filter-btn" data-filter="column">投資コラム</button>
+				<button class="filter-btn" data-filter="all">すべて</button>
+			</div>
 			<ul class="post-list">
 				{posts.map((post) => (
-					<li>
+					<li data-type={post.data.stockCard ? 'stock' : 'column'}>
 						{post.data.stockCard ? (
 							/* 銘柄分析カード */
 							<div class="stock-card">
@@ -322,7 +358,30 @@ const posts = (await getCollection('blog')).sort(
 				))}
 			</ul>
 		</main>
-		<BookSidebar />
 		<Footer />
 	</body>
+	<script>
+		const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+		const items = document.querySelectorAll<HTMLLIElement>('.post-list li');
+
+		function applyFilter(f: string) {
+			btns.forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+			items.forEach(li => {
+				if (f === 'all' || li.dataset.type === f) {
+					li.removeAttribute('data-hidden');
+				} else {
+					li.setAttribute('data-hidden', '');
+				}
+			});
+		}
+
+		// URLパラメータで初期フィルター
+		const params = new URLSearchParams(location.search);
+		const init = params.get('type');
+		applyFilter(init === 'stock' || init === 'column' ? init : 'stock');
+
+		btns.forEach(btn => {
+			btn.addEventListener('click', () => applyFilter(btn.dataset.filter!));
+		});
+	</script>
 </html>

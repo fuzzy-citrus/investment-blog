@@ -8,10 +8,21 @@ import HeaderLink from './HeaderLink.astro';
 		<h2><a href="/">🏢 {SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">ホーム</HeaderLink>
-			<HeaderLink href="/blog">銘柄＆戦略の紹介</HeaderLink>
-			<HeaderLink href="/org">組織図</HeaderLink>
-			<HeaderLink href="/characters">メンバー</HeaderLink>
-			<HeaderLink href="/about">筆者紹介</HeaderLink>
+			<div class="dropdown-wrap">
+				<span class="dropdown-label">コンテンツ <span class="arrow">▾</span></span>
+				<div class="dropdown-menu" role="menu">
+					<a href="/blog/?type=stock" role="menuitem">銘柄紹介</a>
+					<a href="/blog/?type=column" role="menuitem">投資コラム</a>
+				</div>
+			</div>
+			<div class="dropdown-wrap">
+				<span class="dropdown-label">各種紹介 <span class="arrow">▾</span></span>
+				<div class="dropdown-menu" role="menu">
+					<a href="/about" role="menuitem">筆者紹介</a>
+					<a href="/org" role="menuitem">会社組織図・勢力図</a>
+					<a href="/characters" role="menuitem">部下の紹介</a>
+				</div>
+			</div>
 			<HeaderLink href="/search">🔍</HeaderLink>
 		</div>
 	</nav>
@@ -37,6 +48,10 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 		justify-content: space-between;
 	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+	}
 	nav a {
 		padding: 1em 0.5em;
 		color: rgba(255,255,255,0.85);
@@ -51,13 +66,77 @@ import HeaderLink from './HeaderLink.astro';
 	nav a:hover {
 		color: white;
 	}
+
+	/* コンテンツ プルダウン */
+	.dropdown-wrap {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+	.dropdown-label {
+		padding: 1em 0.5em;
+		color: rgba(255,255,255,0.85);
+		font-size: 1em;
+		font-weight: inherit;
+		cursor: pointer;
+		border: none;
+		border-bottom: 4px solid transparent;
+		background: transparent;
+		user-select: none;
+		white-space: nowrap;
+		line-height: inherit;
+		font-family: inherit;
+	}
+	.dropdown-label:hover,
+	.dropdown-wrap:hover .dropdown-label {
+		color: white;
+	}
+	.dropdown-label .arrow {
+		font-size: 0.7em;
+		display: inline-block;
+		transition: transform 0.2s;
+	}
+	.dropdown-wrap:hover .arrow {
+		transform: rotate(180deg);
+	}
+	.dropdown-menu {
+		display: none;
+		position: absolute;
+		top: calc(100% + 0px);
+		left: 0;
+		background: #1e3a2f;
+		border: 1px solid rgba(255,255,255,0.15);
+		border-top: none;
+		border-radius: 0 0 6px 6px;
+		box-shadow: 0 6px 16px rgba(0,0,0,35%);
+		min-width: 140px;
+		z-index: 200;
+		overflow: hidden;
+	}
+	.dropdown-wrap:hover .dropdown-menu {
+		display: block;
+	}
+	.dropdown-menu a {
+		display: block;
+		padding: 0.6em 0.9em;
+		color: rgba(255,255,255,0.85);
+		text-decoration: none;
+		border-bottom: 1px solid rgba(255,255,255,0.08);
+		font-size: 0.78em;
+		white-space: nowrap;
+	}
+	.dropdown-menu a:last-child {
+		border-bottom: none;
+	}
+	.dropdown-menu a:hover {
+		background: rgba(255,255,255,0.12);
+		color: white;
+	}
+
 	@media (max-width: 720px) {
-		h2 {
-			font-size: 0.9em;
-		}
-		nav a {
-			padding: 1em 0.4em;
-			font-size: 0.9em;
-		}
+		h2 { font-size: 0.9em; }
+		nav a { padding: 1em 0.4em; font-size: 0.9em; }
+		.dropdown-label { padding: 1em 0.4em; font-size: 0.9em; }
 	}
 </style>
+
