@@ -144,6 +144,7 @@ export const contentThemes: ContentTheme[] = [
       'dividend-series-03-dividend-as-exit-strategy',
       'dividend-series-04-afterword',
       'low-payout-internal-compounding',
+      'september-rights-2026',
       'towns-197a',
       'toyo-tec-9686',
       'yamau-hd-5284',
