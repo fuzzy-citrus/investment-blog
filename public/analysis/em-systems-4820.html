@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMシステムズ（4820）総合投資レポート ── 医療DX国策受益の検証</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;--sem2:#e88020;
+  --bl:#1a3c7a;--bl2:#2a5cbf;--fu:#804080;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+.hero{background:var(--ink2);color:rgba(246,245,239,.88);padding:28px 52px 22px;position:relative;overflow:hidden}
+.hero::before{content:'4820';position:absolute;right:-16px;top:-8px;font:700 150px/1 var(--head);color:rgba(255,255,255,.03);pointer-events:none}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:8px}
+.hero-title{font:700 28px/1.1 var(--head);letter-spacing:-.02em;margin-bottom:6px}
+.hero-title em{font-style:normal;color:var(--sem2)}
+.hero-sub{font-size:11px;line-height:1.7;color:rgba(246,245,239,.5);margin-bottom:16px}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.kpi{background:rgba(17,18,23,.3);padding:9px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:3px}
+.kpi-v{font:600 17px/1 var(--mono)}
+.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.rd{color:#e08888}.kpi-v.fu{color:#d090c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.35);margin-top:2px}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:rgba(36,144,84,.1);border:1px solid rgba(36,144,84,.22);border-radius:var(--r);padding:10px 16px}
+.verdict-grade{font:700 38px/1 var(--mono);color:var(--gn2)}
+.verdict-text{font-size:11px;color:rgba(246,245,239,.72);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav::-webkit-scrollbar{height:0}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 13px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+.body{max-width:1040px;margin:0 auto;padding:28px 44px 72px}
+@media(max-width:720px){.body,.hero{padding-left:16px;padding-right:16px}}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 19px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-gn{background:#dff0e8;color:var(--gn)}.cb-rd{background:#fce8e8;color:var(--rd)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-fu{background:#f4eaf8;color:var(--fu)}
+.stabs{display:flex;border-bottom:1px solid var(--bg3);margin-bottom:16px;overflow-x:auto}
+.stabs::-webkit-scrollbar{height:0}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:680px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr}}
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px 16px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-fu{border-left:3px solid var(--fu)}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}.card-hi-rd{background:#fdf0f0;border:.5px solid #e0b0b0}.card-hi-bl{background:#eef3fc;border:.5px solid #a0b8e0}.card-hi-am{background:#fef8ee;border:.5px solid #e8c870}.card-hi-fu{background:#f8f2fc;border:.5px solid #c8a8e0}
+.mc{text-align:center;padding:12px 8px}
+.mc-l{font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.mc-v{font:600 22px/1 var(--mono);margin-bottom:3px}
+.mc-v.gn{color:var(--gn)}.mc-v.rd{color:var(--rd)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.fu{color:var(--fu)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.4}
+.hi-gn{color:var(--gn);font-weight:600}.hi-rd{color:var(--rd);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-fu{color:var(--fu);font-weight:600}
+.mono{font-family:var(--mono)}
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-fu{background:#f4eaf8;color:var(--fu)}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:6px 9px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl td{padding:7px 9px;border-bottom:.5px solid var(--bg3);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.tbl td.r{text-align:right}.tbl td.c{text-align:center}
+.tbl tr.hl td{background:#f0f8f4;font-weight:600}
+.tbl tr.hl-rd td{background:#fdf0f0}.tbl tr.hl-am td{background:#fef8ee}.tbl tr.hl-fu td{background:#f8f2fc}.tbl tr.hl-bl td{background:#eef3fc}
+.noteg{background:#f0f8f4;border:.5px solid #a0d8b8;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:10px}
+.noteg strong{color:var(--gn2)}
+.noter{background:#fdf0f0;border:.5px solid #e0b0b0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:10px}
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:10px}
+.notice strong{color:var(--am2)}
+.noteb{background:#eef3fc;border:.5px solid #a0b8e0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--bl);line-height:1.65;margin-bottom:10px}
+.sep{height:1px;background:var(--bg3);margin:14px 0}
+.label{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+p{font-size:13px;line-height:1.75;color:var(--ink2)}
+small{font-size:10px;color:var(--ink3);line-height:1.5}
+.chart-wrap{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px}
+.chart-title{font:600 11px/1 var(--head);margin-bottom:10px;color:var(--ink)}
+.rm{display:grid;grid-template-columns:170px 1fr 52px;align-items:center;gap:9px;margin-bottom:7px}
+.rm-l{font-size:11px;color:var(--ink2)}.rm-t{height:8px;background:var(--bg3);border-radius:2px;overflow:hidden}.rm-f{height:100%;border-radius:2px}.rm-v{font:600 10px/1 var(--mono);text-align:right}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden;height:10px;margin-bottom:7px}
+.bfill{border-radius:2px;height:10px;display:block}
+.tl{display:grid;grid-template-columns:86px 12px 1fr;gap:0 10px;margin-bottom:14px;align-items:start}
+.tl-d{font:600 10px/1.4 var(--mono);color:var(--ink3);text-align:right;padding-top:2px}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid currentColor;background:var(--bg);margin-top:2px;position:relative}
+.tl-dot::before{content:'';position:absolute;left:4px;top:12px;width:2px;height:calc(100% + 14px);background:var(--bg3)}
+.tl:last-child .tl-dot::before{display:none}
+.tl-body{font-size:12px;line-height:1.65}
+.tl-head{font:600 12px/1.3 var(--head);margin-bottom:2px}
+.flow-chain{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:0;margin-bottom:14px}
+.flow-box{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:10px 12px;text-align:center}
+.flow-box strong{font:700 12px/1.3 var(--head);display:block;margin-bottom:4px}
+.flow-box small{font-size:10px;color:var(--ink3);line-height:1.4}
+.flow-arr{text-align:center;font-size:16px;color:var(--ink3)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+@media(max-width:720px){.cat-grid{grid-template-columns:1fr}}
+.cat-card{background:var(--bg2);border:1px solid var(--bg3);border-top:3px solid var(--ink3);border-radius:var(--r);padding:14px}
+.cat-card.c-rd{border-top-color:var(--rd)}.cat-card.c-gn{border-top-color:var(--gn2)}.cat-card.c-am{border-top-color:var(--sem2)}.cat-card.c-bl{border-top-color:var(--bl)}.cat-card.c-fu{border-top-color:var(--fu)}
+.cat-label{display:flex;align-items:center;gap:8px;font:600 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.cat-label .num{background:var(--ink);color:var(--bg);padding:3px 6px;border-radius:2px;font-weight:700;letter-spacing:.04em}
+.cat-label .imp{margin-left:auto;color:var(--ink3)}
+.cat-title{font:700 13.5px/1.32 var(--head);margin:7px 0 8px}
+.cat-big{font:700 30px/1 var(--mono);margin-bottom:3px}
+.t-rd{color:var(--rd)}.t-gn{color:var(--gn2)}.t-am{color:var(--sem2)}.t-bl{color:var(--bl)}.t-fu{color:var(--fu)}
+.cat-sub{font-size:10px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.cat-body{font-size:11.5px;line-height:1.72;color:var(--ink2)}
+.cat-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.cat-tag{font:600 9px/1 var(--mono);background:var(--bg3);color:var(--ink2);padding:4px 7px;border-radius:2px}
+.cat-tldr{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--ink2);color:rgba(246,245,239,.85);border-radius:var(--r);padding:12px 16px;margin-bottom:14px}
+.cat-tldr .tag{font:700 10px/1 var(--mono);background:var(--sem2);color:var(--ink);padding:5px 8px;border-radius:2px;letter-spacing:.08em}
+.cat-tldr p{font-size:12px;color:rgba(246,245,239,.85);line-height:1.7}
+@media print{.mnav{position:static}.chapter{display:block!important;page-break-after:always}}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-label">株式会社ＥＭシステムズ｜東証プライム 4820｜2026年7月 総合投資レポート（504円ベース・FY25/12本決算＋FY26/12 Q1決算・中計FY25-27・有報／IR反映）</div>
+  <div class="hero-title">EMシステムズ <em>4820</em> 医療DX国策受益の検証レポート</div>
+  <div class="hero-sub">
+    現在株価 504円（2026/7/8時点・ユーザー指定）｜調剤レセコン国内シェア42.8%で首位（2026年3月末）｜完全ストック型収益×配当性向100%方針（中計期間）<br>
+    医療DX令和ビジョン2030×改正医療法（2030年末カルテ普及100%明文化）の政策サイクルに乗る一方、電子処方箋特需の剥落でFY26/12 Q1営業利益は▲86%。「特需の谷」をどう評価するかが投資判断の核心
+  </div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--gn2)"><div class="kpi-l">現在株価</div><div class="kpi-v gn">504円</div><div class="kpi-s">2022年高値1,139円比 ▲56%</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)"><div class="kpi-l">予想PER</div><div class="kpi-v am">15.9倍</div><div class="kpi-s">FY26/12会社予想EPS 31.69円</div></div>
+    <div class="kpi" style="border-top:3px solid #8ab0e8"><div class="kpi-l">PBR</div><div class="kpi-v bl">1.72倍</div><div class="kpi-s">BPS 293.77円（FY25/12末）</div></div>
+    <div class="kpi" style="border-top:3px solid #68c890"><div class="kpi-l">予想配当利回り</div><div class="kpi-v gn">4.56%</div><div class="kpi-s">FY26予 23円（中間5＋期末18）</div></div>
+    <div class="kpi" style="border-top:3px solid #d090c0"><div class="kpi-l">中計FY27配当計画</div><div class="kpi-v fu">47円</div><div class="kpi-s">達成なら504円比 利回り9.3%</div></div>
+    <div class="kpi" style="border-top:3px solid #e08888"><div class="kpi-l">自己資本比率</div><div class="kpi-v rd" style="color:#68c890">73.9%</div><div class="kpi-s">実質無借金・ネットキャッシュ約64億</div></div>
+  </div>
+  <div class="verdict">
+    <div class="verdict-grade">B+</div>
+    <div class="verdict-text">
+      <strong>条件付き強気（分割エントリー・中長期インカム＋国策オプション狙い）</strong><br>
+      調剤レセコン<strong>シェア42.8%首位の独占的地位×完全ストック型収益×自己資本比率73.9%の要塞財務</strong>に、<strong>配当性向100%方針（中計期間）</strong>が重なる。中計FY27（営業利益40.3億・ROE17%・最高益）が達成されれば配当47円＝現値比利回り9.3%となり、株価はインカム面から強力に再評価される公算。ただし直近Q1は電子処方箋特需の剥落で営業利益▲86%と急減速し、通期は「下期偏重の回復」前提。<strong>会社側も特需を「不定期の上乗せ」と位置づけており、「医療DX＝公的資金で右肩上がり」という単純な図式は成立しない</strong>。<br>
+      <strong>最重要確認：</strong>2026年8月上旬 2Q決算（下期回復の蓋然性）｜ ARPU・価格改定の進捗 ｜ 標準型電子カルテ本格提供（2026年度）の競合／追い風判定
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="mnav">
+  <button class="mnb on" onclick="showC('c0',this)">①カタリスト（PR事項）</button>
+  <button class="mnb"    onclick="showC('c1',this)">②業績と財務の全体像</button>
+  <button class="mnb"    onclick="showC('c2',this)">③割安性・適正株価</button>
+  <button class="mnb"    onclick="showC('c3',this)">④配当・優待・株主還元</button>
+  <button class="mnb"    onclick="showC('c4',this)">⑤医療DX国策マップ</button>
+  <button class="mnb"    onclick="showC('c5',this)">⑥リスク分析</button>
+  <button class="mnb"    onclick="showC('c6',this)">⑦3年シナリオ</button>
+  <button class="mnb"    onclick="showC('c7',this)">⑧最終判断</button>
+</nav>
+
+<main class="body">
+<!-- ═══ C0: カタリスト（PR事項） ═══ -->
+<section class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">CH.01</span><span class="ch-title">なぜEMシステムズか ── 6つのカタリスト（PR事項）</span><span class="ch-badge cb-gn">BULL CASE</span></div>
+
+  <div class="cat-tldr">
+    <span class="tag">30秒要約</span>
+    <p><strong>「国が金を出してDXさせる市場」で首位シェア（調剤レセコン42.8%）を握るストック型企業</strong>。中計期間は配当性向100%を宣言し、FY27計画通りなら配当47円＝<strong>現値504円比で利回り9.3%</strong>。自己資本比率73.9%・実質無借金で下値は固い。一方、電子処方箋特需の剥落で直近Q1は営業利益▲86%──<strong>「特需の谷」を通過中の今こそ、本来の収益力と国策の持続性を見極めて仕込む局面</strong>。</p>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card c-rd">
+      <div class="cat-label"><span class="num">#1</span>国策 × 独占的シェア<span class="imp">重要度 ★★★</span></div>
+      <div class="cat-big t-rd">42.8%</div>
+      <div class="cat-sub">調剤レセコン国内シェア（2026年3月末・業界首位）</div>
+      <div class="cat-title">医療DXという「法律で決まった需要」の最大級の受け皿</div>
+      <div class="cat-body">2025年12月成立の改正医療法で<strong>「2030年12月末までに電子カルテ普及率100%」が明文化</strong>。オンライン資格確認義務化→電子処方箋→標準型電子カルテ（2026年度本格提供）→電子カルテ情報共有サービスと、政策サイクルが2030年まで連続。シェアが大きいほど義務化のたびに導入需要がまとめて落ちてくる構造で、同社は保険薬局55,000件のうち24,155件（FY24Q3時点）を顧客に持つ。</div>
+      <div class="cat-tags"><span class="cat-tag">改正医療法</span><span class="cat-tag">医療DX令和ビジョン2030</span><span class="cat-tag">シェア首位</span></div>
+    </div>
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">#2</span>インカム<span class="imp">重要度 ★★★</span></div>
+      <div class="cat-big t-gn">配当性向100%</div>
+      <div class="cat-sub">中計期間（FY25〜FY27）の公式方針</div>
+      <div class="cat-title">FY27計画47円なら現値比利回り9.3%──達成前でも4.6%</div>
+      <div class="cat-body">FY24実績35円→FY25実績39円（性向110%）→FY26予想23円（下方修正後・利回り4.56%）→<strong>中計FY27計画47円</strong>。中計最終年度の最高益（純利益30.6億・EPS約44円）が実現すれば、<strong>504円の取得単価に対し利回り9%超</strong>。市場がそれを信じれば株価はインカム面から強制的に再評価される。逆に言えば現値は「中計未達」をほぼ織り込んだ水準。</div>
+      <div class="cat-tags"><span class="cat-tag">DOE的下限なし・性向連動</span><span class="cat-tag">総還元性向 FY24:142%</span></div>
+    </div>
+    <div class="cat-card c-bl">
+      <div class="cat-label"><span class="num">#3</span>財務要塞<span class="imp">重要度 ★★★</span></div>
+      <div class="cat-big t-bl">73.9%</div>
+      <div class="cat-sub">自己資本比率（FY25/12末）・実質無借金</div>
+      <div class="cat-title">ネットキャッシュ約64億円＋自社ビル担保余力150億円</div>
+      <div class="cat-body">現預金71.3億に対し有利子負債7.2億（2026年3月末）。自社保有の新大阪ブリックビルを担保に<strong>約150億円の借入余力</strong>を自認しており、減益局面でも配当原資・M&A資金に窮しない。時価総額約350億円に対しネットキャッシュが約2割を占め、下値を支える。</div>
+      <div class="cat-tags"><span class="cat-tag">ネットD/E ▲34%</span><span class="cat-tag">のれん20.6億は要監視</span></div>
+    </div>
+    <div class="cat-card c-am">
+      <div class="cat-label"><span class="num">#4</span>ビジネスモデル<span class="imp">重要度 ★★☆</span></div>
+      <div class="cat-big t-am">完全ストック型</div>
+      <div class="cat-sub">月額サブスク＋保守が売上の5〜6割</div>
+      <div class="cat-title">スイッチングコストの壁×ARPU+10%の価格改定余地</div>
+      <div class="cat-body">レセコンは薬局業務の基幹システムで、UI変更への現場抵抗が強く<strong>解約されにくい</strong>。中計では業務機能に経営機能（処方箋シェアリング・BIツール・POS）を上乗せし、<strong>ARPUを25,000円→27,500円（+10%強）</strong>へ引き上げる計画。物価上昇を背景とした「製品価格の適正化」＝値上げを公式に掲げており、インフレ転嫁力を持つ。</div>
+      <div class="cat-tags"><span class="cat-tag">MAPsシリーズ</span><span class="cat-tag">解約率低・基幹系</span></div>
+    </div>
+    <div class="cat-card c-fu">
+      <div class="cat-label"><span class="num">#5</span>成長ストーリー<span class="imp">重要度 ★★☆</span></div>
+      <div class="cat-big t-fu">ROE 17%</div>
+      <div class="cat-sub">中計FY27目標（長期20%超）・最高益更新へ</div>
+      <div class="cat-title">FY27営業利益40.3億＝最高益。医科・介護の黒字化が上乗せ</div>
+      <div class="cat-body">調剤で稼ぎながら、医科（シェア3.5%→件数60%増計画）・介護/福祉（FY27黒字化計画）へ共通基盤MAPsを横展開。医科・介護の減損処理済みで年2〜3億円の費用減効果。<strong>ROE改善→PBR再評価（現1.7倍）</strong>のロジックを会社自身が中計で明示しており、株価向上を経営課題として認識している。</div>
+      <div class="cat-tags"><span class="cat-tag">3領域連携</span><span class="cat-tag">メディパルHD 10.2%保有</span></div>
+    </div>
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">#6</span>優待＋需給<span class="imp">重要度 ★☆☆</span></div>
+      <div class="cat-big t-gn">優待あり</div>
+      <div class="cat-sub">200株×1年以上でカタログ優待（1,000円相当〜）</div>
+      <div class="cat-title">個人の長期保有を促す設計＋安定株主57%で浮動株薄</div>
+      <div class="cat-body">12月末に1年以上継続保有で、200株:1,000円相当／1,000株:3,000円相当／2,000株:5,000円相当のカタログ選択式優待。創業家資産管理会社コッコウ37.6%＋メディパルHD10.2%＋GS系10%超で<strong>安定保有が過半</strong>。浮動株が薄く、業績回復や増配確度が高まった局面では株価の弾性が出やすい。</div>
+      <div class="cat-tags"><span class="cat-tag">200株=約10.1万円</span><span class="cat-tag">長期保有条件に注意</span></div>
+    </div>
+  </div>
+
+  <div class="notice"><strong>フェアネスのための注記：</strong>直近FY26/12 Q1は売上▲24.9%・営業利益▲85.9%と急減速（電子処方箋・オン資特需の剥落＋自社リプレイス抑制）。2Q会社予想も営業利益▲67.9%下方修正され、中間配当は14円→5円に減額。通期予想（営利33.2億）は「下期に営業利益率23%へのV字回復」が前提で据え置かれており、<strong>8月の2Q決算がこのレポート全体の前提を試す試金石</strong>になる。詳細は⑥リスク分析。</div>
+
+  <div class="label">カタリストの時間軸</div>
+  <div class="g3">
+    <div class="card card-gn"><div class="label">短期（〜6ヶ月）</div><p style="font-size:12px">8月上旬2Q決算での下期回復確認／ハードリプレイス需要の上振れ／通期据え置き予想の達成→<span class="hi-gn">減配懸念の後退で見直し買い</span></p></div>
+    <div class="card card-bl"><div class="label">中期（〜1年半）</div><p style="font-size:12px">2027年2月 FY26本決算＋FY27ガイダンス（中計最終年度・配当47円計画の現実味）／標準型電子カルテ本格提供と令和8年度診療報酬改定対応の需要顕在化</p></div>
+    <div class="card card-fu"><div class="label">長期（〜2030年）</div><p style="font-size:12px">改正医療法：2030年末カルテ普及100%へ向けた導入・更新需要の連続／医科・介護黒字化による第2・第3の収益柱／長期ROE20%超→PBR再評価</p></div>
+  </div>
+</section>
+
+<!-- ═══ C1: 業績と財務 ═══ -->
+<section class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">CH.02</span><span class="ch-title">業績と財務の全体像 ── 特需の山と谷を分解する</span><span class="ch-badge cb-bl">FUNDAMENTALS</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showT('t1a',this)">年次業績と特需構造</button>
+    <button class="stab" onclick="showT('t1b',this)">四半期モメンタム</button>
+    <button class="stab" onclick="showT('t1c',this)">セグメント分解</button>
+    <button class="stab" onclick="showT('t1d',this)">財務健全性（自己資本）</button>
+  </div>
+
+  <div class="spanel active" id="t1a">
+    <div class="chart-wrap" style="margin-bottom:12px"><div class="chart-title">売上高・営業利益・営業利益率の推移（FY21/12〜FY27/12中計）</div><canvas id="chAnnual" height="120"></canvas><small>出所：決算短信・中期経営計画（FY26は会社予想、FY27は中計目標）</small></div>
+    <div class="g2">
+      <div class="card card-am">
+        <div class="label">FY24/12＝電子処方箋特需のピーク</div>
+        <p style="font-size:12px">FY24/12は売上248.4億（+22%）・営業利益44.6億（+92%）と過去最高。オンライン資格確認義務化・電子処方箋導入・マイナ保険証一体化（2024年12月）・Windows10 EOLハード更新が集中した<strong>「国策特需の収穫期」</strong>だった。FY25/12は反動で減収減益（236.6億／36.8億）ながら、修正計画は上回り純利益は過去最高の24.5億を維持。</p>
+      </div>
+      <div class="card card-bl">
+        <div class="label">会社自身の整理：「特需は不定期の上乗せ」</div>
+        <p style="font-size:12px">中計資料で会社は厚生行政関連を<strong>「不定期的・非オーガニックな上乗せ要因」と明言</strong>し、計画には最低限しか織り込まない方針。つまり①ベースはARPU×件数のストック成長（FY26+4.7%→FY27+3.3%）、②国策イベントのたびに上振れが乗る、という<strong>「階段状成長」モデル</strong>として理解するのが正しい。</p>
+      </div>
+    </div>
+    <div class="noteg"><strong>ポイント：</strong>FY13/3→FY25/12で売上は102億→237億（2.3倍）、利益剰余金は44億→153億。減収年はあっても<strong>収益モデル転換（フロー→ストック）以降、構造的な赤字転落は一度もない</strong>。「谷」は特需の谷であって、需要消滅の谷ではない。</div>
+  </div>
+
+  <div class="spanel" id="t1b">
+    <div class="chart-wrap" style="margin-bottom:12px"><div class="chart-title">四半期 売上高と営業利益率（FY24Q1〜FY26Q1実績＋FY26下期会社計画）</div><canvas id="chQ" height="120"></canvas><small>出所：決算短信・ウォールデンリサーチ集計（26年2Q以降は会社予想を按分）</small></div>
+    <div class="g2">
+      <div class="card card-rd">
+        <div class="label">Q1ショックの中身</div>
+        <p style="font-size:12px">FY26Q1：売上50.4億（▲24.9%）・営業利益2.2億（▲85.9%）・営業利益率4.3%。初期売上高（初期システム／オン資／電子処方箋／ハードリプレイス）が<strong>前年同期比で半減近く</strong>に落ち込んだ。加えて新規他社顧客の獲得・付加価値商材へ営業リソースを戦略シフトし、自社リプレイスを意図的に抑制。費用も前倒し投入した。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">それでも崩れていないもの</div>
+        <p style="font-size:12px"><strong>課金収入（ストック）は漸増を維持</strong>。介護/福祉は値上げとライセンス増で赤字縮小。会社は下期営業利益28.7億（利益率23%）への回復を計画し通期を据え置き。ハードリプレイス需要は想定より上振れ方向とされ、下期偏重シナリオ自体に一定の根拠はある──が、検証は8月2Q決算待ち。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t1c">
+    <table class="tbl" style="margin-bottom:12px">
+      <thead><tr><th>セグメント</th><th class="r">FY25売上</th><th class="r">FY25営利</th><th class="r">利益率</th><th class="r">FY26Q1営利</th><th>中計での位置づけ</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>調剤システム</td><td class="r">192.4億</td><td class="r">39.7億</td><td class="r">20.6%</td><td class="r">3.7億（▲74%）</td><td>ウォレットシェア拡大（ARPU+10%・値上げ）</td></tr>
+        <tr><td>医科システム</td><td class="r">28.8億</td><td class="r">0.3億</td><td class="r">1.1%</td><td class="r">▲1.7億（赤字転落）</td><td>市場シェア拡大（件数3,158→5,000件へ+60%）</td></tr>
+        <tr><td>介護/福祉</td><td class="r">5.7億</td><td class="r">▲3.8億</td><td class="r">赤字</td><td class="r">▲0.8億（赤字縮小）</td><td>FY27黒字化（値上げ＋対象市場29万件へ拡大）</td></tr>
+        <tr><td>その他</td><td class="r">11.2億</td><td class="r">0.3億</td><td class="r">2.5%</td><td class="r">0.4億</td><td>─</td></tr>
+      </tbody>
+    </table>
+    <div class="g2">
+      <div class="card card-am"><div class="label">現実：ほぼ「調剤の一本足」</div><p style="font-size:12px">売上の8割・利益のほぼ全てが調剤。医科はシェア3.5%（対象9万診療所）と小さく、Q1は赤字転落。<strong>「医療DXの総合受益」ではなくまだ「調剤DXの受益」企業</strong>と見るのが実態に忠実。</p></div>
+      <div class="card card-gn"><div class="label">裏返せば：横展開の伸びしろ</div><p style="font-size:12px">医科は電子カルテ普及率5割程度の市場で、国が標準化と普及を強制する領域。共通基盤MAPsで医科・調剤・介護をつなぐ設計は、<strong>国の「全国医療情報プラットフォーム」構想と方向が一致</strong>。FY24に医科・介護の減損を済ませ、費用構造は軽くなっている（年2〜3億円の費用減）。</p></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t1d">
+    <div class="g4" style="margin-bottom:12px">
+      <div class="card mc"><div class="mc-l">自己資本比率</div><div class="mc-v gn">73.9%</div><div class="mc-s">FY25/12末（Q1末72.5%）</div></div>
+      <div class="card mc"><div class="mc-l">ネットキャッシュ</div><div class="mc-v bl">+64億円</div><div class="mc-s">現預金71.3億−有利子負債7.2億（26/3末）</div></div>
+      <div class="card mc"><div class="mc-l">BPS</div><div class="mc-v am">293.77円</div><div class="mc-s">株価504円の58%が純資産</div></div>
+      <div class="card mc"><div class="mc-l">のれん</div><div class="mc-v rd">20.6億円</div><div class="mc-s">M&A拡大で増加傾向・要監視</div></div>
+    </div>
+    <div class="g2">
+      <div class="card card-bl">
+        <div class="label">「借りない会社」から「使う会社」へ</div>
+        <p style="font-size:12px">2008年に76億あった有利子負債を2020年までにほぼゼロ化した保守的財務の会社が、中計では<strong>新大阪ブリックビル（自社保有不動産）を担保に約150億円の借入余力</strong>を活用し、バランスシート適正化＝ROE向上に舵を切った。株主還元9,000百万円（3年累計）をコミット済み。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label">配当原資の安全性</div>
+        <p style="font-size:12px">FY25は配当29.7億円を払ってなお現預金78億・自己資本比率73.9%。<strong>仮に利益が計画を2〜3割下振れても、配当性向100%方針の継続自体は財務的に十分可能</strong>。リスクは「払えるか」ではなく「利益が減れば配当も減る」という性向連動の設計にある（④参照）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══ C2: 割安性・適正株価 ═══ -->
+<section class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">CH.03</span><span class="ch-title">割安性・適正株価 ── 504円は何を織り込んでいるか</span><span class="ch-badge cb-am">VALUATION</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showT('t2a',this)">現在の指標と歴史レンジ</button>
+    <button class="stab" onclick="showT('t2b',this)">★適正株価 4手法分析</button>
+    <button class="stab" onclick="showT('t2c',this)">「割安に見えて割安でない」議論</button>
+  </div>
+
+  <div class="spanel active" id="t2a">
+    <div class="g4" style="margin-bottom:12px">
+      <div class="card mc"><div class="mc-l">予想PER</div><div class="mc-v am">15.9倍</div><div class="mc-s">EPS31.69円／過去PBRピーク期は30倍超も</div></div>
+      <div class="card mc"><div class="mc-l">PBR</div><div class="mc-v bl">1.72倍</div><div class="mc-s">2010年以降レンジ 0.56〜4.53倍のほぼ中央下</div></div>
+      <div class="card mc"><div class="mc-l">EV/EBITDA</div><div class="mc-v fu">約6.5倍</div><div class="mc-s">EV≒285億（時価総額349億−ネットC64億）÷FY26計画EBITDA43.6億</div></div>
+      <div class="card mc"><div class="mc-l">予想配当利回り</div><div class="mc-v gn">4.56%</div><div class="mc-s">過去10年平均は1〜2%台→性向100%化で別物に</div></div>
+    </div>
+    <table class="tbl" style="margin-bottom:12px">
+      <thead><tr><th>指標</th><th class="r">FY24末</th><th class="r">FY25末</th><th class="r">現在(504円)</th><th>評価</th></tr></thead>
+      <tbody>
+        <tr><td>株価</td><td class="r">約780円*</td><td class="r">約795円*</td><td class="r">504円</td><td><span class="badge bd-rd">高値1,139円比▲56%</span></td></tr>
+        <tr><td>PER（予想）</td><td class="r">─</td><td class="r">─</td><td class="r">15.9倍</td><td>グロース評価は完全剥落</td></tr>
+        <tr class="hl"><td>配当利回り（予想）</td><td class="r">4.48%</td><td class="r">4.91%</td><td class="r">4.56%</td><td><span class="badge bd-gn">プライム市場でも上位水準</span></td></tr>
+        <tr><td>ROE</td><td class="r">11.8%</td><td class="r">12.1%</td><td class="r">予11.5%</td><td>中計目標17%との差＝再評価余地</td></tr>
+      </tbody>
+    </table>
+    <small>*配当利回り実績（4.48%・4.91%）から逆算した概算の期中平均的水準。出所：IRBANK・決算短信より計算</small>
+    <div class="noteb" style="margin-top:10px"><strong>読み方：</strong>2022年8月の上場来高値1,139円は「医療DXグロース株」としての評価（PER30倍超・PBR4倍台）。現在の504円は<strong>「特需一巡後の成熟ストック企業」としての評価</strong>で、グロースプレミアムはゼロ。つまりここから先は「中計が達成されるか」だけで期待リターンが決まる、比較的シンプルな賭けになっている。</div>
+  </div>
+
+  <div class="spanel" id="t2b">
+    <div class="chart-wrap" style="margin-bottom:12px"><div class="chart-title">4手法による適正株価レンジ（現在値504円との比較）</div><canvas id="chFair" height="110"></canvas><small>試算はいずれも本レポートの前提に基づく参考値（下記に根拠）</small></div>
+    <table class="tbl" style="margin-bottom:12px">
+      <thead><tr><th>手法</th><th>前提</th><th class="r">保守</th><th class="r">強気</th><th>含意</th></tr></thead>
+      <tbody>
+        <tr><td>① PER法</td><td>FY27中計EPS約44円 × PER14〜16倍（安定ストック企業の標準レンジ）</td><td class="r">616円</td><td class="r">704円</td><td>中計達成が条件</td></tr>
+        <tr><td>② 配当利回り法</td><td>FY27配当47円 ÷ 要求利回り6〜5%</td><td class="r">783円</td><td class="r">940円</td><td>性向100%が中計後も続くかが鍵</td></tr>
+        <tr><td>③ PBR-ROE法</td><td>ROE12%なら理論PBR1.7倍≒現状／ROE17%なら2.5倍</td><td class="r">490円</td><td class="r">735円</td><td>現値=ROE12%継続の織り込み</td></tr>
+        <tr class="hl"><td>④ EV/EBITDA法</td><td>FY27 EBITDA約50億 × 7〜8倍 ＋ ネットキャッシュ64億</td><td class="r">598円</td><td class="r">670円</td><td>M&A買収者目線でも下値は限定的</td></tr>
+      </tbody>
+    </table>
+    <div class="g2">
+      <div class="card card-hi-gn"><div class="label">総合レンジ</div><p style="font-size:12px">4手法の中央値は<strong>おおむね600〜700円</strong>（+19〜+39%）。逆に「中計未達・FY26水準の利益が続く」前提（EPS32円×PER13倍）なら<strong>約415円</strong>で、下値余地は▲18%程度。<strong>上方余地が下方余地を上回る非対称性</strong>が現値の魅力。</p></div>
+      <div class="card card-hi-am"><div class="label">最大の留保</div><p style="font-size:12px">②配当利回り法の783〜940円は「中計期間限定の性向100%」を恒久前提にした数字であり、<strong>FY28以降の還元方針が発表されるまで割り引いて見るべき</strong>。中計後に性向50%へ戻せば配当は約22円となり、利回り妙味は普通の水準に戻る。</p></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t2c">
+    <div class="g2">
+      <div class="card card-gn">
+        <div class="label">割安派の論拠</div>
+        <p style="font-size:12px">①ネットキャッシュ64億＋不動産（新大阪ブリックビル）を控除した事業価値は営業利益33〜40億に対し極めて低い評価。②シェア42.8%の基幹システムは実質的に代替困難で、キャッシュフローの予見性が高い。③配当4.6%＋優待が待つ間の下支え。④安定株主57%で需給が締まっている。</p>
+      </div>
+      <div class="card card-rd">
+        <div class="label">割高（正当な評価）派の論拠</div>
+        <p style="font-size:12px">①調剤薬局市場は横ばいで、オーガニック成長は年3〜5%どまり。②FY24-25の利益は特需の産物で「本来の収益力」は営業利益25〜30億かもしれない（その場合PERは実質18〜20倍）。③医科・介護は赤字で、黒字化計画は過去中計でも未達の実績（医科7,000件目標→実績3,158件）。④性向連動配当は減益＝減配に直結し、利回りの「床」にならない。</p>
+      </div>
+    </div>
+    <div class="notice"><strong>本レポートの立場：</strong>どちらも一理ある。だからこそ「全額を今」ではなく<strong>2Q決算（8月）前後での分割エントリー</strong>が合理的。下期回復が数字で確認されれば割安派の論拠が勝ち、確認できなければ415円方向への調整を待って拾い直せばよい。</div>
+  </div>
+</section>
+
+<!-- ═══ C3: 配当・優待・株主還元 ═══ -->
+<section class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">CH.04</span><span class="ch-title">配当性向100%・優待 ── インカムの実力と脆さ</span><span class="ch-badge cb-gn">INCOME</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showT('t3a',this)">配当の推移と方針</button>
+    <button class="stab" onclick="showT('t3b',this)">株主優待の詳細</button>
+    <button class="stab" onclick="showT('t3c',this)">総還元と資本政策</button>
+  </div>
+
+  <div class="spanel active" id="t3a">
+    <div class="chart-wrap" style="margin-bottom:12px"><div class="chart-title">1株配当と配当性向の推移（FY21/12〜FY27/12計画）</div><canvas id="chDps" height="110"></canvas><small>出所：IRBANK・決算短信・中期経営計画。FY26は修正後予想、FY27は中計計画値</small></div>
+    <div class="g3" style="margin-bottom:12px">
+      <div class="card mc"><div class="mc-l">FY25実績</div><div class="mc-v gn">39円</div><div class="mc-s">性向110%・利回り4.91%（期中）</div></div>
+      <div class="card mc"><div class="mc-l">FY26予想（修正後）</div><div class="mc-v am">23円</div><div class="mc-s">中間14円→5円へ減額修正。性向72.6%</div></div>
+      <div class="card mc"><div class="mc-l">FY27中計計画</div><div class="mc-v fu">47円</div><div class="mc-s">純利益30.6億×性向100%前提</div></div>
+    </div>
+    <div class="g2">
+      <div class="card card-gn"><div class="label">強み：経営が「還元で株価を上げる」と宣言している</div><p style="font-size:12px">中計で「ROE17%達成のためバランスシート適正化＝<strong>中計期間中の配当性向100%</strong>」と明記。株主還元3年累計90億円（時価総額の約26%相当）のキャピタルアロケーションを開示し、自己株取得・消却も選択肢として明示。FY24は12.5億の配当に加え約10億の自社株買いを実施（総還元性向142.5%）。</p></div>
+      <div class="card card-rd"><div class="label">弱み：性向連動＝減益なら即減配</div><p style="font-size:12px">FY26の23円への下方修正（当初32円）はまさにこの設計の帰結。DOEや累進配当のような「額の下限」がないため、<strong>配当利回りを「債券的な床」として頼ることはできない</strong>。FY26予想23円は下期回復前提の性向72.6%であり、通期未達ならさらに切り下がる可能性もゼロではない。</p></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t3b">
+    <table class="tbl" style="margin-bottom:12px">
+      <thead><tr><th>保有株数</th><th class="r">投資額目安(504円)</th><th class="r">優待内容</th><th class="r">優待利回り</th><th class="r">配当+優待利回り</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>200株〜</td><td class="r">100,800円</td><td class="r">カタログ1,000円相当</td><td class="r">0.99%</td><td class="r">約5.6%</td></tr>
+        <tr><td>1,000株〜</td><td class="r">504,000円</td><td class="r">カタログ3,000円相当</td><td class="r">0.60%</td><td class="r">約5.2%</td></tr>
+        <tr><td>2,000株〜</td><td class="r">1,008,000円</td><td class="r">カタログ5,000円相当</td><td class="r">0.50%</td><td class="r">約5.1%</td></tr>
+      </tbody>
+    </table>
+    <div class="g2">
+      <div class="card card-am"><div class="label">条件に注意</div><p style="font-size:12px"><strong>12月末基準・1年以上の継続保有（同一株主番号で連続記載）が必要</strong>。買ってすぐは貰えない。内容はセルフメディケーション・ヘルスケア商品・食品・体験などから1点選択のカタログ式で、ヘルスケア企業らしい設計。</p></div>
+      <div class="card card-gn"><div class="label">最効率は200株</div><p style="font-size:12px">優待利回りは200株（約10万円）が最も高く、<strong>配当4.56%＋優待0.99%≒約5.6%の総合利回り</strong>。NISA成長投資枠での長期保有と相性が良い。ただし優待制度は取締役会決議で変更・廃止され得る点は他社同様。</p></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t3c">
+    <div class="flow-chain">
+      <div class="flow-box"><strong>原資</strong><small>FY24末現預金90億<br>＋中計3年FCF見込75億<br>＋借入余力150億</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>配分</strong><small>株主還元90億<br>成長投資・M&A（医科・介護優先）<br>クラウド安定化投資</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>着地</strong><small>FY27末現預金60億へ圧縮<br>＝ROE17%・PBR再評価<br>長期ROE20%超</small></div>
+    </div>
+    <div class="g2">
+      <div class="card card-bl"><div class="label">株主構成が支える還元の信頼性</div><p style="font-size:12px">筆頭株主コッコウ（創業家系・37.6%）とメディパルHD（医薬品卸最大手・10.2%）で約48%。<strong>大株主自身が配当の最大の受益者</strong>であり、性向100%方針が中計途中で反故にされるインセンティブは小さい。GS系が10%超保有している点は、機関投資家の理論価値評価が入っている証左とも読める。</p></div>
+      <div class="card card-fu"><div class="label">中計後（FY28〜）の論点</div><p style="font-size:12px">性向100%はあくまで「バランスシート適正化の手段」。現預金が目標の60億に達した後は、<strong>性向を下げて成長投資へ回帰する可能性</strong>がある。その時に利益成長（医科・介護の黒字化）がインカム減少を埋められるか──2027年の中計更新が長期保有者の次の関門。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ C4: 医療DX国策マップ ═══ -->
+<section class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">CH.05</span><span class="ch-title">医療DX国策マップ ── 「公的資金で株価は上がるのか」の構造分析</span><span class="ch-badge cb-fu">POLICY</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showT('t4a',this)">政策工程表と受益タイミング</button>
+    <button class="stab" onclick="showT('t4b',this)">受益メカニズムの分解</button>
+    <button class="stab" onclick="showT('t4c',this)">国策の裏面：3つの誤解</button>
+  </div>
+
+  <div class="spanel active" id="t4a">
+    <div class="tl"><div class="tl-d">2023年1月〜</div><div class="tl-dot" style="color:var(--gn2)"></div><div class="tl-body"><div class="tl-head">電子処方箋 運用開始／オンライン資格確認 原則義務化（2023年4月）</div>導入補助（医療情報化支援基金）を追い風にFY23〜25の特需を形成。同社顧客の電子処方箋導入率は70〜75%（2024年末見込）と全国平均を大きく先行。</div></div>
+    <div class="tl"><div class="tl-d">2024年12月</div><div class="tl-dot" style="color:var(--gn2)"></div><div class="tl-body"><div class="tl-head">マイナ保険証と健康保険証の一体化（保険証廃止）</div>診療報酬に「医療DX推進体制整備加算」新設（2024年6月改定）＝<strong>DX対応した医療機関・薬局に公費が流れ続ける恒常的インセンティブ</strong>が完成。</div></div>
+    <div class="tl"><div class="tl-d">2025年12月</div><div class="tl-dot" style="color:var(--bl)"></div><div class="tl-body"><div class="tl-head">改正医療法 成立 ── 「2030年12月末までに電子カルテ普及率100%」を明文化</div>努力目標から<strong>法定目標へ格上げ</strong>。未導入の約5割の無床診療所（＝医科セグメントの対象市場9万件）に導入義務圧力がかかる。</div></div>
+    <div class="tl"><div class="tl-d">2026年度</div><div class="tl-dot" style="color:var(--sem2)"></div><div class="tl-body"><div class="tl-head">標準型電子カルテ 本格提供／令和8年度診療報酬改定（2026年4月）＝いまここ</div>デジタル庁主導（開発：FIXER）のHL7 FHIR準拠カルテが本格展開。診療報酬改定対応はレセコンベンダーの恒常需要。<strong>同社は「改定対応の複雑さがベンダー淘汰を進め、シェア上位に需要が集中する」構造の受益側</strong>。</div></div>
+    <div class="tl"><div class="tl-d">2027〜28年</div><div class="tl-dot" style="color:var(--fu)"></div><div class="tl-body"><div class="tl-head">電子カルテ情報共有サービス拡大・共通算定モジュール展開</div>全国医療情報プラットフォームの本格運用。既存顧客のシステム改修・アップデート需要＝<strong>次の「不定期の上乗せ」候補</strong>。</div></div>
+    <div class="tl"><div class="tl-d">2030年12月</div><div class="tl-dot" style="color:var(--rd)"></div><div class="tl-body"><div class="tl-head">電子カルテ普及率100%（法定目標）</div>ここまでの4年半、導入・更新・改定対応の政策イベントが途切れない。<strong>「医療DXは終わったテーマ」ではなく、特需第2波・第3波の待機期間</strong>というのが工程表の示す事実。</div></div>
+  </div>
+
+  <div class="spanel" id="t4b">
+    <div class="flow-chain">
+      <div class="flow-box"><strong>① 国が制度を作る</strong><small>義務化・診療報酬加算<br>・補助金（公的資金）</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>② 顧客が対応を迫られる</strong><small>全国の薬局・診療所が<br>システム導入/改修</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>③ シェア首位に需要集中</strong><small>42.8%の顧客基盤に<br>初期売上＋恒常ARPU上昇</small></div>
+    </div>
+    <div class="g2">
+      <div class="card card-gn"><div class="label">「公的資金→株価」の正しい経路</div><p style="font-size:12px">公的資金は株価に直接入るのではなく、<strong>①導入時の初期売上（一時的・振れ大）と②一巡後に標準機能化して積み上がる月額課金（恒常的）</strong>の2経路で業績に転換される。FY24の営業利益44.6億は①のピーク、中計FY27の40.3億は②主導での回復。②の比率が上がるほど利益の質は上がり、PERは切り上がりやすい。</p></div>
+      <div class="card card-bl"><div class="label">ベンダー淘汰という隠れた追い風</div><p style="font-size:12px">2年に1度以上の報酬改定・薬価改定への対応負担で、中小レセコンベンダーは<strong>自然減</strong>している（会社・業界資料）。医療DXの高度化は対応体力のある大手への需要集中を加速させ、同社シェアは35.6%（FY21末）→43.9%（FY24Q3）へ上昇してきた。国策は「市場を広げる」だけでなく<strong>「競争相手を減らす」形でも効く</strong>。</p></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="t4c">
+    <div class="g3">
+      <div class="card card-rd"><div class="label">誤解① 「国策だから右肩上がり」</div><p style="font-size:12px">実際は<strong>階段状</strong>。義務化前に需要が集中し、直後に谷が来る（FY26Q1が実例）。国策銘柄は「イベント前に仕込みイベント一巡で山を越える」性質があり、<strong>今は谷側＝仕込み側の局面</strong>だが、次の山の時期は政策スケジュール次第で読み切れない。</p></div>
+      <div class="card card-am"><div class="label">誤解② 「標準型カルテは追い風のみ」</div><p style="font-size:12px">国が安価な標準型電子カルテを提供すれば、<strong>医科セグメントでは自社製品と競合し得る（両刃）</strong>。一方、調剤レセコンは標準型カルテの対象外であり本丸は無傷。医科は「標準型と連携するレセコン・周辺システム」で取る戦略になる。</p></div>
+      <div class="card card-fu"><div class="label">誤解③ 「最大受益株」</div><p style="font-size:12px">医療DX全体の最大受益はカルテ大手（富士通Japan・PHC系等の非上場/大手部門）や情報基盤側にも分散する。同社は正確には<strong>「調剤DXの最大受益株」であり、医科・介護での受益はこれから獲りに行く段階</strong>。この解像度を持って期待値を設定すべき。</p></div>
+    </div>
+    <div class="noteg"><strong>結論（国策評価）：</strong>「公的資金で数年後に株価が上がるか」への答えは──<strong>政策イベントは2030年まで連続しており、シェア首位ゆえ受益の再来はほぼ確実。ただし到来時期は不定期で、その間の株価はストック収益の成長（ARPU×件数）と配当で決まる</strong>。国策は「メインエンジン」ではなく「無料でついてくるコールオプション」として評価するのが妥当。</div>
+  </div>
+</section>
+<!-- ═══ C5: リスク分析 ═══ -->
+<section class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">CH.06</span><span class="ch-title">リスク分析 ── Q1ショックの解剖と6大リスク</span><span class="ch-badge cb-rd">RISK</span></div>
+
+  <div class="label">リスクメーター（発生確率 × 影響度の総合評価）</div>
+  <div style="margin-bottom:16px">
+    <div class="rm"><div class="rm-l">下期回復シナリオの未達</div><div class="rm-t"><div class="rm-f" style="width:62%;background:var(--rd)"></div></div><div class="rm-v" style="color:var(--rd)">高</div></div>
+    <div class="rm"><div class="rm-l">性向連動によるさらなる減配</div><div class="rm-t"><div class="rm-f" style="width:55%;background:var(--rd)"></div></div><div class="rm-v" style="color:var(--rd)">中高</div></div>
+    <div class="rm"><div class="rm-l">医科・介護の黒字化遅延（中計未達）</div><div class="rm-t"><div class="rm-f" style="width:52%;background:var(--sem2)"></div></div><div class="rm-v" style="color:var(--am)">中高</div></div>
+    <div class="rm"><div class="rm-l">標準型電子カルテとの競合（医科）</div><div class="rm-t"><div class="rm-f" style="width:40%;background:var(--sem2)"></div></div><div class="rm-v" style="color:var(--am)">中</div></div>
+    <div class="rm"><div class="rm-l">調剤薬局の淘汰・報酬改定による顧客側疲弊</div><div class="rm-t"><div class="rm-f" style="width:35%;background:var(--am2)"></div></div><div class="rm-v" style="color:var(--am)">中</div></div>
+    <div class="rm"><div class="rm-l">クラウド障害・セキュリティ事故（基幹インフラ）</div><div class="rm-t"><div class="rm-f" style="width:25%;background:var(--bl2)"></div></div><div class="rm-v" style="color:var(--bl)">低中</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:12px">
+    <div class="card card-rd">
+      <div class="label">① 最大リスク：下期V字回復の前提</div>
+      <p style="font-size:12px">通期営業利益33.2億の据え置きは、<strong>下期に28.7億（利益率23%）を稼ぐ計画</strong>を意味する（上期はわずか4.5億）。会社自身が「厚生行政関連需要の今後の推移を慎重に精査する必要がある」と述べており、確度は未確定。未達なら②の減配（23円割れ）と株価調整が同時に来る。<strong>監視指標：8月2Q決算の下期ガイダンス、ハードリプレイスの受注動向</strong>。</p>
+    </div>
+    <div class="card card-rd">
+      <div class="label">② 減配の実績がすでにある</div>
+      <p style="font-size:12px">FY26は当初32円→23円へ期中減額修正済み。性向100%は「利益のミラー」であり、<strong>インカム狙いの投資家が想定すべき最悪ケースはFY26配当20円割れ（利回り4%割れ）</strong>。それでもプライム平均は上回るが、「9%への道」の説得力は大きく削がれる。</p>
+    </div>
+    <div class="card card-am">
+      <div class="label">③ 中計の未達履歴</div>
+      <p style="font-size:12px">前中計では医科7,000件目標→実績3,158件、介護25,000件→14,362件と<strong>シェア目標は大幅未達</strong>（売上・利益はM&Aと特需で達成）。今中計の医科5,000件・介護黒字化も同じ轍を踏むリスクがある。経営はこの反省を中計資料で率直に開示している点は評価できる。</p>
+    </div>
+    <div class="card card-am">
+      <div class="label">④ 顧客市場の構造変化</div>
+      <p style="font-size:12px">調剤薬局市場は約55,000件で横ばい〜淘汰局面。調剤報酬改定は顧客の経営体力を削り、<strong>大手チェーンへの集約は1顧客あたり交渉力の低下（値下げ圧力）</strong>につながり得る。ARPU+10%の値上げ計画と逆向きの力学であり、価格改定の浸透率は毎四半期の確認事項。</p>
+    </div>
+  </div>
+  <div class="noter"><strong>その他の留意点：</strong>のれん20.6億（自己資本の約10%）はM&A継続で増加傾向にあり、医科・介護の計画未達が続けば減損の再発があり得る（FY24-25に減損実績あり）。また東証プライムの流動性基準に対し浮動株が薄く、<strong>日々の出来高が細い日は指値必須</strong>。大株主コッコウの動向（相続・政策変更等)は長期の需給イベント。</div>
+</section>
+
+<!-- ═══ C6: 3年シナリオ ═══ -->
+<section class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">CH.07</span><span class="ch-title">3年シナリオ分析 ── 504円からの期待値</span><span class="ch-badge cb-bl">SCENARIO</span></div>
+
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card card-hi-gn">
+      <div class="label">強気シナリオ（確率30%）</div>
+      <div class="mc-v gn" style="font-size:26px;margin:6px 0">700円 <span style="font-size:12px">+39%</span></div>
+      <p style="font-size:11.5px"><strong>中計達成</strong>：FY27営業利益40.3億・EPS44円・配当47円。下期回復を2Qで確認→減配懸念消滅→利回り9%が視野に入り配当先回り買い。標準型カルテ・情報共有サービスで医科件数も進捗。EPS44円×PER16倍。<br><strong>3年トータル：株価+39% ＋ 累計配当約100円（+20%）≒ +59%</strong></p>
+    </div>
+    <div class="card card-hi-am">
+      <div class="label">標準シナリオ（確率45%）</div>
+      <div class="mc-v am" style="font-size:26px;margin:6px 0">530円 <span style="font-size:12px">+5%</span></div>
+      <p style="font-size:11.5px"><strong>部分達成</strong>：FY26通期は小幅未達〜達成、FY27はEPS37円前後（中計比85%）・配当37円。調剤の値上げは通るが医科・介護の黒字化は1年遅延。EPS37円×PER14倍。<br><strong>3年トータル：株価+5% ＋ 累計配当約85円（+17%）≒ +22%（年率約7%）</strong></p>
+    </div>
+    <div class="card card-hi-rd">
+      <div class="label">弱気シナリオ（確率25%）</div>
+      <div class="mc-v rd" style="font-size:26px;margin:6px 0">330円 <span style="font-size:12px">▲35%</span></div>
+      <p style="font-size:11.5px"><strong>特需の谷が長期化</strong>：下期回復が空振り、FY26営業利益25億前後へ下方修正・配当20円割れ。FY27も回復弱くEPS27円×PER12倍。中計後の還元方針も性向50%へ後退。<br><strong>3年トータル：株価▲35% ＋ 累計配当約60円（+12%）≒ ▲23%</strong></p>
+    </div>
+  </div>
+
+  <div class="card card-bl" style="margin-bottom:14px">
+    <div class="label">加重期待値（3年トータルリターン）</div>
+    <p style="font-size:13px"><span class="mono hi-bl">0.30×(+59%) ＋ 0.45×(+22%) ＋ 0.25×(▲23%) ≒ <strong>+22%（年率約7%）</strong></span><br>
+    <small>期待値の過半は配当（インカム）由来。つまり本銘柄は「値上がり益を狙う国策グロース」ではなく、<strong>「高利回りインカム＋中計達成／国策第2波というアップサイドオプション」の複合商品</strong>として期待値が組成されている。弱気ケースでも配当が損失を約半分吸収する点が、下値の非対称性を作っている。</small></p>
+  </div>
+
+  <div class="label">カタリスト・カレンダー</div>
+  <table class="tbl">
+    <thead><tr><th>時期</th><th>イベント</th><th>注目ポイント</th><th class="c">株価インパクト</th></tr></thead>
+    <tbody>
+      <tr class="hl-am"><td class="mono">2026/8上旬</td><td>2Q決算</td><td>下期回復の蓋然性・通期据え置きの持続／ARPU・値上げ浸透率</td><td class="c"><span class="badge bd-rd">最重要</span></td></tr>
+      <tr><td class="mono">2026/11</td><td>3Q決算</td><td>下期利益率23%計画の実証。ここで確認できれば弱気シナリオはほぼ消滅</td><td class="c"><span class="badge bd-am">大</span></td></tr>
+      <tr><td class="mono">2026年度内</td><td>標準型電子カルテ本格提供</td><td>医科セグメントへの競合/連携影響の初期データ</td><td class="c"><span class="badge bd-bl">中</span></td></tr>
+      <tr class="hl"><td class="mono">2027/2</td><td>FY26本決算・FY27ガイダンス</td><td>中計最終年度の配当計画（47円）を公式予想に落とすか</td><td class="c"><span class="badge bd-rd">最重要</span></td></tr>
+      <tr><td class="mono">2027年後半</td><td>次期中計（FY28〜）予告</td><td>性向100%の後継方針・長期ROE20%への道筋・M&A</td><td class="c"><span class="badge bd-am">大</span></td></tr>
+      <tr><td class="mono">〜2030/12</td><td>電子カルテ普及100%法定期限</td><td>導入・改修需要の第2波、電子カルテ情報共有サービス拡大</td><td class="c"><span class="badge bd-bl">中〜大</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══ C7: 最終判断 ═══ -->
+<section class="chapter" id="c7">
+  <div class="ch-head"><span class="ch-num">CH.08</span><span class="ch-title">最終投資判断 ── 全要素統合</span><span class="ch-badge cb-gn">VERDICT</span></div>
+
+  <div class="cat-tldr" style="margin-bottom:16px">
+    <span class="tag" style="background:var(--gn2);color:#fff">B+ 条件付き強気</span>
+    <p><strong>504円のEMシステムズは「割安な国策グロース株」ではなく、「利回り4.6%（優待込み5.6%）の高財務ストック企業に、中計達成なら利回り9%＋国策第2波という2つのオプションが無料で付いた株」</strong>。期待値はプラス（3年で約+22%・年率7%目安）だが、その実現は8月2Q決算の下期回復確認に大きく依存する。</p>
+  </div>
+
+  <div class="label">観点別スコアカード</div>
+  <table class="tbl" style="margin-bottom:16px">
+    <thead><tr><th>観点</th><th class="c">評点</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr><td>財務健全性（自己資本）</td><td class="c"><span class="badge bd-gn">A</span></td><td>自己資本比率73.9%・実質無借金・ネットキャッシュ64億・自社ビル担保余力150億</td></tr>
+      <tr><td>業界地位（シェア）</td><td class="c"><span class="badge bd-gn">A</span></td><td>調剤レセコン42.8%で首位・スイッチングコスト高・ベンダー淘汰の受益側</td></tr>
+      <tr><td>配当・優待</td><td class="c"><span class="badge bd-gn">A−</span></td><td>予想利回り4.56%＋優待（200株で総合約5.6%）。ただし性向連動で減配実績あり→額の安定性はB</td></tr>
+      <tr><td>国策（医療DX）受益</td><td class="c"><span class="badge bd-am">B+</span></td><td>調剤DXでは最大受益。ただし特需は不定期・階段状で、医科・介護の受益はこれから</td></tr>
+      <tr><td>成長性</td><td class="c"><span class="badge bd-am">B</span></td><td>オーガニックは年3〜5%。中計ROE17%・最高益目標は野心的だが、前中計にシェア未達の履歴</td></tr>
+      <tr><td>足元モメンタム</td><td class="c"><span class="badge bd-rd">C</span></td><td>Q1営業利益▲86%・中間配当減額。下期V字回復前提の据え置きは未検証</td></tr>
+      <tr class="hl"><td>総合（504円に対する投資妙味）</td><td class="c"><span class="badge bd-gn">B+</span></td><td>下値は財務・配当・純資産で限定的、上値は中計達成＋国策第2波で+40〜60%。非対称性は買い方に有利</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-hi-gn">
+      <div class="label">こういう投資家に向く</div>
+      <p style="font-size:12px">✔ 配当4〜5%＋優待を受け取りながら2〜4年待てる<br>✔ 国策テーマを「オプション」として冷静に扱える<br>✔ 200株〜1,000株のNISA長期枠で積む個人投資家<br>✔ 2Q・3Q決算を確認しながら分割で買い増せる人</p>
+    </div>
+    <div class="card card-hi-rd">
+      <div class="label">こういう投資家には不向き</div>
+      <p style="font-size:12px">✘ 数ヶ月での値上がり益狙い（モメンタムは最悪期）<br>✘ 減配を許容できないインカム一本の運用<br>✘ 「医療DX＝爆発的成長」を期待するグロース投資家<br>✘ 流動性の薄さ（出来高細い日あり）を嫌う短期筋</p>
+    </div>
+  </div>
+
+  <div class="card card-bl" style="margin-bottom:14px">
+    <div class="label">実行プラン（一例）</div>
+    <p style="font-size:12.5px">① <strong>現値〜490円で打診買い（予定額の1/3）</strong>：利回り4.6%超を確保しつつ2Q決算を待つ。<br>
+    ② <strong>8月2Q決算で下期回復に根拠が示されれば+1/3</strong>：据え置き達成の確度上昇＝弱気シナリオの縮小。<br>
+    ③ <strong>逆に未達・下方修正なら410〜440円（PBR1.4倍・PER13倍水準）まで引き付けて残りを検討</strong>。減配後利回りでも4%台後半が確保できる水準が目安。<br>
+    ④ 出口：FY27に配当47円が公式予想化された時点で市場利回り5〜6%への収斂（780〜940円）を上限メド、中計後の還元方針悪化なら見直し。</p>
+  </div>
+
+  <div class="notice"><strong>免責：</strong>本レポートは公開情報（決算短信・有価証券報告書・中期経営計画・IR資料・第三者調査）に基づく分析であり、投資勧誘ではありません。数値の一部（適正株価・シナリオ・確率）は本レポート独自の試算です。投資判断はご自身の責任で行ってください。作成者は証券アナリスト・ファイナンシャルアドバイザーではありません。データ基準日：2026年7月8日。</div>
+
+  <div class="label">主要データソース</div>
+  <p style="font-size:11px;color:var(--ink3)">決算短信（FY25/12本決算 2026/2/13・FY26/12 Q1 2026/5/14）／有価証券報告書 第43期（2026/3/26提出）／中期経営計画FY2025-FY2027（2024/11）／IRBANK財務・配当データ／ウォールデンリサーチジャパン決算速報（2026/5/20）／厚労省 医療DX推進工程表・改正医療法（2025/12成立）／株主優待は会社IRページ・優待情報サイト</p>
+</section>
+</main>
+
+<script>
+window.addEventListener('load',function(){
+if(typeof Chart==='undefined')return;
+Chart.defaults.font.family="'Noto Sans JP',sans-serif";
+Chart.defaults.font.size=10;
+Chart.defaults.color='#636470';
+
+new Chart(document.getElementById('chAnnual'),{
+  data:{
+    labels:['FY21/12','FY22/12','FY23/12','FY24/12','FY25/12','FY26/12予','FY27/12中計'],
+    datasets:[
+      {type:'bar',label:'売上高（億円）',data:[144.4,169.2,203.6,248.4,236.6,227.6,235.1],backgroundColor:['#8ab0e8','#8ab0e8','#8ab0e8','#e88020','#8ab0e8','#c8c5ba','#a0d8b8'],yAxisID:'y',borderRadius:2},
+      {type:'bar',label:'営業利益（億円）',data:[18.7,24.0,23.3,44.6,36.8,33.2,40.3],backgroundColor:'#2a2b33',yAxisID:'y',borderRadius:2},
+      {type:'line',label:'営業利益率（%）',data:[13.0,14.2,11.4,18.0,15.5,14.6,17.1],borderColor:'#b83030',backgroundColor:'#b83030',yAxisID:'y2',tension:.3,pointRadius:3}
+    ]
+  },
+  options:{responsive:true,plugins:{legend:{position:'bottom'}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'億円'}},y2:{position:'right',beginAtZero:true,max:25,grid:{drawOnChartArea:false},title:{display:true,text:'%'}}}}
+});
+
+new Chart(document.getElementById('chQ'),{
+  data:{
+    labels:['24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1','26Q2計','26Q3計','26Q4計'],
+    datasets:[
+      {type:'bar',label:'売上高（億円）',data:[55.7,54.2,67.7,70.8,67.1,54.4,59.7,55.4,50.4,52.3,62.4,62.4],backgroundColor:['#8ab0e8','#8ab0e8','#8ab0e8','#8ab0e8','#8ab0e8','#8ab0e8','#8ab0e8','#8ab0e8','#b83030','#c8c5ba','#c8c5ba','#c8c5ba'],yAxisID:'y',borderRadius:2},
+      {type:'line',label:'営業利益率（%）',data:[12.9,9.2,29.3,17.8,22.8,10.1,21.5,5.6,4.3,4.4,23.0,23.0],borderColor:'#e88020',backgroundColor:'#e88020',yAxisID:'y2',tension:.3,pointRadius:3}
+    ]
+  },
+  options:{responsive:true,plugins:{legend:{position:'bottom'}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'億円'}},y2:{position:'right',beginAtZero:true,max:35,grid:{drawOnChartArea:false},title:{display:true,text:'%'}}}}
+});
+
+new Chart(document.getElementById('chDps'),{
+  data:{
+    labels:['FY21/12','FY22/12','FY23/12','FY24/12','FY25/12','FY26/12予','FY27/12計画'],
+    datasets:[
+      {type:'bar',label:'1株配当（円）',data:[11,12,14,35,39,23,47],backgroundColor:['#8ab0e8','#8ab0e8','#8ab0e8','#249054','#249054','#e88020','#d090c0'],yAxisID:'y',borderRadius:2},
+      {type:'line',label:'配当性向（%）',data:[42.8,44.9,50.4,101.3,110.1,72.6,100],borderColor:'#b83030',backgroundColor:'#b83030',yAxisID:'y2',tension:.3,pointRadius:3}
+    ]
+  },
+  options:{responsive:true,plugins:{legend:{position:'bottom'}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'円'}},y2:{position:'right',beginAtZero:true,max:130,grid:{drawOnChartArea:false},title:{display:true,text:'%'}}}}
+});
+
+new Chart(document.getElementById('chFair'),{
+  type:'bar',
+  data:{
+    labels:['① PER法','② 配当利回り法','③ PBR-ROE法','④ EV/EBITDA法'],
+    datasets:[
+      {label:'保守',data:[616,783,490,598],backgroundColor:'#8ab0e8',borderRadius:2},
+      {label:'強気',data:[704,940,735,670],backgroundColor:'#249054',borderRadius:2}
+    ]
+  },
+  options:{indexAxis:'y',responsive:true,plugins:{legend:{position:'bottom'},
+    annotation:undefined},
+    scales:{x:{beginAtZero:true,max:1000,title:{display:true,text:'円'},grid:{color:'#e0ddd4'}}}
+  },
+  plugins:[{
+    id:'nowline',
+    afterDraw(chart){
+      const x=chart.scales.x.getPixelForValue(504);
+      const ctx=chart.ctx;
+      ctx.save();ctx.strokeStyle='#b83030';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(x,chart.chartArea.top);ctx.lineTo(x,chart.chartArea.bottom);ctx.stroke();
+      ctx.fillStyle='#b83030';ctx.font='600 10px JetBrains Mono';
+      ctx.fillText('現在値 504円',x+5,chart.chartArea.top+12);
+      ctx.restore();
+    }
+  }]
+});
+});
+</script>
+
+<script>
+function showC(id,btn){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.mnb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  window.scrollTo({top:0});
+}
+function showT(pid,btn){
+  const panel=document.getElementById(pid);
+  const group=panel.parentElement;
+  group.querySelectorAll(':scope > .spanel').forEach(x=>x.classList.remove('active'));
+  panel.classList.add('active');
+  btn.parentElement.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>

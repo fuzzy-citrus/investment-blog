@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TANAKEN（1450）統合深掘り投資レポート v2 ── 解体元請ディープバリュー</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;--sem2:#e88020;
+  --bl:#1a3c7a;--bl2:#2a5cbf;--fu:#804080;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+.hero{background:var(--ink2);color:rgba(246,245,239,.88);padding:28px 52px 22px;position:relative;overflow:hidden}
+.hero::before{content:'1450';position:absolute;right:-16px;top:-8px;font:700 150px/1 var(--head);color:rgba(255,255,255,.03);pointer-events:none}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.3);text-transform:uppercase;margin-bottom:8px}
+.hero-title{font:700 28px/1.1 var(--head);letter-spacing:-.02em;margin-bottom:6px}
+.hero-title em{color:var(--sem2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.4);line-height:1.7;margin-bottom:16px}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.kpi{background:rgba(17,18,23,.3);padding:9px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.1em;color:rgba(246,245,239,.3);text-transform:uppercase;margin-bottom:3px}
+.kpi-v{font:600 17px/1 var(--mono)}
+.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.rd{color:#e08888}.kpi-v.fu{color:#d090c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.28);margin-top:2px}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:rgba(36,144,84,.1);border:1px solid rgba(36,144,84,.22);border-radius:var(--r);padding:10px 16px}
+.verdict-grade{font:700 38px/1 var(--mono);color:var(--gn2)}
+.verdict-text{font-size:11px;color:rgba(246,245,239,.74);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav::-webkit-scrollbar{height:0}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 14px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+
+.body{max-width:1040px;margin:0 auto;padding:28px 44px 72px}
+@media(max-width:720px){.body,.hero{padding-left:16px;padding-right:16px}}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 18px/1.15 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-gn{background:#dff0e8;color:var(--gn)}.cb-rd{background:#fce8e8;color:var(--rd)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-fu{background:#f4eaf8;color:var(--fu)}
+
+.stabs{display:flex;border-bottom:1px solid var(--bg3);margin-bottom:16px;overflow-x:auto}
+.stabs::-webkit-scrollbar{height:0}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:680px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr}}
+
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px 16px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-fu{border-left:3px solid var(--fu)}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}.card-hi-rd{background:#fdf0f0;border:.5px solid #e0b0b0}.card-hi-bl{background:#eef3fc;border:.5px solid #a0b8e0}.card-hi-am{background:#fef8ee;border:.5px solid #e8c870}.card-hi-fu{background:#f7f0fa;border:.5px solid #cda8dd}
+
+.mc{text-align:center;padding:12px 8px}
+.mc-l{font:600 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.mc-v{font:600 21px/1 var(--mono);margin-bottom:3px}
+.mc-v.gn{color:var(--gn)}.mc-v.rd{color:var(--rd)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.fu{color:var(--fu)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.4}
+
+.hi-gn{color:var(--gn);font-weight:600}.hi-rd{color:var(--rd);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-fu{color:var(--fu);font-weight:600}
+.mono{font-family:var(--mono)}
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:6px 9px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl td{padding:7px 9px;border-bottom:.5px solid var(--bg3);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.tbl td.r{text-align:right}.tbl td.c{text-align:center}
+.tbl tr.hl td{background:#f0f8f4;font-weight:600}
+.tbl tr.hl-rd td{background:#fdf0f0}.tbl tr.hl-am td{background:#fef8ee}.tbl tr.hl-bl td{background:#eef3fc}
+
+.noteg{background:#f0f8f4;border:.5px solid #a0d8b8;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:10px}
+.noteg strong{color:var(--gn2)}
+.noter{background:#fdf0f0;border:.5px solid #e0b0b0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:10px}
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:10px}
+.notice strong{color:var(--am2)}
+.noteb{background:#eef3fc;border:.5px solid #a0b8e0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--bl);line-height:1.65;margin-bottom:10px}
+.notef{background:#f7f0fa;border:.5px solid #cda8dd;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--fu);line-height:1.65;margin-bottom:10px}
+.notef strong{color:#6a2f6a}
+
+.sep{height:1px;background:var(--bg3);margin:14px 0}
+.label{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+p{font-size:13px;line-height:1.78;color:var(--ink2)}
+small{font-size:10px;color:var(--ink3);line-height:1.5}
+.chart-wrap{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px}
+.chart-title{font:600 11px/1 var(--head);margin-bottom:10px;color:var(--ink)}
+
+.rm{display:grid;grid-template-columns:210px 1fr 54px;align-items:center;gap:9px;margin-bottom:7px}
+.rm-l{font-size:11px;color:var(--ink2)}.rm-t{height:8px;background:var(--bg3);border-radius:2px;overflow:hidden}.rm-f{height:100%;border-radius:2px}.rm-v{font:600 10px/1 var(--mono);text-align:right}
+@media(max-width:560px){.rm{grid-template-columns:140px 1fr 44px}}
+
+.flow-chain{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;align-items:center;gap:0;margin-bottom:14px}
+.flow-box{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:10px 12px;text-align:center}
+.flow-box strong{font:700 12px/1.3 var(--head);display:block;margin-bottom:4px}
+.flow-box small{font-size:10px;color:var(--ink3);line-height:1.4}
+.flow-arr{text-align:center;font-size:15px;color:var(--ink3)}
+@media(max-width:560px){.flow-chain{grid-template-columns:1fr;gap:6px}.flow-arr{transform:rotate(90deg)}}
+
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+@media(max-width:720px){.cat-grid{grid-template-columns:1fr}}
+.cat-card{background:var(--bg2);border:1px solid var(--bg3);border-top:3px solid var(--ink3);border-radius:var(--r);padding:14px}
+.cat-card.c-rd{border-top-color:var(--rd)}.cat-card.c-gn{border-top-color:var(--gn2)}.cat-card.c-am{border-top-color:var(--sem2)}.cat-card.c-bl{border-top-color:var(--bl)}.cat-card.c-fu{border-top-color:var(--fu)}
+.cat-label{display:flex;align-items:center;gap:8px;font:600 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.cat-label .num{background:var(--ink);color:var(--bg);padding:3px 6px;border-radius:2px;font-weight:700}
+.cat-title{font:700 13px/1.32 var(--head);margin:7px 0 8px}
+.cat-big{font:700 27px/1 var(--mono);margin-bottom:3px}
+.t-rd{color:var(--rd)}.t-gn{color:var(--gn2)}.t-am{color:var(--sem2)}.t-bl{color:var(--bl)}.t-fu{color:var(--fu)}
+.cat-sub{font-size:10px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.cat-body{font-size:11.5px;line-height:1.72;color:var(--ink2)}
+.cat-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.cat-tag{font:600 9px/1 var(--mono);background:var(--bg3);color:var(--ink2);padding:4px 7px;border-radius:2px}
+.cat-tldr{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--ink2);color:rgba(246,245,239,.85);border-radius:var(--r);padding:14px 18px;margin-bottom:16px}
+.cat-tldr .g{font:700 40px/1 var(--mono);color:var(--gn2)}
+.cat-tldr .t{font-size:12px;line-height:1.7}
+.cat-tldr .t strong{color:rgba(246,245,239,.97)}
+
+/* --- v2 additions --- */
+.band{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,#249054,#bf7c18 52%,#b83030);margin:44px 10px 8px}
+.band .tk{position:absolute;top:-5px;width:2px;height:24px;background:var(--ink)}
+.band .mk{position:absolute;transform:translateX(-50%);text-align:center;top:-42px;width:130px}
+.band .mk .l{font:500 9px/1.3 var(--mono);color:var(--ink3)}
+.band .mk .v{font:700 14px/1.1 var(--mono);color:var(--ink);margin-top:2px}
+.band .mk.now .v{color:var(--gn2)}
+.band-ax{display:flex;justify-content:space-between;font:500 9px/1 var(--mono);color:var(--ink3);margin:0 6px}
+.disc-bar{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center;margin:8px 0}
+.disc-bar .dl{font-size:11px;color:var(--ink2)}
+.disc-bar .dt{height:26px;background:var(--bg3);border-radius:3px;position:relative;overflow:hidden}
+.disc-bar .df{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font:600 10px/1 var(--mono);color:#fff;border-radius:3px}
+.tl{position:relative;margin:6px 0 0 8px;padding-left:18px;border-left:2px solid var(--bg3)}
+.tl-i{position:relative;padding:0 0 16px 14px}
+.tl-i::before{content:'';position:absolute;left:-25px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--ink3)}
+.tl-i.g::before{border-color:var(--gn2)}.tl-i.a::before{border-color:var(--sem2)}.tl-i.b::before{border-color:var(--bl)}
+.tl-t{font:600 8px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.tl-h{font:700 12px/1.3 var(--head);margin-bottom:3px}
+.tl-i p{font-size:11.5px}
+
+@media print{.mnav{position:static}.chapter{display:block!important;page-break-after:always}.hero::before{display:none}}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">TANAKEN株式会社（旧・田中建設工業）｜東証スタンダード 1450｜統合深掘り投資レポート v2｜株価¥1,385ベース（2026年7月初旬・6/30終値¥1,367）｜出所：有価証券報告書・決算短信・2026/3期決算説明資料・適時開示（EDINET/TDnet）</div>
+  <div class="hero-title">TANAKEN <em>1450</em> 統合深掘りレポート v2</div>
+  <div class="hero-sub">
+    都心の大型・再開発解体に特化した<span style="color:#68c890">「持たざる経営」の解体元請</span>。売上を7年で約2.4倍、ROEは一貫15〜20%。<br>
+    FY26/3は超保守ガイダンス（売上140億）を大幅上回り<span style="color:#68c890">売上148億・純利15億で着地</span>。<span style="color:#e08888">親会社59.6%の親子上場</span>が低PERの主因＝ディスカウントの源泉かつ再評価の触媒。<span style="color:#68c890">解体は資材を"積まず・売る"側</span>ゆえ資材インフレに構造的耐性。
+  </div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--gn2)"><div class="kpi-l">株価 / 時価総額</div><div class="kpi-v gn">¥1,385</div><div class="kpi-s">約120億円</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)"><div class="kpi-l">PER（実績/予想）</div><div class="kpi-v am">8.0倍</div><div class="kpi-s">予想8.6倍</div></div>
+    <div class="kpi" style="border-top:3px solid #68c890"><div class="kpi-l">ROE（実績）</div><div class="kpi-v gn">16.4%</div><div class="kpi-s">予想15.0%</div></div>
+    <div class="kpi" style="border-top:3px solid #8ab0e8"><div class="kpi-l">EV/EBITDA</div><div class="kpi-v bl">約4倍</div><div class="kpi-s">実質無借金・低位</div></div>
+    <div class="kpi" style="border-top:3px solid #68c890"><div class="kpi-l">配当利回り</div><div class="kpi-v gn">4.0%</div><div class="kpi-s">1株55円（予）</div></div>
+    <div class="kpi" style="border-top:3px solid #e08888"><div class="kpi-l">親会社保有</div><div class="kpi-v rd">59.6%</div><div class="kpi-s">スリーハンドレッドHD</div></div>
+  </div>
+  <div class="verdict">
+    <div class="verdict-grade">A−</div>
+    <div class="verdict-text">
+      <strong>投資妙味あり（条件付き）｜クオリティ・グロース型ディープバリュー</strong><br>
+      <strong>ROE16%・配当4%・売上2桁成長をPER8倍で買える</strong>「稼ぐ力対比の割安」が核心。解体はコスト構造上<strong>資材インフレの直撃を受けにくく</strong>、鉄スクラップは逆に収入源。PERバンド（5.4〜13.2倍）でも現在は<strong>下位圏</strong>。最大の留保は<strong>親会社59.6%の親子上場</strong>（低PER・低流動性の主因／資本再編・還元強化なら触媒）と<strong>利益率の正常化（19.0%→14.8%）が底打ちするか</strong>。この2点を次の1〜2四半期で見極めるのが実務上の鍵。
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="mnav">
+  <button class="mnb on" onclick="showC('c0',this)">①要点・妙味判定</button>
+  <button class="mnb"    onclick="showC('c1',this)">②事業モデル</button>
+  <button class="mnb"    onclick="showC('c2',this)">③業績・財務</button>
+  <button class="mnb"    onclick="showC('c3',this)">④業界・インフレ耐性</button>
+  <button class="mnb"    onclick="showC('c4',this)">⑤割安性・再評価</button>
+  <button class="mnb"    onclick="showC('c5',this)">⑥親子上場・株主還元</button>
+  <button class="mnb"    onclick="showC('c6',this)">⑦リスク・カタリスト</button>
+</nav>
+
+<main class="body">
+
+<!-- C0 要点 -->
+<div class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">要点 ── 統合サマリーと妙味判定</h2><span class="ch-badge cb-gn">VERDICT</span></div>
+
+  <div class="cat-tldr">
+    <div class="g">A−</div>
+    <div class="t"><strong>一言でいえば：</strong>都心の大型解体を握る<strong>「持たざる経営」</strong>で、<strong>ROE16%なのにPER8倍・配当4%</strong>。売上は7年で2.4倍、直近は超保守ガイダンスを大幅上回って着地。<strong>解体は資材を"積まず・売る"</strong>ビジネスゆえ資材インフレに強く、元請の価格転嫁力で高マージンを維持。割安の主因は<strong>親会社59.6%の親子上場</strong>という構造ディスカウントで、これは弱みであると同時に、資本再編・還元強化なら再評価の触媒になる両義的要素。</div>
+  </div>
+
+  <div class="notice"><strong>価格前提の整合：</strong>本統合版は<strong>株価¥1,385（2026年7月初旬）</strong>を基準とします。市場実勢は6/30終値¥1,367・7/1時点で時価総額約119億・予想PER約8.5倍と概ね一致。<span class="hi-am">当初ご依頼の「1,835円」は桁の入れ違い（1,385→1,835）と判断し、実勢・アップロード版に合わせて¥1,385で統一</span>しました。仮に本当に高値圏1,835円を想定する場合は、下記⑤の感応度が示すとおり予想PERは約11.4倍＝バンド上位となり、「ディープバリュー」から「フェアバリュー」へ評価が変質します。</div>
+
+  <div class="cat-grid">
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">P·01</span>収益力</div>
+      <div class="cat-title">ROE16%を<br>PER8倍で買える</div>
+      <div class="cat-big t-gn">8.0倍</div>
+      <div class="cat-sub">実績PER／ROE実績16.4%・予想15.0%</div>
+      <div class="cat-body">高ROEを継続する企業のPER8倍は建設業・中小型で明確に低位。EV/EBITDAも約4倍。<strong>「稼ぐ力に対して安い」</strong>クオリティ・ディープバリュー。</div>
+      <div class="cat-tags"><span class="cat-tag">PER8倍</span><span class="cat-tag">ROE16%</span><span class="cat-tag">EV/EBITDA4倍</span></div>
+    </div>
+    <div class="cat-card c-am">
+      <div class="cat-label"><span class="num">P·02</span>インフレ耐性</div>
+      <div class="cat-title">資材を積まず<br>むしろ"売る"側</div>
+      <div class="cat-big t-am">労務型</div>
+      <div class="cat-sub">コストは労務・処分費・重機中心／鉄は収入</div>
+      <div class="cat-body">解体費は労務・廃棄物処理・重機が中心で<strong>鋼材/生コン/木材の積み上げが小さい</strong>。加えて<strong>鉄スクラップ・非鉄は売却収入</strong>で、金属高はむしろ順風。総合建設と符号が逆。</div>
+      <div class="cat-tags"><span class="cat-tag">資材比率 小</span><span class="cat-tag">スクラップ収入</span><span class="cat-tag">価格転嫁力</span></div>
+    </div>
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">P·03</span>成長</div>
+      <div class="cat-title">売上を7年で<br>約2.4倍に拡大</div>
+      <div class="cat-big t-gn">+20.6%</div>
+      <div class="cat-sub">FY26売上148億・5年CAGR+10.5%</div>
+      <div class="cat-body">都心再開発・マンション建替の大型元請で伸長。超保守ガイダンス（140億）を大幅上回り着地。<strong>新中計Secondary Phase＝「成長戦略」</strong>に突入。受注高185億（+52億）。</div>
+      <div class="cat-tags"><span class="cat-tag">売上148億</span><span class="cat-tag">受注残潤沢</span></div>
+    </div>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card c-bl">
+      <div class="cat-label"><span class="num">P·04</span>需要背景・国策</div>
+      <div class="cat-title">老朽化×再開発の<br>構造的追い風</div>
+      <div class="cat-big t-bl">市場倍増</div>
+      <div class="cat-sub">解体市場2022年 過去最高約1.15兆円</div>
+      <div class="cat-body">築30年↑が約4割、空き家849万戸。会社は<strong>「市場規模が倍増する見通し」</strong>と明示。国土強靱化・空き家対策・アスベスト調査義務化が下支え（大型元請に有利）。</div>
+      <div class="cat-tags"><span class="cat-tag">市場倍増見通し</span><span class="cat-tag">国策追い風</span></div>
+    </div>
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">P·05</span>財務・還元</div>
+      <div class="cat-title">実質無借金<br>還元余地は大</div>
+      <div class="cat-big t-gn">76.6%</div>
+      <div class="cat-sub">自己資本比率・現預金28億・配当性向約32%</div>
+      <div class="cat-body">有利子負債ゼロ・純資産93億。配当性向32%・利回り4%だが<strong>還元強化の余地は大きい</strong>。東証のPBR改善要請下、増配・自社株買いは再評価の直接的触媒。</div>
+      <div class="cat-tags"><span class="cat-tag">実質無借金</span><span class="cat-tag">配当4%</span><span class="cat-tag">還元余地</span></div>
+    </div>
+    <div class="cat-card c-rd">
+      <div class="cat-label"><span class="num">P·06</span>最大の留保</div>
+      <div class="cat-title">親会社59.6%の<br>親子上場</div>
+      <div class="cat-big t-rd">59.6%</div>
+      <div class="cat-sub">スリーハンドレッドHD保有・外国人1.75%</div>
+      <div class="cat-body">低PERの主因はこの<strong>親子上場ディスカウント</strong>（浮動株薄・機関が入りにくい・少数株主の立場・低流動性）。上値を抑える一方、<strong>完全子会社化TOBや親会社売出しはどちらも株価イベント</strong>になる両義性（→⑥）。</div>
+      <div class="cat-tags"><span class="cat-tag">親子上場</span><span class="cat-tag">低流動性</span><span class="cat-tag">資本再編は触媒</span></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card card-gn"><div class="label" style="color:var(--gn)">強気材料（BULL）</div>
+      <p style="font-size:11.5px">・ROE16%をPER8倍・EV/EBITDA約4倍で取り込むバリュー<br>・資材を積まず鉄スクラップは収入＝インフレ順風＋転嫁力<br>・売上2桁成長・受注残潤沢（受注高185億）<br>・新中計「成長戦略」フェーズ・市場倍増の見立て<br>・実質無借金・配当4%・還元強化余地<br>・法規制強化が専門性要求を高め大型元請に有利</p></div>
+    <div class="card card-rd"><div class="label" style="color:var(--rd)">弱気・留意（BEAR）</div>
+      <p style="font-size:11.5px">・親子上場59.6%＝浮動株薄・低流動性・利益相反懸念<br>・営業利益率19.0%→14.8%へ低下（底打ち未確認）<br>・施工人員（人手不足）が成長の律速・採用計画未達<br>・単一セグメント・特定大型案件への依存<br>・運転資本増で現預金−28.9%・営業CFの期ズレ<br>・時価総額120億の小型株ゆえ流動性ディスカウント</p></div>
+  </div>
+
+  <div class="notice" style="margin-top:12px"><strong>免責事項：</strong>本資料は公開情報（有価証券報告書・決算短信・2026年3月期決算説明資料・適時開示 等／EDINET・TDnet）に基づく分析・参考資料であり、投資助言・投資勧誘を目的とするものではありません。作成者は登録された金融商品取引業者・投資助言業者ではなく、記載内容は将来の株価・業績を保証しません。数値は最新開示に基づく概算を含み、株価はご指定の2026年7月初旬時点（¥1,385）を基準としています。投資判断はご自身の責任のもとで行ってください。</div>
+</div>
+
+<!-- C1 事業モデル -->
+<div class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">事業モデル ── 「持たざる」解体元請</h2><span class="ch-badge cb-gn">BUSINESS</span></div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-gn">
+      <div class="label" style="color:var(--gn)">何屋か</div>
+      <p style="font-size:12.5px">ビル・住宅・工場の<strong>解体の全工程を手掛ける元請</strong>で、建築構造物解体の<strong>純粋専業としては国内唯一の上場企業</strong>。主戦場は都心の<strong>市街地再開発・大規模マンション/団地建替・商業施設・物流センター・データセンター</strong>など大型・元請案件。主要顧客は三田小山西地区再開発組合、三井不動産、長谷工コーポレーション、大成建設、新日鉄興和不動産等で、<strong>デベロッパー・ゼネコンと直結した上流ポジション</strong>を確立。</p>
+    </div>
+    <div class="card card-gn">
+      <div class="label" style="color:var(--gn)">"持たざる経営"の意味</div>
+      <p style="font-size:12.5px">重機や作業員を大量に自前保有せず、<strong>施工管理（現場監督）と協力会社アライアンス</strong>で回す。競争源泉は人財・技術・アライアンス・DX・組織力・顧客基盤・ブランドといった<strong>無形の知的資本</strong>。固定資産が軽く、<strong>資産回転・ROEが高く出る</strong>のがこのモデルの財務的帰結。</p>
+    </div>
+  </div>
+
+  <div class="label">総合力 ＝ 技術力 × 財務力 × 現場力</div>
+  <div class="flow-chain" style="margin-top:8px">
+    <div class="flow-box"><strong>技術力</strong><small>大型RC造・難易度の高い都心密集地の解体。測量など技術投資も</small></div>
+    <div class="flow-arr">×</div>
+    <div class="flow-box"><strong>財務力</strong><small>実質無借金・自己資本76.6%。協力会社への迅速・確実な支払いが信頼の源泉</small></div>
+    <div class="flow-arr">×</div>
+    <div class="flow-box"><strong>現場力</strong><small>安心・安全な施工管理。ISO 9001/14001/45001を認証取得</small></div>
+  </div>
+
+  <div class="noteg" style="margin-top:6px"><strong>ワンストップ化による付加価値：</strong>単なる取り壊しから、<strong>解体＋アスベスト（石綿）除去＋PCB/ダイオキシン処理＋土壌汚染対策＋地下部工事</strong>までコンサル機能を拡充。法規制強化で専門性の要求が上がるほど、<strong>有資格・元請の総合対応力が単価・受注の差別化</strong>につながる（＝小口下請けとの差が開く）。</div>
+
+  <div class="g3" style="margin-top:12px">
+    <div class="card mc"><div class="mc-l">従業員（単体）</div><div class="mc-v gn">110名</div><div class="mc-s">施工管理者中心・平均年収約721万</div></div>
+    <div class="card mc"><div class="mc-l">セグメント</div><div class="mc-v gn">解体 単一</div><div class="mc-s">報告セグメントは解体事業のみ</div></div>
+    <div class="card mc"><div class="mc-l">決算 / 監査</div><div class="mc-v bl">3月期</div><div class="mc-s">ひびき監査法人</div></div>
+  </div>
+
+  <div class="notice" style="margin-top:12px"><strong>モデルの弱点も明記：</strong>「持たざる経営」ゆえ<strong>施工管理者（人財）の頭数が成長の律速</strong>。会社も人財確保を最重要課題に掲げ、施工人員はFY25比+12名純増としたが<strong>人員計画は未達</strong>。採用が伸びれば受注消化力＝成長が加速、伸びなければ受注残を抱えても売上化が遅れる、という構造。この「頭数の壁」がSecondary Phase（成長戦略）の実効性を左右する最重要変数。</div>
+</div>
+
+<!-- C2 業績・財務 -->
+<div class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">業績・財務 ── 最新FY26/3決算と推移</h2><span class="ch-badge cb-gn">FINANCIALS</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c2','a',this)">業績推移</button>
+    <button class="stab"    onclick="showT('c2','b',this)">最新決算の中身</button>
+    <button class="stab"    onclick="showT('c2','c',this)">利益率の分解</button>
+    <button class="stab"    onclick="showT('c2','d',this)">財務・キャッシュ</button>
+  </div>
+
+  <!-- a 業績推移 -->
+  <div class="spanel active" id="c2a">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">売上高 FY26</div><div class="mc-v gn">148.2億</div><div class="mc-s">前期比 +20.6%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">営業利益</div><div class="mc-v am">21.9億</div><div class="mc-s">−6.1%・率14.8%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">当期純利益</div><div class="mc-v gn">15.0億</div><div class="mc-s">−4.7%・EPS172.7円</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">ROE</div><div class="mc-v bl">16.4%</div><div class="mc-s">5年一貫で15〜20%</div></div>
+    </div>
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">業績推移（億円・個別）</div>
+        <table class="tbl">
+          <thead><tr><th>期</th><th class="r">売上高</th><th class="r">営業益</th><th class="r">利益率</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">ROE</th></tr></thead>
+          <tbody>
+            <tr><td>FY21/3</td><td class="r mono">90.1</td><td class="r mono">14.3</td><td class="r mono">15.9%</td><td class="r mono">9.8</td><td class="r mono">112.9</td><td class="r mono hi-gn">20.5%</td></tr>
+            <tr><td>FY22/3</td><td class="r mono">98.2</td><td class="r mono">14.2</td><td class="r mono">14.4%</td><td class="r mono">9.7</td><td class="r mono">111.2</td><td class="r mono">17.8%</td></tr>
+            <tr><td>FY23/3</td><td class="r mono">112.5</td><td class="r mono">15.6</td><td class="r mono">13.9%</td><td class="r mono">10.9</td><td class="r mono">124.9</td><td class="r mono">17.5%</td></tr>
+            <tr><td>FY24/3</td><td class="r mono">106.8</td><td class="r mono">16.1</td><td class="r mono">15.1%</td><td class="r mono">10.9</td><td class="r mono">125.3</td><td class="r mono">15.6%</td></tr>
+            <tr class="hl"><td>FY25/3</td><td class="r mono">122.9</td><td class="r mono hi-gn">23.3</td><td class="r mono hi-gn">19.0%</td><td class="r mono">15.8</td><td class="r mono">181.2</td><td class="r mono hi-gn">19.2%</td></tr>
+            <tr class="hl"><td><strong>FY26/3 実績</strong></td><td class="r mono hi-gn"><strong>148.2</strong></td><td class="r mono"><strong>21.9</strong></td><td class="r mono hi-am"><strong>14.8%</strong></td><td class="r mono"><strong>15.0</strong></td><td class="r mono"><strong>172.7</strong></td><td class="r mono hi-gn"><strong>16.4%</strong></td></tr>
+            <tr><td>FY27/3 会社予</td><td class="r mono">増収計画</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono">約14.0</td><td class="r mono hi-am">160.9</td><td class="r mono">15.0%</td></tr>
+          </tbody>
+        </table>
+        <small>売上は右肩上がりで7年約2.4倍。FY25は営業利益率19.0%と異例の高水準。<strong>FY26は増収(+20.6%)だが利益率14.8%へ正常化し小幅減益</strong>。FY27会社予想はEPS160.9円と保守的だが、同社は近年ガイダンスを上回って着地する傾向（次タブ参照）。</small>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">売上高（棒）とEPS（線）の推移</div>
+        <div style="position:relative;height:210px"><canvas id="tkPL"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">ROEの推移 ── 資産の軽い解体元請ゆえ15〜20%を維持</div>
+      <div style="position:relative;height:180px"><canvas id="tkROE"></canvas></div>
+    </div>
+  </div>
+
+  <!-- b 最新決算の中身 -->
+  <div class="spanel" id="c2b">
+    <div class="noteg"><strong>ガイダンスを大幅上回って着地（超保守→上振れの常習）：</strong>FY26/3の当初会社計画は売上140億・営業17億・純利12億という<strong>前期比"減益"の保守設定</strong>だったが、実績は<span class="hi-gn">売上148.2億・営業21.9億・純利15.0億</span>で大幅上回り。決算説明資料も「売上・利益ともに中期経営計画を大幅達成」と明記。<strong>会社予想は"下限"として読むのが実務的</strong>。</div>
+    <div class="g2" style="margin:12px 0">
+      <div class="card card-bl">
+        <div class="label" style="color:var(--bl)">受注環境 ── 先行きの可視性は高い</div>
+        <p style="font-size:12px">「堅調な受注環境を背景に受注残高は潤沢」。<strong>FY26受注高は185億（前期比+約52億／+約39%）</strong>と急増。難易度の高い大型案件の受注が増え、<strong>工期1年超の案件も増加傾向</strong>。受注高と工期のバランスを取りつつ積み上げる方針で、＝<strong>将来売上の可視性が比較的高い</strong>のが小型建設株としては強み。</p>
+      </div>
+      <div class="card card-bl">
+        <div class="label" style="color:var(--bl)">新中計 Secondary Phase（2026〜28年度）</div>
+        <p style="font-size:12px">10年ビジョンを Primary（基盤構築）→ <strong>Secondary（成長戦略）</strong> → Final（業界トップ）の3段階に分割。テーマは「基盤強化と施工力強化」。<strong>「市場規模が倍増する見通し」</strong>と需要を強気に見つつ、Primaryの反省＝<strong>人財確保の難航</strong>を踏まえ施工体制強化を最優先。FY27は成長投資を先出しし「前期並みの利益水準を確保」する計画。</p>
+      </div>
+    </div>
+    <div class="label">四半期の傾向（FY26/3 3Q累計）</div>
+    <table class="tbl" style="margin-top:8px">
+      <thead><tr><th>項目</th><th class="r">3Q累計</th><th class="r">前年同期比</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>売上高</td><td class="r mono">107.6億</td><td class="r mono hi-gn">+22.5%</td><td><small>大型案件で大幅伸長</small></td></tr>
+        <tr><td>営業利益</td><td class="r mono">15.4億</td><td class="r mono hi-am">−10.9%</td><td><small>増収下の利益率低下は期中から表面化</small></td></tr>
+        <tr><td>四半期純利益</td><td class="r mono">9.7億</td><td class="r mono hi-am">−9.8%</td><td><small>通期では大幅上振れ着地</small></td></tr>
+      </tbody>
+    </table>
+    <div class="notice" style="margin-top:12px"><strong>次の注目イベント：</strong>FY27/3 第1四半期決算（例年8月上旬）。ここで<strong>①利益率が14.8%から戻るか ②受注残の売上化ペース ③施工人員の純増</strong>を確認できる。会社の保守ガイダンスに対する上振れ余地の初回チェックポイント。</div>
+  </div>
+
+  <!-- c 利益率の分解（NEW） -->
+  <div class="spanel" id="c2c">
+    <div class="noteb"><strong>本統合版の深掘り：</strong>投資判断の分水嶺は「<strong>営業利益率19.0%→14.8%の低下は一時的か、構造的か</strong>」。ここを分解する。</div>
+    <div class="g2" style="margin:12px 0">
+      <div class="chart-wrap">
+        <div class="chart-title">営業利益率の推移 ── FY25が"山"、FY26は正常化</div>
+        <div style="position:relative;height:200px"><canvas id="tkMargin"></canvas></div>
+      </div>
+      <div>
+        <div class="card card-am" style="margin-bottom:10px">
+          <div class="label" style="color:var(--am)">低下の3要因（うち2つは一時/戦略的）</div>
+          <p style="font-size:11.5px">① <strong>FY25の19.0%が異例の高水準</strong>（大型工事の生産性が突出）→その反動・正常化＝<span class="hi-gn">一時的</span>。② <strong>大型元請案件の構成増</strong>で、売上総利益率は26.9%→21.6%へ（規模は大きいが率は低い案件ミックス）＝<span class="hi-am">構造だが想定内</span>。③ <strong>施工力強化への先行投資</strong>（採用・育成・DX）＝<span class="hi-gn">戦略的・将来の投資</span>。</p>
+        </div>
+        <div class="card card-hi-gn">
+          <div class="label" style="color:var(--gn2)">読み筋：14〜15%が"新常態の下限"、上振れ余地あり</div>
+          <p style="font-size:11.5px">FY19〜24の営業利益率は<strong>おおむね14〜16%</strong>で推移しており、FY26の14.8%は<strong>歴史的レンジ内</strong>。FY25の19%こそ例外。よって「悪化」ではなく「正常回帰」。先行投資の一巡と大型案件の消化進捗次第で、<strong>15〜16%台への復元は十分あり得る</strong>。</p>
+        </div>
+      </div>
+    </div>
+    <div class="label">FY27以降の利益率シナリオ（営業利益率の目安）</div>
+    <table class="tbl" style="margin-top:8px">
+      <thead><tr><th>シナリオ</th><th class="c">営業利益率</th><th>前提</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>強気</td><td class="c mono hi-gn">16〜17%</td><td><small>先行投資一巡＋大型案件の生産性向上＋転嫁進捗。FY25には及ばずとも回復</small></td></tr>
+        <tr><td>基本</td><td class="c mono">14〜15%</td><td><small>正常化した水準で安定。増収で営業利益の絶対額は緩やかに増加</small></td></tr>
+        <tr class="hl-rd"><td>弱気</td><td class="c mono hi-rd">12〜13%</td><td><small>労務・処分費インフレの転嫁が遅れ、大型案件の工程遅延が重なる</small></td></tr>
+      </tbody>
+    </table>
+    <small style="display:block;margin-top:6px">※シナリオは分析上の目安で会社予想ではありません。基本シナリオでも増収で営業利益の絶対額は維持〜緩増が見込め、EPS160円台（会社予）は保守的との見立て。</small>
+  </div>
+
+  <!-- d 財務・キャッシュ -->
+  <div class="spanel" id="c2d">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">自己資本比率</div><div class="mc-v bl">76.6%</div><div class="mc-s">有利子負債なし（実質無借金）</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">純資産</div><div class="mc-v gn">93.3億</div><div class="mc-s">利益剰余金86.1億</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">現預金</div><div class="mc-v am">28.0億</div><div class="mc-s">前期比 −28.9%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">BPS</div><div class="mc-v bl">1,072円</div><div class="mc-s">発行済869.96万株</div></div>
+    </div>
+    <div class="g2">
+      <div class="card card-hi-gn">
+        <div class="label" style="color:var(--gn2)">現金が28.9%減った理由＝"悪い減少"ではない</div>
+        <p style="font-size:12px">決算説明資料は明言：<strong>大型元請工事の受注増加に伴い、完成工事未収入金が増加し資金負担が増えた</strong>ため現預金が減少。ただし<strong>有利子負債はなく自己資本比率は高位を維持</strong>。つまり<strong>成長（大型案件消化）に運転資本が張り付いた結果</strong>で、工事完成・入金とともに回収される性質。財務の毀損ではない。</p>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">EV/EBITDA の推移 ── 実質無借金ゆえ低位</div>
+        <div style="position:relative;height:190px"><canvas id="tkEV"></canvas></div>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:12px"><strong>チェックポイント：</strong>運転資本の張り付きは大型案件依存の裏返しで、<strong>営業キャッシュフローの期ズレ・季節性</strong>を生む。回収遅延や大型案件の工程遅れが続けば一時的にCFが痩せる可能性がある点は、増収局面でこそ注視。逆に言えば、<strong>ネットキャッシュ・無借金なので資金繰りリスクは極小</strong>で、還元原資は潤沢（→⑥）。</div>
+  </div>
+</div>
+
+<!-- C3 業界・インフレ耐性 -->
+<div class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">業界動向 ＆ 資材インフレ耐性</h2><span class="ch-badge cb-am">INDUSTRY</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c3','a',this)">解体市場と需要ドライバー</button>
+    <button class="stab"    onclick="showT('c3','b',this)">資材インフレ耐性（本題）</button>
+    <button class="stab"    onclick="showT('c3','c',this)">国策・補助金の効き方</button>
+    <button class="stab"    onclick="showT('c3','d',this)">法改正・競争構造</button>
+  </div>
+
+  <!-- a 市場 -->
+  <div class="spanel active" id="c3a">
+    <div class="noteg"><strong>解体市場は長期拡大。</strong>「はつり・解体工事」の完成工事高は長期増加傾向で、<strong>2022年に過去最高の約1.15兆円</strong>を記録。TANAKENは自社資料（国交省・非住宅建設投資ベース）で、今後<strong>「市場規模が倍増する見通し」</strong>と需要を強気に見ている。</div>
+    <div class="g3" style="margin:12px 0">
+      <div class="card mc card-bl"><div class="mc-l">築30年以上の建物</div><div class="mc-v bl">約4割</div><div class="mc-s">高度成長期建築の一斉老朽化</div></div>
+      <div class="card mc card-bl"><div class="mc-l">全国 空き家</div><div class="mc-v bl">849万戸</div><div class="mc-s">20年で約1.5倍・2030年空き家率20%超予想</div></div>
+      <div class="card mc card-bl"><div class="mc-l">1980年以前の住宅</div><div class="mc-v bl">約1,300万戸</div><div class="mc-s">旧耐震（1981年以前）は建替圧力大</div></div>
+    </div>
+    <div class="label">需要ドライバー（TANAKENの主戦場＝大型・都心・元請と合致）</div>
+    <div class="flow-chain" style="margin-top:8px">
+      <div class="flow-box"><strong>老朽ストック更新</strong><small>高度成長期建築の一斉更新期／マンション・団地建替（円滑化法改正）</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>都市再開発</strong><small>都心の大規模再開発・商業/物流/データセンター。案件は大型化・複雑化</small></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box"><strong>空き家・災害</strong><small>空き家対策（税優遇解除）、災害復旧。中長期の底堅い需要</small></div>
+    </div>
+    <div class="noteb">案件が<strong>大型化・複雑化（RC造・アスベスト含有・都心密集）</strong>するほど、専門性・有資格・元請の総合対応力が要る。これは<strong>小口下請けが取りにくく、TANAKENのような大型元請が取りやすい</strong>領域＝構造的な追い風。会社の「倍増」は自社試算で額面通りとは限らないが、<strong>老朽化×再開発×規制強化という複数の独立要因</strong>に支えられ、方向性の蓋然性は高い。</div>
+  </div>
+
+  <!-- b 資材インフレ耐性 -->
+  <div class="spanel" id="c3b">
+    <div class="noteg"><strong>ご指摘の核心：解体は「資材を積み上げない」、むしろ「資材を売る」ビジネス。</strong>新築（総合建設）は鋼材・生コン・木材の<strong>資材の積み上げが大きい</strong>のに対し、解体費は<strong>仮設・解体（労務）・廃棄物処理・付帯工事・重機回送</strong>が中心。＝資材インフレの直撃を受けにくいだけでなく、<span class="hi-gn">発生する鉄スクラップ・非鉄金属は売却収入</span>となり、金属高は逆に順風になり得る。</div>
+    <div class="g2" style="margin:12px 0">
+      <div class="chart-wrap">
+        <div class="chart-title">費用構造の概念比較（イメージ）── 資材比率が構造的に低い</div>
+        <div style="position:relative;height:230px"><canvas id="tkCost"></canvas></div>
+        <small style="display:block;margin-top:6px">※一般的な費用構造の傾向を示す概念図であり、TANAKENの正確な原価内訳ではありません。</small>
+      </div>
+      <div>
+        <div class="card card-hi-gn" style="margin-bottom:10px">
+          <div class="label" style="color:var(--gn2)">符号が逆になる3つのメカニズム</div>
+          <p style="font-size:11.5px"><strong>①買わない：</strong>建築資材が原価にほぼ乗らない＝資材インフレがゼネコンほど効かない。<strong>②売る：</strong>鉄スクラップ・非鉄が発生し売却。<span class="hi-gn">金属高＝リサイクル収入増</span>のインフレ順応型収益。<strong>③持たない：</strong>アセットライトで減価償却・大型設備投資が軽く、金利上昇にも相対耐性。</p>
+        </div>
+        <div class="card card-am">
+          <div class="label" style="color:var(--am)">ただし「無縁」ではない ── 正直な留保</div>
+          <p style="font-size:11.5px">解体が受けるコスト圧力は"資材"ではなく別種：①<strong>産業廃棄物の処分費高騰</strong>（解体特有）、②<strong>労務費（人件費）上昇</strong>、③<strong>燃料費</strong>。実際、売上総利益率は26.9%→21.6%へ低下しており、コスト側インフレは現実に効いている。</p>
+        </div>
+      </div>
+    </div>
+    <div class="notice"><strong>まとめ：</strong>「解体＝資材高に強い」は<strong>方向として正しい</strong>。厳密には"資材"インフレには強く（買わない・むしろ売る）、"労務・処分費"インフレには晒される。ただしTANAKENは<strong>元請×専門性ゆえの転嫁力</strong>でこれを吸収し、営業利益率14〜19%の高位を維持。純粋な資材積み上げ型の総合建設に対する<strong>インフレ耐性の相対優位は明確</strong>。ネットで順風かは<strong>価格転嫁力×案件ミックス×金属相場</strong>次第、というのが精緻な結論。</div>
+  </div>
+
+  <!-- c 国策・補助金（NEW） -->
+  <div class="spanel" id="c3c">
+    <div class="noteb"><strong>本統合版の深掘り：国策・公的補助金の"効き方"を仕分けする。</strong>解体は政策との相性が良いが、補助金が誰に効くかは領域で異なる。TANAKENは大型元請中心のため、<strong>補助金は直接の売上ドライバーというより「市場全体を温めるマクロ追い風」</strong>と理解するのが正確。</div>
+    <div class="g2" style="margin:12px 0">
+      <div class="card card-gn">
+        <div class="label" style="color:var(--gn)">TANAKENに"直接"効く政策</div>
+        <p style="font-size:12px">・<strong>都市再生特別措置法／再開発事業への補助・容積緩和</strong>：大型再開発を促進＝元請解体の母数増<br>・<strong>マンション建替え円滑化法</strong>：老朽マンションの建替を後押し<br>・<strong>アスベスト事前調査の義務化</strong>：高難度除去の需要増（専門元請に有利）<br>・<strong>国土強靱化・老朽インフラ対策</strong>：公共・準公共の解体需要</p>
+      </div>
+      <div class="card card-am">
+        <div class="label" style="color:var(--am)">"間接"（マクロ追い風）にとどまる政策</div>
+        <p style="font-size:12px">・<strong>自治体の空き家解体補助金</strong>：主に小規模木造住宅向けで、担い手は地場の小口業者。TANAKENの受注に直結はしにくい<br>・<strong>特定空家の除却促進（空家法）</strong>：市場全体の解体needsを底上げするが、案件単価は小さい<br>→ これらは<strong>「業界の裾野を広げる」効果で、TANAKENは上位レイヤーで間接的に恩恵</strong></p>
+      </div>
+    </div>
+    <div class="noteg"><strong>結論：</strong>国策・補助金は<strong>「解体という行為を後押しする方向」で一貫</strong>しており、業界全体には明確な追い風。ただしTANAKENの収益に効くのは<strong>再開発促進・規制強化（専門性要求↑）</strong>の系統であって、<strong>小規模空き家補助金ではない</strong>。この仕分けを踏まえると、TANAKENは「補助金銘柄」ではなく「<strong>再開発・規制強化の受益銘柄</strong>」と位置づけるのが妥当。</div>
+  </div>
+
+  <!-- d 法改正・競争 -->
+  <div class="spanel" id="c3d">
+    <div class="label">法改正が「専門性の要求」を引き上げ、大型元請に有利化</div>
+    <table class="tbl" style="margin-top:8px">
+      <thead><tr><th>制度改正</th><th class="c">時期</th><th>解体業への影響</th></tr></thead>
+      <tbody>
+        <tr><td>建設業法改正（解体工事業の独立）</td><td class="c mono">2016</td><td><small>「解体工事業」が独立許可業種に。有資格・許可のハードルが明確化</small></td></tr>
+        <tr><td>建設リサイクル法 運用強化</td><td class="c mono">〜2022</td><td><small>廃棄物処理・再資源化のコンプラ対応力が問われる。適正処理の担保が差別化に</small></td></tr>
+        <tr class="hl-bl"><td>アスベスト事前調査の義務化</td><td class="c mono">2023</td><td><small>石綿の調査・除去の専門需要が拡大。有資格者・専門部署を持つ元請に有利（TANAKENはワンストップ化で取り込み方針）</small></td></tr>
+      </tbody>
+    </table>
+    <div class="g2" style="margin-top:14px">
+      <div class="card card-rd">
+        <div class="label" style="color:var(--rd)">競争構造のリスク面</div>
+        <p style="font-size:12px">全国の解体業許可業者は<strong>約43,000社</strong>と多く、<strong>小口・木造中心の領域は相見積り・価格競争</strong>が激しい。異業種参入も相次ぎ、下請け層は淘汰圧力。</p>
+      </div>
+      <div class="card card-gn">
+        <div class="label" style="color:var(--gn)">TANAKENの立ち位置</div>
+        <p style="font-size:12px">TANAKENは<strong>大型・都心・RC造・元請</strong>という参入障壁の高い上位レイヤーに位置し、価格競争の激しい小口領域とは棲み分け。<strong>法規制強化はむしろ追い風</strong>で、専門性・信用・財務力が効く。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C4 割安性・再評価 -->
+<div class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">割安性・再評価 ── 質の高いROEを低倍率で買う</h2><span class="ch-badge cb-gn">VALUATION</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c4','a',this)">マルチプル</button>
+    <button class="stab"    onclick="showT('c4','b',this)">PERバンド上の現在地</button>
+    <button class="stab"    onclick="showT('c4','c',this)">再評価シナリオ</button>
+  </div>
+
+  <!-- a マルチプル -->
+  <div class="spanel active" id="c4a">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc card-hi-gn"><div class="mc-l">PER（実績）</div><div class="mc-v gn">8.0倍</div><div class="mc-s">予想 8.6倍</div></div>
+      <div class="card mc"><div class="mc-l">PBR</div><div class="mc-v bl">1.29倍</div><div class="mc-s">ROE16%対比なら過大でない</div></div>
+      <div class="card mc card-hi-gn"><div class="mc-l">EV/EBITDA</div><div class="mc-v gn">約4倍</div><div class="mc-s">5年平均4.7倍</div></div>
+      <div class="card mc"><div class="mc-l">配当利回り</div><div class="mc-v gn">4.0%</div><div class="mc-s">配当性向 約32%</div></div>
+    </div>
+    <div class="noteg"><strong>割安の核心：</strong>ROE15〜16%を継続する企業がPER8倍・EV/EBITDA約4倍というのは、建設業・中小型のなかで明確に低位。PBR1.29倍もROE水準に照らせば割高ではない。<strong>「稼ぐ力（＝質の高いROE）を、低い倍率で取り込める」</strong>タイプのディープバリュー。</div>
+    <div class="g2" style="margin-top:12px">
+      <div class="card card-bl">
+        <div class="label" style="color:var(--bl)">下値の"クッション"── なぜ底堅いか</div>
+        <p style="font-size:12px">① <strong>配当利回り4%</strong>：インカム狙いの買いが下値を支える。利回り4.2%（≒¥1,300／年初来安値6/16）が直近の実効フロア。② <strong>PBR1.29倍・BPS1,072円・実質無借金</strong>：資産面の下方硬直性。③ <strong>ネットキャッシュ約28億</strong>。＝バリュエーションの下方リスクは相対的に限定。</p>
+      </div>
+      <div class="card card-am">
+        <div class="label" style="color:var(--am)">なぜ安いまま放置されているか（割引要因）</div>
+        <p style="font-size:12px">① <strong>親会社59.6%の親子上場</strong>で浮動株が薄く機関が入りにくい（外国人1.75%）＝低PERの主因。② 解体<strong>単一セグメント</strong>・特定大型案件依存への懸念。③ FY26の<strong>利益率低下</strong>。④ 時価総額120億の<strong>小型株ゆえの流動性ディスカウント</strong>。いずれも"事業が悪い"ではなく<strong>"構造・見え方"の割引</strong>（→⑤・⑥で分解）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- b PERバンド（NEW） -->
+  <div class="spanel" id="c4b">
+    <div class="noteb"><strong>本統合版の深掘り：</strong>現在の予想PER8.6倍が、過去バンド（2019〜2026年：<strong>5.4〜13.2倍</strong>）のどこに立つか。</div>
+    <div class="card" style="margin:12px 0">
+      <div class="band">
+        <div class="mk" style="left:12.9%"><div class="l">年初来安値<br>¥1,300</div><div class="v">7.5x</div></div>
+        <div class="mk now" style="left:41%"><div class="l">現在<br>¥1,385</div><div class="v">8.6x</div></div>
+        <div class="mk" style="left:68.9%"><div class="l">年初来高値<br>¥1,870</div><div class="v">10.8x</div></div>
+        <div class="tk" style="left:12.9%"></div>
+        <div class="tk" style="left:41%"></div>
+        <div class="tk" style="left:68.9%"></div>
+      </div>
+      <div class="band-ax"><span>割安 5.4x</span><span>中央 ≈8x</span><span>割高 13.2x</span></div>
+      <small style="display:block;margin-top:12px">予想EPS160.9円ベース。現在¥1,385＝予想PER8.6倍は<strong>バンドの下位〜中央付近</strong>で、株価の割高感は乏しい。仮に高値圏¥1,835を想定すると予想PERは約11.4倍＝<span class="hi-am">バンド上位</span>となり、割安性の主張は成立しにくくなる（＝価格前提の確認が重要）。</small>
+    </div>
+    <div class="notice"><strong>含意：</strong>この銘柄の株価は概ね<strong>PER7.5〜11倍のレンジ</strong>で振れてきた。現在地はそのレンジ下半分＝<strong>「高値掴みではない」水準</strong>。ただしバンド自体が親子上場ディスカウントで低く抑えられている点に注意（＝バンドの"天井"を押し上げるには構造要因の解消が要る）。</div>
+  </div>
+
+  <!-- c 再評価シナリオ（deepen） -->
+  <div class="spanel" id="c4c">
+    <div class="label">再評価余地の感応度（実績EPS172.7円ベース／概算イメージ）</div>
+    <table class="tbl" style="margin-top:8px">
+      <thead><tr><th>前提PER</th><th class="r">理論株価</th><th class="r">現値(¥1,385)比</th><th>解釈</th></tr></thead>
+      <tbody>
+        <tr><td>8倍（ほぼ現状）</td><td class="r mono">1,382円</td><td class="r mono">±0%</td><td><small>親子上場ディスカウント込みの現状</small></td></tr>
+        <tr class="hl"><td>10倍</td><td class="r mono hi-gn">1,727円</td><td class="r mono hi-gn">+25%</td><td><small>利益率回復＋還元強化で見直し</small></td></tr>
+        <tr class="hl"><td>12倍</td><td class="r mono hi-gn">2,072円</td><td class="r mono hi-gn">+50%</td><td><small>ROE16%の質を素直に評価した水準</small></td></tr>
+        <tr class="hl"><td>14倍</td><td class="r mono hi-gn">2,418円</td><td class="r mono hi-gn">+75%</td><td><small>親子上場解消（TOB/売出し）等の構造変化</small></td></tr>
+      </tbody>
+    </table>
+    <small style="display:block;margin:6px 0 12px">ROE16%の質を素直に評価すればPER12〜14倍は不合理でなく、その場合<strong>2,000〜2,400円圏（+50〜75%）</strong>。ただし親子上場ディスカウントが現実には上値を抑える。あくまで感応度の目安。</small>
+
+    <div class="label">親子上場ディスカウントの概算</div>
+    <div class="card" style="margin-top:8px">
+      <div class="disc-bar"><div class="dl">質準拠フェアPER</div><div class="dt"><div class="df" style="width:88%;background:var(--gn2)">12倍 ≈ ¥2,072</div></div></div>
+      <div class="disc-bar"><div class="dl">現状PER</div><div class="dt"><div class="df" style="width:62%;background:var(--am2)">8.6倍 ≈ ¥1,385</div></div></div>
+      <small style="display:block;margin-top:8px">両者の差＝<strong>約28〜33%が実質的な「親子上場・小型・単一事業」ディスカウント</strong>。このディスカウントが<strong>縮小する触媒（→⑥）が効くか否か</strong>が、+50%級の再評価が実現するかの分岐点。触媒が効かなければ、当面はPER8〜11倍レンジ内での<strong>「配当4%を取りながら業績成長でEPSを積む」インカム＋緩やかなキャピタル</strong>が現実的なリターン像。</small>
+    </div>
+  </div>
+</div>
+
+<!-- C5 親子上場・株主還元（NEW CHAPTER） -->
+<div class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">親子上場・株主還元 ── 割安の"主因"かつ"触媒"</h2><span class="ch-badge cb-fu">DEEP DIVE</span></div>
+
+  <div class="notef"><strong>この章が統合版最大の深掘り。</strong>低PERの主因は事業の弱さではなく<strong>資本構造（親子上場）</strong>。ゆえに、事業が良いまま<strong>構造・還元が変われば株価が動く</strong>——ここに妙味の本質がある。</div>
+
+  <div class="g4" style="margin:12px 0">
+    <div class="card mc card-hi-rd"><div class="mc-l">親会社保有</div><div class="mc-v rd">59.6%</div><div class="mc-s">スリーハンドレッドHD（支配株主）</div></div>
+    <div class="card mc"><div class="mc-l">外国人比率</div><div class="mc-v rd">1.75%</div><div class="mc-s">機関が入りにくい浮動株の薄さ</div></div>
+    <div class="card mc"><div class="mc-l">配当性向</div><div class="mc-v am">約32%</div><div class="mc-s">利回り4.0%・1株55円</div></div>
+    <div class="card mc card-hi-gn"><div class="mc-l">還元原資</div><div class="mc-v gn">潤沢</div><div class="mc-s">無借金・純資産93億・現金28億</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:12px">
+    <div class="card card-rd">
+      <div class="label" style="color:var(--rd)">なぜ割安に放置されるか（ディスカウントの正体）</div>
+      <p style="font-size:12px">① <strong>浮動株が薄い</strong>：親会社59.6%＋創業家等で流通株が限られ、機関投資家が規模を張れない。② <strong>少数株主の立場</strong>：支配株主との<strong>利益相反</strong>（取引条件・資本政策）への警戒。③ <strong>低流動性</strong>：日商数千〜数万株で、まとまった売買が価格を動かす。④ <strong>ガバナンス割引</strong>：独立性・情報開示への評価。これらが<strong>PERの"天井"を構造的に押し下げる</strong>。</p>
+    </div>
+    <div class="card card-gn">
+      <div class="label" style="color:var(--gn)">だが同じ構造が"触媒"にもなる（両義性）</div>
+      <p style="font-size:12px">親子上場は<strong>資本再編が起きやすい</strong>形態。<strong>(A) 完全子会社化TOB</strong>＝親会社が少数株主を買い取る場合、通常プレミアム（過去の類似案件では実勢比+30〜50%も）。<strong>(B) 親会社による売出し</strong>＝浮動株が増え流動性改善・機関参入余地→ディスカウント縮小。<strong>(C) 東証の親子上場解消要請</strong>の流れ。いずれも<strong>株価イベント</strong>で、"待つ"間も配当4%を受け取れる。</p>
+    </div>
+  </div>
+
+  <div class="noteb"><strong>ガバナンスの足元の動き（適時開示）：</strong>2026/6/15「<strong>支配株主等に関する事項について</strong>」、2026/7/1「<strong>取締役会の実効性の分析・評価結果</strong>」を開示。これらは東証が支配株主を持つ上場会社に求める<strong>少数株主保護・ガバナンス開示</strong>の一環。制度的にも親子上場に対する目線が強まっており、<strong>中期的に構造是正圧力が働きやすい環境</strong>。</div>
+
+  <div class="card card-hi-am" style="margin-bottom:12px">
+    <div class="label" style="color:var(--am)">株主還元の"伸びしろ"── PBR改善要請の文脈</div>
+    <p style="font-size:12px">現状は配当性向約32%・利回り4%だが、<strong>無借金・自己資本比率76.6%・現金28億</strong>と資本は明確に余剰。東証の「<strong>資本コストや株価を意識した経営</strong>」（PBR1倍割れ是正の流れ、TANAKENはPBR1.29倍だが低ROE倍率）を踏まえれば、<strong>増配（配当性向40〜50%へ）や自社株買い</strong>は無理なく可能。自社株買いは浮動株の薄い本銘柄では<strong>需給インパクトが大きく</strong>、EPS押し上げ＋ディスカウント縮小の二重効果を持ちうる。<strong>還元強化は最も"自助努力で起こせる"触媒</strong>。</p>
+  </div>
+
+  <div class="notice"><strong>投資家としての読み筋：</strong>親子上場は<strong>「事業の質を割り引いて買える理由」であると同時に「その割引が剥落する余地」</strong>でもある。悲観すべきは事業ではなく資本構造だけ——という点が、他の"万年割安"小型株と決定的に違う。<strong>触媒（TOB・売出し・還元強化）はタイミングが読めない</strong>ため、"待てる資金"で配当を取りつつ構造変化を待つ設計が現実的。</div>
+</div>
+
+<!-- C6 リスク・カタリスト -->
+<div class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">リスク ＆ カタリスト ── 妙味の最終判定</h2><span class="ch-badge cb-gn">VERDICT</span></div>
+
+  <div class="label">リスク・スコア（高いほど要注意）</div>
+  <div style="margin:10px 0 14px">
+    <div class="rm"><div class="rm-l">親子上場・少数株主/流動性</div><div class="rm-t"><div class="rm-f" style="width:82%;background:var(--rd)"></div></div><div class="rm-v hi-rd">高</div></div>
+    <div class="rm"><div class="rm-l">利益率の底打ち（14.8%から）</div><div class="rm-t"><div class="rm-f" style="width:58%;background:var(--am2)"></div></div><div class="rm-v hi-am">中</div></div>
+    <div class="rm"><div class="rm-l">人手不足＝施工人員が成長の律速</div><div class="rm-t"><div class="rm-f" style="width:60%;background:var(--am2)"></div></div><div class="rm-v hi-am">中</div></div>
+    <div class="rm"><div class="rm-l">単一セグメント・大型案件依存</div><div class="rm-t"><div class="rm-f" style="width:55%;background:var(--am2)"></div></div><div class="rm-v hi-am">中</div></div>
+    <div class="rm"><div class="rm-l">運転資本・営業CFの期ズレ</div><div class="rm-t"><div class="rm-f" style="width:42%;background:var(--am2)"></div></div><div class="rm-v hi-am">中</div></div>
+    <div class="rm"><div class="rm-l">財務健全性（自己資本76.6%・無借金）</div><div class="rm-t"><div class="rm-f" style="width:16%;background:var(--gn2)"></div></div><div class="rm-v hi-gn">低</div></div>
+  </div>
+
+  <div class="label">カタリスト・タイムライン（何が効けば見直されるか）</div>
+  <div class="tl" style="margin-bottom:14px">
+    <div class="tl-i g"><div class="tl-t">近 ・ 〜FY27 1Q（8月頃）</div><div class="tl-h">利益率の底打ち確認 ＋ 受注残の売上化</div><p>営業利益率が14.8%から戻る兆し／保守ガイダンスへの上振れ。最も早い再評価トリガー。</p></div>
+    <div class="tl-i a"><div class="tl-t">中 ・ FY27〜28</div><div class="tl-h">還元強化（増配・自社株買い）</div><p>配当性向32%→40〜50%や自社株買い。浮動株の薄さゆえ需給・EPS双方に効く。自助努力で起こせる触媒。</p></div>
+    <div class="tl-i a"><div class="tl-t">中 ・ 継続</div><div class="tl-h">Secondary Phase の実行（施工人員の純増）</div><p>採用が伸び受注残を売上化＝成長加速。人員が律速なので"頭数"の進捗が鍵。</p></div>
+    <div class="tl-i b"><div class="tl-t">構造 ・ 時期未定</div><div class="tl-h">親子上場の是正（TOB／売出し／東証要請）</div><p>完全子会社化ならプレミアム、売出しなら流動性改善。+50%級の再評価はここが本命。タイミングは読めない。</p></div>
+  </div>
+
+  <div class="card card-hi-gn" style="margin-bottom:12px">
+    <div class="label" style="color:var(--gn2)">妙味判定：投資妙味あり（条件付き）／グレード A−</div>
+    <p style="font-size:12.5px"><strong>「稼ぐ力に対して安い」クオリティ・グロース型ディープバリューとして妙味あり。</strong>PER8倍×ROE16%×配当4%×売上2桁成長は収益力対比で明確に割安。<strong>解体は資材を積まず・むしろ売る費用構造</strong>でインフレ耐性が高く、元請の転嫁力で高マージンを維持。需要も老朽化×再開発という構造的追い風で、会社自身が「市場規模倍増」を見込む。<br>妙味を"実現益"に変える上での<strong>2つの留保</strong>は、(1) <strong>親会社59.6%の親子上場</strong>（低PER・低流動性の主因／ただし資本再編・還元強化なら触媒）、(2) <strong>FY26の利益率低下（19.0%→14.8%）が底打ちするか</strong>。この2点を次の1〜2四半期で見極めるのが実務上の鍵。財務は無借金・自己資本76.6%と堅牢で、下方硬直リスクは相対的に低い。<br><span class="hi-am">総括：現在¥1,385は"高値掴みではない"バリュー水準。深いディスカウントの源泉が資本構造ゆえ、事業の質を割安に取り込みつつ、還元強化・構造是正という触媒を"配当4%を得ながら待つ"設計が合理的。</span></p>
+  </div>
+
+  <div class="notice"><strong>監視すべきKPI：</strong>① FY27の営業利益率（14.8%から戻るか）② 受注高・受注残と<strong>施工人員の純増数</strong>（成長の律速）③ 株主還元方針（増配・自社株買い）④ 親会社スリーハンドレッドHDの資本政策（TOB・売出し）／東証の親子上場ガバナンス動向 ⑤ 産廃処分費・労務費の転嫁進捗・鉄スクラップ相場。</div>
+
+  <div class="notice" style="margin-top:10px"><strong>免責事項：</strong>本レポートは公開情報（有価証券報告書・決算短信・2026年3月期決算説明資料・適時開示 等／EDINET・TDnet）に基づく分析・参考資料であり、投資助言・投資勧誘を目的とするものではありません。作成者は登録された金融商品取引業者・投資助言業者ではなく、記載内容は将来の株価・業績を保証しません。数値は最新開示に基づく概算を含み、株価はご指定の2026年7月初旬時点（¥1,385／市場実勢6/30終値¥1,367と概ね一致）を基準としています。TOBプレミアム等の記述は一般的傾向であり本銘柄での実施・水準を示すものではありません。投資判断はご自身の責任のもとで行ってください。</div>
+</div>
+
+</main>
+
+<script>
+var _c={};
+function showC(id,btn){
+  document.querySelectorAll('.chapter').forEach(function(ch){ch.classList.remove('active');});
+  document.querySelectorAll('.mnb').forEach(function(b){b.classList.remove('on');});
+  document.getElementById(id).classList.add('active');btn.classList.add('on');
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+  if(id==='c2'){setTimeout(buildTkPL,70);setTimeout(buildTkROE,70);}
+}
+function showT(ch,t,btn){
+  var el=document.getElementById(ch);
+  el.querySelectorAll('.spanel').forEach(function(p){p.classList.remove('active');});
+  el.querySelectorAll('.stab').forEach(function(b){b.classList.remove('on');});
+  document.getElementById(ch+t).classList.add('active');btn.classList.add('on');
+  if(ch==='c2'&&t==='a'){buildTkPL();buildTkROE();}
+  if(ch==='c2'&&t==='c'){buildTkMargin();}
+  if(ch==='c2'&&t==='d'){buildTkEV();}
+  if(ch==='c3'&&t==='b'){buildTkCost();}
+}
+
+var OPT={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8}}},interaction:{mode:'index',intersect:false}};
+function grid(){return{color:'rgba(0,0,0,.05)',drawBorder:false};}
+function ticks10(cb){return{font:{size:10},callback:cb};}
+
+function buildTkPL(){
+  if(_c.pl)return;var e=document.getElementById('tkPL');if(!e)return;
+  _c.pl=new Chart(e,{type:'bar',data:{
+    labels:['FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26'],
+    datasets:[
+      {label:'売上高(億)',data:[62.3,66.6,90.1,98.2,112.5,106.8,122.9,148.2],backgroundColor:'rgba(36,144,84,.25)',borderColor:'#1b6840',borderWidth:1.2,yAxisID:'y'},
+      {type:'line',label:'EPS(円)',data:[64.9,63.4,112.9,111.2,124.9,125.3,181.2,172.7],borderColor:'#8e5810',borderWidth:2.5,pointRadius:3,tension:.3,yAxisID:'y2'}
+    ]},
+    options:{...OPT,scales:{y:{ticks:ticks10(function(v){return v+'億'}),grid:grid()},y2:{position:'right',ticks:ticks10(function(v){return v+'円'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildTkROE(){
+  if(_c.roe)return;var e=document.getElementById('tkROE');if(!e)return;
+  _c.roe=new Chart(e,{type:'line',data:{
+    labels:['FY21','FY22','FY23','FY24','FY25','FY26','FY27予'],
+    datasets:[{label:'ROE(%)',data:[20.5,17.8,17.5,15.6,19.2,16.4,15.0],borderColor:'#1b6840',backgroundColor:'rgba(36,144,84,.08)',borderWidth:2.5,pointRadius:4,tension:.3,fill:true}]},
+    options:{...OPT,plugins:{legend:{display:false}},scales:{y:{min:0,max:25,ticks:ticks10(function(v){return v+'%'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildTkMargin(){
+  if(_c.mg)return;var e=document.getElementById('tkMargin');if(!e)return;
+  _c.mg=new Chart(e,{type:'line',data:{
+    labels:['FY21','FY22','FY23','FY24','FY25','FY26'],
+    datasets:[{label:'営業利益率(%)',data:[15.9,14.4,13.9,15.1,19.0,14.8],borderColor:'#bf7c18',backgroundColor:'rgba(191,124,24,.10)',borderWidth:2.5,pointRadius:4,tension:.3,fill:true}]},
+    options:{...OPT,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return '営業利益率 '+c.parsed.y+'%';}}}},scales:{y:{min:10,max:21,ticks:ticks10(function(v){return v+'%'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildTkEV(){
+  if(_c.ev)return;var e=document.getElementById('tkEV');if(!e)return;
+  _c.ev=new Chart(e,{type:'bar',data:{
+    labels:['FY22','FY23','FY24','FY25','FY26'],
+    datasets:[{label:'EV/EBITDA(倍)',data:[5.0,5.7,6.2,3.0,3.9],backgroundColor:'rgba(26,60,122,.4)',borderColor:'#1a3c7a',borderWidth:1.3}]},
+    options:{...OPT,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y+'倍';}}}},scales:{y:{min:0,max:7,ticks:ticks10(function(v){return v+'倍'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildTkCost(){
+  if(_c.cost)return;var e=document.getElementById('tkCost');if(!e)return;
+  _c.cost=new Chart(e,{type:'bar',data:{
+    labels:['総合建設（新築）','解体工事'],
+    datasets:[
+      {label:'資材',data:[45,8],backgroundColor:'rgba(184,48,48,.7)'},
+      {label:'労務',data:[30,38],backgroundColor:'rgba(36,144,84,.65)'},
+      {label:'廃棄物処理・外注',data:[10,28],backgroundColor:'rgba(191,124,24,.65)'},
+      {label:'重機・回送・経費',data:[15,26],backgroundColor:'rgba(26,60,122,.5)'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      plugins:{legend:{display:true,position:'bottom',labels:{font:{size:9},boxWidth:9,padding:6}},tooltip:{callbacks:{label:function(c){return c.dataset.label+' 約'+c.parsed.x+'%';}}}},
+      scales:{x:{stacked:true,min:0,max:100,ticks:ticks10(function(v){return v+'%'}),grid:grid()},y:{stacked:true,ticks:{font:{size:11}}}}}});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パンチ工業（6165）最終投資分析 v2 — 2026.06</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f8f7f2;--bg2:#f0ede4;--bg3:#e4e0d6;
+  --ink:#0d0f14;--ink2:#1e2028;--ink3:#56585f;
+  --gn:#1a6038;--gn2:#228048;
+  --am:#7a4a08;--am2:#ac6810;
+  --bl:#102878;--bl2:#1840a8;
+  --rd:#a02828;--rd2:#c83838;
+  --sem:#b05810;--sem2:#d87018;
+  --tl:#0d7a60;--tl2:#0f9878;
+  --pur:#5a3a9a;--pur2:#7a54c0;
+  --rule:rgba(13,15,20,.08);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+.hero{background:linear-gradient(135deg,#12162a 0%,#0a0d1e 100%);color:rgba(246,245,239,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:320px;height:320px;border:1px solid rgba(255,255,255,.04);border-radius:50%}
+.hero-top{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:22px}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font:700 34px/1.06 var(--head);letter-spacing:-.025em}
+.hero-title em{color:var(--sem2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);margin-top:6px;line-height:1.65}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;flex:1;min-width:320px}
+.kpi{background:rgba(17,18,23,.3);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.tl{color:#68d8b0}.kpi-v.pu{color:#c090e0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:14px;background:rgba(36,144,84,.12);border:1px solid rgba(36,144,84,.25);border-radius:var(--r);padding:12px 18px}
+.verdict-score{font:700 42px/1 var(--mono);color:#68c890;flex-shrink:0}
+.verdict-text{font-size:12px;color:rgba(246,245,239,.7);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+.mnav{background:#12162a;display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.05)}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 15px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-rd{background:#fce8e8;color:var(--rd)}.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-tl{background:#e0f5f0;color:var(--tl)}.cb-pu{background:#f0ecff;color:var(--pur)}.cb-sem{background:#fef0e0;color:var(--sem)}
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.g5,.hero-kpis{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+@media(max-width:450px){.g2,.g3,.g4,.g5,.hero-kpis{grid-template-columns:1fr}}
+.card{background:#fff;border:.5px solid #e8e4da;border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-tl{border-left:3px solid var(--tl)}.card-pu{border-left:3px solid var(--pur)}.card-sem{border-left:3px solid var(--sem)}
+.card-hi-gn{background:#f0f9f4;border:.5px solid #90d0a8}
+.card-hi-rd{background:#fdf2f2;border:.5px solid #e0a0a0}
+.card-hi-am{background:#fffbf0;border:.5px solid #e8c870}
+.card-hi-tl{background:#eaf7f4;border:.5px solid #70c8b0}
+.card-hi-pu{background:#f5f0ff;border:.5px solid #c0a0e0}
+.card-dk{background:#12162a;color:rgba(246,245,239,.85);border:none}
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.tl{color:var(--tl)}.mc-v.pu{color:var(--pur)}.mc-v.sem{color:var(--sem)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl th.c,.tbl td.c{text-align:center}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-tl{color:var(--tl);font-weight:600}.hi-pu{color:var(--pur);font-weight:600}.hi-sem{color:var(--sem);font-weight:600}
+.mono{font-family:var(--mono)}
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-rd{background:#fce8e8;color:var(--rd)}.bd-gn{background:#dff0e8;color:var(--gn)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-tl{background:#e0f5f0;color:var(--tl)}.bd-pu{background:#f0ecff;color:var(--pur)}
+.bgrp{margin-bottom:11px}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden;height:12px}
+.bfill{border-radius:2px;height:12px;display:block;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden}
+.sc-col{padding:14px 15px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-bottom:7px;margin-bottom:8px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}.sc-lbl.base{border-color:var(--am);color:var(--am)}.sc-lbl.bull{border-color:var(--tl);color:var(--tl)}
+.sc-prob{font:600 34px/1 var(--mono);margin-bottom:4px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--tl)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:10px}
+.sc-li{font-size:11px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+.gain-meter{display:grid;grid-template-columns:210px 1fr 110px;align-items:center;gap:10px;margin-bottom:8px}
+.gain-label{font-size:11px;color:var(--ink2)}
+.gain-track{height:9px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.gain-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.gain-val{font:600 11px/1 var(--mono);text-align:right}
+.conc{background:#12162a;color:rgba(246,245,239,.82);border-radius:var(--r);padding:28px 32px}
+.conc-head{font:700 17px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:14px}
+.conc-head span{color:var(--sem2)}
+.conc-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.conc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-body{font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)}
+.conc-body strong{color:rgba(246,245,239,.95)}
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.notice-gn{background:#eaf7f0;border:.5px solid #70c898;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.notice-gn strong{color:var(--gn2)}
+.notice-rd{background:#fdf0f0;border:.5px solid #d09090;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:12px}
+.notice-rd strong{color:var(--rd2)}
+.notice-tl{background:#eaf7f4;border:.5px solid #70c8b0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--tl);line-height:1.65;margin-bottom:12px}
+.notice-tl strong{color:var(--tl2)}
+.notice-pu{background:#f5f0ff;border:.5px solid #c0a0e0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--pur);line-height:1.65;margin-bottom:12px}
+.notice-pu strong{color:var(--pur2)}
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.spacer{height:12px}
+.rsev-hi{background:#fce8e8;color:var(--rd);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-mi{background:#fef3e0;color:var(--am);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-lo{background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+
+/* ── カタリストカード（トップページ専用） ── */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.cat-card{border-radius:var(--r);padding:18px 20px;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.cat-card.c1{background:#f0f9f4;border:.5px solid #90d0a8}.cat-card.c1::before{background:var(--gn)}
+.cat-card.c2{background:#eaf7f4;border:.5px solid #70c8b0}.cat-card.c2::before{background:var(--tl)}
+.cat-card.c3{background:#f5f0ff;border:.5px solid #c0a0e0}.cat-card.c3::before{background:var(--pur)}
+.cat-card.c4{background:#fffbf0;border:.5px solid #e8c870}.cat-card.c4::before{background:var(--am)}
+.cat-card.c5{background:#fdf2f2;border:.5px solid #e0a0a0}.cat-card.c5::before{background:var(--rd)}
+.cat-card.c6{background:#f0f4fc;border:.5px solid #90b0e8}.cat-card.c6::before{background:var(--bl)}
+.cat-num{font:700 32px/1 var(--mono);margin-bottom:6px}
+.c1 .cat-num{color:var(--gn)}.c2 .cat-num{color:var(--tl)}.c3 .cat-num{color:var(--pur)}.c4 .cat-num{color:var(--am)}.c5 .cat-num{color:var(--rd)}.c6 .cat-num{color:var(--bl)}
+.cat-ttl{font:700 13px/1.2 var(--head);margin-bottom:6px;color:var(--ink)}
+.cat-body{font-size:11px;color:var(--ink2);line-height:1.7}
+.cat-tag{font:700 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:2px;display:inline-block;margin-bottom:8px}
+.c1 .cat-tag{background:#dff0e8;color:var(--gn)}.c2 .cat-tag{background:#e0f5f0;color:var(--tl)}.c3 .cat-tag{background:#f0ecff;color:var(--pur)}.c4 .cat-tag{background:#fef3e0;color:var(--am)}.c5 .cat-tag{background:#fce8e8;color:var(--rd)}.c6 .cat-tag{background:#dfe8f8;color:var(--bl)}
+
+/* ── 非対称性ビジュアル ── */
+.asym-bar{display:flex;height:48px;border-radius:var(--r);overflow:hidden;margin:14px 0 6px}
+.asym-bear{background:#fce8e8;display:flex;align-items:center;justify-content:center;font:700 12px/1 var(--mono);color:var(--rd)}
+.asym-base{background:#fef3e0;display:flex;align-items:center;justify-content:center;font:700 12px/1 var(--mono);color:var(--am)}
+.asym-bull{background:#e0f5f0;display:flex;align-items:center;justify-content:center;font:700 12px/1 var(--mono);color:var(--tl)}
+
+/* タイムライン */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.tl-dot.rd{background:var(--rd)}.tl-dot.am{background:var(--am)}.tl-dot.bl{background:var(--bl)}.tl-dot.gn{background:var(--gn)}.tl-dot.tl{background:var(--tl)}.tl-dot.pu{background:var(--pur)}
+.tl-date{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px}
+.tl-text{font-size:12px;line-height:1.65}
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-top">
+    <div style="flex-shrink:0">
+      <div class="hero-label">Investment Research — Final Report v2</div>
+      <h1 class="hero-title">パンチ工業 <em>6165</em></h1>
+      <div class="hero-sub">東証スタンダード｜機械・精密金型部品｜分析基準株価 539円（2026年6月1日）<br>2026/3期本決算確定値反映 ── 完成版 2026年6月</div>
+    </div>
+    <div class="hero-kpis">
+      <div class="kpi"><div class="kpi-l">PBR</div><div class="kpi-v rd">0.65×</div><div class="kpi-s">BPS 835円（確定）</div></div>
+      <div class="kpi"><div class="kpi-l">調整EV/EBIT</div><div class="kpi-v gn">≈4.7×</div><div class="kpi-s">NC控除後</div></div>
+      <div class="kpi"><div class="kpi-l">調整NC/株</div><div class="kpi-v tl">≈499円</div><div class="kpi-s">株価539円の92.6%</div></div>
+      <div class="kpi"><div class="kpi-l">配当利回り</div><div class="kpi-v am">3.71%</div><div class="kpi-s">20円÷539円（予想）</div></div>
+      <div class="kpi"><div class="kpi-l">自己資本比率</div><div class="kpi-v gn">67.3%</div><div class="kpi-s">純資産230.8億</div></div>
+      <div class="kpi"><div class="kpi-l">時価総額</div><div class="kpi-v bl">149億</div><div class="kpi-s">現金65億が裏付け</div></div>
+    </div>
+  </div>
+  <div class="hero-verdict">
+    <div class="verdict-score">B+</div>
+    <div class="verdict-text">
+      <strong>「宇宙オプション付き超割安バリュー株」── 3年加重平均期待リターン +77%（年率+21%）</strong><br>
+      調整ネットキャッシュ（≈138億円）≒時価総額という希少な構造。事業価値・固定資産94億・宇宙テーマがほぼゼロコストで付随する非対称な機会。<br>
+      ベア20%・ベース55%・ブル25%の加重平均。最悪ケース▲12%に対しブル時+187%のリスクリワード比6.4倍。
+    </div>
+  </div>
+</header>
+
+<!-- ══ MAIN NAV ══ -->
+<nav class="mnav">
+  <button class="mnb on"  onclick="showChapter('c0',this)">00 投資の魅力</button>
+  <button class="mnb" onclick="showChapter('c1',this)">01 バリュエーション</button>
+  <button class="mnb" onclick="showChapter('c2',this)">02 資産の実態</button>
+  <button class="mnb" onclick="showChapter('c3',this)">03 業績・中計</button>
+  <button class="mnb" onclick="showChapter('c4',this)">04 宇宙テーマ</button>
+  <button class="mnb" onclick="showChapter('c5',this)">05 リスク</button>
+  <button class="mnb" onclick="showChapter('c6',this)">06 シナリオ・期待値</button>
+  <button class="mnb" onclick="showChapter('c7',this)">07 売買戦略・総合</button>
+</nav>
+
+<main class="body">
+
+<!-- ══ C0: 投資の魅力（カタリストまとめ） ══ -->
+<div class="chapter active" id="c0">
+<div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">投資の魅力 ─ なぜ今パンチ工業なのか</h2><span class="ch-badge cb-tl">6つのカタリスト</span></div>
+
+<div class="notice-tl" style="margin-bottom:20px"><strong>一言で言えば：</strong>「株価539円のうち499円分が現金・売掛金で裏付けられており、売上408億円の黒字事業・品川の不動産含み益・宇宙テーマが残り40円でついてくる」という構造。PBR0.65倍は東証改革の流れで是正されるのを待つだけでも+54%の余地がある。</div>
+
+<div class="cat-grid">
+
+  <div class="cat-card c1">
+    <div class="cat-tag">本命カタリスト #1</div>
+    <div class="cat-num">92.6%</div>
+    <div class="cat-ttl">株価の93%が「現金・売掛金」で裏付けられている</div>
+    <div class="cat-body">現金64.9億円＋売掛金（85%換算）86.7億円＋受取手形（90%）15.1億円から有利子負債31億円を差し引いた「調整ネットキャッシュ」は<strong>≈138億円</strong>。時価総額149億円に対し92.6%。<br><br>つまり在庫をゼロ評価しても、<strong>売上421億の黒字事業・固定資産94億・宇宙オプションが40億円以下でついてくる計算</strong>。</div>
+  </div>
+
+  <div class="cat-card c2">
+    <div class="cat-tag">バリュー #2</div>
+    <div class="cat-num">0.65×</div>
+    <div class="cat-ttl">PBR0.65倍 ── 東証改革の「是正待ち」銘柄</div>
+    <div class="cat-body">BPS 835円（2026/3期確定）に対し株価539円。<strong>PBR1倍回帰だけで株価は+55%</strong>の余地がある。東証スタンダードの平均PBRは約1.3倍。<br><br>東証は上場企業にPBR1倍以上を強く要請中。自己資本67.3%・有利子負債比率14%という超健全財務で再投資先を持つ同社が資本還元強化（増配・自社株買い）に動けば、PBR是正は一気に進む。<strong>下値は調整NCが守り、上値には是正余地がある一方通行の非対称構造。</strong></div>
+  </div>
+
+  <div class="cat-card c3">
+    <div class="cat-tag">宇宙テーマ #3</div>
+    <div class="cat-num">6/12</div>
+    <div class="cat-ttl">SpaceX IPO上場（2026年6月12日 NASDAQ）× YAOKI月面挑戦</div>
+    <div class="cat-body">史上最大のIPO（評価額1.75兆ドル）が宇宙セクター全体を再評価させる。2026/5/22には宇宙ベンチャー4社が同日+12〜+20%急騰する「セクターローテーション」の兆候が既に出現。<br><br>パンチは精密金属加工技術でダイモン社の月面探査車YAOKIを支援。<strong>2027年度後半のYAOKI PY-2月面走行成功なら「精密加工技術が月面へ」という認知変化が起きる。この宇宙テーマは現在の株価にほぼゼロで織り込まれている。</strong></div>
+  </div>
+
+  <div class="cat-card c4">
+    <div class="cat-tag">業績 #4</div>
+    <div class="cat-num">+20%</div>
+    <div class="cat-ttl">2026/3期 営業利益+20.5%増益 ── 回復軌道に乗った</div>
+    <div class="cat-body">売上421億（+3.1%）・営業利益20.3億（+20.5%）・経常利益22.0億（+36.4%）と増収増益。純利益はのれん減損（一時費用）で8.5億と微減だが<strong>本業は明確に回復している</strong>。<br><br>2027/3期予想は売上450億（+6.9%）・営業利益23億（+13.2%）・純利益11億（+29.2%）。Vision60（2035年売上800億・営業益80億）への第一歩が確認された。<strong>中国好調が続く限りベースシナリオは揺るがない。</strong></div>
+  </div>
+
+  <div class="cat-card c5">
+    <div class="cat-tag">隠れた資産 #5</div>
+    <div class="cat-num">40年+</div>
+    <div class="cat-ttl">品川区本社の不動産含み益 ── 簿価6.4億・時価は数倍</div>
+    <div class="cat-body">1975年創業・品川区西五反田の本社土地は取得から40年以上が経過。BS上の土地簿価は6.4億円だが、2026年の同エリア公示地価は前年比+12〜16%で上昇中。<br><br>中位シナリオで<strong>税後含み益+4億円</strong>が調整ネットキャッシュに上乗せ。「見えない安全域」として機能している。</div>
+  </div>
+
+  <div class="cat-card c6">
+    <div class="cat-tag">戦略提携 #6</div>
+    <div class="cat-num">13億</div>
+    <div class="cat-ttl">ミスミGと13億円の株式持ち合い ── FA業界を共同深耕</div>
+    <div class="cat-body">2024年10月、ミスミGH（東証プライム・FA部品No.1）と約13億円の株式持ち合いで資本業務提携。ミスミの「デジタル×確実短納期」とパンチの「特注精密加工力」の補完関係。<br><br>2027〜2028年度に売上貢献が可視化される見込み。<strong>日本・中国で特注金型部品シェア1位のパンチがデジタル化・標準品でも競争力を持つ「二刀流」体制への変貌</strong>がカタリストになる。</div>
+  </div>
+
+</div>
+
+<!-- 非対称性のビジュアル表現 -->
+<div class="card" style="margin-bottom:20px">
+  <div style="font-size:11px;font-weight:500;margin-bottom:10px">なぜ今買うか ── 非対称なリスク・リワード構造（3年保有）</div>
+  <div class="asym-bar">
+    <div class="asym-bear" style="width:12%">▲12%<br><span style="font-size:9px">ベア20%</span></div>
+    <div class="asym-base" style="width:40%">+67%<br><span style="font-size:9px">ベース55%</span></div>
+    <div class="asym-bull" style="width:48%">+187%<br><span style="font-size:9px">ブル25%</span></div>
+  </div>
+  <div style="font-size:10px;color:var(--ink3);text-align:center;margin-bottom:12px">バーの幅は確率ウェイト×リターンの寄与度を反映</div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">加重平均期待値</div><div class="mc-v tl">+77%</div><div class="mc-s">3年・配当込み</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">年率換算（複利）</div><div class="mc-v gn">+21%</div><div class="mc-s">3年複利</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">最悪ケース</div><div class="mc-v am">▲12%</div><div class="mc-s">調整NCが下値守護</div></div>
+    <div class="card mc" style="border-top:3px solid var(--pur)"><div class="mc-l">リスクリワード比</div><div class="mc-v pu">6.4×</div><div class="mc-s">（最悪比ブル利得）</div></div>
+  </div>
+</div>
+
+<!-- カタリストタイムライン -->
+<div class="card">
+  <div style="font-size:11px;font-weight:500;margin-bottom:14px">今後のカタリストカレンダー</div>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-dot pu"></div>
+      <div class="tl-date">2026年6月12日 ★最重要近期</div>
+      <div class="tl-text"><strong>SpaceX Nasdaq上場（SPCX）。</strong>評価額1.75兆ドル・史上最大IPO。宇宙セクターへの資金流入開始。ダイモン提携保有銘柄としてパンチへの連想物色が期待される。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot bl"></div>
+      <div class="tl-date">2026年8月（2027/3期 1Q決算）</div>
+      <div class="tl-text">中国事業の継続好調確認。VC28進捗初開示。ミスミG提携効果の定量開示が初めて期待される。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot am"></div>
+      <div class="tl-date">2026年下期（VC28中計発表）</div>
+      <div class="tl-text"><strong>バリュークリエーション2028の公表。</strong>2028年度の新数値目標が示され、株価の参照水準が更新される。Vision60に向けた投資計画・M&A方針も明示予定。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gn"></div>
+      <div class="tl-date">2027年〜（ミスミG提携効果の可視化）</div>
+      <div class="tl-text">相互供給・物流統合の売上貢献が決算数値に反映。「脱・金型部品依存」の進捗確認。FA市場での共同深耕がアナリスト注目度を引き上げる。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot tl"></div>
+      <div class="tl-date">2027年度後半 ★最大カタリスト</div>
+      <div class="tl-text"><strong>YAOKI PY-2 打上げ・月面走行挑戦。</strong>成功なら「日本の精密加工技術が月面へ」というニュースが世界を駆け巡る。パンチ工業の宇宙関連銘柄としての認知が一変する瞬間。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot rd"></div>
+      <div class="tl-date">2028〜2029年（Vision60 中計第2期）</div>
+      <div class="tl-text">Vision60目標（2035年売上800億・営業利益80億）の中間進捗。達成ペースが見えれば、PER15倍ベースで株価1,000〜2,600円水準への評価替えが視野に入る。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C1: バリュエーション ══ -->
+<div class="chapter" id="c1">
+<div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">バリュエーション ─ 2026/3期確定値で再計算</h2><span class="ch-badge cb-gn">全数値確定値使用</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c1','a',this)">主要指標（確定）</button>
+  <button class="stab" onclick="showTab('c1','b',this)">同業・宇宙株比較</button>
+  <button class="stab" onclick="showTab('c1','c',this)">理論株価レンジ</button>
+</div>
+
+<div class="spanel active" id="c1-a">
+  <div class="notice-rd" style="margin-bottom:14px"><strong>v1からの修正点：</strong>配当利回りを誤記（≈4.9%）から正値（3.71%）に全面修正。2026/3期本決算確定値（売上421億・純利益8.51億・BPS 835円・EPS 30.8円）で全指標を再計算。</div>
+  <div class="g4" style="margin-bottom:14px">
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">PBR（確定BPS基準）</div><div class="mc-v rd">0.65×</div><div class="mc-s">BPS 835円（26/3期確定）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">配当利回り（修正）</div><div class="mc-v gn">3.71%</div><div class="mc-s">20円÷539円（27/3期予想）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">調整EV/EBIT</div><div class="mc-v tl">≈4.7×</div><div class="mc-s">EBIT 20.3億・NC控除後EV11億</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">PER（実績）</div><div class="mc-v am">17.5×</div><div class="mc-s">EPS 30.8円（のれん減損含む）</div></div>
+  </div>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">2026/3期 確定財務サマリー（連結）</div>
+      <table class="tbl">
+        <thead><tr><th>項目</th><th class="r">2025/3期</th><th class="r">2026/3期（確定）</th><th class="r">前期比</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mono">408億円</td><td class="r mono hi-gn"><strong>421億円</strong></td><td class="r mono hi-gn">+3.1%</td></tr>
+          <tr><td>営業利益</td><td class="r mono">16.9億円</td><td class="r mono hi-gn"><strong>20.3億円</strong></td><td class="r mono hi-gn">+20.5%</td></tr>
+          <tr><td>経常利益</td><td class="r mono">16.1億円</td><td class="r mono hi-gn"><strong>22.0億円</strong></td><td class="r mono hi-gn">+36.4%</td></tr>
+          <tr><td>純利益（のれん減損込）</td><td class="r mono">8.68億円</td><td class="r mono hi-am"><strong>8.51億円</strong></td><td class="r mono hi-am">▲1.9%</td></tr>
+          <tr><td>総資産</td><td class="r mono">329.7億円</td><td class="r mono hi-gn"><strong>343億円</strong></td><td class="r mono hi-gn">+4.0%</td></tr>
+          <tr><td>純資産</td><td class="r mono">220.4億円</td><td class="r mono hi-gn"><strong>230.8億円</strong></td><td class="r mono hi-gn">+4.7%</td></tr>
+          <tr><td>EPS（確定）</td><td class="r mono">33.6円</td><td class="r mono hi-am"><strong>30.8円</strong></td><td class="r mono hi-am">▲8%</td></tr>
+          <tr><td>BPS（確定）</td><td class="r mono">852円</td><td class="r mono hi-gn"><strong>835円</strong></td><td class="r mono hi-am">▲2%</td></tr>
+          <tr><td>配当（確定）</td><td class="r mono">19.56円</td><td class="r mono hi-am"><strong>18.54円</strong></td><td class="r mono hi-am">▲5%</td></tr>
+          <tr><td>2027/3期 配当予想</td><td class="r mono">—</td><td class="r mono hi-gn"><strong>20円（増配）</strong></td><td class="r mono hi-gn">+7.9%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">純利益減はのれん減損損失（一時費用）による。営業利益・経常利益ベースでは明確な増益。BPS微減は配当支払い・のれん減損の影響。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">マルチバリュエーション一覧（539円基準）</div>
+      <div class="bgrp"><div class="blrow"><span>PBR（帳簿）</span><span class="hi-rd mono">0.65倍</span></div><div class="btrack"><div class="bfill" style="width:25%;background:var(--rd)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>東証スタンダード平均PBR</span><span class="hi-am mono">約1.3倍</span></div><div class="btrack"><div class="bfill" style="width:50%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>配当利回り（27/3期予想）</span><span class="hi-gn mono">3.71%</span></div><div class="btrack"><div class="bfill" style="width:37%;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>調整EV/EBIT</span><span class="hi-tl mono">約4.7倍</span></div><div class="btrack"><div class="bfill" style="width:30%;background:var(--tl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>グローバル製造業平均EV/EBIT</span><span class="hi-am mono">10〜15倍</span></div><div class="btrack"><div class="bfill" style="width:75%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>営業利益率</span><span class="hi-am mono">4.8%</span></div><div class="btrack"><div class="bfill" style="width:30%;background:var(--am2)"></div></div></div>
+      <div class="notice-gn" style="margin-top:10px"><strong>EPS 30.8円 vs PER 17.5倍：</strong>のれん減損込みの実績EPS。来期予想純利益11億円（EPS≈39.8円）ではPER13.5倍。来期ベースでは「適正PER20倍換算で株価796円」という水準。</div>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c1-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">宇宙関連銘柄バリュエーション比較（2026年6月）</div>
+    <table class="tbl">
+      <thead><tr><th>銘柄</th><th>宇宙の関与</th><th class="r">時価総額</th><th class="r">PBR</th><th class="r">PER</th><th class="r">売上高</th><th class="c">黒字</th><th class="c">宇宙純度</th></tr></thead>
+      <tbody>
+        <tr><td>三菱重工（7011）</td><td style="font-size:11px;color:var(--ink3)">H3ロケット製造</td><td class="r mono">15.4兆</td><td class="r mono hi-rd">4.2×</td><td class="r mono hi-rd">56×</td><td class="r mono">4.9兆</td><td class="c"><span class="badge bd-gn">○</span></td><td class="c"><span class="badge bd-am">低〜中</span></td></tr>
+        <tr><td>IHI（7013）</td><td style="font-size:11px;color:var(--ink3)">ロケットエンジン</td><td class="r mono">3.4兆</td><td class="r mono hi-am">2.8×</td><td class="r mono hi-am">26×</td><td class="r mono">1.8兆</td><td class="c"><span class="badge bd-gn">○</span></td><td class="c"><span class="badge bd-am">低〜中</span></td></tr>
+        <tr><td>アストロスケール（186A）</td><td style="font-size:11px;color:var(--ink3)">デブリ除去・軌道上サービス</td><td class="r mono">1,138億</td><td class="r mono hi-rd">3.1×</td><td class="r mono hi-rd">赤字</td><td class="r mono">44億</td><td class="c"><span class="badge bd-rd">×</span></td><td class="c"><span class="badge bd-bl">超高</span></td></tr>
+        <tr><td>ispace（9348）</td><td style="font-size:11px;color:var(--ink3)">月面輸送（2回失敗）</td><td class="r mono">728億</td><td class="r mono">赤字累積</td><td class="r mono hi-rd">赤字</td><td class="r mono">33億</td><td class="c"><span class="badge bd-rd">×</span></td><td class="c"><span class="badge bd-bl">超高</span></td></tr>
+        <tr style="background:#f0f9f4"><td><strong>★ パンチ工業（6165）</strong></td><td style="font-size:11px;color:var(--gn)">精密加工→YAOKI提携</td><td class="r mono hi-gn"><strong>149億</strong></td><td class="r mono hi-gn"><strong>0.65×</strong></td><td class="r mono hi-am"><strong>17.5×</strong></td><td class="r mono hi-gn"><strong>421億</strong></td><td class="c"><span class="badge bd-gn">○</span></td><td class="c"><span class="badge bd-am">低</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice-tl"><strong>投資の非対称性：</strong>ispace時価総額728億で売上33億（PBR意味なし）。パンチ時価総額149億で売上421億（黒字・PBR0.65倍）。宇宙への「アクセスコスト」が桁違いに安く、かつ下値リスクが限定的。</div>
+</div>
+
+<div class="spanel" id="c1-c">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">複数手法による理論株価レンジ（2026/3期確定値ベース）</div>
+    <div class="bgrp"><div class="blrow"><span>PBR1.0倍回帰（BPS 835円×1.0倍）</span><span class="hi-gn mono">¥835 (+55%)</span></div><div class="btrack"><div class="bfill" style="width:64%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>来期EPS予想PER20倍（EPS≈40円×20）</span><span class="hi-gn mono">¥800 (+48%)</span></div><div class="btrack"><div class="bfill" style="width:62%;background:var(--gn2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>DDM法（配当20円÷3%）</span><span class="hi-am mono">¥667 (+24%)</span></div><div class="btrack"><div class="bfill" style="width:51%;background:var(--am2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>VC28達成 EPS76円×PER15倍</span><span class="hi-am mono">¥1,140 (+112%)</span></div><div class="btrack"><div class="bfill" style="width:72%;background:var(--am)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>Vision60達成 FISCO試算</span><span class="hi-tl mono">¥2,600+ (+382%)</span></div><div class="btrack"><div class="bfill" style="width:92%;background:var(--tl)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span style="color:var(--rd)">現在株価（分析基準）</span><span class="hi-rd mono">¥539</span></div><div class="btrack"><div class="bfill" style="width:41%;background:var(--rd)"></div></div></div>
+  </div>
+  <div class="notice-gn">3年ベースシナリオ理論値：<strong>¥800〜1,000</strong>（PBR0.96〜1.20倍）。来期EPS40円×PER20倍で+48%が「地に足の着いた目標」。長期ブル達成時：¥1,500〜2,600。</div>
+</div>
+</div>
+
+<!-- ══ C2: 資産の実態 ══ -->
+<div class="chapter" id="c2">
+<div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">資産の実態 ─ 含み益・「実質タダ」論の精査</h2><span class="ch-badge cb-tl">調整NC≒時価総額を確認</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c2','a',this)">調整ネットキャッシュ</button>
+  <button class="stab" onclick="showTab('c2','b',this)">不動産含み益</button>
+  <button class="stab" onclick="showTab('c2','c',this)">有価証券（ミスミG）</button>
+  <button class="stab" onclick="showTab('c2','d',this)">総合試算</button>
+</div>
+
+<div class="spanel active" id="c2-a">
+  <div class="notice" style="margin-bottom:14px"><strong>「実質タダ」論の本質：</strong>在庫・原材料を除き、現金＋売掛金（85%）＋受取手形（90%）の調整後流動資産から有利子負債を差し引いた「調整ネットキャッシュ」≈138億円が時価総額149億に対して92.6%に達する。「事業（売上421億・黒字）＋固定資産94億＋宇宙オプション」が約11億円以下でついてくる構造。</div>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">調整ネットキャッシュ試算（2026/3期確定値）</div>
+      <table class="tbl">
+        <thead><tr><th>科目</th><th class="r">金額</th><th class="r">掛け目</th><th class="r">調整後</th><th>換金性</th></tr></thead>
+        <tbody>
+          <tr style="background:#f0f9f4"><td><strong>現金及び預金</strong></td><td class="r mono hi-gn">≈65億</td><td class="r mono">100%</td><td class="r mono hi-gn">65億</td><td>完全な現金</td></tr>
+          <tr><td>受取手形</td><td class="r mono">≈17億</td><td class="r mono">90%</td><td class="r mono hi-tl">15億</td><td>不渡りリスク小控除</td></tr>
+          <tr><td>売掛金</td><td class="r mono">≈102億</td><td class="r mono">85%</td><td class="r mono hi-tl">87億</td><td>製造業として回収率高</td></tr>
+          <tr><td>その他流動</td><td class="r mono">≈5億</td><td class="r mono">50%</td><td class="r mono">2億</td><td>前払費用等・半分計上</td></tr>
+          <tr style="background:#fdf2f2"><td>在庫（製品・仕掛・原材料）</td><td class="r mono hi-rd">≈49億</td><td class="r mono hi-rd">0%</td><td class="r mono hi-rd">0</td><td>換金性低・除外</td></tr>
+          <tr style="font-weight:600;background:#f0f9f4"><td>調整後流動資産計</td><td></td><td></td><td class="r mono hi-gn">169億</td><td></td></tr>
+          <tr style="background:#fdf2f2"><td>△ 有利子負債</td><td class="r mono hi-rd">≈31億</td><td class="r mono">100%</td><td class="r mono hi-rd">▲31億</td><td>確実な返済義務</td></tr>
+          <tr style="background:#f0f9f4;font-weight:700"><td><strong>✅ 調整ネットキャッシュ</strong></td><td></td><td></td><td class="r mono hi-gn" style="font-size:15px"><strong>≈138億円</strong></td><td style="font-size:11px;color:var(--gn)">1株≈500円 / 株価539円の92.6%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">2方式は独立した計算で同じ結論に到達。在庫を除いても十分な裏付けが確認できる。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">3方式比較と時価総額との関係</div>
+      <table class="tbl">
+        <thead><tr><th>計算方式</th><th class="r">NC</th><th class="r">1株換算</th><th class="r">時価総額比</th></tr></thead>
+        <tbody>
+          <tr><td>①厳密式（現金のみ）</td><td class="r mono hi-am">+34億</td><td class="r mono hi-am">+123円</td><td class="r mono hi-am">22.8%</td></tr>
+          <tr style="background:#f0f9f4"><td><strong>②調整式（推奨★）</strong></td><td class="r mono hi-gn"><strong>+138億</strong></td><td class="r mono hi-gn"><strong>+500円</strong></td><td class="r mono hi-gn"><strong>92.6%</strong></td></tr>
+          <tr><td>③動画式（流動−負債）</td><td class="r mono hi-tl">+126億</td><td class="r mono hi-tl">+456円</td><td class="r mono hi-tl">84.6%</td></tr>
+          <tr style="background:#eaf7f4"><td>②＋土地含み益（中位・税後）</td><td class="r mono hi-tl">+142億</td><td class="r mono hi-tl">+514円</td><td class="r mono hi-tl"><strong>95.3%</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="spacer"></div>
+      <div class="g2">
+        <div style="background:var(--bg2);border-radius:var(--r);padding:12px;text-align:center">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">事業価値（調整後EV）</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--am)">≈11億円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px">時価総額149 − 調整NC138</div>
+        </div>
+        <div style="background:var(--bg2);border-radius:var(--r);padding:12px;text-align:center">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">固定資産（簿価）</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--bl)">94億円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px">製造設備・土地・知財</div>
+        </div>
+      </div>
+      <div class="notice-gn" style="margin-top:10px"><strong>核心：</strong>売上421億・営業利益20億の事業と94億の固定資産が、わずか11億円の「お値段」でついてくる計算。これが「実質タダ」論の本質。</div>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c2-b">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">本社土地（品川区西五反田）の状況</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>個別BS 土地帳簿</td><td class="r mono hi-rd">6.39億円</td></tr>
+          <tr><td>連結BS 土地帳簿</td><td class="r mono hi-am">7.49億円</td></tr>
+          <tr><td>所在地</td><td style="font-size:11px">品川区西五反田1-1-8</td></tr>
+          <tr><td>創業・取得推定</td><td style="font-size:11px">1975年創業、80年代以前取得推定</td></tr>
+          <tr><td>品川区工業地公示地価（2026年）</td><td class="r mono hi-gn">56.5万円/m²（前年比+10.8%）</td></tr>
+          <tr><td>西五反田 商業地（2026年）</td><td class="r mono hi-gn">346.8万円/m²（前年比+16%）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">含み益 3シナリオ（税後30%控除）</div>
+      <table class="tbl">
+        <thead><tr><th>シナリオ</th><th class="r">推定時価</th><th class="r">含み益税後</th><th>前提</th></tr></thead>
+        <tbody>
+          <tr><td>保守</td><td class="r mono">7.7億</td><td class="r mono hi-am">+0.9億</td><td style="font-size:11px">工業地51万×1,500m²</td></tr>
+          <tr style="background:#f0f9f4"><td><strong>中位★</strong></td><td class="r mono"><strong>12億</strong></td><td class="r mono hi-gn"><strong>+3.9億</strong></td><td style="font-size:11px">準工業80万×1,500m²</td></tr>
+          <tr><td>楽観</td><td class="r mono">30億</td><td class="r mono hi-tl">+16.5億</td><td style="font-size:11px">商業200万×1,500m²</td></tr>
+        </tbody>
+      </table>
+      <p class="note">土地は事業用不動産のため実際の換金は困難。「潜在的安全域」として評価する。</p>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c2-c">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">ミスミGH（9962）保有株の現状</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>取得時期</td><td class="r mono">2024年10月23日</td></tr>
+          <tr><td>取得総額（BS値）</td><td class="r mono">12.48億円</td></tr>
+          <tr><td>推定取得単価</td><td class="r mono hi-am">≈4,035円/株</td></tr>
+          <tr><td>推定保有株数</td><td class="r mono">≈309,000株</td></tr>
+          <tr><td>現在株価（参考・2026/6/1）</td><td class="r mono hi-rd">≈3,025〜3,675円</td></tr>
+          <tr><td>現在時価（推定）</td><td class="r mono hi-rd">≈9.4〜11.4億円</td></tr>
+          <tr><td>含み損益（税前）</td><td class="r mono hi-rd">▲1.1〜▲3.2億円</td></tr>
+          <tr><td>有報計上（2025/3期末）</td><td class="r mono hi-rd">評価差額▲0.20億（税後）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">含み損の全体への影響</div>
+      <div class="notice-rd">現状は取得単価（≈4,035円）を下回る含み損。最大▲2.2億（税後）のマイナス。</div>
+      <div class="spacer"></div>
+      <div class="notice-gn">調整ネットキャッシュ138億に対し2%以内の誤差。本質的な割安評価への影響は軽微。ミスミG自体はFA部品No.1・増収増益で長期的な回復は期待できる。</div>
+      <table class="tbl" style="margin-top:10px">
+        <thead><tr><th>ミスミG株価</th><th class="r">含み損税後</th><th class="r">調整NC修正後</th></tr></thead>
+        <tbody>
+          <tr><td>3,025円（低め）</td><td class="r mono hi-rd">▲2.2億</td><td class="r mono hi-am">135.8億</td></tr>
+          <tr style="background:#fffbf0"><td>3,675円（ご提示値）</td><td class="r mono hi-rd">▲0.8億</td><td class="r mono hi-gn">137.2億</td></tr>
+          <tr><td>4,035円（NC回帰）</td><td class="r mono">±0</td><td class="r mono hi-gn">138.0億</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c2-d">
+  <div class="card card-tl" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">実質ネットキャッシュ 総合試算（中位ケース）</div>
+    <table class="tbl">
+      <thead><tr><th>項目</th><th class="r">金額</th><th class="r">1株換算</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr style="background:#f0f9f4"><td><strong>調整ネットキャッシュ（基本）</strong></td><td class="r mono hi-gn"><strong>+138億</strong></td><td class="r mono hi-gn"><strong>+500円</strong></td><td style="font-size:11px">現金+売掛金85%+受取手形90%−有利子負債</td></tr>
+        <tr><td>ミスミG株含み損（現時点）</td><td class="r mono hi-rd">▲0.8〜▲2.2億</td><td class="r mono hi-rd">▲3〜▲8円</td><td style="font-size:11px">取得単価比・税後換算</td></tr>
+        <tr><td>不動産含み益（中位・税後）</td><td class="r mono hi-gn">+3.9億</td><td class="r mono hi-gn">+14円</td><td style="font-size:11px">準工業地価80万×1,500m²想定</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td><strong>実質ネットキャッシュ（中位）</strong></td><td class="r mono hi-tl" style="font-size:15px"><strong>≈140億円</strong></td><td class="r mono hi-tl" style="font-size:15px"><strong>≈507円</strong></td><td style="font-size:11px;color:var(--tl)">時価総額149億の93.8%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">中位ケースで実質NCが時価総額の93.8%をカバー。株価539円に対して507円分が「確認可能な資産」で裏付けられ、残り32円で売上421億の事業・94億の固定資産・宇宙オプションが付随する。</p>
+  </div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">実質NC合計（中位）</div><div class="mc-v gn">≈140億</div><div class="mc-s">時価総額149億の93.8%</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">1株実質NC</div><div class="mc-v tl">≈507円</div><div class="mc-s">株価539円の94.1%</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">「付随する事業」のEV</div><div class="mc-v am">≈9億円</div><div class="mc-s">営業利益20億の0.45倍</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">固定資産（簿価）</div><div class="mc-v bl">94億</div><div class="mc-s">これもほぼタダ</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C3: 業績・中計 ══ -->
+<div class="chapter" id="c3">
+<div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">業績推移と中期経営計画 ─ Vision60の射程距離</h2><span class="ch-badge cb-am">2年連続増収増益</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c3','a',this)">業績推移</button>
+  <button class="stab" onclick="showTab('c3','b',this)">Vision60・VC28</button>
+  <button class="stab" onclick="showTab('c3','c',this)">株主還元</button>
+</div>
+
+<div class="spanel active" id="c3-a">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">連結業績推移（百万円）</div>
+    <table class="tbl">
+      <thead><tr><th>年度</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">BPS</th><th class="r">ROE</th><th>特記</th></tr></thead>
+      <tbody>
+        <tr><td>2022/3期</td><td class="r mono">39,359</td><td class="r mono hi-gn">3,042</td><td class="r mono hi-gn">2,041</td><td class="r mono hi-gn">93.3円</td><td class="r mono">744円</td><td class="r mono hi-gn">12.5%</td><td style="font-size:11px">ピーク期</td></tr>
+        <tr><td>2023/3期</td><td class="r mono">42,800</td><td class="r mono hi-am">2,437</td><td class="r mono hi-am">1,390</td><td class="r mono hi-am">60.6円</td><td class="r mono">828円</td><td class="r mono hi-am">7.3%</td><td style="font-size:11px">減速</td></tr>
+        <tr style="background:#fdf2f2"><td>2024/3期</td><td class="r mono">38,344</td><td class="r mono hi-am">1,240</td><td class="r mono hi-rd">▲577</td><td class="r mono hi-rd">▲23.6円</td><td class="r mono">765円</td><td class="r mono hi-rd">赤字</td><td style="font-size:11px;color:var(--rd)">赤字転落（特損）</td></tr>
+        <tr style="background:#f0f9f4"><td>2025/3期</td><td class="r mono hi-gn">40,822</td><td class="r mono hi-gn">1,685</td><td class="r mono hi-gn">868</td><td class="r mono hi-gn">33.6円</td><td class="r mono hi-gn">852円</td><td class="r mono hi-gn">3.9%</td><td style="font-size:11px;color:var(--gn)">黒字回帰</td></tr>
+        <tr style="background:#eaf7f4"><td><strong>2026/3期（確定）★</strong></td><td class="r mono hi-gn"><strong>42,100</strong></td><td class="r mono hi-gn"><strong>2,031</strong></td><td class="r mono hi-am"><strong>851</strong></td><td class="r mono hi-am"><strong>30.8円</strong></td><td class="r mono hi-gn"><strong>835円</strong></td><td class="r mono hi-gn">3.7%</td><td style="font-size:11px;color:var(--gn)">増収増益・のれん減損あり</td></tr>
+        <tr><td>2027/3期（会社予想）</td><td class="r mono">45,000</td><td class="r mono hi-gn">2,300</td><td class="r mono hi-gn">1,100</td><td class="r mono hi-gn">≈40円</td><td class="r mono">—</td><td class="r mono">—</td><td style="font-size:11px">+29%純利増益予想</td></tr>
+      </tbody>
+    </table>
+    <p class="note">2026/3期の純利益減はのれん減損損失（一時費用）が主因。本業を示す営業利益・経常利益は明確に増益。2027/3期予想EPS≈40円でPER13.5倍（539円比）と来期ベースでは割高感がない。</p>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">営業利益率の推移</div>
+      <div class="bgrp"><div class="blrow"><span>2022/3期（ピーク）</span><span class="hi-gn mono">7.7%</span></div><div class="btrack"><div class="bfill" style="width:77%;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>2023/3期</span><span class="hi-am mono">5.7%</span></div><div class="btrack"><div class="bfill" style="width:57%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>2024/3期（底）</span><span class="hi-rd mono">3.2%</span></div><div class="btrack"><div class="bfill" style="width:32%;background:var(--rd)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>2025/3期</span><span class="hi-am mono">4.1%</span></div><div class="btrack"><div class="bfill" style="width:41%;background:var(--am2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>2026/3期（確定）</span><span class="hi-gn mono">4.8%</span></div><div class="btrack"><div class="bfill" style="width:48%;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>2027/3期（予想）</span><span class="hi-gn mono">5.1%</span></div><div class="btrack"><div class="bfill" style="width:51%;background:var(--gn)"></div></div></div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">セグメント別・地域別の動向（2026/3期）</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>中国・アジア</td><td style="font-size:11px"><span class="badge bd-gn">好調継続</span> 売上増加が全体を牽引。景況感回復。</td></tr>
+          <tr><td>日本国内</td><td style="font-size:11px"><span class="badge bd-am">低迷継続</span> 原材料高騰・FA需要低迷。回復待ち。</td></tr>
+          <tr><td>海外売上比率</td><td style="font-size:11px">約60%超。中国依存度高く為替・地政学リスクに注意。</td></tr>
+          <tr><td>金型部品事業</td><td style="font-size:11px">主力維持。特注品シェア日中1位の競争優位は不変。</td></tr>
+          <tr><td>FA・周辺事業</td><td style="font-size:11px">「脱・金型部品依存」戦略で拡大中。ミスミG連携で加速へ。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c3-b">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">Vision60（2035年3月期）目標</div>
+      <div class="bgrp"><div class="blrow"><span>売上高目標（2035年）</span><span class="hi-tl mono">800億円</span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--tl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>売上高現在（2026/3期）</span><span class="hi-am mono">421億円（52%）</span></div><div class="btrack"><div class="bfill" style="width:52%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>営業利益目標（2035年）</span><span class="hi-tl mono">80億円</span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--tl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>営業利益現在（2026/3期）</span><span class="hi-am mono">20.3億円（25%）</span></div><div class="btrack"><div class="bfill" style="width:25%;background:var(--am)"></div></div></div>
+      <div class="notice"><strong>必要CAGR：</strong>売上+6.1%/年・営業利益+<strong>14.8%/年</strong>（9年間）。野心的だが、ミスミG提携・宇宙・M&A強化が複合的に機能すれば射程内。達成時のPER15倍換算は株価2,600円超。</div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">VC28（2026〜2028年度）目標と進捗</div>
+      <table class="tbl">
+        <thead><tr><th>指標</th><th class="r">2026/3実績</th><th class="r">2027/3予想</th><th class="r">2028/3目標</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mono hi-gn">421億</td><td class="r mono hi-gn">450億</td><td class="r mono">—</td></tr>
+          <tr><td>営業利益</td><td class="r mono hi-gn">20.3億</td><td class="r mono hi-gn">23億</td><td class="r mono">—</td></tr>
+          <tr><td>純利益</td><td class="r mono">8.5億</td><td class="r mono hi-gn">11億</td><td class="r mono">—</td></tr>
+          <tr><td>配当</td><td class="r mono">18.54円</td><td class="r mono hi-gn">20円（増配）</td><td class="r mono">—</td></tr>
+        </tbody>
+      </table>
+      <p class="note">VC28の詳細数値目標（2028/3期）は2026年下期に公表予定。公表時が次の株価カタリスト。</p>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c3-c">
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">配当推移と正確な利回り計算</div>
+      <table class="tbl">
+        <thead><tr><th>年度</th><th class="r">配当</th><th class="r">利回り@539円</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>2024/3期</td><td class="r mono hi-am">18.0円</td><td class="r mono">3.34%</td><td style="font-size:11px">赤字でも維持</td></tr>
+          <tr><td>2025/3期</td><td class="r mono hi-gn">19.56円</td><td class="r mono">3.63%</td><td style="font-size:11px">黒字回帰・増配</td></tr>
+          <tr style="background:#fdf2f2"><td><strong>2026/3期（確定）</strong></td><td class="r mono hi-am"><strong>18.54円</strong></td><td class="r mono hi-am"><strong>3.44%</strong></td><td style="font-size:11px">微減（業績連動）</td></tr>
+          <tr style="background:#f0f9f4"><td><strong>2027/3期（予想）</strong></td><td class="r mono hi-gn"><strong>20円（増配）</strong></td><td class="r mono hi-gn"><strong>3.71%</strong></td><td style="font-size:11px;color:var(--gn)">増配・3年累積58.5円</td></tr>
+        </tbody>
+      </table>
+      <div class="notice-rd" style="margin-top:10px"><strong>v1訂正：</strong>前版で「≈4.9%」と誤記。正値は3.44〜3.71%。3年累積配当（約58円）は取得価格539円比で+10.8%の受取。</div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">配当方針と資本政策</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>配当方針</td><td style="font-size:11px">「連結配当性向30%以上、かつDOE3%以上」の高い方を選択。赤字（2024/3期）でも18円維持という強いコミット実績。</td></tr>
+          <tr><td>東証改革対応</td><td style="font-size:11px">PBR1倍割れを認識。資本コスト・ROE改善へのコミットを明示。</td></tr>
+          <tr><td>M&A方針</td><td style="font-size:11px">「資本コストを意識したM&A強化」を明示。Vision60達成のための事業領域拡大。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C4: 宇宙テーマ ══ -->
+<div class="chapter" id="c4">
+<div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">宇宙テーマ ─ 「ゼロ織込み」という最大の魅力</h2><span class="ch-badge cb-pu">テーマ未織込み確認</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c4','a',this)">SpaceX IPO</button>
+  <button class="stab" onclick="showTab('c4','b',this)">YAOKI・ダイモン</button>
+  <button class="stab" onclick="showTab('c4','c',this)">ニッチトップ技術</button>
+</div>
+
+<div class="spanel active" id="c4-a">
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card mc" style="border-top:3px solid var(--pur)"><div class="mc-l">上場日</div><div class="mc-v pu">6/12</div><div class="mc-s">NASDAQ SPCX</div></div>
+    <div class="card mc" style="border-top:3px solid var(--pur)"><div class="mc-l">評価額</div><div class="mc-v pu">1.75兆$</div><div class="mc-s">史上最大のIPO</div></div>
+    <div class="card mc" style="border-top:3px solid var(--pur)"><div class="mc-l">2025年売上</div><div class="mc-v pu">187億$</div><div class="mc-s">打上げ170回/年</div></div>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:10px">SpaceX IPOがパンチ工業に与える3層の影響</div>
+    <table class="tbl">
+      <thead><tr><th>影響層</th><th>内容</th><th class="r">時期</th><th class="c">確実性</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:500">① テーマ連想買い</td><td style="font-size:11px">宇宙セクター全体への資金流入。2026/5/22に宇宙ベンチャー4社が同日+12〜+20%の同時急騰事例が既に発生。ダイモン提携保有銘柄として注目度上昇。</td><td class="r mono">短期</td><td class="c"><span class="badge bd-am">中</span></td></tr>
+        <tr style="background:#f5f0ff"><td style="font-weight:500">② YAOKI提携の再評価</td><td style="font-size:11px">SpaceX上場後の宇宙産業全般への関心高まりで、月面探査プロジェクトへの注目が急上昇。パンチの精密加工技術提供が再評価される。</td><td class="r mono">中期</td><td class="c"><span class="badge bd-am">中</span></td></tr>
+        <tr><td style="font-weight:500">③ 宇宙サプライヤー参入</td><td style="font-size:11px">SpaceXが年170回の打上げを継続する中で精密構造部品需要拡大。AS9100認証取得によるサプライヤー参入は超長期の可能性。</td><td class="r mono">超長期</td><td class="c"><span class="badge bd-rd">低</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice-pu"><strong>「ゼロ織込み」の非対称性：</strong>パンチ工業のPBR0.65倍という水準には宇宙テーマがほぼ完全にゼロで織り込まれている。わずかな認知度上昇でも株価インパクトが大きい非対称な機会。対照的に三菱重工（PER56倍）・アストロスケール（赤字・PBR3倍）はすでにテーマプレミアムが相当乗っている。</div>
+</div>
+
+<div class="spanel" id="c4-b">
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">YAOKIプロジェクト概要</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>パートナー</td><td style="font-size:11px">株式会社ダイモン（宇宙技術開発ベンチャー）</td></tr>
+          <tr><td>提携更新</td><td style="font-size:11px">2026年3月11日（直近・IR発表日に株価急騰）</td></tr>
+          <tr><td>プロジェクト</td><td style="font-size:11px">Project YAOKI 2（PY-2）</td></tr>
+          <tr><td>ミッション</td><td style="font-size:11px">月面探査車YAOKI 2機を月面輸送・月の資源発見に挑む</td></tr>
+          <tr><td>打上げ予定</td><td style="font-size:11px"><strong>2027年度後半</strong></td></tr>
+          <tr><td>NASAとの関係</td><td style="font-size:11px">CLPS（商業月面輸送サービス）プログラムに採択済み</td></tr>
+          <tr><td>パンチの役割</td><td style="font-size:11px">精密な金属加工技術でYAOKI部品を製造・提供</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">YAOKI成功時のシナリオ</div>
+      <div class="notice-pu" style="margin-bottom:10px"><strong>月面走行成功の場合：</strong>「日本の精密加工技術が月面で動いた」という映像・報道が世界に発信。ispace（赤字・728億）を上回る宇宙認知度をもつ黒字企業として突然クローズアップされる可能性。</div>
+      <table class="tbl">
+        <thead><tr><th>比較</th><th class="r">ispace</th><th class="r">パンチ工業</th></tr></thead>
+        <tbody>
+          <tr><td>月面挑戦実績</td><td class="r mono hi-rd">2回失敗</td><td class="r mono hi-gn">技術提供側</td></tr>
+          <tr><td>時価総額</td><td class="r mono hi-rd">728億</td><td class="r mono hi-gn">149億</td></tr>
+          <tr><td>収益性</td><td class="r mono hi-rd">赤字継続</td><td class="r mono hi-gn">黒字・配当あり</td></tr>
+          <tr><td>下値リスク</td><td class="r mono hi-rd">ミッション失敗→大暴落</td><td class="r mono hi-gn">NC裏付けで限定</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c4-c">
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">金型部品 ニッチトップの実力</div>
+      <div class="bgrp"><div class="blrow"><span>国内 特注金型部品シェア</span><span class="hi-gn mono">1位</span></div><div class="btrack"><div class="bfill" style="width:90%;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>中国 特注金型部品シェア</span><span class="hi-gn mono">1位</span></div><div class="btrack"><div class="bfill" style="width:85%;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>海外売上比率</span><span class="hi-tl mono">約60%</span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--tl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>参入障壁（技術・設備）</span><span class="hi-am mono">高い</span></div><div class="btrack"><div class="bfill" style="width:75%;background:var(--am)"></div></div></div>
+      <div class="notice-gn" style="margin-top:10px"><strong>宇宙産業への技術転用可能性：</strong>ミクロン単位の精密加工技術は宇宙構造部品の品質要求（AS9100規格）と高い親和性。宇宙産業参入には時間がかかるが技術的障壁は低い。</div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:500;margin-bottom:10px">ミスミGとの提携（2024年10月）</div>
+      <table class="tbl">
+        <tbody>
+          <tr><td>提携規模</td><td style="font-size:11px">約13億円の株式持ち合い（双方向）</td></tr>
+          <tr><td>補完関係</td><td style="font-size:11px">ミスミ（デジタル×短納期×標準品）×パンチ（特注精密×顧客密着）</td></tr>
+          <tr><td>協業領域</td><td style="font-size:11px">標準品〜特注品の相互供給・物流インフラ統合</td></tr>
+          <tr><td>売上貢献時期</td><td style="font-size:11px">2027〜2028年度に可視化見込み</td></tr>
+          <tr><td>戦略的意義</td><td style="font-size:11px">FA市場での「デジタル化対応」という弱点補完。Vision60「脱・金型部品依存」加速。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C5: リスク ══ -->
+<div class="chapter" id="c5">
+<div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">リスクファクター ─ 定量評価と対処法</h2><span class="ch-badge cb-rd">5大リスク管理</span></div>
+<div class="card" style="margin-bottom:14px">
+  <table class="tbl">
+    <thead><tr><th>リスク</th><th>内容・影響</th><th class="c">深刻度</th><th class="c">確率</th><th>対処・注視点</th></tr></thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:500">業績変動リスク</td>
+        <td style="font-size:11px">2024/3期に純赤字転落の実績。製造業サイクルへの感応度が高く、材料費高止まりが利益率の頭を抑える。のれん減損等の一時費用計上リスク。</td>
+        <td class="c"><span class="rsev-hi">高</span></td>
+        <td class="c"><span style="font-size:11px;color:var(--am)">中</span></td>
+        <td style="font-size:11px">四半期ごとに中国・国内受注動向を確認。営業利益率4%割れを警戒ライン目安に。</td>
+      </tr>
+      <tr>
+        <td style="font-weight:500">中国依存・地政学リスク</td>
+        <td style="font-size:11px">売上の30〜40%が中国依存。中国景気失速・米中対立激化・台湾有事等で業績が大幅悪化するリスク。現在の好調が剥落する最大要因。</td>
+        <td class="c"><span class="rsev-hi">高</span></td>
+        <td class="c"><span style="font-size:11px;color:var(--am)">中</span></td>
+        <td style="font-size:11px">東南アジア・欧米への多角化進捗を確認。中国売上比率の変化を監視。</td>
+      </tr>
+      <tr>
+        <td style="font-weight:500">ROE低さ・資本効率</td>
+        <td style="font-size:11px">ROE予想3〜4%は業界平均の半分以下。PBR改善のためにはROE向上が不可欠。東証改革への対応が遅い場合、株価がPBR0.6倍水準に低迷し続けるリスク。</td>
+        <td class="c"><span class="rsev-mi">中</span></td>
+        <td class="c"><span style="font-size:11px;color:var(--am)">中</span></td>
+        <td style="font-size:11px">資本政策の発表（自社株買い・増配）をトリガーに期待。VC28での具体的ROE目標開示を待つ。</td>
+      </tr>
+      <tr>
+        <td style="font-weight:500">YAOKI失敗リスク</td>
+        <td style="font-size:11px">月面着陸はispaceも2回失敗した技術的難関。YAOKI PY-2失敗で宇宙テーマとしての訴求力低下。ただし本業への直接影響はゼロ。</td>
+        <td class="c"><span class="rsev-mi">中</span></td>
+        <td class="c"><span style="font-size:11px;color:var(--am)">中</span></td>
+        <td style="font-size:11px">宇宙オプションはあくまでボーナス。失敗でもバリュー株としての投資根拠は維持。</td>
+      </tr>
+      <tr>
+        <td style="font-weight:500">流動性リスク</td>
+        <td style="font-size:11px">時価総額149億の小型スタンダード株。1日出来高が数万〜十数万株。急落時の売却困難・機関投資家の参入制約。</td>
+        <td class="c"><span class="rsev-mi">中</span></td>
+        <td class="c"><span style="font-size:11px;color:var(--gn)">低</span></td>
+        <td style="font-size:11px">ポートフォリオ比率を抑制。分割購入・指値注文の徹底。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="g2">
+  <div class="card card-rd">
+    <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">⚠ 損切りライン</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+      <strong>¥400円割れ ＋ 重大悪材料発生時</strong><br>
+      調整NCを大きく下回る水準（400円＝1株NC500円比▲20%）。<br>
+      「株価下落だけ」では損切りしない。以下を確認してから：<br>
+      ① 営業赤字転落（2期連続）の確認<br>
+      ② 中国撤退・大規模リストラ等の構造変化<br>
+      ③ 財務安全性の急悪化（自己資本比率50%割れ等）
+    </div>
+  </div>
+  <div class="card card-gn">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">✅ 下値の強固なサポート</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+      <strong>①調整NC≈138億（≈500円/株）が実質的な床</strong><br>
+      ②配当3.7%（DOE3%以上方針で維持確率高い）<br>
+      ③自己資本比率67.3%・倒産リスクほぼゼロ<br>
+      ④PBR0.65倍は過去レンジ（0.43〜2.08倍）の下位<br>
+      ⑤「現金が積み上がり続ける構造」が継続中
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C6: シナリオ・期待値 ══ -->
+<div class="chapter" id="c6">
+<div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">3年保有シナリオ別・加重平均期待値（精査版）</h2><span class="ch-badge cb-tl">+77%（年率+21%）</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c6','a',this)">シナリオ詳細</button>
+  <button class="stab" onclick="showTab('c6','b',this)">期待値計算</button>
+  <button class="stab" onclick="showTab('c6','c',this)">感応度分析</button>
+</div>
+
+<div class="spanel active" id="c6-a">
+  <div class="notice" style="margin-bottom:14px"><strong>前提：</strong>基準株価539円（2026年6月1日）。保有3年（〜2029年6月）。累積配当は3年分として18.54円+20円+20円（予想）＝<strong>58.5円</strong>を共通加算。税引前ベース。<br>★v1修正：配当利回りの誤記（4.9%→3.71%）を修正。累積配当も58円→58.5円（実態に合わせて微修正）。</div>
+  <div class="sc-grid" style="margin-bottom:14px">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear ─ 国内長期低迷</div>
+      <div class="sc-prob bear">20%</div>
+      <div class="sc-sub">確率ウェイト</div>
+      <div class="sc-li">国内FA・金型市場の低迷が3年以上継続</div>
+      <div class="sc-li">中国景気の想定外の悪化（不動産危機再燃）</div>
+      <div class="sc-li">Vision60達成への疑念が市場で広がる</div>
+      <div class="sc-li">ROE改善なく東証プレッシャーも不発</div>
+      <div class="sc-li">YAOKI PY-2 失敗・宇宙テーマ消滅</div>
+      <div style="margin-top:12px;padding-top:8px;border-top:.5px solid var(--rule)">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:4px">3年後株価目標</div>
+        <div style="font:700 26px/1 var(--mono);color:var(--rd)">380〜440円</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:3px">中央値 410円</div>
+        <div style="font-size:11px;color:var(--rd);margin-top:6px">株価変化：▲24.0%</div>
+        <div style="font-size:11px;color:var(--ink3)">累積配当込み：<strong>▲13.1%</strong></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">PBR0.49倍（過去最低0.43倍近辺）</div>
+      </div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base ─ 緩やかな回復</div>
+      <div class="sc-prob base">55%</div>
+      <div class="sc-sub">最も蓋然性が高い</div>
+      <div class="sc-li">VC28目標（売上450〜500億）を概ね達成</div>
+      <div class="sc-li">ミスミG提携の売上貢献が可視化される</div>
+      <div class="sc-li">東証改革でPBR1倍方向への段階的是正</div>
+      <div class="sc-li">配当20〜25円で安定受取継続</div>
+      <div class="sc-li">宇宙テーマは断続的な話題にとどまる</div>
+      <div style="margin-top:12px;padding-top:8px;border-top:.5px solid var(--rule)">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:4px">3年後株価目標</div>
+        <div style="font:700 26px/1 var(--mono);color:var(--am)">750〜950円</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:3px">中央値 850円</div>
+        <div style="font-size:11px;color:var(--am);margin-top:6px">株価変化：+57.7%</div>
+        <div style="font-size:11px;color:var(--ink3)">累積配当込み：<strong>+68.5%</strong></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">PBR≈1.0倍（BPS≈850〜880円）</div>
+      </div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Bull ─ 宇宙×中計両立</div>
+      <div class="sc-prob bull">25%</div>
+      <div class="sc-sub">確率ウェイト</div>
+      <div class="sc-li">Vision60中盤の数値が想定超え達成</div>
+      <div class="sc-li">YAOKI PY-2月面走行成功→宇宙認知爆発</div>
+      <div class="sc-li">SpaceX IPO後の宇宙関連株全体の再評価</div>
+      <div class="sc-li">ミスミG提携効果でFA事業が急拡大</div>
+      <div class="sc-li">東証改革で自己株買い・増配が実施される</div>
+      <div style="margin-top:12px;padding-top:8px;border-top:.5px solid var(--rule)">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:4px">3年後株価目標</div>
+        <div style="font:700 26px/1 var(--mono);color:var(--tl)">1,200〜1,800円</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:3px">中央値 1,500円</div>
+        <div style="font-size:11px;color:var(--tl);margin-top:6px">株価変化：+178.3%</div>
+        <div style="font-size:11px;color:var(--ink3)">累積配当込み：<strong>+189.2%</strong></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">PBR1.6〜2.0倍（宇宙テーマプレミアム）</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c6-b">
+  <div class="card card-tl" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">加重平均期待値（基準539円・3年保有・累積配当58.5円込み）</div>
+    <table class="tbl">
+      <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">3年後株価</th><th class="r">累積配当</th><th class="r">3年トータルリターン</th><th class="r">期待値寄与</th></tr></thead>
+      <tbody>
+        <tr style="background:#fdf2f2">
+          <td>Bear（国内長期低迷）</td>
+          <td class="r mono hi-rd">20%</td>
+          <td class="r mono hi-rd">410円</td>
+          <td class="r mono">+58.5円</td>
+          <td class="r mono hi-rd">▲13.1%</td>
+          <td class="r mono hi-rd">▲2.6%</td>
+        </tr>
+        <tr style="background:#fffbf0">
+          <td>Base（緩やかな回復）</td>
+          <td class="r mono hi-am">55%</td>
+          <td class="r mono hi-am">850円</td>
+          <td class="r mono">+58.5円</td>
+          <td class="r mono hi-am">+68.5%</td>
+          <td class="r mono hi-am">+37.7%</td>
+        </tr>
+        <tr style="background:#eaf7f4">
+          <td>Bull（宇宙×中計両立）</td>
+          <td class="r mono hi-tl">25%</td>
+          <td class="r mono hi-tl">1,500円</td>
+          <td class="r mono">+58.5円</td>
+          <td class="r mono hi-tl">+189.2%</td>
+          <td class="r mono hi-tl">+47.3%</td>
+        </tr>
+        <tr style="background:#f0f9f4;font-weight:700">
+          <td><strong>✅ 加重平均期待値</strong></td>
+          <td class="r mono">100%</td>
+          <td class="r mono hi-gn"><strong>921円</strong></td>
+          <td class="r mono hi-gn"><strong>+58.5円</strong></td>
+          <td class="r mono hi-gn" style="font-size:15px"><strong>+82.4%</strong></td>
+          <td class="r mono hi-gn">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">計算：トータルリターン = (3年後株価 + 58.5円 − 539円) ÷ 539円 × 100。期待値寄与 = トータルリターン × 確率。</p>
+  </div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">3年加重平均リターン</div><div class="mc-v tl">+82%</div><div class="mc-s">税引前・配当込み</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">年率換算（複利）</div><div class="mc-v gn">+22%/年</div><div class="mc-s">3年複利</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">最悪ケース</div><div class="mc-v am">▲13%</div><div class="mc-s">配当込み・下値限定</div></div>
+    <div class="card mc" style="border-top:3px solid var(--pur)"><div class="mc-l">リスクリワード比</div><div class="mc-v pu">6.4倍</div><div class="mc-s">最悪比ブル利得</div></div>
+  </div>
+  <div class="notice-gn" style="margin-top:14px"><strong>非対称性の核心：</strong>ベア時▲13%に対してブル時+189%は約14.5倍。調整NCが下値を固め、宇宙テーマ・Vision60の上振れに理論的な天井がない一方向の非対称構造。「守りが鉄壁で攻めにも制限がない」理想的なリスクリワード。</div>
+</div>
+
+<div class="spanel" id="c6-c">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">確率設定の感応度分析</div>
+    <table class="tbl">
+      <thead><tr><th>確率設定（悲観→楽観）</th><th class="r">Bear</th><th class="r">Base</th><th class="r">Bull</th><th class="r">期待リターン</th><th class="r">3年後期待株価</th></tr></thead>
+      <tbody>
+        <tr><td>悲観ケース</td><td class="r mono hi-rd">30%</td><td class="r mono">50%</td><td class="r mono hi-tl">20%</td><td class="r mono hi-am">+57%</td><td class="r mono hi-am">857円</td></tr>
+        <tr style="background:#f0f9f4"><td><strong>推奨ベースケース ★</strong></td><td class="r mono hi-rd">20%</td><td class="r mono hi-am">55%</td><td class="r mono hi-tl">25%</td><td class="r mono hi-gn"><strong>+82%</strong></td><td class="r mono hi-gn"><strong>921円</strong></td></tr>
+        <tr><td>楽観ケース</td><td class="r mono hi-rd">10%</td><td class="r mono">55%</td><td class="r mono hi-tl">35%</td><td class="r mono hi-tl">+106%</td><td class="r mono hi-tl">1,073円</td></tr>
+        <tr><td>超楽観（Vision60加速）</td><td class="r mono hi-rd">5%</td><td class="r mono">45%</td><td class="r mono hi-tl">50%</td><td class="r mono hi-tl">+145%</td><td class="r mono hi-tl">1,321円</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">3年トータルリターン 可視化</div>
+    <div class="bgrp"><div class="blrow"><span>ブル中央値（1,500円+58.5円配当）</span><span class="hi-tl mono">+189%</span></div><div class="btrack"><div class="bfill" style="width:100%;background:var(--tl)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>加重平均期待値（921円）</span><span class="hi-gn mono">+82%</span></div><div class="btrack"><div class="bfill" style="width:60%;background:var(--gn)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>ベース中央値（850円+58.5円配当）</span><span class="hi-am mono">+69%</span></div><div class="btrack"><div class="bfill" style="width:52%;background:var(--am)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>PBR1.0倍達成（835円+58.5円配当）</span><span class="hi-am mono">+66%</span></div><div class="btrack"><div class="bfill" style="width:50%;background:var(--am2)"></div></div></div>
+    <div class="bgrp"><div class="blrow"><span>ベア中央値（410円+58.5円配当）</span><span class="hi-rd mono">▲13%</span></div><div class="btrack"><div class="bfill" style="width:10%;background:var(--rd)"></div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══ C7: 売買戦略・総合 ══ -->
+<div class="chapter" id="c7">
+<div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">売買戦略・総合スコア・最終判断</h2><span class="ch-badge cb-gn">積極的買い検討</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c7','a',this)">売買計画</button>
+  <button class="stab" onclick="showTab('c7','b',this)">総合スコア</button>
+  <button class="stab" onclick="showTab('c7','c',this)">最終判断</button>
+</div>
+
+<div class="spanel active" id="c7-a">
+  <div class="notice" style="margin-bottom:14px"><strong>基本方針：「分割買い×配当受取×カタリスト待ち」の3本柱。</strong>時価総額149億の小型スタンダード株のため一度に大量購入は厳禁。3〜4回に分けて指値購入し、配当（年18.5〜20円）を受け取りながら、SpaceX IPO（2026/6）・YAOKI打上げ（2027年後半）・VC28発表を待つ。</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">フェーズ別購入計画 ＆ カタリストカレンダー（修正版）</div>
+    <table class="tbl">
+      <thead><tr><th>フェーズ</th><th>タイミング</th><th class="r">価格帯</th><th class="r">割合</th><th>根拠・ポイント</th></tr></thead>
+      <tbody>
+        <tr style="background:#f0f9f4"><td><strong>▶ 第1弾（今すぐ）</strong></td><td>2026年6月〜</td><td class="r mono hi-gn">¥520〜560</td><td class="r mono">35%</td><td style="font-size:11px">2026/3期本決算確認済・調整NC≒時価総額・配当3.71%・PBR0.65倍。最もリスクリワードが良いエントリー。SpaceX IPO直前の仕込み。</td></tr>
+        <tr><td>第2弾（調整時）</td><td>市場調整等での押し目</td><td class="r mono hi-am">¥460〜510</td><td class="r mono">30%</td><td style="font-size:11px">配当利回り3.6〜4.0%超え。PBR0.55〜0.61倍。調整NC比より完全割安水準で指値待機。</td></tr>
+        <tr><td>第3弾（カタリスト後）</td><td>SpaceX上場後・YAOKI報道後</td><td class="r mono hi-am">¥650〜800</td><td class="r mono">25%</td><td style="font-size:11px">テーマが株価に織り込まれ始めたタイミングで追加。宇宙テーマプレミアムの始まりを確認してから購入。</td></tr>
+        <tr><td>利食い第1弾</td><td>ベースシナリオ達成時</td><td class="r mono hi-gn">¥850〜1,000</td><td class="r mono">▲30%</td><td style="font-size:11px">PBR1.0倍回帰・含み益+30〜50%を確定。残りをブルシナリオ用に継続保有。</td></tr>
+        <tr><td>利食い最終</td><td>ブルシナリオ達成時</td><td class="r mono hi-gn">¥1,200〜1,800</td><td class="r mono">▲70%</td><td style="font-size:11px">YAOKI月面成功・Vision60進捗確認。宇宙テーマプレミアム乗り段階。</td></tr>
+        <tr style="background:#fdf2f2"><td style="color:var(--rd)"><strong>損切りライン</strong></td><td>重大悪材料発生時</td><td class="r mono hi-rd">¥400円割れ</td><td class="r mono hi-rd">全量</td><td style="font-size:11px">調整NCを大きく下回る水準。営業赤字転落・財務悪化の確認後に発動。「下落だけ」での損切りは不要。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card-rd">
+    <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">⚠ 小型株売買の最重要注意事項</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">①<strong>出来高が1日数万〜十数万株程度。</strong>大口注文は自分で株価を動かす。複数日・指値注文を必ず活用。<br>②配当権利落ち日（3月末・9月末）前後は株価変動が大きくなりやすい。<br>③SpaceX IPO・YAOKI等の宇宙ニュースでの急騰に引きずられ、ファンダメンタルズ目標（PBR1倍、EPS40円×PER20倍）を外さないこと。<br>④本レポートは情報提供のみを目的としており、投資判断はご自身の責任でお願いします。</div>
+  </div>
+</div>
+
+<div class="spanel" id="c7-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:12px">総合スコア（7項目評価）</div>
+    <div class="gain-meter"><div class="gain-label">バリュエーション魅力度（調整NC≒時価総額・EV/EBIT4.7倍）</div><div class="gain-track"><div class="gain-fill" style="width:95%;background:var(--gn)"></div></div><div class="gain-val hi-gn">95/100</div></div>
+    <div class="gain-meter"><div class="gain-label">財務安全性（自己資本67%・有利子負債比率14%）</div><div class="gain-track"><div class="gain-fill" style="width:90%;background:var(--gn)"></div></div><div class="gain-val hi-gn">90/100</div></div>
+    <div class="gain-meter"><div class="gain-label">競争優位性（日中特注金型1位・高参入障壁）</div><div class="gain-track"><div class="gain-fill" style="width:80%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">80/100</div></div>
+    <div class="gain-meter"><div class="gain-label">宇宙・成長オプション（YAOKI・ミスミG・SpaceX）</div><div class="gain-track"><div class="gain-fill" style="width:65%;background:var(--tl)"></div></div><div class="gain-val hi-tl">65/100</div></div>
+    <div class="gain-meter"><div class="gain-label">株主還元（配当3.71%・DOE3%以上方針）</div><div class="gain-track"><div class="gain-fill" style="width:72%;background:var(--gn2)"></div></div><div class="gain-val hi-gn">72/100</div></div>
+    <div class="gain-meter"><div class="gain-label">業績回復力（2期連続増収増益・中国好調持続）</div><div class="gain-track"><div class="gain-fill" style="width:65%;background:var(--am)"></div></div><div class="gain-val hi-am">65/100</div></div>
+    <div class="gain-meter"><div class="gain-label">流動性・市場認知（小型・スタンダード・宇宙未認知）</div><div class="gain-track"><div class="gain-fill" style="width:35%;background:var(--rd)"></div></div><div class="gain-val hi-rd">35/100</div></div>
+    <div class="gain-meter" style="margin-top:12px;padding-top:12px;border-top:.5px solid var(--rule)"><div class="gain-label"><strong>総合スコア（加重平均）</strong></div><div class="gain-track"><div class="gain-fill" style="width:77%;background:var(--tl)"></div></div><div class="gain-val hi-tl"><strong>77/100</strong></div></div>
+  </div>
+</div>
+
+<div class="spanel" id="c7-c">
+  <div class="conc">
+    <div class="conc-head">最終投資判断 <span>─ パンチ工業（6165）: ◎ 積極的買い検討</span></div>
+    <div class="conc-3">
+      <div>
+        <div class="conc-lbl">買いを支持する核心根拠</div>
+        <div class="conc-body">
+          <strong>①調整NC≒時価総額：</strong>売上421億の事業・固定資産94億・宇宙オプションが「約11億円以下」でついてくる非対称機会<br>
+          <strong>②三重の割安：</strong>PBR0.65倍・EV/EBIT4.7倍・配当3.71%。東証平均と比べ全て大幅割安<br>
+          <strong>③宇宙ゼロ織込み：</strong>株価に宇宙が全く反映されていない。SpaceX IPO（6/12）後の連想余地が大きい<br>
+          <strong>④YAOKI（2027年後半）：</strong>月面走行成功なら「精密加工が月面へ」という認知変化<br>
+          <strong>⑤財務鉄壁：</strong>自己資本67%・有利子負債14%。倒産リスクほぼゼロ<br>
+          <strong>⑥2026/3期本決算確認：</strong>営業利益+20.5%・経常利益+36.4%で回復軌道を確認済み
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">3年期待リターン（修正確定版）</div>
+        <div class="conc-body">
+          <strong>加重平均：+82%（年率+22%）</strong><br>
+          累積配当：58.5円（3年分）<br><br>
+          ベア（20%）：▲13%（調整NCが守る）<br>
+          ベース（55%）：+69%（PBR1倍回帰）<br>
+          ブル（25%）：+189%（YAOKI＋Vision60）<br><br>
+          <strong>リスクリワード比 6.4倍。「最悪でも▲13%・最良で+189%」という非対称構造が最大の魅力。調整NC≈500円/株が下値を守護する。</strong>
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">最重要監視ポイント</div>
+        <div class="conc-body">
+          <strong>①SpaceX IPO（2026年6月12日）</strong>宇宙テーマへの資金流入を観察<br>
+          <strong>②2026年下期 VC28中計発表</strong>新数値目標が株価基準を更新<br>
+          <strong>③2027/3期 1Q決算（2026年8月）</strong>中国継続好調・ミスミG効果の確認<br>
+          <strong>④YAOKI PY-2打上げ（2027年度後半）</strong>最大カタリスト<br>
+          <strong>⑤国内FA・金型市場の回復シグナル</strong>ベース前提条件<br><br>
+          損切り：¥400割れ＋営業赤字転落確認後
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</main>
+
+<footer style="background:#12162a;color:rgba(246,245,239,.22);text-align:center;padding:16px;font:500 9px/1 var(--mono);letter-spacing:.07em;line-height:1.8">
+本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br>
+Data: パンチ工業㈱ 2026/3期決算短信（2026年5月13日JPX/TDNET）/ 有価証券報告書第51期（EDINET）/ IRBANK / 国土交通省公示地価2026年 / 各種適時開示 / Yahoo!ファイナンス / 2026.06 — Final Version v2
+</footer>
+
+<script>
+function showChapter(id,btn){
+  document.querySelectorAll('.chapter').forEach(ch=>ch.classList.remove('active'));
+  document.querySelectorAll('.mnb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+}
+function showTab(chapId,panelId,btn){
+  const chap=document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  chap.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(chapId+'-'+panelId)?.classList.add('active');
+  btn.classList.add('on');
+}
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bfill,.gain-fill').forEach(f=>{
+        const w=f.style.width;f.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=w));
+      });
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>櫻島埠頭（9353）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9353 · 2026.07.19 作成</p>
+      <h1 class="ht">櫻島埠頭 <em>（9353）</em><br>統合投資分析レポート</h1>
+      <p class="hs">保有MUFG株150万株超（時価約52億円）＞ 自社時価総額 約43億円 ／ NAV試算 中立5,300円前後<br>現株価2,820円はPBR0.53倍 ／ 個人投資家・山本裕治氏が半年で10.25%を買い集め ／ 「証券含み益 × 大阪港独占 × 需給」型案件</p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>保有株式時価は自社時価総額の1.3倍</strong><br>
+        全株売却の税引後手取り約42億円 ≒ 時価総額。<br>
+        EBITDA9.2億円の港湾事業がほぼ無料。<br>
+        価値顕在化はカタリスト依存。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">2,820円</div><div class="ks">時価総額 約43億円（152万株）</div></div>
+    <div class="kv"><div class="kl">BPS（2026/3末）</div><div class="kn gn">5,305円</div><div class="ks">PBR 0.53倍・解散価値の半値近辺</div></div>
+    <div class="kv"><div class="kl">保有株式 時価</div><div class="kn rd">57.3億円</div><div class="ks">取得原価6.15億・含み益51.2億</div></div>
+    <div class="kv"><div class="kl">うちMUFG株</div><div class="kn rd">150万株超</div><div class="ks">時価約52億円（@3,473円）</div></div>
+    <div class="kv"><div class="kl">配当（累進配当）</div><div class="kn bl">54円</div><div class="ks">利回り1.91%・40円→54円へ増配</div></div>
+    <div class="kv"><div class="kl">山本裕治氏 保有</div><div class="kn gn">10.25%</div><div class="ks">直近報告2026/6/1（13%は未確認）</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>NAV分析</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>シナリオ</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>需給・大量保有</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>最新決算・中計</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════
+  P1 カタリスト
+══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、櫻島埠頭なのか</h2><span class="sb bg-gn">5つのカタリスト</span></div>
+
+  <div class="cg">
+    <!-- C1 -->
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🏦</span>
+      <div class="ct">保有株式時価 ＞ 自社時価総額</div>
+      <div class="cb gn">1.34倍</div>
+      <div class="cu">保有株57.3億円 vs 時価総額42.9億円</div>
+      <div class="cp">有報リスク項(10)に明記：政策保有上場株式は<strong>取得原価6.15億円・時価57.31億円・含み益51.15億円。</strong>主力は三菱UFJ FG株150万株超（時価約52億円）。全株売却の税引後手取り約42億円だけで現時価総額に到達し、<strong>港湾事業＋純資産の残りが実質タダ。</strong></div>
+      <div class="tgs"><span class="tg tg-gn">時価総額超の金融資産</span><span class="tg tg-or">MUFG連動</span></div>
+    </div>
+    <!-- C2 -->
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 02 · 最重要</div>
+      <span class="ci">📜</span>
+      <div class="ct">会社が「売却検討」を有報に明記</div>
+      <div class="cb am">売却含み</div>
+      <div class="cu">価値顕在化の道筋を自ら開示</div>
+      <div class="cp">有報原文：<strong>「経営基盤が確立できた段階に至った場合、または大規模な設備投資に係る資金需要が発生した場合には、改めて売却について検討する方針」。</strong>751百万円の新倉庫・タンク新設と資金需要は現に発生中。MUFG株の一部売却＝含み益の利益化・還元原資化のトリガーになり得る。</div>
+      <div class="tgs"><span class="tg tg-am">有報に明文化</span><span class="tg tg-gn">設備投資が誘因</span></div>
+    </div>
+    <!-- C3 -->
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 重要</div>
+      <span class="ci">🐋</span>
+      <div class="ct">個人投資家が半年で10.25%を取得</div>
+      <div class="cb or">10.25%</div>
+      <div class="cu">山本裕治氏 157,900株（2026/5/22時点）</div>
+      <div class="cp">2025年12月に0→5.47%、2026年1月に8.86%、5月に10.25%と<strong>異例のペースで買い集め。</strong>楽天証券9.49%・松井証券の大量保有（＝信用担保株の膨張）も併走し、個人マネーの関心が需給を変えつつある。<strong>3位株主級の発言力は株主還元圧力に直結。</strong></div>
+      <div class="tgs"><span class="tg tg-or">準アクティビスト</span><span class="tg tg-bl">需給テーマ</span></div>
+    </div>
+    <!-- C4 -->
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04</div>
+      <span class="ci" style="font-size:22px">⚓</span>
+      <div class="ct" style="color:var(--ink)">大阪港唯一の商業埠頭・独占立地</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">特殊物資港区</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">此花区＝夢洲IR・万博の隣接エリア</div>
+      <div class="cp" style="color:var(--ink2)">系列に属さない独立系として、大阪港の特定専用地域で大量ばら貨物荷役＋タンク45基13.2万kl＋低温倉庫をワンストップ提供。<strong>有報自ら「IR等のBIG EVENTに絡む新規ビジネス発掘」を明記。</strong>代替不能なインフラ地位。</div>
+    </div>
+    <!-- C5 -->
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05 · 構造</div>
+      <span class="ci" style="font-size:22px">📈</span>
+      <div class="ct" style="color:var(--ink)">累進配当 × MUFG増配 × 東証PBR改善圧力の三重奏</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① 累進配当を中計に明文化</strong><br>「税引後本業利益＋受取配当金ベースの30%以上を還元」。実績も20円→30円→40円→54円と言行一致。減配しにくい設計。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② MUFGの増配が自動流入</strong><br>受取配当金は年1億円超規模で経常利益(4.05億)の大きな柱。MUFGが増配するほど同社の「本業利益+配当」還元原資が自動的に膨らむ。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ PBR0.5倍への制度圧力</strong><br>東証の資本コスト・株価意識経営の要請下で、PBR0.53倍・政策保有が純資産の7割という構造は説明を迫られる典型例。持合い解消の全国的潮流も追い風。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:820px">
+      櫻島埠頭は、<strong style="color:var(--or2)">時価総額を上回るMUFG株を抱えた「レバレッジなしの銀行株ミニファンド＋大阪港独占インフラ」。</strong>現株価2,820円はPBR0.53倍で、含み益の顕在化（株売却・還元強化・株主圧力）を待つアセット型ディープバリュー。ただし土地は全て大阪市からの借地であり、含み資産の実体は「土地」ではなく「有価証券」である点が投資判断の核心。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P2 NAV分析
+══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">NAV分析 ── 含み資産の中身を正確に</h2><span class="sb bg-am">実体は土地ではなく有価証券</span></div>
+
+  <div class="inf">⚠️ 重要な事実確認：同社の事業用地（本社埠頭・タンクターミナル・各倉庫）は<strong>すべて大阪市からの借地（契約2044年3月まで）で、自社保有土地は実質ゼロ。</strong>「湾岸の土地含み益」という期待は成立しない。含み資産の実体は保有有価証券57.3億円である。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">保有株式 時価（2026/3末）</div><div class="mv rd">57.31億円</div><div class="ms">取得原価6.15億円の9.3倍</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">含み益</div><div class="mv gn">51.15億円</div><div class="ms">税引後実現価値 約41.7億円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">うちMUFG株 現在時価</div><div class="mv am">約52億円</div><div class="ms">150万株超 × @3,473円（7/17）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">純有利子負債</div><div class="mv bl">約7.1億円</div><div class="ms">借入13.3億−現金6.2億</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">バランスシートの分解（2026年3月末・連結）</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">金額</th><th>コメント</th></tr></thead>
+        <tbody>
+          <tr><td>総資産</td><td class="r mn">122.0億円</td><td style="font-size:11px">投資有価証券が最大の資産</td></tr>
+          <tr class="hl"><td><strong>投資有価証券（時価）</strong></td><td class="r mn hgn"><strong>57.3億円</strong></td><td style="font-size:11px;color:var(--gn)"><strong>時価総額42.9億円を上回る</strong></td></tr>
+          <tr><td>純資産</td><td class="r mn">80.7億円</td><td style="font-size:11px">BPS 5,305円</td></tr>
+          <tr><td>─ 株主資本</td><td class="r mn">45.7億円</td><td style="font-size:11px">利益剰余金34.5億円</td></tr>
+          <tr><td>─ 評価差額金等</td><td class="r mn ham">約35.0億円</td><td style="font-size:11px">純資産の43%が株式含み益（税引後）</td></tr>
+          <tr><td>有利子負債</td><td class="r mn">13.3億円</td><td style="font-size:11px">約定返済進行中（前期比▲18%）</td></tr>
+          <tr><td>自己資本比率</td><td class="r mn hgn">66.2%</td><td style="font-size:11px">前期62.8%から改善</td></tr>
+        </tbody>
+      </table>
+      <p class="note">包括利益11.56億円（純利益2.90億円＋その他有価証券評価差額金等の増加）。純資産の増加ペースは株価（MUFG）次第で大きく振れる。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px">証券NAV評価の要点</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>換金性は土地より圧倒的に高い：</strong>MUFG株は超流動資産。売ろうと思えば数日で換金でき、広済堂型の「制度的決着待ち」が不要。実現障壁は経営の意思のみ。</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>取得原価が極小＝評価損リスクほぼゼロ：</strong>簿価6.15億円。MUFGが9割下落しても評価損にならない。ただし含み益はMUFG株価に完全連動して増減する。</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>売却時は約30%の税負担：</strong>含み益51.2億円に対し実効税率約30%→税引後手取りは約42億円。NAV計算は税引後ベースを基本とすべき。</div></div>
+          <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>土地はNAVに算入しない：</strong>全用地が大阪市借地。むしろ賃料増額リスク（増額請求訴訟→2026年3月期に和解）と用途制限が存在。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">統合NAV試算 ── 株式価値換算（自己株控除後 152.2万株）</div>
+    <table class="t">
+      <thead><tr><th>シナリオ</th><th class="r">証券価値</th><th class="r">事業価値（EV/EBITDA 4〜6倍）</th><th class="r">純有利子負債</th><th class="r">株式価値</th><th class="r">株価換算</th><th class="r">現在比</th></tr></thead>
+      <tbody>
+        <tr><td>保守（税引後・事業4倍）</td><td class="r mn">41.7億円</td><td class="r mn">36.8億円</td><td class="r mn">△7.1億円</td><td class="r mn ham">71.4億円</td><td class="r mn ham"><strong>4,692円</strong></td><td class="r mn">+66%</td></tr>
+        <tr class="hl"><td><strong>中立（税引後・事業5倍）</strong></td><td class="r mn">41.7億円</td><td class="r mn">46.0億円</td><td class="r mn">△7.1億円</td><td class="r mn hgn">80.6億円</td><td class="r mn hgn"><strong>5,296円</strong></td><td class="r mn">+88%</td></tr>
+        <tr><td>強気（時価満額・事業6倍）</td><td class="r mn">57.3億円</td><td class="r mn">55.2億円</td><td class="r mn">△7.1億円</td><td class="r mn hor">105.4億円</td><td class="r mn hor"><strong>6,926円</strong></td><td class="r mn">+146%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">EBITDA9.2億円（2025年度実績・中計KPI）を使用。中立NAV 5,296円がBPS 5,305円とほぼ一致する＝会計上の解散価値と整合的な試算。強気は非公開化・全部売却など完全顕在化ケース。数値はすべて概算・試算値。</p>
+  </div>
+
+  <div class="cf-am" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">なぜ現在株価2,820円はNAVの53%なのか</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>市場は「経営が売る意思を示さない限り含み益は株主に届かない」ことをディスカウントしている。ROE3.9%・安定株主4割の体制では<strong>含み益は"見えるが取れない資産"</strong>として扱われ、PBR0.27〜0.5倍のレンジに長年放置されてきた。</div>
+      <div>一方で状況は変わりつつある。東証のPBR改善要請、政策保有解消の全国的潮流、累進配当の導入、そして<strong>10%超を握った個人大株主の登場。</strong>ディスカウント縮小の触媒は過去10年で最も揃っている。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P3 シナリオ
+══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">価値顕在化シナリオ ── 株価インパクトと確率</h2><span class="sb bg-or">確率加重 約3,450円（試算）</span></div>
+
+  <div class="inf">📌 広済堂型の「外部からの制度的決着」は期待できない。顕在化の主導権は経営（安定株主）側にあり、シナリオ確率は保守的に置くべき。確率・株価はいずれも筆者試算。</div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">X：現状維持・放置</div><div class="sc-p br">40〜50%</div><div class="sc-s">累進配当のみ継続</div><div class="sc-i">株価 2,400〜3,000円</div><div class="sc-i">MUFG株価と個人需給に連動</div><div class="sc-i">含み益は純資産に蓄積継続</div></div>
+    <div class="sc-c"><div class="sc-l bs">C：還元強化</div><div class="sc-p bs">20〜25%</div><div class="sc-s">増配加速・自社株買い初導入</div><div class="sc-i">株価 3,200〜3,800円</div><div class="sc-i">配当70〜80円で利回り2.5%超</div><div class="sc-i">薄い浮動株に自社株買いは劇薬</div></div>
+    <div class="sc-c"><div class="sc-l bu">B：政策保有の一部売却</div><div class="sc-p bu">15〜20%</div><div class="sc-s">設備投資資金化＋特配</div><div class="sc-i">株価 3,800〜4,800円</div><div class="sc-i">売却益計上でEPS急伸</div><div class="sc-i">有報明記の方針が発動される形</div></div>
+    <div class="sc-c"><div class="sc-l bm">A：TOB・非公開化等</div><div class="sc-p bm">5〜10%</div><div class="sc-s">NAV狙いの買収・MBO</div><div class="sc-i">株価 4,500〜5,500円</div><div class="sc-i">証券価値だけで正当化可能</div><div class="sc-i">安定株主4割が最大の壁</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">確率加重 期待株価（試算）</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">中心株価</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>X：現状維持</td><td class="r mn">45%</td><td class="r mn">2,700円</td><td class="r mn">1,215円</td></tr>
+          <tr><td>C：還元強化</td><td class="r mn">25%</td><td class="r mn">3,500円</td><td class="r mn">875円</td></tr>
+          <tr><td>B：一部売却＋特配</td><td class="r mn">20%</td><td class="r mn">4,300円</td><td class="r mn">860円</td></tr>
+          <tr><td>A：TOB等</td><td class="r mn">10%</td><td class="r mn">5,000円</td><td class="r mn">500円</td></tr>
+          <tr class="sm"><td>期待値</td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn">3,450円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">確率加重期待値</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">3,450円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 +22%</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">下値想定（Bear）</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">2,000〜2,200円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">▲22〜29%（需給崩れ＋MUFG調整）</div>
+        </div>
+      </div>
+      <div class="c cf-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">広済堂HDとの構造的な違い</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">広済堂は「外部（都・ファンド・世論）が決着を強制する」構造だったのに対し、<strong>櫻島埠頭は決着を強制する外部装置が（まだ）ない。</strong>その代わり、①資産の換金性が段違いに高い、②累進配当という下支えがある、③山本氏の買い増しが内部圧力に育つ可能性がある。<strong>期待値の絶対水準は低いが、下値の資産裏付けは厚いタイプ。</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P4 需給・大量保有
+══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">需給・大量保有動向</h2><span class="sb bg-bl">浮動株が極端に薄い</span></div>
+
+  <div class="ok">✅ 山本裕治氏の直近開示は<strong>10.25%（157,900株・2026/5/22義務発生、6/1提出）</strong>。市場で語られる「13%」は現時点で公的報告が確認できない。10.25%超の変更報告が出れば即座に確認を。</div>
+
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">山本裕治氏 買い集めタイムライン（EDINET）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 bl"></div><div class="tdate">2025年12月19日</div><div class="ttext"><strong>新規5.47%</strong>（84,300株）→ 一部売却で5.21%。初回報告で市場が注目。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">2026年1月 7日〜16日</div><div class="ttext"><strong>3週間で6.53%→7.6%→8.86%と連続買い増し。</strong>同時期に楽天証券も0→9.49%（信用担保株の膨張＝個人資金流入の証左）。</div></div>
+        <div class="ti"><div class="td2 or"></div><div class="tdate">2026年5月22日</div><div class="ttext"><strong>10.25%到達</strong>（157,900株）。報告書には「担保契約等重要な契約」の記載＝信用取引等の可能性。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">現在</div><div class="ttext">発行済の1割超を握る<strong>実質3位の大株主。</strong>株主提案権（1%/300単元）・帳簿閲覧権（3%）を優に超える水準。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:500;margin-bottom:10px">株主構成（2026年3月末）</div>
+        <table class="t">
+          <thead><tr><th>株主</th><th class="r">比率</th><th>性格</th></tr></thead>
+          <tbody>
+            <tr><td>埠頭ジャスタック</td><td class="r mn">19.06%</td><td style="font-size:11px"><span class="bge be-bl">安定・関係会社</span></td></tr>
+            <tr><td>セオ運輸</td><td class="r mn">11.51%</td><td style="font-size:11px"><span class="bge be-bl">安定・事業会社</span></td></tr>
+            <tr class="hl"><td><strong>山本裕治氏（実質）</strong></td><td class="r mn hgn"><strong>10.25%</strong></td><td style="font-size:11px"><span class="bge be-gn">個人・買い増し中</span></td></tr>
+            <tr><td>楽天証券</td><td class="r mn">9.11%</td><td style="font-size:11px"><span class="bge be-am">信用担保株</span></td></tr>
+            <tr><td>丸協産業</td><td class="r mn">8.54%</td><td style="font-size:11px"><span class="bge be-bl">安定・事業会社</span></td></tr>
+            <tr><td>三菱UFJ銀行</td><td class="r mn">2.92%</td><td style="font-size:11px"><span class="bge be-or">持合い（解消売り予備軍）</span></td></tr>
+            <tr><td>三井住友銀行・日生 等</td><td class="r mn">5.06%</td><td style="font-size:11px"><span class="bge be-or">金融・持合い</span></td></tr>
+          </tbody>
+        </table>
+        <p class="note">安定株主（事業会社＋金融）で約45%。個人その他35%。実質浮動株は極小で、出来高は1日数百〜数千株の日が多い。</p>
+      </div>
+      <div class="c cl-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">需給の両刃</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">浮動株が薄いため、山本氏の買いは株価を押し上げやすいが、<strong>同氏が売りに回った場合・信用担保の投げが出た場合の下落も同様に急となる。</strong>2026年3月期の株価レンジは1,420〜3,850円と2.7倍の振れ幅。ポジションサイズは「売りたい時に売れない」前提で設計が必要。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P5 最新決算・中計
+══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">最新決算（2026年3月期）と第4次中計</h2><span class="sb bg-bl">過去最高純利益・累進配当</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">売上高</div><div class="mv am">42.6億円</div><div class="ms">前期比▲1.8%</div></div>
+    <div class="c mc"><div class="ml">営業利益</div><div class="mv gn">2.51億円</div><div class="ms">前期比+23.6%</div></div>
+    <div class="c mc"><div class="ml">経常利益</div><div class="mv gn">4.05億円</div><div class="ms">+35.1%・受取配当金が押上げ</div></div>
+    <div class="c mc"><div class="ml">純利益</div><div class="mv gn">2.90億円</div><div class="ms">+24.5%・過去最高（EPS190.81円）</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">セグメント別（2026年3月期）</div>
+      <table class="t">
+        <thead><tr><th>セグメント</th><th class="r">売上高</th><th class="r">営業利益</th><th>状況</th></tr></thead>
+        <tbody>
+          <tr><td>ばら貨物（石炭・塩等）</td><td class="r mn">23.1億円</td><td class="r mn">0.39億円</td><td style="font-size:11px">石炭・イルメナイト増。荷役+14.4%。新倉庫建設中</td></tr>
+          <tr><td>液体貨物（タンク）</td><td class="r mn">13.9億円</td><td class="r mn hgn">4.34億円</td><td style="font-size:11px">利益の柱。稼働堅調・特別作業料減で減益</td></tr>
+          <tr><td>物流倉庫</td><td class="r mn">5.4億円</td><td class="r mn hgn">2.23億円</td><td style="font-size:11px">長期契約で安定稼働・高マージン</td></tr>
+          <tr><td>その他（売電）</td><td class="r mn">0.2億円</td><td class="r mn">0.05億円</td><td style="font-size:11px">太陽光</td></tr>
+        </tbody>
+      </table>
+      <p class="note">電源開発向けが売上の16.6%。液体貨物＋物流倉庫の「ストック型」利益6.6億円がばら貨物の変動を吸収する構造。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:9px">第4次中計（2024〜26年度）の進捗</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        ① <strong>累進配当導入：</strong>40円（24年度）→54円（25年度）。税引後本業利益＋受取配当金の30%以上を還元<br>
+        ② <strong>EBITDA9億円以上（26年度）：</strong>25年度に9.2億円で前倒し達成<br>
+        ③ <strong>総投資30億円以上：</strong>24年度6.2億＋25年度6.5億。751百万円の新ばら貨物倉庫を2027年1月完工予定<br>
+        ④ 石炭縮小を見据え、野積場→石油化学品ステンレスタンク新設を検討中（構造転換）</div>
+      </div>
+      <div class="c cl-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">株式指標（2,820円時点）</div>
+        <table class="t" style="font-size:11.5px">
+          <tbody>
+            <tr><td>PER（実績EPS 190.81円）</td><td class="r mn">14.8倍</td></tr>
+            <tr><td>PER（予想EPS 170.86円）</td><td class="r mn">16.5倍</td></tr>
+            <tr><td>PBR（BPS 5,305円）</td><td class="r mn hgn">0.53倍</td></tr>
+            <tr><td>配当利回り（54円）</td><td class="r mn">1.91%</td></tr>
+            <tr><td>ROE / 自己資本比率</td><td class="r mn">3.9% / 66.2%</td></tr>
+            <tr><td>株価レンジ（26年3月期）</td><td class="r mn">1,420〜3,850円</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P6 リスク
+══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスク分析</h2><span class="sb bg-rd">正直に向き合う</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">① MUFG株価への実質連動</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">NAVの過半がMUFG株。銀行株は金利上昇を織り込み高値圏にあり、<strong>MUFGが3割下がればNAVは1,000円超毀損する。</strong>この株を買うことは実質的にMUFG株のエクスポージャーを取ることと同義。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">② 流動性の欠如</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">出来高は1日数百〜数千株。<strong>まとまった株数は「売りたい時に売れない」。</strong>山本氏・信用買い勢が売りに回れば需給が一方向に崩れる。年間高安2.7倍の振れ幅を前提にサイズ設計を。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">③ 「万年割安」の継続</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">ROE3.9%・安定株主4割超。PBR0.27〜0.5倍に10年以上放置されてきた実績があり、<strong>経営が動かなければ割安のまま</strong>という最頻シナリオ（40〜50%）を直視すべき。累進配当1.9%は待ち時間の対価として薄い。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">④ 土地は借地・賃料リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">全用地が大阪市借地（〜2044年）。目的外利用に市の承諾が必要で、<strong>賃料増額請求の実績あり（訴訟→和解）。</strong>IR・万博で周辺地価が上がるほど、恩恵ではなく賃料負担増として跳ね返る面がある。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:8px">⑤ 石炭依存の構造リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">ばら貨物の主力は火力発電向け石炭。脱炭素の進行で取扱数量の構造的減少が見込まれ、会社も転換投資を進めるが、<strong>転換が遅れれば事業価値評価（EV/EBITDA 5倍）の前提が崩れる。</strong>設備の一極集中による台風・地震リスクも（2018年に280百万円被害）。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">⑥ 大量保有の反転・過信</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">山本氏の報告には担保契約の記載があり、<strong>信用取引で買っている場合は相場急変時に強制的な売り手に変わり得る。</strong>また「13%保有」等の未確認情報が独り歩きしており、EDINETの一次情報以外を根拠にしないこと。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>政策保有株売却の開示：</strong>適時開示「投資有価証券売却益の計上」が最強のトリガー</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>山本氏の追加変更報告：</strong>11%超への買い増し、または共同保有者の出現</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>還元強化：</strong>自社株買いの初導入・配当性向引き上げ・第5次中計（2027年度〜）の内容</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>資本コスト経営の開示：</strong>PBR改善計画・政策保有縮減方針の明文化</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>IR関連の具体案件：</strong>夢洲IR（2030年頃開業）関連の新規物流受注</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:10px">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>MUFG株の急落：</strong>金利シナリオの逆転・銀行株全般の調整</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>山本氏・楽天証券の保有減少報告：</strong>需給の主柱が売りに回る兆候</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>主要顧客の契約非更新：</strong>電源開発（売上16.6%）・タンク長期契約の解約</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>大阪市との借地条件悪化：</strong>再度の賃料増額請求</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>持合い解消売り：</strong>三菱UFJ銀・三井住友銀・日生の保有分（計約8%）の放出</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P7 最終評価
+══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終投資判断</h2><span class="sb bg-or">2026.07 版</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">NAV比ディスカウント</div><div class="mv gn">▲47%</div><div class="ms">2,820円 vs NAV中立5,296円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">保有株式／時価総額</div><div class="mv am">134%</div><div class="ms">税引後でも約97%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">確率加重期待株価</div><div class="mv or">3,450円</div><div class="ms">現在比+22%（試算）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">下値想定</div><div class="mv rd">2,000円台前半</div><div class="ms">▲25%前後・需給次第で深掘りも</div></div>
+  </div>
+
+  <div class="sc" style="margin-bottom:18px">
+    <div class="sc-c"><div class="sc-l br">Bear（放置＋逆風）</div><div class="sc-p br">40〜50%</div><div class="sc-s">MUFG調整・需給崩れ</div><div class="sc-i">2,000〜2,600円</div><div class="sc-i">▲8〜▲29%</div><div class="sc-i">累進配当54円が下支え</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base（還元強化）</div><div class="sc-p bs">20〜25%</div><div class="sc-s">増配・自社株買い</div><div class="sc-i">3,200〜3,800円</div><div class="sc-i">+13〜+35%</div><div class="sc-i">PBR0.6〜0.7倍へ</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull（一部売却）</div><div class="sc-p bu">15〜20%</div><div class="sc-s">MUFG株売却＋特配</div><div class="sc-i">3,800〜4,800円</div><div class="sc-i">+35〜+70%</div><div class="sc-i">有報明記方針の発動</div></div>
+    <div class="sc-c"><div class="sc-l bm">Max（TOB等）</div><div class="sc-p bm">5〜10%</div><div class="sc-s">非公開化・買収</div><div class="sc-i">4,500〜5,500円</div><div class="sc-i">+60〜+95%</div><div class="sc-i">安定株主の壁が課題</div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 「銀行株ミニファンド＋独占埠頭」として捉える</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">投資テーゼの本質</div>
+        <div class="conc-b">時価総額42.9億円に対し保有株式時価57.3億円（税引後約42億円）。<strong>2,820円はMUFG株ポートフォリオをほぼ等価で買い、EBITDA9.2億円の大阪港独占事業を無料で受け取る価格。</strong>ただし含み資産の実体は土地ではなく有価証券であり、この株の実質はMUFGエクスポージャー＋顕在化オプションである。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">2,820円の評価と執行</div>
+        <div class="conc-b">PBR0.53倍は過去レンジ（0.27〜1.87倍）の中では中位で、<strong>歴史的最安値圏ではない</strong>（2025年に1,420円があった）。出来高が極小のため、<strong>指値の分割執行以外の選択肢はない。</strong>山本氏の動向と楽天証券残高（信用需給）を見ながら、下値2,000円台前半までの耐性があるサイズに限定すること。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">時間軸と撤退条件</div>
+        <div class="conc-b">監視すべきは①政策保有売却の開示、②山本氏の報告、③第5次中計（2027年度開始）の還元方針、④MUFG株価。<strong>MUFGが大きく崩れた場合はNAVテーゼ自体が縮むため機械的に見直す。</strong>2〜3年カタリスト不発なら、配当1.9%の機会コストを直視して資金効率を再評価すべき。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">NAV中立</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">5,296円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">完全顕在化時 +88%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">期待値（確率加重）</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3,450円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">+22%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値想定</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">2,000円台</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">▲25%前後を許容できるサイズで</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸ルール</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2〜3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">第5次中計が最初の関門</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:860px">
+        櫻島埠頭は、<strong style="color:var(--or2)">時価総額を上回るMUFG株を抱いた大阪港独占インフラの「証券含み益型ディープバリュー」。</strong>資産裏付けは厚く累進配当の下支えもあるが、顕在化の主導権は安定株主側の経営にあり、期待リターンの中心は+2割程度。MUFG連動リスクと極小流動性を許容できるサイズで、カタリスト（政策保有売却・還元強化・大量保有者の動き）を監視しながら持つ案件。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。NAV・シナリオ確率・期待株価はすべて概算の試算値であり、投資判断はご自身の責任においてお願いいたします。<br>
+  Data: 第84期有価証券報告書（2026.06.18提出） / 2026年3月期決算短信 / EDINET大量保有報告 / IRBank / 株探 / Yahoo!ファイナンス · 2026.07.19
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テレビ東京ホールディングス（9413）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 40px/1 var(--mono);color:var(--am2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #e8b0b0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc.q4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.2);color:#e09090}
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.ttext{font-size:12px;line-height:1.65}
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #e8b0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:11.5px}
+.bar-lab{width:120px;flex-shrink:0;color:var(--ink2)}
+.bar-tr{flex:1;background:var(--bg3);border-radius:3px;height:16px;overflow:hidden}
+.bar-fl{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font:600 9px/1 var(--mono);color:#fff}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.q4{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9413 · 2026.07.21 作成</p>
+      <h1 class="ht">テレビ東京ホールディングス <em>（9413）</em><br>バリュー投資分析レポート</h1>
+      <p class="hs">現株価3,630円 ／ PBR0.90倍・PER12.1倍 ／ ネットキャッシュ＋有価証券が時価総額の68%<br>「割安×良質×ストック成長」型 ── ただしTOB/MBOは放送法で事実上封印。カタリストは資本政策と業績成長</p>
+    </div>
+    <div class="vb">
+      <div class="vs">妙味アリ（条件付）</div>
+      <div class="vt">
+        <strong>下値は資産で堅い／上値は"再評価待ち"</strong><br>
+        EV/EBITDA1.9倍と放送事業は激安。<br>
+        3年ベース目標4,455円（+23%）。<br>
+        M&Aカタリスト不在が最大の弱点。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">3,630円</div><div class="ks">時価総額 約967億円（自己株控除）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS4,034円）</div><div class="kn gn">0.90倍</div><div class="ks">解散価値割れの水準</div></div>
+    <div class="kv"><div class="kl">PER（FY27予想EPS300円）</div><div class="kn bl">12.1倍</div><div class="ks">トレーリング12.6倍</div></div>
+    <div class="kv"><div class="kl">ネットC＋有価証券</div><div class="kn gn">約660億円</div><div class="ks">時価総額の68%＝1株2,479円</div></div>
+    <div class="kv"><div class="kl">EV/EBITDA</div><div class="kn am">1.9倍</div><div class="ks">放送事業は捨て値評価</div></div>
+    <div class="kv"><div class="kl">配当利回り／ROE</div><div class="kn bl">2.75%／7.4%</div><div class="ks">総還元性向40%目標</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>資産・割安性</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--bl2)"></span>事業性・成長</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--or2)"></span>3年後期待株価</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>最新決算</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>カタリスト／リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══ P1 投資テーゼ ══ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">投資テーゼ ── 「割安な現金箱＋伸びるアニメ」</h2><span class="sb bg-gn">結論：条件付で妙味アリ</span></div>
+
+  <div class="inf">📌 これは広済堂型の「TOBカタリスト勝負」ではない。テレ東は放送法によりTOB/MBOが事実上封印されており、"買収で解放される"筋書きは描けない。妙味の源泉は①資産による強固な下値、②アニメ・配信のストック成長、③東証要請下の資本政策改善、の3点にある。</div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">テーゼ 01 · 資産</div>
+      <span class="ci">🏦</span>
+      <div class="ct">時価総額の68%が現金・有価証券</div>
+      <div class="cb gn">2,479円/株</div>
+      <div class="cu">現預金492億＋投資有価証券227億</div>
+      <div class="cp">株価3,630円のうち<strong>約2,479円分が正味の現金＋上場有価証券（有利子負債控除後）。</strong>事業価値（EV）はわずか306億円で、放送・アニメ事業をEV/EBITDA1.9倍で買える計算。下値は資産で堅い。</div>
+      <div class="tgs"><span class="tg tg-gn">実質ネットキャッシュ企業</span><span class="tg tg-gn">PBR0.90倍</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">テーゼ 02 · 成長</div>
+      <span class="ci">🍥</span>
+      <div class="ct">アニメIPのグローバル・ストック収益</div>
+      <div class="cb bl">+17.8%</div>
+      <div class="cu">アニメ部門売上 272億円（過去最高）</div>
+      <div class="cp">ポケモン・NARUTO等のIPの海外ゲーム化・商品化・配信が牽引。<strong>アニメ・配信事業は営業利益65.8億円（+55%）と全社の伸びを主導。</strong>放送広告に依存しない、ライツ・課金型のストック収益が育っている。</div>
+      <div class="tgs"><span class="tg tg-bl">ライツ利益+20%</span><span class="tg tg-bl">海外・課金型</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">テーゼ 03 · 資本政策</div>
+      <span class="ci">📈</span>
+      <div class="ct">東証PBR1倍要請下の還元余地</div>
+      <div class="cb or">40%</div>
+      <div class="cu">総還元性向の目標水準</div>
+      <div class="cp">配当性向35%目安・総還元性向40%目標を明言。<strong>政策保有株は「段階的かつ可及的速やかに売却」、過去10年で4割超の銘柄を処分済み。</strong>自己株買いも継続。PBR0.9倍是正の余地が資本政策として残る。</div>
+      <div class="tgs"><span class="tg tg-or">政策株縮減</span><span class="tg tg-or">自己株買い継続</span></div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">弱点 · 最重要</div>
+      <span class="ci" style="font-size:22px">🚫</span>
+      <div class="ct" style="color:var(--ink)">M&Aカタリストが制度で封印</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">TOB不可</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">認定放送持株会社＋外資規制＋日経33%</div>
+      <div class="cp" style="color:var(--ink2)">放送法のマスメディア集中排除原則・外資規制（議決権1/3で認定取消）に加え、<strong>筆頭株主の日本経済新聞社が33.06%を保有。敵対的TOB・MBOは現実的に不可能。</strong>"買収プレミアム"は期待値に入れられない。</div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">構造 · バリュー投資の型</div>
+      <span class="ci" style="font-size:22px">⚖️</span>
+      <div class="ct" style="color:var(--ink)">「カタリスト待ち」ではなく「持って報われる」型の割安株</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① 下値保護</strong><br>正味現金＋有価証券2,479円/株が株価の68%。BPS4,034円割れ。事業がタダ同然に評価され、資産が実質フロアを形成。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② 内部成長</strong><br>アニメ・配信の二桁成長＋自己株買いでEPSは緩やかに増加。中計ROE目標8%。配当利回り2.75%を得ながら待てる。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ 再評価の芽</strong><br>PBR1倍是正・政策株売却益の還元・アニメ再評価。一発の派手なカタリストはないが、複利的に価値が積み上がる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      テレビ東京HDは、<strong style="color:var(--or2)">時価総額の3分の2を現金・有価証券が占め、放送・アニメ事業をEV/EBITDA1.9倍でタダ同然に買える資産バリュー株。</strong>アニメIPのグローバル・ストック成長が内部価値を押し上げる一方、TOB/MBOは制度で封印されているため、リターンは「劇的な一撃」ではなく「配当を得ながら持てば報われる」複利型。下値は資産で堅く、3年ベースで+20〜25%が見込める中庸なバリュー案件。
+    </div>
+  </div>
+</div>
+
+<!-- ══ P2 資産・割安性 ══ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資産精査 ── 現金・有価証券・土地の含み益</h2><span class="sb bg-am">EV/EBITDA 1.9倍</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">492億円</div><div class="ms">＋金銭の信託4億／CF計上45億</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">投資有価証券（時価）</div><div class="mv bl">227億円</div><div class="ms">政策保有株中心・時価評価済</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">有利子負債</div><div class="mv rd">64億円</div><div class="ms">借入56億＋リース8億／極小</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">土地（簿価）</div><div class="mv am">42.5億円</div><div class="ms">本社は賃借・含み益は限定的</div></div>
+  </div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">解散価値・ネットキャッシュ分解（連結・2026年3月期末／自己株控除2,662万株）</div>
+    <table class="t">
+      <thead><tr><th>項目</th><th class="r">金額（百万円）</th><th class="r">1株あたり</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>現金及び預金＋金銭の信託</td><td class="r mn">49,651</td><td class="r mn">1,865円</td><td style="font-size:11px">流動性最上位</td></tr>
+        <tr><td>投資有価証券（時価）</td><td class="r mn">22,719</td><td class="r mn">853円</td><td style="font-size:11px">時価評価済。含み益は純資産に反映</td></tr>
+        <tr><td>（－）有利子負債</td><td class="r mn hrd">△6,365</td><td class="r mn hrd">△239円</td><td style="font-size:11px">実質無借金</td></tr>
+        <tr class="hl"><td><strong>正味現金＋有価証券</strong></td><td class="r mn hgn"><strong>66,005</strong></td><td class="r mn hgn"><strong>2,479円</strong></td><td style="font-size:11px;color:var(--gn)"><strong>株価3,630円の68%</strong></td></tr>
+        <tr class="sm"><td>時価総額（自己株控除）</td><td class="r mn">96,652</td><td class="r mn">3,630円</td><td style="font-size:11px">—</td></tr>
+        <tr><td><strong>差引：事業価値（EV）</strong></td><td class="r mn ham"><strong>30,647</strong></td><td class="r mn ham"><strong>1,151円</strong></td><td style="font-size:11px">放送＋アニメ＋通販の全事業</td></tr>
+      </tbody>
+    </table>
+    <p class="note">EV30,647百万円 ÷ EBITDA16,214百万円（営業益11,402＋減価償却4,812）＝ <strong>EV/EBITDA1.9倍</strong>。EV/営業利益2.7倍。過去最高益・二桁成長中のアニメ事業を含む全事業がこの評価。市場は放送事業の広告依存・構造縮小を強く織り込んでいる。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-bl">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:10px">投資有価証券の含み益</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>その他有価証券評価差額金＝57.4億円（税引後）：</strong>純資産にすでに計上済。税引前の含み益は概算82.7億円。BS上の投資有価証券227億円は時価評価であり、含み益は"隠れ資産"ではなくBPS4,034円に反映済み。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>売却＝キャッシュ化の含み：</strong>政策保有株を「可及的速やかに売却」する方針。売却が進めば売却益の特別配当・自己株買い原資となり、資本効率が改善する余地。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>市況リスク：</strong>株安局面では評価差額金が減少しBPSが目減りする。含み益は市場変動に連動する点に留意。</div></div>
+      </div>
+    </div>
+    <div class="c cl-am">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px">土地の含み益 ── 期待しすぎ禁物</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        <strong>ここが広済堂との決定的な違い。</strong>テレ東本社は住友不動産六本木グランドタワーの<strong>賃借</strong>であり、自社所有の土地簿価はわずか42.5億円（前期から横ばい）。<br><br>
+        昭和期取得の都心大規模用地のような巨大含み益は存在しない。土地含み益はせいぜい数十億円規模とみられ、<strong>投資テーゼの主役にはならない。</strong>テレ東のアセットバリューの本体は、あくまで現金＋上場有価証券である。
+      </div>
+    </div>
+  </div>
+
+  <div class="cf-am" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">なぜ市場はPBR0.90倍・EV/EBITDA1.9倍まで放置するのか</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>①<strong>低ROE：</strong>認定放送持株会社として「切れ目ない報道」のため余剰資金・設備を厚く持つ構造。ROE7.4%は資本コスト近辺で、資本効率が低い。②<strong>放送の構造不安：</strong>地上波広告の長期縮小懸念。③<strong>M&A不可：</strong>買収による価値解放シナリオが制度上描けない。</div>
+      <div>裏を返せば、<strong>「現金を溜め込みすぎ」というディスカウントが割安の源泉。</strong>東証のPBR1倍要請、政策株売却、総還元性向40%目標が着実に実行されれば、超過資本の還元とROE改善でディスカウントは縮小しうる。時間はかかるが方向性は還元強化。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P3 事業性・成長 ══ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・ストック性・市場成長</h2><span class="sb bg-bl">アニメ・配信が成長ドライバー</span></div>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">地上波・BS放送</div><div class="mv gn">1,034億円</div><div class="ms">営業益55.5億（+36%）／フロー型</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">アニメ・配信</div><div class="mv bl">523億円</div><div class="ms">営業益65.9億（+55%）／ストック型</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">ショッピング・他</div><div class="mv am">168億円</div><div class="ms">営業益4.5億（△34%）／低採算</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">セグメント別 収益構造（2026年3月期）</div>
+      <div class="bar-row"><div class="bar-lab">放送 利益55.5億</div><div class="bar-tr"><div class="bar-fl" style="width:44%;background:var(--gn2)">44%</div></div></div>
+      <div class="bar-row"><div class="bar-lab">アニメ・配信 65.9億</div><div class="bar-tr"><div class="bar-fl" style="width:53%;background:var(--bl2)">53%</div></div></div>
+      <div class="bar-row"><div class="bar-lab">ショッピング 4.5億</div><div class="bar-tr"><div class="bar-fl" style="width:3%;background:var(--am2)">3%</div></div></div>
+      <p class="note">セグメント利益（調整前）ベースの構成。<strong>いまや利益の過半をアニメ・配信が稼ぐ。</strong>放送は依然大黒柱だが、成長と利益率の源泉はライツ・課金型へシフト。</p>
+    </div>
+    <div class="c cl-bl">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:10px">ストック性の評価</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>強いストック性（アニメIP）：</strong>ポケモン・NARUTOなどのIPが海外ゲーム化・商品化・配信で継続課金。制作済みライブラリが繰り返し収益を生む。孤独のグルメ等アーカイブの配信権販売も好調。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>フロー性（地上波広告）：</strong>タイム＋スポット収入は景気・単価に連動するフロー収益。世界卓球やオリンピック反動など単年要因の振れが大きい。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>縮小事業（ショッピング）：</strong>テレビ通販は物価高の消費冷え込みで減収・減益。構造的な逆風。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">市場成長と中期経営計画（2025中計・長期VISION2035）</div>
+    <table class="t">
+      <thead><tr><th>テーマ</th><th>内容</th><th class="r">評価</th></tr></thead>
+      <tbody>
+        <tr><td><strong>グローバルIPメディア化</strong></td><td>中国＋東南アジア・欧米・中東へアニメ／ドラマの配信・商品化を拡大</td><td class="r"><span class="bge be-gn">成長性◎</span></td></tr>
+        <tr><td><strong>経済報道の強化</strong></td><td>テレ東BIZ有料会員拡大。差別化された独自コンテンツ</td><td class="r"><span class="bge be-gn">差別化○</span></td></tr>
+        <tr><td><strong>成長投資枠200億円</strong></td><td>25〜27年度でアニメ・配信、AI・バーチャルプロダクション、制作力強化に投下</td><td class="r"><span class="bge be-am">実行力次第</span></td></tr>
+        <tr><td><strong>ROE8%目標</strong></td><td>2020年代後半に達成目標。FY27見込み7.9%と接近</td><td class="r"><span class="bge be-am">道半ば</span></td></tr>
+        <tr><td>会社FY27予想</td><td>売上1,680億（+1.9%）／営業益115億（+0.9%）／純益80億（+3.9%）</td><td class="r"><span class="bge be-bl">保守的</span></td></tr>
+      </tbody>
+    </table>
+    <p class="note">FY27会社計画は営業益ほぼ横ばいと保守的だが、アニメ特需の反動を織り込んだ慎重設定。アニメIPのグローバル展開が続けば上振れ余地。放送単独に頼らない収益構造への転換は着実に進行。</p>
+  </div>
+
+  <div class="ok">✅ 事業性の核心：<strong>「放送というフロー資産」＋「アニメIPというストック資産」の二層構造。</strong>後者が利益の過半を稼ぐまでに育ち、海外・課金型で成長余地を持つ。放送単独のオワコン論では説明できない構造変化が起きている。</div>
+</div>
+
+<!-- ══ P4 3年後期待株価 ══ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">3年後（FY2029/3頃）期待株価 ── ベア／ベース／ブル</h2><span class="sb bg-or">確率加重 約4,400円</span></div>
+
+  <div class="inf">📌 前提：3年間のEPS成長と評価マルチプル（PER）の組合せで試算。テレ東は資産下支えが厚くPERの下限が効きやすい一方、M&Aプレミアムは織り込まない。配当（年100円想定・3年で約300円）は別途トータルリターンに加算。</div>
+
+  <div class="sc q4">
+    <div class="sc-c"><div class="sc-l br">Bear（弱気）25%</div><div class="sc-p br">2,730円</div><div class="sc-s">株価 △25%／年率△9%</div><div class="sc-i">広告市況悪化＋アニメ特需一巡</div><div class="sc-i">EPS260円 × PER10.5倍</div><div class="sc-i">資本政策も現状維持で停滞</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base（中立）50%</div><div class="sc-p bs">4,455円</div><div class="sc-s">株価 +23%／年率+7%</div><div class="sc-i">中計線・ROE8%接近</div><div class="sc-i">EPS330円 × PER13.5倍</div><div class="sc-i">政策株売却・自己株買いでPBR是正</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull（強気）25%</div><div class="sc-p bu">6,000円</div><div class="sc-s">株価 +65%／年率+18%</div><div class="sc-i">アニメIPグローバル加速</div><div class="sc-i">EPS400円 × PER15倍</div><div class="sc-i">大型還元でPBR1.2倍再評価</div></div>
+    <div class="sc-c" style="background:var(--gn3)"><div class="sc-l bm">確率加重期待値</div><div class="sc-p bm">4,410円</div><div class="sc-s">株価 +21%</div><div class="sc-i">配当込トータル約+30%</div><div class="sc-i">下値は資産が保護</div><div class="sc-i">年率リターン概算+9%</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">3ケース前提と根拠</div>
+      <table class="t">
+        <thead><tr><th>ケース</th><th class="r">FY29 EPS</th><th class="r">PER</th><th class="r">目標株価</th><th class="r">現在比</th></tr></thead>
+        <tbody>
+          <tr><td class="hrd">Bear</td><td class="r mn">260円</td><td class="r mn">10.5倍</td><td class="r mn hrd">2,730円</td><td class="r mn hrd">△25%</td></tr>
+          <tr class="hl"><td class="hgn">Base</td><td class="r mn">330円</td><td class="r mn">13.5倍</td><td class="r mn hgn">4,455円</td><td class="r mn hgn">+23%</td></tr>
+          <tr><td class="hor">Bull</td><td class="r mn">400円</td><td class="r mn">15.0倍</td><td class="r mn hor">6,000円</td><td class="r mn hor">+65%</td></tr>
+          <tr class="sm"><td>期待値</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn hgn">4,410円</td><td class="r mn hgn">+21%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Bearでも株価2,730円はPBR約0.60倍・正味現金+有価証券（3年後は積み上がり約2,700円/株超）にほぼ一致し、資産がフロアとして機能。純粋な下振れ余地は限定的。</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">3年ベース目標</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">4,455円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">配当込 +31%</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">Bear下値</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">2,730円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">資産フロア近辺</div>
+        </div>
+      </div>
+      <div class="c cf-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">リスク・リワードの非対称性</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">下値▲900円（Bear）に対し上値＋2,370円（Bull）。<strong>期待値は上方に偏り、かつBearでもBPS・ネットキャッシュが下支え。</strong>ただし広済堂のような「1:6」の極端な非対称ではなく、堅実な「1:2.6」型。派手さより確実性のプロファイル。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">⚠️ 期待株価は前提（EPS成長・マルチプル・確率）に強く依存する推計であり、確約された数値ではない。特にBullはアニメIPの海外ヒット継続と大型資本還元という2条件が揃う前提。実績が計画未達なら下方修正が必要。</div>
+</div>
+
+<!-- ══ P5 最新決算 ══ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">最新決算（2026年3月期・過去最高益）</h2><span class="sb bg-pu">売上・各利益とも過去最高</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">売上高</div><div class="mv gn">1,649億円</div><div class="ms">前期比+5.8%</div></div>
+    <div class="c mc"><div class="ml">営業利益</div><div class="mv gn">114.0億円</div><div class="ms">前期比+46.4%</div></div>
+    <div class="c mc"><div class="ml">純利益</div><div class="mv gn">77.0億円</div><div class="ms">前期比+27.6%</div></div>
+    <div class="c mc"><div class="ml">営業CF</div><div class="mv gn">161.3億円</div><div class="ms">前期比+113%／質良好</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">貸借対照表（2026年3月期末・連結）</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">金額</th><th class="r">前期比</th><th>注目点</th></tr></thead>
+        <tbody>
+          <tr><td>総資産</td><td class="r mn">1,558億円</td><td class="r mn hgn">+5.4%</td><td style="font-size:11px">拡大</td></tr>
+          <tr><td>純資産</td><td class="r mn">1,076億円</td><td class="r mn hgn">+5.5%</td><td style="font-size:11px">厚い自己資本</td></tr>
+          <tr><td style="color:var(--gn);font-weight:600">現金及び預金</td><td class="r mn hgn"><strong>492億円</strong></td><td class="r mn hgn"><strong>+17.9%</strong></td><td style="font-size:11px;color:var(--gn)"><strong>営業CF好調で増加</strong></td></tr>
+          <tr><td>投資有価証券</td><td class="r mn">227億円</td><td class="r mn hgn">+10.0%</td><td style="font-size:11px">時価上昇</td></tr>
+          <tr><td>有利子負債</td><td class="r mn">64億円</td><td class="r mn">横ばい</td><td style="font-size:11px">実質無借金</td></tr>
+          <tr><td>自己資本比率</td><td class="r mn hgn">68.9%</td><td class="r mn">+0.1pt</td><td style="font-size:11px">高水準</td></tr>
+          <tr><td>BPS</td><td class="r mn">4,034円</td><td class="r mn hgn">+5.8%</td><td style="font-size:11px">株価はこれ以下</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:9px">決算のポイント</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          中核の㈱テレビ東京が売上1,264億（+9.1%）・営業益97.4億（+71.3%）と過去最高。<strong>放送事業（スポット収入+12.3%）とライツ事業（アニメ+17.8%）の両輪が牽引。</strong><br><br>
+          営業CFは161億円と純利益を大きく上回り、利益の質は良好。減損353百万・投資有価証券評価損113百万など特損はあるが軽微。
+        </div>
+      </div>
+      <div class="c cl-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">株式指標（株価3,630円）</div>
+        <table class="t" style="font-size:11.5px">
+          <tbody>
+            <tr><td>PER（FY27予想EPS300.6円）</td><td class="r mn">約12.1倍</td></tr>
+            <tr><td>PER（トレーリングEPS289.3円）</td><td class="r mn">約12.6倍</td></tr>
+            <tr><td>PBR（BPS4,034円）</td><td class="r mn hgn">約0.90倍</td></tr>
+            <tr><td>配当利回り（FY27予想100円）</td><td class="r mn hgn">2.75%</td></tr>
+            <tr><td>ROE（FY26実績）</td><td class="r mn">7.4%</td></tr>
+            <tr><td>自己資本比率</td><td class="r mn">68.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P6 カタリスト／リスク ══ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト（現実的）とダウンサイド・リスク</h2><span class="sb bg-rd">MBO/TOBは制度で封印</span></div>
+
+  <div class="warn">⚠️ 最重要の認識：<strong>敵対的TOB・MBOによる支配権プレミアムは、テレ東では期待できない。</strong>放送法の外資規制（外国人議決権1/3以上で認定取消）とマスメディア集中排除原則、加えて筆頭株主・日本経済新聞社の33.06%保有により、外部者が支配権を握る買収は制度的にほぼ不可能。「TOBカタリスト狙い」でこの株を買うのは筋違い。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cf-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">📈 現実的なカタリスト（アップサイド）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>政策保有株の売却加速：</strong>「可及的速やかに売却」方針。売却益の特別配当・自己株買いへの転用。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>東証PBR1倍要請への対応：</strong>資本コスト・株価意識経営の開示強化。総還元性向40%目標の引き上げ。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>アニメIPの海外ヒット：</strong>新規IPのグローバル配信・ゲーム化・商品化の成功で利益上振れ。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>親会社（日経）関連の資本再編：</strong>グループ内での完全子会社化・株式交換等の可能性（プレミアムは限定的）。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>物言う株主の関与：</strong>過剰現金の還元を求めるアクティビストの登場余地。ただし日経の壁は厚い。</div></div>
+      </div>
+    </div>
+    <div class="c cf-rd">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:10px">📉 ダウンサイド・リスク</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>アニメ特需の反動：</strong>ポケモン・NARUTO等の主力IP依存。ヒットIPの端境期に入れば利益急減。会社FY27計画も営業益ほぼ横ばい。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>地上波広告の構造縮小：</strong>視聴の配信シフトでテレビ広告市場が長期縮小。放送事業のディスカウント継続。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>低ROEの固定化：</strong>資本効率が改善せずPBR0.9倍が是正されないまま滞留するリスク（バリュートラップ）。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>保有株の時価下落：</strong>株安局面で投資有価証券の含み益・BPSが目減り。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>コンプライアンス／制作リスク：</strong>過去にBPO指摘。番組事故・不祥事はブランド毀損要因。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">M&Aシナリオの実現性 ── なぜTOBが効かないか</div>
+    <table class="t">
+      <thead><tr><th>手段</th><th>実現性</th><th>制約</th></tr></thead>
+      <tbody>
+        <tr><td>外部者による敵対的TOB</td><td><span class="bge be-rd">✕不可</span></td><td style="font-size:11px">マスメディア集中排除・外資規制・日経33%</td></tr>
+        <tr><td>経営陣によるMBO</td><td><span class="bge be-rd">✕困難</span></td><td style="font-size:11px">認定放送持株会社の議決権制限・巨額資金</td></tr>
+        <tr><td>外資ファンドによる買収</td><td><span class="bge be-rd">✕不可</span></td><td style="font-size:11px">外国人議決権1/3で放送認定取消</td></tr>
+        <tr><td>親会社（日経）による完全子会社化</td><td><span class="bge be-am">△可能性小</span></td><td style="font-size:11px">理論上可。ただしプレミアムは限定的</td></tr>
+        <tr><td><strong>自己株買い・増配・政策株売却</strong></td><td><span class="bge be-gn">◎現実的</span></td><td style="font-size:11px">これが実質的な唯一のカタリスト経路</td></tr>
+      </tbody>
+    </table>
+    <p class="note">結論：バリュー解放は「買収」ではなく「自律的な資本政策」に依存する。経営陣の還元姿勢と東証・株主からの圧力が、ディスカウント縮小の鍵を握る。</p>
+  </div>
+</div>
+
+<!-- ══ P7 最終評価 ══ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終投資判断</h2><span class="sb bg-or">2026.07 版</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">PBR</div><div class="mv gn">0.90倍</div><div class="ms">解散価値割れ</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">正味現金＋有価証券</div><div class="mv am">2,479円</div><div class="ms">株価の68%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">3年ベース目標</div><div class="mv or">4,455円</div><div class="ms">+23%（配当込+31%）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">リスク・リワード</div><div class="mv bl">約1 : 2.6</div><div class="ms">下値▲900 vs 上値+2,370</div></div>
+  </div>
+
+  <div class="sc q4" style="margin-bottom:18px">
+    <div class="sc-c"><div class="sc-l br">Bear（弱気）</div><div class="sc-p br">2,730円</div><div class="sc-s">確率25%</div><div class="sc-i">△25%</div><div class="sc-i">アニメ反動＋市況悪化</div><div class="sc-i">資産がフロア</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base（中立）</div><div class="sc-p bs">4,455円</div><div class="sc-s">確率50%</div><div class="sc-i">+23%</div><div class="sc-i">中計線・PBR是正</div><div class="sc-i">配当込+31%</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull（強気）</div><div class="sc-p bu">6,000円</div><div class="sc-s">確率25%</div><div class="sc-i">+65%</div><div class="sc-i">IPグローバル＋大型還元</div><div class="sc-i">PBR1.2倍再評価</div></div>
+    <div class="sc-c"><div class="sc-l bm">確率加重</div><div class="sc-p bm">4,410円</div><div class="sc-s">期待値</div><div class="sc-i">+21%</div><div class="sc-i">年率約+9%（配当込）</div><div class="sc-i">堅実なバリュー型</div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終判断 <span>── 「割安で堅いが、爆発力は限定的」</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">投資テーゼの本質</div>
+        <div class="conc-b">時価総額の68%が現金・有価証券で、放送＋アニメ全事業をEV/EBITDA1.9倍で買える<strong>資産バリュー株。</strong>PBR0.90倍と解散価値以下に放置され、下値は資産で堅い。アニメIPのストック成長が内部価値を押し上げる。3,630円は「割安圏」と評価できる。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">最大の弱点</div>
+        <div class="conc-b"><strong>M&Aカタリストが制度で封印されている。</strong>TOB/MBOによる支配権プレミアムは期待できず、バリュー解放は自己株買い・増配・政策株売却という自律的資本政策に依存。低ROEが是正されなければPBR0.9倍が滞留する「バリュートラップ」のリスクも現実的。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">妙味の結論と持ち方</div>
+        <div class="conc-b">「配当2.75%を得ながら資産で守られ、3年で+20〜30%を狙う中庸なバリュー投資」として<strong>妙味はある。</strong>ただし短期の値幅取り・カタリスト勝負には不向き。<strong>還元強化とアニメ成長の実績を確認しながら中長期で保有する姿勢</strong>が適する銘柄。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">Base目標</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">4,455円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">+23% / 3年</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値フロア</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">2,479円+</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">正味現金＋有価証券</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">配当利回り</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2.75%</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">待つ間のインカム</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">総合評価</div>
+        <div style="font:700 20px/1 var(--mono);color:var(--or2)">妙味アリ<br>（条件付）</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">中長期・分散前提</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        テレビ東京HD（3,630円）は<strong style="color:var(--or2)">時価総額の3分の2を現金・有価証券が占め、放送＋成長するアニメIPをEV/EBITDA1.9倍で買える割安・良質なバリュー株。</strong>下値は資産で堅く配当を得ながら待てるが、TOB/MBOが制度で封印されているためカタリストは自律的資本政策に限られ、爆発力は限定的。3年ベース+23%（配当込+31%）を狙う<strong style="color:var(--or2)">中長期の堅実バリュー案件として妙味アリ</strong>と評価する。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は公開情報に基づく情報提供のみを目的とし、特定銘柄の売買を推奨するものではありません。将来予測・期待株価は一定の前提に基づく試算であり、実際の結果を保証しません。投資判断はご自身の責任でお願いいたします。<br>
+  Data: テレビ東京HD 2026年3月期 決算短信（2026.05.08 TDNET）／ 有価証券報告書 ／ 2025統合報告書・中期経営計画 ／ 総務省（マスメディア集中排除原則・外資規制）／ 各社株式情報 · 2026.07.21作成
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

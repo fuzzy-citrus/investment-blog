@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>京阪ホールディングス（9045）深掘り分析 ─ 主要私鉄比較レポート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1A2558;--navy-d:#0E1535;--navy-m:#253070;
+  --ice:#C8DCFA;--ice2:#A0BFFF;
+  --gold:#E8A020;--gold-l:#FEF3C7;
+  --teal:#0D9488;--teal-l:#CCFBF1;
+  --purple:#6D28D9;--purple-l:#EDE9FE;--purple-b:#8B5CF6;
+  --green:#15803D;--green-l:#DCFCE7;
+  --amber:#B45309;--amber-l:#FEF3C7;
+  --red:#B91C1C;--red-l:#FEE2E2;
+  --slate:#334155;--slate-l:#F8FAFC;
+  --border:#E2E8F0;--gray:#64748B;
+  --white:#FFFFFF;--text:#0F172A;
+  --fs:'Shippori Mincho',serif;
+  --fn:'Noto Sans JP',sans-serif;
+  --fm:'DM Mono',monospace;
+  --max:1140px;
+}
+
+/* ─ Base ─ */
+html{scroll-behavior:smooth}
+body{font-family:var(--fn);color:var(--text);background:var(--navy-d);overflow-x:hidden;font-size:14px}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--navy-d)}
+::-webkit-scrollbar-thumb{background:var(--ice2);border-radius:2px}
+
+/* ─ Header ─ */
+.hdr{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:54px;
+  background:rgba(14,21,53,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(200,220,250,.1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+}
+.hdr-logo{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:var(--ice);opacity:.8;text-transform:uppercase}
+.hdr-nav{display:flex;gap:2rem}
+.hdr-nav a{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;color:rgba(200,220,250,.45);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.hdr-nav a:hover{color:var(--ice)}
+
+/* ─ Hero ─ */
+.hero{
+  min-height:100vh;padding:100px 2.5rem 5rem;
+  background:linear-gradient(150deg,#090E22 0%,#0E1535 40%,#130D2A 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 55% at 75% 35%,rgba(109,40,217,.15) 0%,transparent 65%),
+    radial-gradient(ellipse 45% 45% at 15% 65%,rgba(13,148,136,.10) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 55% 80%,rgba(232,160,32,.07) 0%,transparent 60%);
+}
+/* grid dot texture */
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.04;
+  background-image:radial-gradient(circle,#fff 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.hero-inner{max-width:var(--max);width:100%;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.9rem}
+.hero-h1{font-family:var(--fs);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:1rem}
+.hero-h1 em{font-style:normal;color:var(--gold)}
+.hero-rule{width:44px;height:2px;background:var(--gold);margin:.9rem 0 1.1rem;border-radius:1px}
+.hero-lead{font-size:13px;color:rgba(200,220,250,.6);line-height:1.9;max-width:500px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+
+/* ─ Chip ─ */
+.chip{display:inline-block;font-family:var(--fm);font-size:9px;letter-spacing:.09em;padding:3px 10px;border-radius:20px;font-weight:500;text-transform:uppercase}
+.ch-navy{background:rgba(200,220,250,.08);color:var(--ice);border:1px solid rgba(200,220,250,.15)}
+.ch-gold{background:rgba(232,160,32,.15);color:var(--gold);border:1px solid rgba(232,160,32,.25)}
+.ch-teal{background:rgba(13,148,136,.15);color:#2DD4BF;border:1px solid rgba(13,148,136,.25)}
+.ch-purple{background:rgba(109,40,217,.15);color:#C4B5FD;border:1px solid rgba(109,40,217,.25)}
+.ch-red{background:rgba(185,28,28,.15);color:#FCA5A5;border:1px solid rgba(185,28,28,.25)}
+
+/* ─ KPI grid ─ */
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.kpi{
+  background:rgba(255,255,255,.03);border:1px solid rgba(200,220,250,.1);
+  border-radius:12px;padding:1.1rem 1.3rem;
+  transition:border-color .25s,transform .25s;cursor:default;
+}
+.kpi:hover{border-color:rgba(200,220,250,.25);transform:translateY(-2px)}
+.kpi.hi{border-color:rgba(232,160,32,.3);background:rgba(232,160,32,.05)}
+.kpi.pu{border-color:rgba(109,40,217,.3);background:rgba(109,40,217,.05)}
+.kpi.te{border-color:rgba(13,148,136,.3);background:rgba(13,148,136,.05)}
+.kpi-lbl{font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;color:rgba(200,220,250,.45);text-transform:uppercase;margin-bottom:.35rem}
+.kpi-val{font-family:var(--fs);font-size:1.55rem;font-weight:700;color:var(--white);line-height:1}
+.kpi-val.sm{font-size:1.1rem}
+.kpi-sub{font-size:10px;color:rgba(200,220,250,.4);margin-top:.3rem}
+.kpi-badge{display:inline-block;font-family:var(--fm);font-size:9px;padding:2px 8px;border-radius:4px;margin-top:.4rem;font-weight:500}
+.kb-green{background:var(--green-l);color:var(--green)}
+.kb-red{background:var(--red-l);color:var(--red)}
+.kb-amber{background:var(--amber-l);color:var(--amber)}
+.kb-purple{background:var(--purple-l);color:var(--purple)}
+
+/* ─ Page sections ─ */
+.sec{padding:5.5rem 2.5rem}
+.sec-inner{max-width:var(--max);margin:0 auto}
+.sec-eyebrow{font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}
+.sec-h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;line-height:1.25;margin-bottom:.4rem}
+.sec-rule{width:40px;height:2px;background:var(--gold);margin:.8rem 0 1.4rem;border-radius:1px}
+.sec-lead{font-size:13px;line-height:1.9;max-width:700px;margin-bottom:1.8rem}
+
+.sec-light{background:#F0F4FF}
+.sec-light .sec-eyebrow{color:var(--purple)}
+.sec-light .sec-h2{color:var(--navy)}
+.sec-light .sec-lead{color:var(--gray)}
+
+.sec-dark{background:var(--navy-d)}
+.sec-dark .sec-eyebrow{color:var(--gold)}
+.sec-dark .sec-h2{color:var(--white)}
+.sec-dark .sec-lead{color:rgba(200,220,250,.6)}
+
+.sec-mid{background:#0B1128}
+.sec-mid .sec-eyebrow{color:var(--teal)}
+.sec-mid .sec-h2{color:var(--white)}
+.sec-mid .sec-lead{color:rgba(200,220,250,.6)}
+
+.sec-white{background:var(--white)}
+.sec-white .sec-eyebrow{color:var(--teal)}
+.sec-white .sec-h2{color:var(--navy)}
+.sec-white .sec-lead{color:var(--gray)}
+
+/* ─ Gold divider ─ */
+.g-rule{width:100%;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:2.5rem 0;border:none;opacity:.4}
+
+/* ─ Note box ─ */
+.note{font-size:10.5px;color:var(--gray);line-height:1.75;padding:.7rem 1rem;background:#F8FAFC;border-radius:6px;border-left:3px solid var(--border);margin-top:1rem}
+.note-dark{background:rgba(200,220,250,.04);border-left:3px solid rgba(200,220,250,.1);color:rgba(200,220,250,.4)}
+
+/* ─ Waterfall ─ */
+.wf{display:flex;flex-direction:column;gap:.55rem;margin:1.5rem 0}
+.wf-row{display:grid;grid-template-columns:230px 1fr 100px;align-items:center;gap:.8rem}
+.wf-lbl{font-size:12px;color:var(--text)}
+.wf-lbl.bold{font-weight:700;color:var(--navy)}
+.wf-lbl.dim{color:var(--gray);font-size:11px}
+.wf-bar-bg{background:#EEF2FF;border-radius:4px;height:30px;overflow:hidden;position:relative}
+.wf-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 .7rem;font-family:var(--fm);font-size:11px;color:#fff;font-weight:500;white-space:nowrap;min-width:20px;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.wf-num{font-family:var(--fm);font-size:11px;font-weight:500;text-align:right}
+.wf-sep{border-top:2px dashed var(--border);margin:.4rem 0;grid-column:1/-1}
+
+/* ─ Scenario cards ─ */
+.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.4rem}
+.sc-card{border-radius:14px;border:1.5px solid var(--border);overflow:hidden;background:var(--white);transition:transform .2s,box-shadow .2s}
+.sc-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(15,21,58,.12)}
+.sc-head{padding:.7rem 1rem;font-size:11px;font-weight:700;color:#fff}
+.sc-body{padding:1.1rem}
+.sc-scenario{font-size:10px;color:var(--gray);margin-bottom:.3rem;font-family:var(--fm)}
+.sc-price{font-family:var(--fs);font-size:1.35rem;font-weight:700;margin:.15rem 0}
+.sc-ret{font-size:11px;font-weight:700;margin-bottom:.5rem;font-family:var(--fm)}
+.sc-note{font-size:11px;color:var(--gray);line-height:1.65}
+
+/* ─ Score bars ─ */
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.4rem}
+.score-card{background:var(--white);border-radius:14px;padding:1.6rem 1.8rem;border:1px solid var(--border);box-shadow:0 2px 12px rgba(15,21,58,.06)}
+.score-card.dark{background:rgba(255,255,255,.03);border:1px solid rgba(200,220,250,.1)}
+.score-hd{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.score-hd.light{color:var(--white)}
+.score-item{margin-bottom:.9rem}
+.score-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:.25rem}
+.score-key{color:var(--gray)}
+.score-val{font-weight:700;font-family:var(--fm)}
+.bar-bg{height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden}
+.bar-bg.dark{background:rgba(200,220,250,.08)}
+.bar-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+
+/* ─ Big comparison table ─ */
+.tbl-wrap{overflow-x:auto;margin-top:1.5rem;border-radius:12px;box-shadow:0 4px 24px rgba(15,21,58,.12)}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:900px}
+thead tr:first-child th{background:var(--navy);color:var(--white);padding:.75rem .9rem;font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+thead tr:first-child th:first-child{text-align:left;border-radius:12px 0 0 0}
+thead tr:last-child th{background:#253070;color:var(--ice);padding:.5rem .9rem;font-size:10px;font-weight:500}
+thead tr:last-child th:first-child{text-align:left;font-style:italic;color:rgba(200,220,250,.5)}
+tbody tr:nth-child(even){background:#F8FAFC}
+tbody tr:hover{background:#EEF2FF}
+tbody td{padding:.6rem .9rem;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;line-height:1.5}
+tbody td:first-child{text-align:left;font-weight:600;color:var(--slate);font-size:11px;padding-left:1rem}
+.td-k{background:#EEF2FF !important;font-weight:700;color:var(--navy)}
+.td-g{color:var(--green);font-weight:600}
+.td-r{color:var(--red)}
+.td-a{color:var(--amber)}
+.td-b{color:var(--gray)}
+tfoot td{background:var(--navy-d);color:var(--white);padding:.7rem .9rem;font-weight:700;text-align:center;font-family:var(--fm);font-size:11px}
+tfoot td:first-child{text-align:left;border-radius:0 0 0 12px}
+tfoot td:last-child{border-radius:0 0 12px 0}
+.td-winner{background:var(--purple) !important;font-size:12px;letter-spacing:.04em}
+
+/* ─ 5-axis radar as CSS bar chart ─ */
+.radar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.4rem}
+.radar-card{background:rgba(255,255,255,.03);border:1px solid rgba(200,220,250,.1);border-radius:14px;padding:1.4rem 1.5rem}
+.rc-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:.2rem;font-family:var(--fs)}
+.rc-ticker{font-family:var(--fm);font-size:9px;color:rgba(200,220,250,.4);letter-spacing:.1em;margin-bottom:1.1rem}
+.rc-axis{margin-bottom:.7rem}
+.rc-axis-lbl{display:flex;justify-content:space-between;font-size:10px;margin-bottom:.2rem}
+.rc-axis-name{color:rgba(200,220,250,.6)}
+.rc-axis-score{font-family:var(--fm);font-weight:500}
+.rc-bar-bg{height:5px;background:rgba(200,220,250,.08);border-radius:3px;overflow:hidden}
+.rc-bar{height:100%;border-radius:3px;transition:width 1.3s ease}
+.rc-total{margin-top:1rem;padding-top:.8rem;border-top:1px solid rgba(200,220,250,.08);display:flex;justify-content:space-between;align-items:center}
+.rc-total-lbl{font-size:10px;color:rgba(200,220,250,.45);font-family:var(--fm);text-transform:uppercase;letter-spacing:.08em}
+.rc-total-val{font-family:var(--fs);font-size:1.4rem;font-weight:700}
+
+/* ─ Timeline ─ */
+.tl{display:flex;flex-direction:column;gap:0;margin-top:1.4rem}
+.tl-item{display:grid;grid-template-columns:90px 20px 1fr;gap:0 1rem;position:relative}
+.tl-date{font-family:var(--fm);font-size:10px;text-align:right;padding-top:.2rem;line-height:1.4;color:var(--slate)}
+.tl-dot-wrap{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:.2rem;border:2px solid var(--white)}
+.tl-line{flex:1;width:2px;background:var(--border);margin:.3rem 0}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding:0 0 1.8rem 0}
+.tl-tag{display:inline-block;font-family:var(--fm);font-size:8.5px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;margin-bottom:.35rem;font-weight:500}
+.tl-txt{font-size:12.5px;color:var(--slate);line-height:1.8}
+.tl-txt strong{color:var(--navy)}
+
+/* ─ Action checklist ─ */
+.action-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1.4rem}
+.al-item{display:flex;gap:.9rem;background:var(--slate-l);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem;align-items:flex-start;transition:border-color .2s,box-shadow .2s}
+.al-item:hover{border-color:var(--purple);box-shadow:0 4px 16px rgba(109,40,217,.08)}
+.al-icon{flex-shrink:0;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
+.al-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.al-desc{font-size:11.5px;color:var(--gray);line-height:1.75}
+.al-stars{font-size:12px;letter-spacing:1px;margin-left:.4rem}
+
+/* ─ Infrastructure section ─ */
+.infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.4rem}
+.infra-card{background:var(--white);border-radius:14px;padding:1.4rem;border:1px solid var(--border);border-top:4px solid var(--border)}
+.ic-icon{font-size:1.8rem;margin-bottom:.6rem}
+.ic-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.ic-body{font-size:11.5px;color:var(--gray);line-height:1.75}
+.ic-tag{display:inline-block;margin-top:.6rem;font-family:var(--fm);font-size:9px;padding:2px 8px;border-radius:4px}
+
+/* ─ Impact cards ─ */
+.impact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.4rem}
+.impact-card{border-radius:12px;border:1px solid rgba(200,220,250,.1);background:rgba(255,255,255,.03);padding:1.2rem 1.3rem;border-left:4px solid var(--border)}
+.imp-dir{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;font-weight:700;margin-bottom:.3rem}
+.imp-name{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.imp-body{font-size:11px;color:var(--gray);line-height:1.7}
+
+/* ─ Summary tiles ─ */
+.sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:1.5rem}
+.sum-tile{background:rgba(255,255,255,.03);border:1px solid rgba(200,220,250,.1);border-radius:14px;padding:1.5rem 1.3rem;transition:border-color .25s}
+.sum-tile:hover{border-color:rgba(200,220,250,.25)}
+.st-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:15px;font-weight:700;margin-bottom:.8rem}
+.st-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:.5rem;font-family:var(--fs)}
+.st-body{font-size:11px;color:rgba(200,220,250,.55);line-height:1.8}
+
+/* ─ Footer ─ */
+.footer{background:#06080F;padding:2.5rem;text-align:center;border-top:1px solid rgba(200,220,250,.06)}
+.footer-txt{font-size:10px;color:rgba(200,220,250,.28);line-height:1.9;max-width:820px;margin:0 auto}
+.footer-mark{font-family:var(--fm);font-size:9px;color:rgba(200,220,250,.15);letter-spacing:.15em;margin-top:.8rem}
+
+/* ─ Tab ─ */
+.tabs{display:flex;gap:.4rem;margin-bottom:1.8rem;flex-wrap:wrap}
+.tab-btn{padding:.45rem 1.1rem;border-radius:6px;border:1px solid var(--border);background:var(--white);font-size:11px;font-weight:600;cursor:pointer;color:var(--gray);transition:all .18s;font-family:var(--fn)}
+.tab-btn:hover{background:#EEF2FF}
+.tab-btn.on{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.tab-content{display:none}
+.tab-content.on{display:block}
+
+/* Tabs for dark bg */
+.tabs-dark .tab-btn{background:rgba(255,255,255,.04);border-color:rgba(200,220,250,.1);color:rgba(200,220,250,.5)}
+.tabs-dark .tab-btn:hover{background:rgba(255,255,255,.08)}
+.tabs-dark .tab-btn.on{background:var(--purple);color:var(--white);border-color:var(--purple)}
+
+/* ─ Pulse dot ─ */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite;vertical-align:middle;margin-right:4px}
+
+/* ─ Fade-up ─ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;animation:fadeUp .65s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}
+
+/* ─ Responsive ─ */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .sc-grid{grid-template-columns:1fr 1fr}
+  .score-grid,.radar-grid,.infra-grid,.impact-row,.sum-grid{grid-template-columns:1fr}
+  .hdr-nav{display:none}
+  .wf-row{grid-template-columns:160px 1fr 80px}
+}
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="hdr">
+  <div class="hdr-logo">📊 Railway Equity Deep Dive — 9045</div>
+  <nav class="hdr-nav">
+    <a href="#top">概要</a>
+    <a href="#realestate">不動産含み益</a>
+    <a href="#compare">私鉄比較</a>
+    <a href="#activist">アクティビスト</a>
+    <a href="#infra">投資の妙味</a>
+    <a href="#scenario">シナリオ</a>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="fu d1">
+      <div class="hero-eyebrow">Private Railway Valuation Deep Dive 2026</div>
+      <h1 class="hero-h1">私鉄セクターで<br><em>最も割安に潜む</em><br>実態純資産</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-lead">京阪ホールディングス（9045）を軸に、主要私鉄5社の不動産含み益・整理難易度・アクティビスト参入可能性・中長期投資効率・インフラ投資の妙味を多角的に比較分析する。有価証券報告書・決算短信・大量保有報告書・公示地価データに基づく試算。</p>
+      <div class="hero-chips">
+        <span class="chip ch-navy">2026/05/05 時点</span>
+        <span class="chip ch-gold">有価証券報告書ベース</span>
+        <span class="chip ch-teal">地価データ参照</span>
+        <span class="chip ch-red">投資勧誘非該当・試算値</span>
+      </div>
+    </div>
+
+    <div class="kpi-grid fu d2">
+      <div class="kpi hi">
+        <div class="kpi-lbl">京阪HD 現在株価</div>
+        <div class="kpi-val">3,306<span style="font-size:.9rem;font-weight:400;color:rgba(200,220,250,.4)"> 円</span></div>
+        <div class="kpi-sub">時価総額 約3,530億円</div>
+        <div class="kpi-badge kb-amber">PBR 1.01倍</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">帳簿BPS（2025/03）</div>
+        <div class="kpi-val">3,264<span style="font-size:.9rem;font-weight:400;color:rgba(200,220,250,.4)"> 円</span></div>
+        <div class="kpi-sub">ROE 9.3%（私鉄トップ水準）</div>
+        <div class="kpi-badge kb-green">配当97円 / 2.9%</div>
+      </div>
+      <div class="kpi pu">
+        <div class="kpi-lbl">推定実態BPS（中央値）</div>
+        <div class="kpi-val sm">4,900〜6,000<span style="font-size:.75rem"> 円</span></div>
+        <div class="kpi-sub">土地含み益・税引後加算後試算</div>
+        <div class="kpi-badge kb-purple">対現株価 ▲27〜45%割安</div>
+      </div>
+      <div class="kpi te">
+        <div class="kpi-lbl">不動産含み益推計（中央値）</div>
+        <div class="kpi-val sm">5,000〜7,000<span style="font-size:.75rem"> 億円</span></div>
+        <div class="kpi-sub">土地簿価約2,325億円（2024年12月末）</div>
+        <div class="kpi-badge" style="background:var(--teal-l);color:var(--teal)">時価総額の1.4〜2.0倍</div>
+      </div>
+      <div class="kpi" style="grid-column:1/-1;border-color:rgba(109,40,217,.25);background:rgba(109,40,217,.04)">
+        <div class="kpi-lbl"><span class="dot" style="background:#A78BFA"></span>アクティビスト注目度</div>
+        <div style="font-size:12px;color:rgba(200,220,250,.65);line-height:1.8;margin-top:.2rem">
+          野村絢氏（村上世彰氏長女）が業界再編期待で私鉄セクターに注目。京急（2025/2）→フジメディア（2025/4）→髙島屋（2025/9）と連続参入中。不動産大阪・京都集中・ROE高・時価総額適正で<strong style="color:#C4B5FD">京阪HDが関西私鉄ターゲット最有力</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S1: 不動産含み益 ═══ -->
+<section class="sec sec-light" id="realestate">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">① Real Estate Hidden Value</div>
+    <h2 class="sec-h2">不動産含み益の大きさ<br>─ 帳簿に眠る3,500〜5,800億円の隠れた価値</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">有形固定資産の土地簿価約2,325億円（2024年12月末）は取得時の原価で計上。大阪・京都の沿線商業地は数十年前比で2〜4倍超に上昇しており、帳簿に現れない巨大な含み益が積み上がっている。</p>
+
+    <!-- Waterfall -->
+    <div class="wf">
+      <div class="wf-row">
+        <div class="wf-lbl bold">帳簿BPS（2025/03）</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:54%;background:var(--navy)">3,264円</div></div>
+        <div class="wf-num" style="color:var(--navy)">3,264円</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-lbl dim">＋土地含み益（保守 ×1.5倍）税引後</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:22%;background:var(--teal)">+980〜1,400円</div></div>
+        <div class="wf-num" style="color:var(--teal)">+約1,200円</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-lbl dim">＋土地含み益（中央 ×2.5〜3.5倍）税引後</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:42%;background:var(--purple)">+1,600〜2,700円</div></div>
+        <div class="wf-num" style="color:var(--purple)">+約2,200円</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-lbl dim">＋投資有価証券含み益（上場株）税引後</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:1%;background:var(--gold);min-width:52px">+35円</div></div>
+        <div class="wf-num" style="color:var(--gold)">+35円</div>
+      </div>
+      <div class="wf-sep"></div>
+      <div class="wf-row">
+        <div class="wf-lbl bold" style="color:var(--purple)">実態BPS推計（中央値）</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:90%;background:linear-gradient(90deg,var(--navy),var(--purple))">4,900〜6,000円</div></div>
+        <div class="wf-num" style="color:var(--purple);font-weight:700">〜5,500円</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-lbl" style="color:var(--red);font-weight:700">▼ 現在株価（買付基準）</div>
+        <div class="wf-bar-bg"><div class="wf-bar" style="width:55%;background:var(--red)">3,306円 ← 実態BPS比▲27〜45%割安</div></div>
+        <div class="wf-num" style="color:var(--red);font-weight:700">3,306円</div>
+      </div>
+    </div>
+    <div class="note">土地含み益は時価簿価比×1.5〜3.5倍で試算し実効税率30%控除。発行済株数1.07億株で除算。鉄道用地（路線・駅舎）は換金困難な場合が多い点に留意。沿線商業地・開発済み物件が流動化の主対象。</div>
+
+    <!-- Asset Map -->
+    <hr class="g-rule">
+    <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:1rem">主要不動産資産の地理・グレード別分布</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem">
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--purple)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--purple);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">S</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">大阪・淀屋橋〜中之島</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">淀屋橋ステーションワン（2025年6月商業開業）、Nakanoshima Qross（中之島）。最高グレードの都心商業地。売却・REIT化ともに即応可能。</div>
+        <div class="kpi-badge kb-purple" style="margin-top:.5rem">換金容易性 ◎ 最高</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--teal)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--teal);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">A+</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">京都・三条〜祇園四条</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">三条駅周辺プロジェクト（開発中）、祇園四条エリア。インバウンド需要で地価上昇継続。外資系ホテル・ラグジュアリーテナント需要が旺盛。</div>
+        <div class="kpi-badge" style="background:var(--teal-l);color:var(--teal);margin-top:.5rem">換金容易性 ◎ 高</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--teal)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--teal);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">A</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">大阪・天満橋〜北浜</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">天満橋・北浜エリアのオフィスビル群、京阪建物OMM。大阪ビジネス地区の中核。空室率低く、インカム収入も安定。</div>
+        <div class="kpi-badge" style="background:var(--teal-l);color:var(--teal);margin-top:.5rem">換金容易性 ○ 高</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--gold)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--gold);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">A</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">大阪・枚方</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">ステーションヒル枚方、枚方モール、KUZUHA MALL。大型ショッピングモールが安定収益。沿線人口密集地で再開発余地あり。</div>
+        <div class="kpi-badge kb-amber" style="margin-top:.5rem">換金容易性 ○ 中〜高</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--green)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--green);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">S</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">東京・虎ノ門</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">虎ノ門ヒルズ ビジネスタワー（区分所有）。プレミアム都心物件。流動性最高水準で売却益確定も容易。</div>
+        <div class="kpi-badge kb-green" style="margin-top:.5rem">換金容易性 ◎ 最高</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border);border-left:5px solid var(--gray)">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
+          <span style="background:var(--gray);color:#fff;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;font-family:var(--fm)">B</span>
+          <span style="font-size:12.5px;font-weight:700;color:var(--navy)">その他（鉄道用地等）</span>
+        </div>
+        <div style="font-size:11px;color:var(--gray);line-height:1.7">路線敷地・駅舎・変電所等。帳簿の大部分を占めるが換金困難。長期保有前提。ただし廃線・縮小区間で用途転換・売却の余地もある。</div>
+        <div class="kpi-badge" style="background:#F1F5F9;color:var(--gray);margin-top:.5rem">換金容易性 △ 低</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:1rem">Sグレード＝プレミアム換金性、Aグレード＝高流動性。J-REIT化はSとAグレードが主な対象。帳簿の過半は鉄道用地（Bグレード）であり即時換金不可だが、賃貸・開発事業を通じた収益化は継続中。</div>
+  </div>
+</section>
+
+<!-- ═══ S2: 主要私鉄比較 ═══ -->
+<section class="sec sec-dark" id="compare">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">② Major Railway Comparison</div>
+    <h2 class="sec-h2" style="color:var(--white)">主要私鉄5社 多軸比較<br>─ 5つの観点で見る京阪HDの構造的優位</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">不動産含み益の大きさ・整理難易度・アクティビスト参入可能性・中長期投資効率・インフラ投資の妙味、の5軸で主要私鉄5社を定量・定性評価。各軸100点満点で採点し総合スコアで順位付け。</p>
+
+    <div class="tabs tabs-dark">
+      <button class="tab-btn on" onclick="sw(this,'tc-radar')">5軸レーダー</button>
+      <button class="tab-btn" onclick="sw(this,'tc-table')">詳細比較表</button>
+    </div>
+
+    <!-- Radar view -->
+    <div id="tc-radar" class="tab-content on">
+      <div class="radar-grid">
+        <!-- Keihan -->
+        <div class="radar-card" style="border-color:rgba(232,160,32,.35);background:rgba(232,160,32,.04)">
+          <div class="rc-name">京阪ホールディングス</div>
+          <div class="rc-ticker">9045 ／ 東証プライム ／ 現在株価 3,306円</div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">① 不動産含み益の大きさ</span><span class="rc-axis-score" style="color:var(--gold)">88</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:88%;background:var(--gold)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">② 不動産整理の実現性</span><span class="rc-axis-score" style="color:#4ADE80">95</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:95%;background:var(--green)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">③ アクティビスト参入可能性</span><span class="rc-axis-score" style="color:#C4B5FD">87</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:87%;background:var(--purple-b)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">④ 中長期投資効率</span><span class="rc-axis-score" style="color:#67E8F9">85</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:85%;background:var(--teal)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">⑤ インフラ投資の妙味</span><span class="rc-axis-score" style="color:#FCA5A5">82</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:82%;background:#E11D48"></div></div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-lbl">総合スコア</div>
+            <div class="rc-total-val" style="color:var(--gold)">437<span style="font-size:.85rem;color:rgba(200,220,250,.4)">/500</span></div>
+          </div>
+        </div>
+
+        <!-- Kintetsu -->
+        <div class="radar-card">
+          <div class="rc-name">近鉄グループHD</div>
+          <div class="rc-ticker">9041 ／ 東証プライム ／ 時価総額 約6,270億円</div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">① 不動産含み益の大きさ</span><span class="rc-axis-score" style="color:var(--gold)">92</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:92%;background:var(--gold)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">② 不動産整理の実現性</span><span class="rc-axis-score" style="color:#FCA5A5">22</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:22%;background:var(--red)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">③ アクティビスト参入可能性</span><span class="rc-axis-score" style="color:#FCA5A5">28</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:28%;background:var(--red)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">④ 中長期投資効率</span><span class="rc-axis-score" style="color:#FCD34D">48</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:48%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">⑤ インフラ投資の妙味</span><span class="rc-axis-score" style="color:#67E8F9">78</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:78%;background:var(--teal)"></div></div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-lbl">総合スコア</div>
+            <div class="rc-total-val" style="color:rgba(200,220,250,.5)">268<span style="font-size:.85rem;color:rgba(200,220,250,.3)">/500</span></div>
+          </div>
+        </div>
+
+        <!-- Meitetsu -->
+        <div class="radar-card">
+          <div class="rc-name">名古屋鉄道</div>
+          <div class="rc-ticker">9048 ／ 東証プライム ／ 時価総額 約3,900億円</div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">① 不動産含み益の大きさ</span><span class="rc-axis-score" style="color:var(--gold)">72</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:72%;background:var(--gold)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">② 不動産整理の実現性</span><span class="rc-axis-score" style="color:#FCD34D">38</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:38%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">③ アクティビスト参入可能性</span><span class="rc-axis-score" style="color:#FCD34D">52</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:52%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">④ 中長期投資効率</span><span class="rc-axis-score" style="color:#FCD34D">55</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:55%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">⑤ インフラ投資の妙味</span><span class="rc-axis-score" style="color:#67E8F9">72</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:72%;background:var(--teal)"></div></div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-lbl">総合スコア</div>
+            <div class="rc-total-val" style="color:rgba(200,220,250,.5)">289<span style="font-size:.85rem;color:rgba(200,220,250,.3)">/500</span></div>
+          </div>
+        </div>
+
+        <!-- Hankyu Hanshin -->
+        <div class="radar-card">
+          <div class="rc-name">阪急阪神ホールディングス</div>
+          <div class="rc-ticker">9042 ／ 東証プライム ／ 時価総額 約1.0兆円</div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">① 不動産含み益の大きさ</span><span class="rc-axis-score" style="color:var(--gold)">85</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:85%;background:var(--gold)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">② 不動産整理の実現性</span><span class="rc-axis-score" style="color:#FCD34D">55</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:55%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">③ アクティビスト参入可能性</span><span class="rc-axis-score" style="color:#FCA5A5">25</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:25%;background:var(--red)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">④ 中長期投資効率</span><span class="rc-axis-score" style="color:#4ADE80">68</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:68%;background:var(--green)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">⑤ インフラ投資の妙味</span><span class="rc-axis-score" style="color:#67E8F9">80</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:80%;background:var(--teal)"></div></div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-lbl">総合スコア</div>
+            <div class="rc-total-val" style="color:rgba(200,220,250,.5)">313<span style="font-size:.85rem;color:rgba(200,220,250,.3)">/500</span></div>
+          </div>
+        </div>
+
+        <!-- Sotetsu -->
+        <div class="radar-card">
+          <div class="rc-name">相鉄ホールディングス</div>
+          <div class="rc-ticker">9003 ／ 東証プライム ／ 時価総額 約2,800億円</div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">① 不動産含み益の大きさ</span><span class="rc-axis-score" style="color:var(--gold)">55</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:55%;background:var(--gold)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">② 不動産整理の実現性</span><span class="rc-axis-score" style="color:#4ADE80">68</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:68%;background:var(--green)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">③ アクティビスト参入可能性</span><span class="rc-axis-score" style="color:#FCD34D">62</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:62%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">④ 中長期投資効率</span><span class="rc-axis-score" style="color:#FCD34D">60</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:60%;background:var(--amber)"></div></div>
+          </div>
+          <div class="rc-axis">
+            <div class="rc-axis-lbl"><span class="rc-axis-name">⑤ インフラ投資の妙味</span><span class="rc-axis-score" style="color:#67E8F9">65</span></div>
+            <div class="rc-bar-bg"><div class="rc-bar" style="width:65%;background:var(--teal)"></div></div>
+          </div>
+          <div class="rc-total">
+            <div class="rc-total-lbl">総合スコア</div>
+            <div class="rc-total-val" style="color:rgba(200,220,250,.5)">310<span style="font-size:.85rem;color:rgba(200,220,250,.3)">/500</span></div>
+          </div>
+        </div>
+
+        <!-- Summary ─ why Keihan -->
+        <div class="radar-card" style="border-color:rgba(232,160,32,.3);background:rgba(232,160,32,.04);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem">Key Insight</div>
+          <div style="font-family:var(--fs);font-size:1.15rem;font-weight:700;color:var(--white);margin-bottom:.9rem;line-height:1.4">京阪HDが総合トップの<br>決定的な理由</div>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+            <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:.7rem .9rem">
+              <div style="font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:.2rem">「含み益の大きさ」だけなら近鉄が上</div>
+              <div style="font-size:11px;color:rgba(200,220,250,.6);line-height:1.6">しかし近鉄は大阪〜名古屋〜伊勢〜奈良と広域分散し、農村・観光地が多く換金困難。財務も1.26兆円の有利子負債で重い。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:.7rem .9rem">
+              <div style="font-size:10.5px;font-weight:700;color:#4ADE80;margin-bottom:.2rem">京阪は「実現性」で圧倒的に優位</div>
+              <div style="font-size:11px;color:rgba(200,220,250,.6);line-height:1.6">大阪・京都の都心商業地に85%超集中。J-REIT化・売却・外資への転売いずれも実現シナリオが描きやすい唯一の私鉄。</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:.7rem .9rem">
+              <div style="font-size:10.5px;font-weight:700;color:#C4B5FD;margin-bottom:.2rem">ROE 9.3%×時価総額3,530億円の妙</div>
+              <div style="font-size:11px;color:rgba(200,220,250,.6);line-height:1.6">阪急阪神HDは規模が大きすぎ（時価総額1兆円超）でアクティビスト参入コストが過大。京阪は「ちょうどいいサイズ感」。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note note-dark" style="margin-top:1.2rem">各スコアは①不動産含み益規模（時価総額比・絶対額）、②売却・REIT化難易度・地理的流動性、③時価総額の参入適正規模・財務健全性・ROE、④PBR・配当・BPS成長、⑤路線独占度・インフラ代替不可能性 を総合して定性・定量評価した独自試算スコアです。</div>
+    </div>
+
+    <!-- Table view -->
+    <div id="tc-table" class="tab-content">
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;width:180px">評価軸</th>
+              <th style="background:#4C1D95">京阪HD（9045）</th>
+              <th>近鉄GHD（9041）</th>
+              <th>名鉄（9048）</th>
+              <th>阪急阪神（9042）</th>
+              <th>相鉄HD（9003）</th>
+            </tr>
+            <tr>
+              <th style="text-align:left">現在株価 / 時価総額</th>
+              <th style="background:#4C1D95">3,306円 / 3,530億円</th>
+              <th>— / 6,270億円</th>
+              <th>— / 3,900億円</th>
+              <th>— / 約1.0兆円</th>
+              <th>— / 2,800億円</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 不動産含み益規模（推計）</td>
+              <td class="td-k td-g">5,000〜7,000億円<br><small>時価総額の1.4〜2.0倍</small></td>
+              <td class="td-g">8,000〜12,000億円超<br><small>時価総額の1.3〜1.9倍</small></td>
+              <td class="td-a">3,000〜5,000億円<br><small>名古屋駅周辺が中心</small></td>
+              <td class="td-g">8,000〜15,000億円超<br><small>梅田・神戸が主力</small></td>
+              <td class="td-b">1,500〜2,500億円<br><small>横浜・湘南エリア</small></td>
+            </tr>
+            <tr>
+              <td>② 不動産の地理的集中度</td>
+              <td class="td-k td-g">◎ 大阪・京都に85%超集中<br><small>都心商業地主体</small></td>
+              <td class="td-r">× 大阪〜名古屋〜伊勢〜奈良<br><small>農村・観光地多数</small></td>
+              <td class="td-a">△ 名古屋中心<br><small>東海エリア広域</small></td>
+              <td class="td-a">△ 梅田・神戸<br><small>梅田再開発が複雑</small></td>
+              <td class="td-a">○ 横浜・神奈川<br><small>エリア集中だが規模小</small></td>
+            </tr>
+            <tr>
+              <td>② 不動産整理の実現性（売却・REIT化）</td>
+              <td class="td-k td-g">◎ 売却・J-REIT化ともに容易<br><small>都心商業地は買い手豊富</small></td>
+              <td class="td-r">× 極めて困難<br><small>農村・観光地は買い手限定</small></td>
+              <td class="td-r">× 名駅再開発中で制約<br><small>有利子負債膨張リスク</small></td>
+              <td class="td-a">△ 梅田は高価値<br><small>阪急百貨店等の絡みが複雑</small></td>
+              <td class="td-a">○ 横浜・湘南は換金可<br><small>絶対規模が小さい</small></td>
+            </tr>
+            <tr>
+              <td>② 有利子負債（財務リスク）</td>
+              <td class="td-k td-a">○ 約4,300億円<br><small>対総資産56%・管理可能</small></td>
+              <td class="td-r">× 1.26兆円<br><small>最大のリスク要因</small></td>
+              <td class="td-r">× 7,000億円超<br><small>名駅投資で増加中</small></td>
+              <td class="td-r">× 約1.2兆円<br><small>エンタメ事業も重い</small></td>
+              <td class="td-a">○ 3,000億円程度</td>
+            </tr>
+            <tr>
+              <td>③ 時価総額（参入適正規模）</td>
+              <td class="td-k td-g">◎ 3,530億円<br><small>5%取得≒177億円</small></td>
+              <td class="td-r">× 6,270億円<br><small>5%取得≒314億円</small></td>
+              <td class="td-a">○ 3,900億円<br><small>参入可能だがやや大</small></td>
+              <td class="td-r">× 約1.0兆円<br><small>5%取得≒500億円超</small></td>
+              <td class="td-a">△ 2,800億円<br><small>小さく影響力確保が難</small></td>
+            </tr>
+            <tr>
+              <td>③ ROE / 財務収益性</td>
+              <td class="td-k td-g">◎ ROE 9.3%<br><small>私鉄トップ水準</small></td>
+              <td class="td-a">△ ROE 8.3%<br><small>物流事業が重い</small></td>
+              <td class="td-a">△ ROE 8.5%<br><small>名駅投資で低下懸念</small></td>
+              <td class="td-a">△ ROE 8%前後<br><small>エンタメ利益率低下</small></td>
+              <td class="td-a">○ ROE 改善中</td>
+            </tr>
+            <tr>
+              <td>④ PBR / 株価の割安度</td>
+              <td class="td-k td-a">△ PBR 1.01倍<br><small>帳簿BPS対比ほぼ適正</small></td>
+              <td class="td-a">△ PBR 約0.85倍<br><small>財務リスクで評価低</small></td>
+              <td class="td-a">△ PBR 約0.9倍<br><small>名駅再開発期待込み</small></td>
+              <td class="td-a">△ PBR 約1.0倍<br><small>規模に比し割安感薄い</small></td>
+              <td class="td-g">○ PBR 0.8倍台<br><small>割安水準</small></td>
+            </tr>
+            <tr>
+              <td>④ 配当利回り / 株主還元</td>
+              <td class="td-k td-g">○ 2.9%（97円）<br><small>ROE改善で増配余地</small></td>
+              <td class="td-a">△ 約1.5%<br><small>有利子負債で余力乏</small></td>
+              <td class="td-a">△ 約1.8%<br><small>投資フェーズで抑制</small></td>
+              <td class="td-a">△ 約1.5%<br><small>規模の割に低い</small></td>
+              <td class="td-a">○ 約2.5%<br><small>還元意識高い</small></td>
+            </tr>
+            <tr>
+              <td>⑤ 路線独占度（参入障壁）</td>
+              <td class="td-k td-g">◎ 大阪〜京都〜滋賀<br><small>沿線で代替路線なし</small></td>
+              <td class="td-g">◎ 大阪〜名古屋<br><small>近鉄特急は独占路線</small></td>
+              <td class="td-g">◎ 名古屋〜岐阜等<br><small>東海エリアで強固</small></td>
+              <td class="td-g">◎ 梅田〜神戸・宝塚<br><small>関西最強の路線網</small></td>
+              <td class="td-a">○ 横浜〜海老名<br><small>JR・小田急と競合</small></td>
+            </tr>
+            <tr>
+              <td>⑤ IR誘致・万博等の特需</td>
+              <td class="td-k td-g">◎ 夢洲IR・大阪万博<br><small>直接受益・中之島沿線</small></td>
+              <td class="td-g">◎ 大阪・名古屋<br><small>IR・リニア両方の恩恵</small></td>
+              <td class="td-g">◎ リニア中央新幹線<br><small>名古屋駅の地位向上</small></td>
+              <td class="td-a">△ 大阪IR（梅田隣接）<br><small>間接的恩恵</small></td>
+              <td class="td-b">× 特になし<br><small>カタリスト乏しい</small></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>5軸総合スコア（/500点）</td>
+              <td class="td-winner">437点 🥇 第1位</td>
+              <td>268点 第5位</td>
+              <td>289点 第4位</td>
+              <td>313点 第3位</td>
+              <td>310点 第2位</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="note note-dark" style="margin-top:1rem">各社2025年3月期末または直近開示ベースの試算・定性評価。スコアは独自算定。アクティビストの実際の参入を示唆するものではありません。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S3: アクティビスト ═══ -->
+<section class="sec sec-white" id="activist">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">③ Activist Scenario</div>
+    <h2 class="sec-h2">アクティビスト参入の可能性<br>─ 野村絢氏モデルと京阪HDが最有力の根拠</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">野村絢氏（村上世彰氏長女）率いるシティインデックスイレブンスは2025〜2026年にかけて「不動産含み益×ガバナンス改善」を旗印に連続アクションを展開。関西私鉄は次の主要ターゲットと市場でみなされており、その中で京阪HDが「実現性」「規模感」「資産の質」の3点で最有力と判断される。</p>
+
+    <!-- Timeline -->
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-date">2006年</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--purple);border-color:#fff"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--purple-l);color:var(--purple)">先例・原型</span>
+          <div class="tl-txt">旧村上ファンドが阪神電鉄株を大量取得。<strong>阪急阪神HDとの経営統合（合併）の引き金となった。</strong>私鉄セクターへのアクティビズムが業界再編に直結した最大の先例。株価は600円→1,050円（+75%・TOBプレミアム）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025年2月</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--green);border-color:#fff"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--green-l);color:var(--green)">確認済み</span>
+          <div class="tl-txt"><strong>シティインデックスイレブンスが京浜急行電鉄（9006）株5.11%を取得。</strong>大量保有報告書の目的欄：「純投資・重要提案行為等を行うため」。首都圏私鉄への参入として市場に衝撃。報告前後3ヵ月で株価+31%（1,220円→1,600円台）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025年4月</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--green);border-color:#fff"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--green-l);color:var(--green)">確認済み</span>
+          <div class="tl-txt"><strong>野村絢氏がフジ・メディアHD（4676）の筆頭株主に（8.7%取得）。</strong>不動産含み益・ガバナンス改革を同時提起。「コンテンツ会社ではなく不動産会社として再評価すべき」との論点を市場に提示。参入後株価+64%（1,100円→1,800円台）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025年9月</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--green);border-color:#fff"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--green-l);color:var(--green)">確認済み</span>
+          <div class="tl-txt"><strong>野村絢氏が髙島屋（8233）株を5.32%取得。</strong>商業不動産保有企業への連続アクション。売却・REIT化余地の大きいビル型商業施設への着目が鮮明に。株価+35%。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026年3月</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--green);border-color:#fff"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--green-l);color:var(--green)">確認済み</span>
+          <div class="tl-txt">京急株について変更報告書を提出（<strong>保有継続・重要提案行為等の目的を維持</strong>）。首都圏私鉄への長期的関与姿勢が続いており、次の標的として関西私鉄が有力視される。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">今後（期待値）</div>
+        <div class="tl-dot-wrap"><div class="tl-dot" style="background:var(--amber);border-color:#fff"></div></div>
+        <div class="tl-content">
+          <span class="tl-tag" style="background:var(--amber-l);color:var(--amber)">市場の期待値・推測</span>
+          <div class="tl-txt">業界再編・不動産含み益顕在化テーマで<strong>関西私鉄への参入が市場で注目されている。</strong>京急（首都圏）の次の舞台として大阪・京都が浮上。5軸評価で圧倒的スコアを示す京阪HDが最有力候補。野村絢氏自身が業界再編期待での私鉄投資に言及したとの市場コメントあり。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action checklist -->
+    <hr class="g-rule">
+    <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:1rem">想定「要求アクション」と実現性評価</div>
+    <div class="action-list">
+      <div class="al-item">
+        <div class="al-icon" style="background:var(--green-l)">🏢</div>
+        <div>
+          <div class="al-title">① 沿線商業地の段階的売却・J-REIT化 <span class="al-stars" style="color:var(--amber)">★★★★★</span></div>
+          <div class="al-desc">淀屋橋ステーションワン・枚方モール・北浜オフィス群など都市部商業地は売却先・買い手が豊富。西武HD（シティグループモデル）の先例でJ-REITへの現物出資による含み益顕在化が最も即効性が高い。1物件売却で時価総額を大きく動かすインパクトがある。</div>
+        </div>
+      </div>
+      <div class="al-item">
+        <div class="al-icon" style="background:var(--purple-l)">💰</div>
+        <div>
+          <div class="al-title">② 自社株買い大幅拡大・増配（DOE 4%以上への引き上げ） <span class="al-stars" style="color:var(--amber)">★★★★</span><span style="color:#CBD5E1">★</span></div>
+          <div class="al-desc">純利益282億円・EPS 263円に対しBPS 3,264円。配当性向36%でも余裕がある。ROE 9.3%を維持しつつ現配当97円（2.9%）からの増配＋自社株買いはアクティビストが株主総会で可決しやすい最も訴求力のある提案。</div>
+        </div>
+      </div>
+      <div class="al-item">
+        <div class="al-icon" style="background:var(--teal-l)">🎰</div>
+        <div>
+          <div class="al-title">③ 中之島IR誘致関連不動産の先行流動化 <span class="al-stars" style="color:var(--amber)">★★★★</span><span style="color:#CBD5E1">★</span></div>
+          <div class="al-desc">夢洲IRが開業すれば中之島〜淀屋橋エリアの地価は一段上昇。開業前の仕込み・転売タイミングも選択肢。京阪は中之島線の沿線事業者として直接受益者。IR開業前後での不動産価値の先取り・流動化がアクティビストの提案ロジックとして説得力を持つ。</div>
+        </div>
+      </div>
+      <div class="al-item">
+        <div class="al-icon" style="background:var(--amber-l)">🔀</div>
+        <div>
+          <div class="al-title">④ 業界再編（阪急阪神HDとの経営統合）提案 <span class="al-stars" style="color:var(--amber)">★★</span><span style="color:#CBD5E1">★★★</span></div>
+          <div class="al-desc">2006年阪急阪神合併の再現シナリオ。実現には規制・政治的課題が多く短期実現は困難だが、提案するだけで株価が動く「圧力カード」として有効。関西の私鉄2社統合は路線重複の少なさからも合理性を説明しやすい。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Impact -->
+    <hr class="g-rule">
+    <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:1rem">アクティビスト参入時の株価インパクト試算（先行事例ベース）</div>
+    <div class="impact-row">
+      <div class="impact-card" style="background:var(--slate-l);border:1px solid var(--border);border-left:4px solid var(--teal)">
+        <div class="imp-dir" style="color:var(--teal)">MINIMUM CASE</div>
+        <div class="imp-name" style="color:var(--navy)">報告書提出のみ</div>
+        <div style="font-family:var(--fs);font-size:1.8rem;font-weight:700;color:var(--teal);margin:.3rem 0">4,000〜4,300円</div>
+        <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--teal);margin-bottom:.5rem">+21〜30%</div>
+        <div class="imp-body" style="color:var(--gray)">京急の+31%を参考。大量保有報告書が市場に与える最低限の評価切り上げ。含み益の再認識が株価修正を促す。</div>
+      </div>
+      <div class="impact-card" style="background:var(--slate-l);border:1px solid var(--border);border-left:4px solid var(--purple)">
+        <div class="imp-dir" style="color:var(--purple)">BASE CASE</div>
+        <div class="imp-name" style="color:var(--navy)">一部不動産売却＋増配</div>
+        <div style="font-family:var(--fs);font-size:1.8rem;font-weight:700;color:var(--purple);margin:.3rem 0">4,500〜5,200円</div>
+        <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--purple);margin-bottom:.5rem">+36〜57%</div>
+        <div class="imp-body" style="color:var(--gray)">自社株買い拡大＋淀屋橋等の流動化発表。PBR 1.3〜1.5倍への収れん。配当累計を加えた5年総リターン。</div>
+      </div>
+      <div class="impact-card" style="background:var(--slate-l);border:1px solid var(--border);border-left:4px solid var(--navy)">
+        <div class="imp-dir" style="color:var(--navy)">BULL CASE</div>
+        <div class="imp-name" style="color:var(--navy)">業界再編TOBシナリオ</div>
+        <div style="font-family:var(--fs);font-size:1.8rem;font-weight:700;color:var(--navy);margin:.3rem 0">5,500〜7,000円</div>
+        <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:.5rem">+66〜112%</div>
+        <div class="imp-body" style="color:var(--gray)">阪急阪神合併（TOB+75%）の先例。実態BPS中央値5,000〜6,000円に対するプレミアム付き買収が実現した場合の上限。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S4: インフラ投資の妙味 ═══ -->
+<section class="sec sec-mid" id="infra">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">④⑤ Infrastructure Investment Thesis</div>
+    <h2 class="sec-h2">インフラ関連での私鉄投資の妙味<br>─ 中長期目線で京阪HDを保有する6つの根拠</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">私鉄株は「鉄道インフラ」「不動産」「観光・ホテル」の3事業が絡み合う複合インフラ企業。単なる交通事業者ではなく、日本のインフレ・都市再生・インバウンド需要の中長期受益者として再評価される局面にある。</p>
+
+    <div class="infra-grid" style="background:transparent">
+      <div class="infra-card" style="border-top-color:var(--gold)">
+        <div class="ic-icon">🛡️</div>
+        <div class="ic-title">代替不可能な物理インフラ</div>
+        <div class="ic-body">鉄道免許は国が付与し、線路・駅は物理的に新規参入不可能なインフラ。大阪〜京都〜滋賀間の沿線独占は100年以上続く競争上の「堀（モート）」。EV・自動運転が普及しても大都市の大量輸送は鉄道が不可欠。</div>
+        <span class="ic-tag" style="background:var(--gold-l);color:var(--amber)">参入障壁 ◎ 最高</span>
+      </div>
+      <div class="infra-card" style="border-top-color:var(--teal)">
+        <div class="ic-icon">🏙️</div>
+        <div class="ic-title">インフレ連動型の実物資産</div>
+        <div class="ic-body">土地・不動産はインフレとともに価値上昇。大阪・京都商業地の公示地価は2025年も上昇継続。日銀の金融正常化で「モノ（実物資産）>カネ（現金）」の時代に、沿線不動産の含み益拡大が株主価値に直結する。</div>
+        <span class="ic-tag" style="background:var(--teal-l);color:var(--teal)">インフレ耐性 ◎</span>
+      </div>
+      <div class="infra-card" style="border-top-color:var(--purple-b)">
+        <div class="ic-icon">🎌</div>
+        <div class="ic-title">インバウンド・万博・IR誘致の長期恩恵</div>
+        <div class="ic-body">訪日外国人数は2025年以降も拡大傾向。大阪万博（2025年）・夢洲IR誘致は京阪沿線に直接の需要増をもたらす。京都・大阪を結ぶ観光ルートの主要鉄道として、インバウンド需要の中長期受益者。</div>
+        <span class="ic-tag" style="background:var(--purple-l);color:var(--purple)">カタリスト ◎ 複数</span>
+      </div>
+      <div class="infra-card" style="border-top-color:var(--green)">
+        <div class="ic-icon">📊</div>
+        <div class="ic-title">ROE 9.3%×低PBRの組み合わせ</div>
+        <div class="ic-body">ROE 9.3%は私鉄トップ水準で、JPX400の基準を十分クリア。PBR 1.01倍は帳簿BPS対比でほぼ適正だが、実態BPS（4,900〜6,000円）を基準にすれば▲27〜45%の割安。ROE改善継続×PBR切り上がりが株価上昇の複合エンジン。</div>
+        <span class="ic-tag" style="background:var(--green-l);color:var(--green)">ROE × バリュー ◎</span>
+      </div>
+      <div class="infra-card" style="border-top-color:var(--amber)">
+        <div class="ic-icon">💴</div>
+        <div class="ic-title">定期収入×賃貸収入の安定ストック</div>
+        <div class="ic-body">沿線住民・通勤定期契約者は景気に関わらず安定した顧客基盤。不動産賃貸収入も長期契約主体でストック性が高い。配当97円（利回り2.9%）を受け取りながら「待てる」株の典型。金利上昇の有利子負債影響は注視が必要。</div>
+        <span class="ic-tag" style="background:var(--amber-l);color:var(--amber)">ストック性 ★★★★</span>
+      </div>
+      <div class="infra-card" style="border-top-color:var(--navy)">
+        <div class="ic-icon">⚡</div>
+        <div class="ic-title">鉄道のGX・エネルギー転換への対応</div>
+        <div class="ic-body">鉄道は自動車・航空と比べCO₂排出量が格段に少ない低炭素インフラ。GXトレンドで「脱炭素移動手段」として鉄道の社会的価値が再評価される動き。ESG投資家の買い入りが中長期の株価サポート要因になりうる。</div>
+        <span class="ic-tag" style="background:#EEF2FF;color:var(--navy)">ESG・GX 追い風</span>
+      </div>
+    </div>
+
+    <!-- インフレ影響表 -->
+    <hr class="g-rule" style="opacity:.2">
+    <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:1.1rem">インフレ・金利局面が各事業セグメントに与える影響</div>
+    <div class="impact-row">
+      <div class="impact-card" style="border-left-color:var(--green)">
+        <div class="imp-dir" style="color:#4ADE80">◎ 強い追い風</div>
+        <div class="imp-name">不動産地価の上昇</div>
+        <div class="imp-body">大阪・京都商業地は2025年も継続上昇。IR誘致（夢洲）で沿線価値が追加上昇。土地含み益がインフレ連動で拡大し実態BPSが切り上がる。</div>
+      </div>
+      <div class="impact-card" style="border-left-color:var(--green)">
+        <div class="imp-dir" style="color:#4ADE80">◎ 追い風</div>
+        <div class="imp-name">インバウンド・観光需要</div>
+        <div class="imp-body">訪日客増でホテル・百貨店・レジャーが好調。2025年3Q累計で運輸・ホテルセグメントは増収。京都・大阪は訪日消費の主要目的地。</div>
+      </div>
+      <div class="impact-card" style="border-left-color:var(--amber)">
+        <div class="imp-dir" style="color:#FCD34D">△ 注意</div>
+        <div class="imp-name">金利上昇（日銀正常化）</div>
+        <div class="imp-body">有利子負債約4,300億円。金利1%上昇で年+43億円の利払い増（試算）。有利子負債削減や固定金利化でヘッジを進めているかが鍵。近鉄（1.26兆円）よりは格段に軽い。</div>
+      </div>
+    </div>
+    <div class="impact-row" style="margin-top:1rem">
+      <div class="impact-card" style="border-left-color:var(--red)">
+        <div class="imp-dir" style="color:#FCA5A5">▲ 逆風</div>
+        <div class="imp-name">人件費・建設コスト上昇</div>
+        <div class="imp-body">インフレによる人件費・電力料金・建設費の上昇で費用増。設備投資（CAPEX）が拡大中。ただし料金改定（鉄道運賃・施設使用料）で一定転嫁可能。</div>
+      </div>
+      <div class="impact-card" style="border-left-color:var(--green)">
+        <div class="imp-dir" style="color:#4ADE80">◎ 強い追い風</div>
+        <div class="imp-name">実態BPS（物価調整後）</div>
+        <div class="imp-body">インフレが続けば土地含み益は3〜4倍倍率での評価も現実的に。IR誘致確定シナリオでは実態BPS（強気）5,500〜7,000円超に上方修正の可能性。</div>
+      </div>
+      <div class="impact-card" style="border-left-color:var(--teal)">
+        <div class="imp-dir" style="color:#2DD4BF">○ 中立〜追い風</div>
+        <div class="imp-name">鉄道運賃改定</div>
+        <div class="imp-body">インフレを背景に2023〜2025年に鉄道各社が相次いで運賃改定。京阪も2024年に値上げを実施し収益改善に寄与。料金転嫁力がインフレ耐性の証明。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S5: シナリオ分析 ═══ -->
+<section class="sec sec-light" id="scenario">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">⑤ Investment Scenarios</div>
+    <h2 class="sec-h2">中長期目線での投資効率<br>─ 4シナリオ別・3〜5年保有期待値</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-lead">現在株価3,306円（2026/05/05時点）での買付を前提に、4シナリオの5年後株価と累積配当を試算。ベースケースで総リターン36〜51%、アクティビスト参入複合シナリオでは80〜112%も射程に入る。</p>
+
+    <div class="sc-grid">
+      <div class="sc-card">
+        <div class="sc-head" style="background:#64748B">① 現状維持シナリオ</div>
+        <div class="sc-body">
+          <div class="sc-scenario">PBR 1.0倍継続 / 特段のカタリストなし</div>
+          <div class="sc-price" style="color:#334155">3,600〜3,800円</div>
+          <div class="sc-ret" style="color:#64748B">5年総リターン +18〜31%</div>
+          <div class="sc-note">配当のみ（累積97円×5年≒485円）。株価はBPS成長（年+3〜5%）に沿って緩やかに上昇。カタリストなしでも下値は限定的。</div>
+        </div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-head" style="background:var(--teal)">② ベースケース</div>
+        <div class="sc-body">
+          <div class="sc-scenario">PBR 1.1〜1.2倍 / IR誘致・淀屋橋・増配</div>
+          <div class="sc-price" style="color:var(--teal)">4,200〜4,500円</div>
+          <div class="sc-ret" style="color:var(--teal)">5年総リターン +36〜51%</div>
+          <div class="sc-note">IR誘致・淀屋橋ステーションワン開業効果・増配がPBR切り上げを促す。ROE改善継続でJPX400の組み入れ比率上昇も期待。</div>
+        </div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-head" style="background:var(--navy)">③ BPS収れんケース</div>
+        <div class="sc-body">
+          <div class="sc-scenario">PBR 1.3〜1.5倍 / 含み益顕在化</div>
+          <div class="sc-price" style="color:var(--navy)">4,800〜5,200円</div>
+          <div class="sc-ret" style="color:var(--navy)">5年総リターン +55〜74%</div>
+          <div class="sc-note">不動産の一部売却・J-REIT化が実現し実態BPSが市場に認識される。ROE 10%超への改善・自社株買い拡大が株主価値を押し上げ。</div>
+        </div>
+      </div>
+      <div class="sc-card" style="border-color:var(--purple)">
+        <div class="sc-head" style="background:var(--purple)">④ アクティビスト複合シナリオ</div>
+        <div class="sc-body">
+          <div class="sc-scenario">含み益顕在化×業界再編×IR</div>
+          <div class="sc-price" style="color:var(--purple)">5,500〜7,000円</div>
+          <div class="sc-ret" style="color:var(--purple)">5年総リターン +66〜112%</div>
+          <div class="sc-note">大量保有報告書提出→不動産売却提案→業界再編TOBシナリオ。阪急阪神合併の先例（+75%）をモデルにした最大期待値。配当受取りながら待てる株。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score bars summary -->
+    <hr class="g-rule" style="margin-top:2.5rem">
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-hd">京阪HD 投資魅力度スコア</div>
+        <div class="score-item">
+          <div class="score-row"><span class="score-key">不動産含み益（時価総額比）</span><span class="score-val" style="color:var(--gold)">88/100</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:88%;background:var(--gold)"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-row"><span class="score-key">不動産整理の実現性</span><span class="score-val" style="color:var(--green)">95/100</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:95%;background:var(--green)"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-row"><span class="score-key">アクティビスト参入可能性</span><span class="score-val" style="color:var(--purple)">87/100</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:87%;background:var(--purple)"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-row"><span class="score-key">中長期投資効率</span><span class="score-val" style="color:var(--teal)">85/100</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:85%;background:var(--teal)"></div></div>
+        </div>
+        <div class="score-item">
+          <div class="score-row"><span class="score-key">インフラ投資の妙味</span><span class="score-val" style="color:var(--red)">82/100</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width:82%;background:var(--red)"></div></div>
+        </div>
+        <div style="margin-top:1.1rem;padding-top:.9rem;border-top:2px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;color:var(--gray);font-family:var(--fm)">5軸総合スコア</span>
+          <span style="font-family:var(--fs);font-size:1.7rem;font-weight:700;color:var(--navy)">437<span style="font-size:.9rem;color:var(--gray)">/500</span></span>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-hd">主要ダウンサイドリスク</div>
+        <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:.3rem">
+          <div style="display:flex;gap:.7rem;align-items:flex-start;padding:.75rem;background:#FEF2F2;border-radius:8px">
+            <span style="font-size:1rem;flex-shrink:0">⚠️</span>
+            <div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--red);margin-bottom:.2rem">金利上昇（日銀正常化）</div>
+              <div style="font-size:11px;color:var(--gray);line-height:1.6">有利子負債約4,300億円。金利1%上昇で年+43億円の利払い増（試算）。固定金利比率と借り換えリスクを要注視。</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:.7rem;align-items:flex-start;padding:.75rem;background:#FEF3C7;border-radius:8px">
+            <span style="font-size:1rem;flex-shrink:0">📉</span>
+            <div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--amber);margin-bottom:.2rem">関西地価の急落・IR誘致頓挫</div>
+              <div style="font-size:11px;color:var(--gray);line-height:1.6">含み益の前提となる地価が下落するシナリオ。夢洲IR計画の遅延・中止は沿線価値の再評価を阻害する最大リスク。</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:.7rem;align-items:flex-start;padding:.75rem;background:#F0F9FF;border-radius:8px">
+            <span style="font-size:1rem;flex-shrink:0">🚶</span>
+            <div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--navy);margin-bottom:.2rem">鉄道利用者の構造的減少</div>
+              <div style="font-size:11px;color:var(--gray);line-height:1.6">少子化・テレワーク定着で定期収入が長期的に減少するリスク。ホテル・不動産収益でのカバーが求められる。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SUMMARY ═══ -->
+<section class="sec sec-dark">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Summary</div>
+    <h2 class="sec-h2">まとめ ─ 5軸で見る京阪HDの<br>投資論拠と複合カタリスト</h2>
+    <div class="sec-rule"></div>
+    <div class="sum-grid">
+      <div class="sum-tile" style="border-color:rgba(13,148,136,.3)">
+        <div class="st-num" style="background:var(--teal);color:#fff">①</div>
+        <div class="st-title">不動産含み益</div>
+        <div class="st-body">土地簿価2,325億円→時価推計5,000〜7,000億円超。1株税引後1,600〜2,700円の隠れた価値。大阪・京都の都心集中で整理容易性スコア95/100。近鉄（絶対額大だが整理困難）を圧倒するバランスの良さ。</div>
+      </div>
+      <div class="sum-tile" style="border-color:rgba(109,40,217,.3)">
+        <div class="st-num" style="background:var(--purple-b);color:#fff">②</div>
+        <div class="st-title">アクティビスト参入</div>
+        <div class="st-body">野村絢氏が業界再編期待で私鉄注目。不動産の大阪・京都集中＋時価総額3,530億円の適正規模＋ROE 9.3%で、近鉄・名鉄・阪急阪神より圧倒的に参入・アクション実現性が高い。5軸スコア87/100。</div>
+      </div>
+      <div class="sum-tile" style="border-color:rgba(232,160,32,.3)">
+        <div class="st-num" style="background:var(--gold);color:var(--navy-d)">③</div>
+        <div class="st-title">中長期投資効率</div>
+        <div class="st-body">ベースケース5年総リターン36〜51%。アクティビスト参入×IR誘致×淀屋橋再開発の複合シナリオでは80〜112%も射程。配当97円（2.9%）を受け取りながら待てるポジション。PBR 1.01倍は実態BPS比で割安。</div>
+      </div>
+      <div class="sum-tile" style="border-color:rgba(21,128,61,.3)">
+        <div class="st-num" style="background:var(--green);color:#fff">④</div>
+        <div class="st-title">インフラ投資の妙味</div>
+        <div class="st-body">鉄道免許×沿線独占は代替不可能なモート。インフレ連動型の実物資産保有。インバウンド・万博・IR誘致の複数カタリスト。GX・脱炭素トレンドでの鉄道の再評価。定期・賃貸収入の安定ストック性。</div>
+      </div>
+    </div>
+    <div class="note note-dark" style="margin-top:1.5rem">本レポートは有価証券報告書（第103期 2025年3月期）・決算短信・大量保有報告書（金融庁EDINET）・公示地価データ・各種公開報道等に基づく試算・分析であり、投資を勧誘するものではありません。すべての数値・スコアは独自試算であり、確実性を保証しません。投資の最終判断はご自身の責任で行ってください。</div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-txt">本資料は有価証券報告書（第103期 2025年3月期）・決算短信・大量保有報告書（EDINET）・国土交通省公示地価データ・各種公開報道に基づく試算・分析資料です。不動産時価・含み益・株価推計はすべて試算値であり確実性を保証しません。アクティビスト参入シナリオは市場の期待値・推定であり事実ではありません。投資勧誘を目的としたものではなく、投資の最終判断はご自身の責任で行ってください。</div>
+  <div class="footer-mark">KEIHAN HD (9045) — PRIVATE RAILWAY EQUITY DEEP DIVE — 2026.05.05</div>
+</footer>
+
+<script>
+// Tab switcher
+function sw(btn,id){
+  const parent=btn.closest('.sec-inner')||document.body;
+  parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  parent.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+
+// IntersectionObserver for bar animation
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill,.rc-bar,.wf-bar').forEach(b=>{
+        const w=b.style.width;b.style.width='0';
+        setTimeout(()=>{b.style.width=w},50);
+      });
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.score-card,.radar-card,.wf').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

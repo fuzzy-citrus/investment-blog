@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TBSホールディングス（9401）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 40px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eab0b0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 26px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9401 · 2026.07 作成</p>
+      <h1 class="ht">TBSホールディングス <em>（9401）</em><br>資産バリュー投資分析レポート</h1>
+      <p class="hs">現在株価6,136円／時価総額 約1.0兆円 ＝ 保有する東京エレクトロン株1銘柄の価値とほぼ同額<br>放送・不動産・現金・その他有価証券が"実質タダ"で付いてくる典型的アセット割安株<br>ただし触媒は「買収」ではなく「自助努力（資産流動化・還元）」── TELの株価変動が最大の変数</p>
+    </div>
+    <div class="vb">
+      <div class="vs">資産割安</div>
+      <div class="vt">
+        <strong>PBR約0.85倍・NAV比では大幅ディスカウント</strong><br>
+        BPS7,192円を下回る株価。<br>
+        含み益は簿価に一部反映済み、<br>
+        不動産含み益は簿価計上で"隠れ資産"。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">6,136円</div><div class="ks">時価総額 約1.0兆円</div></div>
+    <div class="kv"><div class="kl">BPS（1株純資産）</div><div class="kn gn">7,192円</div><div class="ks">PBR 約0.85倍</div></div>
+    <div class="kv"><div class="kl">TEL株保有価値</div><div class="kn bl">約1.09兆円</div><div class="ks">時価総額とほぼ同額</div></div>
+    <div class="kv"><div class="kl">純資産合計</div><div class="kn gn">1兆1,354億円</div><div class="ks">自己資本比率 69.3%</div></div>
+    <div class="kv"><div class="kl">予想配当利回り</div><div class="kn am">1.6%</div><div class="ks">配当100円＋自社株買い</div></div>
+    <div class="kv"><div class="kl">3年株主還元</div><div class="kn gn">1,050億円</div><div class="ks">当初比+450億円へ増額</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>資産価値NAV</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>事業・業績</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>割安性評価</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- P1 投資テーゼ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜTBSは"資産割安株"なのか</h2><span class="sb bg-gn">アセットバリュー型</span></div>
+
+  <div class="inf">📌 TBSは「放送局」であると同時に、東京エレクトロンをはじめとする巨額の政策保有株式・赤坂の優良不動産・潤沢な現金を抱える"資産管理会社"の性格が非常に強い。株価評価の主戦場は損益（PER）ではなく、貸借対照表（資産の中身）にある。</div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">テーゼ 01 · 最重要</div>
+      <span class="ci">💎</span>
+      <div class="ct">時価総額 ≒ TEL株1銘柄の価値</div>
+      <div class="cb gn">約1.09兆円</div>
+      <div class="cu">東京エレクトロン 15,112千株（3.28%）</div>
+      <div class="cp">時価総額 約1.0兆円に対し、<strong>保有する東京エレクトロン株だけで約1.09兆円。</strong>放送事業・赤坂不動産・その他上場株・現金が実質"オマケ"で付く構造。純粋な資産バリューの典型例。</div>
+      <div class="tgs"><span class="tg tg-gn">第3位株主</span><span class="tg tg-or">単一銘柄で時価総額超</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">テーゼ 02 · 重要</div>
+      <span class="ci">🏢</span>
+      <div class="ct">赤坂不動産は簿価計上の"隠れ益"</div>
+      <div class="cb am">簿価 &lt; 時価</div>
+      <div class="cu">赤坂サカス・Bizタワー・ACTなど</div>
+      <div class="cp">上場株の含み益は純資産（BPS）に反映済みだが、<strong>不動産は取得原価で計上され含み益がBPSに乗らない。</strong>赤坂一等地の再開発も進行中で、NAVはBPS7,192円をさらに上回る。</div>
+      <div class="tgs"><span class="tg tg-am">取得原価主義</span><span class="tg tg-or">再開発オプション</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">テーゼ 03 · 触媒</div>
+      <span class="ci">🔧</span>
+      <div class="ct">会社自身が"自助努力"を加速中</div>
+      <div class="cb or">1,350億円</div>
+      <div class="cu">投資有価証券の売却枠</div>
+      <div class="cp">東証の資本効率改革を受け、<strong>政策保有株の売却枠を1,350億円へ拡大、株主還元を3年1,050億円へ増額、ToSTNeTで自社株買いも実施。</strong>「塩漬け資産」から「還元原資」への転換が進む。</div>
+      <div class="tgs"><span class="tg tg-gn">PBR1倍改革</span><span class="tg tg-or">還元+自社株買い</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">テーゼ 04</div>
+      <span class="ci" style="font-size:22px">📉</span>
+      <div class="ct" style="color:var(--ink)">下値はBPS・資産価値が支え</div>
+      <div style="font:600 24px/1 var(--mono);color:var(--bl);margin:6px 0 2px">BPS 7,192円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">現在株価は解散価値以下</div>
+      <div class="cp" style="color:var(--ink2)">株価6,136円はBPS（含み益反映後）を約15%下回る。放送事業がゼロ評価でも資産が下値を支える構造。ただし後述の通りBPSは"動く床"である点に注意。</div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">テーゼ 05 · 最大の注意点</div>
+      <span class="ci" style="font-size:22px">⚠️</span>
+      <div class="ct" style="color:var(--ink)">"買収カタリスト"は期待しにくい銘柄</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">① 放送法の壁</strong><br>放送局は外資規制（議決権20%未満）と総務省の認定が必要。第三者による敵対的TOBは事実上不可能。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">② 相互持ち合い</strong><br>MUFG系・東通などが安定株主。TBS自身もWOWOW・RKB等を保有。資本の壁が厚い。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--gn)">③ 触媒は"自助"型</strong><br>だからこそ触媒は外部買収ではなく、会社自身の資産流動化・還元・政策株削減。広済堂型の「TOB待ち」とは性質が異なる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      TBSは<strong style="color:var(--or2)">「東京エレクトロン株＋赤坂不動産＋現金」を放送事業のオマケ付きで簿価以下で買える資産バリュー株。</strong>触媒は買収ではなく東証改革下での自助的な資産流動化と株主還元。上値はNAV収れん、下値は資産が支えるが、<strong style="color:#e09090">資産価値そのものがTELの株価（半導体市況）に強く連動して変動する</strong>点が本質的リスク。
+    </div>
+  </div>
+</div>
+
+<!-- P2 NAV -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資産価値（NAV）── 中身の解剖</h2><span class="sb bg-am">時価総額を上回る資産</span></div>
+
+  <div class="inf">📌 重要な会計上の論点：上場株（その他有価証券）の含み益は税効果控除後で純資産＝BPSに反映済み。したがって「有価証券の含み益」と「PBR割れ」を単純合算すると二重計上になる。真に"簿価に乗っていない隠れ益"は、取得原価で計上される<strong>不動産（賃貸等不動産）</strong>にある。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">東京エレクトロン株</div><div class="mv bl">約1.09兆円</div><div class="ms">15,112千株・3.28%保有</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">純資産合計</div><div class="mv gn">1兆1,354億円</div><div class="ms">上場株含み益は反映済み</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">不動産含み益（隠れ益）</div><div class="mv am">要精査</div><div class="ms">簿価計上・有報の注記参照</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">時価総額</div><div class="mv or">約1.0兆円</div><div class="ms">資産合計を大きく下回る</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">保有資産の3本柱</div>
+      <table class="t">
+        <thead><tr><th>資産</th><th>内容</th><th class="r">評価の扱い</th></tr></thead>
+        <tbody>
+          <tr><td><strong>政策保有株</strong></td><td>東京エレクトロン中心＋多数</td><td class="r"><span class="bge be-bl">時価評価済</span></td></tr>
+          <tr><td><strong>赤坂不動産</strong></td><td>サカス・Bizタワー・ACT・土地</td><td class="r"><span class="bge be-am">簿価（含み益）</span></td></tr>
+          <tr><td><strong>現金・預金</strong></td><td>株式売却収入で厚み増</td><td class="r"><span class="bge be-gn">額面</span></td></tr>
+          <tr><td>関連上場株</td><td>WOWOW・RKB毎日HD・WACUL等</td><td class="r"><span class="bge be-bl">時価評価済</span></td></tr>
+        </tbody>
+      </table>
+      <p class="note">TELの含み益は2026年3月期に投資有価証券が約2,598億円増加した主因。相場変動でBPSが上下する構造。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px">不動産（賃貸等不動産）の見方</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>取得原価で計上：</strong>赤坂の土地・建物は昭和期からの保有分を含み、簿価は時価を大きく下回る。含み益はBPSに反映されない"純粋な隠れ益"。</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>正確な数値は有報で確認：</strong>「賃貸等不動産の時価等」注記に時価・簿価・差額が開示。投資判断前に最新有報の当該注記を必ず参照。</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>再開発オプション：</strong>赤坂エリアの再開発が進めば含み益の顕在化・収益不動産化の余地。ただし時間軸は長い。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">簡易サム・オブ・ザ・パーツ（考え方の枠組み・概算）</div>
+    <table class="t">
+      <thead><tr><th>構成要素</th><th class="r">概算価値</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>東京エレクトロン株</td><td class="r mn hbl">約1.09兆円</td><td style="font-size:11px">時価。半導体市況で大きく変動</td></tr>
+        <tr><td>その他上場株・関連会社株</td><td class="r mn">数百億円規模</td><td style="font-size:11px">WOWOW等。時価評価</td></tr>
+        <tr><td>赤坂不動産（時価ベース）</td><td class="r mn ham">簿価＋含み益</td><td style="font-size:11px">有報注記で要確認</td></tr>
+        <tr><td>現金・その他資産</td><td class="r mn hgn">厚みあり</td><td style="font-size:11px">株式売却で増加</td></tr>
+        <tr><td>放送・コンテンツ事業価値</td><td class="r mn">＋α</td><td style="font-size:11px">営業利益247億→260億計画</td></tr>
+        <tr class="sm"><td>合計 vs 時価総額 約1.0兆円</td><td class="r mn hgn">明確に上回る</td><td style="font-size:11px">＝ アセットディスカウント状態</td></tr>
+      </tbody>
+    </table>
+    <p class="note">※本表は精緻なバリュエーションではなく「時価総額が保有資産の合計を下回っている」という構造を示すための概算。実額は最新の有価証券報告書・決算短信の数値で検証すること。</p>
+  </div>
+
+  <div class="cf-am" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">なぜ資産合計より安く放置されるのか（ホールディングス・ディスカウント）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>①政策保有株は「いつ・いくらで売れるか不透明」②売却益に課税③放送事業の構造的逆風④買収による解消が制度上困難、という理由で市場は資産に恒常的ディスカウントを付ける。これは日本の資産保有型企業に共通の「持ち合い割引」。</div>
+      <div>裏を返せば、<strong>東証改革で政策株削減・還元強化が進むほどディスカウントは縮小余地がある。</strong>会社が実際に売却枠拡大・還元増額・自社株買いを実行に移している点が、広済堂型の「観測待ち」より前進した状態にある。</div>
+    </div>
+  </div>
+</div>
+
+<!-- P3 事業・業績 -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・業績・中期計画</h2><span class="sb bg-or">増収増益・上方修正</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">売上高（26/3期）</div><div class="mv am">4,248億円</div><div class="ms">前期比 +4.5%</div></div>
+    <div class="c mc"><div class="ml">営業利益（26/3期）</div><div class="mv gn">247.5億円</div><div class="ms">前期比 +27.1%</div></div>
+    <div class="c mc"><div class="ml">27/3期 売上計画</div><div class="mv or">4,400億円</div><div class="ms">上方修正</div></div>
+    <div class="c mc"><div class="ml">27/3期 営業利益計画</div><div class="mv gn">260億円</div><div class="ms">目標1年前倒し達成</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">事業ポートフォリオの性格</div>
+      <table class="t">
+        <thead><tr><th>領域</th><th>性格</th><th class="r">評価</th></tr></thead>
+        <tbody>
+          <tr><td><strong>放送・メディア</strong></td><td>広告依存・構造的逆風</td><td class="r"><span class="bge be-rd">縮小圧力</span></td></tr>
+          <tr><td><strong>ライフスタイル</strong></td><td>通販・ライブ・IP等</td><td class="r"><span class="bge be-am">分散</span></td></tr>
+          <tr><td><strong>不動産</strong></td><td>赤坂の賃貸・安定収益</td><td class="r"><span class="bge be-gn">ストック性◎</span></td></tr>
+          <tr><td><strong>コンテンツ/IP</strong></td><td>番組・アニメ・配信</td><td class="r"><span class="bge be-bl">成長期待</span></td></tr>
+        </tbody>
+      </table>
+      <p class="note">VISION2030フェーズ2をアップデートし営業利益目標を1年前倒しで達成。コンテンツIPと不動産が収益の下支え。</p>
+    </div>
+    <div>
+      <div class="c cl-or" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:9px">中期経営計画 VISION2030 の要点</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          2021年策定の10年計画。2030年度までを3フェーズに分割。<br><br>
+          ・営業利益目標を1年前倒し達成 → 27/3期 260億円へ上方修正<br>
+          ・投資有価証券の売却枠を<strong>1,350億円</strong>へ拡大<br>
+          ・成長投資（コンテンツ・IP・海外・新規事業）と株主還元を両輪で強化
+        </div>
+      </div>
+      <div class="c cl-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">ストック性の評価</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">放送広告はフロー型で景気・視聴環境に左右されるが、<strong>赤坂不動産の賃貸収益と配当・売却益がキャッシュフローを安定化。</strong>「事業の成長株」というより「安定キャッシュ＋資産」の性格が強い。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="cf-bl" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">事業性の総括</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">本業（放送）は市場縮小という構造的逆風下にあり、"事業成長ストーリー"で買う銘柄ではない。投資妙味は①資産価値のディスカウント解消、②不動産・IP等の安定ストック収益、③株主還元の厚み、に集約される。営業利益は増益基調だが、その多くは資産（有価証券売却益）や非放送領域の寄与である点を理解して評価すべき。</div>
+  </div>
+</div>
+
+<!-- P4 カタリスト -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">カタリスト分析</h2><span class="sb bg-bl">"自助努力"型が主役</span></div>
+
+  <div class="ok">✅ TBSの再評価トリガーは「誰かが買ってくれる」ではなく「会社が自分で資産を現金化して株主に返す」こと。東証のPBR1倍改革がその背中を押している。実際に売却枠拡大・還元増額・自社株買いが動き出している。</div>
+
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">資本政策の進捗タイムライン</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 bl"></div><div class="tdate">2021年5月</div><div class="ttext"><strong>VISION2030策定：</strong>10年計画スタート。資産活用と成長投資を打ち出す。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">2023〜2025年</div><div class="ttext"><strong>政策保有株の継続売却：</strong>投資有価証券売却益を毎期特別利益に計上（東京エレクトロン株等）。</div></div>
+        <div class="ti"><div class="td2 or"></div><div class="tdate">2025年9月</div><div class="ttext"><strong>特別利益・業績上方修正：</strong>投資有価証券売却益の計上を開示。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年5月</div><div class="ttext"><strong>中計アップデート：</strong>売却枠1,350億円へ拡大、株主還元3年1,050億円（+450億円）へ増額。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年6月</div><div class="ttext"><strong>自社株買い実行：</strong>ToSTNeT-3による自己株式取得を実施。還元姿勢を行動で示す。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:500;margin-bottom:10px">カタリストの分類と現実性</div>
+        <table class="t">
+          <thead><tr><th>触媒</th><th>現実性</th><th>効果</th></tr></thead>
+          <tbody>
+            <tr><td>政策株の追加売却＋還元</td><td><span class="bge be-gn">◎進行中</span></td><td style="font-size:11px">ディスカウント縮小</td></tr>
+            <tr><td>大規模自社株買い</td><td><span class="bge be-gn">◎実施中</span></td><td style="font-size:11px">EPS/BPS向上</td></tr>
+            <tr><td>不動産含み益の顕在化</td><td><span class="bge be-am">△中長期</span></td><td style="font-size:11px">再開発次第</td></tr>
+            <tr><td>アクティビスト圧力</td><td><span class="bge be-am">△可能性</span></td><td style="font-size:11px">資産株ゆえ標的化余地</td></tr>
+            <tr><td>第三者による敵対的TOB</td><td><span class="bge be-rd">✕不可</span></td><td style="font-size:11px">放送法・外資規制</td></tr>
+            <tr><td>MBO</td><td><span class="bge be-rd">✕困難</span></td><td style="font-size:11px">規模・持ち合い</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="c cl-bl">
+        <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">TOB/MBOを期待しない理由</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">放送持株会社は<strong>放送法で外国人議決権が20%未満に制限</strong>され、総務省の認定も要る。加えてMUFG系や東通など安定株主の持ち合いが厚い。<strong>「買収による一発解消」は制度的にほぼ望めない</strong>ため、投資はあくまで自助努力ペースのリレートに賭ける形になる。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P5 割安性 -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">バリュエーション・割安性</h2><span class="sb bg-pu">PBR0.85倍・NAV割れ</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--pu)"><div class="ml">PBR</div><div class="mv" style="color:var(--pu)">約0.85倍</div><div class="ms">BPS7,192円 vs 6,136円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">予想PER</div><div class="mv bl">約20倍</div><div class="ms">EPS予想309円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">実績ROE</div><div class="mv gn">9.9%</div><div class="ms">予想は4.3%（益変動大）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">配当利回り</div><div class="mv am">1.6%</div><div class="ms">配当100円＋自社株買い</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">割安性の論点整理</div>
+      <table class="t">
+        <thead><tr><th>指標</th><th class="r">評価</th><th>コメント</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>PBR（対BPS）</td><td class="r mn hgn">割安</td><td style="font-size:11px">含み益反映後BPSを15%下回る</td></tr>
+          <tr class="hl"><td>NAV（対資産合計）</td><td class="r mn hgn">大幅割安</td><td style="font-size:11px">不動産含み益は未反映</td></tr>
+          <tr><td>PER</td><td class="r mn ham">割高〜中立</td><td style="font-size:11px">利益は資産益で振れる</td></tr>
+          <tr><td>配当利回り</td><td class="r mn ham">低め</td><td style="font-size:11px">還元は自社株買い比重</td></tr>
+          <tr><td>ROE</td><td class="r mn ham">低位</td><td style="font-size:11px">資産を抱える宿命</td></tr>
+        </tbody>
+      </table>
+      <p class="note">「PERは高いがPBR/NAVは割安」という資産株特有の姿。損益指標で高く見えても、資産の裏付けで下値は堅い。</p>
+    </div>
+    <div>
+      <div class="c cf-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">割安と評価できる根拠</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">・時価総額 ≒ TEL株1銘柄。他の全資産が実質タダ<br>・PBR0.85倍＝解散価値以下<br>・不動産含み益はBPSにすら乗っていない<br>・会社が還元・自社株買いを実行中でBPS/EPS改善が続く</div>
+      </div>
+      <div class="c cf-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">割安が"罠"になりうる点</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">・資産の大半がTEL＝半導体市況次第でNAVが大きく上下<br>・持ち合い割引は長年解消されず"万年割安"の歴史<br>・本業（放送）は構造的縮小で成長の牽引力に乏しい</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P6 リスク -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスク分析</h2><span class="sb bg-rd">正直に向き合う</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">① TEL株＝半導体市況リスク（最大）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">資産価値の中核が東京エレクトロン1銘柄。半導体サイクルが下押しすればNAV・BPSが数千億円単位で毀損し、"下値の床"自体が下がる。<strong>BPSは固定された床ではなく、市況で動く床。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">② バリュートラップ（万年割安）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">持ち合い割引は長年解消されてこなかった。改革が掛け声倒れなら、割安のまま何年も放置される可能性。時間が味方とは限らない。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">③ 本業の構造的縮小</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">TV広告市場は長期縮小。配信シフトで競争激化。放送の利益貢献が細れば、資産益への依存度がさらに高まる。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">④ 売却益依存の利益の質</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">近年の利益・上方修正の一部は投資有価証券売却益（特別利益）。本業の実力とは切り分けて見る必要がある。売り切れば一巡する一時的な源泉。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">⑤ 買収カタリストは期待薄</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">放送法・外資規制・持ち合いにより、プレミアム付きTOB/MBOはほぼ望めない。"一発リレート"を狙う投資には不向き。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:8px">⑥ 金利・為替・規制</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">不動産価値は金利感応度あり。放送・コンテンツは規制・権利関係の影響も受ける。マクロ環境の変化に留意。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>政策株の追加売却・売却枠消化の進捗</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自社株買いの規模拡大・継続</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>赤坂再開発・不動産の価値顕在化</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>アクティビスト・大量保有報告の出現</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>還元方針の一段の引き上げ</strong></div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:10px">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>半導体市況・TEL株の大幅下落</strong></div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>放送広告のさらなる悪化</strong></div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>還元・売却方針の後退</strong></div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>大型投資での資産の"使い込み"</strong></div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>改革の掛け声倒れ・進捗停滞</strong></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P7 最終評価 -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終投資判断</h2><span class="sb bg-or">2026.07 時点</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">対BPSディスカウント</div><div class="mv gn">約▲15%</div><div class="ms">6,136円 vs BPS7,192円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">TEL株/時価総額</div><div class="mv bl">約105%</div><div class="ms">1銘柄で時価総額超</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">主たる触媒</div><div class="mv am">自助努力</div><div class="ms">売却・還元・自社株買い</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">最大リスク</div><div class="mv rd">TEL連動</div><div class="ms">資産価値が市況で変動</div></div>
+  </div>
+
+  <div class="sc" style="margin-bottom:18px">
+    <div class="sc-c"><div class="sc-l br">弱気</div><div class="sc-p br">半導体下落</div><div class="sc-s">TEL株下落でNAV毀損</div><div class="sc-i">BPSの床が下がる</div><div class="sc-i">割安でも株価軟調</div><div class="sc-i">改革停滞なら万年割安</div></div>
+    <div class="sc-c"><div class="sc-l bs">中立</div><div class="sc-p bs">現状維持</div><div class="sc-s">緩やかな還元継続</div><div class="sc-i">PBR0.8〜0.9倍で推移</div><div class="sc-i">配当＋自社株買いを享受</div><div class="sc-i">大化けはしにくい</div></div>
+    <div class="sc-c"><div class="sc-l bu">強気</div><div class="sc-p bu">改革加速</div><div class="sc-s">売却・還元が本格化</div><div class="sc-i">PBR1倍回帰＝BPS超え</div><div class="sc-i">7,000円台後半〜</div><div class="sc-i">TEL株堅調が前提</div></div>
+    <div class="sc-c"><div class="sc-l bm">上振れ</div><div class="sc-p bm">資産顕在化</div><div class="sc-s">不動産再開発＋アクティビスト</div><div class="sc-i">NAV再評価</div><div class="sc-i">含み益の一部が株価に</div><div class="sc-i">時間軸は長い</div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 資産で守り、自助でリレートを待つ</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">投資妙味の本質</div>
+        <div class="conc-b">「東京エレクトロン株＋赤坂不動産＋現金」を、放送事業のオマケ付きで<strong>簿価以下（PBR0.85倍）で買える</strong>資産バリュー。不動産含み益はBPSにすら乗らない隠れ益。東証改革下で会社が実際に売却枠拡大・還元増額・自社株買いを行動に移しており、<strong>広済堂型の"観測待ち"より一歩進んだ自助リレート局面。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">6,136円の評価</div>
+        <div class="conc-b">解散価値以下で下値の説明はつきやすいが、<strong>資産の中核がTEL1銘柄のため"床"自体が半導体市況で動く。</strong>PERは高く見え、本業は縮小基調、還元利回りも配当ベースでは低め。"割安だが劇的な上値カタリストは乏しい"バランス型。急がず、資産価値を評価軸に淡々と。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">留意点と規律</div>
+        <div class="conc-b">①TEL株・半導体市況を最重要指標として監視 ②還元・政策株削減の"実行進捗"を継続チェック ③本業の実力とは切り分けて利益の質を見る。<strong>買収カタリストは期待せず、自助努力ペースのリレートを前提に期待値を設定する</strong>のが現実的。</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        TBSは<strong style="color:var(--or2)">資産価値がしっかり下値を支える割安株</strong>で、東証改革下の自助的な資産流動化・株主還元がリレート触媒。ただし<strong style="color:#e09090">資産の大半が東京エレクトロン株＝半導体市況に強く連動</strong>し、買収による一発解消は制度上望めない。"守りの資産バリュー＋緩やかなリレート待ち"として捉えるのが妥当。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されており、特定銘柄の売買を推奨するものではありません。投資判断はご自身の責任において行ってください。<br>
+  数値は概算・作成時点のものを含み、正確な最新値は有価証券報告書・決算短信（EDINET/TDNET）でご確認ください。<br>
+  Data: TBSホールディングス 2026年3月期決算短信・中期経営計画VISION2030 / EDINET有価証券報告書 / IRBank / 各社報道 · 2026.07
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

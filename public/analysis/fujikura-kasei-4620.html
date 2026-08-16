@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>藤倉化成（4620）投資分析</title>
+<style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f1efe7;--bg2:#ffffff;--bg3:#e2ded2;--bg4:#f7f6f1;
+  --ink:#0b0c10;--ink2:#1e1f27;--ink3:#4d4e5b;
+  --gn:#125733;--gn2:#1f9c56;--gn3:#d6efe1;
+  --rd:#9e1f1f;--rd3:#fadada;
+  --am:#734508;--am2:#c9821a;--am3:#fdeccd;
+  --bl:#0f2a6e;--bl2:#1e48b8;--bl3:#d4e1f7;
+  --or:#a8540c;--or2:#f08a22;--or3:#fde7cc;
+  --pu:#6b1160;--pu2:#b23a99;--pu3:#f2d5f2;
+  --rule:rgba(11,12,16,.2);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:#f1efe7;color:#0b0c10;line-height:1.8;-webkit-font-smoothing:antialiased}
+
+/* HERO */
+.hero{background:#1e1f27;padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:rgba(246,245,239,.55);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 'Space Grotesk',sans-serif;letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:#f08a22;font-style:normal}
+.hs{font-size:12.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vb{background:rgba(35,144,82,.22);border:1px solid rgba(60,190,110,.55);border-radius:6px;padding:18px 24px;min-width:230px}
+.vs{font:700 48px/1 'JetBrains Mono',monospace;color:#1f9c56;margin-bottom:8px}
+.vt{font-size:12.5px;color:rgba(246,245,239,.82);line-height:1.85}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:#0b0c10;padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:600 9px/1 'JetBrains Mono',monospace;letter-spacing:.13em;color:rgba(246,245,239,.55);text-transform:uppercase;margin-bottom:5px}
+.kn{font:700 17px/1 'JetBrains Mono',monospace;color:rgba(246,245,239,.95)}
+.gn{color:#5ee38f}.rd{color:#ff9b9b}.am{color:#ffab4d}.bl{color:#8fc0ff}
+.ks{font-size:10px;color:rgba(246,245,239,.5);margin-top:4px;line-height:1.45}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:#0b0c10;display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:700 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.05em;color:rgba(246,245,239,.62);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.95)}
+.tb.on{color:#fff;border-bottom-color:#f08a22;border-bottom-width:3px}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid #0b0c10}
+.sn{font:700 11px/1 'JetBrains Mono',monospace;color:#a8540c;letter-spacing:.12em}
+.st{font:700 22px/1.15 'Space Grotesk',sans-serif;letter-spacing:-.018em;color:#0b0c10}
+.sb{font:700 10.5px/1 'JetBrains Mono',monospace;padding:5px 11px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:#d6efe1;color:#125733}.bg-am{background:#fdeccd;color:#734508}
+.bg-or{background:#fde7cc;color:#a8540c}.bg-rd{background:#fadada;color:#9e1f1f}
+.bg-bl{background:#d4e1f7;color:#0f2a6e}.bg-pu{background:#f2d5f2;color:#6b1160}
+
+/* CARDS */
+.c{background:#ffffff;border:1px solid #e2ded2;border-radius:6px;padding:18px 22px;box-shadow:0 1px 3px rgba(11,12,16,.06)}
+.cdk{background:#1e1f27;border-radius:6px;padding:22px 28px}
+.cl-gn{border-left:5px solid #125733}.cl-am{border-left:5px solid #734508}
+.cl-or{border-left:5px solid #a8540c}.cl-bl{border-left:5px solid #0f2a6e}
+.cl-rd{border-left:5px solid #9e1f1f}.cl-pu{border-left:5px solid #6b1160}
+.cf-gn{background:#e4f6ec;border:1.5px solid #6cc494}
+.cf-am{background:#fdeccd;border:1.5px solid #e0aa42}
+.cf-bl{background:#d4e1f7;border:1.5px solid #6d92dd}
+.cf-or{background:#fde7cc;border:1.5px solid #e5a044}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:700 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:.1em;color:#1e1f27;margin-bottom:7px}
+.mv{font:700 24px/1 'JetBrains Mono',monospace;margin-bottom:6px;color:#0b0c10}
+.mv.gn{color:#125733}.mv.rd{color:#9e1f1f}.mv.am{color:#734508}.mv.or{color:#a8540c}.mv.bl{color:#0f2a6e}
+.ms{font-size:12px;color:#1e1f27;line-height:1.7}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:13.5px;background:#ffffff;border:1px solid #e2ded2;border-radius:6px;overflow:hidden}
+.t th{font:700 11px/1.35 'Noto Sans JP',sans-serif;letter-spacing:.02em;color:#fff;background:#1e1f27;padding:9px 11px;text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:9px 11px;border-bottom:1px solid rgba(11,12,16,.2);vertical-align:top;color:#0b0c10}
+.t tr:nth-child(even) td{background:#f7f6f1}
+.t tr:hover td{background:#ecebe2}
+.t tr.hl td{background:#d6efe1;box-shadow:inset 3px 0 0 #1f9c56}.t tr.sm td{background:#e2ded2;font-weight:700}
+.hgn{color:#125733;font-weight:700}.hrd{color:#9e1f1f;font-weight:700}
+.ham{color:#734508;font-weight:700}.hor{color:#a8540c;font-weight:700}.hbl{color:#0f2a6e;font-weight:700}
+.hpu{color:#6b1160;font-weight:700}
+.mn{font-family:'JetBrains Mono',monospace}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);background:#ffffff;border:1px solid #e2ded2;border-radius:6px;overflow:hidden;margin:16px 0}
+.sc-c{padding:17px 18px;border-right:1px solid rgba(11,12,16,.2)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.06em;padding-bottom:8px;margin-bottom:10px;border-bottom:3px solid}
+.sc-l.br{border-color:#9e1f1f;color:#9e1f1f}.sc-l.bs{border-color:#734508;color:#734508}
+.sc-l.bu{border-color:#125733;color:#125733}.sc-l.bm{border-color:#0f2a6e;color:#0f2a6e}
+.sc-p{font:700 28px/1 'JetBrains Mono',monospace;margin-bottom:4px}
+.sc-p.br{color:#9e1f1f}.sc-p.bs{color:#734508}.sc-p.bu{color:#125733}.sc-p.bm{color:#0f2a6e}
+.sc-s{font-size:12px;color:#1e1f27;font-weight:600;margin-bottom:10px}
+.sc-i{font-size:12.5px;padding:6px 0;border-bottom:1px solid rgba(11,12,16,.2);color:#0b0c10;line-height:1.6}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:#4d4e5b}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:#22232c;border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px}
+.cc-gn::before{background:#1f9c56}.cc-or::before{background:#f08a22}.cc-am::before{background:#c9821a}
+.cc-bl::before{background:#1e48b8}.cc-pu::before{background:#b23a99}.cc-rd::before{background:#9e1f1f}
+.cn{font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.62);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 16px/1.3 'Space Grotesk',sans-serif;color:#fff;margin-bottom:8px}
+.cb{font:700 34px/1 'JetBrains Mono',monospace;margin-bottom:4px}
+.cb.gn{color:#5ee38f}.cb.or{color:#ffa24d}.cb.am{color:#ffc061}.cb.bl{color:#8fc0ff}.cb.pu{color:#e9a3dd}
+.cu{font:600 10.5px/1.4 'JetBrains Mono',monospace;color:rgba(246,245,239,.62);margin-bottom:11px}
+.cp{font-size:12.5px;color:rgba(246,245,239,.82);line-height:1.8}
+.cp strong{color:#fff}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:700 9.5px/1 'JetBrains Mono',monospace;padding:4px 9px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.32);color:#7fe8a8}.tg-or{background:rgba(196,104,20,.32);color:#ffab5c}
+.tg-am{background:rgba(188,122,24,.32);color:#ffc673}.tg-bl{background:rgba(30,72,184,.35);color:#9dc6ff}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;gap:14px}
+.bt{background:#d5d0c2;border-radius:3px;overflow:hidden;height:11px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:#e2ded2}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid #f1efe7}
+.td2.gn{background:#125733}.td2.am{background:#734508}.td2.or{background:#a8540c}.td2.rd{background:#9e1f1f}.td2.bl{background:#0f2a6e}
+.td2.pu{background:#6b1160}
+.tdate{font:700 11.5px/1 'JetBrains Mono',monospace;color:#a8540c;margin-bottom:4px}
+.ttext{font-size:13px;line-height:1.75;color:#0b0c10}
+
+/* MISC */
+.note{font-size:11.5px;color:#1e1f27;border-top:1px solid rgba(11,12,16,.2);padding-top:10px;margin-top:11px;line-height:1.7}
+.sp{height:16px}
+.bge{display:inline-block;font:700 10.5px/1 'JetBrains Mono',monospace;padding:4px 9px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:#d6efe1;color:#125733}.be-am{background:#fdeccd;color:#734508}
+.be-or{background:#fde7cc;color:#a8540c}.be-rd{background:#fadada;color:#9e1f1f}.be-bl{background:#d4e1f7;color:#0f2a6e}
+.inf{background:#fdeccd;border:1.5px solid #dda23c;border-left:6px solid #c9821a;border-radius:6px;padding:14px 18px;font-size:13px;color:#5c3705;line-height:1.8;margin-bottom:16px}
+.ok{background:#d6efe1;border:1.5px solid #5fbc8b;border-left:6px solid #1f9c56;border-radius:6px;padding:14px 18px;font-size:13px;color:#0c4526;line-height:1.8;margin-bottom:16px}
+
+/* CONCLUSION */
+.conc{background:#0b0c10;border-radius:9px;padding:30px 34px}
+.conc-h{font:700 21px/1.25 'Space Grotesk',sans-serif;letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:#f08a22}
+.conc-lbl{font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.13em;text-transform:uppercase;color:#f08a22;margin-bottom:9px}
+.conc-b{font-size:13px;line-height:1.95;color:rgba(246,245,239,.85)}
+.conc-b strong{color:#fff;background:rgba(240,138,34,.16);padding:0 3px;border-radius:2px}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 4620 · 2026.08.03 作成</p>
+      <h1 class="ht">藤倉化成 <em>（4620・東証スタンダード）</em><br>バリュー＋アクティビスト統合分析</h1>
+      <p class="hs">株価961円 ／ PBR 0.58倍・PER 8.0倍 ／ 時価総額279億円（自己株控除）<br>ネット金融資産603円/株＝株価の62.7% ／ EV 104億円 ＝ EV/EBITDA 2.7倍 ／ 植島グループ10.1%</p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>妙味あり（強い割安・カタリスト有）</strong><br>
+        BPS 1,667円に対し株価961円。<br>
+        現金＋有価証券だけで603円/株。<br>
+        実質的な事業価値はEV 104億円のみ。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価（8/3終値）</div><div class="kn am">961円</div><div class="ks">3ヶ月 −30.5% ／ 1年 +50.2%</div></div>
+    <div class="kv"><div class="kl">PBR（実績）</div><div class="kn gn">0.58倍</div><div class="ks">BPS 1,666.63円（26/3期）</div></div>
+    <div class="kv"><div class="kl">ネット金融資産</div><div class="kn gn">603円/株</div><div class="ks">現金101億＋有価証券税引後74億</div></div>
+    <div class="kv"><div class="kl">EV/EBITDA</div><div class="kn bl">2.7倍</div><div class="ks">EV 104億／EBITDA 38.7億</div></div>
+    <div class="kv"><div class="kl">有価証券含み益</div><div class="kn rd">98.9億円</div><div class="ks">取得原価5.4億→時価104億</div></div>
+    <div class="kv"><div class="kl">アクティビスト比率</div><div class="kn am">10.1%</div><div class="ks">植島幹九郎氏＋関連3社</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:#1f9c56"></span>結論</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:#c9821a"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:#f08a22"></span>資産精査</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:#1e48b8"></span>事業性・ニッチ</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:#b23a99"></span>株主・植島</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:#1f9c56"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:#9e1f1f"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:#f08a22"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ═══ P1 結論 ═══ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論：961円は「事業をタダ同然で買える」水準</h2><span class="sb bg-gn">妙味あり</span></div>
+
+  <div class="ok">
+    <strong>ワンライナー：</strong>藤倉化成は、時価総額279億円のうち175億円（株価換算603円）がネットキャッシュと上場株の含み益で説明できる。残る72億円で売上556億円・営業利益22.7億円の事業を買う計算になり、EV/EBITDA 2.7倍。そこに保有比率10%超のアクティビストと自社株買い実施中という触媒が乗っている。
+  </div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c cl-gn"><div class="ml">① 資産（バランスシート）</div><div class="mv gn" style="font-size:19px">603円/株</div><div class="ms">現金及び預金148.7億 − 有利子負債47.7億＝ネットキャッシュ101億（348円）。加えてその他有価証券104.4億（取得原価わずか5.4億、含み益98.9億）。売却時課税30.6%を引いても74.1億（255円）。合計603円は株価961円の<strong>62.7%</strong>。</div></div>
+    <div class="c cl-bl"><div class="ml">② 事業（ニッチトップ性）</div><div class="mv bl" style="font-size:19px">EV 104億円</div><div class="ms">プラスチック用塗料（レクラック／フジハード）で日米欧亜のグローバル網。導電性ペースト「ドータイト®」は国内草分けで26/3期は営業利益+1,075%。建築リフォーム塗料は塗替えサイクル型のストック事業。EBITDA 38.7億に対しEV 104億＝<strong>2.7倍</strong>。</div></div>
+    <div class="c cl-or"><div class="ml">③ カタリスト（変化の触媒）</div><div class="mv or" style="font-size:19px">10.1%</div><div class="ms">植島幹九郎氏と関連3社が26年3月〜5月で0→10.1%まで一気に取得。関連会社の商号が<strong>「株式会社DOE5パーセント」</strong>＝要求内容が社名に埋め込まれている。加えて自社株買い70万株/7億円を8/31まで実施中。</div></div>
+  </div>
+
+  <div class="sh"><span class="sn">02</span><h2 class="st">なぜこの価格で放置されているのか</h2><span class="sb bg-am">3ヶ月で−30.5%</span></div>
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>放置の理由</th><th>内容</th><th class="r">評価</th></tr></thead>
+    <tbody>
+      <tr><td class="hrd">今期予想が「未定」</td><td>中東情勢悪化による石油化学製品の供給不安・価格上昇を理由に、27/3期の連結業績予想を合理的に算定困難として<strong>未定</strong>としている</td><td class="r hrd">最大要因</td></tr>
+      <tr><td class="hrd">第12次中期経営計画も延期</td><td>2026年5月14日、外部環境の不透明性を理由に新中計の公表を延期。資本政策・還元方針が示されない状態</td><td class="r hrd">重い</td></tr>
+      <tr><td class="ham">第11次中計の未達</td><td>最終年度目標 売上630億／営業利益40億 に対し実績 556億／22.7億（達成率57%）。ROEのみ8%目標に対し7.0%と接近</td><td class="r ham">信頼低下</td></tr>
+      <tr><td class="ham">利益の質が低い</td><td>経常利益42.1億のうち営業外収益22.4億（主因は投資有価証券売却益16.1億）。本業の営業利益は22.7億で営業利益率4.1%</td><td class="r ham">要注意</td></tr>
+      <tr><td class="ham">植島氏個人分の保有減少</td><td>5/19に植島氏個人が5.26%→2.23%へ。ただし同日にDOE5パーセントが0.74%→3.8%、ナチュラリが3.44%→3.87%と増加。<strong>グループ合計は9.64%→10.10%と増加</strong>しており、実態は共同保有者間の移管</td><td class="r hgn">誤読の余地</td></tr>
+      <tr><td class="ham">東証スタンダード・低流動性</td><td>2023年10月にプライムからスタンダードへ移行。出来高は15万株/日（約1.3億円）で機関投資家の参入余地が限られる</td><td class="r ham">構造要因</td></tr>
+      <tr class="sm"><td colspan="2">→ 材料は「見えないこと」であり「壊れたこと」ではない。8/7の1Q発表が最初の情報開示イベント</td><td class="r hgn">妙味の源泉</td></tr>
+    </tbody>
+  </table>
+
+  <div class="inf">
+    <strong>ただし注意：</strong>26/3期の株主総利回りは231.4（TOPIX 202.2）と大幅にアウトパフォームしており、年初来安値429円から高値1,233円まで急騰した後の調整局面にある。「安いから買う」ではなく「調整後もなお資産価値に対して安い」という位置づけ。1年前に比べればまだ+50%の水準である点は冷静に認識すべき。
+  </div>
+</div>
+
+<!-- ═══ P2 バリュエーション ═══ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">03</span><h2 class="st">株価961円の分解 — 何を買っているのか</h2><span class="sb bg-gn">EV 104億円</span></div>
+
+  <table class="t" style="margin-bottom:18px">
+    <thead><tr><th>株価961円の内訳</th><th class="r">金額（億円）</th><th class="r">1株あたり</th><th class="r">株価比</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>時価総額（自己株控除ベース）</strong></td><td class="r mn">279.0</td><td class="r mn">961円</td><td class="r mn">100%</td><td>29,031,574株（自己株168.9万株・ESOP信託12.98万株控除）</td></tr>
+      <tr><td>− 現金及び預金</td><td class="r mn hgn">148.7</td><td class="r mn hgn">512円</td><td class="r mn">60%</td><td>連結。うち現金同等物126.9億</td></tr>
+      <tr><td>＋ 有利子負債（リース含む）</td><td class="r mn hrd">47.7</td><td class="r mn hrd">164円</td><td class="r mn">19%</td><td>26/3期に+74%。新工場投資の借入</td></tr>
+      <tr class="sm"><td>＝ ネットキャッシュ</td><td class="r mn hgn">101.0</td><td class="r mn hgn">348円</td><td class="r mn">41%</td><td>—</td></tr>
+      <tr><td>− その他有価証券（時価）</td><td class="r mn hgn">104.4</td><td class="r mn hgn">359円</td><td class="r mn">42%</td><td>取得原価5.4億・含み益98.9億</td></tr>
+      <tr><td>（売却時課税30.6%控除後）</td><td class="r mn">74.1</td><td class="r mn">255円</td><td class="r mn">30%</td><td>実効税率30.6%を仮定</td></tr>
+      <tr class="hl"><td><strong>ネット金融資産合計（税引後）</strong></td><td class="r mn hgn"><strong>175.1</strong></td><td class="r mn hgn"><strong>603円</strong></td><td class="r mn hgn"><strong>62.7%</strong></td><td>キャッシュ＋上場株</td></tr>
+      <tr><td>＋ 非支配株主持分</td><td class="r mn">21.8</td><td class="r mn">75円</td><td class="r mn">9%</td><td>藤光樹脂51%・マレーシア80%等</td></tr>
+      <tr class="sm"><td><strong>＝ 事業に対する実質価値（EV）</strong></td><td class="r mn ham"><strong>104.0</strong></td><td class="r mn ham"><strong>217円</strong></td><td class="r mn ham"><strong>26%</strong></td><td>売上556億の事業をこの値段で買う</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc"><div class="ml">EV / EBITDA</div><div class="mv gn">2.68×</div><div class="ms">EBITDA 38.7億（営業利益22.7＋償却16.0）</div></div>
+    <div class="c mc"><div class="ml">EV / EBIT</div><div class="mv gn">4.58×</div><div class="ms">営業利益22.7億</div></div>
+    <div class="c mc"><div class="ml">EV / 売上高</div><div class="mv gn">0.19×</div><div class="ms">売上556.4億</div></div>
+    <div class="c mc"><div class="ml">PER（実績）</div><div class="mv am">9.00×</div><div class="ms">EPS 106.83円（売却益込み）</div></div>
+  </div>
+
+  <div class="sh"><span class="sn">04</span><h2 class="st">バリュー投資の3つの物差し</h2><span class="sb bg-bl">NCAV／PBR／NAV</span></div>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="c cf-gn"><div class="ml">① 修正NCAV（グレアム流）</div><div class="mv gn">808円/株</div><div class="ms">流動資産360.95億＋その他有価証券104.4億−総負債209.0億−非支配株主持分21.8億＝234.5億。<strong>株価961円はこの水準とほぼ同値</strong>。厳格NCAV（有価証券を除く）でも523円/株。</div></div>
+    <div class="c cf-am"><div class="ml">② PBR（実績BPS基準）</div><div class="mv am">0.58倍</div><div class="ms">BPS 1,666.63円。過去16年のPBRレンジは0.26〜0.98倍で、<strong>1倍を一度も超えていない</strong>点は割引の常態化を意味する。ただし直近2年で自己資本は年率10%超で増加中。</div></div>
+    <div class="c cf-bl"><div class="ml">③ 修正NAV（土地含み益反映）</div><div class="mv bl">約1,726円</div><div class="ms">自己資本483.7億＋土地含み益（推定25億の税引後17.4億）＝501.1億。<strong>修正PBR 0.56倍</strong>。土地含み益15億〜40億のレンジでも1,702〜1,762円と結論は動かない。</div></div>
+  </div>
+
+  <div class="inf">
+    <strong>NAVの感応度：</strong>本件で最も価値を左右するのは土地ではなく有価証券。仮に保有上場株が3割下落すれば時価104億→73億、含み益は98.9億→68億となりBPSは約1,667円→1,594円（−4.4%）。逆に3割上昇ならBPS 1,740円。<strong>土地含み益の推定誤差（±15億＝±36円/株）よりも株価変動リスクの方が桁違いに大きい</strong>点は明確に認識すべき。
+
+  </div>
+
+  <div class="sh"><span class="sn">05</span><h2 class="st">同業比較 — 割安なのは事実、しかし理由もある</h2><span class="sb bg-am">相対評価</span></div>
+  <table class="t">
+    <thead><tr><th>銘柄</th><th class="r">株価</th><th class="r">時価総額</th><th class="r">PER</th><th class="r">ROE</th><th class="r">自己資本比率</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="hgn"><strong>藤倉化成（4620）</strong></td><td class="r mn">961円</td><td class="r mn">297億</td><td class="r mn">10.4×</td><td class="r mn">6.2%</td><td class="r mn">67.7%</td><td>財務は最強、収益性は最低</td></tr>
+      <tr><td>日本ペイントHD（4612）</td><td class="r mn">1,205円</td><td class="r mn">2兆8,565億</td><td class="r mn">55.4×</td><td class="r mn">2.7%</td><td class="r mn">45.9%</td><td>グローバル最大手・成長プレミアム</td></tr>
+      <tr><td>関西ペイント（4613）</td><td class="r mn">2,838円</td><td class="r mn">5,051億</td><td class="r mn">16.0×</td><td class="r mn">8.3%</td><td class="r mn">37.4%</td><td>収益性で藤倉化成を上回る</td></tr>
+    </tbody>
+  </table>
+  <p class="note">出所：投資の森（2026年8月3日終値ベース）。※藤倉化成のPER 10.4倍は会社予想未定のため参考値。実績EPS 106.83円ベースでは7.96倍。ROE 6.2%は同サイト表示値、有報記載の26/3期ROEは7.0%。<br><strong>読み方：</strong>藤倉化成の割安さは「事業の質が劣る」ことの対価でもある。営業利益率4.1%は関西ペイント等と比べて明確に低く、この差が縮まらない限りPBR 1倍は正当化しにくい。本件の投資仮説は「事業が良くなる」ではなく<strong>「余剰資産が株主に戻る」</strong>に賭けるものである。</p>
+</div>
+
+<!-- ═══ P3 資産精査 ═══ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">06</span><h2 class="st">有価証券の含み益 — 1年で31億→99億へ</h2><span class="sb bg-or">最重要</span></div>
+
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>その他有価証券（連結・有報注記）</th><th class="r">24/3期</th><th class="r">25/3期</th><th class="r">26/3期</th><th class="r">2年変化</th></tr></thead>
+    <tbody>
+      <tr><td>連結貸借対照表計上額（時価）</td><td class="r mn">26.2億</td><td class="r mn">37.6億</td><td class="r mn hgn"><strong>104.4億</strong></td><td class="r mn hgn">×4.0</td></tr>
+      <tr><td>取得原価</td><td class="r mn">6.2億</td><td class="r mn">6.1億</td><td class="r mn">5.4億</td><td class="r mn">−0.8億</td></tr>
+      <tr class="hl"><td><strong>差額（含み益）</strong></td><td class="r mn">20.0億</td><td class="r mn">31.5億</td><td class="r mn hgn"><strong>98.9億</strong></td><td class="r mn hgn">+78.9億</td></tr>
+      <tr><td>当期売却額／売却益</td><td class="r mn">4.96億／2.97億</td><td class="r mn">0.41億／0.28億</td><td class="r mn ham">16.91億／16.10億</td><td class="r mn">—</td></tr>
+      <tr class="sm"><td>簿価倍率（時価÷取得原価）</td><td class="r mn">4.2×</td><td class="r mn">6.2×</td><td class="r mn ham"><strong>19.3×</strong></td><td class="r">戦前からの持合い株が中心</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ok" style="margin-bottom:16px">
+    <strong>ポイント：</strong>取得原価がわずか5.4億円で時価104億円という比率（19.3倍）は、1938年の会社設立時から続く古い持合い株であることを示す。26/3期には16.9億円を売却して16.1億円の売却益を計上（売却額の95%が益）しており、<strong>すでに現金化の実績がある</strong>。残る104億円も同じロジックで換金可能な「準現金」と評価できる。
+  </div>
+
+  <div class="sh"><span class="sn">07</span><h2 class="st">保有銘柄の内訳と「84億円の正体」</h2><span class="sb bg-am">要検証</span></div>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>特定投資株式（提出会社単体・26/3末）</th><th class="r">株式数</th><th class="r">26/3期簿価</th><th class="r">25/3期簿価</th><th>保有目的</th></tr></thead>
+    <tbody>
+      <tr><td>藤倉コンポジット（5121）</td><td class="r mn">569,840</td><td class="r mn hgn">13.56億</td><td class="r mn">7.90億</td><td>兄弟会社・業務関係</td></tr>
+      <tr><td>極東貿易（8093）</td><td class="r mn">191,944</td><td class="r mn">3.56億</td><td class="r mn">3.00億</td><td>販売取引先</td></tr>
+      <tr><td>長瀬産業（8012）</td><td class="r mn">129,368</td><td class="r mn">1.49億</td><td class="r mn">0.86億</td><td>販売取引先（分割等で株数増）</td></tr>
+      <tr><td>安藤・間（1719）</td><td class="r mn">53,265</td><td class="r mn">1.04億</td><td class="r mn">0.73億</td><td>設備関係取引先</td></tr>
+      <tr><td>巴川コーポレーション（3878）</td><td class="r mn">60,000</td><td class="r mn">0.46億</td><td class="r mn">0.43億</td><td>販売取引先</td></tr>
+      <tr><td>三井住友トラストG（8309）</td><td class="r mn">3,542</td><td class="r mn">0.17億</td><td class="r mn">0.13億</td><td>金融取引先</td></tr>
+      <tr><td>GSIクレオス（8101）</td><td class="r mn">5,316</td><td class="r mn">0.13億</td><td class="r mn">0.08億</td><td>販売取引先</td></tr>
+      <tr><td class="hrd">みずほFG（8411）</td><td class="r mn">売却済</td><td class="r mn">—</td><td class="r mn">1.86億</td><td class="hgn">26/3期中に全売却</td></tr>
+      <tr><td class="hrd">三井住友FG（8316）</td><td class="r mn">売却済</td><td class="r mn">—</td><td class="r mn">0.55億</td><td class="hgn">26/3期中に全売却</td></tr>
+      <tr class="sm"><td>上場株7銘柄 小計（＋非上場2銘柄0.53億）</td><td class="r">—</td><td class="r mn"><strong>20.41億</strong></td><td class="r mn">15.55億</td><td>—</td></tr>
+      <tr class="hl"><td><strong>連結その他有価証券との差額</strong></td><td class="r">—</td><td class="r mn ham"><strong>約83.9億</strong></td><td class="r mn">約22.1億</td><td class="ham">有報の特定投資株式表に非掲載</td></tr>
+    </tbody>
+  </table>
+
+  <div class="inf">
+    <strong>推論（要一次資料での検証）：</strong>連結ベースのその他有価証券104.4億に対し、有報の「特定投資株式」に開示されているのは21.0億のみで、<strong>約84億円が表に現れていない</strong>。この差額は1年で22億→84億へ約3.8倍に膨らんでいる。<br><br>
+    最も整合的な説明は<strong>㈱フジクラ（5803）株式</strong>である。フジクラは藤倉化成の「その他の関係会社」として22.55%を保有しており、藤倉化成側も1938年の分社以来フジクラ株を保有していると考えるのが自然。単体決算では「関係会社株式」に分類されるため政策保有株式の開示対象外となる一方、連結上は関連会社に該当しないため「その他有価証券」として時価評価される — この会計処理の差が、開示表と連結注記の乖離を説明する。フジクラ株は生成AI／データセンター需要で26/3期に大幅上昇しており（同社26/3期は売上1兆1,824億・+20.7%、営業利益1,887億・+39.2%）、3.8倍という増加率とも符合する。<br><br>
+    <strong>この推論が正しい場合の含意は大きい：</strong>①約84億円の含み益資産の値動きはフジクラ株＝AI関連株に連動する、②売却するには親会社との関係整理が必要で換金の自由度は他の政策保有株より低い、③逆に資本関係の見直し（相互解消）が起きれば一気に顕在化する。<span class="bge be-rd">最優先の確認事項</span>26/3期有価証券報告書（S100YJ15）の「③保有目的が純投資目的である投資株式」および単体貸借対照表の関係会社株式明細を直接確認されたい。
+  </div>
+
+  <div class="sh"><span class="sn">08</span><h2 class="st">土地の含み益 — 実は小さい</h2><span class="sb bg-bl">推定15〜40億</span></div>
+  <table class="t" style="margin-bottom:12px">
+    <thead><tr><th>事業所（26/3末・有報「主要な設備の状況」）</th><th class="r">土地簿価</th><th class="r">面積(㎡)</th><th class="r">簿価単価(円/㎡)</th><th>取得時期・評価</th></tr></thead>
+    <tbody>
+      <tr><td>佐野事業所（栃木県佐野市）</td><td class="r mn">15.98億</td><td class="r mn">75,217</td><td class="r mn">21,245</td><td>1971年移転。主力工場。周辺工業地とほぼ同水準</td></tr>
+      <tr><td>鷲宮事業所（埼玉県久喜市/幸手市）</td><td class="r mn">7.81億</td><td class="r mn">20,110</td><td class="r mn">38,835</td><td>1990・1996年。研究所。含み益は限定的</td></tr>
+      <tr><td>久喜物流センター（埼玉県久喜市）</td><td class="r mn">5.82億</td><td class="r mn">18,367</td><td class="r mn">31,687</td><td>2012年新設。物流適地で近年地価上昇</td></tr>
+      <tr><td class="hgn">名古屋営業所（愛知県東海市）</td><td class="r mn">0.80億</td><td class="r mn">5,888</td><td class="r mn hgn">13,586</td><td class="hgn">1974年取得。簿価が著しく低く含み益あり</td></tr>
+      <tr><td class="hgn">その他（福岡県遠賀町ほか）</td><td class="r mn">3.02億</td><td class="r mn">19,161</td><td class="r mn hgn">15,762</td><td class="hgn">うち遠賀町13,786㎡が1.16億＝8,414円/㎡</td></tr>
+      <tr class="sm"><td>提出会社 小計</td><td class="r mn">33.43億</td><td class="r mn">138,744</td><td class="r mn">24,095</td><td>—</td></tr>
+      <tr><td>国内子会社4社（枚方・遠賀・久喜・戸田）</td><td class="r mn">4.26億</td><td class="r mn">15,457</td><td class="r mn">27,560</td><td>—</td></tr>
+      <tr><td class="hgn">RED SPOT（米インディアナ／ミシガン）</td><td class="r mn">1.25億</td><td class="r mn hgn">96,760</td><td class="r mn hgn">1,292</td><td class="hgn">2008年買収。面積が極大で簿価は極小</td></tr>
+      <tr><td>Fujichem Sonneborn（英）</td><td class="r mn">3.90億</td><td class="r mn">28,409</td><td class="r mn">13,728</td><td>2010年買収</td></tr>
+      <tr><td>タイ／インドネシア</td><td class="r mn">5.08億</td><td class="r mn">16,795</td><td class="r mn">30,247</td><td>—</td></tr>
+      <tr class="hl"><td><strong>連結合計</strong></td><td class="r mn"><strong>47.92億</strong></td><td class="r mn"><strong>296,165</strong></td><td class="r mn">16,180</td><td>時価総額279億の19%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="inf">
+    <strong>結論：土地の含み益は「あるが小さい」。</strong>26/3期有報に<strong>「賃貸等不動産関係」の注記がない</strong>＝重要性のある賃貸不動産を保有していないことを意味し、都心一等地型の巨大含み益案件ではない。含み益の源泉は①1974年取得の名古屋（東海市）②遠賀町③RED SPOTの米国広大地に限られる。<br>
+    保守的推定として国内土地の含み益を簿価比+30〜80%（11〜30億）、海外を3〜10億とすると<strong>合計15〜40億円（中央値25億）</strong>。税引後で10〜28億、1株あたり36〜96円にとどまる。<span class="bge be-am">本件は「土地バリュー株」ではなく「有価証券＋キャッシュバリュー株」</span>
+  </div>
+
+  <div class="sh"><span class="sn">09</span><h2 class="st">キャッシュと資本の使途 — 佐野新工場98億円</h2><span class="sb bg-rd">最大の論点</span></div>
+  <div class="g2">
+    <div class="c cl-bl"><div class="ml">財務ポジション（26/3末）</div><div class="ms" style="margin-top:8px">
+      現金及び預金 <strong>148.67億</strong>（うち現金同等物126.88億）／有利子負債 <strong>47.65億</strong>（リース含む・前期比+74%）／自己資本比率 <strong>67.7%</strong>／営業CF <strong>30.06億</strong>／投資CF <strong>−31.06億</strong>／財務CF <strong>+3.45億</strong>。<br><br>
+      借入増加の理由は明確で、2025年12月に財務上の特約に関する臨時報告書、2026年2月に有価証券届出書（組込方式）を提出しており、<strong>新工場向けの資金調達枠を整備</strong>している。
+    </div></div>
+    <div class="c cl-rd"><div class="ml">佐野事業所 新工場計画</div><div class="ms" style="margin-top:8px">
+      投資予定額 <strong>98.00億円</strong>（既支払27.23億／残り約71億）／着手2025年10月・完了2027年9月／資金は自己資金＋借入金。<br><br>
+      加えて佐野2.19億、鷲宮1.83億、RED SPOT 5.07億、インドネシア6.30億の計画あり。<strong>時価総額279億の企業が、今後2年で約85億円の設備投資を実行する。</strong>キャッシュが株主に戻る前に工場に向かうという構図であり、これがアクティビストの主戦場になる。
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══ P4 事業性 ═══ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">10</span><h2 class="st">セグメント別 — 主力が沈み、脇役が伸びた1年</h2><span class="sb bg-bl">26/3期</span></div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>セグメント</th><th class="r">売上26/3</th><th class="r">前期比</th><th class="r">営業利益26/3</th><th class="r">前期比</th><th class="r">利益率</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="hrd"><strong>コーティング</strong></td><td class="r mn">278.1億</td><td class="r mn hrd">−3.7%</td><td class="r mn">6.40億</td><td class="r mn hrd">−6.3%</td><td class="r mn">2.3%</td><td>自動車樹脂部品用塗料（レクラック／フジハード）、化粧品容器、ホビー</td></tr>
+      <tr><td class="hgn"><strong>塗料</strong></td><td class="r mn">133.7億</td><td class="r mn hgn">+14.5%</td><td class="r mn">8.48億</td><td class="r mn hgn">+153.5%</td><td class="r mn">6.3%</td><td>建築用。集合住宅リフォーム向けが牽引、新築は減少</td></tr>
+      <tr class="hl"><td class="hgn"><strong>電子材料</strong></td><td class="r mn">46.2億</td><td class="r mn hgn">+16.5%</td><td class="r mn">4.05億</td><td class="r mn hgn">+1,075%</td><td class="r mn hgn"><strong>8.8%</strong></td><td>導電性ペースト「ドータイト®」。車載・電子機器・PC向けが回復</td></tr>
+      <tr><td class="hgn"><strong>化成品</strong></td><td class="r mn">49.0億</td><td class="r mn hgn">+6.7%</td><td class="r mn">3.88億</td><td class="r mn hgn">+69.5%</td><td class="r mn">7.9%</td><td>粘接着剤・メディカル（糖尿病診断薬）は伸長、トナー材料は市場縮小</td></tr>
+      <tr><td class="hrd"><strong>合成樹脂</strong></td><td class="r mn">49.3億</td><td class="r mn hrd">−23.2%</td><td class="r mn hrd">−0.11億</td><td class="r mn hrd">赤字転落</td><td class="r mn">−0.2%</td><td>藤光樹脂等の商社機能。アクリル原料・LiB増粘剤・TVレンズが不調</td></tr>
+      <tr class="sm"><td><strong>連結合計</strong></td><td class="r mn"><strong>556.4億</strong></td><td class="r mn">+0.2%</td><td class="r mn"><strong>22.71億</strong></td><td class="r mn hgn">+73.9%</td><td class="r mn">4.1%</td><td>海外売上比率 46.6%（前期51.6%）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="inf">
+    <strong>構造上の問題：</strong>売上の50%を占める主力コーティングが減収減益で利益率2.3%。全社の営業利益率4.1%は化学セクターとして明確に低い。一方、売上構成比わずか8%の電子材料が利益の18%を稼ぐ。<strong>「大きい事業ほど儲からない」という逆転構造</strong>が、PBR 0.5倍という評価の実体的な根拠になっている。
+  </div>
+
+  <div class="sh"><span class="sn">11</span><h2 class="st">ニッチトップ性の検証</h2><span class="sb bg-gn">ドータイト®</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Niche 01 · 本命</div><span class="ci">⚡</span>
+      <div class="ct">導電性樹脂材料「ドータイト®」</div>
+      <div class="cb gn">営業利益率 8.8%</div>
+      <div class="cu">全社平均4.1%の2倍以上・26/3期は+1,075%</div>
+      <div class="cp">導電性ペースト／導電性接着剤の国内草分けブランド。開発中の製品群は<strong>ストレッチャブル・成形対応導電ペースト（センサー用）、低温短時間硬化・Snめっき対応導電性接着剤、グラビアオフセット印刷による超細線回路用ペースト、ミリ波吸収シールド材・磁気シールド材</strong>。導電性フィラーの内製開発まで垂直統合している点が参入障壁。</div>
+      <div class="tgs"><span class="tg tg-gn">高収益</span><span class="tg tg-or">ミリ波/センサー</span><span class="tg tg-am">主要顧客に天津三星LED</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Niche 02 · 規模</div><span class="ci">🚗</span>
+      <div class="ct">自動車樹脂部品用コーティング</div>
+      <div class="cb bl">売上 278億</div>
+      <div class="cu">日・米・欧・アジアのグローバル網</div>
+      <div class="cp">プラスチック専用塗料という<strong>金属塗料大手が本気で来ないニッチ</strong>。米RED SPOT（売上161億・純利益7.1億）、英Fujichem Sonneborn、タイ・中国4拠点・マレーシア・インド・インドネシアと供給網を構築済み。2025年12月にインドネシアを連結子会社化。<strong>車種採用が決まればモデルライフ（5〜7年）にわたり供給が続く</strong>点で実質ストック型。</div>
+      <div class="tgs"><span class="tg tg-bl">モデルライフ供給</span><span class="tg tg-am">為替感応度高</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Niche 03 · 構造成長</div><span class="ci">🏠</span>
+      <div class="ct">建築リフォーム用塗料</div>
+      <div class="cb am">+14.5% / OP+153%</div>
+      <div class="cu">集合住宅の大規模修繕が牽引</div>
+      <div class="cp">新築市場は縮小する一方、日本の住宅ストックは高経年化が進行。<strong>塗替えサイクル10〜15年の反復需要</strong>は人口動態に左右されにくい。土木インフラ設備向け塗料も保有技術の応用で開拓中。26/3期に利益が2.5倍になったのは価格改定とミックス改善の両方が効いた証左。</div>
+      <div class="tgs"><span class="tg tg-gn">反復需要</span><span class="tg tg-gn">国内・為替中立</span></div>
+    </div>
+  </div>
+
+  <div class="sh"><span class="sn">12</span><h2 class="st">ストック性スコア（筆者評価）</h2><span class="sb bg-bl">定性</span></div>
+  <div class="c" style="margin-bottom:16px">
+    <div class="bg"><div class="br2"><span><strong>建築リフォーム塗料</strong>　塗替えサイクルによる反復需要。景気感応度も低い</span><span class="hgn mn">85</span></div><div class="bt"><div class="bf" style="width:85%;background:#1f9c56"></div></div></div>
+    <div class="bg"><div class="br2"><span><strong>自動車用コーティング</strong>　車種採用＝モデルライフ供給だが、生産台数と為替に振られる</span><span class="hgn mn">70</span></div><div class="bt"><div class="bf" style="width:70%;background:#125733"></div></div></div>
+    <div class="bg"><div class="br2"><span><strong>電子材料（ドータイト）</strong>　設計組込み後は継続採用。ただし電子部品サイクルの影響大</span><span class="ham mn">65</span></div><div class="bt"><div class="bf" style="width:65%;background:#c9821a"></div></div></div>
+    <div class="bg"><div class="br2"><span><strong>化成品（メディカル・粘接着）</strong>　診断薬材料は規制認証を伴い粘着性が高い。トナーは構造衰退</span><span class="ham mn">55</span></div><div class="bt"><div class="bf" style="width:55%;background:#734508"></div></div></div>
+    <div class="bg"><div class="br2"><span><strong>合成樹脂（商社機能）</strong>　仕入販売型でスイッチングコストがほぼない</span><span class="hrd mn">20</span></div><div class="bt"><div class="bf" style="width:20%;background:#9e1f1f"></div></div></div>
+    <p class="note">評価軸：①顧客のスイッチングコスト ②需要の反復性 ③価格決定力 ④景気感応度の低さ を各25点で配点した筆者の主観スコア。開示データに基づく機械的算出ではない。</p>
+  </div>
+
+  <div class="sh"><span class="sn">13</span><h2 class="st">中期経営計画 — 未達と、公表延期</h2><span class="sb bg-rd">信頼の課題</span></div>
+  <table class="t" style="margin-bottom:12px">
+    <thead><tr><th>第11次中計（24/3期〜26/3期）</th><th class="r">24/3 計画</th><th class="r">24/3 実績</th><th class="r">25/3 計画</th><th class="r">25/3 実績</th><th class="r">26/3 計画</th><th class="r">26/3 実績</th><th class="r">達成率</th></tr></thead>
+    <tbody>
+      <tr><td>売上高（百万円）</td><td class="r mn">55,000</td><td class="r mn">52,612</td><td class="r mn">59,000</td><td class="r mn">55,528</td><td class="r mn">63,000</td><td class="r mn hrd">55,636</td><td class="r mn hrd">88%</td></tr>
+      <tr><td>営業利益（百万円）</td><td class="r mn">1,300</td><td class="r mn">1,299</td><td class="r mn">2,900</td><td class="r mn hrd">1,306</td><td class="r mn">4,000</td><td class="r mn hrd">2,271</td><td class="r mn hrd">57%</td></tr>
+      <tr><td>ROE（%）</td><td class="r mn">3.0</td><td class="r mn">2.8</td><td class="r mn">6.0</td><td class="r mn hrd">1.3</td><td class="r mn">8.0</td><td class="r mn ham">7.0</td><td class="r mn ham">88%</td></tr>
+      <tr class="sm"><td colspan="7">株主還元方針：総還元性向70%以上／配当16円以上維持／ROE8%以上／機動的な自己株式取得</td><td class="r mn hrd">未達</td></tr>
+      <tr class="hl"><td colspan="7"><strong>26/3期の実績還元</strong>：配当5.30億（CF実額）＋自己株式取得6.18億（同）＝11.48億 ÷ 純利益31.34億 ＝ <strong>総還元性向 約37%</strong>（宣言配当20円＋取得枠5.00億で算定すると約35%）</td><td class="r mn hrd">目標70%の半分以下</td></tr>
+    </tbody>
+  </table>
+  <div class="inf">
+    <strong>第12次中計は公表延期（2026年5月14日）。</strong>理由は中東情勢の悪化による石油化学製品の供給不安・価格上昇で、外部環境の影響を見極める必要があるため。同時に27/3期の業績予想も未定としている。<br>
+    公表済みの株主還元方針（総還元性向70%以上）に対し26/3期実績が33%であること、そして次期計画すら示せていないこと — この2点が<strong>アクティビストにとって最も攻めやすい論点</strong>であり、同時に「中計公表」自体が最大のカタリストになる構造を作っている。
+  </div>
+</div>
+
+<!-- ═══ P5 株主・植島 ═══ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">14</span><h2 class="st">植島幹九郎氏グループの参戦 — 3ヶ月で0→10.1%</h2><span class="sb bg-pu">最大の変化</span></div>
+
+  <div class="tl" style="margin-bottom:18px">
+    <div class="ti"><span class="td2 pu"></span><div class="tdate">2026/03/06　報告義務発生</div><div class="ttext"><strong class="hpu">植島幹九郎 0% → 4.31%（133万株）で突如登場</strong>。同時に㈱ナチュラリが0→0.69%。共同保有として計5.00%を突破し大量保有報告書を提出。</div></div>
+    <div class="ti"><span class="td2 pu"></span><div class="tdate">2026/03/26</div><div class="ttext">植島4.55%（140万株）、ナチュラリ0.98%に加え<strong class="hpu">㈱DOE5パーセントが0→0.56%、㈱ドリームキャリアHDが0→0.19%で参戦</strong>。ビークルが4社体制に。</div></div>
+    <div class="ti"><span class="td2 am"></span><div class="tdate">2026/04/01</div><div class="ttext">植島5.21%（160万株）、ナチュラリ1.46%、DOE5パーセント0.63%。グループ計 約7.5%。</div></div>
+    <div class="ti"><span class="td2 am"></span><div class="tdate">2026/04/10 → 04/30</div><div class="ttext">ナチュラリが1.46→2.46→3.44%と連続増加。植島5.21→5.26%（162万株）。<strong>グループ計 9.64%</strong>に到達。</div></div>
+    <div class="ti"><span class="td2 gn"></span><div class="tdate">2026/05/19　直近</div><div class="ttext"><strong class="hgn">植島個人 5.26%→2.23%（−3.03%）と減少する一方、DOE5パーセントが0.74%→3.80%（+3.06%）、ナチュラリが3.44%→3.87%（+0.43%）と増加。</strong>個人からビークルへの移管であり、グループ合計は9.64%→<strong>10.10%</strong>へ純増。売り抜けではない。</div></div>
+    <div class="ti"><span class="td2 bl"></span><div class="tdate">2026/06/25</div><div class="ttext">定時株主総会（第115期）。この時点では株主提案の開示なし。<strong>次の総会は2027年6月 — 株主提案の期限は概ね2027年3月末</strong>。</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cf-or">
+      <div class="ml" style="color:#a8540c">ビークル名が要求そのもの</div>
+      <div class="mv or" style="text-align:left;font-size:20px;margin:8px 0">「株式会社DOE5パーセント」</div>
+      <div class="ms">共同保有者の商号が<strong>DOE（株主資本配当率）5%</strong>。これは要求内容を社名として掲げているに等しい。<br><br>
+      藤倉化成の自己資本483.7億に対しDOE5%は<strong>年間配当総額24.2億円＝1株83円</strong>。株価961円に対する利回りは<strong>9.8%</strong>。現在の年20円（総額5.8億円・DOE1.2%相当）とは4倍以上の開きがある。</div>
+    </div>
+    <div class="c">
+      <div class="ml">DOE水準別の配当インパクト</div>
+      <table class="t" style="margin-top:8px;font-size:12px">
+        <thead><tr><th>DOE</th><th class="r">配当総額</th><th class="r">1株配当</th><th class="r">961円での利回り</th></tr></thead>
+        <tbody>
+          <tr><td>現状（20円）</td><td class="r mn">5.8億</td><td class="r mn">20円</td><td class="r mn">2.4%</td></tr>
+          <tr><td>DOE 3%</td><td class="r mn">14.5億</td><td class="r mn ham">50円</td><td class="r mn ham">5.9%</td></tr>
+          <tr><td>DOE 4%</td><td class="r mn">19.3億</td><td class="r mn ham">67円</td><td class="r mn ham">7.8%</td></tr>
+          <tr class="hl"><td><strong>DOE 5%</strong></td><td class="r mn">24.2億</td><td class="r mn hgn"><strong>83円</strong></td><td class="r mn hgn"><strong>9.8%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">仮にDOE5%が実現し、市場が利回り4〜5%で評価するなら株価は1,660〜2,080円。ただし営業CF 30億に対し配当24.2億＋設備投資という資金繰りは現実にはタイトで、有価証券売却を伴わなければ持続困難。<strong>「還元原資＝保有株の売却」という道筋がセットで要求される</strong>と読むのが自然。</p>
+    </div>
+  </div>
+
+  <div class="sh"><span class="sn">15</span><h2 class="st">株主構成 — フジクラ22.55%という両義性</h2><span class="sb bg-bl">26/3末</span></div>
+  <table class="t" style="margin-bottom:12px">
+    <thead><tr><th>大株主（有報・2026年3月31日現在）</th><th class="r">株式数</th><th class="r">比率</th><th>性格</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>㈱フジクラ（5803）</strong></td><td class="r mn">6,576,200</td><td class="r mn hbl"><strong>22.55%</strong></td><td>その他の関係会社。攻守いずれにも決定権を持つ</td></tr>
+      <tr><td>日本マスタートラスト信託銀行</td><td class="r mn">2,563,100</td><td class="r mn">8.79%</td><td>信託（実質はパッシブ＋アクティブ混在）</td></tr>
+      <tr><td>BNP PARIBAS FRANKFURT</td><td class="r mn">888,300</td><td class="r mn">3.05%</td><td>外国人名義</td></tr>
+      <tr><td>日本カストディ銀行</td><td class="r mn">780,000</td><td class="r mn">2.67%</td><td>信託（ESOP信託12.98万株を含む）</td></tr>
+      <tr><td>DBS BANK LTD</td><td class="r mn">742,000</td><td class="r mn">2.54%</td><td>シンガポール系名義</td></tr>
+      <tr class="hl"><td class="hpu"><strong>植島 幹九郎（シンガポール在住）</strong></td><td class="r mn">735,300</td><td class="r mn hpu">2.52%</td><td>アクティビスト。株主名簿ベースの数値</td></tr>
+      <tr><td>BNYM RE BNYMLB</td><td class="r mn">701,400</td><td class="r mn">2.41%</td><td>外国人名義</td></tr>
+      <tr><td>藤倉コンポジット（5121）</td><td class="r mn">606,500</td><td class="r mn">2.08%</td><td>兄弟会社・相互保有</td></tr>
+      <tr><td>極東貿易（8093）</td><td class="r mn">584,000</td><td class="r mn">2.00%</td><td>取引先・相互保有</td></tr>
+      <tr><td>藤倉化成従業員持株会</td><td class="r mn">575,500</td><td class="r mn">1.97%</td><td>—</td></tr>
+      <tr class="sm"><td>上位10名 合計</td><td class="r mn">14,752,300</td><td class="r mn">50.58%</td><td>—</td></tr>
+      <tr><td>自己株式</td><td class="r mn">1,688,626</td><td class="r mn">5.47%</td><td>発行済比。26年6〜8月に更に70万株取得中</td></tr>
+      <tr class="sm"><td colspan="2">所有者別：金融機関16.18% ／ その他法人33.61% ／ 外国法人等17.29% ／ 個人30.11%</td><td class="r">—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2">
+    <div class="c cl-rd"><div class="ml" style="color:#9e1f1f">守りの側面 ＝ 買収防衛壁</div><div class="ms" style="margin-top:6px">フジクラ22.55%＋藤倉コンポジット2.08%＋極東貿易2.00%＋持株会1.97%＋自己株5.47%で<strong>約34%の安定株主</strong>が存在する。同意なきTOBは成立しない。アクティビストが単独で経営権を握る道は事実上閉ざされており、<strong>出口はフジクラの意思に依存する</strong>。</div></div>
+    <div class="c cl-gn"><div class="ml" style="color:#125733">攻めの側面 ＝ 最強のカタリスト源</div><div class="ms" style="margin-top:6px">逆に言えば、フジクラが動けば一晩で決着する。フジクラは生成AI／データセンター需要で26/3期に売上1兆1,824億（+20.7%）・営業利益1,887億（+39.2%）へ急拡大し、株価も急騰。<strong>資本効率を厳しく問われる立場になった同社にとって、光ファイバー戦略と無関係な塗料子会社22.55%は典型的な「非中核政策保有株」</strong>。放出（＝支配権移動）か完全子会社化か、いずれに転んでも藤倉化成株にはプラス。</div></div>
+  </div>
+</div>
+
+<!-- ═══ P6 カタリスト ═══ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">16</span><h2 class="st">カタリスト一覧 — 時間軸つき</h2><span class="sb bg-gn">7項目</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 直近</div><span class="ci">📅</span>
+      <div class="ct">8月7日 1Q決算＋通期予想の開示</div>
+      <div class="cb gn">4日後</div>
+      <div class="cu">未定だった27/3期予想が示されるか</div>
+      <div class="cp">現在の株安の最大要因は「予想未定」。<strong>1Qと同時に通期予想が開示されれば不透明性プレミアムが剥落する。</strong>逆に据え置きなら失望売りの可能性。最も近く、最も確度の高いイベント。</div>
+      <div class="tgs"><span class="tg tg-gn">確定日程</span><span class="tg tg-am">両方向</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 02 · 進行中</div><span class="ci">🔁</span>
+      <div class="ct">自己株式取得 70万株・7億円</div>
+      <div class="cb or">8/31まで</div>
+      <div class="cu">2026年5月14日取締役会決議</div>
+      <div class="cp">取得期間は2026年6月1日〜8月31日。<strong>70万株は自己株控除後発行済の2.4%</strong>に相当し、7億円の枠は961円なら82万株分＝上限まで買える計算。日次出来高15万株の市場で継続的な買い需要が入っている。</div>
+      <div class="tgs"><span class="tg tg-or">需給支え</span><span class="tg tg-gn">1株価値の増加</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 03 · 中核</div><span class="ci">📜</span>
+      <div class="ct">第12次中期経営計画の公表</div>
+      <div class="cb am">時期未定</div>
+      <div class="cu">延期中。焦点は資本政策と政策保有株</div>
+      <div class="cp">「事業への影響が一定程度見通せる段階に至り次第、速やかに公表」と明記。<strong>アクティビスト10%を背負った状態で作る計画である以上、還元方針・保有株削減・ROE目標は前計画より踏み込まざるを得ない。</strong>公表そのものが再評価のトリガー。</div>
+      <div class="tgs"><span class="tg tg-am">最重要</span><span class="tg tg-gn">上方修正圧力</span></div>
+    </div>
+    <div class="ca cc-pu">
+      <div class="cn">Catalyst 04 · 構造</div><span class="ci">🎯</span>
+      <div class="ct">2027年6月総会に向けた株主提案</div>
+      <div class="cb pu">10.1%</div>
+      <div class="cu">DOE5%・増配・自己株消却・取締役選任</div>
+      <div class="cp">保有10.1%は<strong>株主提案権（1%）を大きく超え、特別決議の拒否権（33.4%）には届かない</strong>という中間位置。単独では通せないが、外国人17.3%＋機関投資家を巻き込めば普通決議での可決も視野。提案期限は概ね2027年3月末。</div>
+      <div class="tgs"><span class="tg tg-am">提案権あり</span><span class="tg tg-bl">賛同票次第</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 05 · 大型</div><span class="ci">🏭</span>
+      <div class="ct">フジクラによる保有株22.55%の処分</div>
+      <div class="cb bl">支配権移動</div>
+      <div class="cu">政策保有削減の潮流＋フジクラの資本効率圧力</div>
+      <div class="cp">フジクラ株はAI需要で歴史的高値圏にあり、同社自身が資本効率を強く問われる立場。<strong>塗料事業は同社のコア戦略と無関係で、非中核持分の典型。</strong>ブロック売却・PEファンドへの譲渡・MBOへの応諾のいずれでも、藤倉化成側に支配権プレミアムが発生する。</div>
+      <div class="tgs"><span class="tg tg-bl">確率は中</span><span class="tg tg-gn">インパクト最大</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 06 · 資産</div><span class="ci">💴</span>
+      <div class="ct">保有有価証券104億円の追加売却</div>
+      <div class="cb gn">104億円</div>
+      <div class="cu">26/3期に16.9億を売却済み（益16.1億）</div>
+      <div class="cp">26/3期にみずほFG・三井住友FGを全売却し、売却額16.9億に対し売却益16.1億を計上。<strong>この方針の継続だけで、時価総額の42%に相当する原資が段階的に現金化される。</strong>新工場98億の資金源としても、還元原資としても機能する。</div>
+      <div class="tgs"><span class="tg tg-gn">実績あり</span><span class="tg tg-am">親会社株は別論点</span></div>
+    </div>
+    <div class="ca cc-rd" style="background:#ffffff;border:.5px solid #e2ded2;grid-column:span 2">
+      <div class="cn" style="color:#4d4e5b">Catalyst 07 · シナリオ</div><span class="ci" style="font-size:22px">🤝</span>
+      <div class="ct" style="color:#0b0c10">MBO／TOBの成立可能性を数字で見る</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12.5px;color:#0b0c10;line-height:1.8">
+        <div style="padding:13px;background:#ffffff;border:1px solid #e2ded2;border-radius:4px"><strong style="color:#9e1f1f">① 買収の実質コストは極小</strong><br>時価総額279億に30%のプレミアムを乗せても321億。うちネット金融資産175億は買収と同時に手に入るため、<strong>実質的な持ち出しは約146億</strong>。EBITDA 38.7億に対し3.8倍で、LBOとして十分成立する水準。</div>
+        <div style="padding:13px;background:#ffffff;border:1px solid #e2ded2;border-radius:4px"><strong style="color:#9e1f1f">② フジクラの同意が絶対条件</strong><br>22.55%を握られている以上、フジクラの応諾なしにTOBは成立しない。逆にフジクラが主導すれば安定株主34%を基盤に極めて容易。<strong>成立可否は経済合理性ではなくフジクラの意思決定に依存する。</strong></div>
+        <div style="padding:13px;background:#ffffff;border:1px solid #e2ded2;border-radius:4px"><strong style="color:#9e1f1f">③ 価格の落としどころ</strong><br>近年の資産バリュー株のTOB事例では修正NAVの0.9〜1.1倍が多い。修正NAV約1,726円なら<strong>1,550〜1,900円</strong>＝現値比+82〜124%。ただし公開情報上、TOB／MBOに関する具体的な観測報道は<strong>現時点で存在しない</strong>。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ P7 リスク ═══ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">17</span><h2 class="st">ダウンサイドリスク — 何が仮説を壊すか</h2><span class="sb bg-rd">7項目</span></div>
+
+  <table class="t" style="margin-bottom:18px">
+    <thead><tr><th>リスク</th><th>内容</th><th class="r">発生確度</th><th class="r">株価影響</th></tr></thead>
+    <tbody>
+      <tr><td class="hrd"><strong>① 保有株の下落</strong></td><td>含み益98.9億の主因と推定される保有銘柄はAI関連の急騰銘柄。<strong>この1銘柄でBPSの約17%が説明される</strong>。AI相場が調整すればBPSと投資仮説の中核が同時に毀損。3割下落でBPS 1,667→約1,590円</td><td class="r hrd">中〜高</td><td class="r hrd">大</td></tr>
+      <tr><td class="hrd"><strong>② 27/3期の減益</strong></td><td>26/3期の経常42.1億のうち16.1億が有価証券売却益。この一過性要因が剥落するだけで経常は26億へ。加えて中東情勢による石化原料高、円高（現在156円台）、自動車生産減がコーティングを直撃</td><td class="r hrd">高</td><td class="r hrd">大</td></tr>
+      <tr><td class="ham"><strong>③ 新工場98億の重荷</strong></td><td>2027年9月稼働。減価償却は年5〜7億増加する見込みで、営業利益22.7億に対し重い。<strong>需要が伴わなければ将来の減損リスク</strong>。有報でも固定資産の減損を重要な会計上の見積りに挙げている</td><td class="r ham">中</td><td class="r ham">中</td></tr>
+      <tr><td class="ham"><strong>④ キャッシュが工場に向かう</strong></td><td>今後2年で約85億の設備投資計画。営業CF 30億では賄えず、借入・保有株売却で埋めることになる。<strong>還元原資と設備投資が同じ財布を奪い合う</strong>構図で、DOE5%のような大型還元は物理的に困難</td><td class="r hrd">高</td><td class="r ham">中</td></tr>
+      <tr><td class="ham"><strong>⑤ バリュートラップ</strong></td><td>PBRは過去16年間で0.26〜0.98倍のレンジにあり<strong>一度も1倍を超えていない</strong>。営業利益率4.1%・ROE7%という収益性が変わらなければ、割安は「割安のまま」続く可能性が構造的に高い</td><td class="r hrd">高</td><td class="r ham">機会損失</td></tr>
+      <tr><td class="ham"><strong>⑥ 買収防衛壁</strong></td><td>フジクラ22.55%を含む安定株主約34%により、アクティビストが強制的に価値を実現させる手段が限られる。<strong>フジクラが現状維持を選べば10%の圧力は空回りする</strong></td><td class="r ham">中</td><td class="r ham">中</td></tr>
+      <tr><td class="ham"><strong>⑦ 流動性と市場区分</strong></td><td>東証スタンダード、出来高15万株/日（約1.3億円）。まとまった売買で価格が動きやすく、機関投資家の参入余地も限定的。アクティビストの売却が始まれば需給が崩れる</td><td class="r ham">中</td><td class="r ham">中</td></tr>
+      <tr class="sm"><td colspan="2"><strong>監査法人の異動（2026年5月20日 臨時報告書）</strong>：EY新日本監査法人に関する異動の届出。理由の確認を推奨</td><td class="r">—</td><td class="r ham">要確認</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh"><span class="sn">18</span><h2 class="st">シナリオ分析（12〜24ヶ月）</h2><span class="sb bg-am">4ケース</span></div>
+  <div class="sc">
+    <div class="sc-c">
+      <div class="sc-l br">Bear ／ 確率25%</div>
+      <div class="sc-p br">600円</div>
+      <div class="sc-s">−29% ／ PBR 0.36倍</div>
+      <div class="sc-i">27/3期が減益、通期予想も慎重</div>
+      <div class="sc-i">AI関連株調整で保有株が3割下落しBPSが低下</div>
+      <div class="sc-i">中計公表がさらに遅延、還元も現状維持</div>
+      <div class="sc-i">植島グループが持分を市場で圧縮</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base ／ 確率40%</div>
+      <div class="sc-p bs">1,100円</div>
+      <div class="sc-s">+29% ／ PBR 0.66倍</div>
+      <div class="sc-i">通期予想が開示され不透明性が後退</div>
+      <div class="sc-i">自己株買い完了＋配当の緩やかな増額（30〜40円）</div>
+      <div class="sc-i">中計で政策保有株削減方針が明示される</div>
+      <div class="sc-i">過去のPBRレンジ上限0.7倍手前まで回復</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull ／ 確率25%</div>
+      <div class="sc-p bu">1,670円</div>
+      <div class="sc-s">+96% ／ PBR 1.00倍</div>
+      <div class="sc-i">中計でDOE型還元（3〜4%）を採用</div>
+      <div class="sc-i">保有有価証券の大型売却＋特別配当</div>
+      <div class="sc-i">電子材料・リフォーム塗料の増益が継続</div>
+      <div class="sc-i">2027年6月総会での株主提案が高い賛成率を獲得</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bm">TOB／MBO ／ 確率10%</div>
+      <div class="sc-p bm">1,550〜1,900円</div>
+      <div class="sc-s">+82〜+124% ／ 修正NAVの0.9〜1.1倍</div>
+      <div class="sc-i">フジクラが22.55%の処分を決断</div>
+      <div class="sc-i">経営陣＋PEによるMBO（実質持ち出し146億）</div>
+      <div class="sc-i">※現時点で具体的な観測報道は存在しない</div>
+      <div class="sc-i">確率は他3シナリオに内包されず独立して加算</div>
+    </div>
+  </div>
+  <p class="note">確率は筆者の主観的な配分であり、Bear/Base/Bullで90%、TOB/MBOを独立事象として10%を配分した。期待値は 600×0.25＋1,100×0.40＋1,670×0.25＋1,725×0.10 ＝ 約1,180円（現値比+39%）。<strong>下方25%・上方35%という非対称性が本件の骨格</strong>だが、Bearの600円は「保有株下落」というBPS毀損を伴うため、単純な株価下落より回復に時間を要する点に注意。</p>
+</div>
+
+<!-- ═══ P8 最終評価 ═══ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">19</span><h2 class="st">最終評価と実務的な向き合い方</h2><span class="sb bg-or">結論</span></div>
+
+  <div class="conc">
+    <div class="conc-h">961円は<span>投資妙味あり</span>。ただし「事業の再生」ではなく「余剰資産の解放」に賭ける投資である。</div>
+
+    <div class="g2" style="gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">妙味の実体</div>
+        <div class="conc-b">時価総額279億円のうち、ネットキャッシュ101億＋税引後の保有株価値74億＝<strong>175億円（603円/株、株価の62.7%）</strong>が金融資産で説明できる。残る104億円のEVで売上556億・EBITDA 38.7億の事業を保有することになり、<strong>EV/EBITDA 2.7倍</strong>。有価証券込みの修正NCAV 808円は株価とほぼ同値で、グレアム的な意味での「ネットネット」に近い。BPS 1,666円に対するPBR 0.58倍、土地含み益を織り込んだ修正NAV 1,726円に対しては0.56倍。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">妙味を「実現」させる仕組み</div>
+        <div class="conc-b">割安なだけの銘柄は割安のまま放置される。本件が違うのは、<strong>3ヶ月で0→10.1%を取得したアクティビスト</strong>と、<strong>商号にDOE5%を掲げる共同保有ビークル</strong>という異例の触媒が存在する点。会社側も総還元性向70%以上を公約しながら実績33%という説明責任を負っており、延期中の第12次中計はこの矛盾を放置したままでは出せない。さらに8/31まで自己株買いが進行中で、需給面の下支えもある。</div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">最大の弱点</div>
+        <div class="conc-b">①<strong>収益性が低い</strong>——営業利益率4.1%、主力コーティング（売上の50%）は利益率2.3%で減収減益。PBR 1倍を正当化する事業力はない。②<strong>利益の質</strong>——26/3期の経常42.1億のうち16.1億は有価証券売却益で、本業の実力は営業利益22.7億。③<strong>キャッシュの行き先</strong>——佐野新工場98億を含め今後2年で約85億の設備投資が控え、還元原資と正面から競合する。④<strong>含み益の正体が単一銘柄に依存</strong>している可能性が高く、その銘柄はAI相場の渦中にある。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">向き合い方</div>
+        <div class="conc-b">株価は3ヶ月で−30.5%だが1年では+50.2%であり、<strong>安値圏ではなく「急騰後の調整局面」</strong>という認識が必要。8/7の1Q決算という直近イベントを跨ぐか否かで組み立てが変わる。分割で取得し、①第12次中計の内容 ②政策保有株の削減方針 ③還元性向の実績 の3点をチェックポイントとして、シナリオが崩れた時点で機械的に見直す規律を持つのが現実的。<strong>2027年6月総会までを一区切りとする時間軸</strong>が妥当。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.09);border:1px solid rgba(246,245,239,.13);border-radius:5px">
+        <div style="font:600 8px/1 'JetBrains Mono',monospace;color:#f08a22;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">期待値（確率加重）</div>
+        <div style="font:700 24px/1 'JetBrains Mono',monospace;color:#f08a22">約1,180円</div>
+        <div style="font-size:11px;color:rgba(246,245,239,.6);margin-top:5px">現値比 +39%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.09);border:1px solid rgba(246,245,239,.13);border-radius:5px">
+        <div style="font:600 8px/1 'JetBrains Mono',monospace;color:#f08a22;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">修正NAV</div>
+        <div style="font:700 24px/1 'JetBrains Mono',monospace;color:#72cc8e">1,726円</div>
+        <div style="font-size:11px;color:rgba(246,245,239,.6);margin-top:5px">土地含み益25億を反映 +103%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.09);border:1px solid rgba(246,245,239,.13);border-radius:5px">
+        <div style="font:600 8px/1 'JetBrains Mono',monospace;color:#f08a22;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値の目安</div>
+        <div style="font:700 24px/1 'JetBrains Mono',monospace;color:#90b4ec">603〜808円</div>
+        <div style="font-size:11px;color:rgba(246,245,239,.6);margin-top:5px">ネット金融資産／修正NCAV</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.09);border:1px solid rgba(246,245,239,.13);border-radius:5px">
+        <div style="font:600 8px/1 'JetBrains Mono',monospace;color:#f08a22;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">次のイベント</div>
+        <div style="font:700 24px/1 'JetBrains Mono',monospace;color:#f08a22">8/7</div>
+        <div style="font-size:11px;color:rgba(246,245,239,.6);margin-top:5px">1Q決算・通期予想の有無</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px;margin-bottom:18px">
+      <div style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#f08a22;text-transform:uppercase;margin-bottom:10px">投資前に必ず確認すべき5点</div>
+      <div style="font-size:13px;line-height:2;color:rgba(246,245,239,.85)">
+        <strong style="color:#f08a22">1.</strong> 26/3期有報（S100YJ15）の「③純投資目的の投資株式」と単体BSの関係会社株式明細 — <strong>約84億円の中身がフジクラ株か否か</strong>。本レポート最大の未検証点。<br>
+        <strong style="color:#f08a22">2.</strong> 8/7の1Q短信で27/3期の通期予想が開示されるか、第12次中計の公表時期に言及があるか。<br>
+        <strong style="color:#f08a22">3.</strong> 植島グループの大量保有変更報告書 — 5/19以降に追加の報告が出ていないか（保有目的欄に「重要提案行為等」の記載があるかが焦点）。<br>
+        <strong style="color:#f08a22">4.</strong> 8/31期限の自己株式取得の進捗（自己株券買付状況報告書）— 実際に上限まで買っているか。<br>
+        <strong style="color:#f08a22">5.</strong> 2026年5月20日提出の臨時報告書「監査公認会計士等の異動」の理由。
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#f08a22;text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15.5px;line-height:1.9;color:rgba(246,245,239,.93);max-width:880px">
+        藤倉化成961円は、<strong style="color:#f08a22">株価の62.7%がキャッシュと上場株で裏打ちされ、事業をEV 104億円（EV/EBITDA 2.7倍）で買える古典的なアセットバリュー投資。</strong>収益性の低さゆえに長年PBR 1倍を超えたことがない銘柄だが、保有比率10.1%のアクティビスト・延期中の中期経営計画・進行中の自社株買い・そしてフジクラ22.55%という三者の力学が、今回に限っては「割安のまま放置」を許さない構図を作っている。賭けているのは事業の成長ではなく、<strong style="color:#f08a22">貯め込まれた資産が株主に戻る確率</strong>である。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:#1e1f27;color:rgba(246,245,239,.55);text-align:center;padding:22px;font:500 10.5px/1.9 'JetBrains Mono',monospace;letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されたものであり、特定銘柄の売買を推奨するものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  筆者は証券アナリストでも投資助言業者でもなく、本資料に含まれる推定・シナリオ確率は主観的なものです。数値は一次資料の転記時点のものであり、誤りが含まれる可能性があります。<br>
+  Data: EDINET 有価証券報告書 第115期(S100YJ15) / 第114期(S100W3IT) / 大量保有報告書 / 藤倉化成 2026年3月期決算短信 / IRBANK / 投資の森（2026年8月3日終値） · 2026.08.03作成
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

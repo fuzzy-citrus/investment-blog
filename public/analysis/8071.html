@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東海エレクトロニクス（8071）深掘り投資分析 — 2026.06</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f8f7f2;--bg2:#f0ede4;--bg3:#e4e0d6;
+  --ink:#0d0f14;--ink2:#1e2028;--ink3:#56585f;
+  --rd:#a02828;--rd2:#c83838;
+  --gn:#1a6038;--gn2:#228048;
+  --am:#7a4a08;--am2:#ac6810;
+  --bl:#102878;--bl2:#1840a8;
+  --tl:#0d7a60;--tl2:#0f9878;
+  --pur:#5a3a9a;--pur2:#7a54c0;
+  --sem:#b05810;--sem2:#d87018;
+  --rule:rgba(13,15,20,.08);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#1a1e2e 0%,#0d1020 100%);color:rgba(246,245,239,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:320px;height:320px;border:1px solid rgba(255,255,255,.04);border-radius:50%}
+.hero-top{display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:22px}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font:700 34px/1.06 var(--head);letter-spacing:-.025em}
+.hero-title em{color:var(--tl2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);margin-top:6px;line-height:1.65}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;flex:1;min-width:320px}
+.kpi{background:rgba(17,18,23,.3);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.tl{color:#60d8c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:14px;background:rgba(13,122,96,.15);border:1px solid rgba(13,122,96,.3);border-radius:var(--r);padding:12px 18px}
+.verdict-score{font:700 40px/1 var(--mono);color:#60d8c0}
+.verdict-text{font-size:12px;color:rgba(246,245,239,.7);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+/* ── NAV ── */
+.mnav{background:#1a1e2e;display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:13px 16px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--tl2)}
+
+/* ── BODY ── */
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-rd{background:#fce8e8;color:var(--rd)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-tl{background:#dff5f0;color:var(--tl)}.cb-pu{background:#f2eeff;color:var(--pur)}
+
+/* ── SUB TABS ── */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.g6{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+
+/* ── CARDS ── */
+.card{background:#fff;border:.5px solid #e8e4da;border-radius:var(--r);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-tl{border-left:3px solid var(--tl)}.card-pu{border-left:3px solid var(--pur)}
+.card-hi-gn{background:#f0f9f4;border:.5px solid #90d0a8}
+.card-hi-tl{background:#eaf7f4;border:.5px solid #70c8b0}
+.card-hi-am{background:#fffbf0;border:.5px solid #e8c870}
+.card-hi-rd{background:#fdf2f2;border:.5px solid #e0a0a0}
+
+/* ── METRIC ── */
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.tl{color:var(--tl)}.mc-v.pu{color:var(--pur)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-tl{color:var(--tl);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* ── BADGE ── */
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-rd{background:#fce8e8;color:var(--rd)}.bd-gn{background:#dff0e8;color:var(--gn)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-tl{background:#dff5f0;color:var(--tl)}.bd-pu{background:#f2eeff;color:var(--pur)}
+
+/* ── BAR / GAIN ── */
+.gain-meter{display:grid;grid-template-columns:200px 1fr 90px;align-items:center;gap:10px;margin-bottom:8px}
+.gain-label{font-size:11px;color:var(--ink2)}
+.gain-track{height:9px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.gain-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.gain-val{font:600 11px/1 var(--mono);text-align:right}
+
+/* ── WATERFALL ── */
+.wf-row{display:flex;align-items:center;padding:8px 12px;font-size:12px;border-bottom:.5px solid var(--rule)}
+.wf-row:hover{background:var(--bg3)}
+.wf-label{flex:1}
+.wf-val{font-family:var(--mono);font-size:12px;font-weight:600;min-width:140px;text-align:right}
+.wf-sub{background:var(--gn);color:#fff;font-weight:700}
+.wf-tot{background:#1a1e2e;color:rgba(246,245,239,.9);font-weight:700}
+.wf-ref{background:var(--bg3);color:var(--ink3)}
+
+/* ── TIMELINE ── */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:14px}
+.tl-dot{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.tl-dot.rd{background:var(--rd)}.tl-dot.am{background:var(--am)}.tl-dot.bl{background:var(--bl)}.tl-dot.gn{background:var(--gn)}.tl-dot.tl{background:var(--tl)}.tl-dot.pu{background:var(--pur)}
+.tl-date{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px}
+.tl-text{font-size:12px;line-height:1.65}
+
+/* ── SCENARIO ── */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden}
+.sc-col{padding:16px 16px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-bottom:8px;margin-bottom:10px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}.sc-lbl.base{border-color:var(--am);color:var(--am)}.sc-lbl.bull{border-color:var(--tl);color:var(--tl)}
+.sc-prob{font:600 36px/1 var(--mono);margin-bottom:4px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--tl)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:12px}
+.sc-li{font-size:11px;padding:5px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+
+/* ── CONCLUSION ── */
+.conc{background:#1a1e2e;color:rgba(246,245,239,.82);border-radius:var(--r);padding:28px 32px}
+.conc-head{font:700 17px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:14px}
+.conc-head span{color:var(--tl2)}
+.conc-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.conc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-body{font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)}
+.conc-body strong{color:rgba(246,245,239,.95)}
+
+/* ── DIALOGUE ── */
+.dlg-wrap{display:flex;flex-direction:column;gap:14px;margin:16px 0}
+.dlg-row{display:flex;gap:12px;align-items:flex-start}
+.dlg-row.right{flex-direction:row-reverse}
+.dlg-avatar{flex-shrink:0;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 16px/1 var(--sans);color:#fff;position:relative}
+.dlg-avatar .tag{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 7px/1 var(--mono);padding:2px 5px;border-radius:2px;letter-spacing:.04em}
+.dlg-bubble{background:#fff;border:.5px solid #e0ddd5;border-radius:0 10px 10px 10px;padding:11px 15px;font-size:12px;line-height:1.8;max-width:74%;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.dlg-row.right .dlg-bubble{border-radius:10px 0 10px 10px;background:#f0f9f4;border-color:#90d0a8}
+.dlg-name{font:700 9px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;color:var(--ink3)}
+.dlg-bubble.rival{background:#fff4f4;border-color:#e0a0a0}
+.dlg-bubble.rival-b{background:#f4f0ff;border-color:#b090e0}
+.dlg-bubble.rival-c{background:#fffbf0;border-color:#d8b060}
+.home-report{background:linear-gradient(135deg,#0d1020 0%,#1a2a18 100%);border-radius:8px;padding:20px 24px;margin-bottom:18px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.hr-grade{font:900 52px/1 var(--mono);color:#60d8c0;flex-shrink:0}
+.hr-tags{display:flex;flex-direction:column;gap:6px;flex:1}
+.hr-tag{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 var(--sans);color:rgba(246,245,239,.85)}
+.hr-tag::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--tl2);flex-shrink:0}
+.hr-note{font-size:10px;color:rgba(246,245,239,.28);margin-top:8px;line-height:1.55}
+.seo-h2{font:700 22px/1.3 var(--head);letter-spacing:-.018em;margin-bottom:6px;color:var(--ink)}
+.seo-sub{font-size:12px;color:var(--ink3);line-height:1.7;margin-bottom:18px}
+
+/* ── NOTICES ── */
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.notice-gn{background:#eaf7f0;border:.5px solid #70c898;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.notice-gn strong{color:var(--gn2)}
+.notice-tl{background:#eaf7f4;border:.5px solid #70c8b0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--tl);line-height:1.65;margin-bottom:12px}
+.notice-tl strong{color:var(--tl2)}
+.notice-rd{background:#fdf0f0;border:.5px solid #d09090;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:12px}
+
+.rsev-hi{background:#fce8e8;color:var(--rd);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-mi{background:#fef3e0;color:var(--am);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.rsev-lo{background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.spacer{height:14px}
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<!-- cintro chapter inserted dynamically before main -->
+<header class="hero">
+  <div class="hero-top">
+    <div style="flex:1;min-width:260px">
+      <p class="hero-label">Deep Value Analysis — 2026.06 — 最新決算（2026/3期）完全反映版</p>
+      <h1 class="hero-title">東海エレクトロニクス <em>（8071）</em><br>深掘り投資分析レポート</h1>
+      <p class="hero-sub">2026年3月期決算確定値反映 ／ 現金119億円（時価総額超）／ 粗利率12%→16%へ急改善 ／ 名証メイン・電子部品専門商社</p>
+    </div>
+    <div class="hero-verdict">
+      <div class="verdict-score">◎</div>
+      <div class="verdict-text">
+        <strong>買い検討 ─ 3年期待リターン+53%（加重平均）</strong><br>
+        純キャッシュ89億円が株価2,800円を理論的に下支え。<br>
+        PBR 0.34倍・現金119億＞時価総額67億の"現金富裕"状態。<br>
+        粗利率改善でFA/AI転換が実証済み。インフレは資産含み益を拡大。
+      </div>
+    </div>
+  </div>
+  <div class="hero-kpis">
+    <div class="kpi"><div class="kpi-l">現在株価</div><div class="kpi-v am">¥2,800</div><div class="kpi-s">時価総額 約65.9億円</div></div>
+    <div class="kpi"><div class="kpi-l">帳簿BPS</div><div class="kpi-v gn">¥8,232</div><div class="kpi-s">PBR 0.34倍</div></div>
+    <div class="kpi"><div class="kpi-l">配当利回り（予）</div><div class="kpi-v gn">4.1%</div><div class="kpi-s">115円予想</div></div>
+    <div class="kpi"><div class="kpi-l">現金等（26/3末）</div><div class="kpi-v tl">¥119億</div><div class="kpi-s">時価総額の1.8倍</div></div>
+    <div class="kpi" style="border-top:3px solid #60d8c0"><div class="kpi-l">純キャッシュ</div><div class="kpi-v tl">+¥89億</div><div class="kpi-s">1株3,783円・下値支持</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)"><div class="kpi-l">3年期待リターン</div><div class="kpi-v am">+53%</div><div class="kpi-s">加重平均（配当含む）</div></div>
+  </div>
+</header>
+
+<!-- ══ NAV ══ -->
+<nav class="mnav" id="mnav">
+  <button class="mnb on" onclick="showChapter('c0',this)">⚡ 0. カタリスト</button>
+  <button class="mnb" onclick="showChapter('c1',this)">1. 決算・財務分析</button>
+  <button class="mnb" onclick="showChapter('c2',this)">2. 含み益・資産精査</button>
+  <button class="mnb" onclick="showChapter('c3',this)">3. ネットネット分析</button>
+  <button class="mnb" onclick="showChapter('c4',this)">4. 事業転換・FA/AI</button>
+  <button class="mnb" onclick="showChapter('c5',this)">5. インフレ影響</button>
+  <button class="mnb" onclick="showChapter('c6',this)">6. リスク分析</button>
+  <button class="mnb" onclick="showChapter('c7',this)">🏁 7. 最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══════════════════════════════════════════
+     CINTRO: 銘柄紹介
+══════════════════════════════════════════ -->
+<div class="chapter" id="cintro" style="display:none">
+
+<!-- SEO見出し -->
+<h1 class="seo-h2">東海エレクトロニクス（8071）銘柄紹介｜現金が株価を上回る"異常なネットネット"の正体とは</h1>
+<p class="seo-sub">名証メイン上場の電子部品専門商社。純キャッシュ3,783円／株が株価2,800円を超過——グレアム式NCAV比52%・PBR 0.34倍という教科書的ネットネット株。流動性は低いが、じっくり拾う価値のある隠れた超割安銘柄を徹底紹介します。</p>
+
+<!-- ホームの近況レポート -->
+<div class="home-report">
+  <div class="hr-grade">A＋</div>
+  <div class="hr-tags">
+    <div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px">近況レポート — 2026.06 / 東海エレクトロニクス（8071）</div>
+    <div class="hr-tag">流動性低 ── ゆっくり拾う</div>
+    <div class="hr-tag">異常なネットネット ── 純キャッシュが株価を超過</div>
+    <div class="hr-tag">粗利率12%→16% ── FA/AI転換を数字が証明</div>
+    <div class="hr-note">時価総額65.9億円に対し現金119億円。純キャッシュ89億円（1株3,783円）が株価2,800円を上回る状態が継続中。名証メイン・小型株のため1日の出来高は薄い。複数日に分けて指値で少しずつ拾うのが正解。</div>
+  </div>
+  <div style="text-align:right;flex-shrink:0">
+    <div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">3年 加重期待リターン</div>
+    <div style="font:900 38px/1 var(--mono);color:#e8b870">+53%</div>
+    <div style="font-size:10px;color:rgba(246,245,239,.3);margin-top:3px">年率 +15% / 配当4.1%込み</div>
+  </div>
+</div>
+
+<!-- キャラ対話 -->
+<div style="background:#fff;border:.5px solid #e8e4da;border-radius:6px;padding:18px 20px;margin-bottom:18px">
+  <div style="font:700 9px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">💬 投資家キャラ討論 ── ライバル陣営が8071を斬る</div>
+
+  <div class="dlg-wrap">
+
+    <!-- ライバル①リク：グロース専業、出来高原理主義 -->
+    <div class="dlg-row">
+      <div class="dlg-avatar" style="background:#b03030">リ<div class="tag" style="background:#b03030;color:#fff">RIVAL</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">リク（グロース専業 / SNS系インフルエンサー）</div>
+        <div class="dlg-bubble rival">
+          出来高スカスカの名証銘柄なんて論外でしょ。スプレッド広いし、買いたいときに買えない・売りたいときに売れない。どんなに割安でも流動性がなければ"絵に描いた餅"じゃないですか？ 8071なんてアルゴ勢も素通りしてますよ。
+        </div>
+      </div>
+    </div>
+
+    <!-- バリュー①ミオ：新キャラ、勉強中の個人投資家 -->
+    <div class="dlg-row right">
+      <div class="dlg-avatar" style="background:var(--tl)">ミ<div class="tag" style="background:var(--tl);color:#fff">VALUE</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">ミオ（バリュー投資 勉強中 / 個人投資家）</div>
+        <div class="dlg-bubble">
+          うーん、でもリクさん……流動性が低いのは「今この瞬間に大量売買できない」ってだけで、長期で持つ前提なら別の話じゃないですか？ 純キャッシュだけで株価を超えてるって、私が勉強した中でもほとんど見たことないケースで。
+        </div>
+      </div>
+    </div>
+
+    <!-- ライバル②アカネ：テクニカル専業、チャートしか信じない -->
+    <div class="dlg-row">
+      <div class="dlg-avatar" style="background:#7030b0">ア<div class="tag" style="background:#7030b0;color:#fff">RIVAL</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">アカネ（テクニカル専業トレーダー / チャーチスト）</div>
+        <div class="dlg-bubble rival-b">
+          チャート的にも全然ダメ。長期下落トレンドのど真ん中で、出来高も伴ってない。PBRとかNCAVとか関係なく、トレンド転換を確認してからじゃないと触れないです。バリュエーションで株価は動かない、需給が動かすんです。
+        </div>
+      </div>
+    </div>
+
+    <!-- バリュー②ケン：ベテラン個人投資家 落ち着いた -->
+    <div class="dlg-row right">
+      <div class="dlg-avatar" style="background:var(--gn)">ケ<div class="tag" style="background:var(--gn);color:#fff">VALUE</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">ケン（ベテランバリュー投資家 / 15年超の個人投資家）</div>
+        <div class="dlg-bubble">
+          アカネさんの言う需給は正しい。でも「需給が動く原因」は何かというと、<strong>最終的にファンダメンタルズ</strong>なんですよ。東証のPBR1倍要請・純キャッシュ89億という数字は、いずれ誰かが気づいて動く理由になる。グレアムが言った「市場は短期には投票機械だが、長期には体重計だ」ってやつです。
+        </div>
+      </div>
+    </div>
+
+    <!-- ライバル③ダイスケ：効率市場信者、機関投資家崩れ -->
+    <div class="dlg-row">
+      <div class="dlg-avatar" style="background:#305080">ダ<div class="tag" style="background:#305080;color:#fff">RIVAL</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">ダイスケ（元機関投資家 / 効率市場信者）</div>
+        <div class="dlg-bubble rival-c">
+          効率市場で考えると、こんなに安いのには「理由がある」んです。売上が394億まで落ちて、自動車向けの構造的な需要減が続いている。ROE 2%台の会社が割安放置されるのは合理的な市場の判断で、割安ではなくて"バリュートラップ"の典型かもしれない。
+        </div>
+      </div>
+    </div>
+
+    <!-- ミオ：反論 -->
+    <div class="dlg-row right">
+      <div class="dlg-avatar" style="background:var(--tl)">ミ<div class="tag" style="background:var(--tl);color:#fff">VALUE</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">ミオ</div>
+        <div class="dlg-bubble">
+          バリュートラップの反論として——売上が減ったのに粗利率が12%→<strong>16%に上がってる</strong>んですよね。普通バリュートラップって事業が悪化し続けるパターンですけど、8071は利益体質が改善してる。それってトラップじゃなくて、転換点のサインじゃないんですか？
+        </div>
+      </div>
+    </div>
+
+    <!-- ケン：まとめ -->
+    <div class="dlg-row right">
+      <div class="dlg-avatar" style="background:var(--gn)">ケ<div class="tag" style="background:var(--gn);color:#fff">VALUE</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">ケン</div>
+        <div class="dlg-bubble">
+          ダイスケさんのバリュートラップ懸念は正当です。だからこそ「流動性低いから<strong>ゆっくり拾う</strong>」という戦略が合理的なんです。一気に買わず、カタリスト（1Q決算・自社株買い発表）を確認しながら少しずつ。最悪シナリオでも純キャッシュ3,783円が下値支持——リスクとリターンの非対称性は明確ですよ。
+        </div>
+      </div>
+    </div>
+
+    <!-- リク：最後の一言 -->
+    <div class="dlg-row">
+      <div class="dlg-avatar" style="background:#b03030">リ<div class="tag" style="background:#b03030;color:#fff">RIVAL</div></div>
+      <div style="flex:1">
+        <div class="dlg-name">リク</div>
+        <div class="dlg-bubble rival">
+          ……まあ、ゆっくり買うなら流動性の問題は小さくなりますね。ただ自分はやっぱり「今すぐ100万入れて来週売れる」銘柄じゃないと無理です（笑）。長期で待てる人向けの銘柄ってことは認めます。
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dlg-wrap -->
+
+  <div style="background:#f0f9f4;border-radius:4px;padding:12px 14px;font-size:11px;color:var(--tl);line-height:1.75;margin-top:4px">
+    <strong>編集部まとめ：</strong>流動性の低さは事実で、デイトレ・スウィングには不向き。しかし長期バリュー投資家にとっては「異常なネットネット＋FA/AI転換の実証＋東証改革の外圧」という三重の買い根拠が揃う稀有なケース。名証の過疎地帯に埋もれた宝石を、焦らずじっくり拾うのが正解と判断しています。
+  </div>
+</div>
+
+<!-- クイック指標サマリー -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:4px">
+  <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">純キャッシュ/株</div><div class="mc-v tl">3,783円</div><div class="mc-s">株価2,800円を超過</div></div>
+  <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">NCAV（グレアム）</div><div class="mc-v bl">5,402円</div><div class="mc-s">株価の1.93倍</div></div>
+  <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">配当利回り</div><div class="mc-v am">4.1%</div><div class="mc-s">待ちながら受け取る</div></div>
+  <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">粗利率改善</div><div class="mc-v gn">+4.6pt</div><div class="mc-s">12%→16% 転換実証</div></div>
+</div>
+<p class="note" style="margin-top:6px">詳細分析は各タブ（カタリスト・財務・ネットネット等）を参照。本記事は情報提供のみを目的とし、投資判断は自己責任でお願いします。</p>
+
+</div><!-- /cintro -->
+
+
+<!-- ══════════════════════════════════════════
+     C0: カタリスト
+══════════════════════════════════════════ -->
+<div class="chapter active" id="c0">
+<div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">カタリスト ─ なぜ東海エレクトロニクス（8071）は今、これほど割安なのか</h2><span class="ch-badge cb-tl">5つの構造的割安</span></div>
+
+<!-- リードコピー -->
+<div style="background:linear-gradient(135deg,#1a1e2e 0%,#0d1428 100%);border-radius:6px;padding:22px 26px;margin-bottom:18px;color:rgba(246,245,239,.85)">
+  <div style="font:700 13px/1 var(--head);color:rgba(246,245,239,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Investment Thesis — なぜ今、なぜ8071か</div>
+  <div style="font:700 18px/1.45 var(--head);letter-spacing:-.01em;margin-bottom:10px">現株価¥2,800は「事業価値ゼロ＋現金に大幅割引」を前提にした異常な水準だ。<br>純キャッシュ89億円だけで株価を上回り、粗利率は12%→16%へ改善済み。<br>PBR 0.34倍・修正PBR 0.24倍という極端な低評価で放置されている。</div>
+  <div style="font-size:11px;color:rgba(246,245,239,.38);line-height:1.7">時価総額65.9億円に対し、現金119億円（純キャッシュ89億円）が存在する。つまり株価2,800円に対し純キャッシュ換算だけで1株3,783円。現金だけで株価を上回るという極めて稀な「スーパー割安」状態にある。さらに土地・有価証券の含み益を加えた修正純資産は1株9,100〜9,400円に達し、株価はその30%水準に過ぎない。2026/3期決算では売上が大幅に減少したにも関わらず、粗利率は4ポイント改善して16.1%へ——FA・AI向け高利益率品へのビジネスモデル転換が実証された。</div>
+</div>
+
+<!-- 5大カタリスト -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+
+  <!-- ① 現金119億＞時価総額 -->
+  <div style="background:#fff;border:.5px solid #c8e8d8;border-radius:6px;overflow:hidden">
+    <div style="background:var(--tl);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">カタリスト ①</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">現金119億円が時価総額65.9億円を超過<br>純キャッシュ1株3,783円が下値フロア</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>現金等（2026/3末）</span><span class="hi-tl mono">119億円</span></div>
+        <div style="background:#e8f5ef;border-radius:3px;height:14px;overflow:hidden"><div style="width:100%;height:100%;background:var(--tl);border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font:700 10px/1 var(--mono);color:#fff">時価総額の1.8倍</span></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:3px"><span>時価総額（株価2,800円）</span><span class="mono">65.9億円</span></div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">2026/3期に棚卸資産・売上債権が大幅圧縮されたことで現金が急増。純キャッシュ（現金119億−借入30億）は<strong>89億円＝1株3,783円</strong>。現在の株価2,800円はこの純キャッシュ単独でも上回られる。事業（電子部品商社＋FA/AI転換）は<strong>実質マイナス評価</strong>という非合理な状態。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-tl">純キャッシュ3,783円/株</span>
+        <span class="badge bd-tl">下値フロアが株価超</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② PBR 0.34倍・修正0.24倍 -->
+  <div style="background:#fff;border:.5px solid #c8d8f0;border-radius:6px;overflow:hidden">
+    <div style="background:var(--bl);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">カタリスト ②</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">PBR 0.34倍・修正PBR 0.24倍<br>純資産の3分の1以下で買える</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center">
+        <div style="text-align:center;flex:1;background:#f0f4fc;border-radius:4px;padding:8px 4px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">帳簿BPS</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--bl)">¥8,232</div>
+          <div style="font-size:9px;color:var(--ink3)">PBR 0.34倍</div>
+        </div>
+        <div style="font-size:18px;color:var(--ink3)">vs</div>
+        <div style="text-align:center;flex:1;background:#eaf7f4;border-radius:4px;padding:8px 4px">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">修正実態BPS</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--tl)">¥9,200+</div>
+          <div style="font-size:9px;color:var(--ink3)">修正PBR 0.24倍</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">帳簿BPS 8,232円に、投資有価証券含み益（税後589円）＋土地含み益（税後340〜538円）を加算すると実態BPSは<strong>9,161〜9,359円</strong>。現在株価2,800円は修正実態BPSの<strong>わずか30%</strong>。東証が問題視するPBR1倍割れどころか0.24倍——解散価値の4分の1以下。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-bl">修正PBR 0.24倍</span>
+        <span class="badge bd-gn">含み益+929〜1,127円/株</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 粗利率12%→16%・FA/AI転換実証 -->
+  <div style="background:#fff;border:.5px solid #f0d898;border-radius:6px;overflow:hidden">
+    <div style="background:var(--am);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">カタリスト ③</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">粗利率12%→16%へ急改善<br>FA/AI向け高利益率品へのモデル転換</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fffbf0;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">2025/3期 粗利率</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--rd)">11.5%</div>
+        </div>
+        <div style="background:#eaf7f4;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--ink3);margin-bottom:2px">2026/3期 粗利率</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--tl)">16.1%</div>
+          <div style="font-size:9px;color:var(--tl)">+4.6pt改善</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">売上高が394億円（▲35%）に落ち込んだにも関わらず、粗利額は95%を維持。<strong>「売上が減っても利益が維持できるビジネス」</strong>へ転換したことを2026/3期決算が実証。TSMC熊本工場稼働に伴うFA・工作機械向けAI半導体需要が牽引。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-am">粗利額95%維持（売上▲35%で）</span>
+        <span class="badge bd-tl">FA/AI転換実証済み</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 東証PBR1倍改革の直撃 -->
+  <div style="background:#fff;border:.5px solid #c8e8d8;border-radius:6px;overflow:hidden">
+    <div style="background:var(--gn);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">カタリスト ④</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">東証改革・PBR1倍要請の直撃<br>純キャッシュ活用の説明義務が増大</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="background:#eaf7f0;border-radius:4px;padding:10px;margin-bottom:10px">
+        <div style="font-size:11px;color:var(--gn);font-weight:600;margin-bottom:5px">東証の要請（2023年3月〜継続中）</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">PBR1倍割れ企業に対し「資本コストを意識した経営改善計画・具体的KPIの開示」を義務付け。PBR 0.34倍・純キャッシュ89億の東海エレクトロニクスは<strong>典型的なターゲット</strong>。</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">現金89億円を抱えながら時価総額66億円という状態は「現金の非効率保有」として問われる対象。①自社株買い、②増配、③戦略投資のいずれかで<strong>株価を押し上げる外圧が制度的に担保</strong>されている。ROE 2%台が続けば機関投資家・アクティビストの圧力が高まる。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-gn">PBR0.34倍→改善義務</span>
+        <span class="badge bd-am">純キャッシュ89億の活用圧力</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 高配当4%台・増配余力 -->
+  <div style="background:#fff;border:.5px solid #e0d0f0;border-radius:6px;overflow:hidden">
+    <div style="background:var(--pur);padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">カタリスト ⑤</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">高配当4.1%＋現金余剰で増配余力大<br>インフレで不動産・有価証券含み益が膨張</div>
+    </div>
+    <div style="padding:13px 14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#f4f0fc;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--pur);margin-bottom:2px">配当利回り（予）</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--pur)">4.1%</div>
+          <div style="font-size:9px;color:var(--ink3)">115円/株予想</div>
+        </div>
+        <div style="background:#f4f0fc;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--pur);margin-bottom:2px">3年累積配当</div>
+          <div style="font:700 22px/1 var(--mono);color:var(--pur)">¥345+</div>
+          <div style="font-size:9px;color:var(--ink3)">115円×3年（増配余力あり）</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">純キャッシュ89億は年間配当総額（≒2.7億円）の約33年分。増配余力は財務的に問題なし。有価証券評価差額金（税後）は939M→1,385Mへ急増——<strong>インフレと株高が含み益を自動的に拡大</strong>させている。繰延税金負債も410→751Mへ急増し含み益実現の準備段階にある可能性。</div>
+      <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+        <span class="badge bd-pu">含み益1,385M（税後）</span>
+        <span class="badge bd-gn">増配余力32年分以上</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- まとめカード（6列目） -->
+  <div style="background:#fff;border:.5px solid var(--bg3);border-radius:6px;overflow:hidden;display:flex;flex-direction:column">
+    <div style="background:#1a1e2e;padding:10px 14px">
+      <div style="font:700 9px/1 var(--mono);color:rgba(255,255,255,.6);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">3年シナリオ 非対称リスク</div>
+      <div style="font:700 14px/1.2 var(--head);color:#fff">ダウンサイド限定的<br>アップサイドは最大+90%</div>
+    </div>
+    <div style="padding:13px 14px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="background:#fdf2f2;border-left:3px solid var(--rd);border-radius:3px;padding:9px 11px">
+        <div style="font:700 10px/1 var(--mono);color:var(--rd);margin-bottom:4px">BEAR 25%・¥2,300</div>
+        <div style="font-size:11px;color:var(--ink2)">配当含む損失<strong style="color:var(--rd)">▲9.6%</strong>に限定。純キャッシュ3,783円が下値支持。</div>
+      </div>
+      <div style="background:#fffbf0;border-left:3px solid var(--am);border-radius:3px;padding:9px 11px">
+        <div style="font:700 10px/1 var(--mono);color:var(--am);margin-bottom:4px">BASE 55%・¥3,800</div>
+        <div style="font-size:11px;color:var(--ink2)">配当込み<strong style="color:var(--am)">+48.2%</strong>。PBR 0.46倍への正常化。</div>
+      </div>
+      <div style="background:#eaf7f0;border-left:3px solid var(--tl);border-radius:3px;padding:9px 11px">
+        <div style="font:700 10px/1 var(--mono);color:var(--tl);margin-bottom:4px">BULL 20%・¥5,500</div>
+        <div style="font-size:11px;color:var(--ink2)">配当込み<strong style="color:var(--tl)">+107%</strong>。自社株買い＋PBR収れん。</div>
+      </div>
+      <div style="background:#f0f9f4;border-radius:4px;padding:10px 12px;text-align:center;margin-top:auto">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">確率加重 3年期待リターン</div>
+        <div style="font:700 28px/1 var(--mono);color:var(--tl)">+53%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:2px">年率換算 +15%/年</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /5cards grid -->
+
+<!-- まとめバー -->
+<div style="background:#1a1e2e;border-radius:6px;padding:16px 20px;margin-bottom:16px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;text-align:center">
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">帳簿BPS</div><div style="font:700 20px/1 var(--mono);color:#68c890">¥8,232</div><div style="font-size:9px;color:rgba(246,245,239,.22)">株価の2.9倍・PBR0.34倍</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">純キャッシュ</div><div style="font:700 20px/1 var(--mono);color:#60d8c0">¥3,783</div><div style="font-size:9px;color:rgba(246,245,239,.22)">1株換算・株価超</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">配当利回り</div><div style="font:700 20px/1 var(--mono);color:#e8b870">4.1%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">115円予想・増配余力大</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">粗利率（26/3）</div><div style="font:700 20px/1 var(--mono);color:#60d8c0">16.1%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">12%→16%・FA/AI転換証明</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">修正PBR</div><div style="font:700 20px/1 var(--mono);color:#68c890">0.24倍</div><div style="font-size:9px;color:rgba(246,245,239,.22)">含み益加算後の実質割安度</div></div>
+  <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">3年期待リターン</div><div style="font:700 20px/1 var(--mono);color:#e8b870">+53%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">加重平均（3ケース）</div></div>
+</div>
+
+<!-- カタリストカレンダー＆非対称リスク -->
+<div class="g2">
+  <div class="card">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">★ カタリストカレンダー（2026〜2028年）</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot tl"></div><div class="tl-date">✓ 2026年5月（完了）</div><div class="tl-text">2026/3期決算確定：粗利率16.1%・現金119億・CF100億超。エントリー根拠の数字確定。</div></div>
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-date">2026年6月〜</div><div class="tl-text">東証PBR改善要請への回答公表期。自社株買い・増配・保有株縮減等の発表が期待される。</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-date">★ 2026年8月（最重要）</div><div class="tl-text">1Q決算：売上回復局面への転換確認。FA/AI需要継続の検証。配当方針のアップデート。</div></div>
+      <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-date">2026年後半〜2027年</div><div class="tl-text">日銀追加利上げ観測→政策保有株（銀行株）含み益拡大→評価差額金・BPS自動改善。</div></div>
+      <div class="tl-item"><div class="tl-dot pu"></div><div class="tl-date">2027年以降</div><div class="tl-text">TSMC第2工場（熊本）稼働予定。FA電子部品需要の第2波。AI向けセンサー・制御機器需要増。</div></div>
+      <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-date">継続監視：自動車需要</div><div class="tl-text">EV化・デンソー/アイシン向け需要回復の時期。遅延→下振れリスク。回復→ブルへの最短経路。</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">非対称リスク構造（ダウンサイド vs アップサイド）</div>
+    <table class="tbl" style="margin-bottom:14px">
+      <thead><tr><th>ケース</th><th>確率</th><th class="r">3年後株価</th><th class="r">配当(3年)</th><th class="r">総リターン</th></tr></thead>
+      <tbody>
+        <tr style="background:#fdf2f2"><td><strong class="hi-rd">ベア</strong></td><td>25%</td><td class="r mono hi-rd">¥2,300</td><td class="r mono">¥345</td><td class="r mono hi-rd">▲9.6%</td></tr>
+        <tr style="background:#fffbf0"><td><strong class="hi-am">ベース</strong></td><td>55%</td><td class="r mono hi-am">¥3,800</td><td class="r mono">¥375</td><td class="r mono hi-am">+48.2%</td></tr>
+        <tr style="background:#eaf7f0"><td><strong class="hi-tl">ブル</strong></td><td>20%</td><td class="r mono hi-tl">¥5,500</td><td class="r mono">¥400</td><td class="r mono hi-tl">+107.1%</td></tr>
+        <tr style="background:#f0f9f4;font-weight:700"><td colspan="2">加重平均期待価格</td><td class="r mono hi-tl">¥3,655</td><td class="r mono">—</td><td class="r mono hi-tl">+53.1%</td></tr>
+      </tbody>
+    </table>
+    <div style="background:#f0f9f4;border-radius:4px;padding:12px;text-align:center">
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">確率加重 3年後 期待株価</div>
+      <div style="font:700 36px/1 var(--mono);color:var(--tl)">¥3,655</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在株価2,800円から+30.5%・配当込みで+53.1%</div>
+    </div>
+    <p class="note">計算式：2,300×25%＋3,800×55%＋5,500×20%＝3,655円。配当は各ケース実績ベース加重平均。純キャッシュ3,783円が実質的な下値フロアとして機能。</p>
+  </div>
+</div>
+
+</div><!-- /c0 -->
+
+
+<!-- ══════════════════════════════════════════
+     C1: 決算・財務分析
+══════════════════════════════════════════ -->
+<div class="chapter" id="c1">
+<div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">決算・財務分析 ─ 2026年3月期 最新確定値の深掘り</h2><span class="ch-badge cb-tl">売上▲35%でも利益構造が改善</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c1','a',this)">損益推移</button>
+  <button class="stab" onclick="showTab('c1','b',this)">BS・純資産</button>
+  <button class="stab" onclick="showTab('c1','c',this)">キャッシュフロー</button>
+  <button class="stab" onclick="showTab('c1','d',this)">バリュエーション比較</button>
+</div>
+
+<div class="spanel active" id="c1-a">
+  <div class="notice-tl"><strong>2026/3期 決算ハイライト：</strong>売上高394億（▲31%）・粗利率16.1%（前年11.5%から+4.6pt急改善）・営業CF+100億超・期末現金119億（前年比+265%増）。売上大幅減の中で利益体質を大幅強化。</div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>期</th><th class="r">売上高(億)</th><th class="r">粗利率</th><th class="r">経常利益(億)</th><th class="r">当期純利益</th><th class="r">BPS(円)</th><th class="r">配当(円)</th><th class="r">自己資本比率</th></tr></thead>
+      <tbody>
+        <tr><td>2023/3期</td><td class="r mono">650</td><td class="r mono">—</td><td class="r mono">17.7</td><td class="r mono">11.0</td><td class="r mono">7,530</td><td class="r mono">100</td><td class="r mono">—</td></tr>
+        <tr><td>2024/3期</td><td class="r mono">608</td><td class="r mono hi-rd">12.1%</td><td class="r mono">16.6</td><td class="r mono hi-rd">4.9</td><td class="r mono">7,907</td><td class="r mono">100</td><td class="r mono">54.9%</td></tr>
+        <tr><td>2025/3期</td><td class="r mono">570</td><td class="r mono hi-rd">11.5%</td><td class="r mono hi-rd">11.0</td><td class="r mono hi-rd">6.4</td><td class="r mono">8,232</td><td class="r mono">115</td><td class="r mono">59.8%</td></tr>
+        <tr style="background:#eaf7f4"><td><strong>2026/3期（最新確定）</strong></td><td class="r mono hi-rd"><strong>394</strong></td><td class="r mono hi-tl"><strong>16.1%</strong></td><td class="r mono hi-tl"><strong>9.5</strong></td><td class="r mono hi-tl"><strong>3.9</strong></td><td class="r mono hi-tl"><strong>≒8,540</strong></td><td class="r mono hi-tl"><strong>115</strong></td><td class="r mono hi-tl"><strong>62.7%</strong></td></tr>
+        <tr><td>2027/3期（会社予想）</td><td class="r mono">400</td><td class="r mono">—</td><td class="r mono">6.2</td><td class="r mono">3.7</td><td class="r mono">≒8,700</td><td class="r mono">115(予)</td><td class="r mono">63%+</td></tr>
+      </tbody>
+    </table>
+    <p class="note">2026/3期の純利益3.9億は前期比減だが、これは特損処理・棚卸評価など一過性要因の影響が大きく、経常ベースでは体質改善。BPSは毎期着実に増加中（自己資本比率59.8%→62.7%）。2027/3期予想の低利益は運転資金の再積み上げ（CF逆転）を含む慎重見通し。</p>
+  </div>
+  <div class="g4">
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">粗利率（26/3）</div><div class="mc-v tl">16.1%</div><div class="mc-s">前期11.5%から+4.6pt</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">自己資本比率</div><div class="mc-v gn">62.7%</div><div class="mc-s">前期59.8%→着実改善</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">受取利息（26/3）</div><div class="mc-v am">5.6億</div><div class="mc-s">現金増加で金融収益拡大</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">為替差損益</div><div class="mc-v bl">+2.0億</div><div class="mc-s">前期▲5.2億から反転</div></div>
+  </div>
+  <div class="notice" style="margin-top:14px"><strong>注目ポイント：</strong>2025/3期は為替差損▲5.2億が経常利益を大きく圧迫。2026/3期は為替差益+2.0億に転換し、受取利息5.6億・受取配当5.4億が拡大。「本業の電子部品商社」としての姿より「現金・金融資産保有会社」としての顔が強まっている。</div>
+</div>
+
+<div class="spanel" id="c1-b">
+  <div class="notice-gn"><strong>B/Sの構造：</strong>流動資産が棚卸・売上債権の圧縮で急減する一方、現金が急増。固定資産の投資有価証券は含み益拡大で増加。自己資本比率62.7%と財務は極めて健全。</div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>B/S主要項目（連結・百万円）</th><th class="r">2024/3</th><th class="r">2025/3</th><th class="r">2026/3</th><th>変化ポイント</th></tr></thead>
+      <tbody>
+        <tr><td class="hi-tl">現金及び預金</td><td class="r mono">4,268</td><td class="r mono">3,254</td><td class="r mono hi-tl">11,946</td><td>在庫・債権圧縮で急増</td></tr>
+        <tr><td>売掛金・受取手形</td><td class="r mono">11,165</td><td class="r mono">9,850</td><td class="r mono">6,794</td><td>売上減少に連動して減少</td></tr>
+        <tr><td>棚卸資産</td><td class="r mono">10,068</td><td class="r mono">8,741</td><td class="r mono hi-gn">4,756</td><td>大幅圧縮・キャッシュ化</td></tr>
+        <tr><td>投資有価証券</td><td class="r mono">1,713</td><td class="r mono">1,867</td><td class="r mono hi-tl">2,528</td><td>含み益拡大</td></tr>
+        <tr><td>土地（簿価）</td><td class="r mono">1,903</td><td class="r mono">1,903</td><td class="r mono">1,903</td><td>名古屋・栄本店等</td></tr>
+        <tr><td class="hi-rd">有利子負債</td><td class="r mono">3,800</td><td class="r mono">4,150</td><td class="r mono">3,000</td><td>返済進行中</td></tr>
+        <tr style="background:#eaf7f4"><td class="hi-tl"><strong>純資産合計</strong></td><td class="r mono hi-tl">17,017</td><td class="r mono hi-tl">17,496</td><td class="r mono hi-tl"><strong>18,757</strong></td><td>着実に増加</td></tr>
+        <tr style="background:#eaf7f4"><td class="hi-tl"><strong>自己資本比率</strong></td><td class="r mono">54.9%</td><td class="r mono">59.8%</td><td class="r mono hi-tl"><strong>62.7%</strong></td><td>財務健全化</td></tr>
+        <tr><td>有価証券評価差額金（税後）</td><td class="r mono">854</td><td class="r mono">939</td><td class="r mono hi-tl">1,385</td><td>含み益が着実拡大</td></tr>
+        <tr><td class="hi-am">繰延税金負債</td><td class="r mono">—</td><td class="r mono">410</td><td class="r mono hi-am">751</td><td>含み益実現準備の可能性</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice"><strong>繰延税金負債が410→751百万円に急増：</strong>これは含み益（有価証券・不動産）が実現に向けて動き出す前兆の可能性。会計的には含み益の将来税コストを先取り計上しており、実現が近いシグナルともとれる。</div>
+</div>
+
+<div class="spanel" id="c1-c">
+  <div class="notice-tl"><strong>2026/3期のCF急増メカニズム：</strong>営業CF+100億超は、棚卸資産▲40億・売上債権▲41億の大幅圧縮が主因。一過性だが、期末に119億の現金として残存。2027/3期は売上再拡大に伴い運転資金が再拡大する予想（CF▲14億）。</div>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">CF推移（億円）</div>
+      <table class="tbl">
+        <thead><tr><th>年度</th><th class="r">営業CF</th><th class="r">投資CF</th><th class="r">期末現金</th></tr></thead>
+        <tbody>
+          <tr><td>2023/3</td><td class="r mono hi-rd">▲7.6</td><td class="r mono">▲0.8</td><td class="r mono">23.7</td></tr>
+          <tr><td>2024/3</td><td class="r mono hi-gn">+36.2</td><td class="r mono">▲4.5</td><td class="r mono">42.7</td></tr>
+          <tr><td>2025/3</td><td class="r mono hi-rd">▲7.6</td><td class="r mono">▲2.7</td><td class="r mono">32.5</td></tr>
+          <tr style="background:#eaf7f4"><td><strong>2026/3</strong></td><td class="r mono hi-tl"><strong>+100.3</strong></td><td class="r mono">▲0.2</td><td class="r mono hi-tl"><strong>119.5</strong></td></tr>
+          <tr style="background:#fffbf0"><td>2027/3（予）</td><td class="r mono hi-rd">▲14.1</td><td class="r mono">▲3.2</td><td class="r mono">70.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">2026/3期 営業CF100億の内訳</div>
+      <table class="tbl">
+        <thead><tr><th>項目</th><th class="r">金額（億円）</th></tr></thead>
+        <tbody>
+          <tr><td>当期純利益</td><td class="r mono">+3.9</td></tr>
+          <tr><td class="hi-tl">棚卸資産の減少</td><td class="r mono hi-tl">+40.2</td></tr>
+          <tr><td class="hi-tl">売上債権の減少</td><td class="r mono hi-tl">+41.5</td></tr>
+          <tr><td>仕入債務の増減</td><td class="r mono">+3.5</td></tr>
+          <tr><td>減価償却費</td><td class="r mono">+2.5</td></tr>
+          <tr><td class="hi-rd">法人税等支払</td><td class="r mono hi-rd">▲4.5</td></tr>
+          <tr><td>その他</td><td class="r mono">+13.2</td></tr>
+          <tr style="background:#eaf7f4;font-weight:700"><td>合計</td><td class="r mono hi-tl">+100.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="notice"><strong>CF解釈の注意点：</strong>100億超のCFのうち81.7億は「売上減少に伴う運転資金の解放」という一過性要因。売上が2027/3期に向けて回復するとこの逆流が起きる（▲14億のCF予想）。正常な年間営業CFは5〜10億円レベルと見るのが妥当。ただし119億の現金は事実として残っており、活用方針が今後の最大注目点。</div>
+</div>
+
+<div class="spanel" id="c1-d">
+  <div class="g4" style="margin-bottom:14px">
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">現在PBR</div><div class="mc-v rd">0.34倍</div><div class="mc-s">BPS 8,232円に対し</div></div>
+    <div class="card mc" style="border-top:3px solid var(--tl)"><div class="mc-l">修正PBR（含み益後）</div><div class="mc-v tl">0.24倍</div><div class="mc-s">修正BPS 9,200円超</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">PER（会社予想）</div><div class="mc-v am">18倍</div><div class="mc-s">EPS≒154円（27/3予）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">EV/EBITDA（推定）</div><div class="mc-v gn">▲12倍</div><div class="mc-s">ネットキャッシュ超過</div></div>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">理論株価の試算</div>
+    <table class="tbl">
+      <thead><tr><th>評価手法</th><th class="r">試算値（円）</th><th>前提・根拠</th></tr></thead>
+      <tbody>
+        <tr><td>純キャッシュ価値</td><td class="r mono hi-tl">3,783</td><td>（現金119億−有利子負債30億）÷ 2,353千株</td></tr>
+        <tr><td>NCAV（グレアム式）</td><td class="r mono hi-tl">5,402</td><td>（流動資産23,710M − 全負債10,987M）÷ 2,353千株</td></tr>
+        <tr><td>帳簿BPS</td><td class="r mono hi-bl">8,232</td><td>2025/3期末純資産÷株式数</td></tr>
+        <tr><td>修正実態BPS（保守）</td><td class="r mono hi-tl">9,161</td><td>帳簿BPS＋含み益加算（保守ケース）</td></tr>
+        <tr><td>修正実態BPS（中央）</td><td class="r mono hi-tl">9,359</td><td>帳簿BPS＋含み益加算（中央ケース）</td></tr>
+        <tr><td>PBR 0.5倍（東証半期目標）</td><td class="r mono hi-am">4,616</td><td>BPS 8,232円 × 0.5倍（現在PBRの約1.5倍）</td></tr>
+        <tr><td>PBR 1.0倍（東証最終目標）</td><td class="r mono hi-gn">8,232</td><td>BPS 8,232円 × 1.0倍（要請水準）</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td>現在株価</td><td class="r mono hi-rd">2,800</td><td>NCAV（5,402円）の52%・修正BPSの30%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice-gn"><strong>結論：</strong>どの評価手法で見ても株価2,800円は著しく割安。グレアム式NCAVの半値以下・帳簿BPSの3分の1・修正実態BPSの30%。理論的に最も保守的な「純キャッシュ価値3,783円」すら株価を上回っており、現在の株価水準は合理的な説明が困難な状態。</div>
+</div>
+</div><!-- /c1 -->
+
+
+<!-- ══════════════════════════════════════════
+     C2: 含み益・資産精査
+══════════════════════════════════════════ -->
+<div class="chapter" id="c2">
+<div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">含み益・資産精査 ─ 有価証券・不動産の隠れた価値</h2><span class="ch-badge cb-tl">含み益1,127円/株が帳簿外に潜在</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c2','a',this)">有価証券含み益</button>
+  <button class="stab" onclick="showTab('c2','b',this)">不動産含み益</button>
+  <button class="stab" onclick="showTab('c2','c',this)">修正BPS試算</button>
+</div>
+
+<div class="spanel active" id="c2-a">
+  <div class="notice-tl"><strong>有価証券評価差額金：</strong>2026/3期末で1,385百万円（税後）。前期939百万円から+47.5%増。繰延税金負債も410→751百万円へ急増しており、政策保有株の含み益が着実に拡大中。</div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>区分</th><th class="r">帳簿価額(千円)</th><th class="r">推定時価</th><th class="r">含み益（税前）</th><th>性質・備考</th></tr></thead>
+      <tbody>
+        <tr><td>その他有価証券（上場株等）</td><td class="r mono">2,528,455</td><td class="r mono hi-tl">〜4,500,000</td><td class="r mono hi-tl">+約1,972M</td><td>政策保有・含み益大</td></tr>
+        <tr style="background:#eaf7f4"><td>うち有価証券評価差額金（税後）</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono hi-tl">1,385,236</td><td>OCI計上済み・BS反映</td></tr>
+        <tr style="background:#fdf2f2"><td>繰延税金負債（含み益対応）</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono hi-rd">▲751,000</td><td>含み益の将来税コスト</td></tr>
+        <tr><td>1株換算（税後）</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono hi-tl">589円/株</td><td>1,385M÷2,353千株</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="gain-meter"><div class="gain-label">有価証券評価差額金（税後・百万円）</div><div class="gain-track"><div class="gain-fill" style="width:70%;background:var(--tl)"></div></div><div class="gain-val hi-tl">1,385M</div></div>
+  <div class="gain-meter"><div class="gain-label">繰延税金負債（含み益対応・百万円）</div><div class="gain-track"><div class="gain-fill" style="width:54%;background:var(--am)"></div></div><div class="gain-val hi-am">751M</div></div>
+  <div class="gain-meter"><div class="gain-label">投資有価証券帳簿価（百万円）</div><div class="gain-track"><div class="gain-fill" style="width:100%;background:var(--bl)"></div></div><div class="gain-val hi-bl">2,528M</div></div>
+  <p class="note" style="margin-top:10px">繰延税金負債が410→751百万円へ急増。これは含み益が更に膨らんだことを示すと同時に、近い将来の実現（売却）に向けた税コスト先取りとも解釈できる。東証の政策保有株縮減要請と合わせると、売却→現金化→還元のサイクルが始まる可能性がある。</p>
+</div>
+
+<div class="spanel" id="c2-b">
+  <div class="notice"><strong>土地の開示制限：</strong>有価証券報告書上、土地面積の開示なし。取得原価と公示地価の比率から逆算推計。実際の面積・建蔽率等により変動あり。</div>
+  <div class="g2">
+    <div class="card" style="margin-bottom:14px">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">有形固定資産の内訳（百万円）</div>
+      <table class="tbl">
+        <thead><tr><th>勘定科目</th><th class="r">帳簿価額（千円）</th></tr></thead>
+        <tbody>
+          <tr><td class="hi-tl">土地</td><td class="r mono hi-tl">1,902,985</td></tr>
+          <tr><td>建物及び構築物（純額）</td><td class="r mono">441,932</td></tr>
+          <tr><td>工具・器具及び備品</td><td class="r mono">45,786</td></tr>
+          <tr><td>リース資産（純額）</td><td class="r mono">27,205</td></tr>
+          <tr style="font-weight:700;background:#eaf7f4"><td>有形固定資産合計</td><td class="r mono">2,499,103</td></tr>
+        </tbody>
+      </table>
+      <p class="note">土地再評価差額金▲662百万円（連結BS計上）。一部土地が土地再評価法で処理済みのため、実際の市場価値は簿価を大きく上回る可能性が高い。</p>
+    </div>
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">土地時価試算（推計）</div>
+      <table class="tbl" style="margin-bottom:12px">
+        <thead><tr><th>シナリオ</th><th class="r">地価想定(万円/㎡)</th><th class="r">推計時価(億円)</th></tr></thead>
+        <tbody>
+          <tr><td>保守（名古屋栄平均）</td><td class="r mono">〜100万</td><td class="r mono">〜27億</td></tr>
+          <tr><td>中央値（栄一等地）</td><td class="r mono">〜150万</td><td class="r mono hi-tl">〜40億</td></tr>
+          <tr><td>強気（商業一等地）</td><td class="r mono">〜200万</td><td class="r mono">〜55億</td></tr>
+          <tr style="color:var(--ink3);font-style:italic"><td>帳簿価額（比較）</td><td class="r mono">—</td><td class="r mono">19億</td></tr>
+        </tbody>
+      </table>
+      <div style="background:#eaf7f4;border-radius:4px;padding:10px 12px">
+        <div style="font-size:11px;color:var(--tl);font-weight:600;margin-bottom:4px">含み益まとめ（土地・税後）</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">含み益8〜21億円 × 71%（税引後）÷ 2,353千株<br>＝ <strong class="hi-tl">約340〜538円/株</strong>の隠れた価値</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spanel" id="c2-c">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">修正BPS（調整後一株純資産）の試算</div>
+    <table class="tbl">
+      <thead><tr><th>項目</th><th class="r">1株換算（円）</th><th>根拠・前提</th></tr></thead>
+      <tbody>
+        <tr><td>帳簿BPS（2025/3期末）</td><td class="r mono">8,232</td><td>有価証券報告書記載値</td></tr>
+        <tr><td>＋土地含み益（保守ケース）</td><td class="r mono hi-tl">+340</td><td>推計27億−簿価19億=8億×71%÷2,353千株</td></tr>
+        <tr><td>＋土地含み益（中央値ケース）</td><td class="r mono hi-tl">+538</td><td>推計40億−簿価19億=21億×71%÷2,353千株</td></tr>
+        <tr><td>＋投資有価証券含み益（税後）</td><td class="r mono hi-tl">+589</td><td>評価差額金1,385M÷2,353千株</td></tr>
+        <tr style="color:var(--ink3);font-style:italic"><td>　税負担控除（実効税率29%）</td><td class="r mono">（含み益に反映済み）</td><td>繰延税金負債751M計上済み・上記は税後値</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td>実態BPS推計（保守）</td><td class="r mono hi-tl">〜9,161円</td><td>税引後含み益加算（保守ケース）</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td>実態BPS推計（中央値）</td><td class="r mono hi-tl">〜9,359円</td><td>税引後含み益加算（中央ケース）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g3">
+    <div class="card mc card-tl"><div class="mc-l">現在株価</div><div class="mc-v rd">¥2,800</div><div class="mc-s">修正BPS比 30%水準</div></div>
+    <div class="card mc card-tl"><div class="mc-l">実態BPS（保守）</div><div class="mc-v tl">¥9,161</div><div class="mc-s">株価の3.27倍</div></div>
+    <div class="card mc card-tl"><div class="mc-l">実態BPS（中央）</div><div class="mc-v tl">¥9,359</div><div class="mc-s">株価の3.34倍</div></div>
+  </div>
+</div>
+</div><!-- /c2 -->
+
+
+<!-- ══════════════════════════════════════════
+     C3: ネットネット分析
+══════════════════════════════════════════ -->
+<div class="chapter" id="c3">
+<div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">ネットネット分析 ─ グレアム式清算価値は株価の2倍</h2><span class="ch-badge cb-tl">NCAV 5,402円 vs 株価2,800円</span></div>
+  <div class="g2">
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">修正NCAV試算（2026/3末・1株換算）</div>
+      <div class="wf-row"><span class="wf-label">流動資産合計</span><span class="wf-val hi-tl">＋¥10,073 /株</span></div>
+      <div class="wf-row" style="padding-left:24px;background:#f8f7f2"><span class="wf-label" style="color:var(--ink3)">うち 現金・預金</span><span class="wf-val" style="color:var(--ink3)">＋¥5,077</span></div>
+      <div class="wf-row" style="padding-left:24px"><span class="wf-label" style="color:var(--ink3)">うち 売掛・受取手形</span><span class="wf-val" style="color:var(--ink3)">＋¥2,887</span></div>
+      <div class="wf-row" style="padding-left:24px;background:#f8f7f2"><span class="wf-label" style="color:var(--ink3)">うち 棚卸資産</span><span class="wf-val" style="color:var(--ink3)">＋¥2,023</span></div>
+      <div class="wf-row"><span class="wf-label">負債合計</span><span class="wf-val hi-rd">▲¥4,671 /株</span></div>
+      <div class="wf-row wf-sub"><span class="wf-label">NCAV（流動資産 − 負債）</span><span class="wf-val">¥5,402 /株</span></div>
+      <div class="wf-row"><span class="wf-label">投資有価証券（帳簿）</span><span class="wf-val hi-tl">＋¥1,075 /株</span></div>
+      <div class="wf-row" style="background:#f8f7f2"><span class="wf-label">有価証券含み益（税後）</span><span class="wf-val hi-tl">＋¥589 /株</span></div>
+      <div class="wf-row"><span class="wf-label">土地含み益（推定・税後）</span><span class="wf-val hi-tl">＋¥340〜¥538 /株</span></div>
+      <div class="wf-row wf-tot"><span class="wf-label">修正資産価値（合計）</span><span class="wf-val">¥7,406〜¥7,604 /株</span></div>
+      <div class="wf-row wf-ref"><span class="wf-label">現在の株価（参考）</span><span class="wf-val hi-rd">¥2,800 /株</span></div>
+      <p class="note">発行済株式数：2,353千株。株価は修正資産価値の37%、NCAVの52%水準。</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="text-align:center;padding:32px">
+        <div style="font-size:11px;color:var(--ink3);margin-bottom:8px">株価 / グレアム式NCAV</div>
+        <div style="font:700 58px/1 var(--mono);color:var(--tl)">52%</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:8px">株価はNCAVの52%水準</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:4px">グレアム基準（≦67%）を大幅に下回る</div>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>指標</th><th class="r">数値</th><th>評価</th></tr></thead>
+          <tbody>
+            <tr><td>時価総額</td><td class="r mono">65.9億円</td><td>現金119億の55%</td></tr>
+            <tr><td>純キャッシュ</td><td class="r mono hi-tl">+89億円</td><td>時価総額の1.35倍</td></tr>
+            <tr><td>PBR</td><td class="r mono hi-rd">0.34倍</td><td>歴史的最低水準</td></tr>
+            <tr><td>修正PBR</td><td class="r mono hi-tl">0.24倍</td><td>帳簿よりさらに割安</td></tr>
+            <tr><td>NCAV比</td><td class="r mono hi-tl">52%</td><td>グレアム基準大幅割れ</td></tr>
+            <tr><td>配当利回り</td><td class="r mono hi-gn">4.1%</td><td>待ちながら受け取れる</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice-gn" style="margin-bottom:0">
+        <strong>スーパー割安の定義：</strong>「純キャッシュ＞株価」という状態は理論的に最も極端な割安。現金だけで株価を買い戻せる水準であり、正常な市場では長続きしない。2026/3期末に初めてこの状態が発生した。
+      </div>
+    </div>
+  </div>
+</div><!-- /c3 -->
+
+
+<!-- ══════════════════════════════════════════
+     C4: 事業転換・FA/AI
+══════════════════════════════════════════ -->
+<div class="chapter" id="c4">
+<div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">事業転換・FA/AI ─ 自動車依存からの脱却と成長ドライバー</h2><span class="ch-badge cb-am">粗利率改善で転換を実証</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c4','a',this)">ビジネスモデル転換</button>
+  <button class="stab" onclick="showTab('c4','b',this)">FA/AI需要の実態</button>
+  <button class="stab" onclick="showTab('c4','c',this)">セグメント別動向</button>
+</div>
+<div class="spanel active" id="c4-a">
+  <div class="notice"><strong>転換の証明：</strong>2026/3期に売上が▲35%減少したにも関わらず、粗利率は11.5%→16.1%へ改善し粗利額は前年比95%を維持。これはFA・AI向け高利益率品のミックスが自動車向け低利益率品の落ち込みを補ったことを意味する。</div>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">売上構成変化（推定）</div>
+      <table class="tbl">
+        <thead><tr><th>セグメント</th><th class="r">2024/3頃</th><th class="r">2026/3頃</th><th>方向性</th></tr></thead>
+        <tbody>
+          <tr><td>Automotive（車載系）</td><td class="r mono hi-rd">65%</td><td class="r mono hi-am">45%</td><td><span class="badge bd-rd">縮小</span></td></tr>
+          <tr><td>FA/IoT（工場自動化）</td><td class="r mono">15%</td><td class="r mono hi-tl">28%</td><td><span class="badge bd-tl">急拡大</span></td></tr>
+          <tr><td>Environment&amp;Energy</td><td class="r mono">8%</td><td class="r mono hi-gn">12%</td><td><span class="badge bd-gn">拡大</span></td></tr>
+          <tr><td>Medical（医療）</td><td class="r mono">5%</td><td class="r mono hi-gn">8%</td><td><span class="badge bd-gn">育成</span></td></tr>
+          <tr><td>Software/システム</td><td class="r mono">7%</td><td class="r mono">7%</td><td><span class="badge bd-am">横ばい</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">粗利率改善の要因分解</div>
+      <div class="gain-meter"><div class="gain-label">FA/AI向け（高粗利率品）</div><div class="gain-track"><div class="gain-fill" style="width:80%;background:var(--tl)"></div></div><div class="gain-val hi-tl">+4.6pt貢献</div></div>
+      <div class="gain-meter"><div class="gain-label">価格転嫁力の実現</div><div class="gain-track"><div class="gain-fill" style="width:60%;background:var(--gn)"></div></div><div class="gain-val hi-gn">仕入上昇分転嫁</div></div>
+      <div class="gain-meter"><div class="gain-label">自動車向け（低粗利）の比率低下</div><div class="gain-track"><div class="gain-fill" style="width:45%;background:var(--am)"></div></div><div class="gain-val hi-am">ミックス改善</div></div>
+      <div class="gain-meter"><div class="gain-label">高付加価値ソリューション</div><div class="gain-track"><div class="gain-fill" style="width:35%;background:var(--pur)"></div></div><div class="gain-val hi-am">単価上昇</div></div>
+      <div style="background:#eaf7f4;border-radius:4px;padding:10px 12px;margin-top:12px">
+        <div style="font-size:11px;color:var(--tl);font-weight:600">粗利率：11.5% → 16.1%（+4.6pt）</div>
+        <div style="font-size:11px;color:var(--ink2);margin-top:4px">売上▲35%でも粗利額95%維持という「事業体質転換」の実証</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="spanel" id="c4-b">
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card card-tl">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:8px">TSMC熊本工場効果</div>
+      <div style="font-size:20px;font-weight:700;color:var(--tl);margin-bottom:6px">2024/12 稼働</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">熊本工場（第1期）稼働後、周辺FA・工作機械・検査装置向けの半導体・電子部品需要が急増。東海エレクトロニクスの営業エリア（中部〜九州）との地理的整合性も高い。第2工場も計画中で更なる需要増が見込まれる。</div>
+    </div>
+    <div class="card card-am">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:8px">AI/データセンター需要</div>
+      <div style="font-size:20px;font-weight:700;color:var(--am);margin-bottom:6px">世界CAGR+30%超</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">AIサーバー向け電源管理IC・制御用FPGA・各種センサー類の需要増。FA商社として製造設備・検査装置向けの部品も恩恵を受ける。2026/3期の粗利率改善の主因の一つ。</div>
+    </div>
+    <div class="card card-pu">
+      <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:8px">EV・車載次世代品</div>
+      <div style="font-size:20px;font-weight:700;color:var(--pur);margin-bottom:6px">パワー半導体</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75">従来の内燃機関向けからEV向けパワー半導体（SiC/GaN）・電池管理ICへのシフト。単価が高く粗利率の高い製品群。デンソー・アイシンとの取引関係がEV化後も継続する可能性がある。</div>
+    </div>
+  </div>
+  <div class="notice-tl"><strong>重要なポイント：</strong>2027/3期の会社予想（売上400億・経常6.2億）は慎重すぎる可能性がある。FA/AI需要が想定より早く回復すれば上振れシナリオへの転換点になる。1Q（8月）決算での売上・粗利率の動向が最初のシグナル。</div>
+</div>
+<div class="spanel" id="c4-c">
+  <div class="notice-rd"><strong>課題：</strong>売上の45%程度を占める自動車向けの本格回復時期が不透明。EV化でデンソー・アイシンのサプライチェーンが変容する構造リスクがあり、長期的な売上水準の下限を見極める必要がある。</div>
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>顧客セグメント</th><th>現状</th><th>3年後見通し</th><th class="r">リスク/機会</th></tr></thead>
+      <tbody>
+        <tr><td class="hi-rd">デンソー・アイシン系（車載）</td><td>大幅減少・構造変容</td><td>EV向けに転換。回復は緩慢</td><td class="r"><span class="rsev-hi">高リスク</span></td></tr>
+        <tr><td class="hi-tl">FA・工作機械向け</td><td>急成長中（TSMC効果）</td><td>半導体投資サイクル依存で変動</td><td class="r"><span class="rsev-tl">高機会</span></td></tr>
+        <tr><td class="hi-gn">AI・データセンター向け</td><td>成長初期段階</td><td>継続的な需要増見込み</td><td class="r"><span class="rsev-tl">高機会</span></td></tr>
+        <tr><td>医療・環境・エネルギー</td><td>育成段階</td><td>中長期で拡大の余地</td><td class="r"><span class="rsev-lo">低リスク</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div><!-- /c4 -->
+
+
+<!-- ══════════════════════════════════════════
+     C5: インフレ影響
+══════════════════════════════════════════ -->
+<div class="chapter" id="c5">
+<div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">インフレ影響分析 ─ 含み益拡大が最大の恩恵</h2><span class="ch-badge cb-gn">インフレはむしろ追い風</span></div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>影響チャネル</th><th>方向性</th><th>8071への具体的な影響</th></tr></thead>
+      <tbody>
+        <tr style="background:#eaf7f4"><td class="hi-tl">① 土地・不動産価格の上昇</td><td><span class="badge bd-tl">◎ 強い追い風</span></td><td>名古屋・栄エリア+5〜15%/年上昇中。帳簿19億の土地が実態27〜55億に拡大。インフレ継続で含み益がさらに自動的に膨らむ。</td></tr>
+        <tr><td class="hi-am">② 電子部品価格・仕入コスト</td><td><span class="badge bd-am">△ 中立</span></td><td>ドル建て仕入コスト増だが価格転嫁力で粗利率12%→16%に急改善済み。「インフレ耐性」が実証された。</td></tr>
+        <tr style="background:#fdf2f2"><td class="hi-rd">③ 人件費・販管費の上昇</td><td><span class="badge bd-rd">▲ 逆風</span></td><td>人件費・物流コスト上昇で販管費が高止まり（55億/年）。ただし構造的に固定的で急激な悪化はしにくい。</td></tr>
+        <tr style="background:#eaf7f4"><td class="hi-tl">④ 金利上昇（日銀正常化）</td><td><span class="badge bd-tl">◎ 軽微・プラス</span></td><td>有利子負債30億のみ。現金119億で受取利息5.6億＞支払利息3.7億。追加利上げは政策保有株（銀行株）の含み益拡大にもつながる。</td></tr>
+        <tr style="background:#eaf7f4"><td class="hi-tl">⑤ 政策保有株（銀行株等）の株高</td><td><span class="badge bd-tl">◎ 強い追い風</span></td><td>インフレ→日銀利上げ→銀行株高→含み益拡大のサイクルが機能。有価証券評価差額金が939→1,385Mへ+48%増。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">インフレ継続シナリオでの上方修正試算</div>
+    <table class="tbl">
+      <thead><tr><th>項目</th><th>基本試算</th><th class="hi-tl">インフレ継続での上方修正</th><th>根拠</th></tr></thead>
+      <tbody>
+        <tr><td>土地時価（中央ケース）</td><td class="r mono">〜40億円</td><td class="r mono hi-tl">〜50〜60億円</td><td>名古屋栄+10〜15%/年×3年</td></tr>
+        <tr><td>有価証券評価差額金（税後）</td><td class="r mono">1,385M</td><td class="r mono hi-tl">1,800〜2,500M</td><td>日銀利上げ2〜3回で銀行株高</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td>実態BPS（中央値・3年後）</td><td class="r mono">〜9,400円</td><td class="r mono hi-tl">〜10,200〜11,000円</td><td>含み益・BPS成長の複合効果</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice-gn" style="margin-top:14px"><strong>総合：</strong>インフレは「仕入コスト増」より「資産含み益拡大＋価格転嫁力＋金融収益増加」の方が優位に働く。実物資産（不動産・政策保有株）を多く保有する東海エレクトロニクスにはインフレはむしろ追い風。</div>
+</div><!-- /c5 -->
+
+
+<!-- ══════════════════════════════════════════
+     C6: リスク分析
+══════════════════════════════════════════ -->
+<div class="chapter" id="c6">
+<div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">リスク分析 ─ 投資判断における留意点</h2><span class="ch-badge cb-am">主要リスク5項目</span></div>
+  <div class="card" style="margin-bottom:14px">
+    <table class="tbl">
+      <thead><tr><th>リスク</th><th class="r">深刻度</th><th>内容</th><th>緩和策・下値支持</th></tr></thead>
+      <tbody>
+        <tr><td class="hi-rd">自動車向け売上の構造的低下</td><td class="r"><span class="rsev-hi">高</span></td><td>EV化によるデンソー・アイシン系サプライチェーン変容。2026/3期で売上が394億まで低下しており回復時期が不透明。長期的な売上水準の下限が定まっていない。</td><td>5フォーカスドメイン転換中。粗利率改善で体質変化を実証。FA/AI向けが補完。</td></tr>
+        <tr style="background:var(--bg2)"><td class="hi-am">バリュー解消トリガーの不在</td><td class="r"><span class="rsev-hi">高</span></td><td>ROE約2%と低水準。東証改革要請への具体的な回答（自社株買い・増配・保有株縮減）がいつ出るか不明。割安が永続的に続く可能性も否定できない。</td><td>純キャッシュ89億が下値支持。東証改革の制度的外圧が時間をかけて機能する見込み。</td></tr>
+        <tr><td class="hi-am">流動性リスク（名証メイン小型株）</td><td class="r"><span class="rsev-mi">中</span></td><td>時価総額66億円。1日の出来高が低く、まとまった売買で株価が大きく動く。機関投資家が参入しにくく、アナリストカバーもほぼゼロ。</td><td>長期保有前提なら流動性リスクは相対的に小さい。割安解消時のアップサイドが大きい。</td></tr>
+        <tr style="background:var(--bg2)"><td>為替リスク</td><td class="r"><span class="rsev-mi">中</span></td><td>ドル建て仕入れが多く急激な円安は仕入コスト増になる。ただし2026/3期に価格転嫁力が実証済み。為替差益/損が損益に直接影響（2025/3期は差損▲5.2億）。</td><td>価格転嫁力の実証（粗利率改善）。現金余剰・受取利息収入がバッファとして機能。</td></tr>
+        <tr><td class="hi-gn">会社予想の保守性リスク</td><td class="r"><span class="rsev-lo">低</span></td><td>2027/3期予想（経常6.2億）は極めて保守的な可能性。FA/AI需要の想定より早い回復、為替改善等で上振れる余地が大きい。逆に言えば「下振れリスクが限定的」。</td><td>保守的予想は株価にネガティブサプライズを起こしにくい。上振れ余地の方が大きい。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g2">
+    <div class="notice-gn"><strong>最重要：リスクとリターンの非対称性。</strong>ベアケースでも純キャッシュ3,783円＞現在株価2,800円という「下値フロア超過」の状態が続く。最悪シナリオでも配当込み損失は▲9.6%程度に限定される一方、ベースケースで+48%、ブルケースで+107%という明確な非対称構造がある。</div>
+    <div class="notice"><strong>損切りライン（参考）：</strong>純キャッシュ価値（1株3,783円）を大幅に下回る水準まで株価が低下した場合（例：¥2,000以下）、新たな重大悪材料（決算の構造的悪化・配当廃止等）が出ていないかを確認。感情的な売買は避け、ファンダメンタルズの変化を根拠とした判断が重要。</div>
+  </div>
+</div><!-- /c6 -->
+
+
+<!-- ══════════════════════════════════════════
+     C7: 最終判断
+══════════════════════════════════════════ -->
+<div class="chapter" id="c7">
+<div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">最終判断 ─ 3ケースシナリオと総合評価</h2><span class="ch-badge cb-tl">◎ 買い検討 — 3年期待+53%</span></div>
+<div class="stabs">
+  <button class="stab on" onclick="showTab('c7','a',this)">3ケース詳細</button>
+  <button class="stab" onclick="showTab('c7','b',this)">総合スコア</button>
+  <button class="stab" onclick="showTab('c7','c',this)">投資判断まとめ</button>
+</div>
+
+<div class="spanel active" id="c7-a">
+  <div class="notice-tl"><strong>前提：</strong>現在株価2,800円。配当115円/年（利回り4.1%）。BPS年成長率3%想定。分析基準：2026/3期確定値。評価軸：3年後（2029年3月期末）の想定株価＋累積配当。</div>
+
+  <!-- シナリオ比較 -->
+  <div class="sc-grid" style="margin-bottom:18px">
+    <div class="sc-col" style="background:#fdf2f2">
+      <div class="sc-lbl bear">BEAR CASE — 確率25%</div>
+      <div class="sc-prob bear">¥2,300</div>
+      <div class="sc-sub">3年後想定株価</div>
+      <div class="sc-li">自動車需要の本格回復なし（EV化遅延）</div>
+      <div class="sc-li">FA/AI需要が半導体サイクル下降で停滞</div>
+      <div class="sc-li">PBR 0.28倍水準で固定化（現状より低下）</div>
+      <div class="sc-li">東証改革要請への回答なし（自社株買い等）</div>
+      <div class="sc-li">3年累積配当：¥345（配当維持を想定）</div>
+      <div class="sc-li">配当込み合計：¥2,645 → <strong style="color:var(--rd)">▲5.5%（▲155円）</strong></div>
+      <div class="sc-li">実質損益（配当除く）：¥2,300 → <strong style="color:var(--rd)">▲17.9%</strong></div>
+      <div style="margin-top:12px;background:#fce8e8;border-radius:4px;padding:8px 10px">
+        <div style="font-size:10px;color:var(--rd);font-weight:600">下値フロア</div>
+        <div style="font-size:11px;color:var(--ink2);margin-top:3px">純キャッシュ3,783円が理論的な下値支持。業績悪化しても現金が盾になる。</div>
+      </div>
+    </div>
+    <div class="sc-col" style="background:#fffbf0">
+      <div class="sc-lbl base">BASE CASE — 確率55%</div>
+      <div class="sc-prob base">¥3,800</div>
+      <div class="sc-sub">3年後想定株価</div>
+      <div class="sc-li">FA/AI需要継続でPBR 0.44〜0.46倍へ</div>
+      <div class="sc-li">自動車需要が部分的に回復（EV電子部品）</div>
+      <div class="sc-li">東証改革要請で増配 or 自社株買い発表</div>
+      <div class="sc-li">BPS成長3%/年で3年後BPS≒9,000円</div>
+      <div class="sc-li">3年累積配当：¥375（軽微増配を想定）</div>
+      <div class="sc-li">配当込み合計：¥4,175 → <strong style="color:var(--am)">+49.1%</strong></div>
+      <div class="sc-li">実質損益（配当除く）：+35.7%</div>
+      <div style="margin-top:12px;background:#fffbf0;border-radius:4px;padding:8px 10px">
+        <div style="font-size:10px;color:var(--am);font-weight:600">蓋然性最高シナリオ</div>
+        <div style="font-size:11px;color:var(--ink2);margin-top:3px">現状のトレンド（FA転換・含み益拡大）が継続。東証改革が徐々に効き始める。</div>
+      </div>
+    </div>
+    <div class="sc-col" style="background:#eaf7f0">
+      <div class="sc-lbl bull">BULL CASE — 確率20%</div>
+      <div class="sc-prob bull">¥5,500</div>
+      <div class="sc-sub">3年後想定株価</div>
+      <div class="sc-li">大型自社株買い発表（純キャッシュ活用）</div>
+      <div class="sc-li">PBR 0.6倍→0.7倍への急回復（BPS収れん）</div>
+      <div class="sc-li">FA/AI・TSMC第2工場で売上V字回復</div>
+      <div class="sc-li">政策保有株売却→特別配当→株価押し上げ</div>
+      <div class="sc-li">3年累積配当：¥400（大幅増配を想定）</div>
+      <div class="sc-li">配当込み合計：¥5,900 → <strong style="color:var(--tl)">+110.7%</strong></div>
+      <div class="sc-li">実質損益（配当除く）：+96.4%</div>
+      <div style="margin-top:12px;background:#dff5ef;border-radius:4px;padding:8px 10px">
+        <div style="font-size:10px;color:var(--tl);font-weight:600">最大アップサイド</div>
+        <div style="font-size:11px;color:var(--ink2);margin-top:3px">純キャッシュ89億の活用が株価を一段上昇させる。東証改革との相乗効果が最大化。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 加重平均計算 -->
+  <div class="card" style="margin-bottom:14px">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">確率加重 期待値の計算</div>
+    <table class="tbl" style="margin-bottom:12px">
+      <thead><tr><th>ケース</th><th class="r">確率</th><th class="r">3年後株価</th><th class="r">累積配当</th><th class="r">配当込み合計</th><th class="r">リターン</th><th class="r">確率加重寄与</th></tr></thead>
+      <tbody>
+        <tr style="background:#fdf2f2"><td><strong class="hi-rd">ベア</strong></td><td class="r mono">25%</td><td class="r mono hi-rd">¥2,300</td><td class="r mono">¥345</td><td class="r mono hi-rd">¥2,645</td><td class="r mono hi-rd">▲5.5%</td><td class="r mono hi-rd">▲1.4%</td></tr>
+        <tr style="background:#fffbf0"><td><strong class="hi-am">ベース</strong></td><td class="r mono">55%</td><td class="r mono hi-am">¥3,800</td><td class="r mono">¥375</td><td class="r mono hi-am">¥4,175</td><td class="r mono hi-am">+49.1%</td><td class="r mono hi-am">+27.0%</td></tr>
+        <tr style="background:#eaf7f0"><td><strong class="hi-tl">ブル</strong></td><td class="r mono">20%</td><td class="r mono hi-tl">¥5,500</td><td class="r mono">¥400</td><td class="r mono hi-tl">¥5,900</td><td class="r mono hi-tl">+110.7%</td><td class="r mono hi-tl">+22.1%</td></tr>
+        <tr style="background:#eaf7f4;font-weight:700"><td>加重平均</td><td class="r mono">100%</td><td class="r mono hi-tl">¥3,655</td><td class="r mono">—</td><td class="r mono hi-tl">¥4,070</td><td class="r mono hi-tl">+47.7%</td><td class="r mono hi-tl"><strong>+47.7%</strong></td></tr>
+      </tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div style="background:#eaf7f4;border-radius:4px;padding:12px;text-align:center">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">3年後 加重期待株価</div>
+        <div style="font:700 32px/1 var(--mono);color:var(--tl)">¥3,655</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在株価比 +30.5%</div>
+      </div>
+      <div style="background:#fffbf0;border-radius:4px;padding:12px;text-align:center">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">3年 期待トータルリターン（配当込）</div>
+        <div style="font:700 32px/1 var(--mono);color:var(--am)">+47.7%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">年率換算 +13.8%/年</div>
+      </div>
+      <div style="background:#eaf7f0;border-radius:4px;padding:12px;text-align:center">
+        <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">ダウンサイドリスク（最悪時）</div>
+        <div style="font:700 32px/1 var(--mono);color:var(--rd)">▲5.5%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">純キャッシュが下値支持</div>
+      </div>
+    </div>
+    <p class="note">配当込みトータルリターン：ベア▲5.5% / ベース+49.1% / ブル+110.7% / 加重平均+47.7%。配当を除くキャピタルのみでは：ベア▲17.9% / ベース+35.7% / ブル+96.4% / 加重+30.5%。</p>
+  </div>
+</div>
+
+<div class="spanel" id="c7-b">
+  <div class="card" style="margin-bottom:14px">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">総合スコア（7項目評価）</div>
+    <div class="gain-meter"><div class="gain-label">資産の割安性（NCAV比52%・純キャッシュ超過）</div><div class="gain-track"><div class="gain-fill" style="width:98%;background:var(--tl)"></div></div><div class="gain-val hi-tl">98/100</div></div>
+    <div class="gain-meter"><div class="gain-label">現金蓄積・財務健全性（現金119億・自己資本比率62.7%）</div><div class="gain-track"><div class="gain-fill" style="width:95%;background:var(--tl)"></div></div><div class="gain-val hi-tl">95/100</div></div>
+    <div class="gain-meter"><div class="gain-label">配当の安定・増配余力（4.1%・純キャッシュ33年分）</div><div class="gain-track"><div class="gain-fill" style="width:82%;background:var(--gn)"></div></div><div class="gain-val hi-gn">82/100</div></div>
+    <div class="gain-meter"><div class="gain-label">価格転嫁力・インフレ耐性（粗利率改善で実証）</div><div class="gain-track"><div class="gain-fill" style="width:78%;background:var(--gn)"></div></div><div class="gain-val hi-gn">78/100</div></div>
+    <div class="gain-meter"><div class="gain-label">事業成長性（FA/AI転換・TSMC効果）</div><div class="gain-track"><div class="gain-fill" style="width:62%;background:var(--am)"></div></div><div class="gain-val hi-am">62/100</div></div>
+    <div class="gain-meter"><div class="gain-label">バリュー解消カタリスト（東証改革・純キャッシュ活用）</div><div class="gain-track"><div class="gain-fill" style="width:50%;background:var(--am)"></div></div><div class="gain-val hi-am">50/100</div></div>
+    <div class="gain-meter"><div class="gain-label">流動性・市場認知度（名証メイン・低流動性）</div><div class="gain-track"><div class="gain-fill" style="width:30%;background:var(--rd)"></div></div><div class="gain-val hi-rd">30/100</div></div>
+    <div class="gain-meter" style="margin-top:12px;padding-top:12px;border-top:.5px solid var(--rule)"><div class="gain-label"><strong>総合スコア（加重平均）</strong></div><div class="gain-track"><div class="gain-fill" style="width:74%;background:var(--tl)"></div></div><div class="gain-val hi-tl"><strong>74/100</strong></div></div>
+  </div>
+</div>
+
+<div class="spanel" id="c7-c">
+  <div class="conc">
+    <div class="conc-head">最終投資判断 <span>─ 東海エレクトロニクス（8071）: ◎ 買い検討</span></div>
+    <div class="conc-3">
+      <div>
+        <div class="conc-lbl">買いを支持する核心根拠</div>
+        <div class="conc-body">
+          <strong>①純キャッシュが株価を超過：</strong>純キャッシュ3,783円＞株価2,800円という「スーパー割安」状態。現金だけで株価以上の価値がある。<br><br>
+          <strong>②NCAV 5,402円 vs 株価2,800円：</strong>グレアム式清算価値の52%水準。解散しても株価より遥かに多い資産が残る。<br><br>
+          <strong>③粗利率改善で事業転換を実証：</strong>売上▲35%でも粗利額95%維持。FA/AI向けビジネスへの転換が数字で証明された。<br><br>
+          <strong>④東証改革の制度的外圧：</strong>純キャッシュ89億保有でROE 2%は「説明義務違反」。増配・自社株買いの外圧が高まる。<br><br>
+          <strong>⑤インフレが含み益を育てる：</strong>不動産・政策保有株の含み益がインフレ連動で自動的に拡大。評価差額金+47.5%増が示す。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">3ケース加重平均での期待値</div>
+        <div class="conc-body">
+          <strong>3年後加重期待株価：¥3,655（+30.5%）</strong><br>
+          <strong>配当込みトータル：+47.7%（年率+13.8%）</strong><br><br>
+          ベア（25%）：¥2,300、配当込み▲5.5%<br>
+          　→ 純キャッシュ3,783円が下値フロア<br><br>
+          ベース（55%）：¥3,800、配当込み+49.1%<br>
+          　→ FA/AI継続＋東証改革の段階的効果<br><br>
+          ブル（20%）：¥5,500、配当込み+110.7%<br>
+          　→ 純キャッシュ活用＋BPS収れん<br><br>
+          <strong>ダウンサイド（▲5.5%）を大幅に上回るアップサイド（+110%）という非対称な機会。</strong>
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">最重要監視ポイント</div>
+        <div class="conc-body">
+          <strong>① 2026年8月末 1Q決算</strong><br>
+          売上回復局面の確認・粗利率16%維持の確認<br><br>
+          <strong>② 東証改革対応の発表</strong><br>
+          自社株買い・増配・政策保有株縮減計画の有無<br><br>
+          <strong>③ 純キャッシュの使途</strong><br>
+          89億円の活用方針（M&A・還元・運転資本）<br><br>
+          <strong>④ 日銀追加利上げ</strong><br>
+          政策保有株（銀行株）含み益の追加拡大<br><br>
+          <strong>⑤ TSMC第2工場進捗</strong><br>
+          FA/AI需要の持続性確認（2027年以降）<br><br>
+          損切りライン目安：¥2,000以下（重大悪材料発生時のみ）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px;background:#fff;border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 20px">
+    <div style="font:600 10px/1 var(--mono);color:var(--ink3);text-transform:uppercase;margin-bottom:12px">投資行動の参考（各自の判断で）</div>
+    <table class="tbl">
+      <thead><tr><th>アクション</th><th>局面</th><th class="r">参考価格帯</th><th class="r">参考規模</th><th>理由</th></tr></thead>
+      <tbody>
+        <tr style="background:#eaf7f4"><td class="hi-tl"><strong>初期エントリー</strong></td><td>現在〜2026年夏</td><td class="r mono hi-tl">¥2,600〜2,900</td><td class="r mono">—</td><td>純キャッシュ超過の「スーパー割安」水準。1Q決算前に基本ポジション構築。</td></tr>
+        <tr><td class="hi-gn"><strong>買い増し</strong></td><td>カタリスト確認後</td><td class="r mono hi-gn">¥3,000〜3,500</td><td class="r mono">—</td><td>増配・自社株買い発表や1Q決算で粗利率維持が確認できた場合。</td></tr>
+        <tr style="background:#fffbf0"><td class="hi-am"><strong>一部利確（目安）</strong></td><td>ブル達成時</td><td class="r mono hi-am">¥4,500〜5,000</td><td class="r mono">—</td><td>BPS比0.55倍超の水準。割安解消が進んだ段階で利益確定を検討。</td></tr>
+        <tr style="background:#fdf2f2"><td class="hi-rd"><strong>損切りライン</strong></td><td>重大悪材料発生時</td><td class="r mono hi-rd">¥2,000割れ</td><td class="r mono">—</td><td>純キャッシュ価値を大幅に下回る新たな構造的悪化確認後。</td></tr>
+      </tbody>
+    </table>
+    <p class="note">⚠ 低流動性銘柄のため1日の出来高に注意。複数日に分けて指値注文を活用すること。本レポートは情報提供のみを目的とし、投資判断はご自身の責任においてなされますようお願いします。</p>
+  </div>
+</div>
+
+</div><!-- /c7 -->
+
+</main>
+
+<footer style="background:#1a1e2e;color:rgba(246,245,239,.22);text-align:center;padding:16px;font:500 9px/1 var(--mono);letter-spacing:.07em">
+本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br>
+Data: 東海エレクトロニクス㈱ 有価証券報告書第70期（2025/03期）/ 2026年3月期決算短信（JPX/TDNET）/ IRBANK / 公示地価データ / 日銀展望レポート 2025年4月 / 2026.06 — Ver.1（最新決算完全反映版）
+</footer>
+
+<script>
+function showChapter(id,btn){
+  document.querySelectorAll('.chapter').forEach(ch=>ch.classList.remove('active'));
+  document.querySelectorAll('.mnb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+}
+function showTab(chapId,panelId,btn){
+  const chap=document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  chap.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(chapId+'-'+panelId)?.classList.add('active');
+  btn.classList.add('on');
+}
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.gain-fill').forEach(f=>{
+        const w=f.style.width;f.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=w));
+      });
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>

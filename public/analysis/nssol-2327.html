@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日鉄ソリューションズ（2327）投資分析 ── イベント投資レポート</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:   #f4f3ed;
+  --bg2:  #eceae0;
+  --bg3:  #e0ddd2;
+  --ink:  #101218;
+  --ink2: #1e2030;
+  --ink3: #5a5c6a;
+  --gn:   #166640;
+  --gn2:  #1f8f52;
+  --gn3:  #e4f2eb;
+  --rd:   #a82828;
+  --rd2:  #cc3838;
+  --rd3:  #fbe8e8;
+  --am:   #8a5010;
+  --am2:  #b87218;
+  --am3:  #fef2e0;
+  --bl:   #163484;
+  --bl2:  #1c44b4;
+  --bl3:  #dce8f8;
+  --pu:   #78186a;
+  --pu2:  #a02c8c;
+  --pu3:  #f4dff4;
+  --or:   #c46014;
+  --or2:  #e07a1c;
+  --or3:  #fef0de;
+  --rule: rgba(16,18,24,.10);
+  --mono: 'JetBrains Mono', monospace;
+  --head: 'Space Grotesk', sans-serif;
+  --sans: 'Noto Sans JP', sans-serif;
+  --r: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.75; }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--ink2);
+  padding: 44px 52px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:''; position:absolute; right:-120px; top:-120px;
+  width:440px; height:440px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.035); pointer-events:none;
+}
+.hero::after {
+  content:''; position:absolute; right:-50px; bottom:-50px;
+  width:260px; height:260px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.025); pointer-events:none;
+}
+.hero-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr auto;
+  gap:32px; align-items:start;
+}
+.hero-eyebrow {
+  font:500 9px/1 var(--mono); letter-spacing:.22em;
+  color:rgba(246,244,238,.28); text-transform:uppercase; margin-bottom:14px;
+}
+.hero-title {
+  font:700 34px/1.04 var(--head); letter-spacing:-.022em;
+  color:rgba(246,244,238,.96); margin-bottom:8px;
+}
+.hero-title em { color:var(--or2); font-style:normal; }
+.hero-sub { font-size:11px; color:rgba(246,244,238,.36); line-height:1.72; margin-top:8px; }
+
+.hero-verdict {
+  display:flex; align-items:center; gap:16px;
+  background:rgba(31,143,82,.13);
+  border:1px solid rgba(31,143,82,.30);
+  border-radius:var(--r); padding:16px 22px; white-space:nowrap;
+}
+.verd-score { font:700 46px/1 var(--mono); color:var(--gn2); }
+.verd-text { font-size:12px; color:rgba(246,244,238,.68); line-height:1.75; }
+.verd-text strong { color:rgba(246,244,238,.96); }
+
+/* ─── KPI STRIP ─── */
+.kpi-strip {
+  background:var(--ink);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  padding:0 52px;
+}
+.kpi-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(7,1fr);
+  gap:1px; background:rgba(255,255,255,.05);
+}
+.kpi { background:rgba(16,18,24,.42); padding:12px 14px; }
+.kpi-l { font:500 8px/1 var(--mono); letter-spacing:.16em; color:rgba(246,244,238,.24); text-transform:uppercase; margin-bottom:5px; }
+.kpi-v { font:600 16px/1 var(--mono); }
+.kpi-v.rd { color:#e09090; }
+.kpi-v.gn { color:#70c892; }
+.kpi-v.am { color:var(--or2); }
+.kpi-v.bl { color:#90b2ec; }
+.kpi-v.pu { color:#cc90c4; }
+.kpi-s { font-size:9px; color:rgba(246,244,238,.20); margin-top:3px; line-height:1.4; }
+
+/* ─── TAB NAV ─── */
+.tab-nav {
+  position:sticky; top:0; z-index:200;
+  background:var(--ink);
+  display:flex; overflow-x:auto; scrollbar-width:none;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.tab-nav::-webkit-scrollbar { display:none; }
+.tnb {
+  font:600 9px/1 var(--mono); letter-spacing:.10em; text-transform:uppercase;
+  color:rgba(246,244,238,.28); padding:14px 18px; cursor:pointer;
+  border:none; border-bottom:2px solid transparent; background:none;
+  white-space:nowrap; flex-shrink:0; transition:all .18s;
+  display:flex; align-items:center; gap:6px;
+}
+.tnb:hover { color:rgba(246,244,238,.74); }
+.tnb.on { color:rgba(246,244,238,.96); border-bottom-color:var(--or2); }
+.tnb .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+/* ─── BODY ─── */
+.body { max-width:1100px; margin:0 auto; padding:38px 52px 80px; }
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* ─── SECTION HEAD ─── */
+.sec-head { display:flex; align-items:baseline; gap:10px; margin-bottom:24px; padding-bottom:11px; border-bottom:2px solid var(--ink); }
+.sec-num { font:600 9px/1 var(--mono); color:var(--ink3); letter-spacing:.14em; }
+.sec-title { font:700 21px/1.1 var(--head); color:var(--ink); }
+.sec-badge { font:600 9px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; padding:4px 9px; border-radius:3px; }
+.sb-gn { background:var(--gn3); color:var(--gn); }
+.sb-rd { background:var(--rd3); color:var(--rd); }
+.sb-am { background:var(--am3); color:var(--am); }
+.sb-bl { background:var(--bl3); color:var(--bl); }
+.sb-or { background:var(--or3); color:var(--or); }
+.sb-pu { background:var(--pu3); color:var(--pu); }
+
+/* ─── CARDS ─── */
+.card { background:#fff; border:1px solid var(--rule); border-radius:var(--r); padding:18px 20px; }
+.card-gn { background:var(--gn3); border-color:rgba(22,102,64,.14); }
+.card-rd { background:var(--rd3); border-color:rgba(168,40,40,.14); }
+.card-am { background:var(--am3); border-color:rgba(138,80,16,.14); }
+.card-bl { background:var(--bl3); border-color:rgba(22,52,132,.14); }
+.card-or { background:var(--or3); border-color:rgba(196,96,20,.14); }
+.card-pu { background:var(--pu3); border-color:rgba(120,24,106,.14); }
+
+/* metric card */
+.mc { padding:14px 16px; }
+.mc-l { font:500 9px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); margin-bottom:7px; }
+.mc-v { font:700 26px/1 var(--mono); margin-bottom:4px; }
+.mc-v.rd { color:var(--rd2); } .mc-v.gn { color:var(--gn2); } .mc-v.am { color:var(--am2); } .mc-v.bl { color:var(--bl2); } .mc-v.pu { color:var(--pu2); } .mc-v.or { color:var(--or); }
+.mc-s { font-size:10px; color:var(--ink3); line-height:1.55; }
+
+/* ─── GRIDS ─── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.g5 { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+
+/* ─── TABLE ─── */
+.tbl { width:100%; border-collapse:collapse; font-size:12px; }
+.tbl th { font:600 9px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); padding:8px 10px; border-bottom:2px solid var(--rule); text-align:left; }
+.tbl th.r, .tbl td.r { text-align:right; }
+.tbl td { padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top; font-size:12px; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tr:hover td { background:rgba(16,18,24,.03); }
+.mono { font-family:var(--mono); }
+.hi-gn { color:var(--gn); font-weight:600; } .hi-rd { color:var(--rd2); font-weight:600; } .hi-am { color:var(--am2); font-weight:600; }
+
+/* ─── TIMELINE ─── */
+.tl { display:flex; flex-direction:column; gap:10px; }
+.tl-item { display:flex; gap:10px; align-items:flex-start; }
+.tl-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.tl-dot.gn { background:var(--gn2); } .tl-dot.rd { background:var(--rd2); } .tl-dot.am { background:var(--am2); } .tl-dot.bl { background:var(--bl2); } .tl-dot.pu { background:var(--pu2); } .tl-dot.or { background:var(--or2); }
+.tl-text { font-size:12px; line-height:1.65; color:var(--ink2); }
+
+/* ─── SCENARIO BOX ─── */
+.sc-box { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.sc-col { background:#fff; border:1px solid var(--rule); border-radius:var(--r); padding:16px 18px; }
+.sc-lbl { font:600 9px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; margin-bottom:8px; }
+.sc-lbl.bear { color:var(--rd); } .sc-lbl.base { color:var(--am); } .sc-lbl.bull { color:var(--gn); }
+.sc-prob { font:700 32px/1 var(--mono); margin-bottom:6px; }
+.sc-prob.bear { color:var(--rd2); } .sc-prob.base { color:var(--am2); } .sc-prob.bull { color:var(--gn2); }
+.sc-sub { font-size:11px; font-weight:500; color:var(--ink); margin-bottom:10px; }
+.sc-li { font-size:11px; color:var(--ink3); line-height:1.65; padding-left:12px; position:relative; margin-bottom:4px; }
+.sc-li::before { content:'–'; position:absolute; left:0; }
+
+/* ─── CONCLUSION ─── */
+.conc { background:var(--ink2); border-radius:var(--r); padding:28px 28px 24px; color:rgba(246,244,238,.92); }
+.conc-head { font:700 15px/1.3 var(--head); color:rgba(246,244,238,.96); margin-bottom:18px; }
+.conc-head span { font-weight:400; font-size:12px; color:rgba(246,244,238,.40); }
+.conc-sub { font:600 9px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.36); margin-bottom:8px; }
+.conc-body { font-size:12px; color:rgba(246,244,238,.72); line-height:1.75; }
+.conc-body strong { color:rgba(246,244,238,.96); }
+
+/* ─── BAR ─── */
+.bgrp { margin-bottom:14px; }
+.blrow { display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px; }
+.btrack { background:var(--bg3); border-radius:2px; height:6px; overflow:hidden; }
+.bfill { height:100%; border-radius:2px; transition:width 1s ease; }
+
+/* ─── ALERT BOX ─── */
+.alert { border-radius:var(--r); padding:14px 16px; font-size:12px; line-height:1.7; margin-bottom:12px; }
+.alert strong { font-weight:600; display:block; margin-bottom:4px; }
+.alert-rd { background:var(--rd3); border-left:3px solid var(--rd2); color:var(--rd); }
+.alert-rd .alert-body { color:var(--ink2); }
+.alert-gn { background:var(--gn3); border-left:3px solid var(--gn2); color:var(--gn); }
+.alert-gn .alert-body { color:var(--ink2); }
+.alert-am { background:var(--am3); border-left:3px solid var(--am2); color:var(--am); }
+.alert-am .alert-body { color:var(--ink2); }
+.alert-bl { background:var(--bl3); border-left:3px solid var(--bl2); color:var(--bl); }
+.alert-bl .alert-body { color:var(--ink2); }
+
+/* ─── PHASE TIMELINE ─── */
+.phase-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin:16px 0; }
+.phase-item { border-top:3px solid var(--rule); padding:14px 14px 12px; }
+.phase-item.done { border-top-color:var(--gn2); background:var(--gn3); }
+.phase-item.active { border-top-color:var(--or2); background:var(--or3); }
+.phase-item.pending { border-top-color:var(--bl2); background:var(--bl3); }
+.phase-item.option { border-top-color:var(--pu2); background:var(--pu3); }
+.phase-tag { font:600 8px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+.phase-item.done .phase-tag { color:var(--gn); }
+.phase-item.active .phase-tag { color:var(--or); }
+.phase-item.pending .phase-tag { color:var(--bl); }
+.phase-item.option .phase-tag { color:var(--pu); }
+.phase-name { font:700 13px/1.25 var(--head); color:var(--ink); margin-bottom:6px; }
+.phase-body { font-size:11px; color:var(--ink3); line-height:1.6; }
+
+/* ─── RISK TABLE ─── */
+.rtbl { width:100%; border-collapse:collapse; font-size:12px; }
+.rtbl th { font:600 9px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); padding:8px 10px; border-bottom:2px solid var(--rule); text-align:left; }
+.rtbl td { padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.65; }
+.rtbl tr:last-child td { border-bottom:none; }
+.prob-hi { background:var(--rd3); color:var(--rd); font:600 9px/1 var(--mono); padding:2px 7px; border-radius:3px; }
+.prob-mid { background:var(--am3); color:var(--am); font:600 9px/1 var(--mono); padding:2px 7px; border-radius:3px; }
+.prob-lo { background:var(--gn3); color:var(--gn); font:600 9px/1 var(--mono); padding:2px 7px; border-radius:3px; }
+
+/* helpers */
+.mb8{margin-bottom:8px} .mb12{margin-bottom:12px} .mb16{margin-bottom:16px} .mb20{margin-bottom:20px} .mb24{margin-bottom:24px}
+.row { display:flex; gap:12px; align-items:flex-start; }
+.sep { border:none; border-top:1px solid var(--rule); margin:20px 0; }
+small { font-size:10px; color:var(--ink3); }
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Investment Analysis Report — Event-Driven · Parent-Child Listing · Activist Pressure</div>
+      <h1 class="hero-title">日鉄ソリューションズ <em>（2327）</em></h1>
+      <p style="font:600 13px/1 var(--mono); color:rgba(246,244,238,.55); margin-top:6px;">東証プライム ／ 情報・通信業 ／ 日本製鉄 63.4%子会社</p>
+      <p class="hero-sub">
+        有価証券報告書（FY2025/3） · 2025-2027中期経営計画 · 3D企業価値向上策（2025/3） · 株主意見聴取レポート（2026/6）<br>
+        FY2026/3期通期確定値（2026/4/27発表） · 次期予想（FY2027/3） · 同業バリュエーション比較 · 流通株式問題修正 · 防衛策消滅反映<br>
+        本資料は情報提供のみを目的とし、投資勧誘を目的とするものではありません。
+      </p>
+    </div>
+    <div class="hero-verdict">
+      <div class="verd-score">BUY</div>
+      <div class="verd-text">
+        <strong>積極的投資価値あり</strong><br>
+        確率加重 期待IRR<br>
+        <strong>年率 +12〜18%</strong><br>
+        参照株価 ¥3,423
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ KPI STRIP ═══════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-inner">
+    <div class="kpi">
+      <div class="kpi-l">現在株価</div>
+      <div class="kpi-v am">¥3,423</div>
+      <div class="kpi-s">分析基準値</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">PER（予想）</div>
+      <div class="kpi-v bl">20.1×</div>
+      <div class="kpi-s">FY2027/3 EPS≈¥170</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">PBR（実績）</div>
+      <div class="kpi-v bl">2.28×</div>
+      <div class="kpi-s">同業2.5〜4倍比割安</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">ROE（実績）</div>
+      <div class="kpi-v rd">10.9%</div>
+      <div class="kpi-s">同業平均20〜48% ← 最下位</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">配当利回り（予）</div>
+      <div class="kpi-v gn">2.5%</div>
+      <div class="kpi-s">年80円 配当性向50%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">防衛策の状況</div>
+      <div class="kpi-v gn">6/19消滅</div>
+      <div class="kpi-s">総会終結後に失効確定</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">預け金残高</div>
+      <div class="kpi-v rd">¥944億</div>
+      <div class="kpi-s">利率0.2% 純資産比40%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB NAV ═══════════════ -->
+<nav class="tab-nav" id="tabNav">
+  <button class="tnb on" onclick="showPanel('p-overview',this)"><span class="dot" style="background:var(--or2)"></span>01 カタリスト</button>
+  <button class="tnb" onclick="showPanel('p-financials',this)"><span class="dot" style="background:var(--bl2)"></span>02 財務分析</button>
+  <button class="tnb" onclick="showPanel('p-bs',this)"><span class="dot" style="background:var(--rd2)"></span>03 BSスラック</button>
+  <button class="tnb" onclick="showPanel('p-3d',this)"><span class="dot" style="background:var(--pu2)"></span>04 3D戦略</button>
+  <button class="tnb" onclick="showPanel('p-peer',this)"><span class="dot" style="background:var(--gn2)"></span>05 同業比較</button>
+  <button class="tnb" onclick="showPanel('p-prob',this)"><span class="dot" style="background:var(--am2)"></span>06 確率・EV再構築</button>
+  <button class="tnb" onclick="showPanel('p-risk',this)"><span class="dot" style="background:var(--rd2)"></span>07 リスク検証</button>
+  <button class="tnb" onclick="showPanel('p-strategy',this)"><span class="dot" style="background:var(--bl2)"></span>08 投資戦略</button>
+  <button class="tnb" onclick="showPanel('p-verdict',this)"><span class="dot" style="background:var(--or2)"></span>09 最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══════════════════════════════════════
+  PANEL 01: カタリスト（投資テーゼ）
+══════════════════════════════════════ -->
+<style>
+/* ── CATALYST CARDS ── */
+.cat-grid-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.cat-grid-bot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.cat-card {
+  background: var(--ink2);
+  border-radius: 8px;
+  padding: 22px 22px 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.06);
+}
+.cat-card::after {
+  content: '';
+  position: absolute;
+  right: -30px; bottom: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.04);
+  pointer-events: none;
+}
+.cat-card.top { border-top: 3px solid; }
+.cat-card.top.c-gn  { border-top-color: var(--gn2); }
+.cat-card.top.c-or  { border-top-color: var(--or2); }
+.cat-card.top.c-pu  { border-top-color: var(--pu2); }
+.cat-card.top.c-bl  { border-top-color: var(--bl2); }
+.cat-card.top.c-am  { border-top-color: var(--am2); }
+.cat-card.top.c-rd  { border-top-color: var(--rd2); }
+
+.cat-label {
+  font: 600 8px/1 var(--mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: .5;
+  color: rgba(246,244,238,.9);
+}
+.cat-label .num { opacity: .6; margin-right: 6px; }
+.cat-label .imp {
+  font-size: 7px;
+  letter-spacing: .12em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-left: 6px;
+  background: rgba(255,255,255,.08);
+  color: rgba(246,244,238,.7);
+  vertical-align: middle;
+}
+.cat-icon { font-size: 28px; margin-bottom: 10px; display: block; line-height: 1; }
+.cat-title {
+  font: 600 14px/1.35 var(--sans);
+  color: rgba(246,244,238,.92);
+  margin-bottom: 10px;
+}
+.cat-big {
+  font: 700 36px/1 var(--mono);
+  margin-bottom: 8px;
+  letter-spacing: -.02em;
+}
+.cat-big.c-gn  { color: #5dd98a; }
+.cat-big.c-or  { color: var(--or2); }
+.cat-big.c-pu  { color: #d090d0; }
+.cat-big.c-bl  { color: #80b0f0; }
+.cat-big.c-am  { color: #f0b050; }
+.cat-big.c-rd  { color: #f08080; }
+.cat-sub {
+  font-size: 10px;
+  color: rgba(246,244,238,.42);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.cat-body {
+  font-size: 11px;
+  color: rgba(246,244,238,.62);
+  line-height: 1.75;
+}
+.cat-body strong { color: rgba(246,244,238,.90); font-weight: 600; }
+.cat-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.cat-tag {
+  font: 600 8px/1 var(--mono);
+  letter-spacing: .10em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.07);
+  color: rgba(246,244,238,.55);
+}
+/* small card variant */
+.cat-card.sm .cat-big { font-size: 28px; }
+.cat-card.sm { padding: 18px 18px 16px; }
+
+/* ── THESIS STRIP ── */
+.thesis-strip {
+  background: var(--ink);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.thesis-item {
+  padding: 16px 20px;
+  background: rgba(255,255,255,.025);
+}
+.thesis-head {
+  font: 600 9px/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(246,244,238,.30);
+  margin-bottom: 8px;
+}
+.thesis-val {
+  font: 700 22px/1 var(--mono);
+  color: rgba(246,244,238,.90);
+  margin-bottom: 4px;
+}
+.thesis-val.gn { color: #5dd98a; }
+.thesis-val.am { color: #f0b050; }
+.thesis-val.rd { color: #f08080; }
+.thesis-desc {
+  font-size: 11px;
+  color: rgba(246,244,238,.42);
+  line-height: 1.6;
+}
+
+/* ── TRIGGER TABLE ── */
+.trigger-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.trigger-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.trigger-tag {
+  font: 600 8px/1 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.tt-hot  { background: var(--rd3);  color: var(--rd);  }
+.tt-warn { background: var(--am3);  color: var(--am);  }
+.tt-cool { background: var(--bl3);  color: var(--bl);  }
+.tt-gn   { background: var(--gn3);  color: var(--gn);  }
+.trigger-title { font: 600 13px/1.3 var(--sans); color: var(--ink); margin-bottom: 6px; }
+.trigger-body  { font-size: 11px; color: var(--ink3); line-height: 1.7; }
+.trigger-body strong { color: var(--ink); font-weight: 600; }
+.trigger-time  { font: 600 9px/1 var(--mono); letter-spacing: .10em; color: var(--ink3); margin-top: 8px; opacity: .7; }
+</style>
+
+<div class="panel active" id="p-overview">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">なぜ日鉄ソリューションズか ── 5つのカタリスト</h2>
+    <span class="sec-badge sb-or">投資テーゼの核心</span>
+  </div>
+
+  <!-- ── TOP 3 CATALYSTS ── -->
+  <div class="cat-grid-top">
+
+    <!-- C01 -->
+    <div class="cat-card top c-rd">
+      <div class="cat-label"><span class="num">C·01</span>最重要<span class="imp">CORE THESIS</span></div>
+      <span class="cat-icon">🔒</span>
+      <div class="cat-title">純資産40%が0.2%で<br>眠る「人工的割安」</div>
+      <div class="cat-big c-rd">¥944億</div>
+      <div class="cat-sub">親会社CMS預け金 ／ 機会損失76億円/年</div>
+      <div class="cat-body">
+        日本製鉄子会社のCMSに<strong>純資産の40%（944億円）を年利0.2%</strong>で預け入れ。資本コスト8.4%との差は年76億円の機会損失（税後純利益の25%相当）。これがROEを同業の3分の1（10.9%）に抑制する構造的歪みの正体。預け金が解消されれば株価は適正水準へ<strong>自然収斂</strong>する。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">ROE抑制</span>
+        <span class="cat-tag">BS歪み</span>
+        <span class="cat-tag">解消待ち</span>
+      </div>
+    </div>
+
+    <!-- C02 -->
+    <div class="cat-card top c-or">
+      <div class="cat-label"><span class="num">C·02</span>最重要<span class="imp">ACTIVIST</span></div>
+      <span class="cat-icon">⚡</span>
+      <div class="cat-title">3D Investment<br>が「強制解放装置」に</div>
+      <div class="cat-big c-or">10.1%</div>
+      <div class="cat-sub">保有比率 ／ 投資額≈538億 ／ 含み益+17%</div>
+      <div class="cat-body">
+        シンガポールの著名アクティビスト3Dが<strong>6ヶ月で5%→10.1%</strong>まで買い増し（538億円投下）。株主提案提出済・ISS/Glass Lewis支持獲得。平均取得単価≈¥2,910で含み益+17%。撤退コストが高く<strong>圧力継続のインセンティブは強固</strong>。目的はTOBではなくBSスラック解消→株価上昇。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">株主提案2026/6</span>
+        <span class="cat-tag">ISS賛同</span>
+        <span class="cat-tag">538億投下</span>
+      </div>
+    </div>
+
+    <!-- C03 -->
+    <div class="cat-card top c-pu">
+      <div class="cat-label"><span class="num">C·03</span>最重要<span class="imp">NEXT MOVE</span></div>
+      <span class="cat-icon">🔓</span>
+      <div class="cat-title">6/19総会後に防衛策消滅<br>買い増し「解禁」へ</div>
+      <div class="cat-big c-pu">6/19</div>
+      <div class="cat-sub">総会終結で防衛策失効 ／ 3Dの次の行動が焦点</div>
+      <div class="cat-body">
+        NSSOLが2025/10導入の買収防衛策（新株予約権）は<strong>6/19総会終結をもって失効</strong>。以降、3Dは法的制約なく買い増し可能に。東邦HD事例では防衛策消滅後に5%→24%まで段階的に拡大。<strong>15〜20%まで買い増せば日鉄への圧力は質的に変化</strong>し、「BSスラック解消か完全子会社化か」の二択を迫る局面になる。※流通株式問題は2025/5に東証が「適合」を確認済み。直接トリガーにはならない点に注意。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">防衛策6/19失効</span>
+        <span class="cat-tag">買い増し解禁</span>
+        <span class="cat-tag">東邦HD型</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOT 3 CATALYSTS ── -->
+  <div class="cat-grid-bot">
+
+    <!-- C04 -->
+    <div class="cat-card sm top c-bl">
+      <div class="cat-label"><span class="num">C·04</span>補強</div>
+      <span class="cat-icon">📈</span>
+      <div class="cat-title">業績は堅調継続<br>問題はBSのみ</div>
+      <div class="cat-big c-bl">+14%</div>
+      <div class="cat-sub">FY2026/3 純利益前期比 ／ 売上+12.7%確定</div>
+      <div class="cat-body">
+        FY2026/3期確定：売上3,813億・純利益308億（いずれも前期比+10%超）。現在株価はこの業績水準で<strong>PER20倍・業績純粋評価でも正当化可能</strong>。つまり3D/TOBオプションはゼロコストで付随。DX需要はFY2027/3も売上4,170億（+9.4%）と堅調予想。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">PER20倍正当化</span>
+        <span class="cat-tag">DX継続成長</span>
+      </div>
+    </div>
+
+    <!-- C05 -->
+    <div class="cat-card sm top c-gn">
+      <div class="cat-label"><span class="num">C·05</span>補強</div>
+      <span class="cat-icon">💰</span>
+      <div class="cat-title">BS改善だけで<br>1,844億円を解放</div>
+      <div class="cat-big c-gn">+30%</div>
+      <div class="cat-sub">BS埋蔵価値 ／ 時価総額（6,000億）比</div>
+      <div class="cat-body">
+        3D試算：①預け金解消761億②政策保有株売却575億③CCC改善420億④その他88億＝合計<strong>1,844億円の投資原資</strong>が創出可能。これを自社株買い・増配・M&Aに再配分するだけでEPSは+102%（162円→327円）。ROEは同業水準（17.9%→20%超）へ。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">EPS+102%余地</span>
+        <span class="cat-tag">自社株買い</span>
+      </div>
+    </div>
+
+    <!-- C06 -->
+    <div class="cat-card sm top c-am">
+      <div class="cat-label"><span class="num">C·06</span>補強</div>
+      <span class="cat-icon">🎯</span>
+      <div class="cat-title">どの出口でも<br>リターンは正</div>
+      <div class="cat-big c-am">78%</div>
+      <div class="cat-sub">何らかの変革確率 ／ 現状維持わずか22%</div>
+      <div class="cat-body">
+        BSスラック解消（35%）・防衛的TOB（18%）・協議型TOB（25%）─ いずれが実現しても<strong>¥4,100〜5,400への上昇</strong>が見込める。現状維持（22%）でも業績成長（年率+8〜14%）で緩やかに上昇。非対称性が明確：アップサイド+24〜+58% vs ダウンサイド▲15〜25%（確率22%）。
+      </div>
+      <div class="cat-tags">
+        <span class="cat-tag">非対称リターン</span>
+        <span class="cat-tag">複数出口</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── THESIS STRIP ── -->
+  <div style="background:var(--ink); border-radius:8px; overflow:hidden; margin-bottom:24px;">
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:rgba(255,255,255,.05);">
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">確率加重IRR</div>
+        <div style="font:700 20px/1 var(--mono); color:#5dd98a; margin-bottom:3px;">+16.8%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">配当込み≈+19〜21%</div>
+      </div>
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">修正理論株価</div>
+        <div style="font:700 20px/1 var(--mono); color:#f08080; margin-bottom:3px;">¥4,500〜</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">BS解消後 同業PER適用</div>
+      </div>
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">ROE（実質）</div>
+        <div style="font:700 20px/1 var(--mono); color:#f0b050; margin-bottom:3px;">17.9%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">預け金除外ベース</div>
+      </div>
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">最大ドローダウン</div>
+        <div style="font:700 20px/1 var(--mono); color:#f08080; margin-bottom:3px;">▲25%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">確率4〜5%の複合ワースト</div>
+      </div>
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">推奨ポジション</div>
+        <div style="font:700 20px/1 var(--mono); color:#80b0f0; margin-bottom:3px;">8〜12%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">Kelly基準+リスクプレミアム</div>
+      </div>
+      <div style="padding:14px 16px; background:rgba(16,18,24,.5);">
+        <div style="font:600 8px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(246,244,238,.28); margin-bottom:7px;">期待保有期間</div>
+        <div style="font:700 20px/1 var(--mono); color:#d090d0; margin-bottom:3px;">1〜2年</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.36);">流通株式問題が最短トリガー</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TRIGGER WATCH ── -->
+  <div style="font:600 11px/1 var(--mono); letter-spacing:.10em; text-transform:uppercase; color:var(--ink3); margin-bottom:14px;">最重要監視トリガー</div>
+  <div class="trigger-grid">
+    <div class="trigger-card">
+      <div class="trigger-tag tt-hot">🔴 即時監視</div>
+      <div class="trigger-title">3D保有比率の変化</div>
+      <div class="trigger-body">変更報告書で<strong>保有率が9%台以下に低下</strong>したら仮説崩壊シグナル。即座にポジション縮小を検討。逆に11%超増加なら流通株式問題が加速し<strong>最強のブルシグナル</strong>。3Dの平均取得単価≈¥2,910（含み益+17%）で撤退インセンティブは低い。</div>
+      <div class="trigger-time">監視頻度：随時（変更報告書 EDINETアラート推奨）</div>
+    </div>
+    <div class="trigger-card">
+      <div class="trigger-tag tt-hot">🔴 最近傍</div>
+      <div class="trigger-title">6月定時株主総会 ── 少数株主賛同率</div>
+      <div class="trigger-body">日鉄63.4%を除く少数株主ベースで3D提案への賛同率が<strong>50%超なら圧力本格化</strong>。前年の社長選任賛同率56%（低水準）が示す通り、少数株主の不満は蓄積済み。否決でも3Dが保有継続なら問題なし。50%未満かつ3D継続なら状況変化なしで保有維持。</div>
+      <div class="trigger-time">2026年6月 ／ 結果は総会当日開示</div>
+    </div>
+    <div class="trigger-card">
+      <div class="trigger-tag tt-warn">🟡 総会後即座に監視</div>
+      <div class="trigger-title">3Dの買い増し開始 ── 防衛策消滅後の動向</div>
+      <div class="trigger-body">6/19総会終結後、法的制約がなくなった3Dが変更報告書を提出して<strong>11〜15%へ買い増しを開始すれば最強のブルシグナル</strong>。東邦HD事例（5%→24%）では防衛策消滅後に段階的買い増しが加速した。変更報告書の提出（1%超変動で5営業日以内）をEDINETアラートで監視すること。買い増しなく沈黙が続く場合は「膠着継続」として保有維持。</div>
+      <div class="trigger-time">6月19日以降 ／ EDINETアラート設定推奨</div>
+    </div>
+    <div class="trigger-card">
+      <div class="trigger-tag tt-cool">🔵 中長期</div>
+      <div class="trigger-title">日鉄FY2027/3業績回復 → 財務余力復活</div>
+      <div class="trigger-body">日鉄はFY2026/3で純利益171億（▲95%）と激減。FY2027/3予想は純利益2,200億（USスチールシナジー）への急回復が見込まれる。<strong>純利益2,000億超が確認できれば</strong>NSSOL完全子会社化に必要な資金2,160億の調達余力が復活。「協議型TOB」シナリオが現実的になる。</div>
+      <div class="trigger-time">2027年4月 通期決算発表</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 02: 財務分析
+══════════════════════════════════════ -->
+<div class="panel" id="p-financials">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">財務分析 ── 有価証券報告書・決算確定値</h2>
+    <span class="sec-badge sb-bl">FY2026/3確定 · FY2027/3予想</span>
+  </div>
+
+  <div class="g4 mb16">
+    <div class="card mc">
+      <div class="mc-l">売上収益 FY2026/3確定</div>
+      <div class="mc-v gn">3,813億</div>
+      <div class="mc-s">前期比 +12.7%<br>会社予想3,770億を上回る着地</div>
+    </div>
+    <div class="card mc">
+      <div class="mc-l">営業利益 FY2026/3確定</div>
+      <div class="mc-v gn">426億</div>
+      <div class="mc-s">前期比 +10.6%<br>営業利益率 11.2%</div>
+    </div>
+    <div class="card mc">
+      <div class="mc-l">純利益 FY2026/3確定</div>
+      <div class="mc-v gn">308億</div>
+      <div class="mc-s">前期比 +14.0%<br>EPS ≈ ¥168（分割調整後）</div>
+    </div>
+    <div class="card mc">
+      <div class="mc-l">ROE FY2026/3確定</div>
+      <div class="mc-v rd">11.3%</div>
+      <div class="mc-s">有報ベース<br>同業最下位水準</div>
+    </div>
+  </div>
+
+  <div class="g2 mb16">
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">業績推移（IFRS連結・百万円）</div>
+      <table class="tbl">
+        <thead><tr><th>期</th><th class="r">売上収益</th><th class="r">営業利益</th><th class="r">純利益</th><th class="r">営業利益率</th><th class="r">ROE</th></tr></thead>
+        <tbody>
+          <tr><td>FY2022/3</td><td class="r mono">270,332</td><td class="r mono">23,600</td><td class="r mono">20,521</td><td class="r mono">8.7%</td><td class="r mono">10.8%</td></tr>
+          <tr><td>FY2023/3</td><td class="r mono">291,688</td><td class="r mono">27,200</td><td class="r mono">22,000</td><td class="r mono">9.3%</td><td class="r mono">11.0%</td></tr>
+          <tr><td>FY2024/3</td><td class="r mono">310,632</td><td class="r mono">32,900</td><td class="r mono">24,241</td><td class="r mono">10.6%</td><td class="r mono">11.1%</td></tr>
+          <tr><td>FY2025/3</td><td class="r mono">338,301</td><td class="r mono">38,500</td><td class="r mono">27,049</td><td class="r mono">11.4%</td><td class="r mono">10.9%</td></tr>
+          <tr style="background:var(--gn3);"><td><strong>FY2026/3確定</strong></td><td class="r mono hi-gn">381,340</td><td class="r mono hi-gn">42,600</td><td class="r mono hi-gn">30,832</td><td class="r mono hi-gn">11.2%</td><td class="r mono hi-rd">11.3%</td></tr>
+          <tr style="background:var(--bl3);"><td><strong>FY2027/3予想</strong></td><td class="r mono">417,000</td><td class="r mono">—</td><td class="r mono">31,600</td><td class="r mono">—</td><td class="r mono">—</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:10px; color:var(--ink3); margin-top:6px;">※FY2022/3〜FY2025/3は有価証券報告書記載値。FY2026/3は2026/4/27発表確定値。FY2027/3は会社予想。</p>
+    </div>
+    <div>
+      <div class="card mb12">
+        <div style="font-size:11px; font-weight:600; margin-bottom:12px;">キャッシュ・BS推移（百万円）</div>
+        <table class="tbl">
+          <thead><tr><th>項目</th><th class="r">FY2025/3</th><th class="r">FY2026/3中間</th></tr></thead>
+          <tbody>
+            <tr><td>現預金等（CMS含む）</td><td class="r mono">192,931</td><td class="r mono">112,900</td></tr>
+            <tr><td>親会社CMS預け金</td><td class="r mono hi-rd">≈96,100</td><td class="r mono hi-rd">≈94,400</td></tr>
+            <tr><td>親会社所有者帰属持分</td><td class="r mono">261,173</td><td class="r mono">266,000</td></tr>
+            <tr><td>総資産</td><td class="r mono">421,302</td><td class="r mono">405,300</td></tr>
+            <tr><td>親会社持分比率</td><td class="r mono">62.0%</td><td class="r mono">65.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card card-am">
+        <div style="font-size:11px; font-weight:600; color:var(--am); margin-bottom:8px;">ROEが上がらない構造的理由</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text">純利益は順調増（年率+8〜14%）なのにROEが10〜11%台に固定されている</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text">理由：分母（純資産）が毎年積み上がる一方、CMS預け金944億円が低収益資産として存在</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text">預け金944億を除いた「有効純資産」ベースROE：308億÷1,716億≒<strong>17.9%</strong></div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">預け金金利0.2%（3D確認値）＝年間利子収入≈21.5億円 vs 資本コスト8.4%換算では損失76億円/年</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">FY2027/3 中期計画目標 vs 実績進捗</div>
+    <table class="tbl">
+      <thead><tr><th>指標</th><th class="r">FY2025/3実績</th><th class="r">FY2026/3確定</th><th class="r">FY2027/3目標（中計）</th><th class="r">FY2026→目標達成率</th><th class="r">評価</th></tr></thead>
+      <tbody>
+        <tr><td>売上収益</td><td class="r mono">338,301</td><td class="r mono">381,340</td><td class="r mono hi-am">450,000〜500,000</td><td class="r mono">76〜85%</td><td><span class="prob-mid">要加速</span></td></tr>
+        <tr><td>営業利益</td><td class="r mono">38,500</td><td class="r mono">42,600</td><td class="r mono hi-am">60,000〜70,000</td><td class="r mono">61〜71%</td><td><span class="prob-hi">大幅未達リスク</span></td></tr>
+        <tr><td>ROE</td><td class="r mono">10.9%</td><td class="r mono">11.3%</td><td class="r mono hi-am">15.0%以上</td><td class="r mono">—</td><td><span class="prob-hi">BS改善必須</span></td></tr>
+        <tr><td>海外売上</td><td class="r mono">≈120億</td><td class="r mono">—</td><td class="r mono hi-am">240億超（2倍）</td><td class="r mono">未確認</td><td><span class="prob-mid">進捗不明</span></td></tr>
+        <tr><td>純利益</td><td class="r mono">27,049</td><td class="r mono hi-gn">30,832</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="prob-lo">良好</span></td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-am" style="margin-top:12px; margin-bottom:0;">
+      <strong>中計目標達成の懸念点</strong>
+      <span class="alert-body">FY2027/3の営業利益600〜700億目標に対してFY2026/3確定値は426億。残1年で+41〜64%の急拡大が必要。インフォコム連結効果（年間約130〜140億追加）があっても達成は厳しい。ただし、この「中計未達リスク」は業績ファンダメンタルへの影響であり、TOB・BS改善シナリオの確率とは独立した変数として評価すべき。</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 03: BSスラック分析
+══════════════════════════════════════ -->
+<div class="panel" id="p-bs">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">BSスラック分析 ── 埋蔵価値の定量化</h2>
+    <span class="sec-badge sb-rd">1,844億円の解放可能価値</span>
+  </div>
+
+  <div class="g4 mb16">
+    <div class="card mc" style="border-top:3px solid var(--rd2);">
+      <div class="mc-l">CMS預け金</div>
+      <div class="mc-v rd">944億</div>
+      <div class="mc-s">利率0.2% 純資産比≈40%<br>3D確認値：平均938億（FY2022〜2024）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--am2);">
+      <div class="mc-l">政策保有株式</div>
+      <div class="mc-v am">≈575億</div>
+      <div class="mc-s">ISS指摘：純資産29.5%を持合<br>売却余地大（3D試算）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--bl2);">
+      <div class="mc-l">CCC改善余地</div>
+      <div class="mc-v bl">≈420億</div>
+      <div class="mc-s">売上債権回転日数の<br>業界水準への適正化</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--gn2);">
+      <div class="mc-l">BS改善合計</div>
+      <div class="mc-v gn">1,844億</div>
+      <div class="mc-s">時価総額（6,000億）比<br><strong>約30%相当の埋蔵価値</strong></div>
+    </div>
+  </div>
+
+  <div class="g2 mb16">
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">CMS預け金の詳細（3D・有報確認）</div>
+      <table class="tbl">
+        <thead><tr><th>項目</th><th class="r">金額・数値</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr><td>期中平均預け金残高（FY2024/3）</td><td class="r mono hi-rd">9,572億円</td><td>3Dプレゼン確認</td></tr>
+          <tr><td>金利収入（FY2024/3）</td><td class="r mono">21.5億円</td><td>3Dプレゼン確認</td></tr>
+          <tr><td>実効利率</td><td class="r mono hi-rd">0.2%</td><td>215百万÷95,723百万</td></tr>
+          <tr><td>資本コスト（3D試算）</td><td class="r mono">8.4%</td><td>3Dプレゼン</td></tr>
+          <tr><td>年間機会損失</td><td class="r mono hi-rd">≈76億円/年</td><td>(8.4%−0.2%)×944億</td></tr>
+          <tr><td>税後純利益比</td><td class="r mono hi-rd">約25〜26%</td><td>308億比</td></tr>
+          <tr><td>FY2022〜2024平均残高</td><td class="r mono">≈938億円</td><td>3D（2026/5）確認</td></tr>
+          <tr><td>FY2026/3残高</td><td class="r mono">≈944億円</td><td>「削減」主張は一時的要因</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="card card-gn mb12">
+        <div style="font-size:11px; font-weight:600; color:var(--gn); margin-bottom:10px;">預け金解消後の理論株価試算</div>
+        <table class="tbl">
+          <thead><tr><th>前提</th><th class="r">価格</th></tr></thead>
+          <tbody>
+            <tr><td>預け金解消後ROE: 17.9%、同業PER27倍適用</td><td class="r mono hi-gn">¥4,590</td></tr>
+            <tr><td>3D試算EPS改善後(+102%)のPER20倍</td><td class="r mono hi-gn">¥5,440〜6,800</td></tr>
+            <tr><td>現在EPS¥168×同業平均PER27倍</td><td class="r mono hi-am">¥4,536</td></tr>
+            <tr><td>現在の会社予想EPS¥170×PER25倍</td><td class="r mono hi-am">¥4,250</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:10px; color:var(--ink3); margin-top:8px;">いずれの試算も現在株価¥3,423に対し+24〜+99%の上昇余地を示す。最保守的な前提（PER25倍）でも¥4,250＝+24%。</p>
+      </div>
+      <div class="card card-am">
+        <div style="font-size:11px; font-weight:600; color:var(--am); margin-bottom:8px;">NSSOLの「預け金削減」主張を反駁する根拠</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>NSSOL主張：</strong>FY2025→FY2026に預け金は減少しており固定化されていない</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>3D反駁：</strong>この減少はリクルート株売却益（一時的）のインフォコム買収充当によるもの。構造的変化ではない</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>証拠：</strong>FY2022〜2024平均938億≒FY2026残高944億。経常的水準は横ばい</div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">中計目標「期末Cash900億圧縮」は現在の預け金と同額水準。預け金を解消しないことを所与とした目標設定の可能性</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">PLスラック（3D試算・190億円の利益改善余地）</div>
+    <table class="tbl">
+      <thead><tr><th>改善項目</th><th>内容</th><th class="r">推定改善額</th></tr></thead>
+      <tbody>
+        <tr><td>① 親会社案件単価の見直し</td><td>SIer業界では長期継続案件は利益率高。親会社向けは全社平均並みに設定→市場価格比▲5%pt低い</td><td class="r mono hi-gn">最大60〜80億</td></tr>
+        <tr><td>② 案件単価・低採算リソースシフト</td><td>付加価値型契約へ段階的移行</td><td class="r mono">20〜30億</td></tr>
+        <tr><td>③ 外注単価適正化・オフショア拡大</td><td>開発コスト低減</td><td class="r mono">20〜30億</td></tr>
+        <tr><td>④ 一般管理費適正化</td><td>管理人員・人件費</td><td class="r mono">15〜20億</td></tr>
+        <tr><td>⑤ 国内外鉄鋼メーカー開拓</td><td>競合他社鉄鋼メーカーが取引を敬遠→潜在需要取り込み</td><td class="r mono">30〜40億</td></tr>
+        <tr style="background:var(--gn3);"><td><strong>合計（3D試算）</strong></td><td><strong>値上げ効果控除後</strong></td><td class="r mono hi-gn"><strong>167〜190億円</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 04: 3D戦略分析
+══════════════════════════════════════ -->
+<div class="panel" id="p-3d">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title">3D Investment Partners 戦略の完全解読</h2>
+    <span class="sec-badge sb-pu">保有10.1% · 株主提案2026/6</span>
+  </div>
+
+  <div class="alert alert-bl mb16">
+    <strong>3D戦略の核心（再定義）</strong>
+    <span class="alert-body">「TOBを誘発する」ではなく「株主リターンを実現する外圧装置」。3Dは段階的に圧力を加え、どの経路に進んでも利益が出る構造を作っている。株主意見聴取レポート（2026/6/2）で「3Dはアプローチを変える必要がある。目的は株主リターンの実現」と外部投資家自身が指摘。</span>
+  </div>
+
+  <div class="phase-grid mb16">
+    <div class="phase-item done">
+      <div class="phase-tag">Phase 1 ── 完了</div>
+      <div class="phase-name">株式取得</div>
+      <div class="phase-body">2024/8〜2025/2の約6ヶ月間で5.0%→10.1%へ段階的買増。総投資額≈538億円。流通株式問題を「意図的に」作り出した可能性。</div>
+    </div>
+    <div class="phase-item active">
+      <div class="phase-tag">Phase 2 ── 進行中</div>
+      <div class="phase-name">株主提案・議決権工作</div>
+      <div class="phase-body">2026/4 株主提案（CMS預け金禁止）提出。ISS/Glass Lewisの支持獲得。少数株主への直接訴求。社長選任議案への少数株主賛同率56%（極めて低位）を武器に交渉。</div>
+    </div>
+    <div class="phase-item pending">
+      <div class="phase-tag">Phase 3 ── 未達</div>
+      <div class="phase-name">ガバナンス改革要求</div>
+      <div class="phase-body">独立社外取締役過半数化、BS改善（預け金解消・政策保有売却）、親会社向け単価適正化。NSSOL取締役会は全て「反対」。NSSOLは「2028年までの方針に反しない」と主張。</div>
+    </div>
+    <div class="phase-item option">
+      <div class="phase-tag">Phase 4 ── 解禁（6/19以降）</div>
+      <div class="phase-name">防衛策消滅後の買い増し</div>
+      <div class="phase-body">6/19総会終結で防衛策が失効。3Dは法的制約なく15〜20%超まで買い増し可能に。東邦HD型（5%→24%）の圧力エスカレーション。変更報告書の提出タイミングが最重要監視指標。※流通株式問題は東証が2025/5に「適合確認」済みのため直接トリガーにはならない。</div>
+    </div>
+  </div>
+
+  <div class="g2 mb16">
+    <div>
+      <div class="card mb12">
+        <div style="font-size:11px; font-weight:600; margin-bottom:12px;">3D保有比率の変化（大量保有報告書）</div>
+        <table class="tbl">
+          <thead><tr><th>日付</th><th class="r">保有比率</th><th class="r">保有株数</th><th class="r">累積取得額</th></tr></thead>
+          <tbody>
+            <tr><td>2024/8/26（初回）</td><td class="r mono">5.00%</td><td class="r mono">9,154,320</td><td class="r mono">約235億</td></tr>
+            <tr><td>2024/9/12</td><td class="r mono">6.08%</td><td class="r mono">11,123,494</td><td class="r mono">約308億</td></tr>
+            <tr><td>2024/10/18</td><td class="r mono">7.08%</td><td class="r mono">12,957,894</td><td class="r mono">約375億</td></tr>
+            <tr><td>2024/11/11</td><td class="r mono">8.35%</td><td class="r mono">15,285,894</td><td class="r mono">約462億</td></tr>
+            <tr><td>2025/2/14</td><td class="r mono">9.40%</td><td class="r mono">17,196,994</td><td class="r mono">約537億</td></tr>
+            <tr style="background:var(--pu3);"><td><strong>2026/5/11現在</strong></td><td class="r mono hi-rd"><strong>10.1%</strong></td><td class="r mono">≈18,486,000</td><td class="r mono hi-rd">≈約538億+</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:10px; color:var(--ink3); margin-top:6px;">※平均取得単価≈約2,910円（単純推算）。現在株価3,423円で含み益約+17%。3Dが撤退するインセンティブは低い。</p>
+      </div>
+    </div>
+    <div>
+      <div class="card card-rd mb12">
+        <div style="font-size:11px; font-weight:600; color:var(--rd); margin-bottom:10px;">流通株式問題の実際（修正・確定版）</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">3Dが10.1%保有→東証規定上「主要株主（10%超）」として流通株式から除外が原則</div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">計算上の流通株式比率は≈26%（プライム基準35%を下回る）</div></div>
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text"><strong>2025年5月2日：NSSOLが「プライム上場維持基準適合を確認」と適時開示</strong>→東証が例外規定（純投資目的等）を認め適合確認</div></div>
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text">結論：流通株式問題は「直接的なTOBトリガー」にはならない。前回分析からの重要な修正点。</div></div>
+          <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">ただし3Dがさらに買い増した場合、東証の判断が変わる可能性は残存。完全な解消ではない。</div></div>
+        </div>
+      </div>
+      <div class="card card-bl">
+        <div style="font-size:11px; font-weight:600; color:var(--bl); margin-bottom:10px;">3D側の「株主意見聴取レポート（2026/6/2）」が示すもの</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">「少数株主の利益を担保する取締役会の独立性が確保されていない」（大多数の参加者）</div></div>
+          <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">「親会社によってNSSOLの企業価値が損なわれているのではないかと懸念」（大多数）</div></div>
+          <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">「3Dはアプローチを変えるべき。目的は株主リターンの実現」（重要：修正シグナル）</div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">3DはPhase 2から「預け金問題一点突破」ではなく「独立性・ガバナンス全般」に戦略転換の可能性</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">3D vs NSSOL 対話年表</div>
+    <table class="tbl">
+      <thead><tr><th>時期</th><th>3D側アクション</th><th>NSSOL側対応</th></tr></thead>
+      <tbody>
+        <tr><td>2024/9/10</td><td>企業価値向上策を書面提出（非公開）</td><td>—</td></tr>
+        <tr><td>2024/8〜2025/2</td><td>保有比率5%→9.4%まで増加</td><td>—</td></tr>
+        <tr><td>2025/3/28</td><td>企業価値向上策の要約版を公開（英語・日本語）</td><td>—</td></tr>
+        <tr><td>2025/6</td><td>第45期株主総会：社長再任議案に反対票</td><td>少数株主賛同56%（低位）で再任成立</td></tr>
+        <tr><td>2025/10/31</td><td>—</td><td><strong>買収防衛策（新株予約権）を導入決議</strong></td></tr>
+        <tr><td>2026/4</td><td>株主提案提出（CMS預け金禁止）</td><td>—</td></tr>
+        <tr><td>2026/5/11</td><td>保有比率10.1%確認・株主向けプレゼン公開</td><td>株主提案に反対意見表明</td></tr>
+        <tr><td>2026/6月予定</td><td>第46期定時株主総会</td><td>株主提案否決見込み（日鉄の63.4%が反対）</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-rd" style="margin-top:12px; margin-bottom:0;">
+      <strong>重要：買収防衛策の存在（2025/10/31）</strong>
+      <span class="alert-body">NSSOLは2025/10/31に「3Dによる大量買付に対する対応方針」として新株予約権の無償割当（ポイズンピル的措置）を導入決議。これにより3Dが敵対的に支配権取得しようとすると株式が希薄化する。ただし「一般株主の株価価値希薄化はない」とされており、防衛対象は3Dの経営支配取得のみ。この防衛策は2026/6月の株主総会後に終了予定。</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 05: 同業比較
+══════════════════════════════════════ -->
+<div class="panel" id="p-peer">
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title">同業比較バリュエーション</h2>
+    <span class="sec-badge sb-gn">ROE最下位 · 構造的割安の証明</span>
+  </div>
+
+  <div class="card mb16">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">国内ITサービス主要企業 バリュエーション比較（2025/3期実績ベース）</div>
+    <table class="tbl">
+      <thead><tr><th>銘柄</th><th class="r">ROE</th><th class="r">営業利益率</th><th class="r">PER目安</th><th class="r">売上規模</th><th>親会社依存</th><th>評価</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SCSK (9719)</strong></td><td class="r mono hi-gn">26.3%</td><td class="r mono">14.6%</td><td class="r mono">25〜30倍</td><td class="r mono">5,717億</td><td>NTT東日本系</td><td><span class="prob-lo">ROE高い</span></td></tr>
+        <tr><td><strong>TIS (3626)</strong></td><td class="r mono hi-gn">48.3%</td><td class="r mono">14.5%</td><td class="r mono">25〜35倍</td><td class="r mono">4,040億</td><td>伊藤忠系</td><td><span class="prob-lo">ROE最高位</span></td></tr>
+        <tr><td><strong>BIPROGY (8056)</strong></td><td class="r mono hi-gn">39.1%</td><td class="r mono">13.6%</td><td class="r mono">25〜30倍</td><td class="r mono">3,383億</td><td>日本ユニシス改め</td><td><span class="prob-lo">改革先行</span></td></tr>
+        <tr><td><strong>NRI (4307)</strong></td><td class="r mono">18〜22%</td><td class="r mono">15〜18%</td><td class="r mono">28〜35倍</td><td class="r mono">7,400億超</td><td>独立系</td><td><span class="prob-lo">高利益率</span></td></tr>
+        <tr style="background:var(--rd3);"><td><strong>NSSOL (2327)</strong></td><td class="r mono hi-rd"><strong>10.9%</strong></td><td class="r mono">11.4%</td><td class="r mono hi-rd"><strong>現在20倍</strong></td><td class="r mono">3,813億</td><td>日本製鉄63.4%</td><td><span class="prob-hi">ROE最下位</span></td></tr>
+        <tr style="background:var(--gn3);"><td><strong>NSSOL（預け金解消後）</strong></td><td class="r mono hi-gn"><strong>17.9%</strong></td><td class="r mono">≈14%</td><td class="r mono hi-gn"><strong>25〜28倍相当</strong></td><td class="r mono">同上</td><td>—</td><td><span class="prob-lo">同業水準</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:10px; color:var(--ink3); margin-top:8px;">※NRI比較データ出典：NRI IR資料（2025年10月更新版）。各社FY2025/3期実績。PERは各社アナリストコンセンサス水準の概算。</p>
+  </div>
+
+  <div class="g2 mb16">
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">ROE格差の構造分解（デュポン分解）</div>
+      <table class="tbl">
+        <thead><tr><th>要素</th><th class="r">NSSOL現状</th><th class="r">NSSOL（預け金解消）</th><th class="r">同業平均</th></tr></thead>
+        <tbody>
+          <tr><td>純利益率</td><td class="r mono">8.1%</td><td class="r mono hi-am">10〜11%</td><td class="r mono hi-gn">12〜16%</td></tr>
+          <tr><td>総資産回転率</td><td class="r mono">0.91×</td><td class="r mono hi-gn">1.1〜1.2×</td><td class="r mono hi-gn">1.0〜1.5×</td></tr>
+          <tr><td>財務レバレッジ</td><td class="r mono">1.61×</td><td class="r mono hi-rd">1.30×</td><td class="r mono">1.5〜2.0×</td></tr>
+          <tr style="background:var(--am3);"><td><strong>ROE（計算値）</strong></td><td class="r mono hi-rd">10.9%</td><td class="r mono hi-am">14〜17%</td><td class="r mono hi-gn">20〜40%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:10px; color:var(--ink3); margin-top:8px;">預け金解消で総資産回転率が上昇し、ROEは14〜17%台に改善。PL施策（190億改善）を加えると20%超も視野。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">理論株価レンジ（様々な前提）</div>
+      <div class="bgrp">
+        <div class="blrow"><span>BS解消のみ（PER25倍）</span><span class="hi-am mono">¥4,250</span></div>
+        <div class="btrack"><div class="bfill" style="width:62%; background:var(--am2)"></div></div>
+        <p style="font-size:10px; color:var(--ink3); margin-top:3px;">最保守的ケース。現状PER20倍から微拡大のみ</p>
+      </div>
+      <div class="bgrp">
+        <div class="blrow"><span>同業平均PER適用（27倍）</span><span class="hi-am mono">¥4,590</span></div>
+        <div class="btrack"><div class="bfill" style="width:72%; background:var(--or2)"></div></div>
+        <p style="font-size:10px; color:var(--ink3); margin-top:3px;">ROE改善後に同業並みの評価が付いた場合</p>
+      </div>
+      <div class="bgrp">
+        <div class="blrow"><span>TOB（+28%プレミアム）</span><span class="hi-gn mono">¥4,380〜4,800</span></div>
+        <div class="btrack"><div class="bfill" style="width:78%; background:var(--gn2)"></div></div>
+        <p style="font-size:10px; color:var(--ink3); margin-top:3px;">国内親子上場TOB平均プレミアム28%適用（直近1年平均）</p>
+      </div>
+      <div class="bgrp">
+        <div class="blrow"><span>高値TOB（+38〜40%）</span><span class="hi-gn mono">¥4,720〜4,800</span></div>
+        <div class="btrack"><div class="bfill" style="width:90%; background:var(--gn)"></div></div>
+        <p style="font-size:10px; color:var(--ink3); margin-top:3px;">SBテクノロジー(+44%)・NTTドコモ(+41%)クラスの事例</p>
+      </div>
+      <div class="bgrp">
+        <div class="blrow"><span>PL+BS完全改善（3D試算）</span><span class="hi-gn mono">¥5,400〜6,800</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%; background:var(--gn)"></div></div>
+        <p style="font-size:10px; color:var(--ink3); margin-top:3px;">EPS+102%（327円）×PER25〜28倍。理論上限</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-bl">
+    <div style="font-size:11px; font-weight:600; color:var(--bl); margin-bottom:10px;">米系大手証券の格下げを再評価する</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">2026/4/1：米系大手がEW→UW、目標株価4,500→3,500円に引き下げ</div></div>
+      <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text">この格下げは「業績面での中計目標未達リスク」と「バリュエーション割高感」を主因とする純粋な業績・PER評価</div></div>
+      <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>重要：</strong>この格下げはBSスラック解消や3D圧力によるガバナンス改革、流通株式問題を「イベントリスク」として評価していない</div></div>
+      <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text">つまり目標株価3,500円は「現状業績の継続ケース」の評価。イベント投資家目線では下値目安として使える一方、アップサイドを大幅に過小評価している</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 06: 確率・期待値再構築
+══════════════════════════════════════ -->
+<div class="panel" id="p-prob">
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2 class="sec-title">確率モデル・期待値 完全再構築</h2>
+    <span class="sec-badge sb-am">確率加重IRR +12〜18%/年</span>
+  </div>
+
+  <div class="alert alert-am mb16">
+    <strong>確率モデルの根拠（確定版）</strong>
+    <span class="alert-body">初回仮説（TOB確率3年53%）→修正①（28%：日鉄財務制約を考慮）→修正②（TOB合計43%：BSスラック解消を独立シナリオとして評価）。流通株式問題は2025/5に東証が「適合確認」済みのため直接トリガーにならない点を修正。防衛策は6/19総会で消滅し、3Dの次の行動（買い増し開始）が新たな最重要トリガーとなる。4シナリオの確率和は100%。</span>
+  </div>
+
+  <div class="sc-box mb20">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear Case</div>
+      <div class="sc-prob bear">22%</div>
+      <div class="sc-sub">現状維持・業績停滞</div>
+      <div class="sc-li">3D撤退 or 株主総会完全否決</div>
+      <div class="sc-li">中計目標未達・PER収縮</div>
+      <div class="sc-li">到達価格：¥2,900〜3,200</div>
+      <div class="sc-li">年率：▲2〜▲5%（3年）</div>
+      <div class="sc-li">EV貢献：▲0.4〜▲1.1%</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base Case A</div>
+      <div class="sc-prob base">35%</div>
+      <div class="sc-sub">BSスラック解消（TOBなし）</div>
+      <div class="sc-li">預け金解消・増配・自社株買い実現</div>
+      <div class="sc-li">ROE15〜18%達成→PER拡大</div>
+      <div class="sc-li">到達価格：¥4,200〜4,800</div>
+      <div class="sc-li">年率：+12〜+20%（2〜3年）</div>
+      <div class="sc-li">EV貢献：+4.2〜+7.0%</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Base Case B</div>
+      <div class="sc-prob bull">25%</div>
+      <div class="sc-sub">協議型TOB（日鉄・NSSOL合意）</div>
+      <div class="sc-li">US Steel統合後の財務余力回復</div>
+      <div class="sc-li">ガバナンス問題解消を目的とした完全子会社化</div>
+      <div class="sc-li">到達価格：¥4,500〜5,400</div>
+      <div class="sc-li">年率：+22〜+36%（2〜3年）</div>
+      <div class="sc-li">EV貢献：+5.5〜+9.0%</div>
+    </div>
+  </div>
+
+  <div class="g2 mb16">
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">防衛的TOB（防衛策消滅後・3D買い増しトリガー）</div>
+      <div style="background:var(--pu3); border-radius:var(--r); padding:16px; margin-bottom:12px;">
+        <div style="font:700 9px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--pu); margin-bottom:8px;">Bull Case · 18%</div>
+        <div style="font:700 28px/1 var(--mono); color:var(--pu2); margin-bottom:6px;">¥4,100〜4,500</div>
+        <div style="font-size:11px; color:var(--ink2); line-height:1.65;">
+          6/19総会後に防衛策が消滅。3Dが15〜20%まで段階的に買い増しを開始することで日鉄に「BSスラック解消か完全子会社化か」の経営判断を迫る。東邦HD型の圧力エスカレーション。最短パス（1〜2年）。プレミアムは防衛目的のため+20〜25%と控えめ。<br><br><span style="font-size:10px; color:var(--am);">※流通株式問題（26%）は2025/5に東証が「適合確認」済みのため直接トリガーにはならない（前回分析からの修正）。</span>
+        </div>
+        <div style="font:600 11px/1 var(--mono); color:var(--pu); margin-top:10px;">年率 +20〜32% ／ EV貢献 +3.6〜5.8%</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px; font-weight:600; margin-bottom:12px;">期待値計算（確率加重IRR）</div>
+      <table class="tbl">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">年率IRR</th><th class="r">EV貢献</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：現状維持</td><td class="r mono">22%</td><td class="r mono hi-rd">▲3.5%</td><td class="r mono hi-rd">▲0.77%</td></tr>
+          <tr><td>Base A：BSスラック解消</td><td class="r mono">35%</td><td class="r mono hi-am">+16%</td><td class="r mono hi-am">+5.60%</td></tr>
+          <tr><td>Bull：防衛的TOB</td><td class="r mono">18%</td><td class="r mono hi-gn">+26%</td><td class="r mono hi-gn">+4.68%</td></tr>
+          <tr><td>Base B：協議型TOB</td><td class="r mono">25%</td><td class="r mono hi-gn">+29%</td><td class="r mono hi-gn">+7.25%</td></tr>
+          <tr style="background:var(--gn3); border-top:2px solid var(--gn2);"><td><strong>確率加重期待IRR</strong></td><td class="r mono">100%</td><td class="r mono hi-gn"><strong>+16.8%/年</strong></td><td class="r mono hi-gn"><strong>+16.76%</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:10px; color:var(--ink3); margin-top:8px;">配当利回り2.5%は上記に加算。確率加重合計期待リターン（配当込）≈年率+19〜21%。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">TOB価格レンジの再精査</div>
+    <table class="tbl">
+      <thead><tr><th>ケース</th><th class="r">基準株価</th><th class="r">プレミアム</th><th class="r">TOB価格</th><th>根拠・類似事例</th></tr></thead>
+      <tbody>
+        <tr><td>防衛的TOB（日鉄主導・安値）</td><td class="r mono">¥3,423</td><td class="r mono">+20〜25%</td><td class="r mono hi-am">¥4,100〜4,280</td><td>黒崎播磨（2025/8）+22%。財務制約下での最低限プレミアム</td></tr>
+        <tr><td>標準TOB（国内平均）</td><td class="r mono">¥3,600〜3,800</td><td class="r mono">+25〜28%</td><td class="r mono hi-am">¥4,500〜4,860</td><td>岡三証券調査：直近1年親子上場TOB平均+25〜28%</td></tr>
+        <tr><td>3D交渉型TOB</td><td class="r mono">¥4,000</td><td class="r mono">+30〜35%</td><td class="r mono hi-gn">¥5,200〜5,400</td><td>SBテクノロジー+44%、NTTドコモ+41%。3Dが公正価格要求した場合</td></tr>
+        <tr><td>超高値（初回仮説）</td><td class="r mono">—</td><td class="r mono">+49%</td><td class="r mono hi-rd">¥5,100</td><td>過大評価：競合なし、財務制約ありの状況では非現実的</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-gn" style="margin-top:12px; margin-bottom:0;">
+      <strong>修正中心値：¥4,300〜4,800（初回5,100円から▲6〜16%下方修正）</strong>
+      <span class="alert-body">競合TOBが存在しない親会社主導の案件ではプレミアムの競り上がりが起きない。ただし3Dが「公正価格意見書」を要求し、独立委員会が第三者評価を行う場合は+30〜35%まで拡大する可能性がある。</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 07: リスク検証
+══════════════════════════════════════ -->
+<div class="panel" id="p-risk">
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <h2 class="sec-title">リスク完全検証 ── 最悪シナリオ</h2>
+    <span class="sec-badge sb-rd">最大ドローダウン ▲25〜30%</span>
+  </div>
+
+  <div class="g4 mb16">
+    <div class="card mc" style="border-top:3px solid var(--rd2);">
+      <div class="mc-l">3D撤退リスク</div>
+      <div class="mc-v rd">▲15〜25%</div>
+      <div class="mc-s">確率：8〜12%<br>平均取得単価≈¥2,910（含み益+17%）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--am2);">
+      <div class="mc-l">中計未達リスク</div>
+      <div class="mc-v am">▲15〜20%</div>
+      <div class="mc-s">確率：15%<br>FY2027営業利益600億は達成困難</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--bl2);">
+      <div class="mc-l">日鉄財務悪化</div>
+      <div class="mc-v bl">▲10〜15%</div>
+      <div class="mc-s">確率：10%<br>FY2026/3純利益171億（▲95%）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--pu2);">
+      <div class="mc-l">複合ワースト</div>
+      <div class="mc-v rd">▲30〜35%</div>
+      <div class="mc-s">確率：4〜5%<br>¥2,200〜2,400水準</div>
+    </div>
+  </div>
+
+  <div class="card mb16">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">リスク詳細マトリクス</div>
+    <table class="rtbl">
+      <thead><tr><th>リスク</th><th>発生確率</th><th>株価影響</th><th>トリガー</th><th>対処法</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;">① 3D撤退・保有減少</td>
+          <td><span class="prob-mid">8〜12%</span></td>
+          <td style="color:var(--rd2); font-weight:600;">▲15〜25%</td>
+          <td>保有比率低下の変更報告書提出</td>
+          <td>変更報告書確認次第、即時ポジション判断を迫る。保有9%台以下→縮小検討</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">② 安値防衛的TOB（¥4,100以下）</td>
+          <td><span class="prob-mid">8%</span></td>
+          <td style="color:var(--am2); font-weight:600;">+20%（予想比低い）</td>
+          <td>3D買い増し後、日鉄が最低限プレミアムで強行</td>
+          <td>+20%でも収益確保可能。ただし「公正価格意見書」要求を3Dが行使できるか注視</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">③ 中計目標大幅未達</td>
+          <td><span class="prob-mid">15%</span></td>
+          <td style="color:var(--rd2); font-weight:600;">▲15〜20%</td>
+          <td>FY2027上期決算で営業利益進捗が著しく低い場合</td>
+          <td>TOB・BSスラックシナリオとは独立。業績悪化のみではポジション縮小判断</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">④ 日鉄によるNSSOL株売却（逆説的リスク）</td>
+          <td><span class="prob-lo">5%</span></td>
+          <td style="color:var(--rd2); font-weight:600;">▲20〜30%</td>
+          <td>日鉄がUS Steel資金調達のためNSSOL持分を一部売却</td>
+          <td>発生なら流通株式比率問題解消→TOBトリガー消失。仮説根本から崩壊。即撤退</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">⑤ 買収防衛策の継続・強化</td>
+          <td><span class="prob-lo">5%</span></td>
+          <td style="color:var(--am2); font-weight:600;">▲5〜10%</td>
+          <td>2026/6月総会後に防衛策を延長または強化</td>
+          <td>3Dの圧力が鈍化する可能性。ただし少数株主の反発が強まりより大きな圧力に転化する可能性もある</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">⑥ 関税政策・景気悪化</td>
+          <td><span class="prob-mid">10%</span></td>
+          <td style="color:var(--am2); font-weight:600;">▲10〜20%</td>
+          <td>顧客企業のIT投資抑制、DX需要減少</td>
+          <td>業績リスク。ただしBSスラック・TOBシナリオへの影響は限定的。一時的なら保有維持</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="g2">
+    <div class="card card-rd">
+      <div style="font-size:11px; font-weight:600; color:var(--rd); margin-bottom:10px;">最重要リスク：日鉄の財務状況</div>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text">FY2026/3期：純利益171億（前期比▲95%）。US Steel買収（約2兆円）の統合損失</div></div>
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text">FY2027/3期予想：純利益2,200億（US Steelシナジー本格化）に回復見込み</div></div>
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text">NSSOLのTOBに必要な資金（少数株主分36%×時価6,000億×36%≈2,160億）は「出せない金額ではない」が優先度は低い</div></div>
+        <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text">FY2027/3期に純利益2,200億が実現すれば財務余力は十分回復。TOBを検討できる環境に</div></div>
+        <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text">逆説：日鉄の財務悪化が「今すぐTOBできない」ことの裏返しであり、これが株価の過度な割安を生み出している</div></div>
+      </div>
+    </div>
+    <div class="card card-am">
+      <div style="font-size:11px; font-weight:600; color:var(--am); margin-bottom:10px;">分析上の不確実性・不明点</div>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>有価証券報告書の精査範囲：</strong>FY2026/3期の有報は未入手（発行6月予定）。FY2025/3期有報ベースの分析が中心</div></div>
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>FY2026/3期CMS預け金残高：</strong>確定値未確認。中間期（2025/9末）の1,129億減少はインフォコム買収関連の一時的要因と3Dが指摘</div></div>
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>日鉄の意思決定タイムライン：</strong>US Steel統合完了後（2025/6）の戦略優先順位を内部で非公表</div></div>
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>東証の流通株式判断：</strong>3D保有が「主要株主（10%以上）」として正式認定された場合の上場維持審査時期が不明</div></div>
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>3Dの最終的出口戦略：</strong>「TOB誘発→プレミアム売却」か「株価上昇→市場売却」かが明確でない</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 08: 投資戦略
+══════════════════════════════════════ -->
+<div class="panel" id="p-strategy">
+  <div class="sec-head">
+    <span class="sec-num">08</span>
+    <h2 class="sec-title">最適投資戦略 ── 実務レベル</h2>
+    <span class="sec-badge sb-bl">ポジション8〜12% · 期待保有期間1〜2年</span>
+  </div>
+
+  <div class="g4 mb16">
+    <div class="card mc" style="border-top:3px solid var(--gn2);">
+      <div class="mc-l">推奨ポジション</div>
+      <div class="mc-v gn">8〜12%</div>
+      <div class="mc-s">初回5〜8%から引き上げ<br>Kelly基準：5〜8% + リスクプレミアム</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--bl2);">
+      <div class="mc-l">エントリー①（即時）</div>
+      <div class="mc-v bl">¥3,350〜3,500</div>
+      <div class="mc-s">全ポジションの50%<br>現在株価近辺で開始</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--am2);">
+      <div class="mc-l">エントリー②（待機）</div>
+      <div class="mc-v am">¥3,000〜3,200</div>
+      <div class="mc-s">残り50%<br>3D撤退報道がない場合の押し目</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--or2);">
+      <div class="mc-l">期待保有期間</div>
+      <div class="mc-v or">1〜2年</div>
+      <div class="mc-s">流通株式問題が<br>最速シナリオのトリガー</div>
+    </div>
+  </div>
+
+  <div class="g2 mb16">
+    <div>
+      <div class="card mb12">
+        <div style="font-size:11px; font-weight:600; margin-bottom:12px;">エントリー・利確・損切り詳細</div>
+        <table class="tbl">
+          <thead><tr><th>アクション</th><th class="r">価格水準</th><th>数量</th><th>タイミング</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--gn); font-weight:600;">エントリー①</td><td class="r mono">¥3,350〜3,500</td><td>50%</td><td>即時。現在株価近辺での仕込み</td></tr>
+            <tr><td style="color:var(--am); font-weight:600;">エントリー②</td><td class="r mono">¥3,000〜3,200</td><td>30%</td><td>総会前後の調整局面を活用</td></tr>
+            <tr><td style="color:var(--bl); font-weight:600;">エントリー③</td><td class="r mono">イベント前</td><td>20%</td><td>東証審査開始 or 日鉄コメント前</td></tr>
+            <tr><td style="color:var(--am2); font-weight:600;">利確①</td><td class="r mono">¥4,200〜4,500</td><td>25%</td><td>BSスラック解消発表 or 増配・自社株買い開始</td></tr>
+            <tr><td style="color:var(--gn); font-weight:600;">利確②（TOB発表）</td><td class="r mono">TOB発表翌日始値</td><td>50%</td><td>大陽線でハーフ利確。残りはTOB価格で応募</td></tr>
+            <tr><td style="color:var(--rd2); font-weight:600;">損切り（事象型）</td><td class="r mono">—</td><td>段階縮小</td><td>3D保有比率9%台以下 / 日鉄のNSSOL株売却報道</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card card-rd mb12">
+        <div style="font-size:11px; font-weight:600; color:var(--rd); margin-bottom:10px;">絶対やってはいけないこと（3点）</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>「TOB発表後」にエントリーしない：</strong>TOB発表翌日は既に+20〜30%ギャップアップ。その後TOB価格へ収斂するだけでリスクリワードが成立しない</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>価格ベース損切りに頼らない：</strong>3,000円割れを「損切りシグナル」にすると、3D撤退報道が出た際には既に大きく下落している。「事象ベース」損切りに転換必須</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>ポジション15%超に張らない：</strong>確率加重IRR+16%のイベント投資に15%超は過大。最大12%。Kelly基準を遵守する</div></div>
+        </div>
+      </div>
+      <div class="card card-gn">
+        <div style="font-size:11px; font-weight:600; color:var(--gn); margin-bottom:10px;">監視すべき5つの指標とアクション</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text"><strong>①3D変更報告書：</strong>10.1%超増加→ブル強化 ／ 低下報告→即縮小</div></div>
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text"><strong>②6月株主総会採決：</strong>少数株主賛同率≥50%→保有維持・追加 ／ ＜50%→一部縮小</div></div>
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text"><strong>③東証プライム審査：</strong>正式通知確認→TOBトリガー最接近→積み増し</div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>④日鉄FY2027/3決算（2027/4発表）：</strong>純利益2,000億超→財務余力回復→TOB環境整備確認</div></div>
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>⑤NSSOL中計FY2027上期進捗（2027/10）：</strong>営業利益ペース確認。大幅未達なら業績単体のバリュエーション再評価</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:11px; font-weight:600; margin-bottom:12px;">シナリオ別ポジション管理マトリクス</div>
+    <table class="tbl">
+      <thead><tr><th>状況</th><th>サイン</th><th>アクション</th><th>想定株価</th></tr></thead>
+      <tbody>
+        <tr><td style="background:var(--gn3);">【強気化】3D増加+東証審査</td><td>変更報告書11%超 + 東証通知</td><td style="color:var(--gn); font-weight:600;">最大12%まで積み増し</td><td>¥3,700〜4,200（直前急騰）</td></tr>
+        <tr><td style="background:var(--am3);">【中立維持】総会否決+3D維持</td><td>提案否決・保有率変化なし</td><td style="color:var(--am); font-weight:600;">保有継続・追加なし</td><td>¥3,200〜3,600</td></tr>
+        <tr><td style="background:var(--bl3);">【増配・自社株買い発表】</td><td>預け金解消or還元強化IR</td><td style="color:var(--bl); font-weight:600;">¥4,200〜4,500で25%利確</td><td>¥3,800〜4,500</td></tr>
+        <tr><td style="background:var(--gn3);">【TOB発表】</td><td>適時開示（TOB実施）</td><td style="color:var(--gn); font-weight:600;">翌日始値で50%利確・残りTOB応募</td><td>¥4,100〜5,400</td></tr>
+        <tr><td style="background:var(--rd3);">【仮説崩壊】3D撤退</td><td>3D保有率9%以下変更報告</td><td style="color:var(--rd2); font-weight:600;">即時50〜70%縮小</td><td>¥2,600〜3,000（▲15〜24%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PANEL 09: 最終投資判断
+══════════════════════════════════════ -->
+<div class="panel" id="p-verdict">
+  <div class="sec-head">
+    <span class="sec-num">09</span>
+    <h2 class="sec-title">最終投資判断 ── 全要素統合</h2>
+    <span class="sec-badge sb-or">Ver.2.0 再検証確定版</span>
+  </div>
+
+  <div class="g4 mb20">
+    <div class="card mc" style="border-top:3px solid var(--rd);">
+      <div class="mc-l">Layer 1 · BS割安</div>
+      <div class="mc-v rd">944億</div>
+      <div class="mc-s">0.2%で眠るCMS預け金<br>純資産の40%・機会損失76億/年</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--am);">
+      <div class="mc-l">Layer 2 · 外圧</div>
+      <div class="mc-v am">78%</div>
+      <div class="mc-s">何らかの変革確率<br>（BSスラック35%+TOB43%）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--or);">
+      <div class="mc-l">Layer 3 · 業績</div>
+      <div class="mc-v or">堅調</div>
+      <div class="mc-s">FY2026売上+12.7%<br>純利益+14.0%（確定）</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--pu);">
+      <div class="mc-l">Layer 4 · 下値支持</div>
+      <div class="mc-v pu">PER20倍</div>
+      <div class="mc-s">業績純粋評価で正当化可能<br>TOBオプションはゼロコスト</div>
+    </div>
+  </div>
+
+  <div class="sc-box mb20">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear Case</div>
+      <div class="sc-prob bear">22%</div>
+      <div class="sc-sub">現状維持・業績停滞</div>
+      <div class="sc-li">3D撤退 or 提案完全否決</div>
+      <div class="sc-li">年率▲2〜▲5%（3年）</div>
+      <div class="sc-li">到達価格：¥2,900〜3,200</div>
+      <div class="sc-li">最大下値▲25%（¥2,570）</div>
+      <div class="sc-li">業績悪化が重なると悪化</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base Case</div>
+      <div class="sc-prob base">60%</div>
+      <div class="sc-sub">BSスラック解消 or 防衛的TOB</div>
+      <div class="sc-li">預け金解消・自社株買い or</div>
+      <div class="sc-li">3D買い増し→圧力型TOB</div>
+      <div class="sc-li">到達価格：¥4,100〜4,800</div>
+      <div class="sc-li">年率+12〜26%（1〜3年）</div>
+      <div class="sc-li">EV貢献：+10.3%</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Bull Case</div>
+      <div class="sc-prob bull">18%</div>
+      <div class="sc-sub">協議型TOB（プレミアム高）</div>
+      <div class="sc-li">US Steel統合後の財務余力回復</div>
+      <div class="sc-li">日鉄がNSSOL価値を評価して合意</div>
+      <div class="sc-li">到達価格：¥4,800〜5,400</div>
+      <div class="sc-li">年率+22〜+36%（2〜3年）</div>
+      <div class="sc-li">EV貢献：+7.3%</div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-head">最終投資判断 <span>── Ver.2.0 有報・3D資料・同業比較 全要素統合</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+      <div>
+        <div class="conc-sub">割安の本質（修正後の正確な理解）</div>
+        <div class="conc-body">¥3,423が割安な理由は「TOBが来るから」ではなく、<strong>純資産40%（944億円）が0.2%で固定され、ROEが同業の3分の1（10.9%）に抑制されている構造的歪み</strong>にある。この歪みが解消されれば預け金除外ROE17.9%→同業PER適用で¥4,500〜4,800が理論的適正水準。現在株価は業績ファンダのみで正当化でき、TOBオプションはほぼゼロコスト付随。</div>
+      </div>
+      <div>
+        <div class="conc-sub">外圧メカニズムの確実性</div>
+        <div class="conc-body">3Dはすでに538億円超を投資し平均取得単価≈¥2,910（含み益+17%）。撤退コストが高く、圧力継続のインセンティブは強い。<strong>6/19総会後に防衛策が消滅し、3Dが15〜20%まで買い増し可能になる</strong>。東邦HD型（5%→24%）の圧力エスカレーションが現実的シナリオ。ISS・Glass Lewisも継続的にNSSOLガバナンスに反対推奨。三方向圧力で「何もしない」選択肢は消えつつある。</div>
+      </div>
+      <div>
+        <div class="conc-sub">確率加重期待価値</div>
+        <div class="conc-body"><strong>確率加重期待IRR：年率+16.8%（配当込み≈+19〜21%）。</strong><br>TOPIX長期リターン（約7%）の2.4倍・国内ITセクター期待収益率（約10〜12%）を大幅上回る。最大ドローダウンは▲25〜30%（複合ワースト・確率4〜5%）。リスクリワード比は良好：期待IRR+17% vs 最悪ケース損失▲25%。</div>
+      </div>
+      <div>
+        <div class="conc-sub">「買わない理由」を探す必要はない</div>
+        <div class="conc-body">BSスラック解消（35%）・防衛的TOB（18%）・協議型TOB（25%）のいずれが実現してもリターンは正。<strong>現状維持でも業績成長（純利益年率+8〜14%）が継続する限り絶対的ドローダウンは限定的。</strong>残されたリスクは「3D撤退」「日鉄がNSSOL株を売却」という仮説根本崩壊の2点のみ。これらの監視に集中することが投資の本質。</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:4px;">
+      <div style="text-align:center; padding:14px; background:rgba(246,244,238,.05); border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono); color:rgba(246,244,238,.28); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">確率加重IRR</div>
+        <div style="font:700 26px/1 var(--mono); color:var(--or2);">+16.8%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.38); margin-top:4px;">配当込み≈+19〜21%</div>
+      </div>
+      <div style="text-align:center; padding:14px; background:rgba(246,244,238,.05); border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono); color:rgba(246,244,238,.28); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">修正理論株価</div>
+        <div style="font:700 26px/1 var(--mono); color:#e09090;">¥4,500〜4,800</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.38); margin-top:4px;">BS解消後同業PER適用</div>
+      </div>
+      <div style="text-align:center; padding:14px; background:rgba(246,244,238,.05); border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono); color:rgba(246,244,238,.28); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">推奨ポジション</div>
+        <div style="font:700 26px/1 var(--mono); color:#70c892;">8〜12%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.38); margin-top:4px;">Kelly基準+リスクプレミアム</div>
+      </div>
+      <div style="text-align:center; padding:14px; background:rgba(246,244,238,.05); border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono); color:rgba(246,244,238,.28); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px;">変革確率（何らかの）</div>
+        <div style="font:700 26px/1 var(--mono); color:var(--or2);">78%</div>
+        <div style="font-size:10px; color:rgba(246,244,238,.38); margin-top:4px;">現状維持わずか22%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2); color:rgba(246,244,238,.20); text-align:center; padding:18px; font:500 9px/1.8 var(--mono); letter-spacing:.07em;">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br>
+  Data: EDINET（有価証券報告書 FY2025/3・FY2026/3） / TDnet適時開示 / 3D企業価値向上策（2025/3） / 3D株主意見聴取レポート（2026/6） / IRBank / みんかぶ / NRI IR資料 / 岡三証券セミナー資料 / 参照株価：¥3,415（6/5終値） / 2026年6月8日時点 — Ver.3.0 Final（流通株式問題修正・防衛策消滅反映・コパイロット検証統合）
+</footer>
+
+<script>
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tnb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({ top: document.getElementById('tabNav').offsetTop - 10, behavior: 'smooth' });
+}
+
+// bar animation on visibility
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.bfill').forEach(f => {
+        const w = f.style.width;
+        f.style.width = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => { f.style.transition = 'width 1.1s ease'; f.style.width = w; }));
+      });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.panel').forEach(p => io.observe(p));
+</script>
+</body>
+</html>

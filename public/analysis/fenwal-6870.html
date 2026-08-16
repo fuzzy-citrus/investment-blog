@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本フェンオール（6870）投資分析 — 時価総額の77%が金融資産、事業をEV/EBITDA 1.7倍で買える</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 31px/1.08 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:10px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.45);line-height:1.85}
+.hs strong{color:rgba(246,245,239,.85)}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 44px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 17px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.15 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto;white-space:nowrap}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.sh2{font:700 13.5px/1.3 var(--head);margin:26px 0 11px;padding-left:9px;border-left:3px solid var(--ink)}
+
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eeaaaa}
+.ch{font:700 12.5px/1.35 var(--head);margin-bottom:7px}
+.cx{font-size:12px;line-height:1.72;color:var(--ink2)}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;vertical-align:bottom}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 26px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.3 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.25);color:#e09090}
+
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:12px 17px;font-size:12px;color:var(--am);line-height:1.7;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:12px 17px;font-size:12px;color:var(--gn);line-height:1.7;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #eeaaaa;border-radius:var(--r);padding:12px 17px;font-size:12px;color:var(--rd);line-height:1.7;margin-bottom:16px}
+
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.25 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px;margin-top:20px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+ul.lst{list-style:none;font-size:12px;line-height:1.78}
+ul.lst li{padding-left:15px;position:relative;margin-bottom:6px}
+ul.lst li::before{content:'▪';position:absolute;left:0;color:var(--ink3)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:24px}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 6870 · 2026.08.03 終値 2,229円</p>
+      <h1 class="ht">日本フェンオール <em>（6870）</em><br>時価総額の77%が金融資産。<br>事業をEV/EBITDA 1.7倍で買える</h1>
+      <p class="hs">中間期末BPS <strong>2,775円（PBR 0.80倍）</strong>／ネットキャッシュ＋投資有価証券 <strong>96.1億円＝1株1,714円</strong><br>サーマル部門 中間受注 <strong>+104.5%</strong>（生成AI・データセンター向け半導体製造装置）／事業EV <strong>28.9億円</strong><br>上位2大株主で <strong>49.3%</strong>・実質浮動株1割台 ／ 中立フェアバリュー <strong>3,320円（+49%）</strong></p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>買い · 買い下がりで集める</strong><br>
+        平均取得 2,050〜2,100円を狙う。<br>
+        価格ではなく<strong>論拠の破綻</strong>で止める。<br>
+        検証日は <strong>10/30（3Q決算）</strong>。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価 / 時価総額</div><div class="kn am">2,229円</div><div class="ks">125.0億円（自己株控除後）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS2,775円）</div><div class="kn gn">0.80倍</div><div class="ks">自己資本比率 77.8%</div></div>
+    <div class="kv"><div class="kl">金融資産／株</div><div class="kn bl">1,714円</div><div class="ks">時価総額の 76.9%</div></div>
+    <div class="kv"><div class="kl">事業EV／EBITDA</div><div class="kn gn">1.7倍</div><div class="ks">事業EV 28.9億円</div></div>
+    <div class="kv"><div class="kl">金融資産控除後PER</div><div class="kn gn">3.3倍</div><div class="ks">会社計画EPS 156.93円</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn am">3.50%</div><div class="ks">78円・6期連続増配／配当性向約34%</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>結論</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>なぜ安いのか</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--rd)"></span>直近決算の中身</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--or2)"></span>資産精査</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>事業性</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--pu2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--gn2)"></span>買い方の設計</button>
+</nav>
+
+<main class="bd">
+
+<!-- ═════ P1 結論 ═════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 — 2,229円は買い。理由は3つに集約される</h2><span class="sb bg-gn">投資判断 ◎</span></div>
+
+  <div class="ok">
+    <strong>この銘柄の割安性は「土地の含み益」ではありません。</strong>実態は、<strong>①時価総額125億円のうち96億円（77%）が事業に不要な金融資産</strong>、<strong>②半導体・AI向けのサーマル部門が受注ベースで倍増している</strong>、<strong>③上位2大株主で49.3%を握る"詰んだ"株主構成</strong>——この3点です。事業そのものは実質<strong>28.9億円</strong>で買えており、そこから年10〜14億円の営業利益が出ています。
+  </div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Reason 01 · 最重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">時価総額の77%が非事業金融資産</div>
+      <div class="cb gn">1,714円</div>
+      <div class="cu">1株あたりネットキャッシュ920円＋投資有価証券793円</div>
+      <div class="cp">2026年6月末で現預金59.4億−借入7.8億＝<strong>ネットキャッシュ51.6億</strong>、投資有価証券<strong>44.5億</strong>。合計96.1億は時価総額125.0億の<strong>76.9%</strong>。自己資本比率77.8%。差引くと<strong>事業EVはわずか28.9億円＝EV/EBITDA 1.7倍</strong>。</div>
+      <div class="tgs"><span class="tg tg-gn">自己資本比率77.8%</span><span class="tg tg-or">金融資産控除後PER 3.3倍</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Reason 02 · 成長ドライバー</div>
+      <span class="ci">🔥</span>
+      <div class="ct">サーマル部門の受注が倍増</div>
+      <div class="cb or">+104.5%</div>
+      <div class="cu">2026年中間 受注高 前年同期比（売上は+71.4%）</div>
+      <div class="cp">会社は「<strong>生成AIの普及に伴うデータセンター関連の投資拡大</strong>を背景に、引き続き半導体製造装置向けの需要増加が見込まれる」と明記。通期計画（売上24億）に対し<strong>中間で既に16.8億・進捗70%</strong>。下期が同水準なら通期33億＝<strong>計画比+40%</strong>。</div>
+      <div class="tgs"><span class="tg tg-or">熱板・センサー</span><span class="tg tg-gn">計画比+40%の余地</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Reason 03 · 構造</div>
+      <span class="ci">🔒</span>
+      <div class="ct">上位2大株主で49.3%</div>
+      <div class="cb bl">49.3%</div>
+      <div class="cu">香港GMP 26.0% ＋ 西華産業 23.3%（持分法適用済）</div>
+      <div class="cp">香港の純投資ファンドGMPが<strong>変更報告書23回</strong>にわたり買い増して26.0%。西華産業（8061）は資本業務提携で23.3%を保有し既に<strong>持分法適用関連会社</strong>。取引先・自己株・持株会を加えると<strong>実質浮動株は10〜15%</strong>。構造的にTOBが起きやすい配置。</div>
+      <div class="tgs"><span class="tg tg-bl">実質浮動株1割台</span><span class="tg tg-gn">GMPの出口＝TOB応募</span></div>
+    </div>
+  </div>
+
+  <div class="sh2">株価が下がった理由と、それが誤読である理由</div>
+  <table class="t">
+    <thead><tr><th style="width:34%">市場が見た数字</th><th>実態</th></tr></thead>
+    <tbody>
+      <tr><td><strong>中間純利益 ▲39.5%</strong><br><span style="font-size:11px;color:var(--ink3)">906→548百万円</span></td><td><strong>前年同期にあった特別利益392百万円（うち関係会社清算益323百万円）の消滅がほぼすべて。</strong>経常は791→998百万円の<span class="hgn">+26.1%</span>、営業は806→905百万円の<span class="hgn">+12.3%</span>で、事業の実力は改善している。</td></tr>
+      <tr><td><strong>特別損失167百万円を計上</strong></td><td>内訳は投資有価証券評価損88＋製品改修関連損失引当金繰入76＋その他2。<strong>品質関連の引当金残高はむしろ減少</strong>（製品保証425→355、製品改修187→198、合計612→553百万円）。過去に大型特損があった年に出していた<strong>「特別損失の計上に関するお知らせ」の単独開示も今回はない</strong>。</td></tr>
+      <tr><td><strong>通期進捗90.7%でも予想据え置き</strong></td><td>前期も同じ運用。25年は期初計画（経常860）に対し1Q66.0%→中間92.0%→3Q109.9%→<strong>通期133.0%（実績1,144）で着地</strong>。会社計画は構造的に保守的で、据え置きは弱気シグナルではない。</td></tr>
+      <tr><td><strong>2Q単独の営業利益が細い</strong><br><span style="font-size:11px;color:var(--ink3)">64百万円（前年199百万円）</span></td><td>セグメントで分解すると<strong>消防ポンプの減益（前年の一過性大口案件の反動）と全社費用33百万円増</strong>が主因。<strong>中核のSSPは利益+13.7%（利益率27.6%は過去最高水準）、サーマルは+42.3%</strong>と増収増益。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh2">バリュエーション・シナリオ</div>
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">Bear</div><div class="sc-p br">2,594円</div><div class="sc-s">+16%</div>
+      <div class="sc-i">EBIT 会社計画1,030に着地</div><div class="sc-i">EV/EBIT 6倍評価</div><div class="sc-i">サーマルの上振れなし</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base</div><div class="sc-p bs">3,320円</div><div class="sc-s"><strong>+49%</strong>（中立目標）</div>
+      <div class="sc-i">EBIT 1,250（計画+21%）</div><div class="sc-i">EV/EBIT 8倍＋金融資産</div><div class="sc-i">サーマル通期30億前後</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull</div><div class="sc-p bu">4,080円</div><div class="sc-s">+83%</div>
+      <div class="sc-i">EBIT 1,400、サーマル33億</div><div class="sc-i">政策保有株の縮減を実行</div><div class="sc-i">EV/EBIT 10倍にリレート</div></div>
+    <div class="sc-c"><div class="sc-l bm">TOB</div><div class="sc-p bm">3,760円</div><div class="sc-s">+69%（オプション）</div>
+      <div class="sc-i">EV/EBITDA 7倍＋金融資産</div><div class="sc-i">西華産業による完全子会社化</div><div class="sc-i">時期は特定不能</div></div>
+  </div>
+  <p class="note">自己株・信託株控除後の株式数 5,607,453株で算定。中間期末の実績ネットキャッシュは51.6億円だが、設備投資が下期に集中する（通期21億円計画に対し上期実績6.8億円）ため、NAV算定では<strong>期末45億円へ目減りする前提</strong>で保守的に置いています。</p>
+</div>
+
+<!-- ═════ P2 なぜ安いのか ═════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">なぜ安いのか — 株価2,229円の中身を分解する</h2><span class="sb bg-am">バリュエーション</span></div>
+
+  <table class="t">
+    <thead><tr><th>構成要素</th><th class="r">金額（百万円）</th><th class="r">1株換算</th><th class="r">株価比</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>現金及び預金</td><td class="r mn">5,943</td><td class="r mn">1,060円</td><td class="r mn">47.5%</td><td>2026年6月末</td></tr>
+      <tr><td>借入金（1年内222＋長期561）</td><td class="r mn hrd">▲783</td><td class="r mn hrd">▲140円</td><td class="r mn">▲6.3%</td><td>実質無借金</td></tr>
+      <tr class="sm"><td>ネットキャッシュ</td><td class="r mn">5,160</td><td class="r mn">920円</td><td class="r mn">41.3%</td><td>—</td></tr>
+      <tr><td>投資有価証券（時価）</td><td class="r mn">4,449</td><td class="r mn">793円</td><td class="r mn">35.6%</td><td>総資産の22.2%。ほぼ政策保有株</td></tr>
+      <tr class="hl"><td><strong>非事業金融資産 合計</strong></td><td class="r mn"><strong>9,609</strong></td><td class="r mn"><strong>1,714円</strong></td><td class="r mn"><strong>76.9%</strong></td><td>時価総額の4分の3強</td></tr>
+      <tr class="sm"><td>市場が事業に払っている値段（事業EV）</td><td class="r mn">2,890</td><td class="r mn">515円</td><td class="r mn">23.1%</td><td>時価総額12,499 − 9,609</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="g4">
+    <div class="c mc"><div class="ml">EV／EBITDA</div><div class="mv gn">1.7倍</div><div class="ms">事業EV 28.9億<br>÷ 推計EBITDA 17.3億</div></div>
+    <div class="c mc"><div class="ml">EV／EBIT</div><div class="mv gn">2.3倍</div><div class="ms">推計営業利益<br>12.5億ベース</div></div>
+    <div class="c mc"><div class="ml">金融資産控除後PER</div><div class="mv gn">3.3倍</div><div class="ms">(2,229−1,714)円<br>÷ EPS 156.93円</div></div>
+    <div class="c mc"><div class="ml">PBR</div><div class="mv or">0.80倍</div><div class="ms">中間期末BPS<br>2,775.08円</div></div>
+  </div>
+
+  <div class="sh2">表面指標と実質指標</div>
+  <table class="t">
+    <thead><tr><th>指標</th><th class="r">表面値</th><th class="r">金融資産控除後</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>PER（会社計画 純利益880百万／EPS 156.93円）</td><td class="r mn">14.2倍</td><td class="r mn hgn">3.3倍</td><td>会社計画は保守的で、達成確度が極めて高い</td></tr>
+      <tr><td>PER（当方推計 純利益1,000百万／EPS 178円）</td><td class="r mn ham">12.5倍</td><td class="r mn hgn">2.9倍</td><td>サーマルの上振れを織り込んだ推計</td></tr>
+      <tr><td>PBR（中間期末BPS 2,775円）</td><td class="r mn ham">0.80倍</td><td class="r">—</td><td>会社は中計で「PBR1倍」を明示目標</td></tr>
+      <tr class="hl"><td><strong>PBR（評価差額金を全額除いた実質BPS 2,357円）</strong></td><td class="r mn"><strong>0.95倍</strong></td><td class="r">—</td><td><strong>政策保有株の含み益をゼロと置いても株価は純資産以下</strong></td></tr>
+      <tr><td>配当利回り（78円・6期連続増配・配当性向約34%・DOE約2.8%）</td><td class="r mn hgn">3.50%</td><td class="r">—</td><td>創立65周年の記念配当は含まない普通配当</td></tr>
+      <tr><td>ROE（25年実績 ／ 28年目標）</td><td class="r mn">8.8% ／ 6.0%</td><td class="r">—</td><td class="hrd">目標が実績を下回る＝目標設定に問題あり</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>ここが本レポートの核心です。</strong>純資産のうち政策保有株の評価差額金（税引後約23.5億円）を<strong>全額ゼロと置いた実質BPSでも2,357円</strong>。株価2,229円はそれすら下回ります。つまり<strong>「株式相場が急落して保有株の含み益が消し飛んでも、なお純資産割れ」</strong>という水準です。バリュー投資の安全域としてはかなり厚い。</div>
+
+  <div class="sh2">修正NAVの積み上げ</div>
+  <table class="t">
+    <thead><tr><th>項目</th><th class="r">Bear</th><th class="r">Base</th><th class="r">Bull</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>事業価値（EV/EBIT）</td><td class="r mn">6,180</td><td class="r mn">10,000</td><td class="r mn">14,000</td><td>EBIT 1,030×6 ／ 1,250×8 ／ 1,400×10</td></tr>
+      <tr><td>＋ ネットキャッシュ（期末見込）</td><td class="r mn">4,500</td><td class="r mn">4,500</td><td class="r mn">4,500</td><td>中間実績5,160から下期capexで目減り</td></tr>
+      <tr><td>＋ 投資有価証券（含み益課税考慮後）</td><td class="r mn">3,435</td><td class="r mn">3,435</td><td class="r mn">3,435</td><td>時価4,449 − 含み益3,379×30%</td></tr>
+      <tr><td>＋ 土地含み益（税引後）</td><td class="r mn">429</td><td class="r mn">691</td><td class="r mn">953</td><td>八王子 4万／6万／8万円/㎡</td></tr>
+      <tr class="hl"><td><strong>修正NAV 合計</strong></td><td class="r mn"><strong>14,544</strong></td><td class="r mn"><strong>18,626</strong></td><td class="r mn"><strong>22,888</strong></td><td>単位：百万円</td></tr>
+      <tr class="sm"><td><strong>1株あたり</strong></td><td class="r mn"><strong>2,594円</strong></td><td class="r mn hgn"><strong>3,322円</strong></td><td class="r mn"><strong>4,082円</strong></td><td>÷ 5,607,453株</td></tr>
+      <tr class="sm"><td><strong>株価2,229円との乖離</strong></td><td class="r mn"><strong>+16%</strong></td><td class="r mn hgn"><strong>+49%</strong></td><td class="r mn"><strong>+83%</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Bearケースですら+16%の上値がある、という点が本件の要諦です。市場は「会社計画どおりの停滞シナリオ」以下の値付けをしており、中間決算の中身がそれを否定しています。</p>
+</div>
+
+<!-- ═════ P3 直近決算 ═════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">直近決算の中身 — 2026年12月期 中間期</h2><span class="sb bg-rd">2026.07.31 開示</span></div>
+
+  <div class="sh2">連結業績</div>
+  <table class="t">
+    <thead><tr><th>（百万円）</th><th class="r">25年中間</th><th class="r">26年中間</th><th class="r">増減率</th><th class="r">26年通期計画</th><th class="r">進捗率</th></tr></thead>
+    <tbody>
+      <tr><td>受注高</td><td class="r mn">7,070</td><td class="r mn">7,353</td><td class="r mn hgn">+4.0%</td><td class="r mn">—</td><td class="r">—</td></tr>
+      <tr><td>売上高</td><td class="r mn">6,520</td><td class="r mn">7,120</td><td class="r mn hgn">+9.2%</td><td class="r mn">12,600</td><td class="r mn">56.5%</td></tr>
+      <tr><td>営業利益</td><td class="r mn">806</td><td class="r mn">905</td><td class="r mn hgn">+12.3%</td><td class="r mn">1,030</td><td class="r mn hgn">87.9%</td></tr>
+      <tr><td>経常利益</td><td class="r mn">791</td><td class="r mn">998</td><td class="r mn hgn">+26.1%</td><td class="r mn">1,100</td><td class="r mn hgn">90.7%</td></tr>
+      <tr><td>特別損益</td><td class="r mn">+392</td><td class="r mn hrd">▲167</td><td class="r">—</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr><td>中間（当期）純利益</td><td class="r mn">906</td><td class="r mn hrd">548</td><td class="r mn hrd">▲39.5%</td><td class="r mn">880</td><td class="r mn">62.3%</td></tr>
+      <tr class="sm"><td>1株当たり純利益</td><td class="r mn">161.73円</td><td class="r mn">97.81円</td><td class="r">—</td><td class="r mn">156.93円</td><td class="r">—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">通期予想・配当予想ともに<strong>修正なし</strong>（短信に「直近に公表されている業績予想からの修正の有無：無」「配当予想からの修正の有無：無」と明記）。前期は同じ中間92.0%進捗から通期133.0%で着地しています。</p>
+
+  <div class="sh2">セグメント別 — 弱いのは消防ポンプだけ</div>
+  <table class="t">
+    <thead><tr><th>セグメント</th><th class="r">25年中間<br>売上</th><th class="r">26年中間<br>売上</th><th class="r">増減</th><th class="r">25年中間<br>利益</th><th class="r">26年中間<br>利益</th><th class="r">増減</th><th class="r">利益率</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>サーマル</strong></td><td class="r mn">979</td><td class="r mn">1,678</td><td class="r mn hgn">+71.4%</td><td class="r mn">206</td><td class="r mn">294</td><td class="r mn hgn">+42.3%</td><td class="r mn">17.5%</td></tr>
+      <tr class="hl"><td><strong>SSP（防災）</strong></td><td class="r mn">2,444</td><td class="r mn">2,514</td><td class="r mn hgn">+2.8%</td><td class="r mn">611</td><td class="r mn">695</td><td class="r mn hgn">+13.7%</td><td class="r mn hgn">27.6%</td></tr>
+      <tr><td>PWBA</td><td class="r mn">490</td><td class="r mn">485</td><td class="r mn">▲1.1%</td><td class="r mn">64</td><td class="r mn">66</td><td class="r mn">+3.3%</td><td class="r mn">13.7%</td></tr>
+      <tr><td>メディカル</td><td class="r mn">689</td><td class="r mn">544</td><td class="r mn hrd">▲21.1%</td><td class="r mn">31</td><td class="r mn">36</td><td class="r mn">+17.2%</td><td class="r mn">6.6%</td></tr>
+      <tr><td>消防ポンプ</td><td class="r mn">1,919</td><td class="r mn">1,900</td><td class="r mn">▲1.0%</td><td class="r mn">206</td><td class="r mn">159</td><td class="r mn hrd">▲22.7%</td><td class="r mn">8.4%</td></tr>
+      <tr class="sm"><td>報告セグメント計</td><td class="r mn">6,521</td><td class="r mn">7,120</td><td class="r mn">+9.2%</td><td class="r mn">1,118</td><td class="r mn">1,250</td><td class="r mn hgn">+11.8%</td><td class="r mn">17.6%</td></tr>
+      <tr><td>全社費用（調整額）</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r mn">▲312</td><td class="r mn">▲345</td><td class="r mn hrd">▲33</td><td class="r">—</td></tr>
+      <tr class="sm"><td><strong>連結営業利益</strong></td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r mn"><strong>806</strong></td><td class="r mn"><strong>905</strong></td><td class="r mn hgn"><strong>+12.3%</strong></td><td class="r mn">12.7%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh2">受注 — サーマルが倍増、SSPは会社いわく「端境期」</div>
+  <table class="t">
+    <thead><tr><th>セグメント</th><th class="r">中間受注高</th><th class="r">前年同期比</th><th class="r">受注−売上</th><th>会社コメント（要旨）</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>サーマル</strong></td><td class="r mn hgn">2,047</td><td class="r mn hgn"><strong>+104.5%</strong></td><td class="r mn hgn">+369</td><td><strong>生成AIの普及に伴うデータセンター関連の投資拡大</strong>を背景に、引き続き半導体製造装置向けの需要増加が見込まれる</td></tr>
+      <tr><td>SSP</td><td class="r mn">2,596</td><td class="r mn hrd">▲10.7%</td><td class="r mn">+82</td><td>装置内小型異常検知器は堅調も、<strong>大型ガス消火設備の端境期</strong>。今後は大型再開発・プラント向けと爆発抑制装置で獲得を図る</td></tr>
+      <tr><td>PWBA</td><td class="r mn hgn">543</td><td class="r mn hgn">+14.6%</td><td class="r mn">+58</td><td>産業機器向け製品の受注が増加</td></tr>
+      <tr><td>消防ポンプ</td><td class="r mn">1,753</td><td class="r mn hrd">▲13.7%</td><td class="r mn hrd">▲147</td><td>民間向けは改善の兆しも、<strong>官公庁向けは前年の一過性の反動</strong></td></tr>
+      <tr><td>メディカル</td><td class="r mn">412</td><td class="r mn hrd">▲36.9%</td><td class="r mn hrd">▲132</td><td>透析装置本体の<strong>最終出荷が2026年5月に完了</strong>。12月の受託終了へ</td></tr>
+      <tr class="sm"><td>合計</td><td class="r mn">7,353</td><td class="r mn">+4.0%</td><td class="r mn hgn">+233</td><td>受注が売上を上回り、受注残は積み上がり継続</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>サーマルの数字が最大の発見です。</strong>通期のサーマル計画は売上2,400百万円ですが、<strong>中間で既に1,678百万円（進捗70%）、受注は2,047百万円</strong>。下期が中間並みなら通期3,300百万円前後＝<strong>計画比+40%</strong>。利益率17.5%を当てはめると通期利益は約580百万円（計画400百万円）で、<strong>この1部門だけで会社計画を+180百万円押し上げる計算</strong>になります。</div>
+
+  <div class="sh2">特別損益 — 前年との比較で見れば話は単純</div>
+  <div class="g2">
+    <div class="c cl-am">
+      <div class="ch">2026年中間：特別損失 167百万円</div>
+      <div class="cx">
+        投資有価証券評価損 <strong>88百万円</strong><br>
+        製品改修関連損失引当金繰入額 <strong>76百万円</strong><br>
+        その他 2百万円
+      </div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ch">2025年中間：特別利益 392百万円</div>
+      <div class="cx">
+        関係会社清算益 <strong>323百万円</strong><br>
+        投資有価証券売却益 58百万円<br>
+        製品改修関連損失引当金<strong>戻入</strong>額 12百万円
+      </div>
+    </div>
+  </div>
+  <div class="sp"></div>
+  <ul class="lst">
+    <li><strong>中間純利益▲39.5%の正体は、前年の特別利益392百万円の消滅です。</strong>税前中間純利益は1,184→831百万円ですが、特別損益を除いた経常段階では+26.1%、営業段階では+12.3%の増益。</li>
+    <li>品質関連の引当金残高は<strong>製品保証425→355、製品改修187→198で合計612→553百万円と減少</strong>。工事損失引当金75百万円と解体撤去関連引当金53百万円はゼロに。<strong>品質問題の再燃を示す数字ではありません</strong>。</li>
+    <li>投資有価証券評価損88百万円は個別銘柄の減損。一方で投資有価証券全体は時価上昇で<strong>861百万円増加</strong>しており、ポートフォリオ全体では大幅なプラスです。</li>
+  </ul>
+</div>
+
+<!-- ═════ P4 資産精査 ═════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">資産精査 — 現金・有価証券・土地</h2><span class="sb bg-or">B/Sの厚み</span></div>
+
+  <div class="sh2">① バランスシートは半年で大幅に厚くなった</div>
+  <table class="t">
+    <thead><tr><th>（百万円）</th><th class="r">2025年12月末</th><th class="r">2026年6月末</th><th class="r">増減</th><th class="r">1株換算</th></tr></thead>
+    <tbody>
+      <tr><td>現金及び預金</td><td class="r mn">4,830</td><td class="r mn hgn">5,943</td><td class="r mn hgn">+1,112</td><td class="r mn">1,060円</td></tr>
+      <tr><td>借入金</td><td class="r mn">622</td><td class="r mn">783</td><td class="r mn">+161</td><td class="r mn">▲140円</td></tr>
+      <tr class="sm"><td>ネットキャッシュ</td><td class="r mn">4,208</td><td class="r mn hgn">5,160</td><td class="r mn hgn">+952</td><td class="r mn"><strong>920円</strong></td></tr>
+      <tr><td>投資有価証券</td><td class="r mn">3,587</td><td class="r mn hgn">4,449</td><td class="r mn hgn">+861</td><td class="r mn"><strong>793円</strong></td></tr>
+      <tr class="hl"><td><strong>金融資産 合計</strong></td><td class="r mn">7,795</td><td class="r mn"><strong>9,609</strong></td><td class="r mn hgn"><strong>+1,814</strong></td><td class="r mn"><strong>1,714円</strong></td></tr>
+      <tr><td>純資産</td><td class="r mn">14,607</td><td class="r mn hgn">15,567</td><td class="r mn hgn">+959</td><td class="r mn"><strong>BPS 2,775円</strong></td></tr>
+      <tr><td>自己資本比率</td><td class="r mn">76.0%</td><td class="r mn hgn">77.8%</td><td class="r mn">+1.8pt</td><td class="r">—</td></tr>
+      <tr><td>営業CF（中間）</td><td class="r mn">872<span style="font-size:10px">（前年中間）</span></td><td class="r mn hgn">1,831</td><td class="r mn hgn">+959</td><td class="r">売上債権1,533百万減が主因</td></tr>
+      <tr><td>投資CF（中間）</td><td class="r mn">▲812<span style="font-size:10px">（前年中間）</span></td><td class="r mn">▲676</td><td class="r mn">+136</td><td class="r">通期21億計画に対し上期6.8億</td></tr>
+    </tbody>
+  </table>
+  <p class="note">留意点：営業CFの改善は<strong>売上債権1,533百万円の減少（運転資本の一時的な戻り）</strong>が主因で下期は反転します。また設備投資は通期21億円計画に対し上期実績6.8億円で、<strong>下期に14億円超が集中</strong>します。期末ネットキャッシュは45億円前後まで戻る想定が妥当で、本レポートのNAVもその前提です。</p>
+
+  <div class="sh2">② 投資有価証券44.5億円 — 「隠れ資産」ではなく「非事業資産」</div>
+  <div class="g4">
+    <div class="c mc"><div class="ml">時価</div><div class="mv bl">44.5億円</div><div class="ms">総資産の22.2%<br>1株793円</div></div>
+    <div class="c mc"><div class="ml">推定取得原価</div><div class="mv">10.7億円</div><div class="ms">時価−含み益<br>から逆算</div></div>
+    <div class="c mc"><div class="ml">含み益（税前）</div><div class="mv gn">33.8億円</div><div class="ms">評価差額金<br>から逆算</div></div>
+    <div class="c mc"><div class="ml">含み益率</div><div class="mv or">約 316%</div><div class="ms">取得原価に対し<br>4.2倍の時価</div></div>
+  </div>
+  <div class="sp"></div>
+  <ul class="lst">
+    <li>投資有価証券は<strong>すでに時価でB/Sに計上済み</strong>で、BPS 2,775円に織り込まれています。論点は「簿外の含み益」ではなく<strong>「事業に不要な資産を44.5億円も抱えている」という資本効率の問題</strong>です。</li>
+    <li>会社は中期経営計画で<strong>「政策保有株式の縮減」「棚卸資産の削減など総資産のスリム化を図り資本収益性を高める」「PBR1倍を目指す」</strong>と明記。2025年1〜3月の取締役会では<strong>「政策投資株式の売却の承認」</strong>が実際に付議され、同年度に投資有価証券売却益を計上しています。</li>
+    <li>株主名簿に<strong>新日本空調（2.43%）・ナガワ（1.77%）・ヨコオ（1.70%）</strong>といった事業会社が並び、相互保有の解消余地が示唆されます。売却が進めば<span class="bge be-gn">特別利益</span> <span class="bge be-gn">ROE改善</span> <span class="bge be-gn">還元原資</span>が同時に発生します。</li>
+    <li>裏返せば下方リスクでもあります。有報の「事業等のリスク」にも<span class="bge be-rd">投資有価証券に係るリスク</span>が独立項目として記載されています。</li>
+  </ul>
+
+  <div class="sh2">③ 土地の含み益 — 期待されるほど大きくない</div>
+  <table class="t">
+    <thead><tr><th>所在</th><th class="r">面積（㎡）</th><th class="r">簿価（千円）</th><th class="r">簿価単価</th><th class="r">推定時価単価</th><th class="r">含み益（税前）</th></tr></thead>
+    <tbody>
+      <tr><td>R&Dセンター<br><span style="font-size:10.5px;color:var(--ink3)">東京都八王子市戸吹町232（1971年取得）</span></td><td class="r mn">18,702</td><td class="r mn">136,005</td><td class="r mn">7,272円</td><td class="r mn ham">4〜8万円</td><td class="r mn hgn">6.1〜13.6億円</td></tr>
+      <tr><td>長野工場<br><span style="font-size:10.5px;color:var(--ink3)">長野県安曇野市豊科448-1（1968年建設・1997年増設）</span></td><td class="r mn">18,171</td><td class="r mn">297,341</td><td class="r mn">16,363円</td><td class="r mn">約16,400円</td><td class="r mn hrd">ほぼゼロ</td></tr>
+      <tr class="sm"><td>合計</td><td class="r mn">36,873</td><td class="r mn">433,346</td><td class="r mn">11,753円</td><td class="r">—</td><td class="r mn"><strong>6.1〜13.6億円</strong></td></tr>
+      <tr class="hl"><td><strong>税引後（実効税率30%）／1株換算</strong></td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r mn"><strong>4.3〜9.5億円／76〜170円</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="sp"></div>
+  <div class="inf"><strong>「昭和期取得の土地に巨額の含み益」という物語は、この銘柄には当てはまりません。</strong>長野工場は簿価単価16,363円/㎡に対し安曇野市の工業地相場が約16,400円/㎡で<strong>含み益はほぼゼロ</strong>（1997年の増設等で取得原価が更新されたため）。八王子は簿価7,272円/㎡と極端に低く含み益は確実にありますが、戸吹町は市北部の丘陵地で市平均（18.2万円/㎡）とは水準が異なり実勢4〜8万円/㎡が妥当。<strong>しかも会社は同拠点に「開発棟建替 12億円」を計画しており、売却の意思はありません</strong>。土地含み益は<strong>TOB時のNAV評価に効くオプション</strong>と位置づけるべきで、投資判断の主柱にはなりません。賃貸等不動産の開示もなく、本社・大阪等の事務所はすべて賃借です。</div>
+</div>
+
+<!-- ═════ P5 事業性 ═════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">事業性 — ニッチトップは本物、ストック性は割り引くべき</h2><span class="sb bg-bl">5セグメント</span></div>
+
+  <div class="sh2">ニッチトップ性の検証 — 代替が効かない4つの製品</div>
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="ch">① 半導体製造装置用アルミ製ホットプレート／高温炉用熱電対</div>
+      <div class="cx">コータデベロッパ内でのウェーハ熱処理に<strong>温度均一性に優れる自社製アルミ製ホットプレート</strong>が採用。成膜プロセス装置の800〜1100℃高温炉には自社センサーが採用されています。装置メーカーへの設計組込み（デザインイン）型で、いったん採用されると切替コストが高い。<strong>中間受注+104.5%と現在の最大の成長ドライバー</strong>。</div>
+    </div>
+    <div class="c cf-gn">
+      <div class="ch">② 爆発抑制装置（HRD／IEP）</div>
+      <div class="cx">圧力波を検知して<strong>1/1000秒単位</strong>で消火剤を噴出し、粉じん爆発を初期段階で抑え込む装置。国内で製品化しているメーカーはごく少数。<strong>売上 207百万（24年）→284百万（25年）→計画447百万（26年）</strong>と社内で最も成長率が高い。食品・化学・バイオマス発電など、規制ではなく<strong>保険・BCP動機による自主設置</strong>が拡大中。実験見学会という営業手法も模倣困難。</div>
+    </div>
+    <div class="c cf-bl">
+      <div class="ch">③ 耐圧防爆型 光電式スポット型煙感知器（FLS-02E）</div>
+      <div class="cx"><strong>2015年に世界初として発売</strong>。石油化学・危険物プラント等、防爆規格が要求される場所での煙検知は他社が容易に参入できない領域で、<strong>認証取得のハードルが参入障壁そのもの</strong>。SSP部門の営業利益率が15〜27%のレンジで安定していることが、その障壁の証明です。</div>
+    </div>
+    <div class="c cf-am">
+      <div class="ch">④ 可搬式消防ポンプ（子会社シバウラ防災製作所）</div>
+      <div class="cx">1942年創業、消防団・自治体向けの国内主要メーカーで実質的な<strong>寡占市場</strong>。25年は営業利益322百万円と過去5年で最高益でした。ただし<strong>会社自身が国内市場を「成熟期」と明記</strong>しており、成長ドライバーではなく安定収益源として見るべきです。26年中間は受注▲13.7%・利益▲22.7%と減速中。</div>
+    </div>
+  </div>
+
+  <div class="sh2">ストック性の実態 — 冷静に測る</div>
+  <table class="t">
+    <thead><tr><th>収益タイプ</th><th class="r">2025年売上</th><th class="r">連結比</th><th>性質</th><th class="r">評価</th></tr></thead>
+    <tbody>
+      <tr><td>SSP メンテナンス（法定点検）</td><td class="r mn">963</td><td class="r mn">7.5%</td><td>消防法により点検が義務。設置基数に比例して積み上がる真のリカーリング</td><td class="r"><span class="bge be-gn">強</span></td></tr>
+      <tr><td>SSP 工事（消火設備・改修）</td><td class="r mn">2,089</td><td class="r mn">16.2%</td><td>案件フロー型。既設更新のリピート性はあるが受注変動大</td><td class="r"><span class="bge be-am">中</span></td></tr>
+      <tr><td>SSP 機器・スプリンクラー・爆発抑制</td><td class="r mn">1,787</td><td class="r mn">13.8%</td><td>製品販売。防爆・爆発抑制は代替性低く価格支配力あり</td><td class="r"><span class="bge be-am">中</span></td></tr>
+      <tr><td>可搬式消防ポンプ 買替需要</td><td class="r mn">1,717</td><td class="r mn">13.3%</td><td>自治体・消防団の更新サイクルによる準ストック。予算依存</td><td class="r"><span class="bge be-am">中</span></td></tr>
+      <tr><td>サーマル（熱板・センサー）</td><td class="r mn">2,108</td><td class="r mn">16.3%</td><td>装置組込み＋消耗交換需要。半導体設備投資サイクルに連動</td><td class="r"><span class="bge be-am">中</span></td></tr>
+      <tr><td>メディカル・PWBA 受託</td><td class="r mn">2,349</td><td class="r mn">18.2%</td><td>特定顧客依存。メディカルは2026年12月で受託終了</td><td class="r"><span class="bge be-rd">弱</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="inf"><strong>ストック性は過大評価しないでください。</strong>この会社の反復収益は「消防法という制度に支えられた需要」であって、契約ベースのリカーリングではありません。純粋なストック（法定点検）は連結売上の<strong>わずか7.5%</strong>。正しくは<strong>「ストック性が強い」ではなく「制度需要と認証障壁により、循環に強く価格支配力がある」</strong>と表現すべきです。ここを取り違えると、半導体サイクルの振れ（サーマルは2023→2024年に売上▲21%の実績あり）に足元をすくわれます。</div>
+
+  <div class="sh2">市場環境 — 追い風と向かい風</div>
+  <div class="g3">
+    <div class="c cl-gn"><div class="ch"><span class="bge be-gn">追い風</span> 半導体・AI</div><div class="cx">サーマル中間受注+104.5%。会社は「生成AIの普及に伴うデータセンター関連の投資拡大」を明記。PWBAも産業機器向けで受注+14.6%。</div></div>
+    <div class="c cl-gn"><div class="ch"><span class="bge be-gn">追い風</span> データセンター・防衛</div><div class="cx">ガス消火設備について会社は「今後、<strong>データセンター、防衛関連等の需要増加が見込まれる</strong>」と明記。2027年には新消火ガス採用の新製品を上市予定。</div></div>
+    <div class="c cl-gn"><div class="ch"><span class="bge be-gn">追い風</span> 粉じん爆発対策</div><div class="cx">爆発抑制装置は自主設置が増加。バイオマス発電・食品・化学の設備で、規制ではなくBCP動機から導入。26年計画+57%。</div></div>
+  </div>
+  <div class="sp"></div>
+  <div class="g3">
+    <div class="c cl-rd"><div class="ch"><span class="bge be-rd">向かい風</span> 消防ポンプ市場の成熟</div><div class="cx">会社自ら「可搬式消防ポンプの国内市場が成熟期」と記載。26年計画は営業利益322→120百万円の減益で、中間実績も▲22.7%。13億円の新工場投資の回収が課題。</div></div>
+    <div class="c cl-rd"><div class="ch"><span class="bge be-rd">向かい風</span> メディカル終息</div><div class="cx">人工腎臓透析装置の受託生産が2026年12月終了。<strong>年商15億・営業利益0.6億</strong>が消失し、2027年は減収決算に。ただし利益寄与は小さく、低採算事業の整理としては中立〜ポジティブ。</div></div>
+    <div class="c cl-rd"><div class="ch"><span class="bge be-rd">向かい風</span> 半導体サイクル</div><div class="cx">サーマルは23年2,555→24年2,027（▲21%）と直近でも大きく振れた実績あり。有報でも「市場の景気動向の影響を受けやすい」と明記。<strong>+104.5%の受注を恒久と見るのは危険</strong>。</div></div>
+  </div>
+</div>
+
+<!-- ═════ P6 カタリスト ═════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト — 資本政策とTOBの蓋然性</h2><span class="sb bg-pu">株主構成</span></div>
+
+  <div class="sh2">株主構成（2025年12月31日現在）— 実質浮動株は10〜15%</div>
+  <table class="t">
+    <thead><tr><th>株主</th><th class="r">株数（千株）</th><th class="r">比率</th><th>性格・示唆</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>HSBC シンガポール PB 名義<br><span style="font-size:10.5px;color:var(--ink3)">実質：GLOBAL MANAGEMENT PARTNERS LTD（香港）</span></td><td class="r mn">1,541</td><td class="r mn"><strong>27.22%</strong></td><td>日本小型バリュー株専門の香港ファンド。<strong>変更報告書23回</strong>にわたり買い増し、2025年6月に26.00%へ。保有目的は純投資。<strong>出口はTOB応募が最も現実的</strong></td></tr>
+      <tr class="hl"><td>西華産業（8061）</td><td class="r mn">1,320</td><td class="r mn"><strong>23.32%</strong></td><td>2024年6月に資本業務提携、市場外相対で18.16%取得後さらに買い増し。<strong>持分法適用関連会社化済み</strong>。三菱系の産業機械商社</td></tr>
+      <tr><td>吉田ディベロプメント</td><td class="r mn">201</td><td class="r mn">3.55%</td><td>—</td></tr>
+      <tr><td>東レ・メディカル</td><td class="r mn">200</td><td class="r mn">3.53%</td><td>メディカル事業の取引先（2026年12月で受託終了）</td></tr>
+      <tr><td>NORTHERN TRUST ／ NHGGP JAPAN OPP FUND</td><td class="r mn">325</td><td class="r mn">5.75%</td><td>海外機関投資家</td></tr>
+      <tr><td>新日本空調・ナガワ・ヨコオ</td><td class="r mn">333</td><td class="r mn">5.90%</td><td>事業会社。<strong>相互保有の可能性</strong></td></tr>
+      <tr><td>社員持株会</td><td class="r mn">103</td><td class="r mn">1.82%</td><td>—</td></tr>
+      <tr><td>自己株式＋役員信託</td><td class="r mn">286</td><td class="r mn">4.85%</td><td>発行済比</td></tr>
+      <tr class="sm"><td><strong>上記合計</strong></td><td class="r">—</td><td class="r mn"><strong>約76%</strong></td><td><strong>実質浮動株は10〜15%程度</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最も確度が高い</div>
+      <span class="ci">📈</span>
+      <div class="ct">通期業績の上方修正</div>
+      <div class="cb gn">10/30</div>
+      <div class="cu">3Q決算（前年は3Q時点で進捗109.9%）</div>
+      <div class="cp">中間で経常998百万円＝通期計画の<strong>90.7%</strong>を消化しながら会社は予想を据え置き。前年は同じ運用で通期実績が計画比<strong>133.0%</strong>。<strong>修正は「起きるか」ではなく「いつ出すか」の問題</strong>。配当性向約34%・DOE約2.8%と低く、増配の余地がある。</div>
+      <div class="tgs"><span class="tg tg-gn">確度：高</span><span class="tg tg-or">時期：3Q〜通期</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 02 · 構造的</div>
+      <span class="ci">🤝</span>
+      <div class="ct">西華産業による完全子会社化</div>
+      <div class="cb bl">49.3%</div>
+      <div class="cu">西華23.3%＋GMP26.0%</div>
+      <div class="cp">西華産業は2025年10月に旭サナックの完全子会社化を発表するなど<strong>M&A姿勢を積極化</strong>。防災製品は西華の販路と補完的で、爆発抑制装置では既に協業推進中。<strong>GMPが応募すればスクイーズアウトの道筋が立つ</strong>配置。想定価格は3,500〜3,900円。</div>
+      <div class="tgs"><span class="tg tg-bl">構造的に高い</span><span class="tg tg-am">時期：不明</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 明文化済</div>
+      <span class="ci">📉</span>
+      <div class="ct">政策保有株式の縮減</div>
+      <div class="cb or">44.5億</div>
+      <div class="cu">投資有価証券 時価（含み益 税前33.8億）</div>
+      <div class="cp">中計に「政策保有株式の縮減」「総資産のスリム化」「<strong>PBR1倍を目指す</strong>」を明記。2025年1〜3月の取締役会で<strong>「政策投資株式の売却の承認」が実際に付議</strong>され、同年度に売却益を計上済み。<strong>売却進捗＝ROE改善＋還元原資</strong>。</div>
+      <div class="tgs"><span class="tg tg-or">着手済み</span><span class="tg tg-gn">ROE直接改善</span></div>
+    </div>
+  </div>
+
+  <div class="sh2">TOB／MBO 想定価格レンジ</div>
+  <table class="t">
+    <thead><tr><th>アプローチ</th><th class="r">算定価格</th><th class="r">2,229円比</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>PBR 1.0倍（会社の明示目標）</td><td class="r mn">2,775円</td><td class="r mn">+25%</td><td>中間期末実績BPS</td></tr>
+      <tr><td>直近平均株価にプレミアム30%</td><td class="r mn">3,100円前後</td><td class="r mn">+39%</td><td>日本のTOBプレミアム中央値の下限</td></tr>
+      <tr class="hl"><td><strong>EV/EBITDA 7倍＋金融資産</strong></td><td class="r mn"><strong>3,760円</strong></td><td class="r mn"><strong>+69%</strong></td><td>EBITDA 17.3億×7＋NC45億＋証券44.5億</td></tr>
+      <tr><td>PBR 1.3倍</td><td class="r mn">3,610円</td><td class="r mn">+62%</td><td>製造業TOBの上限的水準</td></tr>
+      <tr class="sm"><td><strong>最頻値ゾーン</strong></td><td class="r mn"><strong>3,500〜3,900円</strong></td><td class="r mn"><strong>+57〜+75%</strong></td><td>上記の中心域</td></tr>
+    </tbody>
+  </table>
+  <div class="sp"></div>
+  <div class="warn"><strong>重要な留保。</strong>西華産業もGMPも、TOBの意向を表明した事実は一切ありません。西華の保有目的は「資本業務提携に基づく関係強化」、GMPは「純投資」です。上記は<strong>株主構成から導かれる構造的な蓋然性</strong>にすぎず、<strong>時期は特定不能</strong>。これを主たる投資理由にするのは危険で、あくまで「無料で付いてくるオプション」として扱うべきです。</div>
+</div>
+
+<!-- ═════ P7 リスク ═════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">リスク — 買い下がる前に把握しておくこと</h2><span class="sb bg-rd">7項目</span></div>
+
+  <table class="t">
+    <thead><tr><th>リスク</th><th class="r">影響度</th><th class="r">確度</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td><strong>① 政策保有株式の下落</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-am">中</span></td><td>投資有価証券44.5億円は純資産の28.6%。<strong>買い下がりの前提である「厚いB/S」自体が相場と連動して薄くなる</strong>のが本件最大の弱点。ただし評価差額金を全額除いた実質BPS 2,357円でも株価を上回る点は救い。</td></tr>
+      <tr><td><strong>② 半導体サイクルの反転</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-am">中</span></td><td>サーマルは2023年2,555→2024年2,027と<strong>1年で▲21%</strong>振れた実績。中間受注+104.5%を恒久と見るのは危険。ただしサーマルは連結売上の16%で、全損しても事業EV28.9億は割れない。</td></tr>
+      <tr><td><strong>③ SSP受注▲10.7%が「端境期」でなかった場合</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-am">中</span></td><td>SSPは連結営業利益の最大源泉（中間695百万円）。会社は大型ガス消火設備の端境期と説明しているが、<strong>3Qで受注が回復しなければ投資論拠の中核が崩れる</strong>。最重要の監視項目。</td></tr>
+      <tr><td><strong>④ 消防ポンプの構造的減速</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">高</span></td><td>会社自ら「国内市場が成熟期」と明記。中間は受注▲13.7%・利益▲22.7%。<strong>13億円の新工場投資の回収可否</strong>は要監視。</td></tr>
+      <tr><td><strong>⑤ 品質不正の履歴</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-gn">低</span></td><td>2022年3月に製品不正を公表し特別調査委員会を設置、2025年にも消防点検不正の処分が取締役会に付議。<strong>再発は一度で投資論拠を破壊する</strong>類のリスク。ただし品質関連引当金は612→553百万円と減少しており、現時点で悪化の兆候はない。</td></tr>
+      <tr><td><strong>⑥ 流動性</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">高</span></td><td>実質浮動株10〜15%、東証スタンダード。<strong>売りたいときに売れない</strong>可能性がある一方、少額の買いで急騰もする（2026年5月1日にストップ高+23.85%）。<strong>買い下がりが「唯一の建て方」である反面、撤退も同じく時間がかかる</strong>。</td></tr>
+      <tr><td><strong>⑦ 経営の資本効率への本気度</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td>2028年ROE目標6%が2025年実績8.8%を下回る。中計の株主還元17億円は4年間の配当でほぼ埋まり、<strong>自社株買いの計画はゼロ</strong>。「PBR1倍を目指す」が言葉倒れなら、割安が何年も放置される<strong>バリュートラップ</strong>化のリスク。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh2">下値の目安</div>
+  <div class="g3">
+    <div class="c cf-gn"><div class="ch">第1の下値：2,357円</div><div class="cx"><strong>評価差額金を全額除いた実質BPS。</strong>政策保有株の含み益がゼロになっても、この水準までは純資産で説明できる。現株価2,229円は既にこれを下回っている。</div></div>
+    <div class="c cf-am"><div class="ch">第2の下値：1,880〜2,050円</div><div class="cx">政策保有株が3割下落＋会社計画どおりの着地が重なり、かつ小型株全体が売られる局面。<strong>買い下がりの主戦場</strong>と想定する帯。</div></div>
+    <div class="c cf-rd"><div class="ch">第3の下値：1,560〜1,700円</div><div class="cx">2025年の年間安値レンジ（同年は1,560〜1,885円）。<strong>品質不正の再発など信認毀損</strong>が起きた場合の水準。ここは「買い増し」ではなく「撤退」を検討する領域。</div></div>
+  </div>
+</div>
+
+<!-- ═════ P8 買い方の設計 ═════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">買い方の設計 — 買い下がりは「あり」。ただしルールを先に決める</h2><span class="sb bg-gn">実務</span></div>
+
+  <div class="g4">
+    <div class="c mc"><div class="ml">投資判断</div><div class="mv gn">◎ 買い</div><div class="ms">買い下がりで<br>3回に分けて構築</div></div>
+    <div class="c mc"><div class="ml">中立フェアバリュー</div><div class="mv or">3,320円</div><div class="ms">2,229円比 +49%</div></div>
+    <div class="c mc"><div class="ml">目標平均取得単価</div><div class="mv bl">2,050〜2,100円</div><div class="ms">3段ラダーの<br>加重平均</div></div>
+    <div class="c mc"><div class="ml">撤退判断日</div><div class="mv am">10/30</div><div class="ms">3Q決算<br>（価格ではなく論拠で判断）</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>買い下がりが「あり」な理由は3つあります。</strong>①<strong>時価総額の77%が金融資産</strong>で、下値がファンダメンタルズで裏打ちされている。②<strong>評価差額金を全額除いた実質BPS 2,357円すら株価が下回っている</strong>ため、下げるほど安全域が厚くなる。③<strong>実質浮動株が1割台</strong>で、そもそも一度にサイズを作れない——買い下がりは選択肢ではなく必然です。</div>
+
+  <div class="sh2">推奨ラダー（想定枠を100とした配分）</div>
+  <table class="t">
+    <thead><tr><th>段</th><th class="r">指値の目安</th><th class="r">配分</th><th class="r">その水準でのPBR</th><th>意味づけ</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>1段目</strong></td><td class="r mn">2,230円前後</td><td class="r mn">35%</td><td class="r mn">0.80倍</td><td>実質BPS 2,357円を既に下回る水準。<strong>ここで買えないなら本件は縁がなかったと考える</strong></td></tr>
+      <tr><td><strong>2段目</strong></td><td class="r mn">2,050円</td><td class="r mn">35%</td><td class="r mn">0.74倍</td><td>金融資産1,714円に対し事業を336円で買う水準。3Q前の押し目を想定</td></tr>
+      <tr><td><strong>3段目</strong></td><td class="r mn">1,880円</td><td class="r mn">30%</td><td class="r mn">0.68倍</td><td>2025年の高値圏（1,885円）。<strong>小型株全体の調整があった場合の受け皿</strong></td></tr>
+      <tr class="sm"><td><strong>加重平均</strong></td><td class="r mn"><strong>約2,060円</strong></td><td class="r mn">100%</td><td class="r mn">0.74倍</td><td>中立3,320円まで<strong>+61%</strong>、TOB想定3,760円なら<strong>+83%</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="note">1段目で終わる（下がらずに上がっていく）可能性も十分にあります。その場合でも2,229円は中立比+49%なので、機会損失にはなりません。<strong>「全部買えなくても構わない」設計にしておくことが、買い下がりを機能させる条件</strong>です。</p>
+
+  <div class="sh2">買い下がりを止める条件 — 価格ではなく論拠で決める</div>
+  <table class="t">
+    <thead><tr><th>チェック項目</th><th>確認時期</th><th>継続の条件</th><th>撤退・停止の条件</th></tr></thead>
+    <tbody>
+      <tr><td><strong>SSPの受注</strong>（最重要）</td><td>3Q決算 10/30</td><td class="hgn">受注が前年同期比プラスに回復<br>＝「端境期」説の裏付け</td><td class="hrd">2四半期連続で二桁減<br>＝需要減速。買い増し停止</td></tr>
+      <tr><td><strong>サーマルの受注</strong></td><td>3Q決算 10/30</td><td class="hgn">前年同期比で増勢維持<br>AI・DC需要の継続</td><td class="hrd">受注が前年割れ<br>＝半導体サイクル反転</td></tr>
+      <tr><td><strong>品質関連の引当金</strong></td><td>3Q・通期</td><td class="hgn">製品保証＋製品改修の残高が<br>横ばい〜減少</td><td class="hrd">大幅増または「特別損失の計上に関するお知らせ」の単独開示<br>＝即撤退</td></tr>
+      <tr><td><strong>通期予想の修正</strong></td><td>3Q決算 10/30</td><td class="hgn">上方修正<br>（前年パターンの再現）</td><td class="hrd">下方修正<br>＝会社計画の保守性という前提が崩れる</td></tr>
+      <tr><td><strong>政策保有株の縮減</strong></td><td>通期・有報</td><td class="hgn">売却実行と還元強化<br>＝Bullシナリオへ</td><td>進展なしでも継続可<br>（ただし目標到達までの時間は延びる）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="warn"><strong>買い下がりで最も危険な失敗は、「論拠が壊れているのに価格だけ見て買い増す」ことです。</strong>本件で論拠が壊れるのは<strong>SSPの受注が回復しない場合</strong>——ここが連結営業利益の最大源泉だからです。逆に言えば、10月30日の3Q決算でSSPの受注が戻っていれば、Baseシナリオ3,320円の確度は大きく上がります。<strong>3Qまでは「ラダーを埋める期間」、3Q後は「持ち切るか降りるかを決める期間」</strong>と切り分けてください。</div>
+
+  <div class="sh2">ポジションサイズについて</div>
+  <ul class="lst">
+    <li>実質浮動株1割台の銘柄です。<strong>ポートフォリオ全体に対する上限を先に決めておく</strong>こと。急落時に売れない前提で、無理なく塩漬けにできる金額に留めるのが安全です。</li>
+    <li>指値で拾う姿勢を崩さないこと。<strong>成行は板を食い上げるだけ</strong>で、この流動性では自分の買いで自分の取得単価を悪化させます。</li>
+    <li>次のイベントは<strong>8月21日の決算補足説明資料</strong>（セグメント別の詳細と下期見通しが出る）と<strong>10月30日の3Q決算</strong>。この2つの前後で板が動きやすくなります。</li>
+  </ul>
+
+  <div class="sp"></div>
+  <div class="conc">
+    <div class="conc-h">まとめ — <span>2,229円は、事業をタダ同然で買える水準</span></div>
+
+    <div class="conc-lbl">投資論拠</div>
+    <div class="conc-b">
+      時価総額125億円のうち<strong>96億円（77%）がネットキャッシュと投資有価証券</strong>。差し引いた事業EVは<strong>28.9億円</strong>で、そこから年10〜14億円の営業利益が出ています。<strong>EV/EBITDA 1.7倍、金融資産控除後PER 3.3倍</strong>。政策保有株の含み益を全額ゼロと置いた実質BPS 2,357円すら株価が下回っており、バリュー投資の安全域としては極めて厚い。
+    </div>
+
+    <div class="conc-lbl">なぜ今この値段なのか</div>
+    <div class="conc-b">
+      中間決算の見出しが「純利益▲39.5%」だったためです。しかし<strong>その正体は前年同期にあった関係会社清算益323百万円の消滅</strong>であり、経常は+26.1%、営業は+12.3%の増益。特別損失167百万円も、品質関連の引当金残高がむしろ減少していることから、構造的な悪材料ではありません。<strong>市場は見出しの数字だけで売っている</strong>と判断します。
+    </div>
+
+    <div class="conc-lbl">成長の芽</div>
+    <div class="conc-b">
+      <strong>サーマル部門の中間受注が+104.5%</strong>。会社は「生成AIの普及に伴うデータセンター関連の投資拡大」を背景に半導体製造装置向けの需要増加を見込むと明記しています。通期計画（売上24億）に対し中間で既に進捗70%、受注20.5億。<strong>この1部門だけで会社計画を+1.8億円押し上げる計算</strong>で、上方修正は時間の問題です。
+    </div>
+
+    <div class="conc-lbl">誤解しやすい点</div>
+    <div class="conc-b">
+      <strong>①「土地の含み益」は主役ではありません。</strong>長野工場は簿価と時価がほぼ一致し含み益ゼロ、八王子も税引後4.3〜9.5億円（1株76〜170円）にとどまり、しかも会社は12億円かけて建替える計画です。<strong>②「ストック性」も過大評価は禁物。</strong>法定点検由来の真のリカーリングは連結売上の7.5%にすぎず、正しくは「制度需要と認証障壁による循環耐性と価格支配力」です。<strong>③配当78円は記念配当を含まない普通配当</strong>で、一過性の上乗せはありません（67→70→72→74→76→78円と6期連続増配）。
+    </div>
+
+    <div class="conc-lbl">アクション</div>
+    <div class="conc-b">
+      <strong>買い下がりで集めるのが正解です。</strong>2,230円前後で35%、2,050円で35%、1,880円で30%——加重平均約2,060円を狙います。全部埋まらなくても構わない設計にしておくこと。<strong>止める基準は価格ではなく論拠</strong>で、最重要の監視項目は<strong>10月30日の3Q決算におけるSSPの受注</strong>です。ここが回復すればBase 3,320円（+49%）の確度が大きく上がり、回復しなければ買い増しを止めます。上位2大株主で49.3%という株主構成が生む<strong>TOB（想定3,500〜3,900円）は、無料で付いてくるオプション</strong>として扱ってください。
+    </div>
+  </div>
+
+  <div class="sh2">数値の出所と検証</div>
+  <ul class="lst" style="font-size:11.5px">
+    <li><strong>株式数</strong>：発行済 5,893,000株 − 自己株式（役員信託含む）285,547株 = <strong>5,607,453株</strong>。短信記載の期中平均株式数と一致。</li>
+    <li><strong>BPS</strong>：純資産15,567百万円 ÷ 5,607,453株 = 2,776円。短信記載の1株当たり純資産<strong>2,775.08円</strong>と一致（端数処理差）。</li>
+    <li><strong>EPS</strong>：会社計画 純利益880百万円 ÷ 5,607,453株 = 156.93円。短信記載値と一致。</li>
+    <li><strong>ネットキャッシュ</strong>：現金及び預金5,943,050千円 −（1年内返済予定の長期借入金221,744千円＋長期借入金561,072千円）= <strong>5,160百万円</strong>。中間連結貸借対照表より。</li>
+    <li><strong>投資有価証券</strong>：4,448,946千円。含み益は包括利益1,180百万円と純利益548百万円の差から評価差額金の増加を推定し、税前約33.8億円と算定。</li>
+    <li><strong>土地</strong>：有価証券報告書「主要な設備の状況」の面積・帳簿価額と、八王子市・安曇野市の公示地価を突合。</li>
+    <li><strong>出典</strong>：2026年12月期 第２四半期（中間期）決算短信（2026年7月31日、全12ページ）／2025年12月期 有価証券報告書（2026年3月30日）／2025年12月期通期 決算説明資料（2026年2月25日）／大量保有報告書 変更報告書No.23（2025年6月23日）／西華産業 適時開示（2024年6月7日）</li>
+  </ul>
+  <p class="note">本資料は公開情報に基づく分析であり、特定銘柄の売買を推奨するものではありません。筆者は投資助言業者ではなく、記載された数値には推計・仮定が含まれます。株価は2026年8月3日終値2,229円を前提としています。投資判断はご自身の責任でお願いいたします。</p>
+</div>
+
+</main>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

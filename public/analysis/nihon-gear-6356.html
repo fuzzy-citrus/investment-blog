@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日本ギア工業（6356）総合投資レポート v4 ── 最終整理版</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;--sem2:#e88020;
+  --bl:#1a3c7a;--bl2:#2a5cbf;--fu:#804080;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* ── HERO ── */
+.hero{background:var(--ink2);color:rgba(246,245,239,.88);padding:28px 52px 22px;position:relative;overflow:hidden}
+.hero::before{content:'6356';position:absolute;right:-16px;top:-8px;font:700 150px/1 var(--head);color:rgba(255,255,255,.03);pointer-events:none}
+.hero-label{font:600 8px/1 var(--mono);letter-spacing:.22em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:8px}
+.hero-title{font:700 28px/1.1 var(--head);letter-spacing:-.02em;margin-bottom:6px}
+.hero-title em{color:var(--sem2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.35);line-height:1.65;margin-bottom:16px}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.kpi{background:rgba(17,18,23,.3);padding:9px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:3px}
+.kpi-v{font:600 17px/1 var(--mono)}
+.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--sem2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.rd{color:#e08888}.kpi-v.fu{color:#d090c0}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.2);margin-top:2px}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:rgba(36,144,84,.1);border:1px solid rgba(36,144,84,.22);border-radius:var(--r);padding:10px 16px}
+.verdict-grade{font:700 38px/1 var(--mono);color:var(--gn2)}
+.verdict-text{font-size:11px;color:rgba(246,245,239,.72);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+/* ── NAV ── */
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav::-webkit-scrollbar{height:0}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 13px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--sem2)}
+
+/* ── LAYOUT ── */
+.body{max-width:1040px;margin:0 auto;padding:28px 44px 72px}
+@media(max-width:720px){.body,.hero{padding-left:16px;padding-right:16px}}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 19px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-gn{background:#dff0e8;color:var(--gn)}.cb-rd{background:#fce8e8;color:var(--rd)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-fu{background:#f4eaf8;color:var(--fu)}
+
+/* ── TABS ── */
+.stabs{display:flex;border-bottom:1px solid var(--bg3);margin-bottom:16px;overflow-x:auto}
+.stabs::-webkit-scrollbar{height:0}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:680px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.g2,.g3,.g4,.kpi-row{grid-template-columns:1fr}}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px 16px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-fu{border-left:3px solid var(--fu)}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}.card-hi-rd{background:#fdf0f0;border:.5px solid #e0b0b0}.card-hi-bl{background:#eef3fc;border:.5px solid #a0b8e0}.card-hi-am{background:#fef8ee;border:.5px solid #e8c870}.card-hi-fu{background:#f8f2fc;border:.5px solid #c8a8e0}
+
+/* ── METRIC CARD ── */
+.mc{text-align:center;padding:12px 8px}
+.mc-l{font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.mc-v{font:600 22px/1 var(--mono);margin-bottom:3px}
+.mc-v.gn{color:var(--gn)}.mc-v.rd{color:var(--rd)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.fu{color:var(--fu)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.4}
+
+/* ── COLORS ── */
+.hi-gn{color:var(--gn);font-weight:600}.hi-rd{color:var(--rd);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-fu{color:var(--fu);font-weight:600}
+.mono{font-family:var(--mono)}
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-fu{background:#f4eaf8;color:var(--fu)}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:6px 9px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl td{padding:7px 9px;border-bottom:.5px solid var(--bg3);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.tbl td.r{text-align:right}.tbl td.c{text-align:center}
+.tbl tr.hl td{background:#f0f8f4;font-weight:600}
+.tbl tr.hl-rd td{background:#fdf0f0}.tbl tr.hl-am td{background:#fef8ee}.tbl tr.hl-fu td{background:#f8f2fc}.tbl tr.hl-bl td{background:#eef3fc}
+
+/* ── ALERTS ── */
+.noteg{background:#f0f8f4;border:.5px solid #a0d8b8;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:10px}
+.noteg strong{color:var(--gn2)}
+.noter{background:#fdf0f0;border:.5px solid #e0b0b0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:10px}
+.notice{background:#fef3e0;border:.5px solid #f0d080;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:10px}
+.notice strong{color:var(--am2)}
+.noteb{background:#eef3fc;border:.5px solid #a0b8e0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--bl);line-height:1.65;margin-bottom:10px}
+.notefu{background:#f8f2fc;border:.5px solid #c8a8e0;border-radius:var(--r);padding:9px 14px;font-size:12px;color:var(--fu);line-height:1.65;margin-bottom:10px}
+
+/* ── MISC ── */
+.sep{height:1px;background:var(--bg3);margin:14px 0}
+.label{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+p{font-size:13px;line-height:1.75;color:var(--ink2)}
+small{font-size:10px;color:var(--ink3);line-height:1.5}
+.chart-wrap{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px}
+.chart-title{font:600 11px/1 var(--head);margin-bottom:10px;color:var(--ink)}
+
+/* ── RISK METER ── */
+.rm{display:grid;grid-template-columns:170px 1fr 52px;align-items:center;gap:9px;margin-bottom:7px}
+.rm-l{font-size:11px;color:var(--ink2)}.rm-t{height:8px;background:var(--bg3);border-radius:2px;overflow:hidden}.rm-f{height:100%;border-radius:2px}.rm-v{font:600 10px/1 var(--mono);text-align:right}
+
+/* ── BARS ── */
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden;height:10px;margin-bottom:7px}
+.bfill{border-radius:2px;height:10px;display:block}
+
+/* ── TIMELINE ── */
+.tl{display:grid;grid-template-columns:76px 12px 1fr;gap:0 10px;margin-bottom:14px;align-items:start}
+.tl-d{font:600 10px/1.4 var(--mono);color:var(--ink3);text-align:right;padding-top:2px}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid currentColor;background:var(--bg);margin-top:2px;position:relative}
+.tl-dot::before{content:'';position:absolute;left:4px;top:12px;width:2px;height:calc(100% + 14px);background:var(--bg3)}
+.tl:last-child .tl-dot::before{display:none}
+.tl-body{font-size:12px;line-height:1.65}
+.tl-head{font:600 12px/1.3 var(--head);margin-bottom:2px}
+
+/* ── FLOW BOX ── */
+.flow-chain{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:0;margin-bottom:14px}
+.flow-box{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:10px 12px;text-align:center}
+.flow-box strong{font:700 12px/1.3 var(--head);display:block;margin-bottom:4px}
+.flow-box small{font-size:10px;color:var(--ink3);line-height:1.4}
+.flow-arr{text-align:center;font-size:16px;color:var(--ink3)}
+
+@media print{.mnav{position:static}.chapter{display:block!important;page-break-after:always}}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-label">日本ギア工業株式会社｜東証スタンダード 6356｜2026年6月 総合投資レポート v5.1（1,378円ベース最新化・テーマ俯瞰／期待値比較を追補・最終判断を全要素統合サマリー様式に刷新）</div>
+  <div class="hero-title">日本ギア工業 <em>6356</em> 総合投資レポート</div>
+  <div class="hero-sub">
+    現在株価 1,378円（2026/6/16・終値ベース）｜原発バルブアクチュエーター国内シェア90%超｜26/3期本決算で営業利益率24.9%・受注残63.7億（+38.5%増）<br>
+    FLS（NYSE）核受注年4億ドル超・Trillium買収で技術基盤強化｜対米原子力投資サイクル×インフレ価格転嫁力×従業員264名の「嬉しい悲鳴」構造
+  </div>
+  <div class="kpi-row">
+    <div class="kpi" style="border-top:3px solid var(--gn2)"><div class="kpi-l">現在株価</div><div class="kpi-v gn">1,378円</div><div class="kpi-s">年初来高値2,287円比▲40%</div></div>
+    <div class="kpi" style="border-top:3px solid var(--sem2)"><div class="kpi-l">予想PER</div><div class="kpi-v am">11.1倍</div><div class="kpi-s">競合（岡野・TVE）は24倍</div></div>
+    <div class="kpi" style="border-top:3px solid #68c890"><div class="kpi-l">営業利益率</div><div class="kpi-v gn">24.9%</div><div class="kpi-s">26/3期 過去最高・競合中最高</div></div>
+    <div class="kpi" style="border-top:3px solid #8ab0e8"><div class="kpi-l">実質複利利回り</div><div class="kpi-v bl">約8.9%</div><div class="kpi-s">内部複利8.2%＋配当0.7%</div></div>
+    <div class="kpi" style="border-top:3px solid #d090c0"><div class="kpi-l">3年加重期待リターン</div><div class="kpi-v fu">+73%</div><div class="kpi-s">年率換算+20%相当（1,378円基準）</div></div>
+    <div class="kpi" style="border-top:3px solid #e08888"><div class="kpi-l">BPS成長（10年）</div><div class="kpi-v rd" style="color:#68c890">+116%</div><div class="kpi-s">444円→960円、年複利+7.9%</div></div>
+  </div>
+  <div class="verdict">
+    <div class="verdict-grade">A</div>
+    <div class="verdict-text">
+      <strong>強気（BUY）｜中長期コア保有向け｜本テーマ内で期待値No.1</strong><br>
+      原発90%モノポリー×FLS技術親会社の対米核投資加速×インフラ老朽化更新×内部複利ROE約13%が重なる構造的強気材料。<strong>独占シェアゆえの価格転嫁力でインフレに強く</strong>、<strong>FLS経由で米国の原子力・データセンター電力投資サイクルに連動</strong>するサプライチェーン上の戦略的位置を持つ。AI・DC需要起点の電力ボトルネック／原発回帰という本流テーマの関連分野を横断比較しても、<strong>「内部複利効率×PER再評価余地」の期待値は日本ギアが最も高い</strong>（第6章）。残る課題は264名体制の人員ボトルネックと配当性向約8%の薄い還元だが、いずれも増配・採用転換という上振れ余地に転じうる。<br>
+      <strong>最重要確認：</strong>2026/6月 有報FLSライセンス契約条件 ｜ 来期受注残の売上転換 ｜ 増配・自社株買い・採用/設備投資の経営判断
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="mnav">
+  <button class="mnb on" onclick="showC('c0',this)">①カタリスト</button>
+  <button class="mnb"    onclick="showC('c1',this)">②業績と財務の全体像</button>
+  <button class="mnb"    onclick="showC('c2',this)">③競合PER比較・割安性</button>
+  <button class="mnb"    onclick="showC('c3',this)">④内部複利と株主利益</button>
+  <button class="mnb"    onclick="showC('c4',this)">⑤体制リスク＆インフラ追い風</button>
+  <button class="mnb"    onclick="showC('c5',this)">⑥シナリオ・カタリスト</button>
+  <button class="mnb"    onclick="showC('c6',this)">⑦テーマ俯瞰・期待値比較</button>
+  <button class="mnb"    onclick="showC('c7',this)">⑧最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══════════════════════════════════════════════════════
+     C0: カタリスト ── この銘柄の「いいところ」一覧（一発理解）
+     ══════════════════════════════════════════════════════ -->
+<style>
+.cat-grid-top,.cat-grid-bot{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+@media(max-width:720px){.cat-grid-top,.cat-grid-bot{grid-template-columns:1fr}}
+.cat-card{background:var(--bg2);border:1px solid var(--bg3);border-top:3px solid var(--ink3);border-radius:var(--r);padding:14px}
+.cat-card.c-rd{border-top-color:var(--rd)}.cat-card.c-gn{border-top-color:var(--gn2)}.cat-card.c-am{border-top-color:var(--sem2)}.cat-card.c-bl{border-top-color:var(--bl)}.cat-card.c-fu{border-top-color:var(--fu)}
+.cat-label{display:flex;align-items:center;gap:8px;font:600 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.cat-label .num{background:var(--ink);color:var(--bg);padding:3px 6px;border-radius:2px;font-weight:700;letter-spacing:.04em}
+.cat-label .imp{margin-left:auto;color:var(--ink3)}
+.cat-title{font:700 13.5px/1.32 var(--head);margin:7px 0 8px}
+.cat-big{font:700 30px/1 var(--mono);margin-bottom:3px}
+.t-rd{color:var(--rd)}.t-gn{color:var(--gn2)}.t-am{color:var(--sem2)}.t-bl{color:var(--bl)}.t-fu{color:var(--fu)}
+.cat-sub{font-size:10px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.cat-body{font-size:11.5px;line-height:1.72;color:var(--ink2)}
+.cat-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.cat-tag{font:600 9px/1 var(--mono);background:var(--bg3);color:var(--ink2);padding:4px 7px;border-radius:2px}
+.cat-tldr{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--ink2);color:rgba(246,245,239,.85);border-radius:var(--r);padding:14px 18px;margin-bottom:16px}
+.cat-tldr .g{font:700 40px/1 var(--mono);color:var(--gn2)}
+.cat-tldr .t{font-size:12px;line-height:1.7}
+.cat-tldr .t strong{color:rgba(246,245,239,.97)}
+</style>
+<div class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">00</span><h2 class="ch-title">なぜ日本ギアか ── 6つのカタリスト</h2><span class="ch-badge cb-gn">WHY BUY</span></div>
+
+  <div class="cat-tldr">
+    <div class="g">A</div>
+    <div class="t"><strong>一言でいえば：</strong>原発バルブ駆動部で<strong>国内シェア90%超</strong>を握り、<strong>最高利益率24.9%なのにPERは競合最低の11倍</strong>。配当性向約8%ゆえ利益の9割超が社内で複利運用される「見えない複利マシン」で、<strong>インフレ・対米原子力サプライチェーン</strong>の追い風もそろう。AI×DC×電力×原発回帰の本流テーマで<strong>期待値No.1</strong>。</div>
+  </div>
+
+  <!-- TOP 3 -->
+  <div class="cat-grid-top">
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">C·01</span>最重要<span class="imp">MONOPOLY</span></div>
+      <div class="cat-title">原発バルブ駆動部で<br>国内シェア90%超の独占</div>
+      <div class="cat-big t-gn">90%超</div>
+      <div class="cat-sub">営業利益率24.9%（26/3期・過去最高／競合最高）</div>
+      <div class="cat-body">原発・プラントの弁を動かすバルブアクチュエーターで国内シェア90%超。代替の効かない必須部品ゆえ<strong>価格決定力が強く</strong>、26/3期は営業利益率24.9%と過去最高。独占×高採算がすべての土台。</div>
+      <div class="cat-tags"><span class="cat-tag">シェア90%超</span><span class="cat-tag">利益率24.9%</span><span class="cat-tag">価格決定力</span></div>
+    </div>
+    <div class="cat-card c-am">
+      <div class="cat-label"><span class="num">C·02</span>最重要<span class="imp">VALUATION</span></div>
+      <div class="cat-title">最高益率なのに<br>PER11倍という歪み</div>
+      <div class="cat-big t-am">11.1倍</div>
+      <div class="cat-sub">適正18〜22倍 → 理論株価 ¥2,200〜2,700</div>
+      <div class="cat-body">競合（岡野・TVEはPER24倍）より高い利益率なのにPERは半分以下の11倍。適正PER18〜22倍を当てれば<strong>再評価余地は+60〜100%</strong>。増配・受注転換という内部触媒で点火しうる、外部頼みでない割安。</div>
+      <div class="cat-tags"><span class="cat-tag">PER11倍</span><span class="cat-tag">再評価+60〜100%</span><span class="cat-tag">内部触媒</span></div>
+    </div>
+    <div class="cat-card c-bl">
+      <div class="cat-label"><span class="num">C·03</span>最重要<span class="imp">COMPOUNDING</span></div>
+      <div class="cat-title">配当性向約8%で<br>複利が最大化する構造</div>
+      <div class="cat-big t-bl">約8.9%</div>
+      <div class="cat-sub">実質複利利回り（内部複利8.2%＋配当0.7%）</div>
+      <div class="cat-body">EPSの約92%を非課税のまま社内に残し<strong>ROE約13%で再運用</strong>。配当性向が極端に低いぶん複利が最大限効く「見えない複利マシン」。10年で資産+200%超も射程。低PERの入口はこの複利を割安価格で取り込めることを意味する。</div>
+      <div class="cat-tags"><span class="cat-tag">ROE約13%</span><span class="cat-tag">内部留保92%</span><span class="cat-tag">10年+200%超</span></div>
+    </div>
+  </div>
+
+  <!-- NEXT 3 -->
+  <div class="cat-grid-bot">
+    <div class="cat-card c-fu">
+      <div class="cat-label"><span class="num">C·04</span>強み<span class="imp">BACKLOG</span></div>
+      <div class="cat-title">受注残63.7億（+38.5%）<br>が業績の先行指標</div>
+      <div class="cat-big t-fu">+38.5%</div>
+      <div class="cat-sub">受注先行 → 売上・利益が後追いで伸びる</div>
+      <div class="cat-body">受注残が前期末比+38.5%に積み上がり、これが今後の売上・利益の<strong>先行指標</strong>。受注（先）と売上計上（後）のタイムラグが、業績の可視性と上振れ余地を生む。</div>
+      <div class="cat-tags"><span class="cat-tag">受注残63.7億</span><span class="cat-tag">先行指標</span><span class="cat-tag">上振れ余地</span></div>
+    </div>
+    <div class="cat-card c-rd">
+      <div class="cat-label"><span class="num">C·05</span>強み<span class="imp">US SUPPLY CHAIN</span></div>
+      <div class="cat-title">FLS＝Limitorque経由で<br>米国の原発投資に連動</div>
+      <div class="cat-big t-rd">60年提携</div>
+      <div class="cat-sub">FLS核受注 年4億ドル超／円安が採算に追い風</div>
+      <div class="cat-body">米Flowserve（FLS）のLimitorque国内独占ライセンシー。米国はAI・DC電力需要で<strong>原子力回帰</strong>へ舵を切り、FLSの核受注は年4億ドル超。世界標準の日本製造拠点として対米サプライチェーンに連動し、円安は輸出採算に追い風。</div>
+      <div class="cat-tags"><span class="cat-tag">FLS提携60年</span><span class="cat-tag">対米原子力</span><span class="cat-tag">円安メリット</span></div>
+    </div>
+    <div class="cat-card c-gn">
+      <div class="cat-label"><span class="num">C·06</span>強み<span class="imp">INFLATION & BALANCE</span></div>
+      <div class="cat-title">自己資本84%・実質無借金<br>でインフレ・金利に強い</div>
+      <div class="cat-big t-gn">84%</div>
+      <div class="cat-sub">ネットキャッシュ50億／独占の価格転嫁力</div>
+      <div class="cat-body">独占ゆえの<strong>価格転嫁力</strong>でコストインフレを単価に乗せやすく、反復需要は名目で膨張。自己資本比率84%・現預金50億の実質無借金で、金利上昇局面でも財務耐性が高い。</div>
+      <div class="cat-tags"><span class="cat-tag">自己資本84%</span><span class="cat-tag">ネットキャッシュ50億</span><span class="cat-tag">インフレ耐性</span></div>
+    </div>
+  </div>
+
+  <div class="noteb" style="margin-bottom:6px"><strong>カタリストの点火条件（監視ポイント）：</strong>① 増配・自社株買い（配当性向の引上げ）　② 受注残63.7億の売上・利益への転換　③ FLSライセンス契約条件（6月有報）　④ 原発再稼働の加速。各タブ（②〜⑦）で財務・競合比較・内部複利・シナリオ・テーマ俯瞰を深掘りしています。</div>
+  <div class="notice"><strong>免責事項：</strong>本資料は公開情報に基づく分析・参考資料であり、特定銘柄の売買を勧める投資助言・投資勧誘ではありません。株価・指標は2026年6月16日時点（株価1,378円基準）。投資判断はご自身の責任で行ってください。</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C1: 業績と財務の全体像
+     ＝ 財務サマリー / 原発回復ロードマップ / FLS関係 / 受注分析
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">業績と財務の全体像</h2><span class="ch-badge cb-gn">FOUNDATION</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c1','a',this)">財務サマリー</button>
+    <button class="stab"    onclick="showT('c1','b',this)">原発回復ロードマップ</button>
+    <button class="stab"    onclick="showT('c1','c',this)">FLS技術提携の構造</button>
+    <button class="stab"    onclick="showT('c1','d',this)">受注残と業績のラグ</button>
+  </div>
+
+  <!-- タブA: 財務サマリー -->
+  <div class="spanel active" id="c1a">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">売上高（26/3期 実績）</div><div class="mc-v gn">98.8億</div><div class="mc-s">+3.4%・EPS 約123円</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">営業利益率</div><div class="mc-v gn">24.9%</div><div class="mc-s">26/3期 過去最高水準</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">自己資本比率</div><div class="mc-v bl">84.2%</div><div class="mc-s">ROE約12.5% / ROA約10%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">現預金（26/3期3Q）</div><div class="mc-v am">50億</div><div class="mc-s">時価総額の約25%</div></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">収益性の推移と構造的転換</div>
+        <table class="tbl">
+          <thead><tr><th>期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">利益率</th><th class="r">EPS</th><th class="r">BPS</th></tr></thead>
+          <tbody>
+            <tr><td>22/3期</td><td class="r mono">75.7億</td><td class="r mono">0.9億</td><td class="r mono hi-rd">1.2%</td><td class="r mono hi-rd">14.6円</td><td class="r mono">約613円</td></tr>
+            <tr><td>23/3期</td><td class="r mono">75.2億</td><td class="r mono">5.5億</td><td class="r mono hi-am">7.3%</td><td class="r mono">33.9円</td><td class="r mono">約669円</td></tr>
+            <tr class="hl"><td>24/3期</td><td class="r mono">96.2億</td><td class="r mono">21.3億</td><td class="r mono hi-gn">22.1%</td><td class="r mono hi-gn">108.1円</td><td class="r mono hi-gn">約780円</td></tr>
+            <tr class="hl"><td>25/3期</td><td class="r mono">95.6億</td><td class="r mono">21.1億</td><td class="r mono hi-gn">22.0%</td><td class="r mono hi-gn">108.9円</td><td class="r mono hi-gn">960円</td></tr>
+            <tr class="hl"><td><strong>26/3期（実績）</strong></td><td class="r mono hi-gn"><strong>98.8億</strong></td><td class="r mono hi-gn"><strong>24.6億</strong></td><td class="r mono hi-gn"><strong>24.9%</strong></td><td class="r mono hi-gn"><strong>約123円</strong></td><td class="r mono hi-gn"><strong>約1,000円</strong></td></tr>
+            <tr><td>27/3期（予）</td><td class="r mono">100億</td><td class="r mono">約24億</td><td class="r mono hi-gn">約24%</td><td class="r mono hi-am">約123円</td><td class="r mono">約1,110円*</td></tr>
+          </tbody>
+        </table>
+        <small>*27/3期BPSは内部留保積上げの概算（純資産136.7億〔26/3期3Q〕＋当期利益−配当、発行済約1,427万株ベース）。22/3期は電力会社投資停滞の影響で利益率1.2%まで落込んだ「最悪期」。26/3期は本決算で営業利益率24.9%へ過去最高を更新。</small>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">売上高・営業利益・EPS推移（億円・円）</div>
+        <div style="position:relative;height:200px"><canvas id="plChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g3">
+      <div class="card mc"><div class="mc-l">受注残（26/3期3Q末）</div><div class="mc-v gn">63.7億</div><div class="mc-s">前期末比+38.5%（過去最高水準）</div></div>
+      <div class="card mc"><div class="mc-l">3Q累計受注高</div><div class="mc-v gn">84.8億</div><div class="mc-s">前年同期比+15.0%増</div></div>
+      <div class="card mc"><div class="mc-l">純資産（26/3期3Q末）</div><div class="mc-v bl">136.7億</div><div class="mc-s">自己資本比率84.7%（上昇）</div></div>
+    </div>
+  </div>
+
+  <!-- タブB: 原発回復ロードマップ -->
+  <div class="spanel" id="c1b">
+    <div class="noteg" style="margin-bottom:14px"><strong>2026年4月時点：稼働15基・岡野バルブ26/9期中間が売上+38%・営業利益+135%を記録。同じ「原発景気」が日本ギアに1〜2四半期遅れで転換中。</strong></div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="tl">
+          <div class="tl-d">2024〜2026</div>
+          <div class="tl-dot" style="color:var(--gn2);background:var(--gn2)"></div>
+          <div class="tl-body">
+            <div class="tl-head" style="color:var(--gn2)">【現在】稼働15基・原発景気が数字に現れる</div>
+            <p>島根2号機（2024年12月）など続々と再稼働。岡野バルブが先行して爆益を記録し、「同じ波」が日本ギアに到達しつつある。26/3期3Q受注残63.7億（+38.5%）が証拠。</p>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2027年</div>
+          <div class="tl-dot" style="color:var(--am)"></div>
+          <div class="tl-body">
+            <div class="tl-head" style="color:var(--am)">政府目標：2.5GW追加（18基水準）</div>
+            <p>東海第二（防潮堤2027年3月完了予定）・泊3号（北海道電力が2027年早期再稼働目標）が焦点。定期点検サイクルが定常化し日本ギアの工事事業が安定拡大。</p>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2029年〜</div>
+          <div class="tl-dot" style="color:var(--bl)"></div>
+          <div class="tl-body">
+            <div class="tl-head" style="color:var(--bl)">政府目標：5GW追加（20基以上）</div>
+            <p>柏崎刈羽・浜岡・志賀などの審査通過で20基超体制へ。バルブアクチュエータの反復受注（定期点検1〜2年サイクル）が年間100億円超の受注基盤を形成する見通し。80年運転延長認可で長期需要も確保。</p>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2030年代〜</div>
+          <div class="tl-dot" style="color:var(--fu)"></div>
+          <div class="tl-body">
+            <div class="tl-head" style="color:var(--fu)">次世代革新炉・SMR（超長期）</div>
+            <p>経産省ロードマップでは2030年代前半に建設開始。COP28で22カ国が「原発設備3倍宣言」に合意。新炉向けバルブアクチュエータが2030年代以降の超長期成長エンジン。</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap" style="margin-bottom:10px">
+          <div class="chart-title">原発稼働基数と日本ギア受注高の連動（推計）</div>
+          <div style="position:relative;height:200px"><canvas id="nukeChart"></canvas></div>
+        </div>
+        <div class="notice"><strong>AI・DC・半導体工場が電力需要を押し上げ：</strong>2034年までにDC・半導体由来の電力需要が+715万kW増加見込み（経産省）。これが電力会社の設備投資を強制的に増やし、火力・原発のフル稼働→バルブアクチュエータ定期点検増→日本ギア受注増という連鎖を起こす。</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:10px">
+      <div class="label" style="margin-bottom:8px">稼働基数別EPS推計（バルブアクチュエータ＋定期点検工事の合算）</div>
+      <table class="tbl">
+        <thead><tr><th>稼働基数</th><th>時期</th><th class="r">受注高推計</th><th class="r">EPS推計</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr><td>15基（現状）</td><td>2026年</td><td class="r mono">95〜105億</td><td class="r mono">103〜115円</td><td>受注残転換＋定期点検増</td></tr>
+          <tr class="hl"><td>18基</td><td>2027年</td><td class="r mono hi-am">105〜115億</td><td class="r mono hi-am">115〜128円</td><td>東海第二・泊3再稼働加算</td></tr>
+          <tr class="hl"><td>20基超</td><td>2029年</td><td class="r mono hi-gn">115〜130億</td><td class="r mono hi-gn">128〜145円</td><td>政府目標達成時</td></tr>
+          <tr class="hl-fu"><td>25基超＋次世代炉</td><td>2030年代〜</td><td class="r mono hi-fu">140〜165億+</td><td class="r mono hi-fu">155〜180円+</td><td>革新炉・SMR加算</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- タブC: FLS技術提携 -->
+  <div class="spanel" id="c1c">
+    <div class="notefu" style="margin-bottom:14px"><strong>1963年から60年続く技術提携：日本ギアはFlowserve（NYSE: FLS）のLimitorqueブランドを国内で独占製造するライセンシー。FLSが核戦略を加速するほど日本ギアの製品競争力が強化される構造。</strong></div>
+
+    <div class="flow-chain" style="margin-bottom:16px">
+      <div class="flow-box"><strong style="color:var(--fu)">Flowserve（FLS）</strong><small>NYSE上場・50カ国<br>時価総額約65億ドル<br>核受注年4億ドル超</small></div>
+      <div class="flow-arr">→<br><small style="font-size:9px">Limitorque<br>技術ライセンス</small></div>
+      <div class="flow-box" style="border:2px solid var(--fu)"><strong style="color:var(--ink)">日本ギア工業（6356）</strong><small>東証STD・時価総額197億<br>国内原発90%シェア<br>SMB・L120シリーズ製造</small></div>
+      <div class="flow-arr">→<br><small style="font-size:9px">製品・工事<br>サービス</small></div>
+      <div class="flow-box"><strong style="color:var(--bl)">国内電力インフラ</strong><small>稼働15基の全原発<br>火力・上下水道<br>鉄道・ガスプラント</small></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">FLSの核戦略加速（最新動向）</div>
+        <table class="tbl">
+          <thead><tr><th>時期</th><th>内容</th><th class="r">インパクト</th></tr></thead>
+          <tbody>
+            <tr class="hl-fu"><td>2026年2月</td><td>Trillium Flow Technologies買収発表（4.9億ドル）<br>115基の原発に搭載・200,000件のインストールベース</td><td class="r hi-fu">核対応300基超へ</td></tr>
+            <tr><td>2025年通年</td><td>核関連受注が年間約4億ドルへ急増<br>Q1・Q3で各四半期1億ドル超を継続達成</td><td class="r hi-gn">過去最高水準</td></tr>
+            <tr><td>2026年Q1</td><td>核受注1.1億ドル超（高水準継続）<br>通期EPS 4.00〜4.20ドルのガイダンス維持</td><td class="r hi-am">安定成長中</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card card-gn" style="margin-bottom:10px">
+          <div class="label">FLS→日本ギアへの期待波及</div>
+          <p>FLSの技術更新（スマートアクチュエータ・IIoT診断・Trillium技術）がライセンス経由で日本ギアの製品にも順次反映される。Limitorque SMBが世界標準を維持するほど日本国内での採用が継続される。</p>
+        </div>
+        <div class="card card-rd">
+          <div class="label">ライセンス依存リスク（有報要確認）</div>
+          <p>FLSとのライセンス契約期間・独占性・ロイヤリティ条件は有価証券報告書（2026年6月発表予定）で確認必須。現時点では詳細不明。契約見直しリスクは低いと推測されるが、投資判断の前提条件。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブD: 受注残と業績ラグ -->
+  <div class="spanel" id="c1d">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc"><div class="mc-l">3Q末受注残</div><div class="mc-v gn">63.7億</div><div class="mc-s">+38.5%増（期首比）</div></div>
+      <div class="card mc"><div class="mc-l">バルブ受注前年比</div><div class="mc-v gn">+15.9%</div><div class="mc-s">火力・原子力・上下水道増</div></div>
+      <div class="card mc"><div class="mc-l">工事受注前年比</div><div class="mc-v gn">+9.6%</div><div class="mc-s">上下水道・鉄道船舶増</div></div>
+      <div class="card mc"><div class="mc-l">3Q累計売上高</div><div class="mc-v am">67.0億</div><div class="mc-s">▲1.1%減（受注と逆行）</div></div>
+    </div>
+
+    <div class="g2">
+      <div>
+        <div class="noteg" style="margin-bottom:10px"><strong>受注→売上の「下期偏重ラグ」：</strong>売上は第4四半期（1〜3月）に35〜45%が集中するため、3Q時点では受注好調が売上に現れていない。受注残63.7億円は4Qの売上転換バッファとして機能し、26/3期の強い着地と27/3期加速を先行告知している。</div>
+        <div class="chart-wrap">
+          <div class="chart-title">受注高・売上高・受注残の推移（億円）</div>
+          <div style="position:relative;height:200px"><canvas id="orderChart"></canvas></div>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">岡野バルブとの「先行・遅行」関係</div>
+        <table class="tbl">
+          <thead><tr><th>企業</th><th>現状</th><th>原発景気の波への位置</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>岡野バルブ（6492）<br><small>バルブ本体メーカー</small></td><td class="hi-gn">売上+38%<br>営業利益+135%</td><td><span class="badge bd-gn">先行・既に業績直撃</span></td></tr>
+            <tr class="hl-am"><td><strong>日本ギア工業（6356）</strong><br><small>バルブアクチュエータ</small></td><td class="hi-am">受注+15%<br>受注残+38.5%</td><td><span class="badge bd-am">遅行・1〜2Q後に業績転換</span></td></tr>
+            <tr><td>TVE（6466）<br><small>バルブ全般・廃炉</small></td><td class="hi-gn">売上+28%<br>黒字転換</td><td><span class="badge bd-gn">V字回復中</span></td></tr>
+          </tbody>
+        </table>
+        <div class="notice" style="margin-top:10px"><strong>日本ギアが「遅行」する理由：</strong>バルブ本体が先に設置され、アクチュエータ（制御機器）はその後に取り付けられる工程上の順番が存在する。受注残の急増はこの遅れを数字で示しており、「岡野バルブが先に爆益→日本ギアは数四半期後に追随」という構造が確立している。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C2: 競合PER比較・割安性の構造分析
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">競合PER比較・割安性の構造分析</h2><span class="ch-badge cb-fu">VALUATION</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c2','a',this)">指標一覧比較</button>
+    <button class="stab"    onclick="showT('c2','b',this)">★適正PER 4手法分析</button>
+    <button class="stab"    onclick="showT('c2','c',this)">PER割安の理由分解</button>
+    <button class="stab"    onclick="showT('c2','d',this)">競合プロファイル詳細</button>
+    <button class="stab"    onclick="showT('c2','e',this)">割安解消のシナリオ</button>
+  </div>
+
+  <!-- タブA: 指標一覧 -->
+  <div class="spanel active" id="c2a">
+    <div class="chart-wrap" style="margin-bottom:14px">
+      <div class="chart-title">PER比較（日本ギアが競合最高利益率にも関わらず最低PER）</div>
+      <div style="position:relative;height:200px"><canvas id="perChart"></canvas></div>
+    </div>
+
+    <div style="overflow-x:auto;margin-bottom:12px">
+      <table class="tbl" style="min-width:780px">
+        <thead><tr><th>企業</th><th class="r">株価</th><th class="r">時価総額</th><th class="r">予想PER</th><th class="r">PBR</th><th class="r">配当利回り</th><th class="r">営業利益率</th><th class="r">ROE</th><th>直近業績</th></tr></thead>
+        <tbody>
+          <tr class="hl">
+            <td><strong>日本ギア工業（6356）</strong></td>
+            <td class="r mono">1,378円</td><td class="r mono">197億</td>
+            <td class="r mono hi-gn" style="font-size:14px"><strong>11.1倍</strong></td>
+            <td class="r mono">1.38倍</td><td class="r mono hi-rd">0.7%</td>
+            <td class="r mono hi-gn"><strong>24.9%</strong></td>
+            <td class="r mono hi-gn">13.1%</td>
+            <td>受注残+38.5%・売上遅行</td>
+          </tr>
+          <tr>
+            <td>岡野バルブ（6492）</td>
+            <td class="r mono">約8,700円</td><td class="r mono">約281億</td>
+            <td class="r mono hi-am" style="font-size:14px">約24倍</td>
+            <td class="r mono hi-am">1.73倍</td><td class="r mono">0.60%</td>
+            <td class="r mono hi-am">約19.5%</td><td class="r mono">11.3%</td>
+            <td>売上+38%・営業利益+135%（先行回復）</td>
+          </tr>
+          <tr>
+            <td>TVE（6466）</td>
+            <td class="r mono">約2,840円</td><td class="r mono">約132億</td>
+            <td class="r mono hi-am" style="font-size:14px">約24倍</td>
+            <td class="r mono">1.04倍</td><td class="r mono">0.74%</td>
+            <td class="r mono">約14%</td><td class="r mono hi-rd">4.3%</td>
+            <td>売上+28%・黒字転換（V字回復）</td>
+          </tr>
+          <tr>
+            <td>木村化工機（6378）</td>
+            <td class="r mono">約1,465円</td><td class="r mono">約302億</td>
+            <td class="r mono" style="font-size:14px">約14〜16倍</td>
+            <td class="r mono">1.30倍</td><td class="r mono hi-gn">2.80%</td>
+            <td class="r mono">約9〜10%</td><td class="r mono">9.4%</td>
+            <td>減収減益（配当高くインカム層に人気）</td>
+          </tr>
+          <tr class="hl-fu">
+            <td>Flowserve FLS（NYSE）</td>
+            <td class="r mono">約$50</td><td class="r mono">約$65億</td>
+            <td class="r mono hi-fu" style="font-size:14px">約22倍</td>
+            <td class="r mono hi-fu">約3.0倍</td><td class="r mono">約1.5%</td>
+            <td class="r mono">約15%</td><td class="r mono">約15%</td>
+            <td>核受注年4億ドル超・Trillium買収加速</td>
+          </tr>
+        </tbody>
+      </table>
+      <small>PER・株価は2026年5月時点の概算。岡野バルブは26/9期通期予想ベース。TVEは26/9期Q1ベース。</small>
+    </div>
+
+    <div class="g2">
+      <div class="chart-wrap">
+        <div class="chart-title">PER vs 営業利益率（日本ギアは「最高利益率×最低PER」の極端な割安圏）</div>
+        <div style="position:relative;height:210px"><canvas id="perOpmChart"></canvas></div>
+      </div>
+      <div>
+        <div class="noteg" style="margin-bottom:10px"><strong>最重要の発見：</strong>日本ギアは営業利益率24.9%（26/3期・競合最高）にも関わらずPER11.1倍（競合最低）。岡野バルブ（利益率19%・PER24倍）・TVE（利益率14%・PER24倍）と比べると約12倍分のバリュエーションギャップが存在する。</div>
+        <div class="card card-gn">
+          <div class="label">PER格上げのEPSインパクト試算（EPS124円・株価1,378円基準）</div>
+          <table class="tbl" style="margin-top:6px">
+            <thead><tr><th>PER</th><th class="r">株価目安</th><th class="r">現在比</th></tr></thead>
+            <tbody>
+              <tr><td>現状 11.1倍</td><td class="r mono">1,378円</td><td class="r mono hi-am">±0%</td></tr>
+              <tr class="hl"><td>ベース 18倍</td><td class="r mono">2,232円</td><td class="r mono hi-gn">+62%</td></tr>
+              <tr><td>岡野並み 24倍</td><td class="r mono">2,976円</td><td class="r mono hi-gn">+116%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★新タブB: 適正PER 4手法分析 -->
+  <div class="spanel" id="c2b">
+
+    <div class="noteb" style="margin-bottom:16px">
+      <strong>「PERはいくらが適正か」を4つのアプローチで多角検証。結論：日本ギア工業の理論的適正PERは18〜22倍。現在11.1倍は▲20〜35%の明確な割安。</strong>
+    </div>
+
+    <!-- 4手法サマリーカード -->
+    <div class="g4" style="margin-bottom:18px">
+      <div class="card mc" style="border-top:3px solid var(--bl)">
+        <div class="mc-l">①業種平均比較法</div>
+        <div class="mc-v bl">18〜22倍</div>
+        <div class="mc-s">機械セクター平均27倍から<br>ディスカウント調整後</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--gn)">
+        <div class="mc-l">②DDM逆算（理論PER）</div>
+        <div class="mc-v gn">19〜23倍</div>
+        <div class="mc-s">Rf=2.65%・ERP=5%<br>g=5〜7%で算出</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--am)">
+        <div class="mc-l">③PEGレシオ分析</div>
+        <div class="mc-v am">16〜21倍</div>
+        <div class="mc-s">EPS成長率7〜13%<br>×PEG0.8〜1.2倍</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--fu)">
+        <div class="mc-l">④類似ニッチトップ比較</div>
+        <div class="mc-v fu">20〜25倍</div>
+        <div class="mc-s">利益率20%超・独占シェア<br>保有銘柄の市場平均</div>
+      </div>
+    </div>
+
+    <!-- アプローチ①: 業種平均比較法 -->
+    <div class="card card-hi-bl" style="padding:14px;margin-bottom:12px">
+      <div style="font:700 13px/1.3 var(--head);color:var(--bl);margin-bottom:10px">① 業種平均比較法：機械セクター平均PER vs 日本ギアの品質補正</div>
+      <div class="g2">
+        <div>
+          <table class="tbl">
+            <thead><tr><th>市場・セクター</th><th class="r">平均PER</th><th>出典・時点</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td><strong>東証プライム・機械セクター</strong></td><td class="r mono hi-bl" style="font-size:14px"><strong>27.2倍</strong></td><td>いちよし経済研究所 2026/5/8</td></tr>
+              <tr><td>東証プライム・製造業全体</td><td class="r mono">24.4倍</td><td>同上</td></tr>
+              <tr><td>TOPIX全体（プライム）</td><td class="r mono">約20〜21倍</td><td>2026年5月</td></tr>
+              <tr class="hl-am"><td><strong>岡野バルブ（6492・同業最割高）</strong></td><td class="r mono hi-am">24倍</td><td>直接比較可能競合</td></tr>
+              <tr><td>TVE（6466・同業）</td><td class="r mono hi-am">24倍</td><td>直接比較可能競合</td></tr>
+              <tr><td>Flowserve FLS（NYSE・技術親会社）</td><td class="r mono hi-fu">22倍</td><td>同業・グローバル</td></tr>
+              <tr class="hl-rd"><td><strong>日本ギア（6356・現在）</strong></td><td class="r mono hi-rd" style="font-size:14px"><strong>11.1倍</strong></td><td>▲47%のディスカウント</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">品質補正PERの算出</div>
+          <p style="font-size:12px;line-height:1.85">機械セクター平均27.2倍を出発点に、日本ギア固有のディスカウント要因（配当0.7%▲3〜5倍・下期偏重▲2〜3倍・情報開示不足▲1〜2倍）を差し引くと、<strong>18〜22倍</strong>が品質補正後の理論的適正PER。</p>
+          <table class="tbl" style="margin-top:8px;font-size:11px">
+            <thead><tr><th>ベースPER</th><th class="r">▲配当</th><th class="r">▲下期偏重</th><th class="r">▲開示</th><th class="r">適正PER</th></tr></thead>
+            <tbody>
+              <tr><td>機械平均 27.2倍</td><td class="r hi-rd">▲4倍</td><td class="r hi-am">▲2.5倍</td><td class="r hi-am">▲1.5倍</td><td class="r mono hi-gn"><strong>約19倍</strong></td></tr>
+              <tr><td>岡野バルブ 24倍</td><td class="r hi-rd">▲4倍</td><td class="r hi-am">▲2倍</td><td class="r hi-am">▲1倍</td><td class="r mono hi-gn"><strong>約17倍</strong></td></tr>
+              <tr><td>FLS 22倍</td><td class="r hi-rd">▲3倍</td><td class="r hi-am">▲1倍</td><td class="r">—</td><td class="r mono hi-gn"><strong>約18倍</strong></td></tr>
+            </tbody>
+          </table>
+          <small style="display:block;margin-top:4px">3アプローチの平均 → 適正PER約<strong>18〜19倍</strong>（業種比較法）</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- アプローチ②: DDM逆算 -->
+    <div class="card card-hi-gn" style="padding:14px;margin-bottom:12px">
+      <div style="font:700 13px/1.3 var(--head);color:var(--gn);margin-bottom:10px">② DDM逆算法（配当割引モデル）：リスクフリーレート・ERP・成長率から理論PER算出</div>
+      <div class="g2">
+        <div>
+          <div class="label" style="margin-bottom:8px">入力パラメーター（2026年5月時点の実測値）</div>
+          <table class="tbl">
+            <thead><tr><th>パラメーター</th><th class="r">値</th><th>根拠・出典</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>Rf（リスクフリーレート）</td><td class="r mono hi-rd">2.65%</td><td>日本10年国債利回り（2026年5月・1997年以来最高水準）</td></tr>
+              <tr><td>ERP（エクイティリスクプレミアム）</td><td class="r mono">5.0%</td><td>日本株の歴史的ERP（学術・実務標準：4〜6%）</td></tr>
+              <tr><td>β（ベータ）</td><td class="r mono">約0.7</td><td>スタンダード市場・ニッチ製造業の典型値（推計）</td></tr>
+              <tr class="hl"><td>要求収益率（Ke）</td><td class="r mono hi-gn"><strong>6.15%</strong></td><td>Rf + β × ERP = 2.65 + 0.7 × 5.0</td></tr>
+              <tr><td>長期EPS成長率 g（低位）</td><td class="r mono">5.0%</td><td>GDP成長+インフラ需要の最低限</td></tr>
+              <tr><td>長期EPS成長率 g（中位）</td><td class="r mono hi-am">7.0%</td><td>内部複利ROE13%×留保率92%≒12%を保守的に</td></tr>
+              <tr><td>長期EPS成長率 g（高位）</td><td class="r mono hi-gn">10%</td><td>原発景気フル加速・採用拡大シナリオ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">DDM理論PER = 配当性向 ÷ (Ke − g)</div>
+          <div class="noteg" style="margin-bottom:10px"><strong>計算式：</strong>配当割引モデルでは株価 P = D/(Ke-g) → PER = (配当性向)/(Ke-g) で表される。日本ギアの配当性向7.7%を使用。</div>
+          <table class="tbl">
+            <thead><tr><th>EPS成長率(g)</th><th class="r">Ke-g</th><th class="r">理論PER</th><th>解釈</th></tr></thead>
+            <tbody>
+              <tr><td>g = 5.0%（低位）</td><td class="r mono">1.15%</td><td class="r mono hi-am">約6.7倍</td><td>配当性向7.7%のまま</td></tr>
+              <tr class="hl-am"><td>g = 5.0% 配当性向30%</td><td class="r mono">1.15%</td><td class="r mono hi-am"><strong>約26倍</strong></td><td>増配30%で正常化</td></tr>
+              <tr class="hl"><td>g = 7.0% 配当性向30%</td><td class="r mono">-0.85%</td><td colspan="2" class="hi-rd">負（成長株・PER無限大に近い）</td></tr>
+              <tr class="hl" style="background:#f0f8f4"><td><strong>内部複利ベース（ROE×留保）</strong></td><td class="r mono">—</td><td class="r mono hi-gn"><strong>19〜23倍</strong></td><td>「実質配当=EPS全体」として評価</td></tr>
+            </tbody>
+          </table>
+          <div class="notice" style="margin-top:8px"><strong>重要な補正：</strong>DDMの「配当性向7.7%」は表面的すぎる。内部留保114円もROE約13%で株主資本に蓄積・運用されるため、「実質配当＝EPS全体」として要求収益率6.15%・成長率5〜7%を適用すると<strong>理論PER 19〜23倍</strong>が導かれる。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アプローチ③: PEG -->
+    <div class="card card-hi-am" style="padding:14px;margin-bottom:12px">
+      <div style="font:700 13px/1.3 var(--head);color:var(--am);margin-bottom:10px">③ PEGレシオ分析：EPS成長率に見合ったPER水準の算出</div>
+      <div class="g2">
+        <div>
+          <p style="font-size:12px;line-height:1.8">PEG = PER ÷ EPS年成長率（%）。<br>一般的に PEG≤1.0 = 割安、PEG≥1.5 = 割高の目安。<br>日本小型株では PEG 0.8〜1.2 が許容レンジとされる。</p>
+          <table class="tbl" style="margin-top:10px">
+            <thead><tr><th>EPS成長率シナリオ</th><th class="r">成長率</th><th class="r">適正PER<br>（PEG=1.0）</th><th class="r">適正PER<br>（PEG=1.2）</th></tr></thead>
+            <tbody>
+              <tr><td>ベア（業績停滞）</td><td class="r mono">3%</td><td class="r mono hi-rd">3倍</td><td class="r mono hi-rd">3.6倍</td></tr>
+              <tr class="hl-am"><td>慎重ベース（内部複利のみ）</td><td class="r mono">7%</td><td class="r mono hi-am">7倍</td><td class="r mono hi-am">8.4倍</td></tr>
+              <tr class="hl"><td><strong>ベース（原発再稼働＋内部複利）</strong></td><td class="r mono hi-gn">13%</td><td class="r mono hi-gn"><strong>13倍</strong></td><td class="r mono hi-gn"><strong>15.6倍</strong></td></tr>
+              <tr class="hl-fu"><td>ブル（採用拡大・受注急増）</td><td class="r mono">18%</td><td class="r mono hi-fu">18倍</td><td class="r mono hi-fu">21.6倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:8px">現在のPEGレシオ評価</div>
+          <table class="tbl">
+            <thead><tr><th>ケース</th><th class="r">EPS成長率</th><th class="r">PEG（現在PER11.1倍）</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>内部複利のみ（ROE13%）</td><td class="r mono">7〜8%</td><td class="r mono hi-gn"><strong>1.79〜2.04</strong></td><td><span class="badge bd-am">やや割高寄り</span></td></tr>
+              <tr class="hl"><td>原発景気反映（EPS成長13%）</td><td class="r mono">13%</td><td class="r mono hi-gn"><strong>1.10</strong></td><td><span class="badge bd-gn">適正・割安ライン</span></td></tr>
+              <tr class="hl-fu"><td>ブル（EPS成長18%）</td><td class="r mono">18%</td><td class="r mono hi-gn"><strong>0.79</strong></td><td><span class="badge bd-gn">明確に割安</span></td></tr>
+            </tbody>
+          </table>
+          <div class="noteg" style="margin-top:8px"><strong>PEG結論：</strong>原発景気が現実化してEPS成長率が13〜18%に達するなら、現在PER11.1倍はPEG1.1〜0.8倍で「適正〜明確な割安」。逆に内部複利のみの7〜8%成長ならPEG2倍超でやや割高寄りに見える。原発再稼働の進展がPEGを正当化するかどうかが鍵。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アプローチ④: 類似ニッチトップ比較 -->
+    <div class="card card-hi-fu" style="padding:14px;margin-bottom:16px">
+      <div style="font:700 13px/1.3 var(--head);color:var(--fu);margin-bottom:10px">④ 類似ニッチトップ企業比較：「利益率20%超×独占シェア」保有銘柄のバリュエーション相場</div>
+      <div class="g2">
+        <div>
+          <table class="tbl">
+            <thead><tr><th>企業（業種）</th><th class="r">PER</th><th class="r">営業利益率</th><th class="r">シェア</th><th>特徴</th></tr></thead>
+            <tbody>
+              <tr><td>サーモス（バルブ型水筒）</td><td class="r mono">約20〜25倍</td><td class="r mono">約18%</td><td class="r">国内最大</td><td>ニッチ独占×高利益率</td></tr>
+              <tr><td>ミスミグループ（機械部品）</td><td class="r mono">約22〜28倍</td><td class="r mono">約15%</td><td class="r">アジア最大</td><td>カタログ製造×デジタル</td></tr>
+              <tr class="hl"><td>モノタロウ（工業用品）</td><td class="r mono">約25〜35倍</td><td class="r mono">約14%</td><td class="r">国内首位</td><td>独占的ECプラット</td></tr>
+              <tr><td>スター精密（部品・医療）</td><td class="r mono">約18〜22倍</td><td class="r mono">約18%</td><td class="r">高シェア</td><td>ニッチ精密機械</td></tr>
+              <tr class="hl"><td>岡野バルブ（原発バルブ）</td><td class="r mono hi-am">24倍</td><td class="r mono hi-am">約19.5%</td><td class="r">高シェア</td><td>直接競合・先行回復</td></tr>
+              <tr class="hl-rd"><td><strong>日本ギア（原発アクチュエーター）</strong></td><td class="r mono hi-rd"><strong>11.1倍</strong></td><td class="r mono hi-gn"><strong>24.9%</strong></td><td class="r hi-gn"><strong>90%超</strong></td><td>最高利益率・最高シェア・最低PER</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="noteg" style="margin-bottom:10px"><strong>ニッチトップ企業の「相場」：</strong>利益率15〜20%・独占的シェア保有の国内ニッチトップ企業は、一般的にPER20〜28倍で取引されることが多い。日本ギアは利益率24.9%・シェア90%超で競合中トップだが、PER11倍と相場の半分以下。</div>
+          <div class="card card-gn">
+            <div class="label">ニッチトップ比較の適正PER結論</div>
+            <p style="font-size:12px">類似ニッチトップ企業（利益率15〜22%・高シェア）の市場相場PER 20〜25倍から、日本ギア固有のディスカウント（配当・下期偏重・情報開示）を▲3〜5倍差し引くと、<strong>適正PER 20〜22倍</strong>が導かれる。現在11.1倍との差は<strong>▲6〜8倍分の割安</strong>。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4手法の総合結論 -->
+    <div style="background:var(--ink2);border-radius:var(--r);padding:16px;color:rgba(246,245,239,.9)">
+      <div style="font:700 14px/1.3 var(--head);color:var(--sem2);margin-bottom:12px">【総合結論】4手法平均の適正PER：18〜22倍</div>
+      <div class="g4" style="margin-bottom:12px">
+        <div style="background:rgba(255,255,255,.07);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:600 9px/1 var(--mono);color:rgba(246,245,239,.4);text-transform:uppercase;margin-bottom:4px">①業種平均比較</div>
+          <div style="font:700 20px/1 var(--mono);color:#8ab0e8">18〜19倍</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:600 9px/1 var(--mono);color:rgba(246,245,239,.4);text-transform:uppercase;margin-bottom:4px">②DDM理論</div>
+          <div style="font:700 20px/1 var(--mono);color:#68c890">19〜23倍</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:600 9px/1 var(--mono);color:rgba(246,245,239,.4);text-transform:uppercase;margin-bottom:4px">③PEGレシオ</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--sem2)">16〜21倍</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:600 9px/1 var(--mono);color:rgba(246,245,239,.4);text-transform:uppercase;margin-bottom:4px">④ニッチトップ比較</div>
+          <div style="font:700 20px/1 var(--mono);color:#d090c0">20〜22倍</div>
+        </div>
+      </div>
+      <div style="font-size:12px;line-height:1.8;color:rgba(246,245,239,.72)">
+        4手法の中央値・重複域：<strong style="color:rgba(246,245,239,.95)">18〜21倍</strong>。現在11.1倍との差は<strong style="color:#68c890">▲3.7〜6.7倍分（現在比+26〜47%の上昇余地）</strong>。<br>
+        <br>
+        ただし金利上昇（日本10年債2.7%・1997年以来の高水準）は割引率上昇→株式バリュエーション圧縮要因であり、適正PERの上限を抑える方向に働く。金利が3%超に上昇した場合、適正PERは16〜19倍程度まで低下する可能性に留意が必要。<br>
+        <br>
+        <strong style="color:var(--sem2)">適正PER到達時の株価試算（EPS120円想定）：</strong>
+        PER18倍→2,160円（+46%）｜PER20倍→2,400円（+62%）｜PER22倍→2,640円（+78%）
+      </div>
+    </div>
+  </div>
+
+  <!-- タブC: PER割安の理由分解（旧タブB） -->
+  <div class="spanel" id="c2c">
+    <div class="label" style="margin-bottom:10px">構造的ディスカウント要因と解消可能性</div>
+    <table class="tbl" style="margin-bottom:14px">
+      <thead><tr><th>ディスカウント要因</th><th class="r">PERへの影響（推定）</th><th>解消可能性</th><th>主なトリガー</th></tr></thead>
+      <tbody>
+        <tr class="hl-rd"><td><strong>①配当利回り0.7%（業界最低水準）</strong></td><td class="r mono hi-rd">▲3〜5倍</td><td><span class="badge bd-rd">要方針転換</span></td><td>増配・自社株買い発表</td></tr>
+        <tr class="hl-am"><td><strong>②下期偏重・業績変動大（4Q集中）</strong></td><td class="r mono hi-am">▲2〜3倍</td><td><span class="badge bd-am">構造的・中期</span></td><td>複数期の好決算実績積み上げ</td></tr>
+        <tr class="hl-am"><td><strong>③「受注先行・売上遅行」の見えにくさ</strong></td><td class="r mono hi-am">▲1〜2倍</td><td><span class="badge bd-gn">26/3期決算で解消へ</span></td><td>27/3期増益予想発表</td></tr>
+        <tr><td><strong>④スタンダード上場・機関カバレッジ薄</strong></td><td class="r mono hi-am">▲1〜3倍</td><td><span class="badge bd-am">時間で解消</span></td><td>プライム転換・IR強化</td></tr>
+        <tr><td><strong>⑤FLSライセンス依存への懸念</strong></td><td class="r mono">不明</td><td><span class="badge bd-fu">有報で確認後</span></td><td>契約内容の透明化</td></tr>
+        <tr style="background:var(--bg3)"><td colspan="2" style="font-weight:600">合計ディスカウント（推定）</td><td colspan="2" class="hi-rd" style="font-weight:700;font-family:var(--mono)">▲7〜13倍 → 適正PER 18〜22倍</td></tr>
+      </tbody>
+    </table>
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:8px">PER段階的格上げシミュレーション（EPS124円想定）</div>
+        <div class="blrow"><span>現在（PER11.1倍）</span><span class="mono hi-rd">1,378円</span></div>
+        <div class="btrack"><div class="bfill" style="width:46%;background:var(--rd)"></div></div>
+        <div class="blrow"><span>＋本決算の高利益率を織込み（PER16倍）</span><span class="mono hi-am">1,984円</span></div>
+        <div class="btrack"><div class="bfill" style="width:67%;background:var(--am)"></div></div>
+        <div class="blrow"><span>＋増益確認・受注100億超（PER18倍）</span><span class="mono hi-am">2,232円</span></div>
+        <div class="btrack"><div class="bfill" style="width:75%;background:var(--am)"></div></div>
+        <div class="blrow"><span>＋増配・株主還元強化（PER20倍）</span><span class="mono hi-gn">2,480円</span></div>
+        <div class="btrack"><div class="bfill" style="width:83%;background:var(--gn)"></div></div>
+        <div class="blrow"><span>＋岡野バルブ並み（PER24倍）</span><span class="mono hi-gn">2,976円</span></div>
+        <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+      </div>
+      <div class="noteb">
+        <strong>「EPS改善 × PER格上げ」の2段ロケット：</strong><br><br>
+        現状EPS124円 → 内部複利ROE約13%で3年後EPS約177円（+43%成長）<br>
+        PER11倍維持でも：177円×11倍＝1,947円（+41%）<br>
+        PER18倍へ格上げなら：177円×18倍＝3,186円（+131%）<br><br>
+        この2つが同時に起きた場合がベースシナリオ「3年後2,200〜2,900円」の理論的根拠。低い入口PER11倍ほど「PER維持でもEPS成長分は取れる」下値の堅さが効く。
+      </div>
+    </div>
+  </div>
+
+  <!-- タブD: 競合プロファイル -->
+  <div class="spanel" id="c2d">
+    <div class="g2" style="margin-bottom:12px">
+      <div class="card-hi-gn" style="border-radius:var(--r);padding:14px">
+        <div style="font:700 13px/1.3 var(--head);color:var(--gn);margin-bottom:8px">岡野バルブ製造（6492）｜PER 約24倍</div>
+        <p style="font-size:12px">原子力・火力向け大型高温高圧バルブ専業メーカー（北九州市）。26/9期中間で売上+38.2%・営業利益+135.2%増と先行して原発景気を享受。通期予想売上100億（+42.7%増）。PER24倍は「先行回復の実績」に対する市場評価。日本ギアよりバルブ本体→アクチュエータの順で受注が発生するため先行指標として機能している。</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--am);padding:14px">
+        <div style="font:700 13px/1.3 var(--head);color:var(--am);margin-bottom:8px">TVE（旧東亜バルブエンジニアリング）（6466）｜PER 約24倍</div>
+        <p style="font-size:12px">原子力・火力用バルブ＋廃炉事業（尼崎市）。前期まで業績低迷が続いたが26/9期Q1は売上+28%・黒字転換。ROE4.3%・営業利益率14%と日本ギア（ROE13%・利益率22%）を大幅に下回るにも関わらずPER24倍。V字回復銘柄のプレミアムがついており、日本ギアより事業品質は劣る。</p>
+      </div>
+      <div class="card card-hi-bl" style="padding:14px">
+        <div style="font:700 13px/1.3 var(--head);color:var(--bl);margin-bottom:8px">木村化工機（6378）｜PER 約14〜16倍</div>
+        <p style="font-size:12px">化学プラントエンジニアリング＋原子力装置（尼崎市）。26/3期は減収減益見込み。PERは日本ギアと同等だが、営業利益率9〜10%・ROE9.4%と日本ギアに大幅に劣る。配当2.8%が唯一の強みでインカム投資家に人気。「PERが同じでも利益の質が全く異なる」代表例。</p>
+      </div>
+      <div class="card card-hi-fu" style="padding:14px">
+        <div style="font:700 13px/1.3 var(--head);color:var(--fu);margin-bottom:8px">Flowserve FLS（NYSE）｜PER 約22倍</div>
+        <p style="font-size:12px">日本ギアの技術親会社（ダラス）。核バルブアクチュエータで世界最大手。2026年2月にTrillium買収（4.9億ドル）で300基超対応へ。日本ギアが「FLS日本版プレー」として割安な理由：同じ核バルブテーマでFLSがPER22倍なら日本ギアPER11倍は明らかに割安。ただし規模・流動性・配当水準は大きく異なる。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブE: 割安解消シナリオ -->
+  <div class="spanel" id="c2e">
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:10px">PER格上げのトリガー（時系列）</div>
+        <div class="tl">
+          <div class="tl-d">2026/5</div>
+          <div class="tl-dot" style="color:var(--gn)"></div>
+          <div class="tl-body"><div class="tl-head" style="color:var(--gn)">26/3期通期決算（最大のトリガー）</div><p>受注残63.7億の4Q転換確認と27/3期増益予想。「遅行していた売上」が実現すれば「岡野バルブと同じ景気を確認」としてPER再評価が始まる。</p></div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2026/6</div>
+          <div class="tl-dot" style="color:var(--fu)"></div>
+          <div class="tl-body"><div class="tl-head" style="color:var(--fu)">有報：FLSライセンス契約確認</div><p>契約期間・独占性・ロイヤリティ条件の開示があれば最大の不確実性が解消。FLS依存のリスクが明確化されることでむしろ評価改善につながりうる。</p></div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2026〜2027</div>
+          <div class="tl-dot" style="color:var(--am)"></div>
+          <div class="tl-body"><div class="tl-head" style="color:var(--am)">増配・自社株買い（配当ディスカウント解消）</div><p>現預金45億・ROE13%に対して配当性向7.7%は非合理に低い。増配（配当性向20〜30%へ）発表は最も即効性の高いPER格上げカタリスト。</p></div>
+        </div>
+        <div class="tl">
+          <div class="tl-d">2027年〜</div>
+          <div class="tl-dot" style="color:var(--bl)"></div>
+          <div class="tl-body"><div class="tl-head" style="color:var(--bl)">受注100億超・機関投資家参入</div><p>受注高100億超が確認されれば「岡野バルブ並みの原発景気の現実化」。機関投資家がカバレッジ開始すれば流動性向上とともにPER20〜24倍への格上げが進む。</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-hi-am" style="padding:14px;margin-bottom:10px">
+          <div style="font:700 12px/1.3 var(--head);color:var(--am);margin-bottom:6px">増配インパクト試算</div>
+          <table class="tbl" style="font-size:11px">
+            <thead><tr><th>配当性向</th><th class="r">年間配当</th><th class="r">配当利回り<br>（株価1,378円）</th><th>PER格上げ効果（推定）</th></tr></thead>
+            <tbody>
+              <tr><td>現状 約8%</td><td class="r mono">10円</td><td class="r mono hi-rd">0.7%</td><td>なし</td></tr>
+              <tr class="hl"><td>15%</td><td class="r mono">16円</td><td class="r mono">1.08%</td><td>PER+1〜2倍</td></tr>
+              <tr><td>20%</td><td class="r mono">21円</td><td class="r mono hi-am">1.42%</td><td>PER+2〜3倍</td></tr>
+              <tr class="hl"><td>30%</td><td class="r mono">31円</td><td class="r mono hi-gn">2.09%</td><td>PER+3〜5倍（インカム層流入）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="noteg">配当性向を30%（EPS124円×30%≒37円）に引き上げると配当利回り2.7%となり、インカム投資家の参入が期待できる。現預金50億円（=1株換算約350円分）という過剰資本の存在を考えると、株主還元強化の「体力」は十分ある。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C3: 内部複利と株主利益
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">低配当だが「内部複利」で株主利益はどこまで積み上がるか</h2><span class="ch-badge cb-bl">COMPOUNDING</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c3','a',this)">内部複利の仕組みと実質利回り</button>
+    <button class="stab"    onclick="showT('c3','b',this)">BPS・剰余金の実績（証拠）</button>
+    <button class="stab"    onclick="showT('c3','c',this)">3年・5年・10年の定量試算</button>
+    <button class="stab"    onclick="showT('c3','d',this)">高配当型との比較・結論</button>
+  </div>
+
+  <!-- タブA: 仕組みと実質利回り -->
+  <div class="spanel active" id="c3a">
+    <div class="noteb" style="margin-bottom:16px"><strong>「配当0.7%は低い」という見方は半分だけ正しい。残りのEPS約92%（約114円）が毎年純資産に積み上がりROE約13%で再運用される。この「見えない複利」が長期の株主利益を作っている。</strong></div>
+
+    <!-- フロー図 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px;margin-bottom:16px">
+      <div class="label" style="margin-bottom:12px">EPS124円の行方と複利の連鎖</div>
+      <div style="display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;gap:0;align-items:center">
+        <div style="background:rgba(26,60,122,.08);border:1.5px solid var(--bl);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:700 18px/1 var(--mono);color:var(--bl)">124円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px">EPS（1株利益）</div>
+        </div>
+        <div style="text-align:center;color:var(--ink3);font-size:16px">→</div>
+        <div style="display:grid;gap:4px">
+          <div style="background:rgba(184,48,48,.07);border:1px solid var(--rd);border-radius:var(--r);padding:8px;text-align:center">
+            <div style="font:700 13px/1 var(--mono);color:var(--rd)">10円（約8%）</div>
+            <div style="font-size:10px;color:var(--ink3)">配当として現金受取</div>
+          </div>
+          <div style="background:rgba(36,144,84,.07);border:1px solid var(--gn);border-radius:var(--r);padding:8px;text-align:center">
+            <div style="font:700 13px/1 var(--mono);color:var(--gn)">114円（約92%）</div>
+            <div style="font-size:10px;color:var(--ink3)">純資産に蓄積（内部留保）</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--ink3);font-size:16px">→</div>
+        <div style="background:rgba(36,144,84,.07);border:1px solid var(--gn);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:700 12px/1.3 var(--head);color:var(--gn)">BPS増加<br>（純資産拡大）</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px">1,000円→1,114円→…</div>
+        </div>
+        <div style="text-align:center;color:var(--ink3);font-size:16px">→</div>
+        <div style="background:rgba(36,144,84,.12);border:2px solid var(--gn2);border-radius:var(--r);padding:10px;text-align:center">
+          <div style="font:700 12px/1.3 var(--head);color:var(--gn2)">ROE13%で再運用<br>→翌年EPS拡大</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px">複利で資産が膨らむ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">「見えない利回り」の計算（現在株価1,378円ベース）</div>
+        <table class="tbl">
+          <thead><tr><th>利回りの種類</th><th class="r">数値</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>①配当利回り（現金）</td><td class="r mono hi-rd">0.7%</td><td>10円÷1,378円（見える部分）</td></tr>
+            <tr class="hl"><td>②内部留保の実質利回り</td><td class="r mono hi-gn">8.27%</td><td>114円÷1,378円（見えない部分）</td></tr>
+            <tr class="hl"><td><strong>③実質総利回り（①＋②）</strong></td><td class="r mono hi-gn"><strong>約8.9%</strong></td><td>株主が実際に得る経済的利益</td></tr>
+            <tr><td>④内部留保のROE運用</td><td class="r mono hi-gn">約12.5%</td><td>蓄積した資産の再投資収益率</td></tr>
+            <tr class="hl"><td>⑤配当税控除後の実質配当</td><td class="r mono hi-rd">0.56%</td><td>税率20.315%適用後</td></tr>
+            <tr><td>⑥内部複利（税控除不要）</td><td class="r mono hi-gn">8.27%</td><td>課税されない内部の複利効果</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card card-gn">
+          <div class="label">なぜ「内部複利」が配当より税効率が高いのか</div>
+          <p>配当を受け取ると20.315%の税金が差し引かれ、手元には10円×0.797=約8円しか残らない。一方で内部留保された114円には課税されず、会社のBSの中でROE約13%で複利運用が続く。長期では「課税されない内部複利 > 課税される配当」となる。これがバフェットの好むモデル。</p>
+        </div>
+        <div class="notice" style="margin-top:10px"><strong>内部複利が有効な前提：</strong>ROEが継続的に高く（≥10%）、経営陣が内部留保を無駄な投資に使わず、BPSの成長が将来的に株価に反映されること。これら3条件を日本ギアが満たしているかが投資判断の核心。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブB: BPS実績（証拠） -->
+  <div class="spanel" id="c3b">
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">BPS・利益剰余金・EPS・配当の実績推移</div>
+        <table class="tbl">
+          <thead><tr><th>年度</th><th class="r">BPS（推計）</th><th class="r">利益剰余金</th><th class="r">EPS</th><th class="r">配当</th><th class="r">内部留保</th></tr></thead>
+          <tbody>
+            <tr><td>2015/3期</td><td class="r mono">約444円</td><td class="r mono">41.2億</td><td class="r mono">21円</td><td class="r mono">6円</td><td class="r mono">15円</td></tr>
+            <tr><td>2017/3期</td><td class="r mono">約514円</td><td class="r mono">51.2億</td><td class="r mono">48円</td><td class="r mono">6円</td><td class="r mono">42円</td></tr>
+            <tr><td>2020/3期</td><td class="r mono">約583円</td><td class="r mono">約60億</td><td class="r mono">28円</td><td class="r mono">4円</td><td class="r mono">24円</td></tr>
+            <tr><td>2022/3期</td><td class="r mono">約613円</td><td class="r mono">約65億</td><td class="r mono hi-rd">2円</td><td class="r mono">4円</td><td class="r mono hi-rd">▲2円</td></tr>
+            <tr class="hl"><td>2024/3期</td><td class="r mono hi-gn">約780円</td><td class="r mono">約84億</td><td class="r mono hi-gn">108.1円</td><td class="r mono">8円</td><td class="r mono hi-gn">100.1円</td></tr>
+            <tr class="hl"><td>2025/3期</td><td class="r mono hi-gn">960円</td><td class="r mono hi-gn">約98億</td><td class="r mono hi-gn">108.9円</td><td class="r mono">8円</td><td class="r mono hi-gn">100.9円</td></tr>
+            <tr><td>26/3期3Q末</td><td class="r mono hi-gn">約993円</td><td class="r mono hi-gn">107.3億</td><td class="r mono hi-am">103.9円（予）</td><td class="r mono">8円（予）</td><td class="r mono hi-am">95.9円（予）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">BPSと利益剰余金の複利的成長（10年で+116%）</div>
+        <div style="position:relative;height:210px"><canvas id="bpsChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g3">
+      <div class="card mc" style="border-top:3px solid var(--gn)">
+        <div class="mc-l">BPS成長（2015→2025・10年）</div>
+        <div class="mc-v gn">+116%</div>
+        <div class="mc-s">444円→960円 年率複利+7.9%</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--bl)">
+        <div class="mc-l">10年間の配当累計（推計）</div>
+        <div class="mc-v bl">約60円</div>
+        <div class="mc-s">BPS成長+516円の11%に過ぎない</div>
+      </div>
+      <div class="card mc" style="border-top:3px solid var(--am)">
+        <div class="mc-l">24/3期以降の内部留保（年）</div>
+        <div class="mc-v am">約100円</div>
+        <div class="mc-s">EPS108円の92%が毎年蓄積</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブC: 定量試算 -->
+  <div class="spanel" id="c3c">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="chart-wrap">
+        <div class="chart-title">ROEシナリオ別BPS推移と株価（現在BPS960円）</div>
+        <div style="position:relative;height:250px"><canvas id="cpdChart"></canvas></div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">3年・5年・10年の株価試算（ROE13%・配当性向8%維持）</div>
+        <table class="tbl">
+          <thead><tr><th>時点</th><th class="r">BPS推計</th><th class="r">EPS推計</th><th class="r">株価<br>PER15倍</th><th class="r">株価<br>PER18倍</th></tr></thead>
+          <tbody>
+            <tr><td>現在</td><td class="r mono">約1,000円</td><td class="r mono">124円</td><td class="r mono">1,860円</td><td class="r mono">2,232円</td></tr>
+            <tr class="hl"><td><strong>3年後（2029）</strong></td><td class="r mono hi-gn">約1,360円</td><td class="r mono hi-gn">約177円</td><td class="r mono hi-gn">2,655円</td><td class="r mono hi-gn">3,186円</td></tr>
+            <tr><td>5年後（2031）</td><td class="r mono hi-gn">約1,740円</td><td class="r mono hi-gn">約226円</td><td class="r mono hi-gn">3,390円</td><td class="r mono hi-gn">4,068円</td></tr>
+            <tr class="hl-fu"><td><strong>10年後（2036）</strong></td><td class="r mono hi-fu">約3,060円</td><td class="r mono hi-fu">約398円</td><td class="r mono hi-fu">5,970円<br>（+333%）</td><td class="r mono hi-fu">7,164円<br>（+420%）</td></tr>
+          </tbody>
+        </table>
+        <small style="display:block;margin-top:5px">前提：ROE約13%継続・配当性向約8%・発行済株式数不変。EPS＝ROE×BPSで整合。</small>
+        <div class="noteg" style="margin-top:8px"><strong>10年複利の威力：</strong>BPSは約1,000円→約3,060円（年複利+11.8%）。配当累計は10年で約120円（+8.7%）にとどまるが、内部留保の複利が株主価値の大半を作る。低PER11倍の入口は、この複利を割安価格で取り込めることを意味する。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:8px">ROEシナリオ別3年後株価まとめ</div>
+      <table class="tbl">
+        <thead><tr><th>シナリオ</th><th class="r">ROE想定</th><th class="r">3年後BPS</th><th class="r">3年後EPS</th><th class="r">株価（PER15）</th><th class="r">株価（PER18）</th><th>トリガー</th></tr></thead>
+        <tbody>
+          <tr class="hl-fu"><td><span class="badge bd-fu">FLS上振れ</span></td><td class="r mono hi-fu">16%</td><td class="r mono hi-fu">約1,510円</td><td class="r mono hi-fu">約240円</td><td class="r mono hi-fu">3,600円</td><td class="r mono hi-fu">4,320円</td><td>受注急増・生産性改善・採用成功</td></tr>
+          <tr class="hl"><td><span class="badge bd-gn">ベース</span></td><td class="r mono hi-gn">13%</td><td class="r mono hi-gn">約1,360円</td><td class="r mono hi-gn">約177円</td><td class="r mono hi-gn">2,655円</td><td class="r mono hi-gn">3,186円</td><td>現状維持（原発再稼働継続）</td></tr>
+          <tr class="hl-am"><td><span class="badge bd-am">慎重</span></td><td class="r mono hi-am">10%</td><td class="r mono hi-am">約1,260円</td><td class="r mono hi-am">約126円</td><td class="r mono hi-am">1,890円</td><td class="r mono hi-am">2,268円</td><td>人員不足・コスト増顕在化</td></tr>
+          <tr class="hl-rd"><td><span class="badge bd-rd">ベア</span></td><td class="r mono hi-rd">7%</td><td class="r mono hi-rd">約1,150円</td><td class="r mono hi-rd">約81円</td><td class="r mono hi-rd">1,215円</td><td class="r mono hi-rd">1,458円</td><td>電力投資停滞（22/3期の再現）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- タブD: 高配当型比較・結論 -->
+  <div class="spanel" id="c3d">
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">1,378円投資した場合の10年後総資産比較</div>
+        <table class="tbl">
+          <thead><tr><th>タイプ</th><th class="r">配当<br>利回り</th><th class="r">ROE</th><th class="r">10年後<br>株価推計</th><th class="r">10年累計<br>配当受取</th><th class="r">10年後<br>総資産</th></tr></thead>
+          <tbody>
+            <tr class="hl">
+              <td><strong>日本ギア型</strong><br><small>低配当・高ROE・内部複利</small></td>
+              <td class="r mono hi-rd">0.7%</td>
+              <td class="r mono hi-gn">13%</td>
+              <td class="r mono hi-gn">約4,485円<br>（PER15倍）</td>
+              <td class="r mono">約80円</td>
+              <td class="r mono hi-gn"><strong>約4,565円<br>（+208%）</strong></td>
+            </tr>
+            <tr>
+              <td>木村化工機型<br><small>高配当・低ROE</small></td>
+              <td class="r mono hi-gn">2.8%</td>
+              <td class="r mono hi-am">9.5%</td>
+              <td class="r mono">約2,580円</td>
+              <td class="r mono hi-gn">約415円</td>
+              <td class="r mono hi-am">約2,995円<br>（+102%）</td>
+            </tr>
+            <tr>
+              <td>高配当仮想<br><small>配当5%・ROE7%</small></td>
+              <td class="r mono hi-gn">5%</td>
+              <td class="r mono hi-rd">7%</td>
+              <td class="r mono">約1,600円</td>
+              <td class="r mono hi-gn">約740円</td>
+              <td class="r mono hi-am">約2,340円<br>（+58%）</td>
+            </tr>
+          </tbody>
+        </table>
+        <small style="display:block;margin-top:5px">配当再投資なし・PER一定・税金未考慮の概算。長期ほど内部複利の優位性が拡大。</small>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">低配当高ROE vs 高配当低ROEの10年後総資産（万円投資）</div>
+        <div style="position:relative;height:220px"><canvas id="divCmpChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card-hi-bl" style="padding:14px">
+      <div style="font:700 13px/1.3 var(--head);color:var(--bl);margin-bottom:8px">結論：「低配当＝悪」は短期的視点。長期では内部複利が株主利益を最大化する</div>
+      <p style="font-size:13px;line-height:1.85">日本ギアの配当0.7%は配当目的の投資家には不向きだが、10年複利では高配当株を大幅に上回る可能性がある。ROE13%・内部留保率92%という組み合わせが年複利+11〜14%の「見えない利回り」を生み出している。<br><br>
+      ただし<strong>この複利が有効に機能するには3条件が必要：①ROEが継続的に高い（≥10%）②経営陣が現預金45億円を有効活用（採用・設備投資・M&A）③BPS成長が将来的に株価に反映される</strong>。①は確認済み。②は採用・設備投資への転換が鍵。③はPER14→18倍への格上げが必要であり、これが3年後ベースシナリオ2,100〜2,400円の最後のピース。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C4: 体制リスク & インフラ追い風
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">体制リスク「嬉しい悲鳴」＆ インフラ老朽化の追い風</h2><span class="ch-badge cb-am">RISK × OPPORTUNITY</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c4','a',this)">⚠ 人員ボトルネックリスク</button>
+    <button class="stab"    onclick="showT('c4','b',this)">⚠ 受注消化能力の限界試算</button>
+    <button class="stab"    onclick="showT('c4','c',this)">✅ 水道・インフラ老朽化の巨大需要</button>
+    <button class="stab"    onclick="showT('c4','d',this)">総合マトリクス</button>
+  </div>
+
+  <!-- タブA: 人員ボトルネック -->
+  <div class="spanel active" id="c4a">
+    <div class="noter" style="margin-bottom:14px"><strong>【最重要リスク】従業員が10年で376名→264名（▲30%）に減少した体制で受注残+38.5%急増。この「人員逆風×受注順風」の乖離が最大のボトルネック。</strong></div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">正規従業員数の推移（有価証券報告書）</div>
+        <table class="tbl">
+          <thead><tr><th>年度</th><th class="r">正規</th><th class="r">臨時</th><th class="r">合計</th><th class="r">前年差</th><th class="r">1人当たり売上</th></tr></thead>
+          <tbody>
+            <tr><td>2014/3期</td><td class="r mono">376名</td><td class="r mono">127名</td><td class="r mono">503名</td><td>—</td><td class="r mono">23百万</td></tr>
+            <tr><td>2020/3期</td><td class="r mono">338名</td><td class="r mono">75名</td><td class="r mono">413名</td><td class="r mono hi-rd">▲90名</td><td class="r mono">22百万</td></tr>
+            <tr><td>2023/3期</td><td class="r mono">302名</td><td class="r mono">72名</td><td class="r mono">374名</td><td class="r mono hi-rd">▲39名（急減）</td><td class="r mono">25百万</td></tr>
+            <tr class="hl-rd"><td><strong>2025/3期（最新）</strong></td><td class="r mono hi-rd"><strong>264名</strong></td><td class="r mono">67名</td><td class="r mono hi-rd"><strong>331名</strong></td><td class="r mono hi-rd"><strong>▲43名（急減）</strong></td><td class="r mono hi-gn"><strong>36百万</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="noter" style="margin-top:8px"><strong>10年で人員▲34%・1人当たり売上+57%：</strong>224名の純減で、残った1人1人への負荷が急増している。製造部門154名・工事部門77名の体制は、受注急増局面での対応に構造的な限界がある。</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:8px">1人当たり売上高 vs 受注残の乖離（「嬉しい悲鳴」の可視化）</div>
+        <div class="chart-wrap">
+          <div style="position:relative;height:200px"><canvas id="capChart"></canvas></div>
+        </div>
+        <div class="notice" style="margin-top:8px"><strong>平均年齢42.7歳・勤続16.9年：</strong>ベテラン中心の技術継承リスクも存在。若手採用が退職者に追いついておらず、採用情報ではエンジニア・営業を継続募集中。</div>
+      </div>
+    </div>
+
+    <div class="label" style="margin-bottom:8px">人員不足が引き起こすリスクシナリオ</div>
+    <table class="tbl">
+      <thead><tr><th>リスク</th><th>具体的な影響</th><th>顕在化確率</th><th>対応策</th></tr></thead>
+      <tbody>
+        <tr class="hl-rd"><td><strong>納期遅延</strong></td><td>製造・工事の同時増加で処理が追いつかず、4Q集中がさらに悪化。原発向けは許容不可。</td><td><span class="badge bd-am">中〜高</span></td><td>外注活用・残業（ただしコスト増）</td></tr>
+        <tr><td><strong>受注機会損失</strong></td><td>生産能力上限に達し、追加受注を断らざるを得ないシナリオ。市場拡大の恩恵を取り込めない。</td><td><span class="badge bd-am">中</span></td><td>設備投資・採用拡大が必須</td></tr>
+        <tr class="hl-rd"><td><strong>利益率圧迫</strong></td><td>人員不足を外注・残業で補う場合、原価率が上昇。22%の営業利益率が低下。</td><td><span class="badge bd-am">中</span></td><td>付加価値向上・工程効率化</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- タブB: 受注消化能力 -->
+  <div class="spanel" id="c4b">
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">受注残63.7億円の消化能力試算</div>
+        <table class="tbl">
+          <thead><tr><th>シナリオ</th><th class="r">月次消化ペース</th><th class="r">消化期間</th><th>前提</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>最速（現状フル稼働）</td><td class="r mono hi-gn">月7〜8億</td><td class="r mono hi-gn">8〜9ヶ月</td><td>4Q集中消化・残業フル活用</td></tr>
+            <tr><td>ベース（人員制約あり）</td><td class="r mono hi-am">月5〜6億</td><td class="r mono hi-am">10〜13ヶ月</td><td>通常稼働＋部分外注</td></tr>
+            <tr class="hl-rd"><td>遅延（不足が顕在化）</td><td class="r mono hi-rd">月4億以下</td><td class="r mono hi-rd">16ヶ月以上</td><td>退職増・採用難が重なる</td></tr>
+          </tbody>
+        </table>
+        <div class="notice" style="margin-top:8px"><strong>問題の核心：</strong>27/3期に受注高が100億円超に達した場合、63.7億の受注残消化と新規受注の積み上げが同時並行で発生する。264名では物理的に全量消化できない可能性が現実的。</div>
+      </div>
+      <div>
+        <div class="noteg" style="margin-bottom:10px"><strong>緩和要因①：高利益率が外注を吸収できる</strong><br>営業利益率22%という余裕は、一部工程の外注コストを吸収できる。実際、生産管理の求人票に「少量多品種生産での外注管理」が明記されており、外注活用は想定内。</div>
+        <div class="noteg"><strong>緩和要因②：設備投資・採用への転換が最大の解決策</strong><br>現預金45億円（使途未定）を採用強化・設備自動化・工場増床に投入すれば、消化能力の制約は大幅緩和される。経営陣がこの判断をするかどうかが3年後株価の最重要変数。有報・株主総会での方針確認が必須。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブC: インフラ老朽化 -->
+  <div class="spanel" id="c4c">
+    <div class="noteg" style="margin-bottom:14px"><strong>【構造的追い風】水道管の老朽化・電力インフラ需要急増・鉄道・ガスプラントの更新需要が2030〜2040年代にかけてピークを形成。日本ギアはこれら全分野に製品を供給する「インフラ更新の万能プレーヤー」。</strong></div>
+
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">耐用年数超過の水道管</div><div class="mc-v rd">17.6万km</div><div class="mc-s">全体の22%→10年後41%に急増</div></div>
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">年間漏水・破損事故</div><div class="mc-v rd">2万件超</div><div class="mc-s">八潮市陥没（2025年1月）が象徴</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">政府の下水道更新目標</div><div class="mc-v am">2030年</div><div class="mc-s">基幹5,000km更新完了（閣議決定）</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">電力需要増加（DC・半導体）</div><div class="mc-v bl">+715万kW</div><div class="mc-s">2034年まで（経産省試算）</div></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <div class="label" style="margin-bottom:8px">日本ギア製品のインフラ分野別需要マップ</div>
+        <table class="tbl">
+          <thead><tr><th>インフラ分野</th><th>日本ギアの製品</th><th>老朽化/需要状況</th><th>見通し</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>原子力発電所</strong></td><td>SMBシリーズ（90%超シェア）</td><td>再稼働15→20基以上</td><td><span class="badge bd-gn">最大成長源</span></td></tr>
+            <tr><td><strong>上下水道</strong></td><td>バルブアクチュエータ・ジャッキ</td><td>17.6万km超過→急速増悪</td><td><span class="badge bd-gn">強い継続需要</span></td></tr>
+            <tr class="hl"><td><strong>火力発電所</strong></td><td>バルブアクチュエータ</td><td>DC需要増でフル稼働継続</td><td><span class="badge bd-gn">急回復中</span></td></tr>
+            <tr><td><strong>鉄道・船舶</strong></td><td>歯車装置・アクチュエータ</td><td>老朽化更新・耐震化</td><td><span class="badge bd-am">安定需要</span></td></tr>
+            <tr><td><strong>ガス・石油プラント</strong></td><td>バルブアクチュエータ・ジャッキ</td><td>安全基準強化・LNG設備増</td><td><span class="badge bd-am">安定需要</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-title">水道管老朽化率の急増予測（%）</div>
+          <div style="position:relative;height:170px"><canvas id="infraChart"></canvas></div>
+        </div>
+        <div class="noteg" style="margin-top:8px"><strong>八潮市陥没事故（2025年1月）の政策インパクト：</strong>120万人が影響を受けたこの事故が「インフラ更新の緊急性」を全国に実感させ、政府が下水道5,000kmを2030年度までに更新する閣議決定を行う直接の契機となった。日本ギアの上下水道向け製品需要の直接的なカタリスト。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブD: 総合マトリクス -->
+  <div class="spanel" id="c4d">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="card-hi-rd" style="padding:14px;border-radius:var(--r)">
+        <div style="font:700 12px/1.3 var(--head);color:var(--rd);margin-bottom:10px">⚠ 体制リスクスコア</div>
+        <div class="rm"><div class="rm-l">人員10年▲30%（純減継続）</div><div class="rm-t"><div class="rm-f" style="width:90%;background:var(--rd)"></div></div><div class="rm-v hi-rd">最高</div></div>
+        <div class="rm"><div class="rm-l">受注残消化スピードリスク</div><div class="rm-t"><div class="rm-f" style="width:75%;background:var(--rd)"></div></div><div class="rm-v hi-rd">高</div></div>
+        <div class="rm"><div class="rm-l">技術者高齢化（平均42.7歳）</div><div class="rm-t"><div class="rm-f" style="width:65%;background:var(--am)"></div></div><div class="rm-v hi-am">中高</div></div>
+        <div class="rm"><div class="rm-l">外注コスト増→利益率圧迫</div><div class="rm-t"><div class="rm-f" style="width:55%;background:var(--am)"></div></div><div class="rm-v hi-am">中</div></div>
+        <div class="rm"><div class="rm-l">FLSライセンス依存</div><div class="rm-t"><div class="rm-f" style="width:45%;background:var(--am)"></div></div><div class="rm-v hi-am">中</div></div>
+      </div>
+      <div class="card-hi-gn" style="padding:14px;border-radius:var(--r)">
+        <div style="font:700 12px/1.3 var(--head);color:var(--gn);margin-bottom:10px">✅ インフラ追い風スコア</div>
+        <div class="rm"><div class="rm-l">電力逼迫→設備投資強制増</div><div class="rm-t"><div class="rm-f" style="width:95%;background:var(--gn2)"></div></div><div class="rm-v hi-gn">最強</div></div>
+        <div class="rm"><div class="rm-l">原発再稼働（15→20基以上）</div><div class="rm-t"><div class="rm-f" style="width:90%;background:var(--gn2)"></div></div><div class="rm-v hi-gn">最強</div></div>
+        <div class="rm"><div class="rm-l">水道管老朽化（10年後41%）</div><div class="rm-t"><div class="rm-f" style="width:85%;background:var(--gn)"></div></div><div class="rm-v hi-gn">強</div></div>
+        <div class="rm"><div class="rm-l">下水道5,000km更新（2030年）</div><div class="rm-t"><div class="rm-f" style="width:80%;background:var(--gn)"></div></div><div class="rm-v hi-gn">強</div></div>
+        <div class="rm"><div class="rm-l">AI・DC向け電力インフラ新設</div><div class="rm-t"><div class="rm-f" style="width:75%;background:var(--gn)"></div></div><div class="rm-v hi-gn">強</div></div>
+      </div>
+    </div>
+    <div class="card-hi-am" style="padding:14px;border-radius:var(--r)">
+      <div style="font:700 13px/1.3 var(--head);color:var(--am);margin-bottom:8px">★ 総合評価：「嬉しい悲鳴」シナリオが投資の核心</div>
+      <p style="font-size:12px;line-height:1.85">需要（インフラ老朽化＋電力逼迫＋原発再稼働）は構造的・長期的に強く、日本ギアは唯一の供給者として全量受注できる立場にある。問題は「264名の体制で全て受け取れるか」だ。<br><br>
+      <strong>経営陣が現預金45億円を採用・設備投資に転換すれば</strong>：消化能力が解放され、ROE16%・EPS150〜180円の「FLS上振れシナリオ」（株価3,000〜3,500円）が現実化する。<br>
+      <strong>転換しなければ</strong>：受注機会の損失が続き、せっかくの需要拡大を取り込めない「機会損失シナリオ」となる。<br><br>
+      2026年度の株主総会・中期経営計画・設備投資動向が、この「嬉しい悲鳴」をどちらに転化するかを示す最重要シグナル。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C5: シナリオ分析・最終評決
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">3年シナリオ分析とカタリスト</h2><span class="ch-badge cb-gn">CONCLUSION</span></div>
+  <div class="stabs">
+    <button class="stab on" onclick="showT('c5','a',this)">確率加重シナリオ</button>
+    <button class="stab"    onclick="showT('c5','b',this)">カタリストとタイムライン</button>
+    <button class="stab"    onclick="showT('c5','c',this)">投資スタンス別評価</button>
+  </div>
+
+  <!-- タブA: 確率加重シナリオ -->
+  <div class="spanel active" id="c5a">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="chart-wrap">
+        <div class="chart-title">3年後株価シナリオ（確率加重期待値 約2,383円・現在比+73%／1,378円基準）</div>
+        <div style="position:relative;height:240px"><canvas id="scChart"></canvas></div>
+      </div>
+      <div>
+        <div style="margin-bottom:14px">
+          <div class="blrow"><span>FLS上振れ（15%）目標3,400円</span><span class="mono hi-fu">+147%</span></div>
+          <div class="btrack"><div class="bfill" style="width:100%;background:var(--fu)"></div></div>
+          <div class="blrow"><span>ブル（25%）目標2,900円</span><span class="mono hi-gn">+110%</span></div>
+          <div class="btrack"><div class="bfill" style="width:85%;background:var(--gn)"></div></div>
+          <div class="blrow"><span>ベース（45%）目標2,200円</span><span class="mono hi-am">+60%</span></div>
+          <div class="btrack"><div class="bfill" style="width:65%;background:var(--am)"></div></div>
+          <div class="blrow"><span>ベア（15%）目標1,050円</span><span class="mono hi-rd">▲24%</span></div>
+          <div class="btrack"><div class="bfill" style="width:31%;background:var(--rd)"></div></div>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">目標株価</th><th class="r">価格リターン</th><th class="r">加重寄与</th></tr></thead>
+          <tbody>
+            <tr class="hl-fu"><td><span class="badge bd-fu">FLS上振れ</span><br><small>採用成功・受注急増・PER格上げ</small></td><td class="r mono">15%</td><td class="r mono hi-fu">3,400円</td><td class="r mono hi-fu">+147%</td><td class="r mono">+510円</td></tr>
+            <tr class="hl"><td><span class="badge bd-gn">ブル</span><br><small>再稼働加速・受注100億超</small></td><td class="r mono">25%</td><td class="r mono hi-gn">2,900円</td><td class="r mono hi-gn">+110%</td><td class="r mono">+725円</td></tr>
+            <tr class="hl-am"><td><span class="badge bd-am">ベース</span><br><small>受注残転換・現状維持</small></td><td class="r mono">45%</td><td class="r mono hi-am">2,200円</td><td class="r mono hi-am">+60%</td><td class="r mono">+990円</td></tr>
+            <tr class="hl-rd"><td><span class="badge bd-rd">ベア</span><br><small>電力投資停滞・人員不足顕在化</small></td><td class="r mono">15%</td><td class="r mono hi-rd">1,050円</td><td class="r mono hi-rd">▲24%</td><td class="r mono">+158円</td></tr>
+            <tr style="background:var(--bg3)"><td colspan="2" style="font-weight:600">加重期待株価</td><td class="r mono hi-gn" style="font-weight:700;font-size:14px">約2,383円</td><td class="r mono hi-gn" style="font-weight:700">+73%</td><td class="r mono hi-gn" style="font-weight:700">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="noteb">
+      <strong>「内部複利×PER格上げ」の複合効果：</strong>ROE約13%の内部複利のみで3年後EPS約177円（+43%成長）が達成される。これにPER11→18倍の格上げが重なれば、EPS成長分だけで+41%、PER18倍格上げでは合計+131%（177円×18倍＝3,186円）に達する。加重期待値+73%は、各シナリオを確率加重した中心値。入口がPER11倍と低いほど、PER維持でもEPS成長分の上値が取れ、下値の堅さと上値の伸びを両立する非対称性が強まる。
+    </div>
+    </div>
+
+  <!-- タブB: カタリスト -->
+  <div class="spanel" id="c5b">
+    <div class="g2">
+      <div>
+        <div class="label" style="margin-bottom:12px">重要カタリスト（時系列）</div>
+        <div class="tl"><div class="tl-d" style="font-weight:700">2026/5</div><div class="tl-dot" style="color:var(--gn2);background:var(--gn2)"></div><div class="tl-body"><div class="tl-head" style="color:var(--gn2)">★26/3期 通期決算（最重要）</div><p>受注残63.7億の4Q売上転換量と27/3期業績予想。「EPS110円超の増益予想＋受注残さらに積み上がり」が出ればPER格上げの起点。配当方針（現状8円維持か増配か）も注目。</p></div></div>
+        <div class="tl"><div class="tl-d">2026/6</div><div class="tl-dot" style="color:var(--fu)"></div><div class="tl-body"><div class="tl-head" style="color:var(--fu)">有報：FLSライセンス条件確認</div><p>2026年6月提出予定の有価証券報告書でFLSとのライセンス契約詳細を確認。独占性・期間・ロイヤリティが開示されれば最大の不確実性が解消。</p></div></div>
+        <div class="tl"><div class="tl-d">2026〜2027</div><div class="tl-dot" style="color:var(--am)"></div><div class="tl-body"><div class="tl-head" style="color:var(--am)">採用・設備投資計画の発表</div><p>現預金45億円の活用方針（採用拡大・設備増強）が明示されれば、「嬉しい悲鳴を成長に転換できる」として大幅な評価改善につながる。</p></div></div>
+        <div class="tl"><div class="tl-d">2027年〜</div><div class="tl-dot" style="color:var(--bl)"></div><div class="tl-body"><div class="tl-head" style="color:var(--bl)">原発再稼働の継続・受注100億突破</div><p>東海第二・泊3号等の再稼働で受注高が100億超に達すれば「岡野バルブ並みの原発景気」が数字で証明され、PER20倍以上への格上げが現実化する。</p></div></div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:10px">FLS・原発ニュースと株価の感応度</div>
+        <table class="tbl">
+          <thead><tr><th>ニュース・イベント</th><th>日本ギア株価への影響</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>27/3期増益予想（EPS110円超）</td><td class="hi-gn">最大の上昇カタリスト（+15〜30%）</td></tr>
+            <tr><td>増配発表（配当性向20%以上）</td><td class="hi-gn">即効性高い（+10〜20%）</td></tr>
+            <tr class="hl"><td>原発新規再稼働の発表</td><td class="hi-gn">テーマ株として上昇（+5〜15%）</td></tr>
+            <tr><td>FLS Trillium買収クローズ（2026年中期）</td><td class="hi-am">中長期追い風（+3〜8%）</td></tr>
+            <tr class="hl-rd"><td>電力会社の設備投資凍結</td><td class="hi-rd">最大の下落リスク（▲20〜35%）</td></tr>
+            <tr><td>業績下方修正（受注消化遅延起因）</td><td class="hi-rd">体制リスク顕在化（▲10〜20%）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- タブC: 投資スタンス別 -->
+  <div class="spanel" id="c5c">
+    <div class="g2" style="margin-bottom:14px">
+      <div>
+        <table class="tbl">
+          <thead><tr><th>投資スタンス</th><th>判断</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>中長期（3〜10年）</td><td><span class="badge bd-gn">強気</span></td><td>内部複利+原発再稼働+インフラ更新の3重複利構造</td></tr>
+            <tr><td>バリュー投資</td><td><span class="badge bd-gn">買い検討</span></td><td>PER11倍・益回り7%・財務健全で明確な割安余地</td></tr>
+            <tr class="hl"><td>原発テーマ株</td><td><span class="badge bd-gn">強気</span></td><td>国内唯一の原発バルブアクチュエーター事実上独占</td></tr>
+            <tr><td>FLS関連プレー</td><td><span class="badge bd-gn">有望</span></td><td>FLS（PER22倍）より割安で同じ核テーマの恩恵</td></tr>
+            <tr class="hl-rd"><td>インカム・配当重視</td><td><span class="badge bd-rd">不向き</span></td><td>配当0.7%・性向7.7%は最低水準</td></tr>
+            <tr><td>短期トレード</td><td><span class="badge bd-am">中立</span></td><td>決算前後のカタリスト狙いは可能だが流動性注意</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card-hi-bl" style="padding:14px;margin-bottom:10px">
+          <div style="font:700 12px/1.3 var(--head);color:var(--bl);margin-bottom:6px">最重要確認事項（投資前チェックリスト）</div>
+          <table class="tbl" style="font-size:11px">
+            <thead><tr><th>確認事項</th><th>時期</th><th>判定基準</th></tr></thead>
+            <tbody>
+              <tr><td>26/3期通期決算の着地</td><td>2026/5</td><td>EPS100円超＋受注残維持 → 継続保有</td></tr>
+              <tr><td>27/3期業績予想</td><td>2026/5</td><td>増益予想 → ポジション増加検討</td></tr>
+              <tr><td>FLSライセンス条件</td><td>2026/6</td><td>独占性確認 → リスク解消</td></tr>
+              <tr><td>採用・設備投資方針</td><td>2026/6〜</td><td>現預金活用発表 → 評価大幅改善</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     C6: テーマ俯瞰・期待値比較（追補章）
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">メインストリーム俯瞰 ── AI×DC×電力×原発回帰の地図と期待値比較</h2><span class="ch-badge cb-fu">THESIS MAP</span></div>
+
+  <div class="noteb" style="margin-bottom:16px"><strong>本章の結論：</strong>AIデータセンター需要を起点とする「電力ボトルネック → 送配電・原発回帰」という本流テーマを分野横断で精査した結果、<strong>内部複利効率（高ROE×超低配当性向）と再評価余地（低PER→適正PER）の掛け算で測った期待値は、日本ギア（6356）が関連銘柄中で最も高い</strong>。加えて<strong>インフレ耐性</strong>と<strong>対米原子力サプライチェーン上の戦略的位置</strong>が、本テーマ内での相対優位をさらに強める。</div>
+
+  <!-- テーマ構造 -->
+  <div class="label" style="margin-bottom:8px">テーマの連鎖構造</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;font-size:11px">
+    <div class="flow-box" style="border:2px solid var(--bl)"><strong style="color:var(--ink)">AI・DC・半導体</strong><small>2034年までに電力需要+715万kW（経産省）</small></div>
+    <span style="color:var(--ink3)">→</span>
+    <div class="flow-box" style="border:2px solid var(--am2)"><strong style="color:var(--ink)">電力ボトルネック</strong><small>火力フル稼働＋送配電網の増強・更新</small></div>
+    <span style="color:var(--ink3)">→</span>
+    <div class="flow-box" style="border:2px solid var(--gn)"><strong style="color:var(--ink)">原発回帰</strong><small>再稼働15→20基超・80年延命・SMR</small></div>
+    <span style="color:var(--ink3)">→</span>
+    <div class="flow-box" style="border:2px solid var(--fu)"><strong style="color:var(--ink)">設備・保守の反復需要</strong><small>バルブ駆動部・配電・ポンプ・工事</small></div>
+  </div>
+
+  <!-- 関連銘柄ヨコ比較 -->
+  <div class="label" style="margin-bottom:8px">関連分野・銘柄のヨコ比較（2026年6月時点の概算。割安／再評価済の別を付記）</div>
+  <div style="overflow-x:auto;margin-bottom:8px">
+    <table class="tbl" style="min-width:820px">
+      <thead><tr><th>分野</th><th>代表ニッチ</th><th class="r">予想PER</th><th class="r">ROE</th><th class="r">配当性向</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>原発バルブ駆動部</td><td><strong>日本ギア 6356</strong></td><td class="r mono hi-gn"><strong>約11倍</strong></td><td class="r mono hi-gn"><strong>約12.5%</strong></td><td class="r mono hi-gn"><strong>約8%</strong></td><td><span class="badge bd-gn">独占×割安（本命）</span></td></tr>
+        <tr><td>原発バルブ本体</td><td>岡野バルブ 6492</td><td class="r mono">約24倍</td><td class="r mono">約11%</td><td class="r mono">低</td><td><span class="badge bd-am">質良・再評価済</span></td></tr>
+        <tr><td>バルブ・廃炉</td><td>TVE 6466</td><td class="r mono">約24倍</td><td class="r mono hi-rd">約4%</td><td class="r mono">低</td><td><span class="badge bd-am">V字・再評価済</span></td></tr>
+        <tr><td>原子力・核融合計測</td><td>助川電気 7711</td><td class="r mono hi-rd">約40〜50倍</td><td class="r mono hi-gn">約16%</td><td class="r mono">低</td><td><span class="badge bd-rd">過熱・割安卒業</span></td></tr>
+        <tr><td>化学プラント＋原子力装置</td><td>木村化工機 6378</td><td class="r mono">約14〜16倍</td><td class="r mono hi-rd">約9%</td><td class="r mono">中（配当2.8%）</td><td><span class="badge bd-am">安いがROE低</span></td></tr>
+        <tr><td>発電所工事・保守・廃炉</td><td>太平電業 1968</td><td class="r mono">約13倍</td><td class="r mono">約9〜12%</td><td class="r mono">中（配当3%）</td><td><span class="badge bd-gn">堅実バリュー</span></td></tr>
+        <tr><td>変圧器（出遅れ）</td><td>愛知電機 6623</td><td class="r mono hi-gn">約10倍</td><td class="r mono hi-rd">約8%</td><td class="r mono">中高（配当3.5%）</td><td><span class="badge bd-am">資産バリュー・来期減益</span></td></tr>
+        <tr><td>配電・開閉器</td><td>戸上電機 6643</td><td class="r mono hi-gn">約6〜11倍</td><td class="r mono">約11%</td><td class="r mono">中（約45%）</td><td><span class="badge bd-am">割安だが来期減益・減配</span></td></tr>
+        <tr><td>ポンプ（水中・量産）</td><td>鶴見製作所 6351</td><td class="r mono">十数倍</td><td class="r mono">約8〜10%</td><td class="r mono">中</td><td><span class="badge bd-bl">水・防災ディフェンシブ</span></td></tr>
+        <tr><td>ポンプ（大型・淡水化）</td><td>酉島製作所 6363</td><td class="r mono">中位</td><td class="r mono hi-gn">伸長中</td><td class="r mono">中</td><td><span class="badge bd-am">グローバルニッチ・再評価進行</span></td></tr>
+        <tr><td>電気工事（配電網更新）</td><td>きんでん1944・関電工1942・トーエネック1946</td><td class="r mono">低〜中十倍</td><td class="r mono">約8〜10%</td><td class="r mono">中（30〜40%）</td><td><span class="badge bd-rd">上場来高値圏・発見済</span></td></tr>
+        <tr><td>変圧器・電線大手</td><td>ダイヘン・明電舎・フジクラ・古河電工</td><td class="r mono hi-rd">高め</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="badge bd-rd">再評価済・割高</span></td></tr>
+        <tr><td>廃炉解体</td><td>ベステラ 1433</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="badge bd-am">小型・思惑先行</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="noteg" style="margin-bottom:18px">テーマの「易しい割安」は、電気工事大手・変圧器/電線大手・助川電気・岡野バルブなどで概ね剥落済み（上場来高値圏や高PER）。残る割安（愛知・戸上）は来期減益＆ROEが低く、再評価の触媒が弱い。<strong>「低PER × 高ROE × 超低配当性向 × 明確な再評価触媒」を同時に満たす銘柄は日本ギアに限られる</strong>のが、横断比較の核心。</div>
+
+  <!-- 期待値比較 -->
+  <div class="ch-head" style="border-bottom-width:1px;margin-top:8px"><span class="ch-num" style="color:var(--fu)">★</span><h2 class="ch-title" style="font-size:16px">なぜ期待値No.1か ── 内部複利効率 × 再評価余地</h2></div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-gn">
+      <div class="label" style="margin-bottom:8px">① 内部複利効率（高ROE×超低配当性向）</div>
+      <div class="blrow"><span>日本ギア 6356（ROE12.5%×留保92%）</span><span class="mono hi-gn">内部成長 約11〜12%</span></div>
+      <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+      <div class="blrow"><span>助川電気 7711（ROE16%だが高PER）</span><span class="mono hi-am">高ROEだが入口高</span></div>
+      <div class="btrack"><div class="bfill" style="width:62%;background:var(--am)"></div></div>
+      <div class="blrow"><span>電工・変圧器・太平（性向30〜45%）</span><span class="mono hi-rd">内部複利 約5〜7%</span></div>
+      <div class="btrack"><div class="bfill" style="width:48%;background:var(--rd)"></div></div>
+      <p style="font-size:11px;color:var(--ink2);margin-top:8px;line-height:1.7">配当性向が極端に低い（約8%）日本ギアは、EPSの約92%が非課税のまま社内でROE約13%再運用される。配当性向30〜45%の電工・変圧器・保守株は、同じ利益でも内部複利が半分以下にしか効かない。</p>
+    </div>
+    <div class="card card-gn">
+      <div class="label" style="margin-bottom:8px">② 再評価余地（現PER→適正PER）</div>
+      <div class="blrow"><span>日本ギア（現11倍→適正18〜22倍）</span><span class="mono hi-gn">+60〜100%</span></div>
+      <div class="btrack"><div class="bfill" style="width:100%;background:var(--gn2)"></div></div>
+      <div class="blrow"><span>愛知・戸上（割安だが減益で触媒弱）</span><span class="mono hi-am">余地はあるが点火薄</span></div>
+      <div class="btrack"><div class="bfill" style="width:50%;background:var(--am)"></div></div>
+      <div class="blrow"><span>岡野24倍／助川40〜50倍／電工高値</span><span class="mono hi-rd">余地ほぼ消化</span></div>
+      <div class="btrack"><div class="bfill" style="width:28%;background:var(--rd)"></div></div>
+      <p style="font-size:11px;color:var(--ink2);margin-top:8px;line-height:1.7">日本ギアは「最高利益率（24.9%）×最低PER（11倍）」という最も極端な歪みを抱える一方、増配・受注残の売上転換という明確な再評価触媒が控える。同業の多くは既に評価が進み、余地が乏しい。</p>
+    </div>
+  </div>
+
+  <div class="card-hi-gn" style="padding:14px;border-radius:var(--r);margin-bottom:18px">
+    <div class="label" style="margin-bottom:6px">期待値＝①×② の総合評価</div>
+    <p style="font-size:12px;color:var(--ink2);line-height:1.75">他のニッチトップは「高ROEだが入口が高い（助川・岡野）」「割安だがROEが低く触媒が弱い（愛知・戸上・木村）」「安定だが還元厚めで複利が薄い（太平・電工）」のいずれかに偏る。<strong>日本ギアだけが、高ROEと低PERと超低配当性向（＝複利最大化）と明確な触媒の4条件を同時に満たす</strong>。3年・複利重視・コア保有という観点では、本テーマ内で期待値が最も高いと結論づけられる。1,378円・PER11倍という入口は、内部複利だけでも下値を支え（PER維持でもEPS成長分が取れる）、再評価が来れば上値が大きく開く非対称性を生む。</p>
+  </div>
+
+  <!-- インフレ＆対米 -->
+  <div class="g2" style="margin-bottom:14px">
+    <div>
+      <div class="label" style="margin-bottom:8px">インフレに強い理由</div>
+      <div class="noteg" style="margin-bottom:0">
+        <strong>①価格転嫁力：</strong>原発バルブ駆動部で国内シェア90%超の独占的地位ゆえ、原材料・人件費インフレを製品単価へ転嫁しやすい（価格決定力＝堀の本質）。<br><br>
+        <strong>②反復需要の名目膨張：</strong>定期点検・更新という反復需要はインフレ下で名目受注額が膨らむ実物需要。受注残63.7億は物価連動のバッファ。<br><br>
+        <strong>③金利耐性：</strong>自己資本比率84%・ネットキャッシュ（現預金50億）・実質無借金に近く、金利上昇局面でも調達コスト増の影響を受けにくい。バリュエーション面の逆風はあっても、財務面ではむしろ相対優位。
+      </div>
+    </div>
+    <div>
+      <div class="label" style="margin-bottom:8px">対米投資・サプライチェーンのインパクト</div>
+      <div class="noteb" style="margin-bottom:0">
+        <strong>FLS（Flowserve・NYSE）との60年提携が起点。</strong>日本ギアはLimitorqueブランドの国内独占ライセンシー。<br><br>
+        米国はAI・データセンターの電力需要急増を背景に原子力回帰（既存炉延命・SMR）へ大きく舵を切り、FLSの核関連受注は年4億ドル超、Trillium買収で対応300基超へ拡大。<strong>FLSが対米・グローバルの原子力投資サイクルを加速するほど、Limitorque世界標準の日本製造拠点である日本ギアの製品競争力と受注機会が連動して強まる</strong>。<br><br>
+        円安は対米輸出・ライセンス事業の採算に追い風。日米のエネルギー・原子力協力（対米投資枠組み）もマクロの後押し。<br><br>
+        <span style="color:var(--rd)"><strong>留意：</strong></span>ライセンス契約期間・独占性・ロイヤリティ条件は2026年6月の有報で要確認（本テーマ最大の不確実性）。
+      </div>
+    </div>
+  </div>
+
+  <div class="notice"><strong>免責事項：</strong>本章は公開情報（決算短信・有価証券報告書・政府資料・各社開示）に基づく分析・参考資料であり、特定銘柄の売買を推奨する投資助言・投資勧誘ではありません。掲載した他社の指標は2026年6月時点の概算で、最新の個別開示で必ずご確認ください。投資判断はご自身の責任で行ってください。</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     C7: 最終判断 ── 全要素統合（独立タブ）
+     ══════════════════════════════════════════════════════ -->
+<div class="chapter" id="c7">
+  <div class="ch-head"><span class="ch-num">08</span><h2 class="ch-title">最終投資判断 ── 全要素統合</h2><span class="ch-badge cb-gn">A · 強気 · 期待値No.1</span></div>
+
+    <!-- Layer分解 -->
+    <div class="g4" style="margin-bottom:16px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">Layer 1 · 独占の質</div><div class="mc-v gn">90%超</div><div class="mc-s">原発バルブ駆動部の国内シェア<br>＝価格決定力（堀）の源泉</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">Layer 2 · 内部複利</div><div class="mc-v bl">約12%/年</div><div class="mc-s">ROE約13%×内部留保92%<br>配当性向約8%で複利が最大化</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">Layer 3 · 再評価余地</div><div class="mc-v am">+60〜100%</div><div class="mc-s">PER11倍→適正18〜22倍<br>最高利益率24.9%×最低PERの歪み</div></div>
+      <div class="card mc" style="border-top:3px solid var(--fu)"><div class="mc-l">Layer 4 · 下値とヘッジ</div><div class="mc-v fu">自己資本84%</div><div class="mc-s">ネットキャッシュ50億・無借金近<br>インフレ価格転嫁／対米FLS連動</div></div>
+    </div>
+
+    <!-- Bear / Base / Bull -->
+    <div class="g3" style="margin-bottom:16px">
+      <div style="background:var(--bg2);border-top:3px solid var(--rd);border-radius:var(--r);padding:12px">
+        <div style="font:700 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--rd);margin-bottom:4px">Bear Case</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--rd);margin-bottom:6px">15%</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">電力投資停滞・人員不足が顕在化<br>到達 ¥1,050〜1,300<br>年率 ▲8〜▲2%<br>最大下値 ▲24%（¥1,050）</div>
+      </div>
+      <div style="background:var(--bg2);border-top:3px solid var(--gn2);border-radius:var(--r);padding:12px">
+        <div style="font:700 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--gn);margin-bottom:4px">Base Case</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--gn2);margin-bottom:6px">70%</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">受注残の売上転換＋緩やかな再評価<br>到達 ¥2,200〜2,900<br>年率 +17〜+28%<br>内部複利が下値を底上げ</div>
+      </div>
+      <div style="background:var(--bg2);border-top:3px solid var(--fu);border-radius:var(--r);padding:12px">
+        <div style="font:700 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--fu);margin-bottom:4px">Bull Case</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--fu);margin-bottom:6px">15%</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">FLS対米受注急増・採用成功・PER格上げ<br>到達 ¥3,400<br>年率 +35%<br>EPS×PERの2段ロケット点火</div>
+      </div>
+    </div>
+
+    <!-- 全要素統合 結論（ダーク） -->
+    <div style="background:var(--ink2);color:rgba(246,245,239,.82);border-radius:var(--r);padding:18px;margin-bottom:14px">
+      <div style="font:700 13px/1.2 var(--head);color:rgba(246,245,239,.96);margin-bottom:14px">最終投資判断 <span style="font:500 10px/1 var(--mono);color:rgba(246,245,239,.4)">── 本決算・テーマ横断・期待値比較 全要素統合（1,378円ベース）</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+        <div>
+          <div style="font:600 9px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:#68c890;margin-bottom:6px">割安の本質（正確な理解）</div>
+          <div style="font-size:12px;line-height:1.75">¥1,378が割安な理由は単なる「原発テーマ株」だからではなく、<strong style="color:rgba(246,245,239,.96)">営業利益率24.9%（競合最高）がPER11倍（競合最低）で評価される構造的歪み</strong>にある。適正PER18〜22倍を当てれば¥2,200〜2,700が理論的妥当域。再評価はTOB等の外部頼みではなく、増配・受注残の売上転換という<strong style="color:rgba(246,245,239,.96)">内部触媒</strong>で点火しうる。</div>
+        </div>
+        <div>
+          <div style="font:600 9px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:#8ab0e8;margin-bottom:6px">期待値No.1の源泉（複利×再評価）</div>
+          <div style="font-size:12px;line-height:1.75">配当性向約8%ゆえEPSの約92%が非課税のままROE約13%で再運用される内部複利マシン。AI×DC×電力×原発回帰の関連分野を横断比較しても、<strong style="color:rgba(246,245,239,.96)">「低PER×高ROE×超低配当性向×明確な触媒」を同時に満たすのは日本ギアのみ</strong>。他はいずれか一軸が欠ける（高ROEだが高PER、割安だが低ROE・触媒弱、安定だが還元厚で複利薄）。</div>
+        </div>
+        <div>
+          <div style="font:600 9px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--sem2);margin-bottom:6px">インフレ・対米の構造的追い風</div>
+          <div style="font-size:12px;line-height:1.75">90%独占の価格決定力でコストインフレを単価へ転嫁、保守・更新の反復需要は名目で膨張。自己資本84%・ネットキャッシュで金利耐性も高い。<strong style="color:rgba(246,245,239,.96)">FLS＝Limitorque経由で米国の原子力・DC電力投資サイクルに連動</strong>し、円安は対米輸出・ライセンス採算に追い風。</div>
+        </div>
+        <div>
+          <div style="font:600 9px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:#d090c0;margin-bottom:6px">「買わない理由」より監視すべき2点</div>
+          <div style="font-size:12px;line-height:1.75">シナリオのどれでもベース以上ならリターンは正、ベアでも下値は限定的（▲24%）。残る本質的リスクは<strong style="color:rgba(246,245,239,.96)">①FLSライセンス契約条件（6月有報）②264名の人員ボトルネック</strong>の2点のみ。いずれも増配・採用転換という上振れにも転じうる。判断の本質はこの2点の監視に集中すること。</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(246,245,239,.3);margin-bottom:6px">確率加重期待リターン</div>
+          <div style="font:700 24px/1 var(--mono);color:#68c890">+73%</div>
+          <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:4px">年率+20%・配当込／3年</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(246,245,239,.3);margin-bottom:6px">適正株価レンジ</div>
+          <div style="font:700 24px/1 var(--mono);color:#e09090">¥2,200〜2,700</div>
+          <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:4px">PER18〜22倍・EPS124円</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(246,245,239,.3);margin-bottom:6px">ポジション位置づけ</div>
+          <div style="font:700 24px/1 var(--mono);color:#8ab0e8">コア</div>
+          <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:4px">3年・複利重視に適性（助言ではない）</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(246,245,239,.3);margin-bottom:6px">テーマ内期待値</div>
+          <div style="font:700 24px/1 var(--mono);color:var(--sem2)">No.1</div>
+          <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:4px">4条件 同時充足は日本ギアのみ</div>
+        </div>
+      </div>
+    </div>
+    <div class="notice"><strong>免責事項：</strong>本レポートは公開情報（SEC開示・決算短信・有価証券報告書・政府資料）に基づく分析・参考資料であり、投資助言・投資勧誘を目的とするものではありません。投資判断はご自身の責任のもとで行ってください。株価・指標は2026年6月16日時点（株価1,378円基準）、業績は2026年3月期本決算（2026年5月13日発表）に基づきます。</div>
+</div>
+
+</main>
+
+<script>
+var _c={};
+
+function showC(id,btn){
+  document.querySelectorAll('.chapter').forEach(function(ch){ch.classList.remove('active');});
+  document.querySelectorAll('.mnb').forEach(function(b){b.classList.remove('on');});
+  document.getElementById(id).classList.add('active');btn.classList.add('on');
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+  var m={c1:['buildPL','buildNuke','buildOrder'],c2:['buildPer','buildPerOpm'],c3:['buildBps','buildCpd','buildDivCmp'],c4:['buildCap','buildInfra'],c5:['buildSc']};
+  if(m[id])m[id].forEach(function(f){setTimeout(window[f]||function(){},60);});
+}
+function showT(ch,t,btn){
+  var el=document.getElementById(ch);
+  el.querySelectorAll('.spanel').forEach(function(p){p.classList.remove('active');});
+  el.querySelectorAll('.stab').forEach(function(b){b.classList.remove('on');});
+  document.getElementById(ch+t).classList.add('active');btn.classList.add('on');
+}
+
+var OPT={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8}}},interaction:{mode:'index',intersect:false}};
+function grid(co){return{color:'rgba(0,0,0,.05)',drawBorder:false};}
+function ticks10(cb){return{font:{size:10},callback:cb};}
+
+function buildPL(){
+  if(_c.pl)return;var e=document.getElementById('plChart');if(!e)return;
+  _c.pl=new Chart(e,{type:'bar',data:{
+    labels:['22/3','23/3','24/3','25/3','26/3'],
+    datasets:[
+      {label:'売上高(億)',data:[75.7,75.2,96.2,95.6,98.8],backgroundColor:'rgba(26,60,122,.22)',borderColor:'#1a3c7a',borderWidth:1.2,yAxisID:'y'},
+      {type:'line',label:'EPS(円)',data:[14.6,33.9,108.1,108.9,123],borderColor:'#249054',borderWidth:2.5,pointRadius:4,tension:.3,yAxisID:'y2',backgroundColor:'rgba(36,144,84,.08)'}
+    ]},
+    options:{...OPT,scales:{y:{ticks:ticks10(function(v){return v+'億'}),grid:grid()},y2:{position:'right',ticks:ticks10(function(v){return v+'円'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildNuke(){
+  if(_c.nk)return;var e=document.getElementById('nukeChart');if(!e)return;
+  _c.nk=new Chart(e,{type:'bar',data:{
+    labels:['2021','2023','2026現在','2027目標','2029目標','2030代〜'],
+    datasets:[
+      {label:'稼働基数',data:[10,10,15,18,22,25],backgroundColor:function(c){var v=c.raw;return v>=20?'rgba(128,64,128,.75)':v>=15?'rgba(36,144,84,.75)':'rgba(191,124,24,.65)';},borderWidth:1.2},
+      {type:'line',label:'日本ギア受注高推計(億)',data:[78,78,98,110,125,155],borderColor:'#b83030',borderWidth:2.5,pointRadius:4,tension:.3,yAxisID:'y2',fill:false}
+    ]},
+    options:{...OPT,scales:{y:{min:0,max:30,ticks:ticks10(function(v){return v+'基'}),grid:grid()},y2:{position:'right',min:60,max:180,ticks:ticks10(function(v){return v+'億'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildOrder(){
+  if(_c.ord)return;var e=document.getElementById('orderChart');if(!e)return;
+  _c.ord=new Chart(e,{type:'bar',data:{
+    labels:['23/3','24/3','25/3','26/3 3Q累計'],
+    datasets:[
+      {label:'受注高(億)',data:[78,94.1,95.9,84.8],backgroundColor:'rgba(26,60,122,.4)',borderColor:'#1a3c7a',borderWidth:1.2},
+      {label:'売上高(億)',data:[75.2,96.2,95.6,67.0],backgroundColor:'rgba(36,144,84,.35)',borderColor:'#1b6840',borderWidth:1.2},
+      {type:'line',label:'受注残(億)',data:[46,46,46,63.7],borderColor:'#d84040',borderWidth:2.5,pointRadius:5,tension:.3,fill:false,yAxisID:'y2'}
+    ]},
+    options:{...OPT,scales:{y:{ticks:ticks10(function(v){return v+'億'}),grid:grid()},y2:{position:'right',min:30,max:80,ticks:ticks10(function(v){return v+'億'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildPer(){
+  if(_c.per)return;var e=document.getElementById('perChart');if(!e)return;
+  _c.per=new Chart(e,{type:'bar',data:{
+    labels:['日本ギア\n（6356）','岡野バルブ\n（6492）','TVE\n（6466）','木村化工機\n（6378）','FLS\n（NYSE）'],
+    datasets:[{label:'予想PER（倍）',data:[14.3,24,24,15,22],
+      backgroundColor:['rgba(36,144,84,.75)','rgba(191,124,24,.7)','rgba(191,124,24,.7)','rgba(26,60,122,.55)','rgba(128,64,128,.7)'],
+      borderColor:['#1b6840','#8e5810','#8e5810','#1a3c7a','#804080'],borderWidth:1.5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:28,ticks:ticks10(function(v){return v+'倍'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildPerOpm(){
+  if(_c.popm)return;var e=document.getElementById('perOpmChart');if(!e)return;
+  _c.popm=new Chart(e,{type:'bubble',data:{datasets:[
+    {label:'日本ギア(6356)',data:[{x:22,y:14.3,r:14}],backgroundColor:'rgba(36,144,84,.75)',borderColor:'#1b6840',borderWidth:2},
+    {label:'岡野バルブ(6492)',data:[{x:19.5,y:24,r:17}],backgroundColor:'rgba(191,124,24,.7)',borderColor:'#8e5810',borderWidth:1.5},
+    {label:'TVE(6466)',data:[{x:14,y:24,r:10}],backgroundColor:'rgba(191,124,24,.5)',borderColor:'#8e5810',borderWidth:1.5},
+    {label:'木村化工機(6378)',data:[{x:9.5,y:15,r:17}],backgroundColor:'rgba(26,60,122,.55)',borderColor:'#1a3c7a',borderWidth:1.5},
+    {label:'FLS(NYSE)',data:[{x:15,y:22,r:22}],backgroundColor:'rgba(128,64,128,.6)',borderColor:'#804080',borderWidth:1.5}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'bottom',labels:{font:{size:10},boxWidth:10,padding:6}},tooltip:{callbacks:{label:function(c){return c.dataset.label+' 利益率'+c.parsed.x+'% PER'+c.parsed.y+'倍';}}}},
+    scales:{x:{min:5,max:27,title:{display:true,text:'営業利益率（%）',font:{size:9}},ticks:ticks10(function(v){return v+'%'}),grid:grid()},
+      y:{min:10,max:28,title:{display:true,text:'予想PER（倍）',font:{size:9}},ticks:ticks10(function(v){return v+'倍'}),grid:grid()}}}});
+}
+function buildBps(){
+  if(_c.bps)return;var e=document.getElementById('bpsChart');if(!e)return;
+  _c.bps=new Chart(e,{type:'bar',data:{
+    labels:['2015','2017','2020','2022','2024','2025','26/3Q'],
+    datasets:[
+      {label:'BPS（円）',data:[444,514,583,613,780,960,993],backgroundColor:'rgba(26,60,122,.25)',borderColor:'#1a3c7a',borderWidth:1.2,yAxisID:'y'},
+      {type:'line',label:'利益剰余金（億円）',data:[41.2,51.2,60,65,84,98,107.3],borderColor:'#249054',borderWidth:2.5,pointRadius:4,tension:.3,yAxisID:'y2',backgroundColor:'rgba(36,144,84,.08)'}
+    ]},
+    options:{...OPT,scales:{y:{min:300,max:1100,ticks:ticks10(function(v){return v+'円'}),grid:grid()},y2:{position:'right',min:0,max:130,ticks:ticks10(function(v){return v+'億'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildCpd(){
+  if(_c.cpd)return;var e=document.getElementById('cpdChart');if(!e)return;
+  _c.cpd=new Chart(e,{type:'line',data:{
+    labels:['現在','1年後','2年後','3年後','5年後','10年後'],
+    datasets:[
+      {label:'ROE16%（FLS上振れ）',data:[960,1114,1292,1499,2014,4042],borderColor:'#804080',borderWidth:2.5,pointRadius:3,tension:.3,fill:false},
+      {label:'ROE13%（ベース）',data:[960,1085,1226,1386,1770,3238],borderColor:'#1b6840',borderWidth:2.5,pointRadius:3,tension:.3,fill:false},
+      {label:'ROE10%（慎重）',data:[960,1054,1157,1271,1530,2490],borderColor:'#bf7c18',borderWidth:2,pointRadius:3,tension:.3,fill:false,borderDash:[4,2]},
+      {label:'ROE7%（ベア）',data:[960,1024,1092,1164,1325,1907],borderColor:'#b83030',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[3,3]},
+      {label:'株価目安（ROE13%×PER15倍）',data:[1378,1628,1839,2079,2655,4857],borderColor:'#2a5cbf',borderWidth:1.5,borderDash:[2,4],pointRadius:2,tension:.3,fill:false,yAxisID:'yp'}
+    ]},
+    options:{...OPT,scales:{y:{min:800,max:4500,ticks:ticks10(function(v){return v+'円'}),grid:grid()},yp:{position:'right',min:0,max:6000,ticks:ticks10(function(v){return v.toLocaleString()+'円'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildDivCmp(){
+  if(_c.div)return;var e=document.getElementById('divCmpChart');if(!e)return;
+  _c.div=new Chart(e,{type:'bar',data:{
+    labels:['3年後','5年後','10年後'],
+    datasets:[
+      {label:'日本ギア型（低配当ROE13%）',data:[2682,3186,5382],backgroundColor:'rgba(36,144,84,.75)',borderColor:'#1b6840',borderWidth:1.5},
+      {label:'木村化工機型（高配当ROE9.5%）',data:[2118,2573,3410],backgroundColor:'rgba(26,60,122,.55)',borderColor:'#1a3c7a',borderWidth:1.5},
+      {label:'高配当仮想（5%配当ROE7%）',data:[1843,2053,2340],backgroundColor:'rgba(184,48,48,.5)',borderColor:'#b83030',borderWidth:1.5}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{font:{size:10},boxWidth:10,padding:7}},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.parsed.y.toLocaleString()+'円（'+(c.parsed.y>1378?'+':'')+Math.round((c.parsed.y/1378-1)*100)+'%）';}}}},
+    scales:{y:{min:1000,max:6000,ticks:ticks10(function(v){return v.toLocaleString()+'円'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildCap(){
+  if(_c.cap)return;var e=document.getElementById('capChart');if(!e)return;
+  _c.cap=new Chart(e,{type:'line',data:{
+    labels:['2014','2016','2018','2020','2022','2023','2024','2025'],
+    datasets:[
+      {label:'正規従業員数（名・左軸）',data:[376,363,359,338,334,302,290,264],borderColor:'#b83030',backgroundColor:'rgba(184,48,48,.08)',borderWidth:2.5,pointRadius:4,yAxisID:'y',tension:.3,fill:true},
+      {label:'1人当たり売上高（百万円・右軸）',data:[23,24,21,22,23,25,33,36],borderColor:'#1b6840',borderWidth:2.5,pointRadius:4,yAxisID:'y2',tension:.3,borderDash:[5,2],fill:false}
+    ]},
+    options:{...OPT,scales:{y:{min:220,max:420,title:{display:true,text:'従業員数（名）',font:{size:9}},ticks:ticks10(function(v){return v+'名'}),grid:grid()},y2:{position:'right',min:10,max:45,title:{display:true,text:'1人当たり売上（百万）',font:{size:9}},ticks:ticks10(function(v){return v+'M'}),grid:{drawOnChartArea:false}},x:{ticks:ticks10()}}}});
+}
+function buildInfra(){
+  if(_c.inf)return;var e=document.getElementById('infraChart');if(!e)return;
+  _c.inf=new Chart(e,{type:'bar',data:{
+    labels:['2021年（実績）','2025年（現在）','2031年（10年後）','2041年（20年後）'],
+    datasets:[{label:'水道管老朽化率（%）',data:[22,22,41,66],
+      backgroundColor:['rgba(191,124,24,.6)','rgba(184,48,48,.65)','rgba(184,48,48,.75)','rgba(128,0,0,.85)'],
+      borderColor:['#8e5810','#b83030','#b83030','#800000'],borderWidth:1.5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:80,ticks:ticks10(function(v){return v+'%'}),grid:grid()},x:{ticks:ticks10()}}}});
+}
+function buildSc(){
+  if(_c.sc)return;var e=document.getElementById('scChart');if(!e)return;
+  _c.sc=new Chart(e,{type:'line',data:{
+    labels:['現在','1年後','2年後','3年後'],
+    datasets:[
+      {label:'FLS上振れ（15%）',data:[1378,1900,2600,3400],borderColor:'#804080',fill:'+1',borderWidth:2.5,pointRadius:4,tension:.3},
+      {label:'ブル（25%）',data:[1378,1750,2300,2900],borderColor:'#1b6840',fill:'+1',borderWidth:2.5,pointRadius:4,tension:.3},
+      {label:'ベース（45%）',data:[1378,1600,1900,2200],borderColor:'#bf7c18',fill:'+1',borderWidth:2.5,pointRadius:4,tension:.3},
+      {label:'ベア（15%）',data:[1378,1200,1080,1050],borderColor:'#b83030',fill:false,borderWidth:2,borderDash:[4,3],pointRadius:3,tension:.3},
+      {label:'現在株価',data:[1378,1378,1378,1378],borderColor:'#909090',borderWidth:1.2,borderDash:[2,4],pointRadius:0,fill:false}
+    ]},
+    options:{...OPT,scales:{y:{min:800,max:3800,ticks:ticks10(function(v){return v.toLocaleString()+'円'}),grid:grid(),stepSize:500},x:{ticks:ticks10()}}}});
+}
+
+/* c1チャートはタブ表示時（showC）に生成される。先頭タブがカタリスト（c0）になったため、非表示状態での0サイズ描画を避ける目的で初期一括生成は行わない。 */
+
+var barIO=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.bfill,.rm-f').forEach(function(f){var w=f.style.width;f.style.width='0';setTimeout(function(){f.style.transition='width 1.1s cubic-bezier(.4,0,.2,1)';f.style.width=w;},80);});
+    barIO.unobserve(e.target);
+  });
+},{threshold:.12});
+document.querySelectorAll('.chapter').forEach(function(s){barIO.observe(s);});
+</script>
+</body>
+</html>

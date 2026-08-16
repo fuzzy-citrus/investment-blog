@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三協フロンテア（9639）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(188,122,24,.13);border:1px solid rgba(188,122,24,.32);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--am2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eeaaaa}
+.ch{font:700 13px/1.3 var(--head);margin-bottom:8px}
+.cx{font-size:12px;line-height:1.75;color:var(--ink2)}
+.cx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wn td{background:var(--rd3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 32px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.25);color:#e09090}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.wr{background:var(--rd3);border:.5px solid #e8a0a0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h3{font:700 14px/1.2 var(--head);margin:22px 0 10px;padding-left:9px;border-left:3px solid var(--ink)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9639 · 2026.07.30 作成</p>
+      <h1 class="ht">三協フロンテア <em>（9639）</em><br>統合投資分析レポート</h1>
+      <p class="hs">現株価2,304円 ／ PER8.8倍・PBR0.98倍・EV/EBITDA <strong style="color:var(--or2)">3.5倍</strong> ／ ROE11.0% ／ 自己資本比率75.0%<br>
+      <strong style="color:var(--or2)">建設現場の省人化・オフサイト建設という構造テーマの本流に位置しながら、流動性と親子上場を理由にPER8倍台で放置されている</strong>ストック型優良企業。</p>
+    </div>
+    <div class="vb">
+      <div class="vs">○</div>
+      <div class="vt">
+        <strong>結論：投資妙味あり（買い）</strong><br>
+        期待値 <strong>2,860円（+24%）＋配当3.9%</strong><br>
+        MBO成立時 <strong>3,200〜3,600円（+39〜56%）</strong><br>
+        <strong>リレーティングなしでも年率8〜10%</strong>（簿価複利）<br>
+        ただし土地・有価証券の含み益はほぼ無し。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">2,304円</div><div class="ks">時価総額 512億円（自己株控除後）</div></div>
+    <div class="kv"><div class="kl">PER（27/3期予）</div><div class="kn gn">8.8倍</div><div class="ks">EPS予263.2円 · 過去10年レンジ下限圏</div></div>
+    <div class="kv"><div class="kl">PBR</div><div class="kn bl">0.98倍</div><div class="ks">BPS 2,363円 · 解散価値近辺</div></div>
+    <div class="kv"><div class="kl">EV/EBITDA</div><div class="kn gn">3.5倍</div><div class="ks">EV493億 ÷ EBITDA142億 · 割安</div></div>
+    <div class="kv"><div class="kl">土地含み益（中立）</div><div class="kn rd">約37億円</div><div class="ks">税引後 · 1株166円どまり</div></div>
+    <div class="kv"><div class="kl">創業家＋親会社 持株</div><div class="kn am">69.3%</div><div class="ks">和幸興産50.5% · MBO実行可能</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--or2)"></span>結論サマリー</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--rd)"></span>資産精査（含み益検証）</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--gn2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>カタリスト／MBO</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--am2)"></span>震災復興・市場</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>ダウンサイド</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 結論 ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論：割安。ただし理由はバランスシートではない</h2><span class="sb bg-gn">○ 投資妙味あり</span></div>
+
+  <div class="ok"><strong>2,304円は割安です。</strong>EV/EBITDA 3.5倍・PER 8.8倍・ROE 11.0%・配当3.91%・自己資本比率75%・ストック収入比率48%。この組み合わせは日本株全体で見ても明確に安い部類に入ります。期待値は<strong>2,860円（+24.1%）＋配当3.9%</strong>、下方は簿価複利で年率8%が守られます。</div>
+
+  <div class="h3">ご依頼の精査項目 — 結果サマリー</div>
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c cl-bl">
+      <div class="ch" style="color:var(--bl)">有価証券 → 1.15億円</div>
+      <div class="cx">連結BS上の投資有価証券は<strong class="hbl">1.15億円</strong>、総資産700億の<strong>0.16%</strong>。政策保有株をほぼ持たない会社です。<strong>バリュエーションに影響する規模ではありません</strong>が、持ち合い解消圧力と無縁である点はガバナンス上プラスです。</div>
+    </div>
+    <div class="c cl-am">
+      <div class="ch" style="color:var(--am)">土地含み益 → 中立37億円</div>
+      <div class="cx">簿価106.5億円・約55.7万㎡（工場・物流センター用地）、簿価単価<strong>約19,100円/㎡</strong>。物流適地の地価上昇が追い風で、中立ケースの含み益は<strong class="ham">税引後37億円・1株166円</strong>（株価の7%）。<strong>プラス材料ですが主役ではありません</strong>。</div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ch" style="color:var(--bl)">現金同等物 → ネット19億円</div>
+      <div class="cx">現預金55.4億＋長期預金1.1億−有利子負債37.5億＝<strong class="hbl">ネットキャッシュ19億円（1株86円）</strong>、時価総額の3.7%。自己資本比率75%の実態は<strong>現金ではなくレンタル資産・土地建物という実物資産</strong>です。</div>
+    </div>
+  </div>
+
+  <div class="inf"><strong>バランスシート上の余剰資産は、合計しても1株250円程度（株価の11%）です。</strong>したがって本レポートは<strong>「収益力・簿価複利・資本政策」の3点を評価の軸</strong>に置いています。<br><br>
+  なお<strong>真の含み価値はレンタル資産にあります</strong>。取得原価459億に対し簿価177億（償却率61.4%）。税務耐用年数7年に対し実稼働は15〜20年超で、<strong>償却済み資産が年239億のレンタル料を稼ぎ続けている</strong>構造です。ただしこの価値は既にROE 11%として損益に顕在化しているため、NAVに加算すると二重計上になります（詳細は資産精査タブ）。</div>
+
+  <div class="h3">震災需要の扱いについて</div>
+  <div class="c cl-am" style="margin-bottom:18px">
+    <div class="cx">能登半島地震の応急仮設住宅需要は<strong>25/3期に計上され、26/3期に剥落</strong>しました。会社は減収の主因として明記しており、<strong class="ham">レンタル料収入は266億→239億（▲10.2%）</strong>。2026年7月28日の熊本地震（M7.1・最大震度7）も同じ経路をたどると想定され、<strong>27/3期は押し上げ、28/3期は反動減</strong>となる可能性が高い。<br><br>
+    加えて<strong>災害対応は利益率を押し下げます</strong>。特需のあった25/3期の粗利率39.3%に対し、特需のなかった26/3期は40.5%。緊急輸送と突貫施工でコストが嵩むためです。<strong>本レポートでは災害需要をベースケースの下支えとしてのみ織り込み、上振れ材料には含めていません。</strong>継続的な追い風として賭けるべきは、災害"復興"ではなく<strong>災害"予防"の予算＝国土強靱化実施中期計画（2026年度から5年・20兆円強）</strong>です。</div>
+  </div>
+
+  <div class="h3">なぜ安いのか — ディスカウントの正体</div>
+  <table class="t">
+    <thead><tr><th>ディスカウント要因</th><th class="r">推定寄与</th><th>解消可能性</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr class="wn"><td><strong>流動性の枯渇</strong></td><td class="r mn">▲15〜20%</td><td><span class="bge be-rd">MBO以外困難</span></td><td>出来高は日次数千株・数百万円規模。機関投資家が事実上参入不能</td></tr>
+      <tr class="wn"><td><strong>親子上場・支配株主リスク</strong></td><td class="r mn">▲10〜15%</td><td><span class="bge be-am">東証制度改正で圧力</span></td><td>㈲和幸興産（非上場・不動産賃貸業）が50.54%を保有する従属上場会社</td></tr>
+      <tr><td><strong>過去の内部統制不備</strong></td><td class="r mn">▲5〜10%</td><td><span class="bge be-gn">概ね解消済</span></td><td>第49〜54期に「開示すべき重要な不備」。23年に過年度決算訂正。55期以降は有効</td></tr>
+      <tr><td><strong>スタンダード市場・カバレッジ皆無</strong></td><td class="r mn">▲5〜10%</td><td><span class="bge be-am">構造的</span></td><td>アナリストカバーなし。中期経営計画の数値目標も未開示</td></tr>
+      <tr><td><strong>設備投資負担でFCFが薄い</strong></td><td class="r mn">▲5%</td><td><span class="bge be-bl">事業構造由来</span></td><td>営業CF 55.9億に対し設備投資 72.2億。レンタル資産の継続投入が必須</td></tr>
+      <tr class="sm"><td><strong>合計ディスカウント</strong></td><td class="r mn">▲40〜60%</td><td>—</td><td>この多くは<strong>非公開化で一気に解消する</strong>性質のもの</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="h3">投資ストーリーの再定義</div>
+  <div class="cdk">
+    <div class="conc-b" style="font-size:13px">
+      三協フロンテアは<strong>「含み資産バリュー株」ではありません</strong>。正しくは<strong style="color:var(--or2)">「ストック収入48%・ROE11%・実質無借金の優良中堅企業が、流動性と親子上場という"構造的な理由"だけでPER8倍台に放置されている案件」</strong>です。<br><br>
+      裏を返せば、株価の再評価トリガーは業績サプライズではなく<strong style="color:var(--or2)">資本政策・ガバナンス変化</strong>に絞られます。そして支配株主が69.3%を握る以上、その決定権は市場ではなく創業家にあります。<strong>これは「待つ投資」であり、時間軸を許容できる投資家向けです。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 資産精査 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資産精査 — 土地・有価証券・現金の実態</h2><span class="sb bg-bl">精査結果</span></div>
+
+  <div class="h3">① 有価証券 — 含み益はほぼゼロ</div>
+  <div class="g2">
+    <div>
+      <table class="t">
+        <thead><tr><th>項目（連結・26/3期末）</th><th class="r">25/3期</th><th class="r">26/3期</th></tr></thead>
+        <tbody>
+          <tr class="wn"><td><strong>投資有価証券</strong></td><td class="r mn">87</td><td class="r mn hrd"><strong>115</strong></td></tr>
+          <tr><td>関係会社株式（単体）</td><td class="r mn">1,325</td><td class="r mn">1,516</td></tr>
+          <tr><td>関係会社出資金（単体）</td><td class="r mn">236</td><td class="r mn">236</td></tr>
+          <tr><td>長期貸付金</td><td class="r mn">—</td><td class="r mn">13</td></tr>
+          <tr class="sm"><td>参考：総資産</td><td class="r mn">65,331</td><td class="r mn">70,058</td></tr>
+        </tbody>
+      </table>
+      <div class="note">単位：百万円。出所：第57期有価証券報告書（2026/6/19提出）連結・個別貸借対照表</div>
+    </div>
+    <div class="c cf-rd">
+      <div class="ch" style="color:var(--rd)">判定：投資判断に無関係</div>
+      <div class="cx">
+        投資有価証券 <strong class="hrd">1.15億円</strong>は総資産の<strong>0.16%</strong>。時価総額512億円に対し<strong>0.22%</strong>にすぎません。<br><br>
+        関係会社株式15.2億円は<strong>海外子会社（ミャンマー・マレーシア・米国・シンガポール・中国）への出資</strong>であり、連結上は消去されます。売却可能な含み資産ではなく、むしろ<strong>回収リスクを抱えた事業投資</strong>です。<br><br>
+        <strong>結論：「有価証券の含み益」という論点は成立しません。</strong>政策保有株をほぼ持たない点はガバナンス上むしろ好材料ですが、バリュー材料にはなりません。
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">② 土地 — 含み益はあるが「小粒」</div>
+  <table class="t">
+    <thead><tr><th>主要拠点（単体）</th><th class="r">土地簿価（百万円）</th><th class="r">面積（㎡）</th><th class="r">簿価単価（円/㎡）</th><th>立地評価</th></tr></thead>
+    <tbody>
+      <tr><td>本社（千葉県柏市）</td><td class="r mn">88</td><td class="r mn">2,110</td><td class="r mn">41,706</td><td><span class="bge be-gn">柏の葉・上昇</span></td></tr>
+      <tr><td>茨城工場（坂東市）</td><td class="r mn">659</td><td class="r mn">46,283</td><td class="r mn">14,238</td><td><span class="bge be-gn">圏央道・物流適地</span></td></tr>
+      <tr><td>つくば工場（土浦市）</td><td class="r mn">1,096</td><td class="r mn">47,790</td><td class="r mn">22,934</td><td><span class="bge be-am">やや割高取得</span></td></tr>
+      <tr><td>新潟工場（聖籠町）</td><td class="r mn">797</td><td class="r mn">54,897</td><td class="r mn">14,518</td><td><span class="bge be-rd">地方・上昇限定</span></td></tr>
+      <tr><td>姫路など7工場</td><td class="r mn">1,844</td><td class="r mn">144,697</td><td class="r mn">12,744</td><td><span class="bge be-am">まちまち</span></td></tr>
+      <tr><td>茨城物流センター（坂東市）</td><td class="r mn">396</td><td class="r mn">33,640</td><td class="r mn">11,771</td><td><span class="bge be-gn">圏央道・上昇大</span></td></tr>
+      <tr><td>小牧物流センター（愛知）</td><td class="r mn">719</td><td class="r mn">35,971</td><td class="r mn">19,988</td><td><span class="bge be-gn">名古屋圏・堅調</span></td></tr>
+      <tr><td>京都物流センター（京田辺市）</td><td class="r mn">1,357</td><td class="r mn">41,396</td><td class="r mn">32,781</td><td><span class="bge be-gn">京奈和・上昇</span></td></tr>
+      <tr><td>流山ほか21物流センター</td><td class="r mn">3,357</td><td class="r mn">148,803</td><td class="r mn">22,560</td><td><span class="bge be-gn">主力・上昇</span></td></tr>
+      <tr><td>支店・営業所71ヶ所</td><td class="r mn">332</td><td class="r mn">1,397</td><td class="r mn">237,652</td><td><span class="bge be-bl">大半は賃借</span></td></tr>
+      <tr class="sm"><td><strong>合計（所有土地）</strong></td><td class="r mn"><strong>10,645</strong></td><td class="r mn"><strong>556,984</strong></td><td class="r mn"><strong>19,119</strong></td><td>連結簿価 10,649</td></tr>
+      <tr class="wn"><td>展示販売場・トランクルーム 642ヶ所</td><td class="r mn">0</td><td class="r mn">427,949</td><td class="r mn">—</td><td><span class="bge be-rd">全て賃借地</span></td></tr>
+    </tbody>
+  </table>
+  <div class="note">出所：第57期有価証券報告書「第3 設備の状況 2. 主要な設備の状況」。展示場642ヶ所は全て賃借地であり、含み益の対象外。</div>
+
+  <div class="sp"></div>
+  <div class="g3">
+    <div class="c mc cf-am"><div class="ml">保守ケース（+20%）</div><div class="mv am">15億円</div><div class="ms">税引後 · 1株 <strong>67円</strong><br>株価の2.9%</div></div>
+    <div class="c mc cf-am"><div class="ml">中立ケース（+50%）</div><div class="mv am">37億円</div><div class="ms">税引後 · 1株 <strong>166円</strong><br>株価の7.2%</div></div>
+    <div class="c mc cf-gn"><div class="ml">強気ケース（+100%）</div><div class="mv gn">74億円</div><div class="ms">税引後 · 1株 <strong>333円</strong><br>株価の14.5%</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="inf"><strong>なぜ含み益が小さいのか。</strong>①保有地の大半が<strong>地方の工場・物流センター用地</strong>で、簿価単価が19,100円/㎡と既に低廉。②2026年公示地価の工業地平均は84,974円/㎡・前年比+7.0%と上昇基調ですが、これは都市部を含む平均で、聖籠町・姫路周辺などの地方工業地は<strong>横ばい〜微増にとどまる</strong>可能性が高い。③最も価値のある「全国642ヶ所の展示場・トランクルーム店舗網」は<strong>全て賃借地</strong>で、貸借対照表に土地として計上されていません。④有報に「賃貸等不動産の時価等」の開示がなく、全て事業用資産として保有されています。</div>
+
+  <div class="h3">③ 現金同等物 — ネットキャッシュは意外に薄い</div>
+  <div class="g2">
+    <div>
+      <table class="t">
+        <thead><tr><th>項目（連結・26/3期末）</th><th class="r">百万円</th><th class="r">1株換算</th></tr></thead>
+        <tbody>
+          <tr><td>現金及び預金</td><td class="r mn hgn">5,544</td><td class="r mn">249円</td></tr>
+          <tr><td>長期預金</td><td class="r mn hgn">111</td><td class="r mn">5円</td></tr>
+          <tr><td>短期借入金</td><td class="r mn hrd">▲3,500</td><td class="r mn">▲157円</td></tr>
+          <tr><td>1年内返済予定長期借入金</td><td class="r mn hrd">▲200</td><td class="r mn">▲9円</td></tr>
+          <tr><td>リース債務等</td><td class="r mn hrd">▲54</td><td class="r mn">▲2円</td></tr>
+          <tr class="sm"><td><strong>ネットキャッシュ</strong></td><td class="r mn"><strong>1,901</strong></td><td class="r mn"><strong>86円</strong></td></tr>
+          <tr><td>時価総額に対する比率</td><td class="r mn" colspan="2"><strong class="ham">わずか 3.7%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="c cf-am">
+      <div class="ch" style="color:var(--am)">「ネットキャッシュ株」ではない</div>
+      <div class="cx">
+        自己資本比率75.0%という数字から「現金がザクザク」と誤解しがちですが、実態は違います。ネットキャッシュは<strong class="ham">19億円（1株86円）</strong>にとどまります。<br><br>
+        理由は明快で、<strong>自己資本の大半がレンタル資産と土地・建物という実物資産に固定されている</strong>ためです。総資産700億のうち有形固定資産415億（59%）。<br><br>
+        しかも26/3期は有利子負債が23.6億→37.5億と<strong>+57%増加</strong>。新工場用地取得と設備投資のためで、キャッシュを積み上げる局面ではありません。<br><br>
+        <strong>MBO時に「手元現金で買収資金を賄える」タイプの会社ではない</strong>点は押さえておくべきです。
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">④ 本当の"含み資産"はレンタル資産にある</div>
+  <div class="g4" style="margin-bottom:14px">
+    <div class="c mc"><div class="ml">レンタル資産 取得原価</div><div class="mv bl">459億円</div><div class="ms">45,924百万円</div></div>
+    <div class="c mc"><div class="ml">減価償却累計額</div><div class="mv rd">▲282億円</div><div class="ms">償却率 <strong>61.4%</strong></div></div>
+    <div class="c mc"><div class="ml">簿価（純額）</div><div class="mv am">177億円</div><div class="ms">17,719百万円</div></div>
+    <div class="c mc"><div class="ml">年間レンタル料収入</div><div class="mv gn">239億円</div><div class="ms">簿価の<strong>1.35倍</strong>／年</div></div>
+  </div>
+  <div class="ok"><strong>ここが最大の見落としポイントです。</strong>ユニットハウスの税務上の耐用年数は7年前後ですが、鉄骨造ユニットの<strong>実際の稼働年数は15〜20年超</strong>。つまり<strong>簿価ゼロ近くまで償却済みの資産が、なお満額のレンタル料を稼ぎ続けている</strong>構造です。取得原価459億に対し簿価177億（償却率61%）という数字は、<strong>「簿外の稼働資産が大量に存在する」</strong>ことを示唆します。<br><br>
+  ただし注意点として、<strong>この価値は既にPLの利益（ROE 11%）として顕在化しているため、NAVに単純加算すると二重計上になります。</strong>正しい理解は「PBR約1倍でも実質的な資産価値はそれを上回っており、その証拠が11%のROEである」ということです。</div>
+
+  <div class="h3">総括：修正NAV（純資産＋含み益）</div>
+  <table class="t">
+    <thead><tr><th>シナリオ</th><th class="r">株主資本</th><th class="r">土地含み益（税後）</th><th class="r">レンタル資産超過価値（税後）</th><th class="r">修正NAV</th><th class="r">1株NAV</th><th class="r">対現値</th></tr></thead>
+    <tbody>
+      <tr><td>保守（土地+20%／レンタル+15%）</td><td class="r mn">52,056</td><td class="r mn">1,478</td><td class="r mn">1,845</td><td class="r mn">55,379</td><td class="r mn"><strong>2,492円</strong></td><td class="r mn ham">+8.1%</td></tr>
+      <tr class="hl"><td><strong>中立（土地+50%／レンタル+30%）</strong></td><td class="r mn">52,056</td><td class="r mn">3,695</td><td class="r mn">3,689</td><td class="r mn">59,440</td><td class="r mn"><strong>2,674円</strong></td><td class="r mn hgn">+16.1%</td></tr>
+      <tr><td>強気（土地+100%／レンタル+50%）</td><td class="r mn">52,056</td><td class="r mn">7,390</td><td class="r mn">6,148</td><td class="r mn">65,595</td><td class="r mn"><strong>2,951円</strong></td><td class="r mn hgn">+28.1%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">単位：百万円。実効税率30.6%で税効果調整。実質株式数 22,225,053株（発行済23,356,800株 − 自己株1,131,747株）。<br>
+  <strong>重要：</strong>NAVアプローチでは上値余地は+8〜28%にとどまります。この銘柄の投資妙味は<strong>資産価値ではなく収益力と資本政策</strong>から導かれるべきです。</div>
+</div>
+
+<!-- ══════════════════════════════ P3 事業性 ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・ストック性 — ここが本当の強み</h2><span class="sb bg-gn">◎ 質は高い</span></div>
+
+  <div class="h3">売上構成：ストック48% × フロー52%</div>
+  <table class="t">
+    <thead><tr><th>区分</th><th>内容</th><th class="r">25/3実績</th><th class="r">26/3実績</th><th class="r">前年比</th><th class="r">27/3予想</th><th class="r">前年比</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>MS レンタル料収入</strong></td><td>ユニットハウスのレンタル</td><td class="r mn">26,600</td><td class="r mn">23,878</td><td class="r mn hrd">89.8%</td><td class="r mn">24,600</td><td class="r mn hgn">103.0%</td></tr>
+      <tr class="hl"><td><strong>MS 賃貸収入</strong></td><td>トランクルーム・レンタルスペース</td><td class="r mn">2,157</td><td class="r mn">2,196</td><td class="r mn hgn">101.8%</td><td class="r mn">2,290</td><td class="r mn hgn">104.3%</td></tr>
+      <tr class="sm"><td><strong>ストック小計</strong></td><td>継続課金型</td><td class="r mn">28,757</td><td class="r mn"><strong>26,074</strong></td><td class="r mn hrd">90.7%</td><td class="r mn">26,890</td><td class="r mn hgn">103.1%</td></tr>
+      <tr><td>MS 製品売上高</td><td>ユニットハウス物販</td><td class="r mn">12,870</td><td class="r mn">13,306</td><td class="r mn hgn">103.4%</td><td class="r mn">14,700</td><td class="r mn hgn">110.5%</td></tr>
+      <tr><td>MS 工事売上高</td><td>工事請負（本建築）</td><td class="r mn">14,113</td><td class="r mn">14,526</td><td class="r mn hgn">102.9%</td><td class="r mn">17,080</td><td class="r mn hgn">117.6%</td></tr>
+      <tr><td>その他</td><td>立体駐車装置・植物工場等</td><td class="r mn">350</td><td class="r mn">368</td><td class="r mn hgn">105.0%</td><td class="r mn">330</td><td class="r mn hrd">89.7%</td></tr>
+      <tr class="sm"><td><strong>合計</strong></td><td>—</td><td class="r mn">56,092</td><td class="r mn"><strong>54,275</strong></td><td class="r mn hrd">96.8%</td><td class="r mn"><strong>59,000</strong></td><td class="r mn hgn">108.7%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">単位：百万円。出所：2026年3月期決算説明会資料（2026/5/26）</div>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">◎ ストック比率48.0%の意味</div>
+      <div class="cx">
+        レンタル料＋賃貸収入で<strong>売上の48%が継続課金型</strong>。建設関連企業としては極めて高い水準です。<br><br>
+        しかも<strong>店舗網が毎年着実に拡大</strong>しており、ストック基盤は物理的に積み上がっています。
+        <div style="margin-top:12px">
+          <div class="bg"><div class="br2"><span>トランクルーム店舗</span><span class="mn">435 → 462 → <strong>478店</strong></span></div><div class="bt"><div class="bf" style="width:96%;background:var(--gn2)"></div></div></div>
+          <div class="bg"><div class="br2"><span>展示場</span><span class="mn">216 → 212 → <strong>213店</strong></span></div><div class="bt"><div class="bf" style="width:43%;background:var(--am2)"></div></div></div>
+          <div class="bg"><div class="br2"><span>レンタルスペース</span><span class="mn">71 → 89 → <strong>105店</strong></span></div><div class="bt"><div class="bf" style="width:21%;background:var(--bl2)"></div></div></div>
+        </div>
+        <div class="note">24/3末 → 25/3末 → 26/3末。展示場は「従来型79・リニューアル型134」で、質的な入れ替えが進行中。</div>
+      </div>
+    </div>
+    <div class="c cf-am">
+      <div class="ch" style="color:var(--am)">△ ただし26/3期はストックが減った</div>
+      <div class="cx">
+        レンタル料収入 <strong class="hrd">266億 → 239億（▲10.2%）</strong>。<br><br>
+        会社説明では「前期に能登半島地震の応急仮設住宅建設や被災地域の復興に対応する計上があったこと」「全国的な建築確認申請許可の遅延等により着工時期に遅れが生じたこと」が主因。<br><br>
+        つまり<strong>25/3期のレンタル料266億には災害特需が上乗せされていた</strong>ということです。27/3期予想も246億で、<strong>25/3期の水準にはまだ戻りません</strong>。<br><br>
+        <strong>ストック性は高いが、単調増加ではない</strong>という点は正しく認識すべきです。稼働率が下がると固定費レバレッジが逆回転します。
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">収益性は改善傾向 — 減収でも増益</div>
+  <div class="g4">
+    <div class="c mc"><div class="ml">売上総利益率</div><div class="mv gn">40.5%</div><div class="ms">39.3%→40.5%<br>減収下で<strong>改善</strong></div></div>
+    <div class="c mc"><div class="ml">経常利益率</div><div class="mv gn">15.3%</div><div class="ms">14.6%→15.3%<br>過去最高水準</div></div>
+    <div class="c mc"><div class="ml">ROE</div><div class="mv gn">11.0%</div><div class="ms">自己資本比率75%で<br>この水準は優秀</div></div>
+    <div class="c mc"><div class="ml">ROA</div><div class="mv gn">7.9%</div><div class="ms">27/3期予 8.35%</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>26/3期は「減収3.2%・経常増益1.6%」。</strong>製造・物流部門の原価低減と経費削減が効き、<strong>会社予想（経常80億）を3.7%上回って着地</strong>しました。売上が落ちた年に利益率を上げられるのは、コストコントロールが効いている証拠です。四半期推移を見ると1Qは前年比79.7%と大きく落ち込みましたが、2Q以降は100.6%→102.5%→105.5%と<strong>右肩上がりで回復</strong>。4Q経常利益は前年比126.7%と勢いがついた状態で27/3期に入っています。</div>
+
+  <div class="h3">10年トラックレコード</div>
+  <table class="t">
+    <thead><tr><th>指標</th><th class="r">10年CAGR</th><th class="r">16/3期</th><th class="r">26/3期</th><th class="r">倍率</th></tr></thead>
+    <tbody>
+      <tr><td>売上高</td><td class="r mn hgn">+5.49%</td><td class="r mn">—</td><td class="r mn">542.8億</td><td class="r mn"><strong>1.7倍</strong></td></tr>
+      <tr><td>純利益</td><td class="r mn hgn">+8.04%</td><td class="r mn">—</td><td class="r mn">55.6億</td><td class="r mn"><strong>2.2倍</strong></td></tr>
+      <tr><td>BPS</td><td class="r mn hgn">+7.8%</td><td class="r mn">1,118円</td><td class="r mn">2,363円</td><td class="r mn"><strong>2.1倍</strong></td></tr>
+      <tr><td>自己資本比率</td><td class="r mn">—</td><td class="r mn">46.9%</td><td class="r mn hgn">75.0%</td><td class="r mn">+28pt</td></tr>
+      <tr><td>有利子負債</td><td class="r mn hgn">▲12.9%</td><td class="r mn">146.5億</td><td class="r mn">37.0億</td><td class="r mn hgn"><strong>0.25倍</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="note">BPSは2024年10月の1:2株式分割を調整済み。財務は10年で劇的に改善しており、経営の質は評価できます。<br>
+  <strong>ただし懸念：</strong>純利益は22/3期の63.5億がピークで、以降は43億→53億→55億→56億と<strong>足踏み状態</strong>。成長株ではなく安定収益株として見るべきです。</div>
+
+  <div class="h3">競争構造 — 「上位2社」ではあるが「寡占」ではない</div>
+  <table class="t">
+    <thead><tr><th>プレイヤー</th><th class="r">関連売上規模</th><th>ポジション</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>三協フロンテア（9639）</strong></td><td class="r mn">レンタル料 238.8億<br><span style="font-size:10px">全社 542.8億</span></td><td><span class="bge be-gn">レンタル最大手</span></td><td>製造〜物流〜レンタル〜再販の自社一貫。約800拠点</td></tr>
+      <tr class="hl"><td><strong>ナガワ（9663）</strong></td><td class="r mn">全社 353.9億<br><span style="font-size:10px">3セグメント合計</span></td><td><span class="bge be-gn">同2位</span></td><td>ユニットハウス／モジュール・システム建築／建機レンタルの3本柱</td></tr>
+      <tr><td>日成ビルド工業</td><td class="r mn">—</td><td><span class="bge be-am">3番手</span></td><td>システム建築・立体駐車場も展開</td></tr>
+      <tr><td>建機レンタル大手<br><span style="font-size:10px">アクティオ・カナモト・西尾レントオール・日建リース工業</span></td><td class="r mn">—</td><td><span class="bge be-rd">周辺から侵食</span></td><td><strong>仮設ハウスを建機とセットで貸し出す</strong>。現場のワンストップ調達ニーズでは強い競合</td></tr>
+      <tr><td>大手ハウスメーカー<br><span style="font-size:10px">大和ハウス・積水ハウス・ミサワホーム等</span></td><td class="r mn">—</td><td><span class="bge be-rd">災害時に参入</span></td><td><strong>応急仮設住宅はプレハブ建築協会経由で各社に配分</strong>。災害需要は三協の独占にならない</td></tr>
+    </tbody>
+  </table>
+  <div class="note">ユニットハウスレンタル市場は年間1,000億円強とみられ、<strong>三協＋ナガワの上位2社で概ね4割程度</strong>と推定されます（正式な市場シェア統計は公表されていないため、あくまで売上規模からの概算です）。<br>
+  <strong>結論：明確な「トップ2」だが、CR2が4割では寡占とは言えません。</strong>建機レンタル大手が仮設ハウスを扱う点、災害時にはプレハブ建築協会経由で大手ハウスメーカーにも配分される点が、価格支配力を制約しています。会社自身も事業リスクに「同業者との価格競争の激化」を明記しています。</div>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>ただし「トップ2」であること自体の価値は小さくありません。</strong>ユニットハウスは<strong>輸送コストが競争力を直接左右する</strong>ため、全国25ヶ所の物流センター・11工場・約800拠点という配置は新規参入者が短期で模倣できません。26/3期は減収局面でも<strong>粗利率を39.3%→40.5%に改善</strong>させており、少なくとも「値崩れによるシェア防衛」には陥っていない。実質的な競争環境は数字ほど厳しくないと読めます。</div>
+
+  <div class="h3">中核テーマ：省人化・オフサイト建設の本流に位置する</div>
+  <div class="inf"><strong>三協フロンテアの事業は「建設現場の省人化」そのものです。</strong>工場でユニットを完成させ、現場は据付のみ（最短1日で施工）。これは政策・規制・人口動態の3方向から同時に追い風を受ける構造で、<strong>災害需要よりもはるかに確度が高く、持続的です。</strong></div>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">政策・規制の後押し</div>
+      <div class="cx">
+        <strong>① i-Construction 2.0（国交省・2024年4月）</strong><br>
+        2040年度までに建設現場の<strong class="hgn">省人化3割（生産性1.5倍）</strong>を国家目標として設定。背景は2040年度までに生産年齢人口が約2割減という前提。<br><br>
+        <strong>② 建設業の時間外労働上限規制（2024年4月適用）</strong><br>
+        月45時間・年360時間の罰則付き上限＋週休二日。<strong>元請・下請、公共・民間を問わず一律適用</strong>。現場工数を削らなければ法令違反になる状況。<br><br>
+        <strong>③ 技能労働者の大量離職</strong><br>
+        60歳以上が技能者の<strong class="hgn">25.7%</strong>を占め、10年以内に大量退職が確定的。
+      </div>
+    </div>
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">市場としての広がり</div>
+      <div class="cx">
+        <strong>オフサイト建設 世界市場</strong><br>
+        2025年 1,850億ドル → 2026年 1,982億ドル（<strong class="hgn">CAGR 7.1%</strong>）<br><br>
+        <strong>モジュラー建設 世界市場</strong><br>
+        2022年 1,131億ドル → 2031年 2,233億ドル（<strong class="hgn">CAGR 6.1%</strong>）<br><br>
+        <strong>三協の該当性</strong><br>
+        会社は有報で<strong>「職人不足の状況下において、モバイルスペースを工場生産することで、建築工事における効率化と省人化を実現」</strong>と機会認定。27/3期は<strong>工事売上（本建築）を+17.6%増</strong>の計画で、単なる仮設事務所から<strong>恒久建築のオフサイト化</strong>へ軸足を移しつつあります。<br><br>
+        海外6ヶ国の現地法人設立（2024年米国・2025年シンガポール）も、このテーマの世界展開を狙ったものです。
+      </div>
+    </div>
+  </div>
+  <div class="ok"><strong>この点は投資判断上、重要です。</strong>三協は「建設市況に振られる仮設屋」ではなく、<strong>「建設のやり方そのものが変わる過程で構造的にシェアを取る側」</strong>に位置しています。10年売上CAGR+5.5%・純利益CAGR+8.0%という実績は市況追随ではなくこの構造変化の反映と解釈でき、<strong>PER8.8倍という評価はこのテーマ性を織り込んでいません</strong>。同じテーマで語られる建設DX・ロボティクス関連銘柄がPER20〜40倍で取引されていることとの対比は際立ちます。</div>
+</div>
+
+<!-- ══════════════════════════════ P4 バリュエーション ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">バリュエーション — 何をどう見ても安い</h2><span class="sb bg-gn">◎ 割安</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc cf-gn"><div class="ml">PER（27/3期予）</div><div class="mv gn">8.75倍</div><div class="ms">EPS 263.2円<br>10年レンジ 2.4〜61.5倍</div></div>
+    <div class="c mc cf-am"><div class="ml">PBR</div><div class="mv am">0.975倍</div><div class="ms">BPS 2,363円<br>10年レンジ 0.23〜1.68倍</div></div>
+    <div class="c mc cf-gn"><div class="ml">EV/EBITDA</div><div class="mv gn">3.48倍</div><div class="ms">EV 493億<br>EBITDA 142億</div></div>
+    <div class="c mc cf-gn"><div class="ml">配当利回り</div><div class="mv gn">3.91%</div><div class="ms">27/3期予 90円<br>配当性向目標35%</div></div>
+  </div>
+
+  <div class="h3">計算根拠（全て検算済み）</div>
+  <table class="t">
+    <thead><tr><th>項目</th><th class="r">数値</th><th>算式・出所</th></tr></thead>
+    <tbody>
+      <tr><td>発行済株式総数</td><td class="r mn">23,356,800株</td><td>第57期有報（2024/10/1に1:2分割済）</td></tr>
+      <tr><td>自己株式</td><td class="r mn">▲1,131,747株</td><td>4.85%。26/3期の追加取得はゼロ</td></tr>
+      <tr class="sm"><td><strong>実質株式数</strong></td><td class="r mn"><strong>22,225,053株</strong></td><td>—</td></tr>
+      <tr><td>時価総額（自己株控除後）</td><td class="r mn">512.1億円</td><td>22,225,053株 × 2,304円</td></tr>
+      <tr><td>ネットキャッシュ</td><td class="r mn">▲19.0億円</td><td>現預金55.4億+長期預金1.1億−有利子負債37.5億</td></tr>
+      <tr class="sm"><td><strong>EV（企業価値）</strong></td><td class="r mn"><strong>493.1億円</strong></td><td>512.1億 − 19.0億</td></tr>
+      <tr><td>営業利益（26/3実績）</td><td class="r mn">79.9億円</td><td>7,994百万円</td></tr>
+      <tr><td>減価償却費</td><td class="r mn">61.8億円</td><td>6,176百万円（CF計算書）</td></tr>
+      <tr class="sm"><td><strong>EBITDA</strong></td><td class="r mn"><strong>141.7億円</strong></td><td>営業利益＋減価償却費</td></tr>
+      <tr class="hl"><td><strong>EV/EBITDA</strong></td><td class="r mn"><strong>3.48倍</strong></td><td>493.1 ÷ 141.7</td></tr>
+      <tr><td>EV/EBIT</td><td class="r mn">6.17倍</td><td>493.1 ÷ 79.9</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="ok"><strong>EV/EBITDA 3.5倍は突出して安い。</strong>減価償却費が61.8億と営業利益（79.9億）に匹敵する規模のため、PERよりEV/EBITDAの方が実態を映します。<strong>キャッシュ創出力ベースでは3.5年で企業価値を回収できる計算</strong>で、これはPEファンドの典型的な買収目線（6〜8倍）の半分以下です。</div>
+
+  <div class="h3">同業比較 — ナガワとの対比が示唆的</div>
+  <table class="t">
+    <thead><tr><th>項目</th><th class="r">三協フロンテア（9639）</th><th class="r">ナガワ（9663）</th><th>評価</th></tr></thead>
+    <tbody>
+      <tr><td>株価</td><td class="r mn">2,304円</td><td class="r mn">4,930円</td><td>—</td></tr>
+      <tr><td>時価総額</td><td class="r mn">512億円</td><td class="r mn">約806億円</td><td>ナガワの方が大きい</td></tr>
+      <tr class="hl"><td><strong>PER（予）</strong></td><td class="r mn hgn"><strong>8.8倍</strong></td><td class="r mn hrd">23.2倍</td><td><span class="bge be-gn">三協が62%割安</span></td></tr>
+      <tr class="hl"><td><strong>PBR</strong></td><td class="r mn hgn"><strong>0.98倍</strong></td><td class="r mn ham">1.10倍</td><td><span class="bge be-gn">三協が割安</span></td></tr>
+      <tr class="hl"><td><strong>ROE</strong></td><td class="r mn hgn"><strong>11.0%</strong></td><td class="r mn hrd">6.8%</td><td><span class="bge be-gn">三協が62%高い</span></td></tr>
+      <tr><td>自己資本比率</td><td class="r mn">75.0%</td><td class="r mn">87.3%</td><td>両社とも財務堅牢</td></tr>
+      <tr><td>配当利回り</td><td class="r mn hgn">3.91%</td><td class="r mn hrd">1.22%</td><td><span class="bge be-gn">三協が3.2倍</span></td></tr>
+      <tr><td>市場区分</td><td class="r">スタンダード</td><td class="r">プライム</td><td><span class="bge be-rd">流動性で劣後</span></td></tr>
+      <tr><td>支配株主</td><td class="r hrd">和幸興産50.5%（従属上場）</td><td class="r">分散</td><td><span class="bge be-rd">三協の弱点</span></td></tr>
+    </tbody>
+  </table>
+  <div class="note">ナガワは2026/6/19時点。<strong>三協はナガワより高ROE・高配当なのにPERは38%の水準</strong>。この差の大半は「プライム vs スタンダード」「株主分散 vs 同族支配」「流動性」という非事業要因で説明されます。<br>
+  <strong>示唆：</strong>非公開化やプライム移行など、非事業要因が変化すれば大幅なリレーティング余地があります。逆に何も変わらなければ、この差は永続する可能性もあります。</div>
+
+  <div class="h3">理論株価の三面算定</div>
+  <div class="g3">
+    <div class="c cl-bl">
+      <div class="ch">① 残余利益／PBRアプローチ</div>
+      <div class="cx">理論PBR = ROE ÷ 株主資本コスト<br>
+      <span class="mn">= 11.0% ÷ 8.0% = <strong>1.375倍</strong></span><br>
+      → 2,363円 × 1.375 = <strong class="hgn">3,249円</strong><br><br>
+      <strong>ガバナンス／流動性ディスカウント25%を控除</strong><br>
+      → <strong class="ham">2,437円</strong>
+      </div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ch">② PERアプローチ</div>
+      <div class="cx">安定収益・ストック48%・ROE11%<br>
+      適正PER <strong>11〜13倍</strong>が妥当水準<br>
+      → 263.2円 × 12倍 = <strong class="hgn">3,158円</strong><br><br>
+      <strong>スタンダード・無カバレッジで15%控除</strong><br>
+      → <strong class="ham">2,684円</strong>
+      </div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ch">③ EV/EBITDAアプローチ</div>
+      <div class="cx">同業・PE買収目線 <strong>6.0倍</strong>適用<br>
+      EBITDA 141.7億 × 6.0 = EV 850億<br>
+      ＋ネットキャッシュ19億 = 869億<br>
+      → 1株 <strong class="hgn">3,910円</strong><br><br>
+      <strong>これはMBO／TOB時の上限目線</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="inf"><strong>三面算定の収束点。</strong>ディスカウント後で <strong>2,437円／2,684円／（3,910円はM&A目線）</strong>。継続保有前提の中立フェアバリューは<strong class="ham">2,700円前後（+17%）</strong>、資本イベント発生時は<strong class="hgn">3,000〜3,900円（+30〜70%）</strong>と整理できます。<br><br>
+  <strong>重要：</strong>現株価2,304円は26/3期の上場来高値2,288円（分割調整後）を既に上抜けた水準です。「安値で放置されている」のではなく、<strong>「割安なまま高値圏にいる」</strong>状態。株価はこの2年で+31.5%（TOPIX +102.2%）と、指数には大きく劣後しています。</div>
+
+  <div class="h3">株主還元の実態</div>
+  <table class="t">
+    <thead><tr><th>期</th><th class="r">1株配当</th><th class="r">配当性向</th><th class="r">自己株取得</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>22/3期</td><td class="r mn">160円</td><td class="r mn">28.2%</td><td class="r">—</td><td>分割前ベース</td></tr>
+      <tr><td>23/3期</td><td class="r mn">155円</td><td class="r mn">40.2%</td><td class="r">—</td><td>減益で性向上昇</td></tr>
+      <tr><td>24/3期</td><td class="r mn">160円</td><td class="r mn">33.8%</td><td class="r">—</td><td>—</td></tr>
+      <tr><td>25/3期</td><td class="r mn">85円※</td><td class="r mn">34.6%</td><td class="r">—</td><td>24/10に1:2分割</td></tr>
+      <tr class="hl"><td><strong>26/3期</strong></td><td class="r mn"><strong>85円</strong></td><td class="r mn">34.3%</td><td class="r hrd"><strong>ゼロ</strong></td><td>中間40円＋期末45円</td></tr>
+      <tr><td>27/3期予</td><td class="r mn hgn">90円</td><td class="r mn">34.2%</td><td class="r">未定</td><td>利回り3.91%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">※分割調整後。<strong>配当性向は「中期的に35%目安」で固定的</strong>。自己株式1,131,747株（4.85%）を保有しているが、26/3期の追加取得も消却もゼロ。<br>
+  <strong>評価：</strong>配当利回り3.91%は下値を支える一方、<strong>自己株買いを一度も実施していない点は資本効率への意識の低さを示唆</strong>します。PBR1倍割れかつ実質無借金でありながら還元を強化しないのは、支配株主が希薄化を気にしない（既に69%保有）ためと解釈できます。裏を返せば<strong>還元強化余地は大きく残されています</strong>。</div>
+</div>
+
+<!-- ══════════════════════════════ P5 カタリスト ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">カタリスト — MBOと東証制度改正が二本柱</h2><span class="sb bg-pu">最重要タブ</span></div>
+
+  <div class="cg">
+    <div class="ca cc-pu">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🔐</span>
+      <div class="ct">MBOの実行環境が完璧に整っている</div>
+      <div class="cb" style="color:#d890d0">69.3%</div>
+      <div class="cu">創業家＋親会社の議決権保有比率</div>
+      <div class="cp">和幸興産50.54%＋長妻貴嗣14.93%＋長妻和男2.92%＋長妻幸枝0.86%。<strong>既に特別決議（2/3）を単独可決できる水準</strong>。株式併合によるスクイーズアウトが法的に完全に可能で、実行リスクは事実上ゼロ。</div>
+      <div class="tgs"><span class="tg tg-gn">実行障壁なし</span><span class="tg tg-am">残り30.7%の買取</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 02 · 最重要</div>
+      <span class="ci">🏛️</span>
+      <div class="ct">東証・従属上場会社の制度改正が進行中</div>
+      <div class="cb bl">2026年</div>
+      <div class="cu">少数株主保護に関する上場制度の見直し</div>
+      <div class="cp">東証は2026年春に<strong>少数株主の賛否割合の開示義務化・独立性基準の見直し</strong>のパブコメを実施。<strong>2026年夏以降に親子上場企業への開示アプローチを検討</strong>。三協は典型的な従属上場会社であり、直撃するテーマ。</div>
+      <div class="tgs"><span class="tg tg-bl">今まさに進行中</span><span class="tg tg-or">対応 or 非公開化の二択</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 03 · 重要</div>
+      <span class="ci">🏗️</span>
+      <div class="ct">国土強靱化 実施中期計画が26年度始動</div>
+      <div class="cb am">20兆円超</div>
+      <div class="cu">2026年度から5年間・326施策</div>
+      <div class="cp">第1次国土強靱化実施中期計画が<strong>2026年度から始動</strong>。26年度概算要求は6.66兆円（当初予算比+24.6%）。三協の主要顧客である建設・土木業界への<strong>構造的な予算流入</strong>で、仮設事務所・宿舎需要を押し上げる。</div>
+      <div class="tgs"><span class="tg tg-am">5年確定予算</span><span class="tg tg-gn">26年度スタート</span></div>
+    </div>
+  </div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 04</div>
+      <span class="ci">🖥️</span>
+      <div class="ct">コンテナ型データセンター</div>
+      <div class="cb gn">+18.7%</div>
+      <div class="cu">日本市場CAGR（2026-2034年予測）</div>
+      <div class="cp">会社が対処すべき課題で<strong>「拡大するデータセンター需要に対応するコンテナ型データセンターなどの新製品の提供」を明記</strong>。日本市場は2025年約9.2億ドル規模から年率18.7%成長の予測。三協の製造・物流基盤と親和性が高い新規領域。</div>
+      <div class="tgs"><span class="tg tg-gn">会社が公式言及</span><span class="tg tg-or">単価・利益率とも高い</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 05</div>
+      <span class="ci">🌏</span>
+      <div class="ct">海外現地法人の設立ラッシュ</div>
+      <div class="cb or">6ヶ国</div>
+      <div class="cu">2024年米国 → 2025年シンガポール</div>
+      <div class="cp">中国・ミャンマー×2・マレーシアに加え、<strong>2024年7月に米国、2025年8月にシンガポール法人を設立</strong>。「VISION2050／Mobile Spaceを世界の常識に」の実装段階。関係会社株式は13.3億→15.2億に増加。ただし<strong>収益貢献はまだ皆無</strong>で、現時点ではコスト要因。</div>
+      <div class="tgs"><span class="tg tg-or">中長期オプション</span><span class="tg tg-rd">当面は先行投資</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 06 · 最重要</div>
+      <span class="ci">👷</span>
+      <div class="ct">省人化・オフサイト建設の本流</div>
+      <div class="cb gn">省人化3割</div>
+      <div class="cu">i-Construction 2.0 · 2040年度目標</div>
+      <div class="cp">国交省が<strong>2040年度までに建設現場の省人化3割（生産性1.5倍）</strong>を国家目標に設定。2024年4月からは<strong>罰則付き時間外労働上限規制</strong>も適用され、現場工数の削減は法令要請に。三協の「工場生産＋現場は据付のみ」は<strong>この解そのもの</strong>。27/3期は本建築の工事売上を+17.6%計画。</div>
+      <div class="tgs"><span class="tg tg-gn">政策×規制×人口</span><span class="tg tg-gn">不可逆</span><span class="tg tg-or">PERに未反映</span></div>
+    </div>
+  </div>
+
+  <div class="h3">補論：ナガワとの決定的な違い — 株主構成が資本政策を決めている</div>
+  <table class="t">
+    <thead><tr><th>項目</th><th class="r">三協フロンテア（9639）</th><th class="r">ナガワ（9663）</th></tr></thead>
+    <tbody>
+      <tr><td>売上高（26/3期）</td><td class="r mn hgn">542.8億円</td><td class="r mn">353.9億円</td></tr>
+      <tr><td>純利益（26/3期）</td><td class="r mn hgn">55.6億円</td><td class="r mn">44.4億円</td></tr>
+      <tr class="wn"><td><strong>時価総額</strong></td><td class="r mn hrd"><strong>512億円</strong></td><td class="r mn hgn"><strong>821億円</strong></td></tr>
+      <tr><td>PER（予）</td><td class="r mn hgn">8.8倍</td><td class="r mn">23.6倍</td></tr>
+      <tr><td>ROE（予）</td><td class="r mn hgn">11.1%</td><td class="r mn hrd">4.8%</td></tr>
+      <tr class="hl"><td><strong>筆頭株主</strong></td><td class="r hrd">㈲和幸興産 50.5%<br><span style="font-size:10px">創業家合計 69.3%</span></td><td class="r">髙橋修 12.96%<br><span class="hgn" style="font-size:10px">SFPバリューファンド 12.32%</span></td></tr>
+      <tr class="hl"><td><strong>アクティビストの存在</strong></td><td class="r hrd"><strong>参入余地なし</strong></td><td class="r hgn"><strong>SFP・オークツリーが関与</strong></td></tr>
+      <tr class="hl"><td><strong>自己株買い実績</strong></td><td class="r hrd"><strong>ゼロ</strong></td><td class="r mn hgn">24年11.9億／25年5.9億／26年7.7億<br><span style="font-size:10px">毎年継続</span></td></tr>
+      <tr><td>配当利回り</td><td class="r mn hgn">3.91%</td><td class="r mn hrd">1.20%</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><strong>売上で1.5倍、純利益で1.25倍、ROEで2.3倍上回る三協の時価総額が、ナガワの62%にとどまっています。</strong>この差を作っているのは事業の質ではなく<strong>株主構成です</strong>。ナガワには物言う株主（SFPバリューファンド12.32%）が入り、その圧力下で毎年自己株買いを実施している。三協は創業家が69.3%を握るため<strong>アクティビストが物理的に参入できず、還元強化の外圧が働きません</strong>。<br><br>
+  <strong>この事実は両刃です。</strong>①ディスカウントの正体が特定できた以上、<strong>解消経路も特定できる</strong>（＝MBO、あるいは創業家の自発的な還元強化）。②一方で、<strong>外圧が効かない以上、創業家が動かなければ永久に是正されない</strong>可能性もある。MBO確率を3年内20〜30%と置いているのは、この両面を踏まえた数字です。</div>
+
+  <div class="h3">MBOシナリオの定量分析</div>
+  <table class="t">
+    <thead><tr><th>買収価格</th><th class="r">現値比プレミアム</th><th class="r">対応PER</th><th class="r">対応PBR</th><th class="r">対応EV/EBITDA</th><th class="r">買収所要額※</th><th>実現可能性の評価</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2,800円</td><td class="r mn">+21.5%</td><td class="r mn">10.6倍</td><td class="r mn">1.18倍</td><td class="r mn">4.3倍</td><td class="r mn">191億円</td><td><span class="bge be-rd">安すぎて特別委員会が承認困難</span></td></tr>
+      <tr class="hl"><td class="mn"><strong>3,200円</strong></td><td class="r mn"><strong>+38.9%</strong></td><td class="r mn">12.2倍</td><td class="r mn">1.35倍</td><td class="r mn">4.9倍</td><td class="r mn">218億円</td><td><span class="bge be-gn">最頻値ゾーン・日本のMBO標準プレミアム</span></td></tr>
+      <tr class="hl"><td class="mn"><strong>3,600円</strong></td><td class="r mn"><strong>+56.3%</strong></td><td class="r mn">13.7倍</td><td class="r mn">1.52倍</td><td class="r mn">5.5倍</td><td class="r mn">246億円</td><td><span class="bge be-am">DCF評価レンジ上限。競合提案があれば</span></td></tr>
+      <tr><td class="mn">3,900円</td><td class="r mn">+69.3%</td><td class="r mn">14.8倍</td><td class="r mn">1.65倍</td><td class="r mn">6.0倍</td><td class="r mn">266億円</td><td><span class="bge be-rd">PEの目線上限。同族には割高</span></td></tr>
+    </tbody>
+  </table>
+  <div class="note">※スクイーズアウトに必要な非支配株主分（30.7%＝約6.83百万株）の取得所要額。<br>
+  <strong>資金調達の実現可能性：</strong>経常利益83億円／年、EBITDA 142億円／年、有利子負債はわずか37億円。<strong>218億円の買収資金はLBOローンで容易に調達可能</strong>（EBITDA倍率1.5倍程度の負債で済む）。財務面での障害はありません。</div>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">MBOの動機が存在する理由</div>
+      <div class="cx">
+        ① <strong>上場維持コストに見合わない</strong>：資金調達を一切必要としていない（実質無借金・営業CF56億）。上場のメリットが薄い。<br>
+        ② <strong>東証の親子上場規制強化</strong>：対応コストと開示負担が増大する方向。<br>
+        ③ <strong>親会社が非上場の不動産賃貸会社</strong>：㈲和幸興産との関連当事者取引を抱えており、支配株主取引の透明性要求は年々厳しくなる。<br>
+        ④ <strong>事業承継</strong>：社長・長妻貴嗣氏は1965年5月生まれで<strong>現在61歳</strong>。2002年就任から24年目。承継設計のタイミングとして自然。<br>
+        ⑤ <strong>株価が割安</strong>：PBR約1倍で買える。同族にとって経済合理性が高い。
+      </div>
+    </div>
+    <div class="c cf-rd">
+      <div class="ch" style="color:var(--rd)">MBOが来ない理由も同じくらいある</div>
+      <div class="cx">
+        ① <strong>会社は非公開化を一切示唆していない</strong>。有報にも決算説明資料にも記載なし。<strong>これは現時点で「観測」ですらなく「推論」です。</strong><br>
+        ② <strong>既に完全に支配している</strong>：69.3%を握り取締役会も掌握。<strong>わざわざ218億円を払う実利が薄い</strong>。<br>
+        ③ 上場企業ステータスは採用・与信・ブランドで価値がある（従業員1,207名、新卒採用を継続）。<br>
+        ④ 東証の制度改正は<strong>まだ「検討」段階</strong>で、強制力のある上場廃止基準ではない。<br>
+        ⑤ 配当性向35%を維持しており、同族は毎年<strong>約13億円の配当を受領</strong>。現状維持でも十分な果実がある。<br><br>
+        <strong>→ MBO確率は筆者推定で3年内20〜30%程度。「あれば大きい」オプションであり、前提にすべきではありません。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">想定タイムライン</div>
+  <div class="tl">
+    <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年4月〜（進行中）</div><div class="ttext"><strong>国土強靱化 実施中期計画（第1次）始動。</strong>5年20兆円強・26年度概算要求6.66兆円。建設投資の増加が三協の顧客基盤に波及。<span class="bge be-gn">追い風</span></div></div>
+    <div class="ti"><div class="td2 bl"></div><div class="tdate">2026年夏以降</div><div class="ttext"><strong>東証、親子関係にある上場会社への開示アプローチを検討。</strong>グループ経営に関する開示推進の要請（2023年12月）のフォローアップ。三協への直接的な情報開示圧力に。<span class="bge be-bl">要注視</span></div></div>
+    <div class="ti"><div class="td2 am"></div><div class="tdate">2026年8月上旬</div><div class="ttext"><strong>27/3期 第1四半期決算発表。</strong>レンタル料収入の回復（会社計画+3.0%）が実現しているかが最初の確認点。前年1Q経常は12.4億と低いため、比較は容易。</div></div>
+    <div class="ti"><div class="td2 or"></div><div class="tdate">2026年11月</div><div class="ttext"><strong>中間決算＋中間配当（40円想定）。</strong>通期上方修正の有無、自己株取得の発表有無を確認。<strong>還元強化があれば最初の再評価トリガー</strong>。</div></div>
+    <div class="ti"><div class="td2 pu"></div><div class="tdate">2027年5月</div><div class="ttext"><strong>27/3期本決算。</strong>売上590億・経常88億の達成可否。中期経営計画（数値目標）の開示があれば大きなポジティブ。</div></div>
+    <div class="ti"><div class="td2 rd"></div><div class="tdate">2027〜2029年</div><div class="ttext"><strong>MBO／非公開化の可能性ウィンドウ。</strong>東証の制度改正が具体化し、対応コストが顕在化する局面。社長63〜65歳で事業承継の現実味も増す。<span class="bge be-rd">確率20〜30%</span></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P6 震災復興・市場 ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">震災復興・市場成長 — 期待の仕方を変える必要あり</h2><span class="sb bg-am">要・認識修正</span></div>
+
+  <div class="wr"><strong>「震災復興関連も継続的な追い風」という前提は、直近実績と矛盾します。</strong>能登半島地震（2024年1月）の応急仮設住宅需要は<strong>25/3期に計上され、26/3期には剥落しました</strong>。会社は減収の主因としてこれを明示しています。復興需要は「継続的追い風」ではなく<strong>「一過性のスパイクと、その翌期の反動減」</strong>という性質を持ちます。</div>
+
+  <div class="h3">災害需要の実際の効き方</div>
+  <table class="t">
+    <thead><tr><th>期</th><th class="r">レンタル料収入</th><th class="r">前年比</th><th class="r">全社売上</th><th>災害要因</th></tr></thead>
+    <tbody>
+      <tr><td>24/3期</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">523.7億</td><td>—</td></tr>
+      <tr class="hl"><td><strong>25/3期</strong></td><td class="r mn hgn"><strong>266.0億</strong></td><td class="r mn hgn">—</td><td class="r mn hgn">560.9億</td><td><strong class="hgn">能登半島地震 応急仮設住宅＋復興対応で押し上げ</strong></td></tr>
+      <tr class="wn"><td><strong>26/3期</strong></td><td class="r mn hrd"><strong>238.8億</strong></td><td class="r mn hrd"><strong>▲10.2%</strong></td><td class="r mn hrd">542.8億（▲3.2%）</td><td><strong class="hrd">能登特需の剥落が減収の主因（会社説明）</strong></td></tr>
+      <tr><td>27/3期予</td><td class="r mn">246.0億</td><td class="r mn hgn">+3.0%</td><td class="r mn hgn">590.0億（+8.7%）</td><td>災害要因を織り込まない通常回復</td></tr>
+    </tbody>
+  </table>
+  <div class="note">出所：2026年3月期決算説明会資料。<strong>27/3期予想の246億は、特需のあった25/3期266億に対してまだ7.5%低い水準</strong>です。</div>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c cf-am">
+      <div class="ch" style="color:var(--am)">災害を投資根拠にすべきでない3つの理由</div>
+      <div class="cx">
+        <strong>① 予測不能。</strong>いつ・どこで・どの規模かは事前に織り込めません。株価の期待値計算に組み込めない変数です。<br><br>
+        <strong>② 一過性。</strong>応急仮設住宅は基本2年（延長で最長3年）の供与期間。<strong>需要のピークは発災後3〜12ヶ月に集中</strong>し、その後は返却で反動減が来ます。26/3期がまさにこれ。<br><br>
+        <strong>③ 利益率が高いとは限らない。</strong>災害対応は緊急輸送・突貫施工でコストが嵩みます。25/3期の売上総利益率39.3%は、特需のない26/3期の40.5%より<strong>低い</strong>という事実がそれを示しています。
+      </div>
+    </div>
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">代わりに賭けるべき「構造的な防災需要」</div>
+      <div class="cx">
+        災害"復興"ではなく、<strong>災害"予防"の予算</strong>こそが継続的な追い風です。<br><br>
+        <strong>第1次国土強靱化実施中期計画</strong>（2025年6月6日閣議決定）<br>
+        ・期間：<strong class="hgn">2026年度から5年間</strong><br>
+        ・規模：<strong class="hgn">おおむね20兆円強</strong>／326施策<br>
+        ・内訳：ライフライン強靱化 約10.6兆円、防災インフラ整備・管理 約5.8兆円<br>
+        ・26年度概算要求：<strong class="hgn">6兆6,583億円（当初予算比+24.6%）</strong><br><br>
+        こちらは<strong>閣議決定済みの5年確定予算</strong>であり、三協の主要顧客である建設・土木業界に安定的に流入します。仮設事務所・宿舎・資材倉庫といった<strong>ストック型のレンタル需要</strong>を底上げする性質のもので、まさに「継続的な追い風」の名にふさわしい。<br><br>
+        <strong>投資家として賭けるならこちらです。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">市場成長ドライバーの総括</div>
+  <table class="t">
+    <thead><tr><th>ドライバー</th><th class="r">定量規模</th><th>時間軸</th><th class="r">確度</th><th>三協へのインパクト</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>国土強靱化 中期計画</strong></td><td class="r mn">20兆円超／5年</td><td>2026年度〜2030年度</td><td class="r"><span class="bge be-gn">高</span></td><td>顧客の建設投資増→仮設需要の底上げ。<strong>最も確実</strong></td></tr>
+      <tr class="hl"><td><strong>建設職人不足</strong></td><td class="r mn">構造的</td><td>不可逆・長期</td><td class="r"><span class="bge be-gn">高</span></td><td>工場生産型建築へのシフト。<strong>三協のコア優位性を強化</strong></td></tr>
+      <tr><td>コンテナ型DC</td><td class="r mn">CAGR +18.7%</td><td>2026〜2034年</td><td class="r"><span class="bge be-am">中</span></td><td>会社が新製品として言及。高単価だが実績はこれから</td></tr>
+      <tr><td>トランクルーム市場</td><td class="r mn">店舗478→拡大中</td><td>継続</td><td class="r"><span class="bge be-gn">高</span></td><td>賃貸収入22億（売上の4%）。<strong>安定だが規模が小さい</strong></td></tr>
+      <tr><td>データセンター建設ブーム</td><td class="r mn">—</td><td>2026〜</td><td class="r"><span class="bge be-am">中</span></td><td>建設現場の仮設事務所・宿舎需要。間接的だが大きい</td></tr>
+      <tr><td>海外展開（6ヶ国）</td><td class="r mn">現状ほぼゼロ</td><td>2030年〜</td><td class="r"><span class="bge be-rd">低</span></td><td>VISION2050の長期オプション。<strong>当面は先行投資負担</strong></td></tr>
+      <tr class="wn"><td>災害復興特需</td><td class="r mn">予測不能</td><td>不定期</td><td class="r"><span class="bge be-rd">賭けるべきでない</span></td><td>一過性スパイク＋翌期反動。<strong>期待値に含めない</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="inf"><strong>市場成長の総評：△〜○。</strong>爆発的な成長市場ではありませんが、<strong>国土強靱化と職人不足という2つの構造要因が、5年スパンで安定的な需要を保証</strong>します。会社の10年売上CAGR +5.49%・純利益CAGR +8.04%という実績も、この「地味だが着実」な性格と整合的です。<strong>年率5〜8%の利益成長＋配当4%＝トータル9〜12%のリターン</strong>を、割安なバリュエーションから狙う設計が現実的です。</div>
+</div>
+
+<!-- ══════════════════════════════ P7 リスク ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">ダウンサイドリスク — 冷静に数えると多い</h2><span class="sb bg-rd">要精査</span></div>
+
+  <div class="h3">リスクの深刻度マトリクス</div>
+  <table class="t">
+    <thead><tr><th>リスク</th><th class="r">発生確率</th><th class="r">株価影響</th><th class="r">総合</th><th>内容と根拠</th></tr></thead>
+    <tbody>
+      <tr class="wn"><td><strong>① 流動性リスク</strong></td><td class="r"><span class="bge be-rd">確定</span></td><td class="r">中〜大</td><td class="r hrd"><strong>最大</strong></td><td>出来高は日次数千株規模（26/6/9は1,900株＝約440万円）。<strong>数百万円のポジションでも建玉・手仕舞いに時間を要する</strong>。悪材料時は板が飛ぶ。個人投資家にとって実質的な最大リスク</td></tr>
+      <tr class="wn"><td><strong>② レンタル料収入の続落</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r">大</td><td class="r hrd"><strong>高</strong></td><td>26/3期▲10.2%。稼働率低下時は<strong>減価償却61.8億という固定費が逆レバレッジ</strong>として効く。27/3期計画+3.0%が未達なら失望売り</td></tr>
+      <tr class="wn"><td><strong>③ 支配株主リスク</strong></td><td class="r"><span class="bge be-rd">確定</span></td><td class="r">中</td><td class="r hrd"><strong>高</strong></td><td>㈲和幸興産（<strong>非上場・不動産賃貸業</strong>）が50.54%。関連当事者取引が存在。少数株主の利益と支配株主の利益が構造的に相反しうる</td></tr>
+      <tr><td><strong>④ 過去の内部統制不備</strong></td><td class="r"><span class="bge be-gn">解消済</span></td><td class="r">中</td><td class="r ham">中</td><td>第49〜54期（2018〜2023年）に<strong>「開示すべき重要な不備」</strong>。2023年に過年度決算訂正・訂正有報を提出。監査法人も2024年にアヴァンティアへ交代。<strong>55期以降は「有効」だが信頼の完全回復には時間</strong></td></tr>
+      <tr><td><strong>⑤ 建設投資への依存</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r">大</td><td class="r ham">中</td><td>会社が事業リスクとして明記。<strong>公共投資の大幅削減や民間工事の著しい減少</strong>が起きれば直撃。景気敏感性は決して低くない</td></tr>
+      <tr><td><strong>⑥ FCFの薄さ</strong></td><td class="r"><span class="bge be-rd">確定</span></td><td class="r">中</td><td class="r ham">中</td><td>営業CF 55.9億に対し<strong>設備投資 72.2億</strong>。27/3期も85.4億の設備投資計画。減価償却61.8億を上回る投資が構造的に必要で、<strong>還元余力を圧迫</strong></td></tr>
+      <tr><td><strong>⑦ 資材価格上昇</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r">中</td><td class="r ham">中</td><td>鋼材価格が主原価。円安も原材料調達コストを押し上げ。会社が事業リスクとして明記。<strong>ただし26/3期は原価低減で吸収に成功</strong></td></tr>
+      <tr><td><strong>⑧ レンタル資産の陳腐化・減損</strong></td><td class="r"><span class="bge be-gn">低</span></td><td class="r">大</td><td class="r hbl">低〜中</td><td>会社が事業リスクの筆頭に記載。取得原価459億の資産が陳腐化すれば<strong>大規模な減損・廃棄損</strong>。ただし製品特性上、急激な技術革新は考えにくい</td></tr>
+      <tr><td><strong>⑨ 有利子負債の急増</strong></td><td class="r"><span class="bge be-am">要注視</span></td><td class="r">小</td><td class="r hbl">低</td><td>23.6億→37.5億（<strong>+57%</strong>）。新工場用地取得のため。絶対額は小さいが<strong>実質無借金という前提が崩れつつある</strong>点は要監視</td></tr>
+      <tr><td><strong>⑩ 有利子負債の返済集中</strong></td><td class="r"><span class="bge be-gn">低</span></td><td class="r">小</td><td class="r hbl">低</td><td>2年以内2.23億・3年以内0.15億・4年以内0.08億。<strong>返済負担は軽微</strong>。ほぼ短期借入のロールで対応可能</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="h3">最も注意すべき：流動性リスクの実務的な意味</div>
+  <div class="cdk">
+    <div class="conc-b">
+      三協フロンテアは<strong style="color:#e09090">「割安だから買える銘柄」ではあっても「割安だから機動的に売買できる銘柄」ではありません。</strong><br><br>
+      浮動株は全体の約30.7%（約683万株）に見えますが、そのうち相当部分は信託口・従業員持株会・SUS等の安定株主です。<strong style="color:rgba(246,245,239,.95)">実際に日々売買されているのは1日あたり数千株規模</strong>で、金額にすれば数百万円〜数千万円。<br><br>
+      これが意味することは3つ。<br>
+      ① <strong style="color:rgba(246,245,239,.95)">ポジションサイズは資産の数%に抑えるべき</strong>。逃げられなくなります。<br>
+      ② <strong style="color:rgba(246,245,239,.95)">指値でしか買わない・売らない</strong>。成行は板を飛ばします。<br>
+      ③ <strong style="color:rgba(246,245,239,.95)">数ヶ月〜数年の保有を前提にする</strong>。デイトレ・スイングには全く向きません。<br><br>
+      逆に言えば、<strong style="color:var(--or2)">この流動性の薄さこそがPER8倍台の主因</strong>であり、時間を許容できる投資家にとっては「他人が取れないリスクを取ることへの対価」でもあります。
+    </div>
+  </div>
+
+  <div class="h3">最悪シナリオの下値試算</div>
+  <div class="g3">
+    <div class="c mc cf-rd"><div class="ml">シナリオA：レンタル料続落</div><div class="mv rd">1,750円</div><div class="ms">EPS 250円 × PER 7倍<br><strong>▲24%</strong></div></div>
+    <div class="c mc cf-rd"><div class="ml">シナリオB：建設投資急減</div><div class="mv rd">1,540円</div><div class="ms">EPS 220円 × PER 7倍<br><strong>▲33%</strong></div></div>
+    <div class="c mc cf-am"><div class="ml">下値フロア（PBR 0.75倍）</div><div class="mv am">1,772円</div><div class="ms">過去10年PBR下限0.23倍<br>ただし直近5年は0.7倍が下限</div></div>
+  </div>
+  <div class="note"><strong>下値の支え：</strong>①配当利回り。株価1,800円なら利回り5.0%となり、配当妙味で買いが入る水準。②BPS 2,363円（26/3期末）は毎年7〜8%積み上がるため、時間経過とともに下値が切り上がる。③自己資本比率75%・有利子負債37億で財務破綻リスクは実質ゼロ。<br>
+  <strong>結論：ダウンサイドは▲25〜33%程度、アップサイドは+17〜56%程度</strong>。リスクリワードは悪くありませんが、圧倒的に有利というほどでもありません。</div>
+
+  <div class="h3">ガバナンスの追加チェックポイント</div>
+  <div class="g3">
+    <div class="c cl-am"><div class="ch">取締役の期中辞任</div><div class="cx">取締役・鈴木洋帆氏が<strong>2026年3月31日付で辞任により退任</strong>。取締役会出席は11回中8回。理由は開示されていません。単発事象と見られますが、過去の内部統制不備の経緯もあり<strong>次期以降の役員異動は要注視</strong>。</div></div>
+    <div class="c cl-am"><div class="ch">会社自身がガバナンス不十分を認定</div><div class="cx">有報のサステナビリティ項目で<strong>「当社グループのサステナビリティに関するガバナンス体制は、不十分であり、改善の必要があると認識しております」</strong>と明記。誠実な開示ではありますが、<strong>整備途上であることの自認</strong>でもあります。</div></div>
+    <div class="c cl-gn"><div class="ch">○ 政策保有株がほぼゼロ</div><div class="cx">投資有価証券1.15億円のみ。<strong>持ち合い解消圧力とは無縁</strong>で、この点は東証の要請に対してクリーンです。含み益はありませんが、ガバナンス上はプラス材料。</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P8 最終評価 ══════════════════════════════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">最終評価</h2><span class="sb bg-gn">○ 投資妙味あり（買い）</span></div>
+
+  <div class="ok"><strong>評価：○（買い）。</strong>根拠は<strong>「下方が構造的に守られ、上方に無料オプションが3つ付いている」</strong>という収益構造の非対称性です。以下5点で説明します。</div>
+
+  <div class="h3">評価○の根拠 — 5つの柱</div>
+  <table class="t" style="margin-bottom:18px">
+    <thead><tr><th>柱</th><th>ファクト</th><th class="r">数値</th><th>投資判断への意味</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>① 下方の堅さ</strong><br><span class="bge be-gn">最重要</span></td><td>BPSが年7.5%で複利成長（過去10年実績+7.8%）。配当性向35%で残り65%が内部留保される</td><td class="r mn hgn"><strong>年率+8.3%</strong><br><span style="font-size:10px">PBR0.90倍でも</span></td><td><strong>MBOもリレーティングも起こらず、PBRが今の0.98倍から0.90倍に下がっても3年で年率8.3%</strong>。上振れ要因ゼロでも負けにくい</td></tr>
+      <tr><td><strong>② 絶対的な割安さ</strong></td><td>EV/EBITDA 3.5倍はPEファンドの買収目線（6〜8倍）の半分以下。PER 8.8倍・PBR 0.98倍</td><td class="r mn hgn"><strong>EV/EBITDA<br>3.48倍</strong></td><td>減価償却61.8億が営業利益79.9億に匹敵するため、PERよりEV/EBITDAが実態を映す。<strong>3.5年で企業価値を回収できる</strong></td></tr>
+      <tr><td><strong>③ 収益の質</strong></td><td>ストック収入48%・粗利率40.5%・ROE 11.0%・自己資本比率75%。約800拠点の物理的参入障壁</td><td class="r mn hgn"><strong>ROE 11.0%</strong><br><span style="font-size:10px">無借金でこの水準</span></td><td>実質無借金でROE11%＝<strong>レバレッジに頼らない収益力</strong>。自己資本比率を60%に下げれば理論ROEは13.2%に上昇する余地</td></tr>
+      <tr><td><strong>④ 配当の下支え</strong></td><td>利回り3.91%、配当性向34.3%で<strong>2.9倍のカバー</strong>。減配リスクは極小</td><td class="r mn hgn"><strong>3.91%</strong><br><span style="font-size:10px">1,800円なら5.0%</span></td><td>株価が下落するほど利回りが跳ね上がり、<strong>配当妙味で買いが入る水準まで自動的に下値が形成される</strong></td></tr>
+      <tr><td><strong>⑤ 複数の勝ち筋</strong></td><td>リレーティング／MBO／還元強化。いずれも起きなくても①で年率8%が確保されている</td><td class="r mn hgn"><strong>+13〜56%</strong><br><span style="font-size:10px">実現時の上乗せ</span></td><td>ダウンサイドが守られた上での上振れ余地は<strong>実質的な無料オプション</strong>。1つでも当たれば年率13〜15%圏に乗る</td></tr>
+    </tbody>
+  </table>
+
+  <div class="h3">柱①の詳細：リレーティング不要でもリターンが出る構造</div>
+  <table class="t">
+    <thead><tr><th>3年後の想定PBR</th><th class="r">3年後BPS</th><th class="r">株価</th><th class="r">＋累計配当</th><th class="r">合計</th><th class="r">累計</th><th class="r">年率</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td>0.90倍</td><td class="r mn">2,936円</td><td class="r mn">2,642円</td><td class="r mn">285円</td><td class="r mn">2,927円</td><td class="r mn hgn">+27.0%</td><td class="r mn hgn"><strong>+8.3%</strong></td><td><strong>今よりPBRが下がっても</strong></td></tr>
+      <tr><td>0.95倍</td><td class="r mn">2,936円</td><td class="r mn">2,789円</td><td class="r mn">285円</td><td class="r mn">3,074円</td><td class="r mn hgn">+33.4%</td><td class="r mn hgn"><strong>+10.1%</strong></td><td>今よりPBRが下がっても</td></tr>
+      <tr class="hl"><td><strong>0.98倍（現状維持）</strong></td><td class="r mn">2,936円</td><td class="r mn">2,877円</td><td class="r mn">285円</td><td class="r mn">3,162円</td><td class="r mn hgn">+37.2%</td><td class="r mn hgn"><strong>+11.1%</strong></td><td><strong>何も変わらない場合</strong></td></tr>
+      <tr><td>1.05倍</td><td class="r mn">2,936円</td><td class="r mn">3,082円</td><td class="r mn">285円</td><td class="r mn">3,367円</td><td class="r mn hgn">+46.2%</td><td class="r mn hgn"><strong>+13.5%</strong></td><td>なおナガワ1.10倍を下回る</td></tr>
+      <tr><td>1.10倍</td><td class="r mn">2,936円</td><td class="r mn">3,229円</td><td class="r mn">285円</td><td class="r mn">3,514円</td><td class="r mn hgn">+52.5%</td><td class="r mn hgn"><strong>+15.1%</strong></td><td>ナガワ並みへの収れん</td></tr>
+    </tbody>
+  </table>
+  <div class="note">BPS年率7.5%成長（過去10年実績+7.8%）、配当90→95→100円を前提。<br>
+  <strong>これが○の根拠です。</strong>MBOもリレーティングも起こらず、<strong>PBRが今より下がったとしても年率8%が確保される</strong>。上振れ要因が一切なくても負けにくい設計であり、これは「条件付き」ではなく素直に良い投資対象です。</div>
+
+  <div class="h3">4シナリオ（確率を適正化）</div>
+  <div class="sc">
+    <div class="sc-c">
+      <div class="sc-l br">Bear · 確率<strong>15%</strong>（旧20%）</div>
+      <div class="sc-p br">1,750円</div>
+      <div class="sc-s">▲24.0%</div>
+      <div class="sc-i">レンタル料収入が27/3期も減少</div>
+      <div class="sc-i">建設投資が減速、稼働率低下</div>
+      <div class="sc-i">PBR0.74倍・配当利回り5.14%</div>
+      <div class="sc-i">直近5年のPBR下限0.7倍が支え</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base · 確率45%</div>
+      <div class="sc-p bs">2,750円</div>
+      <div class="sc-s">+19.4%</div>
+      <div class="sc-i">27/3期 会社計画をほぼ達成</div>
+      <div class="sc-i">国土強靱化で需要が底堅い</div>
+      <div class="sc-i">熊本の仮設需要が計画を下支え</div>
+      <div class="sc-i">BPS積み上がりで下値が切り上がる</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull · 確率<strong>25%</strong>（旧20%）</div>
+      <div class="sc-p bu">3,400円</div>
+      <div class="sc-s">+47.6%</div>
+      <div class="sc-i">工事売上+17.6%計画を超過達成</div>
+      <div class="sc-i">自己株買い・増配で還元強化</div>
+      <div class="sc-i">会社計画は保守的（前期+3.7%超過）</div>
+      <div class="sc-i">EPS 285円 × PER 11.9倍</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bm">MBO · 確率15%</div>
+      <div class="sc-p bm">3,200〜3,600</div>
+      <div class="sc-s">+39〜56%</div>
+      <div class="sc-i">東証の親子上場規制が具体化</div>
+      <div class="sc-i">創業家が218〜246億円で買取</div>
+      <div class="sc-i">プレミアム35〜55%が標準</div>
+      <div class="sc-i">3年内の実現確率20〜30%</div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="c cf-gn" style="margin-bottom:18px">
+    <div class="ch" style="color:var(--gn)">期待値計算（改定後）</div>
+    <div class="cx">
+      Bear 1,750円×15% ＋ Base 2,750円×45% ＋ Bull 3,400円×25% ＋ MBO 3,400円×15%<br>
+      = 262.5 ＋ 1,237.5 ＋ 850 ＋ 510 = <strong class="hgn">2,860円</strong><br><br>
+      <strong>期待リターン：+24.1%（キャピタル）＋ 3.9%（配当）＝ 約28%</strong><br>
+      時間軸2年で<strong class="hgn">年率約15%</strong>、3年で<strong class="hgn">年率約11%</strong>。<strong>下方は簿価複利で年率8%が守られ、上方はリレーティングとMBOで年率15%。この非対称性が○の実質です。</strong>
+    </div>
+  </div>
+
+  <div class="h3">評点を上げなかった要素（据え置き）</div>
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c cl-rd"><div class="ch" style="color:var(--rd)">流動性制約は評価と別次元</div><div class="cx">日次数千株の板は、評価が良くても逃げ道を作ってくれません。<strong>○であってもポジションは資産の3〜5%まで</strong>。これは銘柄の質ではなく執行の問題であり、評価では相殺できません。</div></div>
+    <div class="c cl-rd"><div class="ch" style="color:var(--rd)">外圧が効かない構造</div><div class="cx">創業家69.3%でアクティビストが参入不能。<strong>還元強化もMBOも、創業家が自発的に動かない限り起きません</strong>。「いつか是正される」ことは保証されていない。だから下方の年率8%が土台になります。</div></div>
+    <div class="c cl-am"><div class="ch" style="color:var(--am)">災害需要は上振れ材料に含めず</div><div class="cx">熊本地震は27/3期を押し上げますが、<strong>28/3期の反動減が能登と同じ構造で発生します</strong>。ベースケースの下支えとしてのみ織り込み、シナリオの上振れには一切算入していません。</div></div>
+  </div>
+
+  <div class="h3">投資判断サマリー</div>
+  <table class="t">
+    <thead><tr><th>評価軸</th><th class="r">評点</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td><strong>割安性</strong></td><td class="r"><span class="bge be-gn">◎</span></td><td>PER8.8倍・EV/EBITDA3.5倍・配当3.91%。<strong>純粋なマルチプルは明確に安い</strong></td></tr>
+      <tr><td><strong>事業の質</strong></td><td class="r"><span class="bge be-gn">○</span></td><td>ストック48%・ROE11%・粗利率40.5%・約800拠点の参入障壁。<strong>質は高い</strong></td></tr>
+      <tr><td><strong>財務健全性</strong></td><td class="r"><span class="bge be-gn">◎</span></td><td>自己資本比率75%・有利子負債37億。<strong>破綻リスクは実質ゼロ</strong></td></tr>
+      <tr><td><strong>成長性</strong></td><td class="r"><span class="bge be-am">△</span></td><td>10年CAGR 売上+5.5%・利益+8.0%。<strong>純利益は22/3期の63.5億がピークで足踏み</strong></td></tr>
+      <tr class="hl"><td><strong>簿価複利（追加評価）</strong></td><td class="r"><span class="bge be-gn">◎</span></td><td>BPS年7.5%成長＋配当3.9%。<strong>PBRが今より下がっても年率8%。初版で見落としていた最重要要素</strong></td></tr>
+      <tr class="hl"><td><strong>テーマ性（省人化）</strong></td><td class="r"><span class="bge be-gn">◎</span></td><td>i-Construction 2.0の省人化3割目標、2024年規制、オフサイト建設CAGR7.1%。<strong>本流。かつPERに未反映</strong></td></tr>
+      <tr><td><strong>BS上の余剰資産</strong></td><td class="r"><span class="bge be-bl">中立</span></td><td>有価証券1.15億・土地含み益37億・ネットキャッシュ19億。<strong>計1株250円程度で評価の主役ではない</strong></td></tr>
+      <tr><td><strong>災害需要</strong></td><td class="r"><span class="bge be-am">△</span></td><td>27/3期は熊本で押し上げ、28/3期は反動減。<strong>下支え要因として扱い、上振れには含めず</strong></td></tr>
+      <tr><td><strong>カタリスト</strong></td><td class="r"><span class="bge be-am">△</span></td><td>MBOは魅力的だが<strong>会社の示唆ゼロ・確率20〜30%</strong>。国土強靱化は確実だが地味</td></tr>
+      <tr class="wn"><td><strong>流動性</strong></td><td class="r"><span class="bge be-rd">✕</span></td><td>日次数千株。<strong>これが最大の実務的制約かつ割安の主因</strong></td></tr>
+      <tr><td><strong>ガバナンス</strong></td><td class="r"><span class="bge be-rd">△▲</span></td><td>従属上場・関連当事者取引・過去の内部統制不備。<strong>ディスカウント要因</strong></td></tr>
+      <tr><td><strong>株主還元</strong></td><td class="r"><span class="bge be-am">△</span></td><td>配当性向35%固定・自己株買いゼロ。<strong>余力は大きいが実行意思が見えない</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="conc">
+    <div class="conc-h">結論：<span>「負けにくく、勝ち筋は複数」</span>— 評価 ○</div>
+
+    <div class="conc-lbl">評価 ○（買い）— その根拠</div>
+    <div class="conc-b" style="margin-bottom:20px">
+      <strong>2,304円は投資妙味あり。</strong>PER8.8倍・EV/EBITDA3.5倍・PBR0.98倍・ROE11.0%・配当3.91%・自己資本比率75%・ストック収入48%。期待値は<strong>2,860円（+24.1%）＋配当3.9%＝2年で約28%、年率15%</strong>。<br><br>
+      <strong>○とする決め手は、リターン構造の非対称性です。</strong>BPSが年7.5%で複利成長するため、<strong style="color:var(--or2)">MBOもリレーティングも起こらず、PBRが今の0.98倍から0.90倍に低下したとしても、3年で年率8.3%が確保されます</strong>。上振れ要因がゼロでも負けにくい。そのうえでリレーティング（年率13.5%）・MBO（+39〜56%）・還元強化という複数の勝ち筋が、実質的な無料オプションとして付いてくる構造です。<br><br>
+      <strong>そして事業は構造テーマの本流にあります。</strong>国交省のi-Construction 2.0は2040年度までに建設現場の省人化3割を国家目標とし、2024年4月からは罰則付きの時間外労働上限規制が適用されました。技能者の25.7%が60歳以上で大量離職が確定している。<strong style="color:var(--or2)">「工場でつくって現場は据付だけ」という三協の事業モデルは、この課題に対する解そのものです。</strong>オフサイト建設の世界市場はCAGR 7.1%で拡大しており、同じテーマの建設DX関連がPER20〜40倍で取引されるなか、<strong style="color:var(--or2)">三協の8.8倍はテーマ性を一切織り込んでいません。</strong>
+    </div>
+
+    <div class="conc-lbl">では、なぜ安いのか</div>
+    <div class="conc-b" style="margin-bottom:20px">
+      理由は事業ではなく<strong style="color:rgba(246,245,239,.95)">株主構成</strong>にあります。同業ナガワは売上353.9億・純利益44.4億・ROE4.8%と三協（542.8億・55.6億・11.1%）に見劣りしながら、時価総額は821億と三協の512億を大きく上回る。差を作っているのは<strong style="color:var(--or2)">ナガワにはアクティビスト（SFPバリューファンド12.32%）が入り、毎年自己株買いを実施している</strong>のに対し、<strong style="color:var(--or2)">三協は創業家が69.3%を握るため外圧が物理的に働かず、自己株買い実績がゼロ</strong>という一点です。<br><br>
+      これは<strong>ディスカウントの正体が特定できたということ</strong>でもあります。解消経路は明確で、MBOか創業家の自発的な還元強化。ただし外圧が効かない以上、<strong style="color:rgba(246,245,239,.95)">動かなければ是正されない</strong>という裏面も同時に受け入れる必要があります。だからこそ、①の「何も起こらなくても年率8%」が投資の土台になります。
+    </div>
+
+    <div class="conc-lbl">では何を買うのか</div>
+    <div class="conc-b" style="margin-bottom:20px">
+      買うべきは<strong>「ストック収入48%・ROE11%・実質無借金の優良中堅が、流動性の薄さと親子上場という非事業要因だけでPER8倍台に放置されている」という歪み</strong>です。同業ナガワはPER23.2倍・ROE6.8%。<strong>三協はROEが62%高いのにPERは38%の水準</strong>で、この差は事業の質ではなく市場構造から生じています。<br><br>
+      そして<strong>その歪みを一気に解消しうる唯一の装置がMBO／非公開化</strong>です。創業家＋和幸興産で69.3%を握り、株式併合によるスクイーズアウトが法的に完全可能。買収所要額218億円はEBITDA142億の1.5倍で、資金調達も容易。<strong>東証の従属上場会社規制が2026年に具体化する</strong>点も追い風です。<strong>ただし会社は非公開化を一切示唆しておらず、これは観測ですらなく推論であることは強調しておきます。</strong>
+    </div>
+
+    <div class="g3" style="margin-bottom:18px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">推奨ポジションサイズ</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">株式資産の3〜5%</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">流動性制約から集中投資は不可</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値フロア目線</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">1,800円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">配当利回り5.0%・PBR0.76倍</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸ルール</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2〜3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">動きなければ資金移動を検討</div>
+      </div>
+    </div>
+
+    <div class="conc-lbl">実務的な買い方の提案</div>
+    <div class="conc-b" style="margin-bottom:20px">
+      ① <strong>指値で分割エントリー。</strong>成行は絶対に使わない。1日の出来高が数千株の板では、成行が数十円動かします。<br>
+      ② <strong>2,200円以下なら妙味が増す。</strong>現値2,304円は26/3期高値2,288円を上抜けた水準で、押し目を待つ余裕はあります。配当利回り4%を超える2,250円以下は魅力的。<br>
+      ③ <strong>27/3期1Q（2026年8月上旬）を最初の確認点に。</strong>レンタル料収入の回復が計画線か確認。前年1Q経常12.4億は低いハードルです。<br>
+      ④ <strong>11月中間決算で還元強化（自己株買い）が出れば増し玉。</strong>これが実質的な「経営が資本効率を意識し始めた」シグナルになります。
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        三協フロンテアは、<strong style="color:var(--or2)">省人化・オフサイト建設という構造テーマの本流にいながら、創業家69.3%という株主構成だけを理由にPER8.8倍・EV/EBITDA3.5倍で放置されたストック型優良企業</strong>。期待値2,860円（+24%）＋配当3.9%。<strong style="color:var(--or2)">何も起こらずPBRが下がっても簿価複利で年率8.3%、リレーティングで13.5%、MBOなら+39〜56%</strong>という非対称性ゆえに評価は<strong style="color:var(--or2)">○（買い）</strong>。買い方は「安い優良企業を配当をもらいながら2〜3年待つ」設計で、<strong style="color:var(--or2)">流動性制約から資産の3〜5%まで、必ず指値で</strong>。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。筆者は証券アナリストではなく、記載の株価目標・確率はすべて筆者の試算・推定です。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: 三協フロンテア 第57期有価証券報告書（2026/6/19提出・EDINET） / 2026年3月期決算短信（2026/5/12） / 2026年3月期決算説明会資料（2026/5/26） / IRBANK / 内閣官房 国土強靱化推進室 / 東京証券取引所（従属上場会社における少数株主保護） / 国土交通省 地価公示2026 · 作成 2026.07.30
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

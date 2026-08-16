@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>菱友システムズ（4685）投資分析 Ver.2.0 ─ 1Q決算急落後の再検証</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:#f5f4ee; --bg2:#eceae1; --bg3:#dedad0;
+  --ink:#111217; --ink2:#272830; --ink3:#636470;
+  --gn:#1a6640; --gn2:#239052; --gn3:#e6f4ec;
+  --rd:#b42c2c; --rd2:#d63c3c; --rd3:#fce8e8;
+  --am:#8a5510; --am2:#bc7a18; --am3:#fef3e0;
+  --bl:#153480; --bl2:#1e48b8; --bl3:#dfe8f8;
+  --or:#c46814; --or2:#e68020; --or3:#fef0e0;
+  --pu:#7a1a6a; --pu2:#a83090; --pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace; --head:'Space Grotesk',sans-serif; --sans:'Noto Sans JP',sans-serif;
+  --r:5px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+.hero{background:var(--ink2);padding:40px 52px 32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(255,255,255,.04)}
+.hero::after{content:'';position:absolute;right:-40px;bottom:-40px;width:240px;height:240px;border-radius:50%;border:1px solid rgba(255,255,255,.03)}
+.hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start}
+.hero-eyebrow{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.3);text-transform:uppercase;margin-bottom:12px}
+.hero-title{font:700 32px/1.06 var(--head);letter-spacing:-.02em;color:rgba(246,245,239,.95);margin-bottom:6px}
+.hero-title em{color:var(--or2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);line-height:1.7;margin-top:6px}
+.hero-verdict{display:flex;align-items:center;gap:16px;background:rgba(188,122,24,.12);border:1px solid rgba(188,122,24,.3);border-radius:var(--r);padding:14px 20px;white-space:nowrap}
+.verd-score{font:700 40px/1 var(--mono);color:var(--am2)}
+.verd-text{font-size:12px;color:rgba(246,245,239,.68);line-height:1.7}
+.verd-text strong{color:rgba(246,245,239,.95)}
+
+.kpi-strip{background:var(--ink);border-bottom:1px solid rgba(255,255,255,.04);padding:0 52px}
+.kpi-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.05)}
+.kpi{background:rgba(17,18,23,.4);padding:11px 14px}
+.kpi-l{font:500 8px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 17px/1 var(--mono)}
+.kpi-v.rd{color:#e09090}.kpi-v.gn{color:#70cc90}.kpi-v.am{color:var(--or2)}.kpi-v.bl{color:#90b4ec}.kpi-v.pu{color:#d098c8}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px;line-height:1.4}
+
+.tab-nav{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tab-nav::-webkit-scrollbar{display:none}
+.tnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:14px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tnb:hover{color:rgba(246,245,239,.75)}
+.tnb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tnb .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+.body{max-width:1080px;margin:0 auto;padding:36px 52px 80px}
+.panel{display:none}.panel.active{display:block}
+
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sec-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.sec-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sec-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.sb-gn{background:var(--gn3);color:var(--gn)}.sb-am{background:var(--am3);color:var(--am)}
+.sb-or{background:var(--or3);color:var(--or)}.sb-rd{background:var(--rd3);color:var(--rd)}
+.sb-bl{background:var(--bl3);color:var(--bl)}.sb-pu{background:var(--pu3);color:var(--pu)}
+
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px 20px}
+.card-gn{border-left:3px solid var(--gn)}.card-am{border-left:3px solid var(--am)}
+.card-rd{border-left:3px solid var(--rd)}.card-bl{border-left:3px solid var(--bl)}
+.card-or{border-left:3px solid var(--or)}.card-pu{border-left:3px solid var(--pu)}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+
+.mc{text-align:center;padding:14px 12px}
+.mc-l{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.mc-v{font:600 24px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}
+.mc-v.or{color:var(--or)}.mc-v.bl{color:var(--bl)}.mc-v.pu{color:var(--pu)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl th.c,.tbl td.c{text-align:center}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-gn{color:var(--gn);font-weight:600}.hi-rd{color:var(--rd);font-weight:600}
+.hi-am{color:var(--am);font-weight:600}.hi-or{color:var(--or);font-weight:600}
+.hi-bl{color:var(--bl);font-weight:600}.hi-pu{color:var(--pu);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* DIFF ROW */
+.diff{display:grid;grid-template-columns:1.4fr 1fr 16px 1fr 1.1fr;gap:10px;align-items:center;padding:11px 14px;border-bottom:.5px solid var(--rule);font-size:12px}
+.diff:last-child{border-bottom:none}
+.diff-lbl{font-weight:600}
+.diff-old{font-family:var(--mono);font-size:12px;color:var(--ink3);text-align:right}
+.diff-arw{color:var(--ink3);font-size:11px;text-align:center}
+.diff-new{font-family:var(--mono);font-size:13px;font-weight:600;text-align:right}
+.diff-note{font-size:10px;color:var(--ink3);line-height:1.45}
+.diff-hd{display:grid;grid-template-columns:1.4fr 1fr 16px 1fr 1.1fr;gap:10px;padding:7px 14px;border-bottom:2px solid var(--ink);font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.diff-hd span:nth-child(2),.diff-hd span:nth-child(4){text-align:right}
+
+/* VERDICT CARDS */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.cat-card{background:var(--ink2);border-radius:8px;padding:20px 22px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.cat-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.cat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cat-card.c-gn::before{background:var(--gn2)}.cat-card.c-or::before{background:var(--or2)}
+.cat-card.c-bl::before{background:var(--bl2)}.cat-card.c-am::before{background:var(--am2)}
+.cat-card.c-pu::before{background:var(--pu2)}.cat-card.c-rd::before{background:var(--rd2)}
+.cat-num{font:700 9px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;opacity:.5;color:rgba(246,245,239,.9)}
+.cat-icon{font-size:26px;margin-bottom:10px;display:block;line-height:1}
+.cat-title{font:700 15px/1.2 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px;letter-spacing:-.01em}
+.cat-num-big{font:700 32px/1 var(--mono);margin-bottom:4px;letter-spacing:-.02em}
+.cat-num-big.gn{color:var(--gn2)}.cat-num-big.or{color:var(--or2)}.cat-num-big.am{color:var(--am2)}
+.cat-num-big.bl{color:#90b4ec}.cat-num-big.pu{color:#d098c8}.cat-num-big.rd{color:#e09090}
+.cat-body{font-size:11px;color:rgba(246,245,239,.55);line-height:1.7;margin-top:8px}
+.cat-body strong{color:rgba(246,245,239,.85)}
+.cat-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.ctag{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase}
+.ctag-gn{background:rgba(35,144,82,.2);color:#70cc90}
+.ctag-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.ctag-am{background:rgba(188,122,24,.2);color:var(--am2)}
+.ctag-rd{background:rgba(180,44,44,.2);color:#e09090}
+.ctag-pu{background:rgba(168,48,144,.2);color:#d098c8}
+.ctag-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* ACCORDION */
+.cat-detail{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.cat-detail-head{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;transition:background .15s}
+.cat-detail-head:hover{background:var(--bg3)}
+.cdn-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono);color:#fff;flex-shrink:0}
+.cdn-num.gn{background:var(--gn)}.cdn-num.or{background:var(--or)}.cdn-num.am{background:var(--am)}
+.cdn-num.bl{background:var(--bl)}.cdn-num.pu{background:var(--pu)}.cdn-num.rd{background:var(--rd)}
+.cdn-title{font:600 13px/1.25 var(--head);color:var(--ink)}
+.cdn-sub{font-size:11px;color:var(--ink3);margin-top:2px}
+.cdn-meta{text-align:right;flex-shrink:0}
+.cdn-prob{font:600 13px/1 var(--mono);margin-bottom:2px}
+.cdn-impact{font-size:10px;color:var(--ink3)}
+.cdn-arrow{font-size:12px;color:var(--ink3);transition:transform .2s;margin-left:8px}
+.cdn-arrow.open{transform:rotate(180deg)}
+.cat-detail-body{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.cat-detail-body.open{max-height:1000px;padding:14px 18px 18px}
+.cat-body-inner{font-size:12px;color:var(--ink2);line-height:1.8;padding-top:4px;border-top:.5px solid var(--rule)}
+
+.tl{padding-left:20px;position:relative}
+.tl::before{content:'';position:absolute;left:3px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:12px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-20px;top:5px;width:8px;height:8px;border-radius:50%;border:2px solid var(--bg)}
+.tl-dot.gn{background:var(--gn)}.tl-dot.am{background:var(--am)}.tl-dot.or{background:var(--or)}
+.tl-dot.rd{background:var(--rd)}.tl-dot.bl{background:var(--bl)}.tl-dot.pu{background:var(--pu)}
+.tl-text{font-size:12px;line-height:1.65}
+
+.bgrp{margin-bottom:14px}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:3px;overflow:hidden;height:10px}
+.bfill{border-radius:3px;height:100%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:var(--gn3);color:var(--gn)}.bd-rd{background:var(--rd3);color:var(--rd)}
+.bd-am{background:var(--am3);color:var(--am)}.bd-bl{background:var(--bl3);color:var(--bl)}
+.bd-or{background:var(--or3);color:var(--or)}.bd-pu{background:var(--pu3);color:var(--pu)}
+
+.notice{background:var(--am3);border:.5px solid #f0d080;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.7;margin-bottom:14px}
+.warn-gn{background:var(--gn3);border:.5px solid #90cca8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.7;margin-bottom:14px}
+.warn-rd{background:var(--rd3);border:.5px solid #f0a0a0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.7;margin-bottom:14px}
+.warn-bl{background:var(--bl3);border:.5px solid #a0b8e8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--bl);line-height:1.7;margin-bottom:14px}
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.sp{height:14px}
+
+.sc-box{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-col{padding:14px 16px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border-right:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;margin-bottom:8px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}
+.sc-lbl.base{border-color:var(--am);color:var(--am)}
+.sc-lbl.bull{border-color:var(--gn);color:var(--gn)}
+.sc-prob{font:700 28px/1 var(--mono);margin-bottom:3px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--gn)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:8px}
+.sc-li{font-size:11px;padding:3px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+
+.conc{background:var(--ink);color:rgba(246,245,239,.82);border-radius:8px;padding:28px 32px}
+.conc-head{font:700 18px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:18px}
+.conc-head span{color:var(--or2)}
+.conc-sub{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:6px}
+.conc-body{font-size:12px;line-height:1.9;color:rgba(246,245,239,.65)}
+.conc-body strong{color:rgba(246,245,239,.95)}
+
+.risk-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:.5px solid var(--rule);font-size:12px;gap:12px}
+.risk-row:last-child{border-bottom:none}
+.risk-label{flex:1;font-weight:500}
+.risk-val{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.risk-desc{flex:2;font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* PRICE STRIP */
+.pxwrap{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--bg3);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.px{background:var(--bg2);padding:9px 6px;text-align:center}
+.px-d{font:500 8px/1 var(--mono);color:var(--ink3);margin-bottom:4px}
+.px-p{font:600 13px/1 var(--mono);margin-bottom:3px}
+.px-c{font:500 9px/1 var(--mono)}
+.px.hit{background:var(--rd3)}
+.px.rec{background:var(--gn3)}
+
+/* CHECKLIST */
+.chk{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:start;padding:11px 0;border-bottom:.5px solid var(--rule);font-size:12px}
+.chk:last-child{border-bottom:none}
+.chk-i{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono);color:#fff}
+.chk-i.gn{background:var(--gn)}.chk-i.am{background:var(--am)}.chk-i.rd{background:var(--rd)}
+.chk-t{line-height:1.6}
+.chk-t b{display:block;margin-bottom:2px}
+.chk-t span{color:var(--ink3);font-size:11px}
+.chk-v{font:600 10px/1 var(--mono);white-space:nowrap;padding-top:5px}
+
+@media (max-width:820px){
+  .pxwrap{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:700px){
+  .cat-grid,.g3{grid-template-columns:1fr}
+  .g2,.g4,.g5{grid-template-columns:1fr 1fr}
+  .hero-inner{grid-template-columns:1fr}
+  .body,.hero,.kpi-strip{padding-left:20px;padding-right:20px}
+  .kpi-inner{grid-template-columns:repeat(3,1fr)}
+  .sc-box{grid-template-columns:1fr}
+  .diff,.diff-hd{grid-template-columns:1fr 1fr;gap:6px}
+  .diff-arw{display:none}
+  .diff-note{grid-column:1/-1}
+}
+@media (max-width:450px){
+  .g2,.g4,.g5,.kpi-inner{grid-template-columns:1fr}
+  .pxwrap{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Investment Research · 2026.08.06 · Ver.2.0 · 27/3期1Q決算（7/31）反映 · Ver.1.0比較版</p>
+      <h1 class="hero-title">菱友システムズ <em>（4685）</em><br>1Q急落後の再検証レポート</h1>
+      <p class="hero-sub">8/3に−9.9%の急落・年初来安値2,467円をつけた後、2,644円まで戻し ／ 1Q営業益−16.3%・純利益−24.8%<br>結論：<strong style="color:rgba(246,245,239,.75)">事業の堀は無傷。だが「保守的予想の上振れ」というVer.1.0の中核前提は崩れた。</strong>指値分割で買い増し可、ただし10/31の2Q決算が本当の判定日。</p>
+    </div>
+    <div class="hero-verdict">
+      <div class="verd-score">○</div>
+      <div class="verd-text">
+        <strong>期待株価 3,566円 · +35%</strong><br>
+        配当込み期待リターン +47%（年率+13.6%）<br>
+        Ver.1.0（+40%）より<u>期待値は改善</u><br>
+        ─ 株価の下落幅が業績悪化幅を上回ったため
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi-inner">
+    <div class="kpi">
+      <div class="kpi-l">現在株価 (8/6)</div>
+      <div class="kpi-v am">2,644円</div>
+      <div class="kpi-s">時価総額 約337億円（Ver.1.0時 2,896円）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">PER（会社予想）</div>
+      <div class="kpi-v gn">9.4倍</div>
+      <div class="kpi-s">EPS 282.0円（27/3期会予）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">PBR</div>
+      <div class="kpi-v gn">1.52倍</div>
+      <div class="kpi-s">BPS 1,742.54円（26/3期実績）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">配当利回り</div>
+      <div class="kpi-v gn">3.78%</div>
+      <div class="kpi-s">DPS 100円（27/3期・増配予定）</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">1Q経常 進捗率</div>
+      <div class="kpi-v rd">13.8%</div>
+      <div class="kpi-s">5年平均15.3% / 前年16.1%を下回る</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-l">年初来高値からの下落</div>
+      <div class="kpi-v rd">−34.5%</div>
+      <div class="kpi-s">4,035円（26/2/2）→ 2,644円</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav" id="tabNav">
+  <button class="tnb on" onclick="showPanel('p-diff', this)"><span class="dot" style="background:var(--or2)"></span>何が変わったか</button>
+  <button class="tnb" onclick="showPanel('p-1q', this)"><span class="dot" style="background:var(--rd2)"></span>1Q決算の解剖</button>
+  <button class="tnb" onclick="showPanel('p-thesis', this)"><span class="dot" style="background:var(--am2)"></span>カタリスト生死判定</button>
+  <button class="tnb" onclick="showPanel('p-val', this)"><span class="dot" style="background:var(--gn2)"></span>バリュエーション再計算</button>
+  <button class="tnb" onclick="showPanel('p-scen', this)"><span class="dot" style="background:var(--bl2)"></span>シナリオ再構築</button>
+  <button class="tnb" onclick="showPanel('p-action', this)"><span class="dot" style="background:var(--pu2)"></span>買い増し判断・撤退基準</button>
+</nav>
+
+<main class="body">
+
+<!-- ═══ PANEL 1: 差分 ═══ -->
+<div class="panel active" id="p-diff">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">Ver.1.0（26年6月）→ Ver.2.0（26年8月）の差分</h2>
+    <span class="sec-badge sb-or">投資テーゼの棚卸し</span>
+  </div>
+
+  <div class="warn-rd">
+    <strong>結論を先に：</strong>今回の急落は「防衛IT準独占という<u>堀（moat）の毀損</u>」ではなく、「<u>利益モメンタムの反転</u>」に対する反応です。ただし、Ver.1.0が抱えていた<strong>内部矛盾が1Qで白日の下に晒された</strong>点は軽視できません。Ver.1.0はリスク欄で「会社自身が27/3期を横ばい〜減益と見通す」と正しく書きながら、KPI欄と結論では「保守的な会社予想の上振れパターンが定着しており上方修正が期待される」という真逆の前提でシナリオを組んでいました。1Q進捗13.8%（5年平均15.3%）は、この<strong>上振れ前提を否定する方向</strong>で矛盾を解消しました。
+  </div>
+
+  <!-- 株価の軌跡 -->
+  <div class="card" style="margin-bottom:16px;">
+    <div style="font-size:11px;font-weight:600;margin-bottom:10px;">決算前後の株価の軌跡（7/31 大引け後16:10に決算発表）</div>
+    <div class="pxwrap">
+      <div class="px"><div class="px-d">7/29</div><div class="px-p">2,848</div><div class="px-c" style="color:var(--ink3)">±0.0%</div></div>
+      <div class="px"><div class="px-d">7/30</div><div class="px-p">2,883</div><div class="px-c hi-gn">+1.2%</div></div>
+      <div class="px"><div class="px-d">7/31 決算</div><div class="px-p">2,881</div><div class="px-c" style="color:var(--ink3)">−0.1%</div></div>
+      <div class="px hit"><div class="px-d">8/3 急落</div><div class="px-p hi-rd">2,597</div><div class="px-c hi-rd">−9.9%</div></div>
+      <div class="px hit"><div class="px-d">8/3 安値</div><div class="px-p hi-rd">2,467</div><div class="px-c hi-rd">年初来安値</div></div>
+      <div class="px"><div class="px-d">8/4</div><div class="px-p">2,543</div><div class="px-c hi-rd">−2.1%</div></div>
+      <div class="px rec"><div class="px-d">8/5</div><div class="px-p hi-gn">2,632</div><div class="px-c hi-gn">+3.5%</div></div>
+      <div class="px rec"><div class="px-d">8/6</div><div class="px-p hi-gn">2,644</div><div class="px-c hi-gn">+0.5%</div></div>
+    </div>
+    <p class="note">8/3の出来高は203,400株と平常時（1.5〜4万株）の<strong>5〜10倍</strong>。安値2,467円は52週安値・年初来安値を同時更新。翌々日には+3.5%と反発しており、<strong>投げ売りの一巡（セリングクライマックス）の形</strong>を示唆。ただし出来高の少ない銘柄では戻り売りで再度崩れる展開も珍しくなく、断定は禁物。<br>参考：52週高値 4,415円（25/10/31）、年初来高値 4,035円（26/2/2）。ピークからは−40%／−34.5%。</p>
+  </div>
+
+  <!-- 数値の差分表 -->
+  <div class="card" style="margin-bottom:16px;padding:0;overflow:hidden;">
+    <div style="padding:14px 18px 0;font-size:11px;font-weight:600;">主要指標のVer.1.0 → Ver.2.0 差分</div>
+    <div style="padding:10px 4px 8px;">
+      <div class="diff-hd"><span>指標</span><span>Ver.1.0 (26/6)</span><span></span><span>Ver.2.0 (26/8)</span><span>コメント</span></div>
+      <div class="diff"><span class="diff-lbl">株価</span><span class="diff-old">2,896円</span><span class="diff-arw">▸</span><span class="diff-new hi-rd">2,644円</span><span class="diff-note">−8.7%。ただし8/3安値2,467円まで見れば−14.8%</span></div>
+      <div class="diff"><span class="diff-lbl">時価総額</span><span class="diff-old">約370億円</span><span class="diff-arw">▸</span><span class="diff-new">約337億円</span><span class="diff-note">発行済 約1,275万株ベース</span></div>
+      <div class="diff"><span class="diff-lbl">27/3期 会社予想EPS</span><span class="diff-old">〜290円（推定）</span><span class="diff-arw">▸</span><span class="diff-new hi-am">282.0円</span><span class="diff-note">Ver.1.0は会社予想を約3%高く見積もっていた</span></div>
+      <div class="diff"><span class="diff-lbl">PER（会予）</span><span class="diff-old">10.0倍</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">9.4倍</span><span class="diff-note">割安度は<strong>拡大</strong></span></div>
+      <div class="diff"><span class="diff-lbl">PBR</span><span class="diff-old">1.7倍</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">1.52倍</span><span class="diff-note">BPS実績1,742.54円で再計算（Ver.1.0は概算1,700円）</span></div>
+      <div class="diff"><span class="diff-lbl">DPS（26/3期実績）</span><span class="diff-old">92.5円</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">97.5円</span><span class="diff-note">Ver.1.0の誤り。実績は97.5円（5円増額）</span></div>
+      <div class="diff"><span class="diff-lbl">DPS（27/3期予想）</span><span class="diff-old">97.5円?</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">100円</span><span class="diff-note"><strong>減益予想下でも増配</strong>。経営の自信・株主還元姿勢を示す</span></div>
+      <div class="diff"><span class="diff-lbl">配当利回り</span><span class="diff-old">3.2%</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">3.78%</span><span class="diff-note">株価下落＋増配のダブルで大幅改善</span></div>
+      <div class="diff"><span class="diff-lbl">ROE（26/3期実績）</span><span class="diff-old">「20%超」</span><span class="diff-arw">▸</span><span class="diff-new hi-am">18.9%</span><span class="diff-note">Ver.1.0は過大表記。27/3期会予ベースでは16.2%へ低下</span></div>
+      <div class="diff"><span class="diff-lbl">下値サポート</span><span class="diff-old">2,820円（26/5/28安値）</span><span class="diff-arw">▸</span><span class="diff-new hi-rd">失効</span><span class="diff-note">8/3に2,467円まで下抜け。新サポートは2,467円</span></div>
+      <div class="diff"><span class="diff-lbl">3年期待株価（加重）</span><span class="diff-old">3,818円 / +32%</span><span class="diff-arw">▸</span><span class="diff-new hi-am">3,566円 / +35%</span><span class="diff-note">絶対値は下げたが、株価も下げたため<strong>期待リターンは改善</strong></span></div>
+      <div class="diff"><span class="diff-lbl">配当込み期待リターン</span><span class="diff-old">+40%（年率12%）</span><span class="diff-arw">▸</span><span class="diff-new hi-gn">+47%（年率13.6%）</span><span class="diff-note">利回り改善が効いている</span></div>
+      <div class="diff"><span class="diff-lbl">総合判定</span><span class="diff-old">◎ 買い検討</span><span class="diff-arw">▸</span><span class="diff-new hi-am">○ 条件付き買い増し</span><span class="diff-note">「◎」から一段格下げ。理由は次パネル以降</span></div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>Ver.1.0で修正すべきだった数値：</strong>①26/3期DPSは92.5円ではなく<strong>97.5円</strong>、②ROEは「20%超」ではなく<strong>18.9%</strong>、③BPSは約1,700円ではなく<strong>1,742.54円</strong>、④27/3期の会社予想EPSは290円ではなく<strong>282.0円</strong>。いずれも投資判断を覆す規模ではありませんが、Ver.1.0が全体に<u>0.5〜1段階ずつ楽観方向に丸められていた</u>ことは記録に残す価値があります。強気の資料を書くと、個々の丸め誤差が同じ方向に積み上がりやすい典型例です。
+  </div>
+</div><!-- /panel diff -->
+
+
+<!-- ═══ PANEL 2: 1Q解剖 ═══ -->
+<div class="panel" id="p-1q">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">27/3期 第1四半期決算の解剖</h2>
+    <span class="sec-badge sb-rd">減収 −3.0% / 営業益 −16.3%</span>
+  </div>
+
+  <div class="g4" style="margin-bottom:16px;">
+    <div class="card mc"><div class="mc-l">売上高</div><div class="mc-v am">98.5億円</div><div class="mc-s">前年同期比 −3.0%</div></div>
+    <div class="card mc"><div class="mc-l">営業利益</div><div class="mc-v rd">7.35億円</div><div class="mc-s">前年同期比 −16.3%</div></div>
+    <div class="card mc"><div class="mc-l">経常利益</div><div class="mc-v rd">7.81億円</div><div class="mc-s">前年同期比 −13.5%</div></div>
+    <div class="card mc"><div class="mc-l">純利益</div><div class="mc-v rd">4.67億円</div><div class="mc-s">前年同期比 <strong>−24.8%</strong></div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card">
+      <div style="font-size:11px;font-weight:600;margin-bottom:10px;">四半期業績の推移（3ヵ月ベース・百万円）</div>
+      <table class="tbl">
+        <thead><tr><th>四半期</th><th class="r">売上高</th><th class="r">営業益</th><th class="r">経常益</th><th class="r">純利益</th><th class="r">営業利益率</th></tr></thead>
+        <tbody>
+          <tr><td>25.04-06（前年1Q）</td><td class="r mono">10,155</td><td class="r mono">878</td><td class="r mono">903</td><td class="r mono">621</td><td class="r mono">8.6%</td></tr>
+          <tr><td>25.07-09（2Q）</td><td class="r mono">9,861</td><td class="r mono">1,327</td><td class="r mono">1,359</td><td class="r mono">970</td><td class="r mono hi-gn">13.5%</td></tr>
+          <tr><td>25.10-12（3Q）</td><td class="r mono">10,283</td><td class="r mono">1,572</td><td class="r mono">1,611</td><td class="r mono">1,115</td><td class="r mono hi-gn">15.3%</td></tr>
+          <tr><td>26.01-03（4Q）</td><td class="r mono">12,930</td><td class="r mono">1,711</td><td class="r mono">1,746</td><td class="r mono">1,204</td><td class="r mono hi-gn">13.2%</td></tr>
+          <tr style="background:var(--rd3);"><td><strong>26.04-06（今回1Q）</strong></td><td class="r mono"><strong>9,854</strong></td><td class="r mono"><strong>735</strong></td><td class="r mono"><strong>781</strong></td><td class="r mono"><strong>467</strong></td><td class="r mono hi-rd"><strong>7.5%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>季節性の確認：</strong>1Qは構造的に最も利益率が低い四半期です（24年1Q 8.0%、25年1Q 8.6%）。1Qの数字だけを年率換算するのは誤りです。ただし今回の7.5%は<u>過去2年の1Qをさらに1.1〜0.5pt下回る</u>水準で、季節性だけでは説明がつきません。</p>
+    </div>
+    <div>
+      <div class="card card-rd" style="margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px;">減益の3つの要因分解</div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>① 商材販売案件の減少（減収要因）：</strong>会社説明によれば売上減の主因は「商材販売案件の減少」。これはIBM特約店としてのハード・ソフト転売であり、<u>低採算のフロービジネス</u>。減ること自体は利益インパクトが小さいはずで、実際に減収は−3.0%にとどまる。</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>② 販管費の増加（減益の主因）：</strong>会社は27/3期通期でAI投資・セキュリティ強化・人件費増を織り込み済みと説明。1Qではこのコストが先行し、売上総利益の伸びが追いつかず<strong>営業利益率が8.6%→7.5%へ1.1pt悪化</strong>。</div></div>
+          <div class="tl-item"><div class="tl-dot pu"></div><div class="tl-text"><strong>③ 税率の急上昇（純利益の落ち込み増幅）：</strong>経常−13.5%に対し純利益−24.8%。実効税率が<strong>31.2% → 40.2%</strong>と約9pt上昇したことが差の正体。<u>この1点は要検証</u>（下記の警告参照）。</div></div>
+        </div>
+      </div>
+      <div class="card card-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px;">通期予想に対する進捗</div>
+        <div class="bgrp"><div class="blrow"><span>今回1Q（経常781／通期5,650）</span><span class="mono hi-rd">13.8%</span></div><div class="btrack"><div class="bfill" style="width:55%;background:var(--rd)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>過去5年平均の1Q進捗</span><span class="mono hi-am">15.3%</span></div><div class="btrack"><div class="bfill" style="width:61%;background:var(--am)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>前年1Q（903／5,619）</span><span class="mono hi-gn">16.1%</span></div><div class="btrack"><div class="bfill" style="width:64%;background:var(--gn)"></div></div></div>
+        <p class="note">「5年平均とほぼ同水準」とする報道もありますが、<strong>1.5ptの下振れは無視できません</strong>。1Q実績781百万円を過去5年平均の進捗率15.3%で割り戻すと通期経常は<strong>約5,105百万円</strong>となり、会社予想5,650百万円を<u>約545百万円（−9.6%）下回る</u>計算になります。<strong>それでも会社は通期予想を据え置いた</strong>── つまり2Q以降で例年以上の巻き返しを前提にしています。ここが達成されるかどうかが最大の論点です。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-bl">
+    <strong>⚑ 検証が必要な論点 ─ 税率40.2%の異常値：</strong>日本の法定実効税率は約30〜31%。今回の40.2%は明らかに高い水準です。考えられる説明は、(a) 2026年4月開始事業年度から適用される<strong>防衛特別法人税</strong>（法人税額に4%上乗せ）の影響、(b) 四半期特有の「見積実効税率法」による期ズレ、(c) 一過性の税務調整項目。(a)だけでは1〜1.5pt程度しか説明できず、<u>大部分は(b)または(c)である公算が高い</u>と考えます。つまり<strong>純利益−24.8%という見出しの数字は実態より悪く見えている可能性が高く、経常−13.5%のほうが実力に近い</strong>と読むべきです。決算短信の「税金費用の計算」注記で確認する価値があります。ここは本レポートで確定できなかった唯一の重要論点です。
+  </div>
+
+  <div class="notice">
+    <strong>会社予想は据え置き（27/3期・26年4月28日発表から変更なし）：</strong>売上450億円（+4.1%）／営業利益54.5億円（−0.7%）／経常利益56.5億円（+0.6%）／純利益36.0億円（−7.9%）／EPS 282.0円／<strong>DPS 100円（増配）</strong>。<u>減益予想でありながら増配を維持</u>している点は、会社側が今期の減益を「投資フェーズの一時的なもの」と位置づけている強いシグナルと読めます。ただし経営者の自己申告であり、額面通りには受け取れません。
+  </div>
+</div><!-- /panel 1q -->
+
+
+<!-- ═══ PANEL 3: カタリスト生死判定 ═══ -->
+<div class="panel" id="p-thesis">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">Ver.1.0の6カタリスト ─ 生死判定</h2>
+    <span class="sec-badge sb-am">生存4 / 要修正1 / 破綻1</span>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card c-gn">
+      <div class="cat-num">Catalyst 01 · 判定：生存</div>
+      <span class="cat-icon">🛡️</span>
+      <div class="cat-title">防衛・宇宙ITの<br>準独占的地位</div>
+      <div class="cat-num-big gn">無傷</div>
+      <div style="font:500 10px/1 var(--mono);color:rgba(246,245,239,.45);margin-top:2px">1Qの減収要因は「商材販売」＝周辺の転売事業</div>
+      <div class="cat-body">減収の主因が<strong>IBM商材の転売案件</strong>であり、三菱重工向けのシステム開発・設計支援そのものが減ったという開示はない。堀（moat）に毀損なし。<br>ただし副作用として「<u>売上の一定割合が低採算の商材転売に依存している</u>」という事業構成の脆さが可視化された。Ver.1.0はここを議論していなかった。</div>
+      <div class="cat-tags"><span class="ctag ctag-gn">堀は健在</span><span class="ctag ctag-am">売上構成の脆さ露呈</span></div>
+    </div>
+
+    <div class="cat-card c-rd">
+      <div class="cat-num">Catalyst 02 · 判定：<strong>要修正</strong></div>
+      <span class="cat-icon">📉</span>
+      <div class="cat-title">「保守的予想は<br>毎年上振れる」前提</div>
+      <div class="cat-num-big rd">破綻</div>
+      <div style="font:500 10px/1 var(--mono);color:rgba(246,245,239,.45);margin-top:2px">1Q進捗13.8% ＜ 5年平均15.3%</div>
+      <div class="cat-body">Ver.1.0の中核ロジックの一つが「会社予想は保守的で毎年上振れる（26/3期は会予34億→実績39.1億）」だった。しかし27/3期は<strong>期初から減益予想</strong>で、1Q進捗も平均以下。<strong>上方修正どころか下方修正リスク側</strong>に振れている。<u>これが今回の最大の毀損点</u>。</div>
+      <div class="cat-tags"><span class="ctag ctag-rd">上振れ前提の消滅</span><span class="ctag ctag-rd">下方修正リスク</span></div>
+    </div>
+
+    <div class="cat-card c-am">
+      <div class="cat-num">Catalyst 03 · 判定：生存（進展なし）</div>
+      <span class="cat-icon">🎯</span>
+      <div class="cat-title">流通株式比率問題と<br>TOB・非上場化圧力</div>
+      <div class="cat-num-big am">30〜35%</div>
+      <div style="font:500 10px/1 var(--mono);color:rgba(246,245,239,.45);margin-top:2px">3年内TOB確率（当社推定・Ver.1.0の35〜40%から微減）</div>
+      <div class="cat-body">6月に「支配株主等に関する事項について」を開示したものの、TOBを示唆する動きは確認できず。<strong>株価下落で三菱重工の取得コストは337億→買収想定440億程度に低下</strong>し、動く経済合理性はむしろ上がった。<u>ただしVer.1.0時点から2ヵ月経っても何も起きておらず、時間軸は依然として不明。</u>確率をやや引き下げる。</div>
+      <div class="cat-tags"><span class="ctag ctag-am">取得コスト低下</span><span class="ctag ctag-rd">時間軸不明のまま</span></div>
+    </div>
+  </div>
+
+  <div class="g3" style="margin-bottom:24px;">
+    <div class="cat-card c-bl" style="background:var(--bg2);border:.5px solid var(--bg3);">
+      <div class="cat-num" style="color:var(--ink3);">Catalyst 04 · 判定：<strong>要注意</strong></div>
+      <span class="cat-icon" style="font-size:22px;">💴</span>
+      <div class="cat-title" style="color:var(--ink);font-size:13px;">「手元資金102億円」の<br>実態は33億円</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px;">33億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:6px;">CF計算書上の現金及び現金同等物残高（26/3期末）</div>
+      <div class="cat-body" style="color:var(--ink2);">Ver.1.0は「現金21.7億＋預け金80.4億＝102億円、時価総額の28%」と主張したが、<strong>キャッシュフロー計算書上の現金等残高は3,305百万円＝33億円</strong>（現金比率10.25%）。差の約70億円は<u>親会社等への預け金</u>で、CMS（キャッシュ・マネジメント・システム）預け金であれば実質現金だが、保証金的性格なら自由に使えない。<strong>「株価の28%がキャッシュ」という下値論拠は根拠として弱い。</strong></div>
+      <div class="cat-tags"><span class="ctag ctag-rd">論拠を格下げ</span><span class="ctag ctag-gn">自己資本比率68.9%・無借金は事実</span></div>
+    </div>
+
+    <div class="cat-card c-pu" style="background:var(--bg2);border:.5px solid var(--bg3);">
+      <div class="cat-num" style="color:var(--ink3);">Catalyst 05 · 判定：生存（時間軸は長い）</div>
+      <span class="cat-icon" style="font-size:22px;">⚔️</span>
+      <div class="cat-title" style="color:var(--ink);font-size:13px;">防衛費拡大の<br>直撃追い風</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px;">継続</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:6px;">構造的な需要環境に変化なし</div>
+      <div class="cat-body" style="color:var(--ink2);">防衛予算の拡大トレンド自体に変化はない。ただし<strong>1Qで実際に減益になっている以上、「防衛特需 → 即座に利益」というリニアなストーリーは1年単位ではワークしていない</strong>。受注→開発→計上のリードタイムは数年単位であり、<u>この追い風は3〜5年スパンで効いてくるものと再定義すべき</u>。Ver.1.0はここを短期カタリストのように扱っていた。</div>
+      <div class="cat-tags"><span class="ctag ctag-gn">構造は健在</span><span class="ctag ctag-am">短期材料ではない</span></div>
+    </div>
+
+    <div class="cat-card c-rd" style="background:var(--bg2);border:.5px solid var(--bg3);">
+      <div class="cat-num" style="color:var(--ink3);">Catalyst 06 · 判定：<strong>否定</strong></div>
+      <span class="cat-icon" style="font-size:22px;">🌡️</span>
+      <div class="cat-title" style="color:var(--ink);font-size:13px;">「賃上げは単価転嫁で<br>相殺できる」</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px;">反証</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:6px;">営業利益率 8.6% → 7.5%（−1.1pt）</div>
+      <div class="cat-body" style="color:var(--ink2);">Ver.1.0は「IT人月単価のインフレはそのまま売上増に直結」「賃上げコストも単価転嫁でほぼ相殺」と主張した。しかし1Qは<strong>販管費増で明確にマージンが圧縮</strong>されている。人月単価の引き上げには顧客（＝実質的に三菱重工）との交渉が必要で、<u>親子関係にある以上、転嫁力はむしろ制約される</u>と考えるべき。<strong>Ver.1.0で最も検証が甘かった主張。</strong></div>
+      <div class="cat-tags"><span class="ctag ctag-rd">前提が崩れた</span><span class="ctag ctag-rd">親子関係＝価格交渉力の制約</span></div>
+    </div>
+  </div>
+
+  <div class="sec-head" style="margin-top:8px;">
+    <span class="sec-num">詳細</span>
+    <h2 class="sec-title" style="font-size:16px;">深掘り（クリックで展開）</h2>
+  </div>
+
+  <div class="cat-detail">
+    <div class="cat-detail-head" onclick="toggleAcc(this)">
+      <div class="cdn-num rd">A</div>
+      <div>
+        <div class="cdn-title">Ver.1.0が抱えていた内部矛盾 ─ なぜ「◎」だったのか</div>
+        <div class="cdn-sub">リスク欄では正しく警告し、結論では逆の前提を使っていた</div>
+      </div>
+      <div class="cdn-meta"><div class="cdn-prob hi-rd">構造的な問題</div><div class="cdn-impact">強気バイアスの典型</div><span class="cdn-arrow">▼</span></div>
+    </div>
+    <div class="cat-detail-body">
+      <div class="cat-body-inner">
+        <p style="margin-bottom:10px;">Ver.1.0のリスクパネルには、こう書かれていました：</p>
+        <div style="background:var(--rd3);border-left:3px solid var(--rd);padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:12px;line-height:1.7;">
+          「利益成長鈍化 ─ 会社自身が2027/3期を『横ばい〜減益』と見通す。<strong>上方修正のパターン継続を過信するのは禁物</strong>」
+        </div>
+        <p style="margin-bottom:10px;">ところが同じレポートの業績パネルには、こう書かれていました：</p>
+        <div style="background:var(--gn3);border-left:3px solid var(--gn);padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:12px;line-height:1.7;">
+          「保守的な会社予想の上振れパターンが定着しており、<strong>2027/3期も上方修正が期待される</strong>」
+        </div>
+        <p style="margin-bottom:10px;">同一資料内で完全に矛盾しています。そしてシナリオ計算では後者（楽観）を採用し、Base CaseにEPS 310円（＝会社予想282円を+10%上回る）を置いていました。<strong>1Qの結果は、この矛盾を悲観方向で解消しました。</strong></p>
+        <p style="margin-bottom:0;"><strong>教訓として：</strong>Ver.2.0のシナリオでは、Base CaseのEPSを会社予想から乖離させる場合、その根拠を明示するルールを課しています（後述のシナリオパネル参照）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-detail">
+    <div class="cat-detail-head" onclick="toggleAcc(this)">
+      <div class="cdn-num am">B</div>
+      <div>
+        <div class="cdn-title">「商材販売」依存 ─ Ver.1.0が見落としていた事業構成リスク</div>
+        <div class="cdn-sub">IBM特約店機能は「堀」ではなく「振れ幅の源泉」だった</div>
+      </div>
+      <div class="cdn-meta"><div class="cdn-prob hi-am">新規論点</div><div class="cdn-impact">売上の質を再評価</div><span class="cdn-arrow">▼</span></div>
+    </div>
+    <div class="cat-detail-body">
+      <div class="cat-body-inner">
+        <div class="tl">
+          <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>Ver.1.0の記述：</strong>「IBM特約店機能：三菱重工グループへのIBMハードウェア・ソフトウェア供給も担う。インフラ込みの<u>ワンストップ体制が乗り換えをさらに困難にしている</u>」── つまり<strong>堀の一部としてポジティブに扱っていた</strong>。</div></div>
+          <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>1Qで判明した実態：</strong>この商材販売は案件の有無で四半期売上が数億円単位で振れる。今回はこれが減って<strong>減収の主因</strong>となった。粗利率が低いため利益インパクトは限定的だが、<u>売上高の見た目のボラティリティを大きくし、決算のたびにサプライズ要因になる</u>。</div></div>
+          <div class="tl-item"><div class="tl-dot bl"></div><div class="tl-text"><strong>再評価：</strong>商材販売は「堀」ではなく「<strong>低採算・高ボラティリティの付随事業</strong>」と位置づけるのが正確。逆に言えば、<u>これを除いたコア事業（SI・設計支援）のマージンと成長率</u>こそが本当に見るべき数字。会社がセグメント別開示を出していれば確認したいところです。</div></div>
+          <div class="tl-item"><div class="tl-dot gn"></div><div class="tl-text"><strong>投資判断への含意：</strong>商材要因の減収は本質的な悪材料ではない。<strong>本当の悪材料は販管費（人件費・AI投資）によるマージン圧縮のほう</strong>。市場が9.9%売ったのは、この2つを区別せずに「減収減益」というヘッドラインに反応した面がある。<u>ここに歪みがある可能性はある。</u></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-detail">
+    <div class="cat-detail-head" onclick="toggleAcc(this)">
+      <div class="cdn-num bl">C</div>
+      <div>
+        <div class="cdn-title">「減益予想下での増配」をどう読むか</div>
+        <div class="cdn-sub">DPS 97.5円 → 100円。配当性向は31.8% → 35.5%へ上昇</div>
+      </div>
+      <div class="cdn-meta"><div class="cdn-prob hi-gn">ポジティブ寄り</div><div class="cdn-impact">ただし過信は禁物</div><span class="cdn-arrow">▼</span></div>
+    </div>
+    <div class="cat-detail-body">
+      <div class="cat-body-inner">
+        <table class="tbl" style="margin-bottom:10px;">
+          <thead><tr><th>期</th><th class="r">EPS</th><th class="r">DPS</th><th class="r">配当性向</th><th class="r">利回り（2,644円）</th></tr></thead>
+          <tbody>
+            <tr><td>2024/3期</td><td class="r mono">189.9円</td><td class="r mono">60円</td><td class="r mono">31.6%</td><td class="r mono">2.27%</td></tr>
+            <tr><td>2025/3期</td><td class="r mono">265.6円</td><td class="r mono">85円</td><td class="r mono">32.0%</td><td class="r mono">3.21%</td></tr>
+            <tr><td>2026/3期（実績）</td><td class="r mono">306.7円</td><td class="r mono">97.5円</td><td class="r mono">31.8%</td><td class="r mono">3.69%</td></tr>
+            <tr style="background:var(--gn3);"><td><strong>2027/3期（会予）</strong></td><td class="r mono hi-rd"><strong>282.0円</strong></td><td class="r mono hi-gn"><strong>100円</strong></td><td class="r mono hi-am"><strong>35.5%</strong></td><td class="r mono hi-gn"><strong>3.78%</strong></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-bottom:10px;"><strong>読み方（ポジティブ）：</strong>配当性向が約32%で安定していた会社が、減益期に<u>あえて性向を35.5%まで上げてまで増配を継続</u>している。これは「今期の減益は投資による一時的なもので、来期以降は戻る」という経営の内部見通しを反映している可能性が高い。連続増配記録を守る意思も明確。</p>
+        <p style="margin-bottom:10px;"><strong>読み方（慎重）：</strong>一方で、性向を上げて増配を続けるのは<u>利益成長が止まった会社の典型的な行動</u>でもある。性向が40%、50%と切り上がっていくなら、それは成長の終わりのサイン。<strong>27/3期の35.5%は許容範囲だが、28/3期にさらに切り上がるなら警戒すべき。</strong></p>
+        <p style="margin-bottom:0;"><strong>実務的な意味：</strong>いずれにせよ、保有継続する投資家にとって<strong>年3.78%の配当を受け取りながらカタリストを待てる</strong>構造は維持されました。これがVer.1.0（3.2%）より改善している点は、買い増しの根拠として素直に評価できます。</p>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel thesis -->
+
+
+<!-- ═══ PANEL 4: バリュエーション ═══ -->
+<div class="panel" id="p-val">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title">バリュエーション再計算（2,644円ベース）</h2>
+    <span class="sec-badge sb-gn">PER 9.4倍・PBR 1.52倍・利回り3.78%</span>
+  </div>
+
+  <div class="g5" style="margin-bottom:18px;">
+    <div class="card mc"><div class="mc-l">PER（会社予想）</div><div class="mc-v gn">9.4倍</div><div class="mc-s">EPS 282.0円</div></div>
+    <div class="card mc"><div class="mc-l">PER（前期実績）</div><div class="mc-v gn">8.6倍</div><div class="mc-s">EPS 306.7円</div></div>
+    <div class="card mc"><div class="mc-l">PBR</div><div class="mc-v gn">1.52倍</div><div class="mc-s">BPS 1,742.54円</div></div>
+    <div class="card mc"><div class="mc-l">配当利回り</div><div class="mc-v gn">3.78%</div><div class="mc-s">DPS 100円</div></div>
+    <div class="card mc"><div class="mc-l">株式益回り</div><div class="mc-v gn">10.7%</div><div class="mc-s">PERの逆数</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card">
+      <div style="font-size:11px;font-weight:600;margin-bottom:10px;">PER水準訂正シミュレーション（EPS 282円ベース）</div>
+      <div class="bgrp"><div class="blrow"><span>現在（PER 9.4倍）</span><span class="mono hi-am">2,644円</span></div><div class="btrack"><div class="bfill" style="width:38%;background:var(--am)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>PER 11倍</span><span class="mono">3,102円 (+17%)</span></div><div class="btrack"><div class="bfill" style="width:45%;background:var(--bl)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>PER 12倍</span><span class="mono">3,384円 (+28%)</span></div><div class="btrack"><div class="bfill" style="width:49%;background:var(--bl2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>PER 15倍（業種平均）</span><span class="mono hi-gn">4,230円 (+60%)</span></div><div class="btrack"><div class="bfill" style="width:61%;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>PER 20倍（NRI並・過剰期待）</span><span class="mono">5,640円 (+113%)</span></div><div class="btrack"><div class="bfill" style="width:82%;background:var(--gn2)"></div></div></div>
+      <p class="note"><strong>重要な留意：</strong>減益局面の企業にPER15倍を適用するのは無理があります。市場がPERを切り下げているのは「割安放置」ではなく「<u>成長が止まった企業への正当な再評価</u>」の可能性を常に考えるべきです。Ver.2.0のBase Caseでは<strong>PER 11倍</strong>を採用しています。</p>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:600;margin-bottom:10px;">下値めどの再計算（Ver.1.0のサポートは失効済み）</div>
+      <table class="tbl">
+        <thead><tr><th>水準</th><th class="r">株価</th><th class="r">根拠</th></tr></thead>
+        <tbody>
+          <tr style="background:var(--gn3);"><td><strong>直近安値（新サポート）</strong></td><td class="r mono hi-gn"><strong>2,467円</strong></td><td class="r" style="font-size:10px;">26/8/3 の年初来安値・大商い</td></tr>
+          <tr><td>現実的な悲観</td><td class="r mono hi-am"><strong>2,265円</strong></td><td class="r" style="font-size:10px;">PBR 1.3倍／PER 8.0倍（2,256円）の交点</td></tr>
+          <tr><td>下方修正が出た場合</td><td class="r mono hi-rd">2,000円前後</td><td class="r" style="font-size:10px;">EPS 250円 × PER 8倍</td></tr>
+          <tr><td>歴史的悲観</td><td class="r mono hi-rd">1,743円</td><td class="r" style="font-size:10px;">PBR 1.0倍（純資産価値）</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Ver.1.0は「2,820円が強力なサポート」としていましたが、8/3にあっさり2,467円まで下抜けました。<strong>出来高の薄い銘柄でテクニカルなサポートを下値論拠にするのは危険</strong>という実例です。Ver.2.0では下値をPBR・PERというファンダメンタルズ基準に一本化しています。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <div style="font-size:11px;font-weight:600;margin-bottom:10px;">同業比較の再検証 ─ 「PER10倍は不当に安い」は今も成り立つか</div>
+    <table class="tbl">
+      <thead><tr><th>比較対象</th><th class="r">PER</th><th class="r">直近の利益トレンド</th><th class="r">市場区分</th><th class="c">評価</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--am3);"><td><strong>菱友システムズ（4685）</strong></td><td class="r mono hi-gn"><strong>9.4倍</strong></td><td class="r mono hi-rd"><strong>減益転換（27/3期 −7.9%）</strong></td><td class="r mono">スタンダード</td><td class="c"><span class="badge bd-am">割安だが理由あり</span></td></tr>
+        <tr><td>野村総合研究所（NRI）</td><td class="r mono">25倍前後</td><td class="r mono hi-gn">継続増益</td><td class="r mono">プライム</td><td class="c"><span class="badge bd-bl">成長プレミアム</span></td></tr>
+        <tr><td>TISインテックグループ</td><td class="r mono">18倍前後</td><td class="r mono hi-gn">継続増益</td><td class="r mono">プライム</td><td class="c"><span class="badge bd-bl">成長プレミアム</span></td></tr>
+        <tr><td>SCSK</td><td class="r mono">20倍前後</td><td class="r mono hi-gn">継続増益</td><td class="r mono">プライム</td><td class="c"><span class="badge bd-bl">成長プレミアム</span></td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>Ver.1.0との違い：</strong>Ver.1.0は「収益性指標はNRIと同等以上なのにPERは2.5倍の開き ＝ 異常状態」と結論づけました。しかし<u>減益転換した企業と継続増益企業のPERを直接比べるのは不適切</u>です。ディスカウントの要因は Ver.1.0が挙げた3つ（①スタンダード市場、②親子上場、③低流動性）に加え、<strong>④利益成長の停止</strong>という第4の要因が加わりました。①〜③は構造要因でTOB等でしか解消しませんが、<strong>④は業績次第で自力解消が可能</strong>です。逆に言えば、<u>④が解消しない限り①〜③だけでは水準訂正は起きない</u>と考えるべきです。※同業他社のPERは概算値であり、投資判断の際は最新値をご確認ください。</p>
+  </div>
+
+  <div class="warn-gn">
+    <strong>バリュエーション面の結論：</strong>Ver.1.0時点（PER 10.0倍・PBR 1.7倍・利回り3.2%）と比較して、<strong>すべての指標が投資家に有利な方向に動きました</strong>（PER 9.4倍・PBR 1.52倍・利回り3.78%）。一方で分母となる利益の質は劣化しています。<u>「安くなった度合い（約−9%）」と「業績見通しの悪化度合い（会予EPS 290円想定→282円実績、約−3%）」を比べると、株価の下落幅のほうが大きい</u>── これがVer.2.0で期待リターンが改善する理由です。ただしこの計算は「27/3期の会社予想が達成される」ことが前提であり、下方修正が出れば前提ごと崩れます。
+  </div>
+</div><!-- /panel val -->
+
+
+<!-- ═══ PANEL 5: シナリオ ═══ -->
+<div class="panel" id="p-scen">
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title">3年保有シナリオ再構築（2029年3月末）</h2>
+    <span class="sec-badge sb-bl">加重平均 3,566円（+35%）</span>
+  </div>
+
+  <div class="notice">
+    <strong>Ver.2.0でのシナリオ設計ルール：</strong>①Base CaseのEPSは会社予想（282円）を起点とし、乖離させる場合は根拠を明記する。②適用PERは「減益局面の企業」として保守的に置く。③キャッシュ上乗せはVer.1.0より縮小（預け金の性格が確認できないため）。④Bear確率をVer.1.0の30%→35%へ引き上げ、Bull確率を25%→20%へ引き下げ。
+  </div>
+
+  <div class="sc-box" style="margin-bottom:18px;">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear Case</div>
+      <div class="sc-prob bear">35%</div>
+      <div class="sc-sub">投資フェーズが長期化・マージン低迷が定着</div>
+      <div class="sc-li">EPS 275円（29/3期）</div>
+      <div class="sc-li">適用PER 8.5倍 → 2,340円</div>
+      <div class="sc-li">キャッシュ上乗せ +150円</div>
+      <div class="sc-li"><strong>目標株価 2,490円</strong></div>
+      <div class="sc-li">3年累積配当 +315円</div>
+      <div class="sc-li hi-am"><strong>配当込み 2,805円（+6%）</strong></div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base Case</div>
+      <div class="sc-prob base">45%</div>
+      <div class="sc-sub">27/3期で投資一巡、28/3期以降マージン回復</div>
+      <div class="sc-li">EPS 320円（29/3期）</div>
+      <div class="sc-li">適用PER 11倍 → 3,520円</div>
+      <div class="sc-li">キャッシュ上乗せ +200円</div>
+      <div class="sc-li"><strong>目標株価 3,720円</strong></div>
+      <div class="sc-li">3年累積配当 +320円</div>
+      <div class="sc-li hi-gn"><strong>配当込み 4,040円（+53%）</strong></div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Bull Case</div>
+      <div class="sc-prob bull">20%</div>
+      <div class="sc-sub">防衛IT再評価 or 三菱重工によるTOB成立</div>
+      <div class="sc-li">EPS 360円 × PER 14倍</div>
+      <div class="sc-li">または TOB（プレミアム30〜45%）</div>
+      <div class="sc-li"><strong>目標株価 5,100円</strong></div>
+      <div class="sc-li">3年累積配当 +300円</div>
+      <div class="sc-li hi-gn"><strong>配当込み 5,400円（+104%）</strong></div>
+    </div>
+  </div>
+
+  <div class="conc" style="margin-bottom:18px;">
+    <div class="conc-head">確率加重平均期待値 <span>── Ver.2.0 再計算</span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">加重平均株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2);">3,566円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">+34.9%（株価のみ）</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">配当込み期待値</div>
+        <div style="font:700 24px/1 var(--mono);color:#70cc90;">3,880円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">+46.7%（年率 +13.6%）</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">Bear下値（配当込）</div>
+        <div style="font:700 24px/1 var(--mono);color:#e09090;">2,805円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">元本+6% ─ 実質的に横ばい</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">Ver.1.0からの変化</div>
+        <div style="font:700 24px/1 var(--mono);color:#70cc90;">+40% → +47%</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">期待値は<u>改善</u>（株価下落のため）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div style="font-size:11px;font-weight:600;margin-bottom:10px;">Ver.1.0 vs Ver.2.0 シナリオ比較</div>
+      <table class="tbl">
+        <thead><tr><th>項目</th><th class="r">Ver.1.0</th><th class="r">Ver.2.0</th></tr></thead>
+        <tbody>
+          <tr><td>起点株価</td><td class="r mono">2,896円</td><td class="r mono hi-am">2,644円</td></tr>
+          <tr><td>Bear 確率／株価</td><td class="r mono">30% / 2,690円</td><td class="r mono hi-rd">35% / 2,490円</td></tr>
+          <tr><td>Base 確率／株価</td><td class="r mono">45% / 3,920円</td><td class="r mono hi-am">45% / 3,720円</td></tr>
+          <tr><td>Bull 確率／株価</td><td class="r mono">25% / 5,620円</td><td class="r mono hi-gn">20% / 5,100円</td></tr>
+          <tr><td>Base の適用PER</td><td class="r mono hi-rd">12倍</td><td class="r mono hi-gn">11倍</td></tr>
+          <tr><td>Base の想定EPS</td><td class="r mono hi-rd">310円</td><td class="r mono hi-gn">320円</td></tr>
+          <tr><td><strong>配当込み期待リターン</strong></td><td class="r mono"><strong>+40%</strong></td><td class="r mono hi-gn"><strong>+47%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Base EPSを310→320円に<u>引き上げている</u>のは矛盾に見えますが、対象年度が1年後ろにずれているためです（Ver.1.0は28/3期、Ver.2.0は29/3期）。Ver.2.0のBase前提は<strong>27/3期会予282円 → 29/3期320円＝2年で年率+6.5%</strong>。これは「27/3期で投資が一巡し、28/3期以降は従来の増益基調に戻る」という仮定を置いたものです。<u>この仮定こそがBase Caseの生命線</u>であり、2Q・3Qで検証していく必要があります。適用PERはVer.1.0の12倍から11倍へ引き下げました。</p>
+    </div>
+    <div class="card card-am">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px;">この期待値をどこまで信じるか ─ 3つの留保</div>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>留保①：Bull ケースの20%は主観的。</strong>TOB確率に客観的な根拠はありません。流通株式比率が基準未達である証拠を本レポートでは確認できておらず、<u>Ver.1.0の「推定12〜34%」という幅の広さ自体が、この論点の不確実性を物語っています</u>。TOB期待を除いた期待リターンは <strong>+30%程度</strong>まで低下します。</div></div>
+        <div class="tl-item"><div class="tl-dot rd"></div><div class="tl-text"><strong>留保②：Base の「28/3期以降マージン回復」は仮定にすぎない。</strong>AI投資・セキュリティ強化が1年で終わる保証はなく、むしろ恒常的なコストになる可能性もあります。この場合Bearに近づきます。</div></div>
+        <div class="tl-item"><div class="tl-dot am"></div><div class="tl-text"><strong>留保③：シナリオ確率は「もっともらしく見える数字」にすぎない。</strong>加重平均が+47%だからといって、実際に+47%になる確率は極めて低い。<u>意思決定に使うべきは平均値ではなく分布の形</u>── すなわち「Bearでもほぼ元本維持、Bullで2倍」という<strong>非対称性</strong>のほうです。</div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel scen -->
+
+
+<!-- ═══ PANEL 6: 買い増し判断 ═══ -->
+<div class="panel" id="p-action">
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2 class="sec-title">買い増し判断と撤退基準</h2>
+    <span class="sec-badge sb-pu">保有中・買い増し検討中の前提</span>
+  </div>
+
+  <div class="g3" style="margin-bottom:18px;">
+    <div class="card mc" style="border-top:3px solid var(--gn);">
+      <div class="mc-l">ストーリーは崩れたか</div>
+      <div class="mc-v am">部分的に</div>
+      <div class="mc-s">堀（防衛IT準独占）は無傷<br>「上振れ前提」と「転嫁力」が崩壊</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--am);">
+      <div class="mc-l">買い増しの是非</div>
+      <div class="mc-v gn">条件付き可</div>
+      <div class="mc-s">一括ではなく分割<br>2Q決算（10/31）が判定日</div>
+    </div>
+    <div class="card mc" style="border-top:3px solid var(--bl);">
+      <div class="mc-l">総合判定の変化</div>
+      <div class="mc-v am">◎ → ○</div>
+      <div class="mc-s">「明確な買い」から<br>「検証しながら積む」へ</div>
+    </div>
+  </div>
+
+  <div class="warn-bl">
+    <strong>まず、ナンピンの罠について一言：</strong>すでに保有している状況での買い増しは、<u>「安くなったから」ではなく「当初の想定より期待リターンが高くなったから」</u>という理由でのみ正当化されます。本レポートの計算では期待リターンは+40%→+47%へ改善しており、この条件は形式的には満たされます。ただしそれは<strong>「27/3期の会社予想が達成される」という前提の上に成り立っている</strong>ことを忘れないでください。1Q進捗13.8%は、その前提に黄信号を灯しています。<br>また、平均取得単価が下がること自体には何の価値もありません。判断すべきは「今、新規に2,644円で買うか」であり、既存ポジションの含み損は無関係です。
+  </div>
+
+  <!-- 買い増しプラン -->
+  <div class="card" style="margin-bottom:16px;">
+    <div style="font-size:12px;font-weight:600;margin-bottom:12px;">分割買い増しプラン（一案）</div>
+    <table class="tbl">
+      <thead><tr><th>タイミング</th><th class="r">価格めど</th><th class="r">配分</th><th>実行条件</th></tr></thead>
+      <tbody>
+        <tr><td><strong>第1弾：現水準</strong></td><td class="r mono hi-am">2,600〜2,700円</td><td class="r mono">追加予定額の 1/3</td><td style="font-size:11px;">PER 9.4倍・利回り3.78%は、堀が無傷である限り妥当な水準。8/3の投げ売りは一巡した形。</td></tr>
+        <tr><td><strong>第2弾：2Q決算後</strong></td><td class="r mono hi-gn">10/31以降</td><td class="r mono">1/3</td><td style="font-size:11px;"><strong>上期経常が21.5億円以上</strong>（通期進捗38%以上）で着地し、通期予想が据え置かれた場合のみ実行。下回れば見送り。</td></tr>
+        <tr><td><strong>第3弾：押し目</strong></td><td class="r mono hi-bl">2,400円以下</td><td class="r mono">1/3</td><td style="font-size:11px;">下方修正を伴わない需給要因の下落であれば実行。下方修正が原因なら実行せず、撤退基準の判定へ。</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>なぜ分割か：</strong>1四半期の数字だけでは「一時的な投資フェーズ」か「構造的なマージン低下」かを判別できないためです。判別材料が出てくるのは<strong>2026年10月31日の2Q決算</strong>。それまでは情報が足りない状態でポジションを大きく傾けるべきではありません。一方で「完全に確認できてから買う」と、確認できた時点で株価は戻っているのが常です。<u>この不確実性を分割で引き受ける</u>のが現実的な折衷案です。<br>なお、日次出来高が1.5〜7万株程度と薄いため、まとまった株数を買う場合は<strong>指値・複数日に分けての執行</strong>が必須です。成行での大口注文は自分で株価を押し上げます。</p>
+  </div>
+
+  <!-- 2Q決算チェックリスト -->
+  <div class="card card-bl" style="margin-bottom:16px;">
+    <div style="font-size:12px;font-weight:600;color:var(--bl);margin-bottom:12px;">📅 2026年10月31日・2Q決算で確認すべき5項目</div>
+    <div class="chk">
+      <div class="chk-i bl">1</div>
+      <div class="chk-t"><b>上期経常利益が21.5億円を超えたか</b><span>通期会予56.5億円に対する進捗38%が最低ライン。前年上期は22.6億円（進捗40.3%）。これを大きく下回れば通期下方修正の公算が高い。</span></div>
+      <div class="chk-v hi-bl">最重要</div>
+    </div>
+    <div class="chk">
+      <div class="chk-i bl">2</div>
+      <div class="chk-t"><b>営業利益率が2Q単独で12%以上に戻ったか</b><span>前年2Q単独は13.5%。1Qの7.5%が季節性なら2Qで大きく回復するはず。回復しなければ「構造的マージン低下」の証拠。</span></div>
+      <div class="chk-v hi-bl">最重要</div>
+    </div>
+    <div class="chk">
+      <div class="chk-i am">3</div>
+      <div class="chk-t"><b>通期予想が据え置かれたか、下方修正されたか</b><span>下方修正が出れば投資テーゼの前提が崩れる。撤退基準①に直結。</span></div>
+      <div class="chk-v hi-am">高</div>
+    </div>
+    <div class="chk">
+      <div class="chk-i am">4</div>
+      <div class="chk-t"><b>実効税率が正常化（30%前後）したか</b><span>1Qの40.2%が期ズレなら2Qで正常化する。しなければ恒常的な税負担増としてEPS前提を下げる必要がある。</span></div>
+      <div class="chk-v hi-am">中</div>
+    </div>
+    <div class="chk">
+      <div class="chk-i am">5</div>
+      <div class="chk-t"><b>商材販売以外（SI・設計支援）の売上動向</b><span>コア事業が伸びているなら1Qの減収は無視してよい。コアが減っているなら三菱重工の発注そのものが減っており、堀の毀損を疑うべき。</span></div>
+      <div class="chk-v hi-am">高</div>
+    </div>
+  </div>
+
+  <!-- 撤退基準 -->
+  <div class="card card-rd" style="margin-bottom:16px;">
+    <div style="font-size:12px;font-weight:600;color:var(--rd);margin-bottom:12px;">🚪 撤退基準 ─ 「何が起きたら売るか」を事前に定義する（Ver.1.0に欠けていた項目）</div>
+    <div class="risk-row">
+      <span class="risk-label">① 通期業績予想の下方修正</span>
+      <span class="badge bd-rd">即時見直し</span>
+      <span class="risk-desc">会社予想の達成が本レポートの全計算の前提。崩れたら期待値はゼロベースで再計算が必要。</span>
+    </div>
+    <div class="risk-row">
+      <span class="risk-label">② 通期営業利益率が10%を下回る</span>
+      <span class="badge bd-rd">高</span>
+      <span class="risk-desc">26/3期12.7% → 27/3期会予12.1%。10%割れは「高収益SIer」というプレミアムの根拠が消える水準。</span>
+    </div>
+    <div class="risk-row">
+      <span class="risk-label">③ 商材以外（コアSI）の売上減少</span>
+      <span class="badge bd-rd">高</span>
+      <span class="risk-desc">三菱重工の発注そのものの減少を意味する。これが起きたら堀の毀損であり、投資テーゼは完全に崩壊。</span>
+    </div>
+    <div class="risk-row">
+      <span class="risk-label">④ 減配または増配の停止</span>
+      <span class="badge bd-am">中</span>
+      <span class="risk-desc">10年以上の連続増配が途切れることは、経営が自ら「回復の目処が立たない」と認めたに等しい。</span>
+    </div>
+    <div class="risk-row">
+      <span class="risk-label">⑤ 上場維持基準への「適合」表明</span>
+      <span class="badge bd-am">中（逆説的）</span>
+      <span class="risk-desc">流通株式比率が基準を満たしたと会社が表明した場合、TOB圧力の論拠が消滅。Bull Caseの20%が剥落し、期待リターンは+30%程度へ低下する。</span>
+    </div>
+    <div class="risk-row">
+      <span class="risk-label">⑥ 三菱重工の防衛部門の失速</span>
+      <span class="badge bd-bl">低（現状）</span>
+      <span class="risk-desc">売上の大半を1社に依存する構造上の最大リスク。現時点で兆候はないが、三菱重工の決算は毎回チェックすべき。</span>
+    </div>
+    <p class="note"><strong>なぜ事前に定義するのか：</strong>含み損を抱えた状態では、どんな悪材料も「もう織り込み済み」「一時的」と解釈したくなります。判断が歪む前に基準を紙に書いておくことが、唯一の対策です。Ver.1.0にはリスク要因の一覧はありましたが、<u>「何が起きたら降りるか」という行動基準がありませんでした</u>。</p>
+  </div>
+
+  <!-- 最終結論 -->
+  <div class="conc">
+    <div class="conc-head">最終判断 <span>── ○ 条件付き買い増し可（分割・段階実行）</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
+      <div>
+        <div class="conc-sub">投資妙味はあるか → ある。ただしVer.1.0より薄い</div>
+        <div class="conc-body">PER 9.4倍・PBR 1.52倍・配当利回り3.78%は、<strong>防衛機密ITで代替不可能な地位を持ち、無借金・自己資本比率68.9%の企業</strong>として依然として安い。株価の下落幅（−8.7%）が業績見通しの悪化幅（−3%）を上回ったため、<u>期待リターンは+40%→+47%へむしろ改善</u>しました。買う根拠は成立しています。</div>
+      </div>
+      <div>
+        <div class="conc-sub">ストーリーは崩れたか → 一部が明確に崩れた</div>
+        <div class="conc-body">崩れたのは2つ。<strong>①「保守的な会社予想は毎年上振れる」</strong>という中核前提（1Q進捗13.8%が否定）、<strong>②「インフレ・賃上げは単価転嫁で相殺できる」</strong>というマージン防衛力の想定（営業利益率−1.1pt が反証）。一方で<u>堀そのもの（防衛・宇宙ITの準独占）は無傷</u>で、減収の主因は低採算の商材転売でした。</div>
+      </div>
+      <div>
+        <div class="conc-sub">買い増すべきか → 3分割で、10/31を判定日に</div>
+        <div class="conc-body">現水準で1/3、<strong>2Q決算（10/31）で上期経常21.5億円以上を確認できたら1/3</strong>、2,400円以下の押し目で1/3。一括投入は避けてください。1四半期の数字だけでは「投資フェーズの一時的コスト」か「構造的なマージン低下」かを判別できず、<strong>判別材料が出るのは10月末</strong>だからです。</div>
+      </div>
+      <div>
+        <div class="conc-sub">最も注意すべきこと</div>
+        <div class="conc-body">本レポートの期待値計算は<strong>すべて「27/3期の会社予想が達成される」前提の上</strong>にあります。1Q進捗13.8%（5年平均15.3%）は、その前提に黄信号を灯しています。<u>下方修正が出た瞬間、この資料の数字はすべて無効になります</u>。そのときは平均取得単価や含み損を忘れて、ゼロから計算し直してください。</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:4px;">
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">加重平均期待株価</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--or2);">3,566円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">+34.9%（配当除く）</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">配当込み期待</div>
+        <div style="font:700 22px/1 var(--mono);color:#70cc90;">3,880円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">+46.7%（年率+13.6%）</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">次の判定日</div>
+        <div style="font:700 22px/1 var(--mono);color:#90b4ec;">10/31</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">2Q決算・上期経常21.5億円が閾値</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:rgba(246,245,239,.05);border-radius:4px;">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">撤退トリガー</div>
+        <div style="font:700 22px/1 var(--mono);color:#e09090;">下方修正</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px;">出たら全計算を再構築</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel action -->
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.22);text-align:center;padding:18px;font:500 9px/1 var(--mono);letter-spacing:.07em;line-height:1.9;">
+  本資料は情報提供のみを目的として作成されたものであり、投資勧誘を目的としたものではありません。筆者は投資助言業者ではなく、<br>
+  記載された見解・数値・確率はすべて一定の仮定に基づく推定です。投資判断はご自身の責任においてなされますようお願いいたします。<br>
+  <span style="opacity:.7">Data: 2027年3月期第1四半期決算短信（TDnet, 2026/07/31） / 2026年3月期決算短信（2026/04/28） / 株探（株価・業績・時系列, 2026/08/06時点） / 前版「菱友システムズ_投資分析 Ver.1.0」（2026年6月）<br>
+  Ver.2.0 — 2026.08.06 作成 ／ 株価は2026年8月6日場中 2,644円時点</span>
+</footer>
+
+<script>
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tnb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('on');
+  window.scrollTo({ top: document.getElementById('tabNav').offsetTop, behavior: 'smooth' });
+}
+function toggleAcc(head) {
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.cdn-arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (arrow) arrow.classList.toggle('open', !isOpen);
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.bfill').forEach(f => {
+        const w = f.style.width;
+        f.style.width = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => f.style.width = w));
+      });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.panel').forEach(p => io.observe(p));
+</script>
+</body>
+</html>

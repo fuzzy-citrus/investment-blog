@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遠藤照明（6932）／照明セクター 投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(188,122,24,.13);border:1px solid rgba(188,122,24,.32);border-radius:var(--r);padding:18px 24px;min-width:240px}
+.vs{font:700 44px/1 var(--mono);color:var(--or2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eaa8a8}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wr td{background:var(--am3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.22);color:#e09090}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #e8a8a8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h3b{font:700 13px/1.3 var(--head);margin:20px 0 9px;letter-spacing:-.01em}
+.pp{font-size:12.5px;line-height:1.85;margin-bottom:12px}
+.eq{font:600 13px/1.9 var(--mono);background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:14px 18px;margin:12px 0;white-space:pre-wrap}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 6932 / 6748 · 2026.07.27 作成</p>
+      <h1 class="ht">遠藤照明 <em>（6932）</em>／照明セクター<br>統合投資分析レポート</h1>
+      <p class="hs">現株価2,606円 ／ 転換社債の希薄化を織込むとPER10.1倍・PBR0.81倍 ／ 実質PBRは1.00倍<br>含み益はほぼ存在せず、投資妙味の源泉は「アドバンテッジパートナーズ13.01%」という資本イベント</p>
+    </div>
+    <div class="vb">
+      <div class="vs">△＋</div>
+      <div class="vt">
+        <strong>打診買いは可・主力化は2,300円以下</strong><br>
+        バリュー株ではなくイベント株。<br>
+        3年期待リターン（配当込）+23.3%。<br>
+        年率換算では+7.2%にとどまる。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">2,606円</div><div class="ks">時価総額385億円／希薄化後443億円</div></div>
+    <div class="kv"><div class="kl">予想PER（希薄化後）</div><div class="kn bl">10.1倍</div><div class="ks">表面値は8.75倍</div></div>
+    <div class="kv"><div class="kl">PBR（希薄化後）</div><div class="kn am">0.81倍</div><div class="ks">FX・のれん控除後の実質は1.00倍</div></div>
+    <div class="kv"><div class="kl">ネットキャッシュ</div><div class="kn gn">137億円</div><div class="ks">希薄化後時価総額の30.9%</div></div>
+    <div class="kv"><div class="kl">配当利回り（88円）</div><div class="kn gn">3.38%</div><div class="ks">配当性向29.9%・増配余地あり</div></div>
+    <div class="kv"><div class="kl">3年期待リターン</div><div class="kn am">+23.3%</div><div class="ks">配当込／CAGR +7.2%</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>テーゼ・カタリスト</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>バリュエーション精査</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--pu2)"></span>照明セクター論</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>シナリオ・期待値</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════
+  P1 テーゼ・カタリスト
+══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜこの株か、そして何が違うのか</h2><span class="sb bg-am">前提を1つ訂正</span></div>
+
+  <div class="ng">
+    <strong>まず訂正すべき前提が1つあります。</strong>　この銘柄を「土地・有価証券の含み益が眠るバリュー株」として見る前提は成立しません。投資有価証券は<strong>わずか1.06億円</strong>、土地簿価も34.9億円。掘っても隠れ資産は出てきません。加えて2025年11月発行の<strong>転換社債50億円がすでにイン・ザ・マネー</strong>で、表面PER8.75倍は実質10.1倍です。
+  </div>
+
+  <div class="cg">
+    <!-- C1 -->
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🎯</span>
+      <div class="ct">PEファンドが潜在株13.01%を取得</div>
+      <div class="cb gn">13.01%</div>
+      <div class="cu">AAGS Investment（アドバンテッジパートナーズ系）</div>
+      <div class="cp">2025年11月20日、<strong>AAGSS13, L.P.が第2回無担保転換社債50億円を引受。</strong>報道では「アドバンテッジパートナーズと事業提携」とされ、資金使途はDX推進・事業拡大・M&A。国内大手バイアウトファンドが潜在ベース13%を握った意味は小さくありません。</div>
+      <div class="tgs"><span class="tg tg-gn">大量保有報告済</span><span class="tg tg-or">事業提携を公表</span></div>
+    </div>
+    <!-- C2 -->
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 02 · 最重要</div>
+      <span class="ci">🏛️</span>
+      <div class="ct">創業家系アーバン33.4%との合算で46%超</div>
+      <div class="cb am">46.4%</div>
+      <div class="cu">非公開化が技術的に組みやすい持分構造</div>
+      <div class="cp">株式会社アーバン（創業家系資産管理会社）が<strong>33.4%を保有。</strong>AAGSと合算すれば46%超で、スクイーズアウトに必要な2/3まで買い集めるべき浮動株は限定的。時価総額385億円という規模も国内PEの射程内です。</div>
+      <div class="tgs"><span class="tg tg-am">事業承継の素地</span><span class="tg tg-bl">上位10名で50.8%</span></div>
+    </div>
+    <!-- C3 -->
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 重要</div>
+      <span class="ci">⚡</span>
+      <div class="ct">同業・岩崎電気がすでにMBOで非公開化</div>
+      <div class="cb or">4,460円</div>
+      <div class="cu">2023年3月TOB成立・6月上場廃止</div>
+      <div class="cp">照明業界では<strong>岩崎電気（6924）が2023年にMBOを実施し東証プライムから退場済み。</strong>成熟産業・低PBR・事業承継という条件が揃うと非公開化が選ばれるという、極めて近い前例が同一セクター内に存在します。</div>
+      <div class="tgs"><span class="tg tg-or">セクター内前例</span><span class="tg tg-gn">構造要因は共通</span></div>
+    </div>
+    <!-- C4 -->
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04</div>
+      <span class="ci" style="font-size:22px">🕯️</span>
+      <div class="ct" style="color:var(--ink)">直管形蛍光灯の製造禁止まであと18ヶ月</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">2027年末</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">最大市場である直管形の禁止期限</div>
+      <div class="cp" style="color:var(--ink2)">電球形は2025年末、コンパクト形は2026年末に禁止済み／間近。<strong>オフィス・工場・学校で使われる直管形が2027年末で最後。</strong>更新需要はまさに今がピーク帯です。</div>
+    </div>
+    <!-- C5 -->
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05 · 逆風要因</div>
+      <span class="ci" style="font-size:22px">⚠️</span>
+      <div class="ct" style="color:var(--ink)">ただし「なぜ安いのか」にも明確な理由がある</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① CB希薄化が現実</strong><br>転換価額2,230.5円に対し現株価2,606円。すでに16.8%イン・ザ・マネーで、潜在株224万株（13.2%相当）の希薄化は理論値ではなく前提。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② 純資産の18%が為替</strong><br>為替換算調整勘定91.9億円は英国子会社の円換算差額。これとのれんを除いた実質BPSは2,608円＝現株価とほぼ同値。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ 売上の26%が英国</strong><br>2014年買収のAnsell社が中核。「国内蛍光灯更新テーマ」として買っても、4分の1は英国景気とポンド相場に晒される。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      遠藤照明は、<strong style="color:var(--or2)">「資産バリュー」ではなく「創業家＋PEファンドによる資本イベント」に賭ける案件。</strong>本業は営業利益率10.4%・自己資本比率65.3%と堅実だが、希薄化後PER10.1倍は決してバーゲンではない。上値を作るのは業績ではなく、アドバンテッジパートナーズが握った13%が動く日である。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P2 バリュエーション精査
+══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">バリュエーション精査 ── 含み益はどこにもない</h2><span class="sb bg-am">実質PBR 1.00倍</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">投資有価証券</div><div class="mv rd">1.06億円</div><div class="ms">総資産の0.14%・政策保有株ほぼゼロ</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">土地（簿価）</div><div class="mv am">34.94億円</div><div class="ms">総資産の4.6%・事業用地で売却困難</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">239.88億円</div><div class="ms">総資産の31.3%・唯一の資産的強み</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">為替換算調整勘定</div><div class="mv rd">91.94億円</div><div class="ms">自己資本の18.4%・円高で剥落</div></div>
+  </div>
+
+  <h3 class="h3b">表面値と実力値の差 ── 転換社債の織込み</h3>
+  <table class="t" style="margin-bottom:8px">
+    <thead><tr><th>項目</th><th class="r">表面ベース</th><th class="r">完全希薄化ベース</th><th class="r">差</th></tr></thead>
+    <tbody>
+      <tr><td>発行済株式数（自己株控除）</td><td class="r mn">14,768,618株</td><td class="r mn">17,010,268株</td><td class="r mn hrd">+2,241,650株</td></tr>
+      <tr><td>時価総額</td><td class="r mn">385.0億円</td><td class="r mn">443.5億円</td><td class="r mn">+58.5億円</td></tr>
+      <tr><td>1株純資産（BPS）</td><td class="r mn">3,387円</td><td class="r mn">3,235円</td><td class="r mn hrd">▲152円</td></tr>
+      <tr class="wr"><td><strong>PBR</strong></td><td class="r mn">0.77倍</td><td class="r mn ham">0.81倍</td><td class="r mn">+0.04</td></tr>
+      <tr><td>27/3期予想EPS</td><td class="r mn">297.9円</td><td class="r mn">258.7円</td><td class="r mn hrd">▲39.2円</td></tr>
+      <tr class="wr"><td><strong>予想PER</strong></td><td class="r mn">8.75倍</td><td class="r mn ham">10.08倍</td><td class="r mn">+1.33</td></tr>
+      <tr><td>配当利回り（88円）</td><td class="r mn hgn">3.38%</td><td class="r mn hgn">3.38%</td><td class="r">—</td></tr>
+    </tbody>
+  </table>
+  <div class="inf">
+    <strong>CBは理論上の話ではありません。</strong>　当初転換価額2,262円は、2026年6月の株主総会で決議された特別配当により<strong>2,230.5円へ下方調整（2026年7月10日適用）。</strong>現株価2,606円はこれを16.8%上回っており、割当先にとって株式化が経済合理的な状態です。希薄化後の数字を実力値として扱うべきです。
+  </div>
+
+  <h3 class="h3b">含み益の在り処を1つずつ潰す</h3>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-rd">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">① 有価証券の含み益 → 実質ゼロ</div>
+      <div class="pp" style="margin-bottom:0">26年3月期末の投資有価証券は<strong>106百万円</strong>。純資産のその他有価証券評価差額金も<strong>34百万円</strong>にすぎません。政策保有株の売却によるバランスシート改善余地は事実上ありません。<br><br>裏を返せば「持ち合い解消を迫られる余地がない＝資産効率はすでにクリーン」とも言えますが、<strong>東証のPBR改善要請に対して政策保有株売却という定石カードが使えない</strong>という制約でもあります。</div>
+    </div>
+    <div class="c cl-am">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">② 土地の含み益 → 規模的に効かない</div>
+      <div class="pp">賃貸等不動産の時価は開示されていません（賃貸収入1.77億円と小規模で重要性に乏しいため）。簿価34.94億円に含み益率を仮定した株価インパクトは以下の通りです。</div>
+      <div class="bg"><div class="br2"><span>含み益率 +50%</span><span class="mn ham">+72円/株</span></div><div class="bt"><div class="bf" style="width:25%;background:var(--am2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>含み益率 +100%</span><span class="mn ham">+144円/株</span></div><div class="bt"><div class="bf" style="width:50%;background:var(--am2)"></div></div></div>
+      <div class="bg" style="margin-bottom:0"><div class="br2"><span>含み益率 +200%</span><span class="mn ham">+288円/株</span></div><div class="bt"><div class="bf" style="width:100%;background:var(--am2)"></div></div></div>
+      <div class="note">税効果30%控除後・希薄化後株数ベース。時価が簿価の3倍でも株価換算288円（現株価の11%）にとどまります。</div>
+    </div>
+  </div>
+
+  <h3 class="h3b">③ ネットキャッシュ ── ここは本物の強み</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>項目</th><th class="r">金額（百万円）</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>現金及び預金</td><td class="r mn hgn">23,988</td><td>CF計算書上の現金同等物は23,534</td></tr>
+      <tr><td>短期借入金／1年内返済長期借入金</td><td class="r mn">△4,025</td><td rowspan="3">有利子負債（CB除く）合計 10,070</td></tr>
+      <tr><td>社債</td><td class="r mn">△1,000</td></tr>
+      <tr><td>長期借入金</td><td class="r mn">△5,045</td></tr>
+      <tr><td>リース債務（流動＋固定）</td><td class="r mn">△224</td><td></td></tr>
+      <tr class="hl"><td><strong>ネットキャッシュ（CB除く）</strong></td><td class="r mn hgn"><strong>13,694</strong></td><td>希薄化後時価総額の<strong>30.9%</strong></td></tr>
+      <tr><td>転換社債型新株予約権付社債</td><td class="r mn">△5,018</td><td>転換されれば負債は消え、現金は残る</td></tr>
+      <tr class="sm"><td>ネットキャッシュ（CB控除後・保守）</td><td class="r mn">8,676</td><td>CB非転換シナリオ</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">EV（企業価値）</div><div class="mv gn">306.5億円</div><div class="ms">希薄化後時価総額－ネットキャッシュ</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">EV / 営業利益（27/3予）</div><div class="mv gn">5.11倍</div><div class="ms">この指標では明確に割安圏</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">EV / EBITDA（26/3実）</div><div class="mv am">3.33倍</div><div class="ms">レンタル償却が大きく割引評価が必要</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">自己資本比率</div><div class="mv bl">65.3%</div><div class="ms">有利子負債比率20.1%（前期29.3%）</div></div>
+  </div>
+
+  <h3 class="h3b">④ そして最も重要な数字 ── 実質PBR</h3>
+  <div class="cf-bl" style="border-radius:var(--r);padding:20px 24px;margin-bottom:14px">
+    <div class="pp">自己資本500.25億円から、<strong>為替換算調整勘定91.94億円</strong>（英国Ansell社等の在外子会社純資産の円換算差額）と<strong>のれん23.15億円</strong>を控除すると、実質純資産は385.16億円。これを実質発行済株式数14,768,618株で割ると──</div>
+    <div class="eq" style="text-align:center;font-size:16px;background:rgba(255,255,255,.5)">実質BPS ＝ 2,608円　≒　現在株価 2,606円　（実質PBR 1.00倍）</div>
+    <div class="pp" style="margin-bottom:0">偶然の一致ですが示唆的です。<strong>「PBR0.77倍だから割安」という見方は、為替の累積換算益とのれんを額面通りの資産価値として評価した場合の話。</strong>保守的に見れば、市場は遠藤照明を実質簿価ちょうどで評価しています。26年3月期は純利益が前期比9.5%減にもかかわらず自己資本が13.6%増えましたが、その差は実力ではなく為替の効果でした。</div>
+    <div class="note">完全希薄化ベース（自己資本にCB50億を加算・17,010千株で除算）では実質BPS 2,558円・実質PBR 1.02倍。どちらの計算でも「ほぼ1倍」という結論は変わりません。なお為替換算調整勘定は実在する在外子会社純資産を表すため、全額を無価値とみなすのは保守的すぎるという反論も成り立ちます。感応度の目安としてご覧ください。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P3 事業性・ストック性
+══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・ストック性 ── サブスク銘柄ではない</h2><span class="sb bg-or">リカーリング 8.6%</span></div>
+
+  <h3 class="h3b">セグメント別実績（26年3月期）</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>セグメント</th><th class="r">外部売上</th><th class="r">構成比</th><th class="r">セグメント利益</th><th class="r">利益率</th><th class="r">設備投資</th></tr></thead>
+    <tbody>
+      <tr><td><strong>照明器具関連事業</strong></td><td class="r mn">430.98億</td><td class="r mn">77.7%</td><td class="r mn">61.62億</td><td class="r mn hgn">12.6%</td><td class="r mn">13.80億</td></tr>
+      <tr><td><strong>環境関連事業（レンタル）</strong></td><td class="r mn">112.15億</td><td class="r mn">20.2%</td><td class="r mn">9.76億</td><td class="r mn ham">8.6%</td><td class="r mn hrd">33.59億</td></tr>
+      <tr><td><strong>インテリア家具事業</strong></td><td class="r mn">11.60億</td><td class="r mn">2.1%</td><td class="r mn">0.25億</td><td class="r mn hrd">2.2%</td><td class="r mn">0.01億</td></tr>
+      <tr><td>全社費用</td><td class="r">—</td><td class="r">—</td><td class="r mn hrd">△15.81億</td><td class="r">—</td><td class="r">—</td></tr>
+      <tr class="sm"><td>連結</td><td class="r mn">554.73億</td><td class="r mn">100%</td><td class="r mn">57.42億</td><td class="r mn">10.4%</td><td class="r mn">47.41億</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:11px">収益の性質（26年3月期・554.73億円）</div>
+      <div class="bg"><div class="br2"><span>フロー型販売（案件ベース）</span><span class="mn hor">91.4%</span></div><div class="bt"><div class="bf" style="width:91.4%;background:var(--or2)"></div></div></div>
+      <div class="bg" style="margin-bottom:0"><div class="br2"><span>リカーリング（レンタル・リース）</span><span class="mn hgn">8.6%</span></div><div class="bt"><div class="bf" style="width:8.6%;background:var(--gn2)"></div></div></div>
+      <div class="note">収益認識注記：「顧客との契約から生じる収益」506.86億円＋「その他の収益（リース・レンタル取引）」47.86億円。会計上のストック収益は全社の8.6%にすぎません。</div>
+    </div>
+    <div class="c">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:11px">地域構成 ── 実は「英国株」の側面</div>
+      <div class="bg"><div class="br2"><span>日本</span><span class="mn hbl">64.5%</span></div><div class="bt"><div class="bf" style="width:64.5%;background:var(--bl2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>英国（Ansell社）</span><span class="mn hrd">26.5%</span></div><div class="bt"><div class="bf" style="width:26.5%;background:var(--rd)"></div></div></div>
+      <div class="bg"><div class="br2"><span>アジア</span><span class="mn">5.6%</span></div><div class="bt"><div class="bf" style="width:5.6%;background:var(--am2)"></div></div></div>
+      <div class="bg" style="margin-bottom:0"><div class="br2"><span>欧州（英国除く）</span><span class="mn">3.5%</span></div><div class="bt"><div class="bf" style="width:3.5%;background:var(--ink3)"></div></div></div>
+      <div class="note">英国売上146.76億円（前期141.80億円）。増加分の多くはポンド高による換算効果と推察され、現地通貨ベースでは横ばい圏の可能性。</div>
+    </div>
+  </div>
+
+  <div class="inf">
+    <strong>環境関連事業（レンタル）は「稼ぐストック」になっていません。</strong>　複数年契約でキャッシュフローは読めますが、セグメント利益率8.6%は照明器具関連の12.6%を大きく下回り、設備投資は年33.59億円と<strong>全社の71%を消費</strong>。レンタル資産は取得原価189.07億円に対し純額91.50億円まで償却が進んでおり、規模維持のための継続的な再投資が必要です。EV/EBITDA 3.33倍が実態より安く見える理由もここにあります。
+  </div>
+
+  <h3 class="h3b">Smart LEDZ ── 「ストック」ではなく「高付加価値フロー」</h3>
+  <div class="g3" style="margin-bottom:14px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">Smart LEDZ関連売上</div><div class="mv gn">132.71億円</div><div class="ms">前期比+5.4%・全社の23.9%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">累計導入実績</div><div class="mv bl">45,000件超</div><div class="ms">発売10年以上・無線調光の国内定番</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">売上総利益率</div><div class="mv or">41.0%</div><div class="ms">前期38.7%から+2.3pt改善</div></div>
+  </div>
+  <div class="pp">Smart LEDZは無線制御システムとして国内で確立したポジションにあり、単なる器具置き換えより単価と粗利を取れるのは事実です。ただし<strong>これはシステム同梱の器具販売であり、月額課金型のリカーリング収益ではありません。</strong>「単価アップによる粗利率改善」がこの会社の成長ドライバーであって、SaaS的なストックモデルを期待すると評価を誤ります。</div>
+
+  <h3 class="h3b">業績推移と中期経営計画（2025-2027）</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">営業利益率</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">配当</th></tr></thead>
+    <tbody>
+      <tr><td>2025/3期</td><td class="r mn">537.35億</td><td class="r mn">49.30億</td><td class="r mn">9.2%</td><td class="r mn">54.11億</td><td class="r mn">47.99億</td><td class="r mn">324.85円</td><td class="r mn">50円</td></tr>
+      <tr class="hl"><td><strong>2026/3期（実績）</strong></td><td class="r mn">554.73億</td><td class="r mn">57.42億</td><td class="r mn">10.4%</td><td class="r mn">59.35億</td><td class="r mn">43.42億</td><td class="r mn">294.00円</td><td class="r mn">88円</td></tr>
+      <tr><td>2027/3期（会社予想）</td><td class="r mn">595.00億</td><td class="r mn">60.00億</td><td class="r mn">10.1%</td><td class="r mn">62.00億</td><td class="r mn">44.00億</td><td class="r mn">297.93円</td><td class="r mn">88円</td></tr>
+      <tr class="sm"><td>2028/3期（中計最終年度）</td><td class="r mn">610.00億</td><td class="r mn">70.00億</td><td class="r mn ham">11.5%</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r">ROE10%以上</td></tr>
+    </tbody>
+  </table>
+  <div class="pp"><strong>26年3月期の中身。</strong>売上総利益率が38.7%→41.0%へ2.3ポイント改善し、売上原価は絶対額で0.6%減（329.15億→327.06億円）。高付加価値化と価格改定が効いています。純利益が9.5%減となったのは、前期に法人税等調整額△6.58億円という一過性の益があった反動で、税引前利益は+8.7%の増益。事業の実態は悪くありません。</div>
+  <div class="pp"><strong>中計の難易度。</strong>売上610億円に対する営業利益70億円＝利益率11.5%は、同社が過去10年で一度も到達していない水準です。27/3期予想の60億円から最終年度に+10億円を積む形で、「やや高いが非現実的ではない」というのが妥当な評価です。</div>
+
+  <div class="ng">
+    <strong>キャッシュフローには注意が必要です。</strong>　26年3月期の営業CF 102.78億円（前期比+252%）は印象的ですが、内訳を見ると<strong>棚卸資産の減少が+16.14億円（前期は△16.86億円）</strong>と運転資本の振れが大きく寄与しています。前期に積んだ在庫を取り崩しただけで、この効果は反復しません。<strong>2期平均のフリーCFは年22.85億円</strong>、希薄化後時価総額に対するFCF利回りは約5.2%で、「異常に安い」水準ではありません。
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P4 照明セクター論
+══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">「照明業界に張る」は正しいか</h2><span class="sb bg-pu">結論：張り方を変える</span></div>
+
+  <div class="inf">
+    <strong>結論を先に。</strong>　テーマとしては面白いのですが、<strong>「照明業界に張る」という発想は成立しにくいのが実情です。</strong>純粋な上場照明株が2銘柄しか残っておらず、分散効果がほぼ得られません。正しくは「照明の皮を被った<strong>個別イベント株を2本持つ</strong>」と理解すべきで、セクター投資というよりコンセントレーテッドな個別株投資になります。
+  </div>
+
+  <h3 class="h3b">そもそも投資可能な照明株がほとんど残っていない</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>企業</th><th>市場</th><th>投資可能性</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>遠藤照明（6932）</strong></td><td>東証スタンダード</td><td><span class="bge be-gn">投資可</span></td><td>業務用照明・照明制御。時価総額385億円</td></tr>
+      <tr class="hl"><td><strong>星和電機（6748）</strong></td><td>東証スタンダード</td><td><span class="bge be-gn">投資可</span></td><td>道路・トンネル照明＋情報表示。時価総額95億円</td></tr>
+      <tr><td>岩崎電気（旧6924）</td><td>—</td><td><span class="bge be-rd">MBOで退場</span></td><td>2023年3月TOB（4,460円）→ 同年6月上場廃止</td></tr>
+      <tr><td>パナソニック（6752）</td><td>東証プライム</td><td><span class="bge be-am">実質不可</span></td><td>照明は巨大コングロマリットの一部門にすぎない</td></tr>
+      <tr><td>三菱電機／東芝ライテック</td><td>—</td><td><span class="bge be-am">実質不可</span></td><td>大企業の一部門・子会社でピュアプレーにならない</td></tr>
+      <tr><td>コイズミ照明／オーデリック／大光電機</td><td>非上場</td><td><span class="bge be-rd">不可</span></td><td>業界主要プレイヤーだが未上場</td></tr>
+      <tr><td>アイリスオーヤマ</td><td>非上場</td><td><span class="bge be-rd">不可</span></td><td>LED照明の有力プレイヤーだが未上場</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ok">
+    <strong>この「銘柄が枯れている」という事実自体が、実はテーゼの核心です。</strong>　成熟産業・低PBR・事業承継という条件が揃った照明業界では、上場を続けるメリットが小さい。岩崎電気は2023年にMBOで実際に退場しました。<strong>遠藤照明にPEファンドが入り、星和電機が継続的に自社株買いを実施しているのは、同じ構造圧力の表れ</strong>と読むのが自然です。セクターの本質は「成長テーマ」ではなく「成熟産業の再編」にあります。
+  </div>
+
+  <h3 class="h3b">規制タイムライン ── 今がちょうど需要のピーク帯</h3>
+  <div class="c" style="margin-bottom:14px">
+    <div class="tl">
+      <div class="ti"><div class="td2 gn"></div><div class="tdate">2023年11月　水俣条約COP5</div><div class="ttext">全ての一般照明用蛍光ランプを2027年末までに製造・輸出入禁止とすることで合意。</div></div>
+      <div class="ti"><div class="td2 am"></div><div class="tdate">2025年12月末　【済】</div><div class="ttext"><strong>電球形蛍光ランプ</strong>の製造・輸出入が禁止。</div></div>
+      <div class="ti"><div class="td2 or"></div><div class="tdate">2026年12月末　【あと約5ヶ月】</div><div class="ttext"><strong>コンパクト形蛍光ランプ</strong>の製造・輸出入が禁止。</div></div>
+      <div class="ti"><div class="td2 rd"></div><div class="tdate">2027年12月末　【あと約18ヶ月】</div><div class="ttext"><strong>直管形蛍光ランプ</strong>の製造・輸出入が禁止。オフィス・工場・学校・店舗で使われる<strong>最大市場</strong>がここで終わる。更新需要のピーク帯。</div></div>
+      <div class="ti"><div class="td2 bl"></div><div class="tdate">2028年以降</div><div class="ttext">既存在庫での使用継続は可能なため需要は分散するが、<strong>2029年以降は需要の谷（先食いの反動）</strong>を織り込む必要がある。</div></div>
+      <div class="ti" style="margin-bottom:0"><div class="td2 pu"></div><div class="tdate">2030年　政府目標</div><div class="ttext">従来照明器具（ストックマーケット）の高効率次世代照明化100%。ただし遠藤照明自身が「国内LED照明市場は少子化を背景に長期的に成長が鈍化する」と資料で明言している。</div></div>
+    </div>
+  </div>
+  <div class="pp"><strong>時間軸を区切るべきテーマです。</strong>　「2028年までに勝負がつく」と割り切り、それ以降も持ち続けるなら業績ではなく資本イベントを理由にする。そういう整理が必要です。</div>
+
+  <h3 class="h3b">2銘柄比較 ── 性格がまったく違う</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>項目</th><th class="r">遠藤照明（6932）</th><th class="r">星和電機（6748）</th></tr></thead>
+    <tbody>
+      <tr><td>株価（基準日）</td><td class="r mn">2,606円</td><td class="r mn">720円（26/7/7）</td></tr>
+      <tr><td>時価総額</td><td class="r mn">385億円</td><td class="r mn">95億円</td></tr>
+      <tr><td>予想PER</td><td class="r mn ham">10.08倍（希薄化後）</td><td class="r mn hgn">6.97倍</td></tr>
+      <tr><td>PBR</td><td class="r mn ham">0.81倍（実質1.00倍）</td><td class="r mn hgn">0.48倍</td></tr>
+      <tr><td>配当利回り</td><td class="r mn hgn">3.38%</td><td class="r mn">2.78%</td></tr>
+      <tr><td>予想ROE</td><td class="r mn hgn">8.8%</td><td class="r mn">6.9%</td></tr>
+      <tr><td>自己資本比率</td><td class="r mn hgn">65.3%</td><td class="r mn">60.4%</td></tr>
+      <tr><td>ネットキャッシュ</td><td class="r mn hgn">+137億円</td><td class="r mn hrd">▲3.4億円（実質ゼロ）</td></tr>
+      <tr><td>主戦場</td><td class="r">商業施設・店舗・オフィス</td><td class="r">道路・トンネル・高速道路・官公庁</td></tr>
+      <tr><td>主要顧客</td><td class="r">民間設備投資（＋英国26.5%）</td><td class="r">NEXCO東・中・西、国土交通省</td></tr>
+      <tr><td>支配株主</td><td class="r ham">アーバン33.4%（創業家系）</td><td class="r">なし（取引先持株会14.5%が最大）</td></tr>
+      <tr><td>資本イベント</td><td class="r hgn">PEファンド13.01%取得済</td><td class="r">自社株買いを3年連続実施</td></tr>
+      <tr class="wr"><td><strong>3年期待リターン（配当込）</strong></td><td class="r mn"><strong>+23.3%</strong>／CAGR+7.2%</td><td class="r mn"><strong>+34.5%</strong>／CAGR+10.4%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-gn">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">星和電機の魅力と限界</div>
+      <div class="pp" style="margin-bottom:0"><strong>魅力：</strong>PBR0.48倍・PER7倍は素直に安い。照明機器セグメントの利益率は約20%と高く、道路・トンネル照明は国土強靭化・インフラ老朽化対策という別軸の追い風を持ちます。自社株買いを2024年から3年連続で実施しており、資本政策の意識は改善傾向。<br><br><strong>限界：</strong>ネットキャッシュは実質ゼロ（現金32.0億円 vs 有利子負債35.4億円）で、遠藤照明のような財務クッションはありません。官公庁・高速道路案件は期ズレの振れが大きく、時価総額95億円・出来高数千株という流動性の薄さは無視できません。支配株主が不在で、持株会・地銀・財団が安定株主として3割強を占める構造は、資本イベントを起こしにくい形でもあります。</div>
+    </div>
+    <div class="c cl-am">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">「セクター張り」の落とし穴</div>
+      <div class="pp" style="margin-bottom:0"><strong>① 分散が効かない。</strong>2銘柄では個別リスクを打ち消せません。どちらも東証スタンダードの小型株で、地合い悪化時には同時に売られます。<br><br><strong>② 相関が意外に低い。</strong>遠藤は民間設備投資＋英国景気、星和は公共インフラ予算。ドライバーが違うので「照明テーマ」として同時に評価される場面は限定的です。テーマ買いの恩恵は期待しにくい。<br><br><strong>③ 需要の谷が同時に来る。</strong>ただし2029年以降の蛍光灯需要一巡だけは両社に同時に効きます。分散が効かない一方でダウンサイドは共有する、という最も嫌な形です。</div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">照明セクターへの結論</div>
+    <div style="font-size:14px;line-height:1.9;color:rgba(246,245,239,.82);max-width:880px">
+      「少し張る」という距離感自体は<strong style="color:var(--or2)">適切です。</strong>ただし期待すべきは蛍光灯特需による業績爆発ではなく、<strong style="color:var(--or2)">成熟産業で低PBRに放置された会社が非公開化・資本政策で見直される流れ</strong>のほう。岩崎電気が実例を作り、遠藤照明にはPEが入り、星和電機は自社株買いを続けている。<br><br>配分は<strong style="color:var(--or2)">遠藤照明70% ／ 星和電機30%</strong>が妥当（期待CAGR +8.2%）。星和のリターン期待は高いものの、流動性・案件期ズレ・財務クッションの薄さを考えると主力にはしにくい。総資産に対しては<strong style="color:var(--or2)">5〜10%程度</strong>にとどめ、2029年の需要の谷までに判断を下す時間軸で臨むのが現実的です。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P5 シナリオ・期待値
+══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">配当込みリターンと株価シナリオ</h2><span class="sb bg-bl">3年・希薄化後ベース</span></div>
+
+  <h3 class="h3b">計算式</h3>
+  <div class="eq">配当込みリターン ＝（3年後株価 ＋ 累計受取配当）÷ 現在株価 － 1
+
+CAGR ＝〔（3年後株価 ＋ 累計受取配当）÷ 現在株価〕^(1/3) － 1</div>
+  <div class="inf">
+    <strong>ご提供いただいたモデルからの修正点。</strong>　元のモデルは3年後目標株価3,247円・現在株価2,601円で+34.9%（CAGR+10.5%）としていましたが、これは<strong>転換社債による希薄化を織り込んでいない数値</strong>です。潜在株224万株（13.2%相当）を反映すると1株あたり利益は約13%目減りし、同じPERを当てはめても目標株価は下がります。以下は希薄化後EPSで再構築した数値です。
+  </div>
+
+  <h3 class="h3b">遠藤照明（6932）── 現在株価 2,606円</h3>
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l bu">Bull ／ 確率20%</div><div class="sc-p bu">3,880円</div><div class="sc-s">中計超過達成・PER12倍</div><div class="sc-i">営業利益75億／純利益55億</div><div class="sc-i">希薄化後EPS 323円</div><div class="sc-i">累計配当303円（増配）</div><div class="sc-i">配当込 <strong>+60.5%</strong>／CAGR+17.1%</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base ／ 確率40%</div><div class="sc-p bs">3,050円</div><div class="sc-s">中計に概ね到達・PER10.5倍</div><div class="sc-i">営業利益65億／純利益48億</div><div class="sc-i">希薄化後EPS 290円</div><div class="sc-i">累計配当283円</div><div class="sc-i">配当込 <strong>+27.8%</strong>／CAGR+8.5%</div></div>
+    <div class="sc-c"><div class="sc-l br">Bear ／ 確率25%</div><div class="sc-p br">1,650円</div><div class="sc-s">英国減速＋円高・PER8.5倍</div><div class="sc-i">営業利益45億／純利益33億</div><div class="sc-i">希薄化後EPS 194円</div><div class="sc-i">累計配当264円（維持）</div><div class="sc-i">配当込 <strong>▲26.6%</strong>／CAGR▲9.8%</div></div>
+    <div class="sc-c"><div class="sc-l bm">Event ／ 確率15%</div><div class="sc-p bm">3,600円</div><div class="sc-s">MBO／TOBによる非公開化</div><div class="sc-i">国内MBOプレミアム30〜50%</div><div class="sc-i">中計EBIT70億×EV/EBIT8倍なら4,100円</div><div class="sc-i">累計配当176円（2年分）</div><div class="sc-i">配当込 <strong>+44.8%</strong>／CAGR+13.1%</div></div>
+  </div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">確率加重 3年トータル</div><div class="mv am">+23.3%</div><div class="ms">配当込み</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">年率換算（CAGR）</div><div class="mv am">+7.2%</div><div class="ms">元モデルの+10.5%から下方修正</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">上値／下値レンジ</div><div class="mv gn">+60% / ▲27%</div><div class="ms">リスク・リワードは約1 : 2.3</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">下値フロア（実質BPS）</div><div class="mv bl">2,608円</div><div class="ms">現株価とほぼ同値＝クッション薄い</div></div>
+  </div>
+
+  <h3 class="h3b">星和電機（6748）── 現在株価 720円</h3>
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l bu">Bull ／ 確率20%</div><div class="sc-p bu">1,073円</div><div class="sc-s">PBR0.65倍へリレーティング</div><div class="sc-i">3年後BPS 1,650円想定</div><div class="sc-i">照明機器の高利益率が評価される</div><div class="sc-i">累計配当67円</div><div class="sc-i">配当込 <strong>+58.3%</strong>／CAGR+16.6%</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base ／ 確率35%</div><div class="sc-p bs">920円</div><div class="sc-s">EPS115円・PER8倍</div><div class="sc-i">営業利益20億円台が定着</div><div class="sc-i">PBR0.55倍程度まで回復</div><div class="sc-i">累計配当60円</div><div class="sc-i">配当込 <strong>+36.1%</strong>／CAGR+10.8%</div></div>
+    <div class="sc-c"><div class="sc-l br">Bear ／ 確率30%</div><div class="sc-p br">595円</div><div class="sc-s">案件期ズレ・情報機器不振</div><div class="sc-i">営業利益15億円割れ</div><div class="sc-i">PBR0.4倍台が定着</div><div class="sc-i">累計配当60円</div><div class="sc-i">配当込 <strong>▲9.0%</strong>／CAGR▲3.1%</div></div>
+    <div class="sc-c"><div class="sc-l bm">Event ／ 確率15%</div><div class="sc-p bm">1,300円</div><div class="sc-s">TOB／MBOでPBR0.8倍</div><div class="sc-i">支配株主不在ゆえ組成は難しい</div><div class="sc-i">安定株主3割強が壁</div><div class="sc-i">累計配当40円</div><div class="sc-i">配当込 <strong>+86.1%</strong>／CAGR+23.0%</div></div>
+  </div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">確率加重 3年トータル</div><div class="mv gn">+34.5%</div><div class="ms">配当込み</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">年率換算（CAGR）</div><div class="mv gn">+10.4%</div><div class="ms">遠藤照明を上回る</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">下値の浅さ</div><div class="mv am">▲9.0%</div><div class="ms">PBR0.48倍が下支え</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">流動性</div><div class="mv rd">出来高8,400株</div><div class="ms">2026/7/7実績・執行に制約</div></div>
+  </div>
+
+  <h3 class="h3b">ポートフォリオ配分別の期待値</h3>
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>配分</th><th class="r">3年トータル（配当込）</th><th class="r">CAGR</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>遠藤照明 100%</td><td class="r mn">+23.3%</td><td class="r mn">+7.2%</td><td>安定重視だが期待値は最も低い</td></tr>
+      <tr class="hl"><td><strong>遠藤照明70% ／ 星和電機30%</strong></td><td class="r mn hgn"><strong>+26.7%</strong></td><td class="r mn hgn"><strong>+8.2%</strong></td><td><strong>推奨。</strong>財務・流動性・期待値のバランスが最良</td></tr>
+      <tr><td>遠藤照明50% ／ 星和電機50%</td><td class="r mn">+28.9%</td><td class="r mn">+8.8%</td><td>期待値は上がるが星和の流動性リスクを取りすぎ</td></tr>
+      <tr><td>星和電機 100%</td><td class="r mn">+34.5%</td><td class="r mn">+10.4%</td><td>期待値は最高だが小型株1本集中は非推奨</td></tr>
+    </tbody>
+  </table>
+  <div class="note">※ 確率配分は定量的な根拠を持つものではなく、開示情報から筆者が想定した主観的な重み付けです。特にEventシナリオの確率15%は、資本イベントの発生時期が投資家側で予測できない性質のものであることを踏まえた保守的な置き方をしています。</div>
+
+  <h3 class="h3b">買い水準の目安（遠藤照明・希薄化後ベース）</h3>
+  <table class="t">
+    <thead><tr><th>株価</th><th class="r">希薄化後PER</th><th class="r">希薄化後PBR</th><th class="r">配当利回り</th><th>評価</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2,800円</td><td class="r mn">10.8倍</td><td class="r mn">0.87倍</td><td class="r mn">3.14%</td><td><span class="bge be-rd">見送り</span></td></tr>
+      <tr class="wr"><td class="mn"><strong>2,606円（現在）</strong></td><td class="r mn">10.1倍</td><td class="r mn">0.81倍</td><td class="r mn">3.38%</td><td><span class="bge be-am">打診買い圏</span></td></tr>
+      <tr><td class="mn">2,400円</td><td class="r mn">9.3倍</td><td class="r mn">0.74倍</td><td class="r mn">3.67%</td><td><span class="bge be-bl">買い増し圏</span></td></tr>
+      <tr class="hl"><td class="mn"><strong>2,230円（＝転換価額）</strong></td><td class="r mn">8.6倍</td><td class="r mn">0.69倍</td><td class="r mn">3.95%</td><td><span class="bge be-gn">妙味あり・心理的節目</span></td></tr>
+      <tr><td class="mn">2,000円</td><td class="r mn">7.7倍</td><td class="r mn">0.62倍</td><td class="r mn">4.40%</td><td><span class="bge be-gn">積極的に買いたい</span></td></tr>
+      <tr><td class="mn">1,800円</td><td class="r mn">7.0倍</td><td class="r mn">0.56倍</td><td class="r mn">4.89%</td><td><span class="bge be-gn">強く検討</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════
+  P6 リスク
+══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">ダウンサイドリスクの点検</h2><span class="sb bg-rd">下値クッションは薄い</span></div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>リスク</th><th class="r">影響度</th><th class="r">蓋然性</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CB転換による希薄化</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-rd">高</span></td><td>転換価額2,230.5円に対し現株価2,606円で既にイン・ザ・マネー。潜在株2,241千株＝13.2%相当。EPSは約13%低下</td></tr>
+      <tr><td><strong>ポンド安・円高</strong></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-am">中</span></td><td>売上の26.5%・自己資本の18.4%が英国関連。円高10%でBPSは実質約2%減、英国利益も目減り</td></tr>
+      <tr><td><strong>蛍光灯特需の先食い</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td>2028年までに更新需要が集中 → 2029年以降の反動減（クリフリスク）。星和電機とも共有するリスク</td></tr>
+      <tr><td><strong>レンタル事業の資本効率</strong></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">高</span></td><td>年33.6億円の設備投資に対し利益率8.6%。FCFを構造的に圧迫し、EV/EBITDAの安さを見かけ倒しにする</td></tr>
+      <tr><td>国内商業施設・オフィス投資の循環</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td>案件ベースのフロー型収益が91.4%を占め、景気感応度が高い</td></tr>
+      <tr><td>AAGS保有分のオーバーハング</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td>保有目的は形式上「純投資」。転換後に市場売却されれば需給の重石。CB発表当日は売り気配で始まった経緯も</td></tr>
+      <tr><td>親会社単体の収益力</td><td class="r"><span class="bge be-am">中</span></td><td class="r">—</td><td>単体営業利益14.09億円は連結57.42億円の25%。利益の大半が子会社・海外由来という構造</td></tr>
+      <tr><td>のれん減損</td><td class="r"><span class="bge be-gn">小</span></td><td class="r"><span class="bge be-gn">低</span></td><td>のれん23.15億円（英国Ansell）。自己資本の4.6%と限定的</td></tr>
+      <tr><td>流動性・指数需給</td><td class="r"><span class="bge be-gn">小</span></td><td class="r"><span class="bge be-rd">高</span></td><td>東証スタンダード・時価総額385億円。機関投資家の買いが入りにくく、リレーティングに時間がかかる</td></tr>
+      <tr><td>カタリストの発火時期が読めない</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">高</span></td><td>アーバンが応じない限り買収は成立しない。<strong>投資家側で全くコントロールできない</strong>要素で、数年待たされる可能性</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-rd">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">下値の目安 ── どこで止まるか</div>
+      <div class="pp" style="margin-bottom:0">下値の支えは3層あります。<br><br><strong>① ネットキャッシュ137億円</strong>＝希薄化後1株806円<br><strong>② 実質BPS 2,608円</strong>＝現株価とほぼ同値<br><strong>③ 配当88円</strong>の利回り水準<br><br>配当利回り4.0%となる株価は2,200円、4.5%で1,956円。<strong>平時のダウンサイドは2,000〜2,200円ゾーン</strong>が現実的な目処で、現株価からの下落余地は15〜23%です。過去10年のPBRレンジは0.28〜2.8倍と広く、ショック時には実質BPS基準0.5倍＝1,300円も想定外ではありません。</div>
+    </div>
+    <div class="c cl-bl">
+      <div style="font:700 12px/1.3 var(--head);margin-bottom:8px">フォローすべきチェックポイント</div>
+      <div class="pp" style="margin-bottom:0">
+      <strong>① CBの転換・売却動向</strong>／AAGSの大量保有報告書の変更報告<br>
+      <strong>② APとの事業提携の中身</strong>／具体的なM&A・DX施策が出るか。単なる資金提供で終われば失望<br>
+      <strong>③ 英国Ansell社の現地通貨ベース業績</strong>／ポンド換算前の実力<br>
+      <strong>④ 粗利率41%の維持</strong>／価格改定効果の剥落と原材料動向<br>
+      <strong>⑤ 運転資本の反転</strong>／26年3月期の営業CF急増は在庫取崩し。27年3月期に反動が出ないか<br>
+      <strong>⑥ 株主提案の賛成率</strong>／ガバナンス圧力の強度を測る指標<br>
+      <strong>⑦ 次回中計のROE・還元方針</strong>／PBR1倍是正への本気度</div>
+    </div>
+  </div>
+
+  <div class="ng">
+    <strong>最も注意すべきは「下値クッションが薄い」ことです。</strong>　広済堂HDのように「解散価値以下・NAVの半値」という強力な下支えは、遠藤照明にはありません。実質BPSが現株価と同値である以上、<strong>資産面からのダウンサイド・プロテクションは事実上ゼロ</strong>と考えるべきです。守ってくれるのは配当利回りと業績の安定性だけ。だからこそ「2,300円以下まで待って主力化」という規律が意味を持ちます。
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P7 最終評価
+══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終投資判断</h2><span class="sb bg-or">条件付き買い</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">総合評価</div><div class="mv am">3.5 / 5</div><div class="ms">前提訂正により4.5→3.5へ下方修正</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">確率加重期待株価</div><div class="mv bl">2,949円</div><div class="ms">3年後・現在比+13.1%（配当除く）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">3年期待リターン</div><div class="mv gn">+23.3%</div><div class="ms">配当込／CAGR +7.2%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">リスク・リワード比</div><div class="mv rd">約1 : 2.3</div><div class="ms">上値+60% vs 下値▲27%</div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── バリューではなくイベント</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">投資テーゼの本質</div>
+        <div class="conc-b">この銘柄は<strong>「含み益狙いのバリュー株」ではありません。</strong>投資有価証券1.06億円、土地簿価34.9億円。掘っても隠れ資産は出ず、むしろ為替換算調整勘定91.9億円という剥落しうる純資産を抱え、実質PBRは1.00倍。上値を作るのは<strong>アドバンテッジパートナーズが握った13.01%が動く日</strong>であり、賭けの対象は資産ではなく資本イベントです。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">2,606円の評価と執行戦術</div>
+        <div class="conc-b">希薄化後PER10.1倍・PBR0.81倍は「妥当〜やや割安」で、明確なバーゲンではありません。<strong>打診買い（想定ポジションの30%程度）は可、主力化は2,300円以下</strong>、できれば転換価額2,230円近辺まで待つのが合理的。既に保有しているなら配当3.38%を受け取りながらイベント待ちのホールドで問題ありません。<strong>底当てを狙わず、決めた価格帯で決めた株数を淡々と分割執行</strong>し、正式発表時に向けた余力を残すこと。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">時間軸と撤退条件</div>
+        <div class="conc-b">蛍光灯更新需要は<strong>2028年で一巡</strong>し、2029年以降は反動減が想定されます。したがって<strong>「3年以内に資本イベントか中計達成のいずれかが見えなければ撤退」</strong>という時間軸を最初に設定すべき。撤退トリガーは①AAGSの持分売却、②粗利率が38%台へ低下、③英国事業の現地通貨ベース減収、④営業利益率8%台への低下。この4つのいずれかが確認されたら見直します。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">打診買い</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2,606円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">想定ポジションの30%まで</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">主力化ライン</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">2,300円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">現在比▲11.8%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">実質BPS</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">2,608円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">FX・のれん控除後＝現株価並み</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸ルール</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">2029年の需要の谷まで</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">照明セクターへの一文回答</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        「照明業界に少し張る」という距離感は妥当。ただし<strong style="color:var(--or2)">投資可能な純粋照明株は遠藤照明と星和電機の2銘柄しか残っておらず、これはセクター投資ではなく個別株2本のコンセントレーテッド・ポジション</strong>です。期待すべきは蛍光灯特需による業績爆発ではなく、<strong style="color:var(--or2)">成熟産業で低PBRに放置された会社が非公開化・資本政策で見直される流れ</strong>。岩崎電気が2023年にMBOで実例を作りました。配分は遠藤70/星和30（期待CAGR+8.2%）、総資産の5〜10%にとどめ、2029年の需要の谷までに決着をつける。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は公開情報に基づく分析であり、特定の有価証券の売買を推奨するものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: TDNET（遠藤照明 2026年3月期決算短信・2026.04.30） / EDINET / IRBANK / M&A Online（大量保有報告書） / 環境省・経済産業省（蛍光ランプ規制） / 遠藤照明 中期経営計画（2025.04.30）・Corporate Profile / 星和電機 IRBANK（2026.07.07時点） / 岩崎電気 上場廃止関連開示（2023） · 2026.07.27
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>岡谷鋼機（7485）最終投資分析 v3.0 — カタリスト爆発・TOB売却益・含み益逆転 完全版</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f6f5ef;--bg2:#edeae2;--bg3:#e0ddd4;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--rd2:#d84040;
+  --gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;
+  --bl:#153480;--bl2:#1e48b8;
+  --ok:#c88400;--ok2:#e0a000;   /* okaya gold */
+  --inf:#7a1a6a;--inf2:#a83090; /* inflation purple */
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--ink2) 0%,#1a2535 60%,var(--ink2) 100%);color:rgba(246,245,239,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;left:-80px;top:-80px;width:320px;height:320px;border:1px solid rgba(200,132,0,.08);border-radius:50%}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border:1px solid rgba(200,132,0,.05);border-radius:50%}
+.hero-eyebrow{font:600 8px/1 var(--mono);letter-spacing:.22em;color:var(--ok2);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font:700 32px/1.06 var(--head);letter-spacing:-.025em;margin-bottom:6px}
+.hero-title em{color:var(--ok2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(246,245,239,.38);line-height:1.65;margin-bottom:22px}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.kpi{background:rgba(17,18,23,.32);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:var(--ok2)}.kpi-v.bl{color:#8ab0e8}.kpi-v.inf{color:#d090c0}.kpi-v.wh{color:rgba(246,245,239,.9)}
+.kpi-s{font-size:9px;color:rgba(246,245,239,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:16px;background:rgba(200,132,0,.1);border:1px solid rgba(200,132,0,.22);border-radius:var(--r);padding:12px 20px}
+.verdict-score{font:700 44px/1 var(--mono);color:var(--ok2)}
+.verdict-text{font-size:12px;color:rgba(246,245,239,.7);line-height:1.65}
+.verdict-text strong{color:rgba(246,245,239,.95)}
+
+/* NAV */
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:12px 15px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(246,245,239,.9);border-bottom-color:var(--ok2)}
+
+/* BODY */
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-rd{background:#fce8e8;color:var(--rd)}.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-ok{background:#fff3d8;color:var(--ok)}.cb-inf{background:#f5e0f5;color:var(--inf)}
+
+/* SUB TABS */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+@media(max-width:450px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr}}
+
+/* CARDS */
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px 18px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-ok{border-left:3px solid var(--ok)}.card-inf{border-left:3px solid var(--inf)}
+.card-dk{background:var(--ink2);color:rgba(246,245,239,.85);border:none}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}
+.card-hi-ok{background:#fffbf0;border:.5px solid #e8d080}
+.card-hi-inf{background:#f8f0f8;border:.5px solid #d0a0c8}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.ok{color:var(--ok)}.mc-v.inf{color:var(--inf)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-ok{color:var(--ok);font-weight:600}.hi-inf{color:var(--inf);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* BADGE */
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-ok{background:#fff3d8;color:var(--ok)}.bd-inf{background:#f5e0f5;color:var(--inf)}
+
+/* BAR */
+.bgrp{margin-bottom:11px}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden}
+.bfill{border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* MISC */
+.notice{background:#fff8e8;border:.5px solid #e8c870;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.good{background:#e8f8f0;border:.5px solid #80c8a0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.good strong{color:var(--gn2)}
+.warn{background:#f8f0f8;border:.5px solid #d0a0c8;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--inf);line-height:1.65;margin-bottom:12px}
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.spacer{height:14px}
+
+/* CONC */
+.conc{background:var(--ink);color:rgba(246,245,239,.82);border-radius:var(--r);padding:28px 32px}
+.conc-head{font:700 16px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:14px}
+.conc-head span{color:var(--ok2)}
+.conc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-body{font-size:12px;line-height:1.85;color:rgba(246,245,239,.68)}
+.conc-body strong{color:rgba(246,245,239,.95)}
+
+/* SC grid */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden}
+.sc-col{padding:14px 15px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-bottom:7px;margin-bottom:8px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}.sc-lbl.base{border-color:var(--am);color:var(--am)}.sc-lbl.bull{border-color:var(--gn);color:var(--gn)}
+.sc-prob{font:600 32px/1 var(--mono);margin-bottom:4px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--gn)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:10px}
+.sc-li{font-size:11px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+
+svg text{font-family:'Noto Sans JP','Space Grotesk',sans-serif}
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO ══════ -->
+<header class="hero">
+  <p class="hero-eyebrow">最終投資分析レポート 2026.05.31 v3.0 — 第91期決算確定・東北特殊鋼TOB・ティラド急騰・3回目分割（本日基準日）</p>
+  <h1 class="hero-title">岡谷鋼機 <em>（7485）</em> — カタリストが連鎖発動、保有株が時価総額を超えた名古屋の聖域</h1>
+  <p class="hero-sub">★ 本日2026/5/31が第3回株式分割（1→2株）基準日。6/1発効後の株価は約4,700円換算（現在≈9,400円）／ 投資有価証券45.9%増・純資産5,177億・自己資本比率49.6%に改善（第91期確定）
+  ／ 東北特殊鋼 自己株取得≈34億円の特別売却益が第92期に乗る ／ ティラド+31%急騰（14,600円→15,100円）で保有株含み益さらに拡大</p>
+  <div class="hero-kpis">
+    <div class="kpi"><div class="kpi-l">株価（5/31現在）</div><div class="kpi-v am">≈9,400円</div><div class="kpi-s">分割後換算 ≈4,700円<br>時価総額≈1,830億</div></div>
+    <div class="kpi"><div class="kpi-l">PBR（第91期末）</div><div class="kpi-v gn">0.35倍</div><div class="kpi-s">純資産5,177億・BPS26,650円<br>TOPIX比▲75%割安</div></div>
+    <div class="kpi"><div class="kpi-l">有証/時価総額</div><div class="kpi-v am">190%超推計</div><div class="kpi-s">投資有証45.9%増<br>★逆転幅さらに拡大</div></div>
+    <div class="kpi"><div class="kpi-l">純利益（第91期）</div><div class="kpi-v gn">305億円</div><div class="kpi-s">前期比+12.7%増益<br>EPS 1,569円</div></div>
+    <div class="kpi"><div class="kpi-l">東北特殊鋼TOB</div><div class="kpi-v rd">売却益30億↑</div><div class="kpi-s">自己株4,491円で売却<br>第92期に特別利益計上</div></div>
+    <div class="kpi"><div class="kpi-l">年間配当（予想）</div><div class="kpi-v am">161円</div><div class="kpi-s">分割後80.5円相当<br>前期比+13%</div></div>
+  </div>
+  <div class="hero-verdict">
+    <div class="verdict-score">A+</div>
+    <div class="verdict-text">
+      <strong>「含み益逆転・さらに拡大」「TOB売却益カタリスト」「ティラド急騰」「3回目分割（本日）」が同時発動。</strong><br>
+      第91期で純資産が5,177億に+28.6%拡大。投資有価証券も45.9%増と含み益が爆発的に積み上がっている。
+      東北特殊鋼の自己株取得で≈30億円の特別売却益が近く計上。ティラドも52週高値圏で含み益200億超へ。
+      <strong>PBR0.35倍。PBR1.0倍目標株価26,650円（分割後13,325円）は現在比+183%の潜在価値。</strong>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ NAV ══════ -->
+<nav class="mnav" id="mnav">
+  <button class="mnb on"  onclick="showChapter('c0',this)" style="background:rgba(200,132,0,.18);color:var(--ok2);border-bottom-color:var(--ok2)">★ カタリスト【必見】</button>
+  <button class="mnb"     onclick="showChapter('c1',this)">1. 割安指標・概況</button>
+  <button class="mnb"     onclick="showChapter('c2',this)">2. 保有有価証券</button>
+  <button class="mnb"     onclick="showChapter('c3',this)">3. 間接保有効率（修正）</button>
+  <button class="mnb"     onclick="showChapter('c4',this)">4. 燃料高・インフレ耐性</button>
+  <button class="mnb"     onclick="showChapter('c5',this)">5. SP500・TOPIX比較</button>
+  <button class="mnb"     onclick="showChapter('c6',this)">6. 内部複利と保有優位性</button>
+  <button class="mnb"     onclick="showChapter('c7',this)">7. 株主還元の変化・相続</button>
+  <button class="mnb"     onclick="showChapter('c8',this)">8. 図解</button>
+  <button class="mnb"     onclick="showChapter('c9',this)">9. 最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══════════════════════════════════════════════
+  c0: カタリスト【必見】
+══════════════════════════════════════════════ -->
+<div class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">★</span><h2 class="ch-title">岡谷鋼機（7485）— なぜ今、この株なのか</h2><span class="ch-badge cb-ok">投資魅力の全体像 2026.05.31</span></div>
+
+  <!-- ── 一言サマリー ── -->
+  <div style="background:var(--ink);color:rgba(246,245,239,.88);border-radius:4px;padding:18px 24px;margin-bottom:18px;display:flex;align-items:center;gap:20px">
+    <div style="font:700 52px/1 var(--mono);color:var(--ok2);flex-shrink:0">A+</div>
+    <div>
+      <div style="font:700 15px/1.3 var(--head);color:#fff;margin-bottom:6px">「1株9,400円で、時価2,500億超の株ポートフォリオ＋年商1.1兆円の商社事業＋357年の顧客網が手に入る」</div>
+      <div style="font-size:11px;color:rgba(246,245,239,.55);line-height:1.75">PBR 0.35倍・有証が時価総額を上回る「逆転状態」・インフレ利上げで含み益が自動増価・カタリスト複数同時進行。これだけの歪みが放置されている日本株は極めて稀。</div>
+    </div>
+  </div>
+
+  <!-- ── 6大魅力カード ── -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px">
+
+    <!-- 魅力①: 異常な割安性 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--rd);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">①</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">歴史的な割安性<br><span style="font-weight:400;opacity:.7;font-size:9px">EXTREME UNDERVALUATION</span></div>
+        <div style="margin-left:auto;font:700 20px/1 var(--mono);color:#ffc0c0">0.35×</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+          <div style="background:#fce8e8;border-radius:3px;padding:7px 9px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--rd);letter-spacing:.08em;margin-bottom:4px">PBR</div>
+            <div style="font:700 22px/1 var(--mono);color:var(--rd)">0.35倍</div>
+            <div style="font-size:9px;color:var(--ink3);margin-top:2px">TOPIX比 ▲75%割安</div>
+          </div>
+          <div style="background:#fff3d8;border-radius:3px;padding:7px 9px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--ok);letter-spacing:.08em;margin-bottom:4px">PER</div>
+            <div style="font:700 22px/1 var(--mono);color:var(--ok)">7.5倍</div>
+            <div style="font-size:9px;color:var(--ink3);margin-top:2px">S&P500比 ▲64%割安</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+          純資産<strong>5,177億円</strong>に対して時価総額は<strong>1,830億円</strong>。BPS 26,650円に対して株価9,400円という歪み。S&P500 PBR 4.5倍・TOPIX 1.4倍の中で<strong style="color:var(--rd)">TOPIX平均の30%以下という歴史的水準</strong>。
+        </div>
+        <div style="margin-top:8px;background:#fce8e8;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--rd)">
+          <strong>PBR1.0倍正常化で目標株価26,650円 → 現在比+183%</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 魅力②: 有証逆転 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--ok);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">②</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">有証が時価総額を超える逆転<br><span style="font-weight:400;opacity:.7;font-size:9px">SECURITIES ＞ MARKET CAP</span></div>
+        <div style="margin-left:auto;font:700 20px/1 var(--mono);color:#fff3d0">190%+</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span>投資有価証券（第91期・45.9%増後）</span><span class="mono hi-ok">≈3,100億↑</span></div>
+          <div style="background:var(--bg3);border-radius:2px;height:10px;overflow:hidden"><div style="width:100%;height:10px;background:var(--ok2);border-radius:2px"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin:5px 0 3px"><span>時価総額（現在）</span><span class="mono">≈1,830億</span></div>
+          <div style="background:var(--bg3);border-radius:2px;height:10px;overflow:hidden"><div style="width:59%;height:10px;background:var(--bl);border-radius:2px"></div></div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+          投資有価証券だけで時価総額の<strong style="color:var(--ok)">約1.7倍以上</strong>。岡谷株を買うことは「保有株ポートフォリオを大幅ディスカウントで間接購入すること」に等しい。前回分析（2,416億）から第91期で<strong>+45.9%</strong>とさらに拡大。
+        </div>
+        <div style="margin-top:8px;background:#fff3d8;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--ok)">
+          <strong>含み益（税後）は純資産の25%超を占め、BPSを自動押し上げ中</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 魅力③: インフレ・利上げ自動受益 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--inf);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">③</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">インフレ・利上げが味方<br><span style="font-weight:400;opacity:.7;font-size:9px">INFLATION AUTO-BENEFIT</span></div>
+        <div style="margin-left:auto;font:700 20px/1 var(--mono);color:#e8b8e8">+118億/年</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="background:#f8f0f8;border-radius:3px;padding:8px 10px;margin-bottom:9px;font-size:11px;color:var(--inf)">
+          日銀利上げ1%ごとに含み益が<strong style="color:var(--inf2)">税後+118億円（+607円/株）</strong>自動増加
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+          三菱UFJ FG（≈580億）・三井住友トラスト（≈234億）の金融株<strong>≈800億超</strong>を保有。利上げ局面で株価が上昇するため、インフレが「価値を破壊する敵」ではなく<strong style="color:var(--inf)">「自動的に純資産を増やす味方」</strong>になる。<br>NASDAQ100がPER圧縮リスクを抱える中、岡谷は逆風をヘッジ。
+        </div>
+        <div style="margin-top:8px;background:#f5e0f5;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--inf)">
+          <strong>商社＝自社燃料費ほぼゼロ・価格転嫁可。インフレ免疫体質</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 魅力④: 間接エクスポージャー効率 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--gn);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">④</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">間接エクスポージャーの大きさ<br><span style="font-weight:400;opacity:.7;font-size:9px">LEVERAGED EXPOSURE TO TOP STOCKS</span></div>
+        <div style="margin-left:auto;font:700 20px/1 var(--mono);color:#a0e0b8">21.8%OFF</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7;margin-bottom:9px">
+          岡谷株を1,830億円で買うと、トヨタ（≈1,100億）・三菱UFJ（≈580億）・三井住友T（≈234億）・日本製鉄（≈209億）…という<strong>日本株最優良銘柄群への間接エクスポージャーが一括取得できる</strong>。さらに商社事業800億推計が"おまけ"でついてくる。
+        </div>
+        <table class="tbl" style="font-size:10px">
+          <thead><tr><th>購入方法</th><th class="r">コスト</th><th class="r">取得できる価値</th></tr></thead>
+          <tbody>
+            <tr><td>各銘柄を直接購入</td><td class="r mono">≈3,100億+</td><td class="r mono">有証のみ</td></tr>
+            <tr style="background:#dff0e8"><td><strong>岡谷株で間接購入</strong></td><td class="r mono hi-gn"><strong>≈1,830億</strong></td><td class="r mono hi-gn"><strong>有証＋商社事業＋無形資産</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 魅力⑤: 含み益カタリスト複数発動中 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--bl);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">⑤</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">含み益顕在化カタリスト<br><span style="font-weight:400;opacity:.7;font-size:9px">ACTIVE CATALYSTS （2026年）</span></div>
+        <div style="margin-left:auto;font:700 14px/1.1 var(--mono);color:#a0c0f0">3連発</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:11px">
+          <div style="background:#dfe8f8;border-radius:3px;padding:7px 10px">
+            <div style="font:700 10px/1 var(--mono);color:var(--bl);letter-spacing:.08em;margin-bottom:4px">TOB CATALYST ／ 2026年7月確定</div>
+            <strong>東北特殊鋼 自己株取得</strong> → 特別売却益<strong style="color:var(--bl)">≈30億円</strong>が第92期に計上。岡谷10.12%保有、4,491円/株で売却。超長期保有のため帳簿価額は極めて低く、ほぼ全額が益になる。
+          </div>
+          <div style="background:#dff0e8;border-radius:3px;padding:7px 10px">
+            <div style="font:700 10px/1 var(--mono);color:var(--gn);letter-spacing:.08em;margin-bottom:4px">SHARE PRICE SURGE ／ 5/1確認</div>
+            <strong>ティラド（7236）</strong> 好決算+31%急騰・52週安値比+249%。岡谷の保有≈83,000株は時価<strong style="color:var(--gn)">125億円超</strong>、含み益≈+97億円（+347%）へ拡大。
+          </div>
+          <div style="background:#fff3d8;border-radius:3px;padding:7px 10px">
+            <div style="font:700 10px/1 var(--mono);color:var(--ok);letter-spacing:.08em;margin-bottom:4px">PORTFOLIO BASELINE UP ／ 全銘柄</div>
+            金融株（三菱UFJ・三井住友T）等の主要保有株が全般的に株価ベースライン切り上がり。第91期で投資有証<strong style="color:var(--ok)">+45.9%増</strong>として確定。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 魅力⑥: 安定事業基盤と世代交代 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--am);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">⑥</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">357年・盤石な事業基盤と変化の萌芽<br><span style="font-weight:400;opacity:.7;font-size:9px">STABLE MOAT ＋ STRUCTURAL CHANGE</span></div>
+        <div style="margin-left:auto;font:700 14px/1 var(--mono);color:#ffe8b0">1669〜</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px">
+          <div style="background:#fef3e0;border-radius:3px;padding:6px 9px;font-size:10px;color:var(--am)">
+            <div style="font-weight:700;margin-bottom:3px">🏯 1669年創業</div>
+            357年・創業家14代目が2021年社長就任。TOBリスクなし。名古屋財界の中枢。
+          </div>
+          <div style="background:#fef3e0;border-radius:3px;padding:6px 9px;font-size:10px;color:var(--am)">
+            <div style="font-weight:700;margin-bottom:3px">📈 3期連続増収増益</div>
+            第91期：売上1.1兆円・営業益+8.3%・純益305億（+12.7%）
+          </div>
+          <div style="background:#fef3e0;border-radius:3px;padding:6px 9px;font-size:10px;color:var(--am)">
+            <div style="font-weight:700;margin-bottom:3px">📊 2024〜26年 3回連続分割</div>
+            世代交代後に株主還元が加速。配当+13%・優待拡充・本日3回目分割基準日。
+          </div>
+          <div style="background:#fef3e0;border-radius:3px;padding:6px 9px;font-size:10px;color:var(--am)">
+            <div style="font-weight:700;margin-bottom:3px">🔒 自己資本比率49.6%</div>
+            前期44.5%から改善。財務健全性が高く倒産リスクは事実上ゼロ。
+          </div>
+        </div>
+        <div style="background:#fef3e0;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--am)">
+          <strong>「変化の萌芽」：</strong>名証単独上場・低配当性向10%という批判点はあるが、世代交代以降に分割・増配が加速している。東証移行・配当性向引き上げが次の大型カタリストになりうる。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ワンラインサマリーテーブル ── -->
+  <div class="card" style="margin-bottom:18px">
+    <div style="font:700 12px/1 var(--head);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span>投資魅力 スコアカード</span>
+      <span style="font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.1em">6つの軸で評価</span>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>魅力軸</th><th class="r">スコア</th><th>現在の状態</th><th class="r">目標・潜在値</th><th>評価</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fce8e8">
+          <td><strong>① 割安性（PBR）</strong></td>
+          <td class="r"><span class="badge bd-rd">96/100</span></td>
+          <td>PBR 0.35倍・BPS 26,650円</td>
+          <td class="r mono hi-gn">PBR1.0倍 → +183%</td>
+          <td><span class="badge bd-rd">歴史的割安</span></td>
+        </tr>
+        <tr style="background:#fff3d8">
+          <td><strong>② 有証/時価総額の逆転</strong></td>
+          <td class="r"><span class="badge bd-ok">95/100</span></td>
+          <td>投資有証が時価総額を大幅超過</td>
+          <td class="r mono hi-ok">解消で株価2倍+</td>
+          <td><span class="badge bd-ok">唯一無二</span></td>
+        </tr>
+        <tr style="background:#f8f0f8">
+          <td><strong>③ インフレ・利上げ耐性</strong></td>
+          <td class="r"><span class="badge bd-inf">88/100</span></td>
+          <td>金融株≈800億・利上げ1%で+118億/年</td>
+          <td class="r mono hi-inf">日銀利上げ継続で自動増価</td>
+          <td><span class="badge bd-inf">インフレ受益</span></td>
+        </tr>
+        <tr style="background:#dff0e8">
+          <td><strong>④ 間接エクスポージャー効率</strong></td>
+          <td class="r"><span class="badge bd-gn">90/100</span></td>
+          <td>21.8%割引で日本最優良株群へ</td>
+          <td class="r mono hi-gn">有証単純保有より有利</td>
+          <td><span class="badge bd-gn">割引購入</span></td>
+        </tr>
+        <tr style="background:#dfe8f8">
+          <td><strong>⑤ 含み益顕在化カタリスト</strong></td>
+          <td class="r"><span class="badge bd-bl">85/100</span></td>
+          <td>TOB+ティラド急騰+有証+45.9%が同時進行</td>
+          <td class="r mono hi-bl">第92期に特別利益≈30億確定</td>
+          <td><span class="badge bd-bl">複数発動中</span></td>
+        </tr>
+        <tr style="background:#fef3e0">
+          <td><strong>⑥ 事業安定性・株主還元変化</strong></td>
+          <td class="r"><span class="badge bd-am">78/100</span></td>
+          <td>357年・3期連続増益・3回連続分割</td>
+          <td class="r mono hi-am">東証移行・配当性向引上げが潜在カタリスト</td>
+          <td><span class="badge bd-am">変化加速中</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── リスク要因（ワンライン） ── -->
+  <div class="notice" style="margin-bottom:14px">
+    <strong>主なリスク要因（正直に）：</strong>
+    ① トヨタ自動車への集中（≈1,100億・米国関税リスク残存）
+    ② 名証単独上場による低流動性（売買高が少ない）
+    ③ 配当性向≈10%の低さ（内部留保主義）
+    ④ 外部株主への還元加速タイミング不確実性
+    ⑤ 第92期は地政学・コスト上昇で減収減益を会社予想
+  </div>
+
+  <!-- ── 結論ボックス ── -->
+  <div style="background:var(--ink);color:rgba(246,245,239,.82);border-radius:4px;padding:22px 26px">
+    <div style="font:700 14px/1.1 var(--head);color:rgba(246,245,239,.95);margin-bottom:12px">
+      ⚖️ 結論：<span style="color:var(--ok2)">なぜ今この株なのか</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:11px;color:rgba(246,245,239,.65);line-height:1.8">
+      <div>
+        <div style="font:700 10px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;margin-bottom:7px">下値硬直性（なぜ大きく下がりにくいか）</div>
+        含み益1,228億円（税後）がBPSの床を形成。PBR0.35倍は既にほぼ"資産解散価値以下"に近い水準。いくら売られても純資産5,177億という厚みが下支えする。これはS&P500・NASDAQ100にはない特性。
+      </div>
+      <div>
+        <div style="font:700 10px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;margin-bottom:7px">上値余地（なぜ大きく上がりうるか）</div>
+        PBR1.0倍への正常化だけで<strong style="color:var(--ok2)">+183%（26,650円）</strong>。さらに①TOB売却益②ティラド含み益拡大③日銀利上げ連鎖④東証移行期待⑤配当性向引き上げ——という複数のカタリストがどれか一つ機能するだけで市場の再評価が始まる可能性がある。
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px">
+      <div style="text-align:center;padding:8px;background:rgba(246,245,239,.04);border-radius:3px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.25);letter-spacing:.1em;margin-bottom:4px">現在株価</div>
+        <div style="font:700 16px/1 var(--mono);color:var(--ok2)">9,400円</div>
+        <div style="font-size:9px;color:rgba(246,245,234,.35);margin-top:2px">分割後≈4,700円</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:rgba(246,245,239,.04);border-radius:3px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.25);letter-spacing:.1em;margin-bottom:4px">BPS（第91期）</div>
+        <div style="font:700 16px/1 var(--mono);color:#68c890">26,650円</div>
+        <div style="font-size:9px;color:rgba(246,245,234,.35);margin-top:2px">PBR1倍 目標値</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:rgba(246,245,239,.04);border-radius:3px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.25);letter-spacing:.1em;margin-bottom:4px">純資産</div>
+        <div style="font:700 16px/1 var(--mono);color:var(--ok2)">5,177億</div>
+        <div style="font-size:9px;color:rgba(246,245,234,.35);margin-top:2px">時価総額の2.8倍</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:rgba(246,245,239,.04);border-radius:3px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.25);letter-spacing:.1em;margin-bottom:4px">東北特殊鋼売却益</div>
+        <div style="font:700 16px/1 var(--mono);color:#ffa0a0">≈30億</div>
+        <div style="font-size:9px;color:rgba(246,245,234,.35);margin-top:2px">7月決済・第92期計上</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:rgba(246,245,239,.04);border-radius:3px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.25);letter-spacing:.1em;margin-bottom:4px">利上げ1%の含み益増</div>
+        <div style="font:700 16px/1 var(--mono);color:#d090c0">+118億/年</div>
+        <div style="font-size:9px;color:rgba(246,245,234,.35);margin-top:2px">税後・自動増価</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c1: 割安指標・概況
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">割安指標と第90期中財務（半期報告書確認値）</h2><span class="ch-badge cb-ok">確認済データ</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c1','t1a',this)">株式指標</button>
+    <button class="stab" onclick="showTab('c1','t1b',this)">半期BS要約</button>
+    <button class="stab" onclick="showTab('c1','t1c',this)">大株主</button>
+  </div>
+
+  <div class="spanel active" id="c1-t1a">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">PBR（第89期有報）</div><div class="mc-v rd">0.38倍</div><div class="mc-s">BPS 25,792円<br>TOPIX比▲69%割安</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">PBR（第90期末・確定）</div><div class="mc-v gn">0.38倍</div><div class="mc-s">BPS 25,792円<br>SBI証券掲載確定値</div></div>
+      <div class="card mc" style="border-top:3px solid var(--ok)"><div class="mc-l">修正PBR（含み益加算）</div><div class="mc-v ok">0.30倍</div><div class="mc-s">修正BPS 32,477円<br>有証1,228億+土地60億加算</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">PER（予想）</div><div class="mc-v gn">7.5倍</div><div class="mc-s">EPS予 1,299円<br>S&amp;P500比▲64%割安</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">自己資本比率（最新）</div><div class="mc-v am">47.0%</div><div class="mc-s">令和7年11月末（第3Q）<br>前期44.5%から+5.1pt改善（第90期末）</div></div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">PBR割安性の比較</div>
+        <div class="bgrp"><div class="blrow"><span>岡谷鋼機 PBR</span><span class="hi-gn mono">0.38倍</span></div><div class="btrack"><div class="bfill" style="width:10%;height:10px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>含み益調整後実質PBR</span><span class="hi-gn mono">≈0.23倍</span></div><div class="btrack"><div class="bfill" style="width:5%;height:10px;background:var(--ok)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>TOPIX平均 PBR</span><span class="mono">1.4倍</span></div><div class="btrack"><div class="bfill" style="width:31%;height:10px;background:var(--bl)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>S&amp;P500 PBR</span><span class="hi-rd mono">4.5倍</span></div><div class="btrack"><div class="bfill" style="width:100%;height:10px;background:var(--rd)"></div></div></div>
+        <p class="note">
+          <strong>BPSについて：</strong>BPS 25,792円はYahoo!ファイナンス掲載値（第89期有報・令7.2末）と一致。第3Q末（令7.11末）の最新BPSは純資産4,582億円ベースで推計約23,786円に増加中。修正BPS（有証含み益税後1,228億+土地含み益税後60億加算）= 29,387円 → 修正PBR = 0.33倍。
+        </p>
+      </div>
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">PER割安性の比較</div>
+        <div class="bgrp"><div class="blrow"><span>岡谷鋼機 PER</span><span class="hi-gn mono">7.5倍</span></div><div class="btrack"><div class="bfill" style="width:21%;height:10px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>TOPIX平均 PER</span><span class="mono">15倍</span></div><div class="btrack"><div class="bfill" style="width:43%;height:10px;background:var(--bl)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>S&amp;P500 PER</span><span class="hi-rd mono">21倍</span></div><div class="btrack"><div class="bfill" style="width:60%;height:10px;background:var(--rd)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>NASDAQ100 PER</span><span class="hi-rd mono">35倍</span></div><div class="btrack"><div class="bfill" style="width:100%;height:10px;background:var(--rd2)"></div></div></div>
+        <p class="note">中間純利益+31.2%（162億64百万円）のペースが継続すれば、通期EPSは1,299円予想を超過し実質PERはさらに低下する見込み。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c1-t1b">
+    <div class="notice"><strong>出所：第90期中 半期報告書（令和7年10月15日提出、E02553）</strong> — 中間連結貸借対照表・損益計算書より直接読取り。全数値は確認値。</div>
+    <table class="tbl">
+      <thead><tr><th>項目</th><th class="r">第90期中（令7.8末）</th><th class="r">第89期末（令7.2末）</th><th class="r">増減</th><th>評価</th></tr></thead>
+      <tbody>
+        <tr><td>売上高（中間累計）</td><td class="r mono">5,706億円</td><td class="r mono">11,557億（通期）</td><td class="r hi-gn">+5.7%</td><td><span class="badge bd-gn">増収</span></td></tr>
+        <tr><td>経常利益（中間）</td><td class="r mono">244億円</td><td class="r mono">455億（通期）</td><td class="r hi-gn">+28.4%</td><td><span class="badge bd-gn">大幅増益</span></td></tr>
+        <tr><td>中間純利益（親会社）</td><td class="r mono hi-gn"><strong>162億64百万円</strong></td><td class="r mono">270億70百万円（通）</td><td class="r hi-gn">+31.2%</td><td><span class="badge bd-gn">高成長</span></td></tr>
+        <tr style="background:#fffbf0"><td><strong>★ 投資有価証券（時価）</strong></td><td class="r mono hi-ok"><strong>2,416億58百万円</strong></td><td class="r mono">2,207億19百万円</td><td class="r hi-gn">+209億↑</td><td><span class="badge bd-ok">逆転確認</span></td></tr>
+        <tr style="background:#fffbf0"><td><strong>★ 評価差額金（税後含み益）</strong></td><td class="r mono hi-ok"><strong>1,227億81百万円</strong></td><td class="r mono">1,092億13百万円</td><td class="r hi-gn">+135億↑</td><td><span class="badge bd-ok">公式確認値</span></td></tr>
+        <tr><td>純資産合計</td><td class="r mono">4,312億75百万円</td><td class="r mono">4,026億79百万円</td><td class="r hi-gn">+285億↑</td><td><span class="badge bd-gn">増加</span></td></tr>
+        <tr><td>現金及び預金</td><td class="r mono">233億83百万円</td><td class="r mono">193億82百万円</td><td class="r hi-gn">+40億</td><td><span class="badge bd-gn">改善</span></td></tr>
+        <tr><td>短期借入金</td><td class="r mono">1,433億22百万円</td><td class="r mono">1,507億44百万円</td><td class="r hi-gn">▲74億↓</td><td><span class="badge bd-gn">減少</span></td></tr>
+        <tr><td>長期借入金</td><td class="r mono">404億74百万円</td><td class="r mono">408億38百万円</td><td class="r">▲3.6億</td><td><span class="badge bd-am">安定</span></td></tr>
+        <tr><td>自己資本比率</td><td class="r mono hi-gn">49.6%</td><td class="r mono">44.5%</td><td class="r hi-gn">+1.2pt</td><td><span class="badge bd-gn">改善</span></td></tr>
+        <tr><td>1株当たり中間純利益</td><td class="r mono hi-gn">845円27銭</td><td class="r mono">1,407円（通期）</td><td class="r hi-gn">好調</td><td><span class="badge bd-gn">高水準</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="spanel" id="c1-t1c">
+    <div class="notice"><strong>令和7年8月31日現在（半期報告書直接掲載値）：</strong>三菱UFJ銀行・日本製鉄・三井住友信託銀行など、岡谷鋼機が保有しているはずの銘柄が逆に岡谷鋼機を保有している「相互保有」構造が鮮明。</div>
+    <table class="tbl">
+      <thead><tr><th>氏名・名称</th><th class="r">所有株（千株）</th><th class="r">比率</th><th>相互保有の意味</th></tr></thead>
+      <tbody>
+        <tr><td>岡谷不動産㈱</td><td class="r mono">2,428</td><td class="r mono hi-ok"><strong>12.60%</strong></td><td>創業家資産管理法人（生前贈与済・安定株主）</td></tr>
+        <tr><td>岡谷篤一（先代社長）</td><td class="r mono">966</td><td class="r mono">5.01%</td><td>創業家先代（取締役相談役として残存）</td></tr>
+        <tr style="background:#fffbf0"><td><strong>㈱三菱UFJ銀行</strong></td><td class="r mono"><strong>925</strong></td><td class="r mono hi-gn">4.80%</td><td><strong>→ 岡谷も三菱UFJ FG株を相互保有（推計2,000万株）</strong></td></tr>
+        <tr style="background:#fffbf0"><td><strong>日本製鉄㈱</strong></td><td class="r mono"><strong>869</strong></td><td class="r mono hi-gn">4.51%</td><td><strong>→ 岡谷も日本製鉄株を相互保有（推計870万株）</strong></td></tr>
+        <tr style="background:#fffbf0"><td><strong>三井住友信託銀行㈱</strong></td><td class="r mono"><strong>804</strong></td><td class="r mono hi-gn">4.17%</td><td><strong>→ 岡谷も三井住友T株を相互保有（推計425万株）</strong></td></tr>
+        <tr><td>㈱りそな銀行</td><td class="r mono">530</td><td class="r mono">2.75%</td><td>取引銀行</td></tr>
+        <tr><td>損害保険ジャパン㈱</td><td class="r mono">376</td><td class="r mono">1.95%</td><td>→ 岡谷も損保ジャパン株を相互保有</td></tr>
+        <tr><td>岡谷鋼機社員持株会</td><td class="r mono">329</td><td class="r mono">1.71%</td><td>従業員株主（安定株主）</td></tr>
+        <tr><td>オークマ㈱</td><td class="r mono">326</td><td class="r mono">1.69%</td><td>→ 岡谷もオークマ株を相互保有（IRBANK確認）</td></tr>
+        <tr><td>㈱あいち銀行</td><td class="r mono">312</td><td class="r mono">1.62%</td><td>名古屋財界の地方銀行</td></tr>
+        <tr style="background:var(--bg3);font-weight:600"><td>上位10名計</td><td class="r mono">7,868千株</td><td class="r mono">40.84%</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="note">創業家合計（岡谷不動産+岡谷篤一）= 17.61%。2021年3月に岡谷健広氏（14代目）が社長就任し31年ぶりの世代交代完了。岡谷篤一先代は取締役相談役として残存するが代表権なし。</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c2: 保有有価証券
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">主要保有有価証券（精査・修正版）</h2><span class="ch-badge cb-gn">IRBank + 半期報告書</span></div>
+
+  <div class="warn"><strong>三菱UFJ FGについて（修正）：</strong>前回推計450万株・128億円は著しく過小。三菱UFJ銀行が岡谷鋼機株を4.80%（925千株）保有する相互保有構造から、岡谷も<strong>約1,500〜2,500万株（中央値2,000万株・時価≈569億円）</strong>を保有していると推定される。確定値は第90期有価証券報告書で開示予定。</div>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>銘柄</th><th>コード</th><th class="r">推定株数</th><th class="r">精度</th>
+        <th class="r">5/2株価（円）</th><th class="r">推定時価（億）</th><th class="r">推定含み益（億）</th><th class="r">含み益率</th>
+        <th>インフレ感応度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fffbf0">
+        <td><strong>🏆 トヨタ自動車</strong></td><td>7203</td>
+        <td class="r mono">3,300万株</td><td class="r"><span class="badge bd-gn">IRBANK確認</span></td>
+        <td class="r mono">3,220</td><td class="r mono hi-ok"><strong>1,063</strong></td>
+        <td class="r mono hi-gn">+1,035</td><td class="r mono hi-gn">+3,780%</td>
+        <td>△ 関税リスクで中立</td>
+      </tr>
+      <tr style="background:#f8f0fc">
+        <td><strong>⚠ 三菱UFJ FG（修正）</strong></td><td>8306</td>
+        <td class="r mono">≈2,000万株</td><td class="r"><span class="badge bd-am">要有報確認</span></td>
+        <td class="r mono">2,844</td><td class="r mono hi-inf"><strong>569</strong></td>
+        <td class="r mono hi-gn">+489</td><td class="r mono hi-gn">+611%</td>
+        <td>◎ 利上げ恩恵 最大</td>
+      </tr>
+      <tr>
+        <td>三井住友トラスト</td><td>8309</td>
+        <td class="r mono">≈425万株</td><td class="r"><span class="badge bd-gn">大株主逆引</span></td>
+        <td class="r mono">5,328</td><td class="r mono">226</td>
+        <td class="r mono hi-gn">+175</td><td class="r mono hi-gn">+344%</td>
+        <td>◎ 利上げ恩恵 大</td>
+      </tr>
+      <tr>
+        <td>日本製鉄</td><td>5401</td>
+        <td class="r mono">≈870万株</td><td class="r"><span class="badge bd-gn">大株主逆引</span></td>
+        <td class="r mono">≈2,400</td><td class="r mono">209</td>
+        <td class="r mono hi-gn">+135</td><td class="r mono hi-gn">+182%</td>
+        <td>○ 鉄鋼価格転嫁可</td>
+      </tr>
+      <tr>
+        <td>中部電力</td><td>9502</td>
+        <td class="r mono">≈680万株</td><td class="r"><span class="badge bd-am">推計</span></td>
+        <td class="r mono">2,652</td><td class="r mono">180</td>
+        <td class="r mono hi-gn">+140</td><td class="r mono hi-gn">+342%</td>
+        <td>△ 燃料コスト増もあり</td>
+      </tr>
+      <tr>
+        <td>ティラド</td><td>7236</td>
+        <td class="r mono">≈110万株</td><td class="r"><span class="badge bd-gn">大株主開示</span></td>
+        <td class="r mono hi-gn">15,100 ※※</td><td class="r mono hi-gn">125</td>
+        <td class="r mono hi-gn">+97</td><td class="r mono hi-gn">+347%</td>
+        <td>△ 自動車部品依存</td>
+      </tr>
+      <tr>
+        <td>損保ジャパン</td><td>8630</td>
+        <td class="r mono">≈325万株</td><td class="r"><span class="badge bd-gn">大株主逆引</span></td>
+        <td class="r mono">≈3,600</td><td class="r mono">117</td>
+        <td class="r mono hi-gn">+68</td><td class="r mono hi-gn">+140%</td>
+        <td>○ 保険料転嫁可</td>
+      </tr>
+      <tr>
+        <td>豊田通商</td><td>8015</td>
+        <td class="r mono">≈135万株</td><td class="r"><span class="badge bd-am">推計</span></td>
+        <td class="r mono">6,920</td><td class="r mono">93</td>
+        <td class="r mono hi-gn">+66</td><td class="r mono hi-gn">+246%</td>
+        <td>△ トヨタグループ連動</td>
+      </tr>
+      <tr>
+        <td>オークマ</td><td>6103</td>
+        <td class="r mono">≈164万株</td><td class="r"><span class="badge bd-gn">大株主逆引</span></td>
+        <td class="r mono">4,315</td><td class="r mono">71</td>
+        <td class="r mono hi-gn">+51</td><td class="r mono hi-gn">+259%</td>
+        <td>△ 設備投資連動</td>
+      </tr>
+      <tr style="background:#fff0f0">
+        <td><strong>★東北特殊鋼（売却予定）</strong></td><td>5484</td>
+        <td class="r mono">≈75万株（10.12%）</td><td class="r"><span class="badge bd-rd">TOB確定</span></td>
+        <td class="r mono hi-gn">4,491（自己株取得価格）</td><td class="r mono hi-gn">34</td>
+        <td class="r mono hi-gn">+30（税前）</td><td class="r mono hi-gn">+750%超</td>
+        <td>→ 第92期に特別売却利益計上</td>
+      </tr>
+      <tr style="background:var(--bg3);font-weight:600">
+        <td colspan="5"><strong>主要10銘柄 合計（東北特殊鋼含む）</strong></td>
+        <td class="r mono hi-ok"><strong>≈2,689億</strong></td>
+        <td class="r mono hi-gn"><strong>≈+2,292億</strong></td>
+        <td class="r mono hi-gn">≈+579%</td><td></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">※※ティラド（7236）は2026年4月27日好決算後+31%急騰（5/1終値14,600円）、さらに5/26時点で15,100円へ上昇継続。52週安値4,325円からは+249%超。岡谷の保有≈83,000株の含み益は約97億円と大幅拡大。<br>
+  ★ <strong>東北特殊鋼（5484）</strong>：大同特殊鋼が2026/5/15に1株4,491円のTOBを発表。岡谷は保有10.12%（≈75万株）を東北特殊鋼による自己株取得（4,491円）に応じる予定（2026年7月6日決済）。売却益≈30億円（税前）が第92期に特別売却利益として計上見込み。三菱UFJ FGの保有株数は第91期有価証券報告書で開示予定。「インフレ感応度」は日銀利上げ・物価上昇局面における保有株への影響評価。◎＝大きな追い風、○＝プラス、△＝中立〜軽微なリスク。</p>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c3: 間接保有効率（正確版）
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">間接保有効率 — 前回「61%割引」誤りを完全修正</h2><span class="ch-badge cb-rd">誤り修正済</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c3','t3a',this)">誤りの説明と修正</button>
+    <button class="stab" onclick="showTab('c3','t3b',this)">3つの分析ビュー</button>
+    <button class="stab" onclick="showTab('c3','t3c',this)">銘柄別詳細テーブル</button>
+    <button class="stab" onclick="showTab('c3','t3d',this)">NAV分析</button>
+
+    <button class="stab" onclick="showTab('c3','t3e',this)">固定資産含み益</button>
+  </div>
+
+  <!-- t3a -->
+  <div class="spanel active" id="c3-t3a">
+    <div class="warn"><strong>前回レポートの誤りについて：</strong>「61%割引」「38%割引」という数字は計算ロジック自体が誤りでした。正しい間接保有割引率は<strong>21.8%割引</strong>（方法1）です。</div>
+
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:16px">
+      <div style="background:var(--ink2);padding:12px 20px">
+        <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">なぜ「61%割引」は誤りだったか：正しい計算の考え方</p>
+      </div>
+      <svg viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+        <defs><marker id="arr1" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#2a2b33"/></marker></defs>
+        <!-- 誤り側 -->
+        <rect x="20" y="20" width="240" height="140" rx="6" fill="#fce8e8" stroke="#b83030" stroke-width="1.5"/>
+        <text x="140" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#b83030">❌ 前回の誤り「61%割引」</text>
+        <text x="140" y="72" text-anchor="middle" font-size="11" fill="#636470">保有株を過小推計（≈1,000億と見積もり）</text>
+        <text x="140" y="90" text-anchor="middle" font-size="11" fill="#636470">→ 計算ロジック自体が誤り</text>
+        <text x="140" y="112" text-anchor="middle" font-size="10" fill="#b83030">根拠のない数字でした</text>
+        <text x="140" y="130" text-anchor="middle" font-size="10" fill="#b83030">ご指摘のとおり誤りです</text>
+        <!-- 矢印 -->
+        <line x1="264" y1="90" x2="330" y2="90" stroke="#2a2b33" stroke-width="2" marker-end="url(#arr1)"/>
+        <text x="297" y="83" text-anchor="middle" font-size="10" fill="#2a2b33">修正</text>
+        <!-- 正しい計算 -->
+        <rect x="335" y="20" width="540" height="140" rx="6" fill="#e8f8f0" stroke="#1b6840" stroke-width="1.5"/>
+        <text x="605" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">✅ 正しい計算（方法1・最も分かりやすい）</text>
+        <text x="430" y="78" text-anchor="middle" font-size="11" fill="#636470">岡谷 時価総額</text>
+        <text x="430" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#111217" font-family="'JetBrains Mono',monospace">1,890億円</text>
+        <text x="545" y="96" text-anchor="middle" font-size="18" fill="#1b6840">÷</text>
+        <text x="650" y="78" text-anchor="middle" font-size="11" fill="#636470">投資有価証券時価（確認値）</text>
+        <text x="650" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#111217" font-family="'JetBrains Mono',monospace">2,416億円</text>
+        <text x="795" y="86" text-anchor="middle" font-size="14" fill="#1b6840" font-weight="700">= 0.782</text>
+        <text x="795" y="106" text-anchor="middle" font-size="11" fill="#1b6840">→ 21.8%割引</text>
+        <text x="605" y="130" text-anchor="middle" font-size="10" fill="#636470">「岡谷株を買うと、市場価格の78.2%のコストで2,416億円の有価証券に間接エクスポージャーが得られる。ただし有利子負債1,838億も引き受ける。」</text>
+      </svg>
+    </div>
+
+    <div class="g3">
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">前回主張（誤り）</div><div class="mc-v rd">61%割引</div><div class="mc-s">完全な誤り<br>根拠のない数字</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">正しい割引率（方法1）</div><div class="mc-v gn">21.8%割引</div><div class="mc-s">1,890÷2,416=78.2%<br>全銘柄一律</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">負債考慮後（方法2）</div><div class="mc-v am">P/NAV 1.17倍</div><div class="mc-s">有利子負債1,838億加味<br>NAV推計1,612億対比</div></div>
+    </div>
+
+    <div class="card card-gn" style="margin-top:14px">
+      <div style="font:600 11px/1 var(--head);margin-bottom:10px">なぜ全銘柄の割引率が「一律21.8%」なのか</div>
+      <p style="font-size:12px;line-height:1.85;color:var(--ink2)">
+        岡谷時価総額1,890億円を支払うと、投資有価証券全体2,416億円の権利が（按分比率で）得られる。
+        各銘柄への按分コストは「各銘柄時価 × (1,890÷2,416) = 各銘柄時価 × 78.2%」となるため、
+        どの銘柄も<strong>一律21.8%割引</strong>になる。銘柄ごとに割引率が変わるように見えた前回の計算は誤り。
+        ただし銘柄間での差異は<strong>含み益率（帳簿価額との乖離）</strong>に現れる。トヨタの3,780%という含み益率が、
+        岡谷の保有有価証券の質の高さを示している。
+      </p>
+    </div>
+  </div>
+
+  <!-- t3b -->
+  <div class="spanel" id="c3-t3b">
+    <div class="notice">間接保有の「お得さ」を3つの視点で分析。ビューによって評価が変わるため、すべての理解が重要。</div>
+    <div class="g3">
+      <div class="card card-gn">
+        <div style="font:700 12px/1 var(--head);color:var(--gn);margin-bottom:10px">ビュー1：時価総額/有証時価<br><small style="font-weight:400;color:var(--ink3)">最もシンプルな割引率</small></div>
+        <div style="font:700 30px/1 var(--mono);color:var(--gn);margin:12px 0">21.8%<br><span style="font-size:14px">割引</span></div>
+        <table class="tbl"><tbody>
+          <tr><td>岡谷時価総額</td><td class="r mono">1,890億</td></tr>
+          <tr><td>÷ 投資有証時価</td><td class="r mono">2,416億</td></tr>
+          <tr><td>コスト比率</td><td class="r mono hi-gn">78.2%</td></tr>
+        </tbody></table>
+        <p class="note">最も分かりやすい指標。岡谷株を1,890億で買えば、2,416億の有証へのエクスポージャーが得られる。</p>
+      </div>
+      <div class="card card-am">
+        <div style="font:700 12px/1 var(--head);color:var(--am);margin-bottom:10px">ビュー2：NAV（純資産価値）対比<br><small style="font-weight:400;color:var(--ink3)">負債・事業価値込みの実態</small></div>
+        <div style="font:700 30px/1 var(--mono);color:var(--am);margin:12px 0">P/NAV<br><span style="font-size:14px">1.17倍</span></div>
+        <table class="tbl"><tbody>
+          <tr><td>投資有証（2,416）+現金（234）</td><td class="r mono">2,650億</td></tr>
+          <tr><td>+ 事業価値推計</td><td class="r mono">+800億</td></tr>
+          <tr><td>- 有利子負債</td><td class="r mono hi-rd">▲1,838億</td></tr>
+          <tr><td>NAV推計</td><td class="r mono hi-am">1,612億</td></tr>
+          <tr><td>P/NAV（1,890÷1,612）</td><td class="r mono hi-am">1.17倍</td></tr>
+        </tbody></table>
+        <p class="note">NAVに対して17%プレミアム。ただし商社は構造的に短期借入が大きく（売掛担保型）、純粋な「割高」とは言えない。</p>
+      </div>
+      <div class="card card-bl">
+        <div style="font:700 12px/1 var(--head);color:var(--bl);margin-bottom:10px">ビュー3：EV/有証<br><small style="font-weight:400;color:var(--ink3)">最も保守的な見方</small></div>
+        <div style="font:700 30px/1 var(--mono);color:var(--bl2);margin:12px 0">1.12倍<br><span style="font-size:14px">（事業調整後）</span></div>
+        <table class="tbl"><tbody>
+          <tr><td>EV（1,890+純負債1,604）</td><td class="r mono">3,494億</td></tr>
+          <tr><td>- 事業価値推計</td><td class="r mono">▲800億</td></tr>
+          <tr><td>有証相当コスト</td><td class="r mono">2,694億</td></tr>
+          <tr><td>÷ 投資有証時価</td><td class="r mono">2,416億</td></tr>
+          <tr><td>EV/有証（事業調整後）</td><td class="r mono hi-bl">1.12倍</td></tr>
+        </tbody></table>
+        <p class="note">全資産をEVで評価しても12%のプレミアム。商社本業800億が「タダ」でついてくる点を考慮すれば実質的に割安。</p>
+      </div>
+    </div>
+    <div class="good" style="margin-top:14px">
+      <strong>結論：</strong>最も分かりやすいビュー1では<strong>21.8%割引</strong>。負債を考慮したビュー2・3ではNAV比で約17%プレミアム。「岡谷を買えば投資有価証券2,416億円へのエクスポージャーが得られるが、有利子負債1,838億も引き受け、商社本業（≈800億の事業価値）が無料でついてくる」というのが最も正確な表現。前回の61%割引は完全な誤り。
+    </div>
+  </div>
+
+  <!-- t3c -->
+  <div class="spanel" id="c3-t3c">
+    <div class="notice">割引率は全銘柄で一律21.8%。銘柄間の差異は「含み益率」に現れる。帳簿価額が低いほど（取得が古いほど）、含み益率が高く価値保全機能が強い。</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>銘柄</th>
+          <th class="r">市場直接購入（億）</th>
+          <th class="r">岡谷経由実効コスト（億）</th>
+          <th class="r">節約額（億）</th>
+          <th class="r">割引率</th>
+          <th class="r">帳簿価額推計（億）</th>
+          <th class="r">含み益（億）</th>
+          <th class="r">含み益率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fffbf0">
+          <td><strong>🏆 トヨタ自動車</strong></td>
+          <td class="r mono"><strong>1,063</strong></td><td class="r mono hi-gn"><strong>831</strong></td>
+          <td class="r mono hi-gn"><strong>▲232</strong></td><td class="r mono hi-gn"><strong>21.8%</strong></td>
+          <td class="r mono">27</td><td class="r mono hi-gn">1,035</td><td class="r mono hi-gn">+3,780%</td>
+        </tr>
+        <tr>
+          <td>三菱UFJ FG（推計中央値）</td>
+          <td class="r mono">569</td><td class="r mono hi-gn">445</td>
+          <td class="r mono hi-gn">▲124</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">80</td><td class="r mono hi-gn">489</td><td class="r mono hi-gn">+611%</td>
+        </tr>
+        <tr>
+          <td>三井住友トラスト</td>
+          <td class="r mono">226</td><td class="r mono hi-gn">177</td>
+          <td class="r mono hi-gn">▲49</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">51</td><td class="r mono hi-gn">175</td><td class="r mono hi-gn">+344%</td>
+        </tr>
+        <tr>
+          <td>日本製鉄</td>
+          <td class="r mono">209</td><td class="r mono hi-gn">163</td>
+          <td class="r mono hi-gn">▲46</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">74</td><td class="r mono hi-gn">135</td><td class="r mono hi-gn">+182%</td>
+        </tr>
+        <tr>
+          <td>中部電力</td>
+          <td class="r mono">180</td><td class="r mono hi-gn">141</td>
+          <td class="r mono hi-gn">▲39</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">41</td><td class="r mono hi-gn">140</td><td class="r mono hi-gn">+342%</td>
+        </tr>
+        <tr>
+          <td>ティラド</td>
+          <td class="r mono">161</td><td class="r mono hi-gn">126</td>
+          <td class="r mono hi-gn">▲35</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">28</td><td class="r mono hi-gn">133</td><td class="r mono hi-gn">+484%</td>
+        </tr>
+        <tr>
+          <td>損保ジャパン</td>
+          <td class="r mono">117</td><td class="r mono hi-gn">92</td>
+          <td class="r mono hi-gn">▲25</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">49</td><td class="r mono hi-gn">68</td><td class="r mono hi-gn">+140%</td>
+        </tr>
+        <tr>
+          <td>豊田通商</td>
+          <td class="r mono">93</td><td class="r mono hi-gn">73</td>
+          <td class="r mono hi-gn">▲20</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">27</td><td class="r mono hi-gn">66</td><td class="r mono hi-gn">+246%</td>
+        </tr>
+        <tr>
+          <td>オークマ</td>
+          <td class="r mono">71</td><td class="r mono hi-gn">55</td>
+          <td class="r mono hi-gn">▲15</td><td class="r mono hi-gn">21.8%</td>
+          <td class="r mono">20</td><td class="r mono hi-gn">51</td><td class="r mono hi-gn">+259%</td>
+        </tr>
+        <tr style="background:var(--bg3);font-weight:600">
+          <td><strong>主要9銘柄合計</strong></td>
+          <td class="r mono hi-ok"><strong>2,689億</strong></td><td class="r mono hi-gn"><strong>2,103億</strong></td>
+          <td class="r mono hi-gn"><strong>▲586億節約</strong></td><td class="r mono hi-gn"><strong>21.8%</strong></td>
+          <td class="r mono">397億</td><td class="r mono hi-gn">2,292億</td><td class="r mono hi-gn">+577%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">割引率が全銘柄で一律21.8%になる理由：岡谷時価総額1,890億÷投資有価証券時価2,416億という同一の比率を全銘柄に均等按分するため。銘柄間の優劣は「含み益率」で判断する。トヨタの+3,780%という圧倒的な含み益率は、取得コストが極めて低い（推計27億）ことを示す。</p>
+  </div>
+
+  <!-- t3d -->
+  <div class="spanel" id="c3-t3d">
+    <div class="g2">
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:14px">NAV分解（令和7年8月末）</div>
+        <table class="tbl"><tbody>
+          <tr><td>投資有価証券（時価・確認値）</td><td class="r mono hi-ok">+2,416億</td></tr>
+          <tr><td>現金及び預金（確認値）</td><td class="r mono">+234億</td></tr>
+          <tr><td>商社事業価値（推計・PER6.5×純利益）</td><td class="r mono">+800億</td></tr>
+          <tr><td>その他資産（推計）</td><td class="r mono">+200億</td></tr>
+          <tr><td>有利子負債（確認値）</td><td class="r mono hi-rd">▲1,838億</td></tr>
+          <tr style="font-weight:600;background:#fffbf0"><td>NAV推計合計</td><td class="r mono hi-ok">1,812億</td></tr>
+          <tr style="font-weight:600"><td>P/NAV（1,890÷1,812）</td><td class="r mono hi-am">1.04倍</td></tr>
+        </tbody></table>
+        <p class="note">事業価値推計800億を前提とするとP/NAVはほぼ1.0倍（ほぼ等価）。含み益1,228億（税後）という資本利得の潜在力が内包されている。</p>
+      </div>
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:14px">「岡谷経由」 vs 「直接購入」の比較</div>
+        <div class="bgrp"><div class="blrow"><span style="font-size:11px">岡谷時価総額（払うコスト）</span><span class="mono">1,890億円</span></div><div class="btrack"><div class="bfill" style="width:78%;height:10px;background:var(--ok)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span style="font-size:11px">投資有証（得られるエクスポージャー）</span><span class="mono hi-gn">2,416億円</span></div><div class="btrack"><div class="bfill" style="width:100%;height:10px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span style="font-size:11px">有利子負債（引き受ける）</span><span class="mono hi-rd">▲1,838億円</span></div><div class="btrack"><div class="bfill" style="width:76%;height:10px;background:var(--rd)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span style="font-size:11px">商社本業（おまけ）</span><span class="mono hi-bl">+800億円推計</span></div><div class="btrack"><div class="bfill" style="width:33%;height:10px;background:var(--bl)"></div></div></div>
+        <div class="spacer"></div>
+        <div class="good">「岡谷を買うと：有証2,416億（時価）＋<strong>商社事業800億（推計）</strong>を手にする一方、有利子負債1,838億も引き受ける。純コスト1,890億で得られる純価値≈1,812億。ほぼ等価だが、含み益1,228億（税後）という潜在力が付随する。<strong>さらに「1669年創業・357年の取引ネットワーク・年商1.1兆円の商社ブランド」という無形資産が計算式に入っていない状態でこの数字。</strong>」</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- t3e: 固定資産含み益 -->
+  <div class="spanel" id="c3-t3e">
+    <div class="notice"><strong>重要な前提：</strong>岡谷鋼機は「商社」であり製造業ではない。大規模工場・生産設備は持たない。固定資産含み益は投資有価証券含み益（1,754億税前）と比較すると規模は1/10未満だが、創業1669年の老舗として名古屋栄・東京丸の内等の優良不動産を保有している可能性がある。有価証券報告書の「有形固定資産等明細表」から直接確認が必要。</div>
+
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">有形固定資産（帳簿・令7.8末）</div><div class="mc-v am">798億円</div><div class="mc-s">半期報告書確認値<br>内・土地推計50億円</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">土地含み益（税前推計）</div><div class="mc-v gn">30〜130億円</div><div class="mc-s">帳簿価額の0.6〜2.6倍<br>中央値：税後50〜70億</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">BPS加算効果（中央値）</div><div class="mc-v bl">+309円/株</div><div class="mc-s">土地含み益税後60億÷<br>1,944万株</div></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:16px">
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">岡谷鋼機の主要固定資産（推定）</div>
+        <table class="tbl">
+          <thead><tr><th>資産</th><th class="r">帳簿価額推計</th><th class="r">含み益推計（税前）</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr style="background:#fffbf0">
+              <td><strong>①本社用地（名古屋市中区栄）</strong></td>
+              <td class="r mono">5〜10億</td>
+              <td class="r mono hi-gn">+20〜40億</td>
+              <td>1669年創業の超長期保有・栄の一等地</td>
+            </tr>
+            <tr>
+              <td>②倉庫・配送センター用地（愛知県内等）</td>
+              <td class="r mono">20〜30億</td>
+              <td class="r mono hi-gn">+10〜40億</td>
+              <td>工業用地・地価上昇は緩やか</td>
+            </tr>
+            <tr>
+              <td>③全国営業所・支店用地・建物</td>
+              <td class="r mono">15〜20億</td>
+              <td class="r mono hi-am">+5〜20億</td>
+              <td>大阪・東京・各地（賃借多数の可能性）</td>
+            </tr>
+            <tr>
+              <td>④使用権資産（IFRS16号・リース）</td>
+              <td class="r mono">350億（推計）</td>
+              <td class="r mono">含み益なし</td>
+              <td>賃借資産のリース化 → 含み益対象外</td>
+            </tr>
+            <tr style="background:var(--bg3);font-weight:600">
+              <td>合計（①〜③）</td>
+              <td class="r mono">50億（推計）</td>
+              <td class="r mono hi-gn">+30〜130億</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">東京本店（千代田区丸の内）は賃借の可能性が高い（賃借資産はIFRS16号でリース資産計上・含み益対象外）。有報の固定資産明細表「土地」欄の直接確認が必要。</p>
+      </div>
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">修正BPS・修正PBR（固定資産含み益加算後）</div>
+        <table class="tbl">
+          <thead><tr><th>シナリオ</th><th class="r">土地含み益（税後）</th><th class="r">修正BPS</th><th class="r">修正PBR</th></tr></thead>
+          <tbody>
+            <tr><td>帳簿BPS（SBI証券・第90期末確定）</td><td class="r mono">—</td><td class="r mono"><strong>25,792円</strong></td><td class="r mono"><strong>0.377倍</strong></td></tr>
+            <tr><td>有証含み益のみ加算</td><td class="r mono">—</td><td class="r mono hi-gn">32,168円</td><td class="r mono hi-gn">0.302倍</td></tr>
+            <tr style="background:#fffbf0">
+              <td><strong>Bear（土地含み益税後30億）</strong></td>
+              <td class="r mono">30億</td>
+              <td class="r mono hi-gn"><strong>32,323円</strong></td>
+              <td class="r mono hi-gn"><strong>0.301倍</strong></td>
+            </tr>
+            <tr style="background:#fffbf0">
+              <td><strong>Base（土地含み益税後60億）</strong></td>
+              <td class="r mono">60億</td>
+              <td class="r mono hi-gn"><strong>32,477円</strong></td>
+              <td class="r mono hi-gn"><strong>0.299倍</strong></td>
+            </tr>
+            <tr style="background:#fffbf0">
+              <td><strong>Bull（土地含み益税後90億）</strong></td>
+              <td class="r mono">90億</td>
+              <td class="r mono hi-gn"><strong>32,632円</strong></td>
+              <td class="r mono hi-gn"><strong>0.298倍</strong></td>
+            </tr>
+            <tr>
+              <td>(参考)第90期末+有証+土地 合計</td>
+              <td class="r mono">—</td>
+              <td class="r mono hi-am">32,477円</td>
+              <td class="r mono hi-am">0.299倍</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">有証含み益加算後の修正BPS 29,078円（土地0億想定）→ 修正PBR 0.334倍。土地含み益は有証含み益と比較すると規模が小さく（5〜8%）、修正PBRへの影響は軽微。有証含み益1,228億（税後）の圧倒的な規模が割安性の核心。</p>
+      </div>
+    </div>
+
+    <div class="card card-hi-ok" style="margin-top:4px">
+      <div style="font:600 11px/1 var(--head);margin-bottom:10px">固定資産含み益 vs 投資有価証券含み益：スケール比較</div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">投資有価証券含み益（税前）</span><span class="hi-ok mono">≈1,754億円</span></div><div class="btrack"><div class="bfill" style="width:100%;height:12px;background:var(--ok)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">投資有価証券含み益（税後・確認値）</span><span class="hi-gn mono">1,228億円</span></div><div class="btrack"><div class="bfill" style="width:70%;height:12px;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">固定資産（土地）含み益（税前・推計上限）</span><span class="hi-am mono">≈130億円</span></div><div class="btrack"><div class="bfill" style="width:7%;height:12px;background:var(--am2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">固定資産（土地）含み益（税後・推計中央値）</span><span class="hi-am mono">≈60億円</span></div><div class="btrack"><div class="bfill" style="width:3%;height:12px;background:var(--am)"></div></div></div>
+      <p class="note">岡谷鋼機の含み益は「投資有価証券」が圧倒的な主役（97〜98%）。土地含み益は存在するが修正PBRへの影響は軽微（0.003〜0.005倍）。ただし1669年創業の老舗として、有報「有形固定資産等明細表」の土地帳簿価額を直接確認することで推計精度は大幅に向上する。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c4: 燃料高・インフレ耐性
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">燃料高・インフレ：岡谷鋼機は「インフレ受益者」か</h2><span class="ch-badge cb-inf">インフレ耐性分析</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c4','t4a',this)">インフレの直接影響</button>
+    <button class="stab" onclick="showTab('c4','t4b',this)">保有株のインフレ受益</button>
+    <button class="stab" onclick="showTab('c4','t4c',this)">インフレ連鎖図解</button>
+    <button class="stab" onclick="showTab('c4','t4d',this)">転嫁力と耐性評価</button>
+  </div>
+
+  <div class="spanel active" id="c4-t4a">
+    <div class="good"><strong>核心：岡谷鋼機は「商社」であり製造業・運送業と根本的に異なる。</strong>自社では燃料をほぼ消費しない。仕入価格の上昇は販売価格に転嫁できる。インフレが保有金融株の含み益を拡大させる。</div>
+    <div class="g3">
+      <div class="card card-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:10px">❌ ネガティブ影響（間接）</div>
+        <table class="tbl"><tbody>
+          <tr><td>物流コスト上昇</td><td class="r"><span class="badge bd-am">軽微</span></td></tr>
+          <tr><td>仕入先の燃料費増加</td><td class="r"><span class="badge bd-am">間接的</span></td></tr>
+          <tr><td>製造業の設備投資抑制</td><td class="r"><span class="badge bd-am">要注意</span></td></tr>
+          <tr><td>建築・土木需要減</td><td class="r"><span class="badge bd-am">鉄鋼で影響</span></td></tr>
+          <tr><td>自社燃料費</td><td class="r"><span class="badge bd-gn">ほぼゼロ</span></td></tr>
+        </tbody></table>
+        <p class="note">製造業と異なり、商社は「燃料を直接消費しない」。自動車を走らせる事業ではなく仕入・販売が主。物流は外部委託。</p>
+      </div>
+      <div class="card card-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">✅ ポジティブ影響</div>
+        <table class="tbl"><tbody>
+          <tr><td>鉄鋼・資源価格上昇→売価転嫁</td><td class="r"><span class="badge bd-gn">有利</span></td></tr>
+          <tr><td>在庫評価益（商品価格上昇）</td><td class="r"><span class="badge bd-gn">プラス</span></td></tr>
+          <tr><td>金融株（三菱UFJ等）含み益拡大</td><td class="r"><span class="badge bd-gn">★最重要</span></td></tr>
+          <tr><td>日銀利上げ→銀行株価上昇</td><td class="r"><span class="badge bd-gn">直接恩恵</span></td></tr>
+          <tr><td>鉄鋼在庫の実物価値保全</td><td class="r"><span class="badge bd-gn">実物資産</span></td></tr>
+        </tbody></table>
+        <p class="note">インフレ局面では「商品を持っている企業」が有利。鉄鋼・産業資材の在庫は実物資産として価値保全機能を持つ。</p>
+      </div>
+      <div class="card card-ok">
+        <div style="font-size:11px;font-weight:600;color:var(--ok);margin-bottom:10px">⚖ 岡谷のインフレ構造的ポジション</div>
+        <table class="tbl"><tbody>
+          <tr><td>売上高（インフレ連動型）</td><td class="r"><span class="badge bd-gn">○ 連動</span></td></tr>
+          <tr><td>直接燃料費</td><td class="r"><span class="badge bd-gn">○ ほぼゼロ</span></td></tr>
+          <tr><td>在庫（鉄鋼・産業資材）</td><td class="r"><span class="badge bd-gn">○ 実物</span></td></tr>
+          <tr><td>金融株含み益</td><td class="r"><span class="badge bd-gn">○ 自動増価</span></td></tr>
+          <tr><td>自動車産業依存</td><td class="r"><span class="badge bd-am">△ 関税リスク</span></td></tr>
+        </tbody></table>
+        <p class="note">製造業・運送業とは根本的に異なるインフレポジション。直接燃料コストがほぼゼロで保有金融株がインフレ受益者。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c4-t4b">
+    <div class="notice"><strong>核心：インフレ→日銀利上げ継続→銀行株価上昇→岡谷の含み益が自動的に増加。</strong>これは「インフレが岡谷の純資産を増やす」という強力な構造的優位性。S&P500やTOPIXにはない特性。</div>
+    <div class="g4" style="margin-bottom:16px">
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">三菱UFJ（569億）利上げ恩恵</div><div class="mc-v bl">+85億/年</div><div class="mc-s">1%利上げで株価+15%想定<br>BPS+437円/株</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl2)"><div class="mc-l">三井住友T（226億）利上げ恩恵</div><div class="mc-v bl">+45億/年</div><div class="mc-s">1%利上げで株価+20%想定<br>BPS+231円/株</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">日本製鉄（209億）鉄鋼転嫁</div><div class="mc-v am">+21億/年</div><div class="mc-s">鉄鋼価格+10%想定<br>BPS+108円/株</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">インフレ含み益増合計（税後）</div><div class="mc-v gn">+105億/年</div><div class="mc-s">（151億×税後70%）<br>BPS+540円/株</div></div>
+    </div>
+    <div class="card">
+      <div style="font:600 11px/1 var(--head);margin-bottom:12px">インフレ・利上げシナリオ：保有有価証券の価値変化推計（日銀+1%利上げ）</div>
+      <table class="tbl">
+        <thead><tr><th>銘柄</th><th class="r">現在時価</th><th class="r">前提（株価変化）</th><th class="r">含み益増加</th><th class="r">BPS増加効果</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr><td>三菱UFJ FG</td><td class="r mono">569億</td><td class="r">+15%（利上げ恩恵）</td><td class="r mono hi-gn">+85億</td><td class="r mono hi-gn">+437円/株</td><td>銀行の金利収益拡大</td></tr>
+          <tr><td>三井住友トラスト</td><td class="r mono">226億</td><td class="r">+20%（信託・運用好調）</td><td class="r mono hi-gn">+45億</td><td class="r mono hi-gn">+231円/株</td><td>運用資産収益改善</td></tr>
+          <tr><td>日本製鉄</td><td class="r mono">209億</td><td class="r">+10%（鉄鋼価格転嫁）</td><td class="r mono hi-gn">+21億</td><td class="r mono hi-gn">+108円/株</td><td>コスト転嫁実現</td></tr>
+          <tr><td>中部電力</td><td class="r mono">180億</td><td class="r">+5%（電力価格調整）</td><td class="r mono hi-gn">+9億</td><td class="r mono hi-gn">+46円/株</td><td>電力料金改定</td></tr>
+          <tr><td>損保ジャパン</td><td class="r mono">117億</td><td class="r">+8%（保険料転嫁）</td><td class="r mono hi-gn">+9億</td><td class="r mono hi-gn">+46円/株</td><td>インフレ保険料調整</td></tr>
+          <tr style="background:var(--bg3);font-weight:600"><td>主要5銘柄 合計</td><td class="r mono">1,301億</td><td class="r">—</td><td class="r mono hi-gn"><strong>+169億/年（税前）</strong></td><td class="r mono hi-gn"><strong>+870円/株（税前）</strong></td><td></td></tr>
+          <tr style="background:#e8f8f0;font-weight:600"><td>税後（70%）</td><td class="r mono">—</td><td class="r">—</td><td class="r mono hi-gn"><strong>+118億/年（税後）</strong></td><td class="r mono hi-gn"><strong>+607円/株（税後）</strong></td><td>純資産（BPS）増加分</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="spanel" id="c4-t4c">
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:16px">
+      <div style="background:var(--ink2);padding:12px 20px">
+        <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">インフレが岡谷の純資産を増やす「自動増価メカニズム」</p>
+        <p style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px">S&P500・TOPIX にはない「実物資産連動の価値保全機能」</p>
+      </div>
+      <svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+        <defs><marker id="arrf" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#7a1a6a"/></marker>
+        <marker id="arrg" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#1b6840"/></marker></defs>
+        <rect x="20" y="20" width="130" height="60" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+        <text x="85" y="45" text-anchor="middle" font-size="12" font-weight="600" fill="#b83030">インフレ進行</text>
+        <text x="85" y="63" text-anchor="middle" font-size="10" fill="#636470">燃料高・物価上昇</text>
+        <line x1="152" y1="50" x2="192" y2="50" stroke="#7a1a6a" stroke-width="2" marker-end="url(#arrf)"/>
+        <rect x="195" y="20" width="130" height="60" rx="4" fill="#f5e0f5" stroke="#7a1a6a" stroke-width="1"/>
+        <text x="260" y="45" text-anchor="middle" font-size="12" font-weight="600" fill="#7a1a6a">日銀利上げ継続</text>
+        <text x="260" y="63" text-anchor="middle" font-size="10" fill="#636470">金融政策転換</text>
+        <line x1="327" y1="50" x2="367" y2="50" stroke="#7a1a6a" stroke-width="2" marker-end="url(#arrf)"/>
+        <rect x="370" y="20" width="160" height="60" rx="4" fill="#dfe8f8" stroke="#153480" stroke-width="1.5"/>
+        <text x="450" y="43" text-anchor="middle" font-size="11" font-weight="700" fill="#153480">金融株株価上昇</text>
+        <text x="450" y="61" text-anchor="middle" font-size="10" fill="#636470">三菱UFJ・三井住友T↑↑</text>
+        <line x1="532" y1="50" x2="572" y2="50" stroke="#1b6840" stroke-width="2.5" marker-end="url(#arrg)"/>
+        <rect x="575" y="10" width="160" height="80" rx="4" fill="#e8f8f0" stroke="#1b6840" stroke-width="2"/>
+        <text x="655" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">含み益 自動拡大</text>
+        <text x="655" y="55" text-anchor="middle" font-size="18" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">+118億/年</text>
+        <text x="655" y="75" text-anchor="middle" font-size="10" fill="#636470">BPS+607円/株（税後）</text>
+        <line x1="737" y1="50" x2="777" y2="50" stroke="#1b6840" stroke-width="2.5" marker-end="url(#arrg)"/>
+        <rect x="780" y="20" width="110" height="60" rx="4" fill="#dff0e8" stroke="#1b6840" stroke-width="1.5"/>
+        <text x="835" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">純資産増加</text>
+        <text x="835" y="63" text-anchor="middle" font-size="10" fill="#636470">株主価値向上</text>
+        <!-- 補足 -->
+        <rect x="20" y="100" width="870" height="50" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+        <text x="455" y="122" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">S&amp;P500・TOPIX はインフレで逆風：金利上昇→DCF低下→特にNASDAQ100（PER35倍）のグロース株でバリュエーション圧縮リスク</text>
+        <text x="455" y="140" text-anchor="middle" font-size="10" fill="#636470">岡谷の保有ポートフォリオ（金融株中心）は利上げで自動的に価値増加 ← これが決定的な差異</text>
+      </svg>
+    </div>
+    <div class="g2">
+      <div class="card card-inf">
+        <div style="font-size:11px;font-weight:600;color:var(--inf);margin-bottom:10px">インフレに「強い」保有株（合計912億）</div>
+        <table class="tbl"><tbody>
+          <tr><td>三菱UFJ FG（569億）</td><td class="r hi-gn">◎ 利上げ恩恵 最大</td></tr>
+          <tr><td>三井住友トラスト（226億）</td><td class="r hi-gn">◎ 利上げ恩恵 大</td></tr>
+          <tr><td>日本製鉄（209億）</td><td class="r hi-gn">○ 鉄鋼価格転嫁</td></tr>
+          <tr><td>損保ジャパン（117億）</td><td class="r hi-gn">○ 保険料転嫁可</td></tr>
+        </tbody></table>
+        <p class="note">金融株（銀行・信託・保険）合計912億円が時価総額の48%に相当するインフレヘッジ機能を内包。</p>
+      </div>
+      <div class="card card-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:10px">インフレに「中立〜注意」の保有株</div>
+        <table class="tbl"><tbody>
+          <tr><td>トヨタ自動車（1,063億）</td><td class="r hi-am">△ 米国関税リスクが相殺</td></tr>
+          <tr><td>中部電力（180億）</td><td class="r hi-am">△ 燃料費コスト増も</td></tr>
+          <tr><td>ティラド（161億）</td><td class="r hi-am">△ 自動車部品需要連動</td></tr>
+        </tbody></table>
+        <p class="note">トヨタ（最大保有）への集中は関税リスク局面では最大のリスク。ただし3,780%の含み益で下値余地は限定的。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c4-t4d">
+    <div class="g2">
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">燃料コスト免疫：岡谷vs製造業・運送業</div>
+        <table class="tbl">
+          <thead><tr><th>コスト項目</th><th class="r">岡谷への影響</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>自社燃料費（直接）</td><td class="r hi-gn">極めて軽微</td><td>商社は車両を保有しない</td></tr>
+            <tr><td>物流委託コスト増</td><td class="r hi-am">軽微〜中程度</td><td>仕入価格へ転嫁可</td></tr>
+            <tr><td>電気代（オフィス）</td><td class="r hi-gn">軽微</td><td>管理費の一部</td></tr>
+            <tr><td>取引先の燃料高影響</td><td class="r hi-am">間接影響</td><td>製造業の設備投資減</td></tr>
+            <tr><td>仕入・在庫コスト上昇</td><td class="r hi-gn">販売価格転嫁可</td><td>商社モデルの強み</td></tr>
+          </tbody>
+        </table>
+        <div class="spacer"></div>
+        <div class="good"><strong>岡谷は燃料高の「直接の被害者」ではなく、燃料高→インフレ→利上げという連鎖の「間接的受益者」。</strong>商社は「インフレした価格で仕入れ、インフレした価格で売る」ため売上・粗利は拡大する。</div>
+      </div>
+      <div class="card">
+        <div style="font:600 11px/1 var(--head);margin-bottom:12px">インフレ耐性の総合評価</div>
+        <div class="bgrp"><div class="blrow"><span>燃料高への直接耐性</span><span class="hi-gn mono">92点</span></div><div class="btrack"><div class="bfill" style="width:92%;height:10px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>価格転嫁力</span><span class="hi-gn mono">80点</span></div><div class="btrack"><div class="bfill" style="width:80%;height:10px;background:var(--gn)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>金融株の利上げ受益</span><span class="hi-gn mono">88点</span></div><div class="btrack"><div class="bfill" style="width:88%;height:10px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>実物在庫の価値保全</span><span class="hi-gn mono">75点</span></div><div class="btrack"><div class="bfill" style="width:75%;height:10px;background:var(--gn)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>トヨタ集中リスク（逆）</span><span class="hi-rd mono">40点</span></div><div class="btrack"><div class="bfill" style="width:40%;height:10px;background:var(--rd)"></div></div></div>
+        <p class="note">トヨタ集中リスクを除けば、インフレ耐性は極めて高水準。とりわけ「利上げで保有金融株が上昇する」という自動増価メカニズムは製造業・インデックスファンドにはない特性。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c5: SP500比較
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">S&amp;P500 / TOPIX との徹底比較：なぜ岡谷を保有すべきか</h2><span class="ch-badge cb-gn">インデックスvs個別株</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c5','t5a',this)">バリュエーション比較</button>
+    <button class="stab" onclick="showTab('c5','t5b',this)">リスク構造の差異</button>
+    <button class="stab" onclick="showTab('c5','t5c',this)">100万円シミュレーション</button>
+  </div>
+
+  <div class="spanel active" id="c5-t5a">
+    <div class="g4" style="margin-bottom:16px">
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">岡谷鋼機 PBR</div><div class="mc-v gn">0.38倍</div><div class="mc-s">BPS 25,792円</div></div>
+      <div class="card mc"><div class="mc-l">TOPIX PBR</div><div class="mc-v">1.4倍</div><div class="mc-s">岡谷の3.3倍</div></div>
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">S&amp;P500 PBR</div><div class="mc-v rd">4.5倍</div><div class="mc-s">岡谷の10.5倍</div></div>
+      <div class="card mc" style="border-top:3px solid var(--rd2)"><div class="mc-l">NASDAQ100 PBR</div><div class="mc-v rd">7.8倍</div><div class="mc-s">岡谷の18倍</div></div>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>指標</th><th class="r">岡谷鋼機（7485）</th><th class="r">TOPIX</th><th class="r">S&amp;P500</th><th class="r">NASDAQ100</th><th>岡谷の評価</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PBR</td><td class="r mono hi-gn"><strong>0.38倍</strong></td><td class="r mono">1.4倍</td><td class="r mono hi-rd">4.5倍</td><td class="r mono hi-rd">7.8倍</td><td><span class="badge bd-gn">TOPIX比▲69%割安</span></td></tr>
+        <tr><td>PER（予想）</td><td class="r mono hi-gn"><strong>7.5倍</strong></td><td class="r mono">15倍</td><td class="r mono hi-rd">21倍</td><td class="r mono hi-rd">35倍</td><td><span class="badge bd-gn">S&amp;P500比▲64%割安</span></td></tr>
+        <tr><td>配当利回り</td><td class="r mono">1.6%</td><td class="r mono">2.2%</td><td class="r mono">1.2%</td><td class="r mono">0.5%</td><td><span class="badge bd-am">表面的に低め（内部複利）</span></td></tr>
+        <tr><td>ROE</td><td class="r mono">7.0%</td><td class="r mono">9%</td><td class="r mono hi-rd">20%+</td><td class="r mono hi-rd">25%+</td><td><span class="badge bd-am">改善余地あり</span></td></tr>
+        <tr><td>有価証券/時価総額</td><td class="r mono hi-ok"><strong>127.8%</strong></td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="badge bd-ok">唯一無二の特性</span></td></tr>
+        <tr><td>インフレ耐性（保有株）</td><td class="r mono hi-gn"><strong>◎</strong></td><td class="r mono">○</td><td class="r mono">△</td><td class="r mono hi-rd">✕</td><td><span class="badge bd-gn">金融株保有が強み</span></td></tr>
+        <tr><td>中間純利益成長（最新）</td><td class="r mono hi-gn">+31.2%</td><td class="r mono">—</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="badge bd-gn">高成長</span></td></tr>
+        <tr><td>インフレで「上がる」特性</td><td class="r mono hi-gn"><strong>◎ 含み益自動増加</strong></td><td class="r mono">○</td><td class="r mono">△</td><td class="r mono hi-rd">✕ PER圧縮リスク</td><td><span class="badge bd-gn">独自の優位性</span></td></tr>
+      </tbody>
+    </table>
+    <div class="good" style="margin-top:14px"><strong>決定的差異：</strong>S&P500・NASDAQ100は「市場全体の不確実な成長」に賭けるが、岡谷鋼機は「確認された含み益（1,228億・税後）の顕在化」と「優良株ポートフォリオの保有継続＋インフレ自動受益」が価値の源泉。インフレ局面でNASDAQ100が逆風を受ける中、岡谷の保有金融株は追い風。</div>
+  </div>
+
+  <div class="spanel" id="c5-t5b">
+    <div class="g2">
+      <div class="card card-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:10px">S&amp;P500 / NASDAQ100 のリスク</div>
+        <table class="tbl"><tbody>
+          <tr><td>PBR4.5〜7.8倍の高バリュ</td><td class="r hi-rd">高い調整リスク</td></tr>
+          <tr><td>米国金利上昇への感応</td><td class="r hi-rd">グロース株に深刻</td></tr>
+          <tr><td>AI・テック集中リスク</td><td class="r hi-rd">上位10銘柄で40%</td></tr>
+          <tr><td>為替リスク（円高）</td><td class="r hi-rd">日本人には打撃</td></tr>
+          <tr><td>地政学（米中・関税）</td><td class="r hi-rd">ハイテクに直撃</td></tr>
+          <tr><td>インフレでの実質低下</td><td class="r hi-rd">DCF/PER圧縮要因</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card card-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">岡谷鋼機のリスク構造</div>
+        <table class="tbl"><tbody>
+          <tr><td>含み益が「床」を形成</td><td class="r hi-gn">下値硬直性あり</td></tr>
+          <tr><td>インフレ→金融株上昇</td><td class="r hi-gn">保有株が自動ヘッジ</td></tr>
+          <tr><td>円高でも国内株式安定</td><td class="r hi-gn">円ベースで安全</td></tr>
+          <tr><td>トヨタ集中リスク</td><td class="r hi-rd">▲ 最大リスク要因</td></tr>
+          <tr><td>名証単独・低流動性</td><td class="r hi-am">△ 流動性制約</td></tr>
+          <tr><td>低配当性向（内部複利）</td><td class="r hi-am">△ 配当少ないが蓄積</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c5-t5c">
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
+      <div style="background:var(--ink2);padding:12px 20px">
+        <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">100万円を投資した場合の3年後シミュレーション（3シナリオ）</p>
+      </div>
+      <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+        <!-- 軸 -->
+        <line x1="80" y1="240" x2="820" y2="240" stroke="#e0ddd4" stroke-width="1"/>
+        <line x1="80" y1="30" x2="80" y2="244" stroke="#e0ddd4" stroke-width="1"/>
+        <!-- Y軸ラベル -->
+        <text x="72" y="44"  text-anchor="end" font-family="'JetBrains Mono'" font-size="9" fill="#636470">400万</text>
+        <text x="72" y="96"  text-anchor="end" font-family="'JetBrains Mono'" font-size="9" fill="#636470">300万</text>
+        <text x="72" y="148" text-anchor="end" font-family="'JetBrains Mono'" font-size="9" fill="#636470">200万</text>
+        <text x="72" y="200" text-anchor="end" font-family="'JetBrains Mono'" font-size="9" fill="#636470">150万</text>
+        <text x="72" y="240" text-anchor="end" font-family="'JetBrains Mono'" font-size="9" fill="#636470">100万</text>
+        <!-- X軸ラベル -->
+        <text x="80"  y="257" text-anchor="middle" font-size="9" fill="#636470">開始</text>
+        <text x="280" y="257" text-anchor="middle" font-size="9" fill="#636470">1年後</text>
+        <text x="480" y="257" text-anchor="middle" font-size="9" fill="#636470">2年後</text>
+        <text x="680" y="257" text-anchor="middle" font-size="9" fill="#636470">3年後</text>
+        <text x="800" y="257" text-anchor="middle" font-size="9" fill="#636470">3.5年後</text>
+        <!-- グリッド -->
+        <line x1="76" y1="44"  x2="84" y2="44"  stroke="#e0ddd4" stroke-width="1"/>
+        <line x1="76" y1="96"  x2="84" y2="96"  stroke="#e0ddd4" stroke-width="1"/>
+        <line x1="76" y1="148" x2="84" y2="148" stroke="#e0ddd4" stroke-width="1"/>
+        <line x1="76" y1="200" x2="84" y2="200" stroke="#e0ddd4" stroke-width="1"/>
+        <!-- TOPIX +8%/年: 100→108→117→126→129万 -->
+        <polygon points="80,240 280,229 480,218 680,207 800,204 800,240" fill="#636470" fill-opacity=".12"/>
+        <polyline points="80,240 280,229 480,218 680,207 800,204" fill="none" stroke="#636470" stroke-width="2"/>
+        <circle cx="800" cy="204" r="5" fill="#636470"/>
+        <text x="805" y="200" font-size="10" fill="#636470" font-weight="600">129万円</text>
+        <text x="805" y="212" font-size="9" fill="#636470">TOPIX+8%</text>
+        <!-- NASDAQ100 +18%/年: 100→118→139→164→177万 -->
+        <polygon points="80,240 280,215 480,187 680,159 800,145 800,240" fill="#b83030" fill-opacity=".08"/>
+        <polyline points="80,240 280,215 480,187 680,159 800,145" fill="none" stroke="#b83030" stroke-width="2.5" stroke-dasharray="6,3"/>
+        <circle cx="800" cy="145" r="5" fill="#b83030"/>
+        <text x="805" y="141" font-size="10" fill="#b83030" font-weight="600">177万円</text>
+        <text x="805" y="153" font-size="9" fill="#b83030">NASDAQ+18%</text>
+        <!-- 岡谷Bear +5%/年: 100→105→110→116→119万 -->
+        <polyline points="80,240 280,234 480,229 680,224 800,221" fill="none" stroke="#b83030" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="805" y="218" font-size="9" fill="#b83030">岡谷Bear+5%</text>
+        <text x="805" y="228" font-size="9" fill="#b83030">119万円</text>
+        <!-- 岡谷Base +25%/年: 100→125→156→195→210万 -->
+        <polygon points="80,240 280,210 480,173 680,132 800,118 800,240" fill="#c88400" fill-opacity=".15"/>
+        <polyline points="80,240 280,210 480,173 680,132 800,118" fill="none" stroke="#c88400" stroke-width="3"/>
+        <circle cx="800" cy="118" r="6" fill="#c88400"/>
+        <text x="805" y="114" font-size="10" fill="#c88400" font-weight="600">210万円</text>
+        <text x="805" y="126" font-size="9" fill="#c88400">岡谷Base+25%</text>
+        <!-- 岡谷Bull+60%/年: 100→160→256→410→546万 -->
+        <polygon points="80,240 280,184 480,104 680,44 800,240" fill="#1b6840" fill-opacity=".12"/>
+        <polyline points="80,240 280,184 480,104 680,44" fill="none" stroke="#1b6840" stroke-width="2.5"/>
+        <circle cx="680" cy="44" r="6" fill="#1b6840"/>
+        <text x="686" y="40" font-size="10" fill="#1b6840" font-weight="600">410万円</text>
+        <text x="686" y="52" font-size="9" fill="#1b6840">岡谷Bull+60% PBR1.0倍化</text>
+        <!-- 凡例 -->
+        <line x1="100" y1="268" x2="128" y2="268" stroke="#1b6840" stroke-width="2.5"/>
+        <text x="133" y="271" font-size="9" fill="#636470">岡谷Bull（PBR1.0倍正常化）</text>
+        <line x1="280" y1="268" x2="308" y2="268" stroke="#c88400" stroke-width="3"/>
+        <text x="313" y="271" font-size="9" fill="#636470">岡谷Base（含み益部分顕在化）</text>
+        <line x1="480" y1="268" x2="508" y2="268" stroke="#636470" stroke-width="2"/>
+        <text x="513" y="271" font-size="9" fill="#636470">TOPIX</text>
+        <line x1="560" y1="268" x2="588" y2="268" stroke="#b83030" stroke-width="2.5" stroke-dasharray="6,3"/>
+        <text x="593" y="271" font-size="9" fill="#636470">NASDAQ100</text>
+      </svg>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>投資先</th><th class="r">前提（年率リターン）</th><th class="r">1年後</th><th class="r">3年後（複利）</th><th class="r">TOPIX比超過リターン</th></tr></thead>
+      <tbody>
+        <tr style="background:#fffbf0"><td><strong>岡谷鋼機（Bull）</strong></td><td class="r mono">+60%/年（PBR1.0倍正常化）</td><td class="r mono hi-gn"><strong>160万</strong></td><td class="r mono hi-gn"><strong>410万</strong></td><td class="r mono hi-gn">+284万（+226%）</td></tr>
+        <tr style="background:#fffbf0"><td><strong>岡谷鋼機（Base）</strong></td><td class="r mono">+25%/年（含み益顕在化）</td><td class="r mono hi-ok"><strong>125万</strong></td><td class="r mono hi-ok"><strong>195万</strong></td><td class="r mono hi-ok">+69万（+55%）</td></tr>
+        <tr><td>岡谷鋼機（Bear）</td><td class="r mono">+5%/年（現状維持）</td><td class="r mono">105万</td><td class="r mono">116万</td><td class="r mono hi-rd">▲10万（▲8%）</td></tr>
+        <tr><td>TOPIX（インデックス）</td><td class="r mono">+8%/年（過去実績）</td><td class="r mono">108万</td><td class="r mono">126万</td><td class="r mono" style="color:var(--ink3)">—（基準）</td></tr>
+        <tr><td>S&amp;P500（円換算）</td><td class="r mono">+10%/年（過去実績）</td><td class="r mono">110万</td><td class="r mono">133万</td><td class="r mono hi-gn">+7万（+6%）</td></tr>
+        <tr><td>NASDAQ100（円換算）</td><td class="r mono">+18%/年（直近実績）</td><td class="r mono">118万</td><td class="r mono">164万</td><td class="r mono hi-gn">+38万（+30%）</td></tr>
+      </tbody>
+    </table>
+    <p class="note">岡谷BaseのBase（+25%/年）の根拠：①中間純利益+31.2%の加速的成長、②投資有価証券のインフレ自動増価（+118億/年税後）、③PBR0.38倍→0.55倍への緩やかな正常化。Bull（+60%）はPBR1.0倍（=BPS25,792円）への正常化シナリオ。Bear（+5%）は現状の低PBR・低還元継続シナリオ。</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c6: 内部複利と保有優位性
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">内部複利と「低還元」の真実 — なぜ岡谷を保有すべきか</h2><span class="ch-badge cb-ok">保有優位性の核心</span></div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c6','t6a',this)">内部複利のメカニズム</button>
+    <button class="stab" onclick="showTab('c6','t6b',this)">配当vs内部留保</button>
+    <button class="stab" onclick="showTab('c6','t6c',this)">カタリスト一覧</button>
+  </div>
+
+  <div class="spanel active" id="c6-t6a">
+    <div class="good"><strong>逆説：「配当利回り1.6%は低い」が、実質的な価値成長率は毎年二桁水準。</strong>純利益内部留保＋含み益のインフレ増価＋BPS着実増加が「見えない複利」として蓄積される。</div>
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:16px">
+      <div style="background:var(--ink2);padding:12px 20px">
+        <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">内部複利の仕組み：表面上の低配当に隠れた価値蓄積</p>
+      </div>
+      <svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+        <defs>
+          <marker id="a1m" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#2a2b33"/></marker>
+          <marker id="a2m" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#1b6840"/></marker>
+        </defs>
+        <!-- 左：表面の低配当 -->
+        <rect x="20" y="20" width="155" height="170" rx="6" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+        <text x="98" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#b83030">表面上の利回り</text>
+        <text x="98" y="82" text-anchor="middle" font-family="'JetBrains Mono'" font-size="26" font-weight="600" fill="#b83030">1.6%</text>
+        <text x="98" y="102" text-anchor="middle" font-size="10" fill="#636470">155円/株</text>
+        <rect x="38" y="116" width="120" height="22" rx="3" fill="#b83030" fill-opacity=".12"/>
+        <text x="98" y="130" text-anchor="middle" font-size="10" fill="#b83030">「低配当」に見える罠</text>
+        <text x="98" y="155" text-anchor="middle" font-size="10" fill="#636470">これだけ見ると</text>
+        <text x="98" y="170" text-anchor="middle" font-size="10" fill="#636470">投資魅力が薄い</text>
+        <!-- 矢印 -->
+        <line x1="178" y1="105" x2="232" y2="105" stroke="#2a2b33" stroke-width="2" marker-end="url(#a1m)"/>
+        <text x="205" y="99" text-anchor="middle" font-size="10" fill="#2a2b33">実態は</text>
+        <!-- 中央：内部複利構成 -->
+        <rect x="235" y="20" width="370" height="170" rx="6" fill="#e8f8f0" stroke="#1b6840" stroke-width="1.5"/>
+        <text x="420" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">実質的な価値増加（年間/株）</text>
+        <rect x="255" y="56" width="90" height="22" rx="3" fill="#1b6840" fill-opacity=".7"/>
+        <text x="300" y="71" text-anchor="middle" font-size="10" fill="white">EPS 1,299円</text>
+        <text x="360" y="71" font-size="10" fill="#636470">当期純利益（内部留保の源泉）</text>
+        <rect x="255" y="84" width="330" height="22" rx="3" fill="#8e5810" fill-opacity=".55"/>
+        <text x="420" y="99" text-anchor="middle" font-size="10" fill="white">インフレ含み益自動増価 +607円/株/年（税後・利上げ1%シナリオ）</text>
+        <rect x="255" y="112" width="280" height="22" rx="3" fill="#153480" fill-opacity=".45"/>
+        <text x="395" y="127" text-anchor="middle" font-size="10" fill="white">BPS増加（純資産+285億/半期 → 年+570億推計）</text>
+        <rect x="255" y="148" width="330" height="24" rx="3" fill="#1b6840"/>
+        <text x="420" y="164" text-anchor="middle" font-size="13" font-weight="600" fill="white" font-family="'JetBrains Mono'">実質価値増加 ≈ 株価の15〜20%/年</text>
+        <!-- 矢印 -->
+        <line x1="607" y1="105" x2="660" y2="105" stroke="#1b6840" stroke-width="2" marker-end="url(#a2m)"/>
+        <text x="634" y="99" text-anchor="middle" font-size="10" fill="#1b6840">PBR</text>
+        <text x="634" y="113" text-anchor="middle" font-size="10" fill="#1b6840">正常化で</text>
+        <!-- 右：出口での回収 -->
+        <rect x="663" y="20" width="175" height="170" rx="6" fill="#dff0e8" stroke="#1b6840" stroke-width="1.5"/>
+        <text x="750" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">PBR正常化で回収</text>
+        <text x="750" y="76" text-anchor="middle" font-size="20" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono'">+134%</text>
+        <text x="750" y="96" text-anchor="middle" font-size="10" fill="#636470">PBR1.0倍での目標</text>
+        <text x="750" y="112" text-anchor="middle" font-size="10" fill="#636470">25,792円（BPS基準）</text>
+        <rect x="678" y="125" width="145" height="36" rx="3" fill="#1b6840" fill-opacity=".1" stroke="#1b6840" stroke-width="1"/>
+        <text x="750" y="139" text-anchor="middle" font-size="10" fill="#1b6840">毎年155円の配当受取</text>
+        <text x="750" y="155" text-anchor="middle" font-size="10" fill="#1b6840">+含み益段階的顕在化</text>
+        <text x="750" y="178" text-anchor="middle" font-size="9" fill="#636470">「低配当＝内部複利蓄積中」</text>
+      </svg>
+    </div>
+
+    <div class="g3">
+      <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">表面配当利回り</div><div class="mc-v rd">1.6%</div><div class="mc-s">155円/株（161円予想）<br>「低い」に見える</div></div>
+      <div class="card mc" style="border-top:3px solid var(--ok)"><div class="mc-l">インフレ含み益増（年）</div><div class="mc-v ok">+607円/株</div><div class="mc-s">利上げ1%シナリオ税後<br>BPS自動増加</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">PBR1.0倍目標株価</div><div class="mc-v gn">25,792円</div><div class="mc-s">現在9,720円から<br>+134%の潜在価値</div></div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c6-t6b">
+    <div class="g2">
+      <div class="card card-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:10px">❌ 「配当をくれ」派の正当な批判</div>
+        <div class="bgrp"><div class="blrow"><span>配当性向（現在）</span><span class="hi-rd mono">≈10%</span></div><div class="btrack"><div class="bfill" style="width:10%;height:8px;background:var(--rd)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>TOPIX平均配当性向</span><span class="mono">35%</span></div><div class="btrack"><div class="bfill" style="width:35%;height:8px;background:var(--bl)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>自社株買い実施頻度</span><span class="hi-rd mono">ほぼなし</span></div><div class="btrack"><div class="bfill" style="width:5%;height:8px;background:var(--rd)"></div></div></div>
+        <ul style="font-size:12px;padding-left:16px;line-height:2;color:var(--ink3);margin-top:10px">
+          <li>配当性向10%は低すぎる</li>
+          <li>TOPIX平均2.2%利回りに劣る</li>
+          <li>名証単独で東証のPBR改善圧力が弱い</li>
+          <li>創業家支配で外部株主圧力が限定的</li>
+        </ul>
+        <p class="note">これらの批判は全て正当。ただし2024〜2026年にかけて増配・分割が加速しており「変化の萌芽」が明確に見え始めている。</p>
+      </div>
+      <div class="card card-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">✅ 「内部留保は正しい」派の論拠</div>
+        <div class="bgrp"><div class="blrow"><span>配当しない分→BPS増加</span><span class="hi-gn mono">毎年蓄積</span></div><div class="btrack"><div class="bfill" style="width:100%;height:8px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>含み益自動増価（インフレ）</span><span class="hi-gn mono">+607円/株/年</span></div><div class="btrack"><div class="bfill" style="width:90%;height:8px;background:var(--gn)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>中間純利益成長+31.2%</span><span class="hi-gn mono">加速中</span></div><div class="btrack"><div class="bfill" style="width:75%;height:8px;background:var(--ok)"></div></div></div>
+        <ul style="font-size:12px;padding-left:16px;line-height:2;color:var(--ink3);margin-top:10px">
+          <li>350年企業として長期視点で価値蓄積</li>
+          <li>純資産4,313億（半期末）が着実成長</li>
+          <li>PBR0.38倍→1.0倍で+134%の潜在価値</li>
+          <li>配当を出さず含み益が「内部複利」化</li>
+        </ul>
+        <p class="note">純資産は第85期から第89期まで毎期確実に増加。インフレ局面では金融株含み益がBPSを自動押し上げ。この「静かな価値蓄積」が配当に見えないリターンの源泉。</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div style="font:600 11px/1 var(--head);margin-bottom:12px">配当・BPS推移の実績（分割後換算）</div>
+      <table class="tbl">
+        <thead><tr><th>期</th><th class="r">年間配当</th><th class="r">配当性向</th><th class="r">純資産（連結）</th><th class="r">評価差額金</th><th>変化のシグナル</th></tr></thead>
+        <tbody>
+          <tr><td>第85期（R3.2）</td><td class="r mono">112.5円</td><td class="r mono">23.2%</td><td class="r mono">2,420億</td><td class="r">—</td><td>—</td></tr>
+          <tr><td>第86期（R4.2）</td><td class="r mono">117.5円</td><td class="r mono">17.3%</td><td class="r mono">2,789億</td><td class="r">—</td><td>—</td></tr>
+          <tr><td>第87期（R5.2）</td><td class="r mono">122.5円</td><td class="r mono">13.1%</td><td class="r mono">3,050億</td><td class="r">—</td><td>—</td></tr>
+          <tr><td>第88期（R6.2）</td><td class="r mono">130円</td><td class="r mono">12.7%</td><td class="r mono">4,043億</td><td class="r">—</td><td>1回目株式分割発表</td></tr>
+          <tr style="background:#fffbf0"><td><strong>第89期（R7.2）</strong></td><td class="r mono hi-ok"><strong>142.5円</strong></td><td class="r mono">14.0%</td><td class="r mono hi-ok"><strong>4,027億</strong></td><td class="r mono hi-ok">1,092億（確認）</td><td>1回目分割実施</td></tr>
+          <tr style="background:#fffbf0"><td><strong>第90期（R8.2予）</strong></td><td class="r mono hi-gn"><strong>161円</strong></td><td class="r">≈10%</td><td class="r mono">4,313億（中間）</td><td class="r mono hi-ok">1,228億（確認）</td><td><strong>2回目分割発表・増配↑</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="spanel" id="c6-t6c">
+    <table class="tbl">
+      <thead><tr><th>カタリスト</th><th class="r">発生確率</th><th class="r">株価インパクト</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr style="background:#fffbf0"><td><strong>★ 日銀利上げ継続（金融株上昇）</strong></td><td class="r hi-gn">70〜80%</td><td class="r hi-gn">+10〜20%</td><td>含み益+118億/年（税後）→BPS自動増加</td></tr>
+        <tr><td>増配・配当性向改善</td><td class="r hi-am">30〜40%</td><td class="r hi-gn">+15〜30%</td><td>第90期161円達成、継続的改善期待</td></tr>
+        <tr><td>東証プライムへの市場変更</td><td class="r hi-am">15〜25%</td><td class="r hi-gn">+20〜40%</td><td>機関投資家の参入→流動性・認知度向上</td></tr>
+        <tr><td>政策保有株の一部売却・還元</td><td class="r hi-am">15〜25%</td><td class="r hi-gn">+20〜50%</td><td>PBR改善に最も直接的に効く</td></tr>
+        <tr><td>自社株買い（大規模）</td><td class="r hi-rd">5〜10%</td><td class="r hi-gn">+30〜80%</td><td>自己株式が現在0.89%のみ</td></tr>
+        <tr><td>海外機関投資家の発見・参入</td><td class="r hi-am">10〜20%</td><td class="r hi-gn">+15〜30%</td><td>流動性向上で認知度上昇後</td></tr>
+      </tbody>
+    </table>
+    <div class="card card-ok" style="margin-top:14px">
+      <p style="font-size:12px;line-height:1.85">
+        <strong>カタリストの「重複当選」が期待できる：</strong>
+        日銀利上げ（70〜80%）は独立して発生中であり、増配（30〜40%）も継続的に行われている。
+        これら複数のカタリストが同時に作用する確率は非常に高く、
+        「待てば待つほどBPSが積み上がる内部複利銘柄」という特性が際立つ。
+        東証PBR改善要請の対象外（名証）という弱点はあるが、
+        2024〜2026年の行動（2回の分割・増配・世代交代）は「外部株主を意識した変化の始まり」と解釈できる。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c7: 株主還元・相続
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c7">
+  <div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">株主還元の変化・世代交代・相続対策の完了評価</h2><span class="ch-badge cb-bl">直接確認済</span></div>
+
+  <div class="good"><strong>「相続対策のネガティブイベントは完了したか」→ ほぼ完了と判断できる5つの根拠が揃った。</strong>2021年の社長世代交代（31年ぶり）、2024〜2026年の2回連続株式分割、増配継続、岡谷不動産への株式集約がその証拠。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div style="font:600 11px/1 var(--head);margin-bottom:12px">★ 確認済み：事業承継イベントのタイムライン</div>
+      <div style="padding-left:20px;position:relative">
+        <div style="position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--rule)"></div>
+        <div style="position:relative;margin-bottom:14px">
+          <div style="position:absolute;left:-20px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--am);border:2px solid var(--bg)"></div>
+          <div style="font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px">2021年3月</div>
+          <div style="font-size:12px;line-height:1.65;color:var(--ink2)"><strong>岡谷健広氏（14代目・当時47歳）が社長就任。31年ぶりの世代交代。</strong><br>先代・篤一氏（76歳）は代表権のない取締役相談役に退く。米バブソン大院卒、フィデリティ投信→2011年常務→2018年専務→2021年社長。</div>
+        </div>
+        <div style="position:relative;margin-bottom:14px">
+          <div style="position:absolute;left:-20px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--ok);border:2px solid var(--bg)"></div>
+          <div style="font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px">2024年3月28日</div>
+          <div style="font-size:12px;line-height:1.65;color:var(--ink2)">第1回株式分割（1→2株）発表・2024年9月1日効力発生。同時に株主優待一部変更。目的「投資単位引下げ・個人投資家への親しみ」</div>
+        </div>
+        <div style="position:relative;margin-bottom:14px">
+          <div style="position:absolute;left:-20px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--gn);border:2px solid var(--bg)"></div>
+          <div style="font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px">2026年3月31日（直接確認）</div>
+          <div style="font-size:12px;line-height:1.65;color:var(--ink2)"><strong>3つを一括発表：</strong><br>①期末配当86円（予想80円から増額・前期75円から+14.7%増）→年間161円確定<br>②第2回株式分割（1→2株）2026年6月1日効力・「投資家層の更なる拡大と流動性向上」<br>③株主優待実質拡充（分割後も同株数区分維持）</div>
+        </div>
+        <div style="position:relative;margin-bottom:0">
+          <div style="position:absolute;left:-20px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--bl);border:2px solid var(--bg)"></div>
+          <div style="font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:2px">現在（2026年5月）</div>
+          <div style="font-size:12px;line-height:1.65;color:var(--ink2)">創業家合計17.61%（岡谷不動産12.60%+岡谷篤一5.01%）。取締役相談役篤一氏は現在≈81歳。IRBANKに「真照会 1.46%」が登場（第89期有報）→創業家関連の資産管理会社か財団と推定。</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font:600 11px/1 var(--head);margin-bottom:12px">「相続完了」を示す5つの根拠</div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">①世代交代完了（2021年）</span><span class="hi-gn mono">根拠: 最強</span></div><div class="btrack"><div class="bfill" style="width:95%;height:10px;background:var(--gn2)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">②2回連続株式分割（流動性重視）</span><span class="hi-gn mono">根拠: 強</span></div><div class="btrack"><div class="bfill" style="width:85%;height:10px;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">③岡谷不動産への株式集約（12.6%）</span><span class="hi-gn mono">根拠: 強</span></div><div class="btrack"><div class="bfill" style="width:85%;height:10px;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">④一貫した増配継続</span><span class="hi-gn mono">根拠: 中</span></div><div class="btrack"><div class="bfill" style="width:70%;height:10px;background:var(--ok)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span style="font-size:11px">⑤「真照会」の出現と変動</span><span class="hi-am mono">示唆: 中</span></div><div class="btrack"><div class="bfill" style="width:55%;height:10px;background:var(--am)"></div></div></div>
+      <div class="spacer"></div>
+      <div class="warn"><strong>留保事項：</strong>岡谷篤一先代（≈81歳）が個人で5.01%を保有。将来の相続対象が残っている。ただし岡谷不動産12.60%（法人）は動かないため、経営支配権に影響するネガティブイベントは実質完了と判断。</div>
+    </div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc-col">
+      <div class="sc-lbl bear">過去の売出（ネガティブ）</div>
+      <div class="sc-prob bear">完了</div>
+      <div class="sc-sub">数年前に実施（推定2019〜2022年頃）</div>
+      <div class="sc-li">創業家持株→岡谷不動産に集約</div>
+      <div class="sc-li">相続税評価額の確定（上場株式）</div>
+      <div class="sc-li">社長交代（2021年3月）が核心</div>
+      <div class="sc-li">発行済株式数は不変（売出のため）</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">現在の移行期</div>
+      <div class="sc-prob base">進行中</div>
+      <div class="sc-sub">2024〜2026年の行動変化</div>
+      <div class="sc-li">2連続株式分割で流動性重視</div>
+      <div class="sc-li">増配継続（配当性向改善傾向）</div>
+      <div class="sc-li">「真照会」1.46%の整理が進行中</div>
+      <div class="sc-li">篤一先代5.01%の将来整理が残課題</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">今後の展望（ポジティブ）</div>
+      <div class="sc-prob bull">期待</div>
+      <div class="sc-sub">14代目社長のもとでの変革</div>
+      <div class="sc-li">東証上場変更（名証→東証PRM）</div>
+      <div class="sc-li">自社株買いの本格実施</div>
+      <div class="sc-li">政策保有株の段階的圧縮・還元</div>
+      <div class="sc-li">配当性向20〜30%への改善目標</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c8: 図解
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c8">
+  <div class="ch-head"><span class="ch-num">★</span><h2 class="ch-title">なぜ今、岡谷鋼機か？ ビジュアル図解集</h2><span class="ch-badge cb-ok">図解</span></div>
+
+  <!-- 図①：含み益逆転の構造 -->
+  <div class="card" style="margin-bottom:16px;padding:0;overflow:hidden">
+    <div style="background:var(--ink2);padding:14px 22px">
+      <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">① 「含み益逆転」の衝撃：時価総額より保有株が大きい</p>
+      <p style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px">時価総額1,890億円を支払うと、投資有価証券2,416億円（+526億超過）が手に入る</p>
+    </div>
+    <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+      <defs>
+        <linearGradient id="gOk" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#c88400;stop-opacity:.35"/><stop offset="100%" style="stop-color:#c88400;stop-opacity:.08"/></linearGradient>
+        <linearGradient id="gGn" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1b6840;stop-opacity:.38"/><stop offset="100%" style="stop-color:#1b6840;stop-opacity:.06"/></linearGradient>
+        <marker id="aA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#2a2b33"/></marker>
+      </defs>
+      <!-- 時価総額バー -->
+      <rect x="60" y="30" width="300" height="220" rx="6" fill="url(#gOk)" stroke="#c88400" stroke-width="2"/>
+      <text x="210" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#8e5810">岡谷鋼機 時価総額</text>
+      <text x="210" y="100" text-anchor="middle" font-size="38" font-weight="700" fill="#8e5810" font-family="'JetBrains Mono',monospace">1,890億</text>
+      <text x="210" y="128" text-anchor="middle" font-size="11" fill="#636470">9,720円 × 1,944万株</text>
+      <text x="210" y="155" text-anchor="middle" font-size="11" fill="#8e5810">これを支払うと…</text>
+      <rect x="80" y="170" width="260" height="64" rx="4" fill="#c88400" fill-opacity=".15"/>
+      <text x="210" y="193" text-anchor="middle" font-size="11" fill="#8e5810">税後含み益 1,228億 = <tspan font-weight="700">65%</tspan></text>
+      <text x="210" y="212" text-anchor="middle" font-size="11" fill="#8e5810">BPS 25,792円（PBR 0.38倍）</text>
+      <text x="210" y="230" text-anchor="middle" font-size="11" fill="#8e5810">「株価の65%が含み益」</text>
+      <!-- 矢印 -->
+      <line x1="364" y1="140" x2="430" y2="140" stroke="#2a2b33" stroke-width="2.5" marker-end="url(#aA)"/>
+      <text x="397" y="132" text-anchor="middle" font-size="11" fill="#2a2b33" font-weight="600">得られる</text>
+      <!-- 投資有証バー -->
+      <rect x="435" y="15" width="370" height="250" rx="6" fill="url(#gGn)" stroke="#1b6840" stroke-width="2.5"/>
+      <text x="620" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#1b6840">投資有価証券（時価・確認値）</text>
+      <text x="620" y="94" text-anchor="middle" font-size="42" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">2,416億</text>
+      <text x="620" y="122" text-anchor="middle" font-size="11" fill="#636470">半期報告書（令和7年8月末）直接確認値</text>
+      <!-- 内訳バー -->
+      <rect x="452" y="137" width="336" height="22" rx="3" fill="#1b6840" fill-opacity=".6"/>
+      <text x="620" y="152" text-anchor="middle" font-size="10" fill="white">🏆 トヨタ自動車 1,063億（44%）—含み益率+3,780%</text>
+      <rect x="452" y="164" width="200" height="20" rx="3" fill="#153480" fill-opacity=".55"/>
+      <text x="552" y="178" text-anchor="middle" font-size="10" fill="white">三菱UFJ FG 569億（24%）—利上げ受益</text>
+      <rect x="452" y="189" width="336" height="22" rx="3" fill="#8e5810" fill-opacity=".45"/>
+      <text x="620" y="203" text-anchor="middle" font-size="10" fill="white">その他（三井住友T・日鉄・中電等） 784億（32%）</text>
+      <!-- 差額強調 -->
+      <rect x="452" y="216" width="336" height="34" rx="3" fill="#1b6840"/>
+      <text x="620" y="231" text-anchor="middle" font-size="12" font-weight="700" fill="white" font-family="'JetBrains Mono',monospace">1,890億で2,416億のエクスポージャー</text>
+      <text x="620" y="244" text-anchor="middle" font-size="10" fill="#a0d8c0">21.8%割引（ただし有利子負債1,838億も引受）</text>
+      <!-- 差額ラベル -->
+      <rect x="815" y="60" width="75" height="60" rx="4" fill="#e8f8f0" stroke="#1b6840" stroke-width="1"/>
+      <text x="852" y="83" text-anchor="middle" font-size="11" fill="#1b6840" font-weight="700">超過分</text>
+      <text x="852" y="105" text-anchor="middle" font-size="17" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">+526億</text>
+    </svg>
+  </div>
+
+  <!-- 図②：トヨタ直接購入 vs 岡谷鋼機100万円比較 -->
+  <div class="card" style="margin-bottom:16px;padding:0;overflow:hidden">
+    <div style="background:var(--ink2);padding:14px 22px">
+      <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">② 100万円で「トヨタ株」を直接買う vs 「岡谷鋼機」を買う — 何が得られるか</p>
+      <p style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px">同じ97万円を使った場合の取得資産の違い。岡谷経由は有利子負債も引き受ける点に注意。</p>
+    </div>
+    <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+      <defs>
+        <marker id="aX" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#1b6840"/></marker>
+        <marker id="aY" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#b83030"/></marker>
+      </defs>
+
+      <!-- ===== 左側：トヨタ直接購入 ===== -->
+      <rect x="20" y="10" width="390" height="310" rx="8" fill="#fce8e8" stroke="#b83030" stroke-width="2"/>
+      <text x="215" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#b83030">A. トヨタ株を直接購入</text>
+      <text x="215" y="60" text-anchor="middle" font-size="11" fill="#636470">100万円 → 3単元（300株）= 96.6万円</text>
+
+      <!-- 支払ボックス -->
+      <rect x="40" y="75" width="350" height="50" rx="4" fill="#b83030" fill-opacity=".15" stroke="#b83030" stroke-width="1"/>
+      <text x="215" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#b83030">支払額: 966,000円（96.6万円）</text>
+      <text x="215" y="114" text-anchor="middle" font-size="10" fill="#636470">3,220円 × 300株</text>
+
+      <!-- 得られるもの -->
+      <text x="215" y="147" text-anchor="middle" font-size="11" font-weight="600" fill="#636470">得られるもの:</text>
+      <rect x="40" y="158" width="350" height="60" rx="4" fill="#b83030" fill-opacity=".6"/>
+      <text x="215" y="183" text-anchor="middle" font-size="14" font-weight="700" fill="white">🏆 トヨタ自動車 300株</text>
+      <text x="215" y="203" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.85)">エクスポージャー: 96.6万円 のみ</text>
+
+      <!-- デメリット -->
+      <text x="215" y="242" text-anchor="middle" font-size="10" fill="#636470">その他に得られるもの:</text>
+      <rect x="40" y="252" width="350" height="32" rx="3" fill="#636470" fill-opacity=".12"/>
+      <text x="215" y="272" text-anchor="middle" font-size="11" fill="#636470">なし（トヨタ1社のみ）</text>
+      <text x="215" y="300" text-anchor="middle" font-size="10" fill="#b83030">→ 集中リスク：トヨタ業績・株価に100%依存</text>
+
+      <!-- ===== 右側：岡谷鋼機購入 ===== -->
+      <rect x="430" y="10" width="450" height="310" rx="8" fill="#e8f8f0" stroke="#1b6840" stroke-width="2.5"/>
+      <text x="655" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#1b6840">B. 岡谷鋼機を購入</text>
+      <text x="655" y="60" text-anchor="middle" font-size="11" fill="#636470">100万円 → 1単元（100株）= 97.2万円</text>
+
+      <!-- 支払ボックス -->
+      <rect x="450" y="75" width="410" height="50" rx="4" fill="#1b6840" fill-opacity=".15" stroke="#1b6840" stroke-width="1"/>
+      <text x="655" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">支払額: 972,000円（97.2万円）</text>
+      <text x="655" y="114" text-anchor="middle" font-size="10" fill="#636470">9,720円 × 100株（同水準のコスト）</text>
+
+      <!-- 得られるもの -->
+      <text x="655" y="147" text-anchor="middle" font-size="11" font-weight="600" fill="#636470">得られる間接エクスポージャー（97.2万円分）:</text>
+
+      <!-- 各銘柄バー -->
+      <rect x="450" y="156" width="290" height="20" rx="3" fill="#1b6840" fill-opacity=".8"/>
+      <text x="450" y="156" dx="5" dy="14" font-size="10" fill="white">🏆 トヨタ自動車 →</text>
+      <text x="860" y="170" text-anchor="end" font-size="11" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">54.7万円</text>
+
+      <rect x="450" y="180" width="180" height="18" rx="3" fill="#153480" fill-opacity=".7"/>
+      <text x="452" y="193" font-size="10" fill="white">三菱UFJ FG →</text>
+      <text x="860" y="193" text-anchor="end" font-size="10" fill="#153480" font-family="'JetBrains Mono',monospace">29.3万円</text>
+
+      <rect x="450" y="202" width="110" height="16" rx="3" fill="#153480" fill-opacity=".5"/>
+      <text x="452" y="214" font-size="9" fill="white">三井住友T →</text>
+      <text x="860" y="215" text-anchor="end" font-size="10" fill="#153480" font-family="'JetBrains Mono',monospace">11.6万円</text>
+
+      <rect x="450" y="222" width="105" height="16" rx="3" fill="#8e5810" fill-opacity=".55"/>
+      <text x="452" y="234" font-size="9" fill="white">日本製鉄 →</text>
+      <text x="860" y="235" text-anchor="end" font-size="10" fill="#8e5810" font-family="'JetBrains Mono',monospace">10.8万円</text>
+
+      <rect x="450" y="242" width="360" height="16" rx="3" fill="#636470" fill-opacity=".2"/>
+      <text x="452" y="254" font-size="9" fill="#636470">中電・ティラド・損保・豊田通商・オークマ他 →</text>
+      <text x="860" y="255" text-anchor="end" font-size="10" fill="#636470" font-family="'JetBrains Mono',monospace">31.9万円</text>
+
+      <!-- 合計 -->
+      <rect x="450" y="265" width="410" height="28" rx="4" fill="#1b6840"/>
+      <text x="655" y="283" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="'JetBrains Mono',monospace">間接エクスポージャー合計: 138.3万円</text>
+
+      <!-- 注記 -->
+      <text x="655" y="308" text-anchor="middle" font-size="9" fill="#b83030">ただし有利子負債の持分相当（≈94.5万円）も引き受ける</text>
+
+      <!-- 中央の矢印・比較 -->
+      <text x="410" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="#2a2b33">vs</text>
+
+      <!-- 重要比較コメント -->
+      <rect x="20" y="328" width="860" height="10" rx="2" fill="none"/>
+    </svg>
+
+    <!-- 比較サマリー（SVGの下） -->
+    <div style="padding:12px 20px 16px;background:#f6f5ef">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="text-align:center;padding:10px;background:#fce8e8;border-radius:6px">
+          <div style="font:600 9px/1 var(--mono);color:#b83030;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">トヨタ直接購入</div>
+          <div style="font:700 18px/1 var(--mono);color:#b83030">96.6万円</div>
+          <div style="font-size:10px;color:#636470;margin-top:3px">トヨタ1社のみ</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:#e8f8f0;border-radius:6px">
+          <div style="font:600 9px/1 var(--mono);color:#1b6840;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">岡谷鋼機購入（同額97万円）</div>
+          <div style="font:700 18px/1 var(--mono);color:#1b6840">138.3万円相当</div>
+          <div style="font-size:10px;color:#636470;margin-top:3px">9銘柄分散+商社本業（負債94.5万引受）</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:#fffbf0;border-radius:6px">
+          <div style="font:600 9px/1 var(--mono);color:#8e5810;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">うちトヨタへのエクスポージャー</div>
+          <div style="font:700 18px/1 var(--mono);color:#8e5810">54.7万円</div>
+          <div style="font-size:10px;color:#636470;margin-top:3px">直接購入96.6万の<strong>56.6%のコスト</strong>でトヨタを間接保有</div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:#636470;margin-top:10px;line-height:1.7;padding:0 4px">
+        <strong>解釈：</strong>岡谷鋼機100株（97.2万円）を買うと、トヨタ（54.7万円）＋三菱UFJ（29.3万円）＋三井住友T（11.6万円）など9銘柄合計<strong>138.3万円相当</strong>の有価証券に間接エクスポージャーが得られる。
+        同時に有利子負債の持分相当（94.5万円）も負担するため、純粋な「資産価値」では138.3−94.5≈<strong>43.8万円相当の純資産</strong>（＋商社本業の権利）を購入していることになる。
+        さらに修正BPS 32,477円に対して9,720円（修正PBR 0.30倍）で取得できている。
+      </p>
+    </div>
+  </div>
+
+<!-- 図③：インフレ→含み益増加の連鎖 -->
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="background:var(--ink2);padding:14px 22px">
+      <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">③ インフレが岡谷の純資産を増やす「自動増価の連鎖」― S&amp;P500には絶対にない優位性</p>
+    </div>
+    <svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+      <defs>
+        <marker id="aB" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#7a1a6a"/></marker>
+        <marker id="aC" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#1b6840"/></marker>
+        <marker id="aD" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#b83030"/></marker>
+      </defs>
+      <!-- 岡谷ルート -->
+      <text x="450" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">[ 岡谷鋼機 ] インフレが「味方」になるルート</text>
+      <rect x="20" y="35" width="120" height="55" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+      <text x="80" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">インフレ</text>
+      <text x="80" y="76" text-anchor="middle" font-size="10" fill="#636470">燃料高・物価上昇</text>
+      <line x1="143" y1="63" x2="175" y2="63" stroke="#7a1a6a" stroke-width="2" marker-end="url(#aB)"/>
+      <rect x="178" y="35" width="130" height="55" rx="4" fill="#f5e0f5" stroke="#7a1a6a" stroke-width="1"/>
+      <text x="243" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#7a1a6a">日銀利上げ</text>
+      <text x="243" y="76" text-anchor="middle" font-size="10" fill="#636470">金融政策転換</text>
+      <line x1="311" y1="63" x2="343" y2="63" stroke="#7a1a6a" stroke-width="2" marker-end="url(#aB)"/>
+      <rect x="346" y="35" width="150" height="55" rx="4" fill="#dfe8f8" stroke="#153480" stroke-width="1.5"/>
+      <text x="421" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#153480">銀行株価上昇</text>
+      <text x="421" y="73" text-anchor="middle" font-size="10" fill="#636470">三菱UFJ+15%・三井住友T+20%</text>
+      <line x1="499" y1="63" x2="531" y2="63" stroke="#1b6840" stroke-width="2.5" marker-end="url(#aC)"/>
+      <rect x="534" y="25" width="160" height="75" rx="4" fill="#e8f8f0" stroke="#1b6840" stroke-width="2"/>
+      <text x="614" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">含み益 自動増加</text>
+      <text x="614" y="68" text-anchor="middle" font-size="16" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">+118億/年</text>
+      <text x="614" y="87" text-anchor="middle" font-size="10" fill="#636470">BPS+607円/株（税後）</text>
+      <line x1="697" y1="63" x2="730" y2="63" stroke="#1b6840" stroke-width="2.5" marker-end="url(#aC)"/>
+      <rect x="733" y="35" width="147" height="55" rx="4" fill="#dff0e8" stroke="#1b6840" stroke-width="1.5"/>
+      <text x="806" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">純資産増加</text>
+      <text x="806" y="73" text-anchor="middle" font-size="10" fill="#636470">株主価値の向上</text>
+
+      <!-- S&P500ルート -->
+      <text x="450" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#b83030">[ S&amp;P500/NASDAQ100 ] インフレが「敵」になるルート</text>
+      <rect x="20" y="130" width="120" height="55" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+      <text x="80" y="153" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">インフレ</text>
+      <text x="80" y="171" text-anchor="middle" font-size="10" fill="#636470">燃料高・物価上昇</text>
+      <line x1="143" y1="158" x2="175" y2="158" stroke="#b83030" stroke-width="2" marker-end="url(#aD)"/>
+      <rect x="178" y="130" width="130" height="55" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1"/>
+      <text x="243" y="153" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">FRB利上げ</text>
+      <text x="243" y="171" text-anchor="middle" font-size="10" fill="#636470">米国金利上昇</text>
+      <line x1="311" y1="158" x2="343" y2="158" stroke="#b83030" stroke-width="2" marker-end="url(#aD)"/>
+      <rect x="346" y="130" width="150" height="55" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1.5"/>
+      <text x="421" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">DCF低下</text>
+      <text x="421" y="168" text-anchor="middle" font-size="10" fill="#636470">PER圧縮（特にグロース株）</text>
+      <line x1="499" y1="158" x2="531" y2="158" stroke="#b83030" stroke-width="2.5" marker-end="url(#aD)"/>
+      <rect x="534" y="120" width="160" height="75" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="2"/>
+      <text x="614" y="143" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">株価下落リスク</text>
+      <text x="614" y="163" text-anchor="middle" font-size="14" font-weight="700" fill="#b83030" font-family="'JetBrains Mono',monospace">PBR圧縮</text>
+      <text x="614" y="182" text-anchor="middle" font-size="10" fill="#636470">PER35倍のNASDAQ100が最大リスク</text>
+      <line x1="697" y1="158" x2="730" y2="158" stroke="#b83030" stroke-width="2.5" marker-end="url(#aD)"/>
+      <rect x="733" y="130" width="147" height="55" rx="4" fill="#fce8e8" stroke="#b83030" stroke-width="1.5"/>
+      <text x="806" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#b83030">含み損拡大</text>
+      <text x="806" y="168" text-anchor="middle" font-size="10" fill="#636470">価値破壊の可能性</text>
+
+      <!-- キャプション -->
+      <text x="450" y="218" text-anchor="middle" font-size="11" font-weight="700" fill="#111217">インフレ局面における「岡谷 vs インデックス」の決定的差異 = 方向性が真逆</text>
+      <text x="450" y="234" text-anchor="middle" font-size="10" fill="#636470">岡谷：インフレ→金融株↑→含み益増→純資産増　／　NASDAQ：インフレ→金利↑→DCF低下→PER圧縮→株価↓</text>
+    </svg>
+
+  <!-- 図④：事業価値が「タダ」でついてくる -->
+  <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+    <div style="background:var(--ink2);padding:14px 22px">
+      <p style="font:700 13px/1 var(--head);color:rgba(246,245,239,.9)">④ 創業357年・年商1.1兆円の商社が「タダ」でついてくる</p>
+      <p style="font-size:10px;color:rgba(246,245,239,.4);margin-top:3px">修正PBR 0.30倍の意味 ─ 岡谷を9,720円で買うと「隠れ資産」が次々と手に入る</p>
+    </div>
+
+    <!-- SVG: 購入金額の「中身」分解図 -->
+    <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#f6f5ef">
+      <defs>
+        <linearGradient id="gFree" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1b6840;stop-opacity:.5"/>
+          <stop offset="100%" style="stop-color:#1b6840;stop-opacity:.1"/>
+        </linearGradient>
+        <linearGradient id="gPay" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#c88400;stop-opacity:.4"/>
+          <stop offset="100%" style="stop-color:#c88400;stop-opacity:.08"/>
+        </linearGradient>
+        <marker id="aFr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3z" fill="#1b6840"/>
+        </marker>
+        <marker id="aFd" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3z" fill="#b83030"/>
+        </marker>
+      </defs>
+
+      <!-- ─── タイトル行 ─── -->
+      <text x="450" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#111217">岡谷鋼機 1株（9,720円）を購入すると何が手に入るか</text>
+      <text x="450" y="46" text-anchor="middle" font-size="10" fill="#636470">発行済株式1,944万株・時価総額1,890億円。1株保有 = 全体の0.000514%の権利</text>
+
+      <!-- ─── 左列：支払うもの ─── -->
+      <text x="170" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#8e5810">【支払うもの】</text>
+
+      <!-- 株価バー -->
+      <rect x="30" y="88" width="280" height="52" rx="6" fill="url(#gPay)" stroke="#c88400" stroke-width="2"/>
+      <text x="170" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#7c4c08">株価</text>
+      <text x="170" y="130" text-anchor="middle" font-size="20" font-weight="700" fill="#7c4c08" font-family="'JetBrains Mono',monospace">9,720円</text>
+
+      <!-- 引受負債 -->
+      <text x="170" y="165" text-anchor="middle" font-size="11" fill="#636470">+ 有利子負債の持分負担</text>
+      <rect x="30" y="172" width="280" height="32" rx="4" fill="#b83030" fill-opacity=".12" stroke="#b83030" stroke-width="1"/>
+      <text x="170" y="193" text-anchor="middle" font-size="11" fill="#b83030">有利子負債 1,838億 × 0.000514% = <tspan font-weight="700">945円</tspan></text>
+
+      <!-- 合計支払 -->
+      <rect x="30" y="214" width="280" height="38" rx="4" fill="#7c4c08" fill-opacity=".2" stroke="#7c4c08" stroke-width="1.5"/>
+      <text x="170" y="228" text-anchor="middle" font-size="10" fill="#7c4c08">実質的な総負担</text>
+      <text x="170" y="245" text-anchor="middle" font-size="15" font-weight="700" fill="#7c4c08" font-family="'JetBrains Mono',monospace">10,665円相当</text>
+
+      <!-- ─── 中央矢印 ─── -->
+      <text x="450" y="150" text-anchor="middle" font-size="26" fill="#1b6840">⟹</text>
+      <text x="450" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">得られる</text>
+      <text x="450" y="186" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">もの</text>
+
+      <!-- ─── 右列：得られるもの ─── -->
+      <text x="680" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">【得られるもの（全部で3層構造）】</text>
+
+      <!-- 層1: 投資有価証券 -->
+      <rect x="590" y="88" width="280" height="64" rx="6" fill="#e8f8f0" stroke="#1b6840" stroke-width="2"/>
+      <text x="680" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#1b6840">🏦 第1層：保有有価証券</text>
+      <text x="680" y="125" text-anchor="middle" font-size="10" fill="#636470">2,416億円 × 0.000514% =</text>
+      <text x="815" y="143" text-anchor="end" font-size="15" font-weight="700" fill="#1b6840" font-family="'JetBrains Mono',monospace">12,422円相当</text>
+      <text x="680" y="143" text-anchor="middle" font-size="9" fill="#636470">（トヨタ5,470円+三菱UFJ2,930円+他4,022円）</text>
+
+      <!-- 層2: 事業価値（★今回追加のメイン） -->
+      <rect x="590" y="162" width="280" height="170" rx="6" fill="url(#gFree)" stroke="#1b6840" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <!-- 「FREE」バッジ -->
+      <rect x="820" y="156" width="56" height="22" rx="11" fill="#1b6840"/>
+      <text x="848" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="white">FREE</text>
+
+      <text x="730" y="183" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6840">🏭 第2層：商社事業価値（推計800億）</text>
+
+      <!-- 事業の中身 -->
+      <text x="730" y="203" text-anchor="middle" font-size="9" fill="#1b6840" font-weight="600">── 推計PER7.5倍×純利益107億 = 800億 ──</text>
+
+      <!-- 4つの事業アイコン行 -->
+      <rect x="600" y="210" width="123" height="44" rx="4" fill="white" fill-opacity=".7"/>
+      <text x="661" y="228" text-anchor="middle" font-size="9" font-weight="700" fill="#153480">鉄鋼部門</text>
+      <text x="661" y="243" text-anchor="middle" font-size="8" fill="#636470">年商1,922億</text>
+      <text x="661" y="254" text-anchor="middle" font-size="8" fill="#636470">北東アジア販売網</text>
+
+      <rect x="737" y="210" width="123" height="44" rx="4" fill="white" fill-opacity=".7"/>
+      <text x="798" y="228" text-anchor="middle" font-size="9" font-weight="700" fill="#153480">情報・電機部門</text>
+      <text x="798" y="243" text-anchor="middle" font-size="8" fill="#636470">年商1,840億</text>
+      <text x="798" y="254" text-anchor="middle" font-size="8" fill="#636470">半導体・EV部品</text>
+
+      <rect x="600" y="260" width="123" height="44" rx="4" fill="white" fill-opacity=".7"/>
+      <text x="661" y="278" text-anchor="middle" font-size="9" font-weight="700" fill="#153480">産業資材部門</text>
+      <text x="661" y="293" text-anchor="middle" font-size="8" fill="#636470">年商1,553億</text>
+      <text x="661" y="304" text-anchor="middle" font-size="8" fill="#636470">化成品・メカトロ</text>
+
+      <rect x="737" y="260" width="123" height="44" rx="4" fill="white" fill-opacity=".7"/>
+      <text x="798" y="278" text-anchor="middle" font-size="9" font-weight="700" fill="#153480">生活産業部門</text>
+      <text x="798" y="293" text-anchor="middle" font-size="8" fill="#636470">年商391億</td>
+      <text x="798" y="304" text-anchor="middle" font-size="8" fill="#636470">食品・不動産</text>
+
+      <text x="730" y="328" text-anchor="middle" font-size="10" fill="#1b6840" font-weight="600">1株あたり: 800億 × 0.000514% = 4,114円相当</text>
+
+      <!-- 層3: 無形の価値 -->
+      <rect x="590" y="342" width="280" height="92" rx="6" fill="#fff8e8" stroke="#c88400" stroke-width="2" stroke-dasharray="6,3"/>
+      <rect x="820" y="336" width="56" height="22" rx="11" fill="#c88400"/>
+      <text x="848" y="352" text-anchor="middle" font-size="11" font-weight="700" fill="white">FREE</text>
+
+      <text x="730" y="363" text-anchor="middle" font-size="11" font-weight="700" fill="#7c4c08">🏯 第3層：無形資産（価格付け不能）</text>
+      <text x="625" y="383" font-size="9" fill="#7c4c08">• 1669年創業・357年の顧客関係（価値化不能）</text>
+      <text x="625" y="398" font-size="9" fill="#7c4c08">• トヨタ・日鉄との深い取引ネットワーク</text>
+      <text x="625" y="413" font-size="9" fill="#7c4c08">• 名古屋財界の中枢ポジション・ブランド</text>
+      <text x="625" y="428" font-size="9" fill="#7c4c08">• 創業家による長期安定経営（TOBリスクなし）</text>
+
+      <!-- ─── 下部：合計比較 ─── -->
+      <rect x="30" y="275" width="280" height="72" rx="6" fill="#111217" fill-opacity=".06"/>
+      <text x="170" y="298" text-anchor="middle" font-size="10" fill="#636470">得られる価値の合計（第1〜3層）</text>
+      <text x="170" y="315" text-anchor="middle" font-size="10" fill="#636470">有証 12,422円 + 事業 4,114円 + 無形 = ?</text>
+      <text x="170" y="335" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6840">計算可能分だけで 16,536円以上</text>
+      <text x="170" y="352" text-anchor="middle" font-size="10" fill="#636470">（総負担10,665円との差 +5,871円）</text>
+
+      <!-- 最終結論バー -->
+      <rect x="30" y="365" width="280" height="62" rx="6" fill="#1b6840"/>
+      <text x="170" y="390" text-anchor="middle" font-size="11" font-weight="700" fill="white">修正PBR 0.30倍 の意味</text>
+      <text x="170" y="408" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.85)">計算可能な資産だけで</text>
+      <text x="170" y="424" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="'JetBrains Mono',monospace">支払額の3.3倍の価値</text>
+    </svg>
+
+    <!-- 下部解説テキスト -->
+    <div style="padding:16px 22px 18px;background:#f6f5ef">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="background:var(--bg2);border-radius:6px;padding:12px 14px;border-left:3px solid var(--ok)">
+          <div style="font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:7px">第1層（数値確認済み）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--ok)">12,422円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.6">
+            投資有価証券2,416億÷1,944万株<br>
+            うちトヨタ: <strong>5,470円相当</strong><br>
+            三菱UFJ: <strong>2,928円相当</strong>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border-radius:6px;padding:12px 14px;border-left:3px solid var(--gn);position:relative">
+          <div style="position:absolute;top:-8px;right:10px;background:var(--gn);color:white;font:700 9px/1 var(--mono);padding:2px 8px;border-radius:10px">FREE</div>
+          <div style="font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gn);margin-bottom:7px">第2層（事業価値・推計）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--gn)">4,114円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.6">
+            事業価値800億÷1,944万株<br>
+            年商1.1兆円・4セグメント<br>
+            <strong>修正PBRに加味されていない未評価部分</strong>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border-radius:6px;padding:12px 14px;border-left:3px solid var(--ok2);position:relative">
+          <div style="position:absolute;top:-8px;right:10px;background:var(--ok2);color:white;font:700 9px/1 var(--mono);padding:2px 8px;border-radius:10px">FREE</div>
+          <div style="font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:7px">第3層（無形資産・価格なし）</div>
+          <div style="font:700 20px/1 var(--mono);color:var(--ok)">???円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.6">
+            1669年創業・357年の信用<br>
+            トヨタ・日鉄との深い取引網<br>
+            <strong>名古屋財界中枢・ブランド価値</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 歴史タイムライン -->
+      <div style="background:var(--ink2);border-radius:6px;padding:14px 18px">
+        <p style="font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.35);margin-bottom:10px">357年の歴史が築いた「無料でついてくる資産」</p>
+        <div style="display:flex;align-items:center;gap:0;overflow:hidden">
+          <div style="flex:1;text-align:center;padding:8px 4px;border-right:1px solid rgba(255,255,255,.08)">
+            <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);margin-bottom:4px">1669年</div>
+            <div style="font-size:10px;color:rgba(246,245,239,.75)">岡谷惣助が<br>名古屋で創業</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:8px 4px;border-right:1px solid rgba(255,255,255,.08)">
+            <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);margin-bottom:4px">1910年代〜</div>
+            <div style="font-size:10px;color:rgba(246,245,239,.75)">豊田紡織（後のトヨタ）<br>との取引開始</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:8px 4px;border-right:1px solid rgba(255,255,255,.08)">
+            <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);margin-bottom:4px">1950〜70年代</div>
+            <div style="font-size:10px;color:rgba(246,245,239,.75)">高度経済成長期<br>鉄鋼・電機商社として拡大</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:8px 4px;border-right:1px solid rgba(255,255,255,.08)">
+            <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);margin-bottom:4px">2000年代〜</div>
+            <div style="font-size:10px;color:rgba(246,245,239,.75)">情報・電機・生活産業<br>に事業を多角化</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:8px 4px">
+            <div style="font:600 8px/1 var(--mono);color:var(--ok2);margin-bottom:4px">2026年現在</div>
+            <div style="font-size:10px;color:rgba(246,245,239,.9);font-weight:600">年商1.1兆円<br>純利益270億円</div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:rgba(246,245,239,.55);margin-top:10px;line-height:1.7;text-align:center">
+          「357年間一度も倒産せず・창業家経営を貫いてきた商社」という無形の信用力は、修正PBR 0.30倍の計算式には一切含まれていない。
+          これが岡谷鋼機を株価9,720円で買うと<strong style="color:rgba(246,245,239,.9)">「タダ」でついてくる</strong>。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c9: 最終判断
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c9">
+  <div class="ch-head"><span class="ch-num">09</span><h2 class="ch-title">最終投資判断</h2></div>
+
+  <div class="g4" style="margin-bottom:20px">
+    <div class="card mc" style="border-top:3px solid var(--ok)"><div class="mc-l">PBR（実績）</div><div class="mc-v ok">0.38倍</div><div class="mc-s">TOPIX比▲69%割安</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">有証/時価総額</div><div class="mc-v gn">127.8%</div><div class="mc-s">逆転確認済み</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">税後含み益（確認）</div><div class="mc-v bl">1,228億</div><div class="mc-s">時価総額の65%</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">中間純利益成長</div><div class="mc-v gn">+31.2%</div><div class="mc-s">162億64百万円</div></div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear（確率15%）</div>
+      <div class="sc-prob bear">+5%/年</div>
+      <div class="sc-sub">現状維持・低還元継続シナリオ</div>
+      <div class="sc-li">名証単独上場が継続</div>
+      <div class="sc-li">東証のPBR改善圧力が届かない</div>
+      <div class="sc-li">創業家支配で株主還元改善しない</div>
+      <div class="sc-li">トヨタ株急落（関税発動）</div>
+      <div class="sc-li">3年後：119万円（100万→）</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base（確率60%）</div>
+      <div class="sc-prob base">+25%/年</div>
+      <div class="sc-sub">含み益顕在化・インフレ受益シナリオ</div>
+      <div class="sc-li">日銀利上げ→金融株↑→含み益増</div>
+      <div class="sc-li">増配継続（配当性向15〜20%へ）</div>
+      <div class="sc-li">PBR0.38→0.6〜0.7倍に正常化</div>
+      <div class="sc-li">中間純利益+31%成長継続</div>
+      <div class="sc-li">3年後：195万円（100万→）</div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Bull（確率25%）</div>
+      <div class="sc-prob bull">+60%/年</div>
+      <div class="sc-sub">PBR正常化・大型カタリストシナリオ</div>
+      <div class="sc-li">東証プライム上場変更</div>
+      <div class="sc-li">大規模自社株買い・政策株解消</div>
+      <div class="sc-li">PBR0.38→1.0倍（25,792円）</div>
+      <div class="sc-li">機関投資家の大量参入</div>
+      <div class="sc-li">3年後：410万円（100万→）</div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <table class="tbl" style="margin-bottom:20px">
+    <thead><tr><th>評価軸</th><th class="r">スコア</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>バリュエーション割安度</td><td class="r hi-gn mono"><strong>95点</strong></td><td>PBR0.38倍・PER7.5倍・有証が時価総額超え。歴史的割安水準</td></tr>
+      <tr><td>財務健全性</td><td class="r hi-gn mono"><strong>78点</strong></td><td>自己資本比率49.6%・短期借入金減少。有利子負債1,838億は商社として構造的</td></tr>
+      <tr><td>インフレ耐性</td><td class="r hi-gn mono"><strong>85点</strong></td><td>金融株保有912億がインフレ受益。利上げで含み益+118億/年（税後）</td></tr>
+      <tr><td>収益成長性</td><td class="r hi-am mono">68点</td><td>中間純利益+31.2%は強い。来期は減益予想に注意</td></tr>
+      <tr><td>株主還元</td><td class="r hi-rd mono"><strong>30点</strong></td><td>配当性向10%・自社株買い限定的。名証単独で改善圧力が弱い。変化の萌芽はある</td></tr>
+      <tr><td>保有資産の質</td><td class="r hi-gn mono"><strong>92点</strong></td><td>トヨタ・三菱UFJ・日鉄等の最優良株。含み益率平均579%</td></tr>
+      <tr><td>間接保有効率（修正後）</td><td class="r hi-gn mono"><strong>78点</strong></td><td>21.8%割引（前回61%は誤り）。NAV対比ではほぼ等価（P/NAV1.04倍）</td></tr>
+      <tr><td>事業承継・ガバナンス</td><td class="r hi-am mono">65点</td><td>2021年世代交代完了・2連続分割。ただし先代5.01%の将来相続が残課題</td></tr>
+    </tbody>
+  </table>
+
+  <div class="conc">
+    <div class="conc-head">📋 最終投資判断 <span>— 半期報告書・第89期有報・IR全資料 完全検証版</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div>
+        <div class="conc-lbl">含み益「逆転」の現実と間接保有効率</div>
+        <div class="conc-body">
+          半期報告書（R7.8末）で投資有価証券<strong>2,416億円（時価総額1,890億を526億超過）</strong>を公式確認。
+          税後評価差額金<strong>1,228億円（時価総額の65%）</strong>も確認。
+          <strong>前回の61%割引は誤り→正しくは21.8%割引</strong>（岡谷時価総額1,890÷保有株時価2,416）。
+          全銘柄一律の理由は按分比率が同一のため。
+          三菱UFJ FGの保有株数も前回推計450万株→<strong>1,500〜2,500万株</strong>に上方修正。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">インフレ耐性：岡谷はインフレ受益者</div>
+        <div class="conc-body">
+          インフレ→日銀利上げ→銀行株上昇→含み益自動増加という連鎖で
+          <strong>年間+118億円（税後）、BPS+607円/株が自動的に積み上がる</strong>。
+          S&amp;P500・NASDAQ100がインフレ局面でDCF低下・PER圧縮リスクを抱える中、
+          岡谷の保有金融株（三菱UFJ・三井住友T合計795億）はまさに利上げの恩恵を直接受ける。
+          燃料高の直接コストはほぼゼロ（商社は燃料を消費しない）。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">株主還元の変化と相続対策完了</div>
+        <div class="conc-body">
+          2021年3月に31年ぶり社長世代交代（岡谷健広氏就任）。
+          2024〜2026年に<strong>2回連続株式分割・増配161円（前期比+13%）・優待拡充</strong>を連続実施。
+          「外部株主を意識した変化の始まり」と読める。
+          創業家合計17.61%（岡谷不動産12.60%+篤一5.01%）で安定支配体制は維持。
+          相続対策ネガティブイベントは「ほぼ完了」と判断（先代の5.01%は残課題）。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">なぜ岡谷をTOPIX・S&amp;P500より保有すべきか</div>
+        <div class="conc-body">
+          <strong>PBR0.38倍・PER7.5倍・有証が時価総額を超越・インフレ自動受益・世代交代完了。</strong>
+          インデックスが「市場全体の不確実な成長」に賭けるのに対し、岡谷は
+          「確認された含み益の顕在化」+「インフレが価値を増やす構造」+「カタリスト待ち」が源泉。
+          PBR1.0倍正常化だけで+134%、さらにインフレ含み益が毎年+607円/株積み上がる。
+          表面的な1.6%配当を「低い」と切り捨てるのは誤り—内部複利として静かに蓄積中。
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div style="text-align:center;padding:10px;background:rgba(246,245,239,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">修正BPS（含み益加算）</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--ok2)">32,477円</div>
+        <div style="font-size:10px;color:rgba(246,245,234,.4);margin-top:3px">修正PBR 0.30倍<br>帳簿BPS 25,792円（第90期末）</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(246,245,239,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">有証/時価総額</div>
+        <div style="font:700 22px/1 var(--mono);color:#68c890">127.8%</div>
+        <div style="font-size:10px;color:rgba(246,245,234,.4);margin-top:3px">逆転確認済み</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(246,245,239,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">間接保有割引率（修正）</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--ok2)">21.8%</div>
+        <div style="font-size:10px;color:rgba(246,245,234,.4);margin-top:3px">前回61%は誤り</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(246,245,239,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,234,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">インフレ含み益増/年</div>
+        <div style="font:700 22px/1 var(--mono);color:#8ab0e8">+118億</div>
+        <div style="font-size:10px;color:rgba(246,245,234,.4);margin-top:3px">利上げ1%・税後</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.22);text-align:center;padding:16px;font:500 9px/1 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br style="margin-bottom:3px">
+  Data: EDINET / 第91期決算短信（2026/3/31発表） / 第90期中半期報告書（E02553・令和7年10月15日提出） / 大同特殊鋼TOBプレスリリース（2026/5/15） / ティラド2026/3期決算（2026/4/27） /
+  IRBANKデータベース / Yahoo!ファイナンス / Investing.com（2026/5/26株価） / 岡谷鋼機IR（2026/5/31分割基準日確認） — Version 3.0 最新版 2026.05.31
+</footer>
+
+<script>
+function showChapter(id, btn){
+  document.querySelectorAll('.chapter').forEach(ch=>ch.classList.remove('active'));
+  document.querySelectorAll('.mnb').forEach(b=>{b.classList.remove('on');b.style.background='';b.style.color='';});
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('on');
+  if(id==='c0'){btn.style.background='rgba(200,132,0,.18)';btn.style.color='var(--ok2)';}
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+}
+function showTab(chapId, panelId, btn){
+  const chap = document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  chap.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(`${chapId}-${panelId}`)?.classList.add('active');
+  btn.classList.add('on');
+}
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bfill').forEach(f=>{
+        const w = f.style.width; f.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=w));
+      });
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>

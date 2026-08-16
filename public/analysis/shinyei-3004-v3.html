@@ -210,45 +210,6 @@ body{background:var(--bg);color:var(--ink)}
 .rsev-lo{background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
 .rsev-tl{background:#eaf7f4;color:var(--tl);font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase}
 </style>
-
-<style id="mobile-readability-boost">
-/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
-@media (max-width:600px){
-  html{font-size:15px}
-  body{line-height:1.7}
-  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
-  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
-  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
-  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
-  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
-  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
-  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
-  [style*="font-size:9.5px"]{font-size:13px !important}
-  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
-  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
-  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
-  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
-  [style*=" 8px/"]{font-size:11px !important}
-  [style*=" 9px/"]{font-size:11px !important}
-  [style*=" 10px/"]{font-size:11.5px !important}
-  [style*=" 11px/"]{font-size:13px !important}
-  [style*=" 12px/"]{font-size:14px !important}
-  .hero-title{font-size:26px;line-height:1.15}
-  .ch-title{font-size:18px}
-  .conc-head{font-size:16px}
-  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
-  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
-  .sc-col:last-child{border-bottom:none}
-  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
-  .body{padding:24px 14px 64px}
-  .card,.mc{padding:14px 14px}
-  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
-}
-@media (max-width:380px){
-  html{font-size:14.5px}
-  .hero-title{font-size:23px}
-}
-</style>
 </head>
 <body>
 
@@ -470,6 +431,102 @@ body{background:var(--bg);color:var(--ink)}
   <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">政策保有株比率</div><div style="font:700 20px/1 var(--mono);color:#68c890">91.2%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">事業は実質タダ評価</div></div>
   <div><div style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">3年期待リターン</div><div style="font:700 20px/1 var(--mono);color:#e8b870">+100%</div><div style="font-size:9px;color:rgba(246,245,239,.22)">年率+26%（含み益反映）</div></div>
 </div>
+
+<!-- ─ 最新アップデート：1Q決算急落 ＋ 食品減税 ─ -->
+<div style="background:#fff;border:.5px solid #e8e4da;border-radius:6px;margin-bottom:14px;overflow:hidden">
+  <div style="background:#2a2b33;padding:10px 16px;display:flex;align-items:center;gap:10px">
+    <span style="font:700 9px/1 var(--mono);color:rgba(246,245,239,.4);letter-spacing:.14em;text-transform:uppercase">⚠ 最新アップデート</span>
+    <span style="font:700 11px/1 var(--mono);color:#e8c870">2026年8月7日時点 ─ 1Q決算急落と食品消費税減税の影響を再分析</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+
+    <!-- 左：1Q決算の解剖 -->
+    <div style="padding:14px 16px;border-right:.5px solid var(--rule)">
+      <div style="font:700 11px/1 var(--head);color:var(--rd);margin-bottom:10px">❶ 1Q決算（2026年7月31日）急落の実態 ─ ストーリー崩壊か、ノイズか</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div style="background:#fdf2f2;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--rd);margin-bottom:2px">1Q営業利益</div>
+          <div style="font:700 18px/1 var(--mono);color:var(--rd)">3億円</div>
+          <div style="font-size:9px;color:var(--ink3)">前年比▲27.2%</div>
+        </div>
+        <div style="background:#fdf2f2;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--rd);margin-bottom:2px">1Q最終損益</div>
+          <div style="font:700 18px/1 var(--mono);color:var(--rd)">▲0.28億</div>
+          <div style="font-size:9px;color:var(--ink3)">赤字転落</div>
+        </div>
+        <div style="background:#fdf2f2;border-radius:4px;padding:8px;text-align:center">
+          <div style="font-size:9px;color:var(--rd);margin-bottom:2px">特別損失</div>
+          <div style="font:700 18px/1 var(--mono);color:var(--rd)">▲3億円</div>
+          <div style="font-size:9px;color:var(--ink3)">コンデンサ撤退</div>
+        </div>
+      </div>
+
+      <!-- 「見え方」と「実態」の分離 -->
+      <div style="background:#fffbf0;border-left:3px solid var(--am);border-radius:3px;padding:9px 11px;margin-bottom:8px;font-size:11px;color:var(--ink2);line-height:1.75">
+        <strong style="color:var(--am)">前年1Q比較が歪む理由：</strong>前年同期の純利益7.46億円は<strong>MS&AD株の売却益5.19億円（特殊要因）</strong>が含まれており、その剥落との比較は不公平。「前年が異常に高かっただけ」という文脈が市場に伝わっていない。
+      </div>
+
+      <div style="font-size:11px;color:var(--ink2);line-height:1.75;margin-bottom:10px">
+        <strong>赤字の主因を分解すると：</strong><br>
+        ① コンデンサ特損3億円（一時的・撤退完了後は消滅）<br>
+        ② 前年売却益5.19億円の剥落（前年が特殊だっただけ）<br>
+        ③ 食品仕入コスト上昇（ホルムズ封鎖継続・転嫁遅延）
+      </div>
+
+      <!-- ストーリーチェック -->
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="border-bottom:1px solid var(--rule)"><th style="text-align:left;padding:4px 6px;color:var(--ink3);font-weight:600;font-size:10px">チェック項目</th><th style="padding:4px 6px;font-size:10px;color:var(--ink3);font-weight:600">判定</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:.5px solid var(--rule)"><td style="padding:5px 6px">政策保有株80.3億円（資産の核）</td><td style="padding:5px 6px;text-align:center"><span style="background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">不変</span></td></tr>
+          <tr style="border-bottom:.5px solid var(--rule)"><td style="padding:5px 6px">湿度センサー世界首位</td><td style="padding:5px 6px;text-align:center"><span style="background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">不変</span></td></tr>
+          <tr style="border-bottom:.5px solid var(--rule)"><td style="padding:5px 6px">配当110円の維持</td><td style="padding:5px 6px;text-align:center"><span style="background:#dff0e8;color:var(--gn);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">変更なし</span></td></tr>
+          <tr style="border-bottom:.5px solid var(--rule)"><td style="padding:5px 6px">コンデンサ損失の打ち止め</td><td style="padding:5px 6px;text-align:center"><span style="background:#fef3e0;color:var(--am);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">要確認</span></td></tr>
+          <tr style="border-bottom:.5px solid var(--rule)"><td style="padding:5px 6px">食品コスト転嫁の進捗</td><td style="padding:5px 6px;text-align:center"><span style="background:#fef3e0;color:var(--am);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">継続監視</span></td></tr>
+          <tr><td style="padding:5px 6px">通期EPS486円の達成</td><td style="padding:5px 6px;text-align:center"><span style="background:#fce8e8;color:var(--rd);font:700 9px/1 var(--mono);padding:2px 6px;border-radius:2px">下方修正</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:9px;padding:8px 10px;background:#eaf7f0;border-radius:4px;font-size:11px;color:var(--gn)"><strong>総括：ストーリーの崩壊ではない。</strong>資産の核（政策保有株・センサー首位）は不変。1Qの赤字は一時要因の集中。ただし食品コスト問題の長期化で通期EPSが300〜380円に下方修正が必要な可能性あり。それでも現株価¥2,040のPERは5.4〜6.8倍で依然割安。</div>
+    </div>
+
+    <!-- 右：損出し判断 ＋ 食品減税 -->
+    <div style="padding:14px 16px">
+      <div style="font:700 11px/1 var(--head);color:var(--bl);margin-bottom:10px">❷ 損出し・買い増し判断と食品消費税減税の影響</div>
+
+      <!-- 損出し -->
+      <div style="background:#f0f4fc;border-radius:4px;padding:10px 12px;margin-bottom:10px">
+        <div style="font:700 10px/1 var(--mono);color:var(--bl);letter-spacing:.08em;margin-bottom:7px">損出しして買い増すべきか？</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.75">
+          <strong>損出しと買い増しは別軸で考える。</strong><br>
+          損出し（売却→損失確定→即買い戻し）は<strong>税務上の節税ツール</strong>であり、年内（12月末）に他の含み益と相殺できるなら有効。<br>ただし神栄は低流動性のため「売った値段で買い戻せる保証がない」点に注意。スプレッド分のコストが必ず発生する。<br><br>
+          <strong style="color:var(--bl)">買い増しの判断は急がない。</strong>2Q決算（10〜11月頃）で①コンデンサ追加損失の有無②食品コスト転嫁の進捗が見えてから動くのが合理的。現在の¥2,040は当初想定の「第2弾指値圏（¥1,900〜2,050円）」に入っており、<strong>少量の積み増しは合理性がある</strong>ものの、全力買いは2Q確認後。
+        </div>
+      </div>
+
+      <!-- 食品消費税減税 -->
+      <div style="background:#eaf7f0;border-radius:4px;padding:10px 12px;margin-bottom:10px">
+        <div style="font:700 10px/1 var(--mono);color:var(--tl);letter-spacing:.08em;margin-bottom:7px">食品消費税 8%→1%減税（2027年4月〜2年間）の神栄への影響</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+          <div style="font-size:9px;color:var(--ink3)">今期（2027/3期）への影響</div>
+          <div style="font:700 13px/1 var(--mono);color:var(--ink3)">ゼロ</div>
+          <div style="font-size:9px;color:var(--ink3)">（実施は2027年4月〜）</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.75">
+          <strong style="color:var(--tl)">プラス（大）：食品需要の喚起</strong><br>
+          食料品が実質値下がりすることで消費者の購買量・グレードが上がる。冷凍食品など内食需要が増加し、神栄の主力商品の販売量増につながりうる。年間5〜6万円の家計節約効果が食品消費の拡大に回る構造。<br><br>
+          <strong style="color:var(--tl)">プラス（中）：値上げ転嫁しやすい環境</strong><br>
+          消費者が「税込み価格が下がった」と感じる環境では、メーカー・卸の値上げ転嫁に対する抵抗感が相対的に薄れる。ホルムズ封鎖コストの転嫁に有利。<br><br>
+          <strong style="color:var(--am)">注意点：仕入税額控除の逆転リスク（軽微）</strong><br>
+          国内販売の消費税が1%になると受取消費税が減る一方、海外からの輸入品はゼロ税率で控除対象。国内仕入れ分（10%）との差額で納税額が増える可能性はあるが、神栄の主たる仕入れが輸入品中心である点を踏まえると影響は限定的と判断。
+        </div>
+      </div>
+
+      <div style="padding:8px 10px;background:#fffbf0;border-radius:4px;font-size:11px;color:var(--am)">
+        <strong>食品減税の結論：</strong>今期業績には無関係だが、2028/3期以降の食品事業に明確なプラス材料。長期保有の論拠がさらに1つ加わった。法案は秋の臨時国会で審議予定（2026年8月時点では閣議決定段階）。
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+</div><!-- /update box -->
 
 <!-- ─ 補足：カタリストカレンダーと非対称リスク ─ -->
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">

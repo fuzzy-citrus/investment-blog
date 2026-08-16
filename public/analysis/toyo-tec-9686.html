@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東洋テック（9686）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</style></head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9686 · 2026.07.28 作成</p>
+      <h1 class="ht">東洋テック <em>（9686）</em><br>深掘り投資分析レポート</h1>
+      <p class="hs">セコム27.42%保有・関電14.34% ／ 中核事業EV/EBITDA 1.8倍 ／ NAV推定 2,318円（中立）<br>累進配当（DOE3%下限）＋優待で総合利回り4.9〜5.5% ／ 「資本 × 資産 × 制度」型の先回り投資</p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>SOTP中立 2,901円 · 現在比+79%</strong><br>
+        1,624円はNAV(2,318円)の70%・PBR0.73倍。<br>
+        非事業資産を引いた中核事業は時価55億円。<br>
+        下値は配当利回り4.3%＋DOE下限が固める。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,624円</div><div class="ks">時価総額 約174億円（自己株除く1,070万株）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS2,212円）</div><div class="kn bl">0.73倍</div><div class="ks">中計目標は株価2,000円・PBR1倍</div></div>
+    <div class="kv"><div class="kl">予想PER（27/3期）</div><div class="kn gn">13.4倍</div><div class="ks">EPS 120.98円（万博反動を織込済）</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn gn">4.37%</div><div class="ks">71円・DOE3.0%下限を明文化</div></div>
+    <div class="kv"><div class="kl">中核事業EV/EBITDA</div><div class="kn rd">1.8倍</div><div class="ks">投有・賃貸不動産を控除後</div></div>
+    <div class="kv"><div class="kl">セコム持株比率</div><div class="kn am">27.42%</div><div class="ks">＋関電14.34%＝41.76%</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>土地含み益・NAV</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>再編シナリオ</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>決算・中計</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>配当・優待</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════ P1 カタリスト ══════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、東洋テックなのか</h2><span class="sb bg-gn">6つのカタリスト</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要 / 新事実</div>
+      <span class="ci">🔥</span>
+      <div class="ct">2026年6月、セコムが取締役2名・関電が監査役1名を新たに送り込んだ</div>
+      <div class="cb gn">＋3名</div>
+      <div class="cu">2026年6月17日 第62期定時株主総会で就任</div>
+      <div class="cp">社外取締役3名（諸島・福岡・長尾）が退任し、<strong>セコム㈱執行役員 人事本部長・錦野真二氏</strong>と<strong>セコム㈱執行役員 営業本部長補佐・堂野敦司氏</strong>が新任社外取締役に。さらに<strong>関西電力㈱執行役員 取締役会室長 兼 経営企画室グループ事業担当室長・黒川裕之氏</strong>が新任社外監査役に。<strong>「人事」と「営業」──統合実務そのものの責任者が取締役会に入った。</strong></div>
+      <div class="tgs"><span class="tg tg-gn">名誉職ではない布陣</span><span class="tg tg-or">大株主2社が同時に増員</span></div>
+    </div>
+
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 02 · 最重要</div>
+      <span class="ci">🔑</span>
+      <div class="ct">関西電力が「3年で5,500億円」の保有株売却を計画</div>
+      <div class="cb am">14.34%</div>
+      <div class="cu">関電保有分＝1,535,900株（時価約25億円）</div>
+      <div class="cp">関電は「経営計画2026」（2026年4月30日）で<strong>今後3年間で5,500億円以上の保有株式等の売却</strong>を明記。東洋テック株は2004年の資本業務提携以来の政策保有株。<strong>その関電が、グループ事業ポートフォリオを統括する現役執行役員を監査役に送り込んだ意味は小さくない。</strong>14.34%がセコムに渡れば41.76%となり、東証の新ルール上の「40%以上の大株主」に該当する。</div>
+      <div class="tgs"><span class="tg tg-am">売り手の動機が公式化</span><span class="tg tg-or">買い手はセコムが自然</span></div>
+    </div>
+
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 最重要 / 制度</div>
+      <span class="ci">⚖️</span>
+      <div class="ct">その新任役員が、1年後に「独立役員」ではいられなくなる</div>
+      <div class="cb or">2027年6月</div>
+      <div class="cu">適用開始＝27/3期定時株主総会の翌日</div>
+      <div class="cp">2026年7月10日施行の東証規程改正で、<strong>主要株主（10%以上）およびその業務執行者は独立役員の要件を満たさなくなる。</strong>東洋テックは<strong>セコム執行役員3名を独立役員として届出中</strong>。就任からわずか1年で錦野・堂野・植松の3氏（＋関電の黒川氏）が資格を失う。<strong>この矛盾は、ガバナンス体制の再構築か、資本関係そのものの整理でしか解けない。</strong></div>
+      <div class="tgs"><span class="tg tg-or">期限が制度で確定</span><span class="tg tg-bl">検証可能な事実</span></div>
+    </div>
+
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 04 · バリュエーション</div>
+      <span class="ci">💰</span>
+      <div class="ct">中核事業が「実質57億円」で放置されている</div>
+      <div class="cb bl">1.8倍</div>
+      <div class="cu">警備＋ビル管理のEV/EBITDA</div>
+      <div class="cp">時価総額174億円＋ネット有利子負債▲7億円＝EV167億円。ここから<strong>投資有価証券43億円（税後）と賃貸用不動産69億円（税後時価）を差し引くと、中核事業のEVはわずか57.7億円。</strong>EBITDA30.2億円に対し1.8倍。<strong>セコムが2023年に公表したM&A枠（国内・海外で5年間2,000億円）から見れば端数の規模。</strong></div>
+      <div class="tgs"><span class="tg tg-bl">同業M&A相場5〜8倍</span><span class="tg tg-gn">買収余力＝現値の2倍超</span></div>
+    </div>
+
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05</div>
+      <span class="ci" style="font-size:22px">🎯</span>
+      <div class="ct" style="color:var(--ink)">会社自身が「株価2,000円・PBR1倍」を中計に明記</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">+23%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">1,624円 → 会社の公表目標2,000円</div>
+      <div class="cp" style="color:var(--ink2)">第13次中計で<strong>2027年度にROE6〜7%・PBR1.00〜1.02倍・株価2,000円</strong>を数値目標として公表。加えて万博で稼いだ<strong>営業CF50.2億円</strong>と<strong>自己株式6.34%</strong>という原資があり、中計には「資本政策の検討／実施」が明記されている。<strong>りそな・関西みらい出身の竹野新社長は財務畑。</strong></div>
+    </div>
+
+    <div class="ca cc-gn" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 06 · 下値</div>
+      <span class="ci" style="font-size:22px">🛡️</span>
+      <div class="ct" style="color:var(--ink)">累進配当＋優待で総合利回り5.0〜5.6%</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--gn);margin:6px 0 2px">5.60%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">2,500株保有時の配当＋優待利回り</div>
+      <div class="cp" style="color:var(--ink2)"><strong>DOE3.0%を下限とする方針＝BPS2,212円×3%＝66.4円が制度的な配当フロア。</strong>2018年度以降、減配なし。26/3期の71円には記念配5円が含まれるにもかかわらず、<strong>減益予想の27/3期も71円を据え置き＝実質増配。</strong>プレミアム優待倶楽部と合わせ、<strong>待つコストがマイナスにならない。</strong></div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      東洋テックは、<strong style="color:var(--or2)">「業界再編待ったなしの警備業」×「セコム27.42%＋関電14.34%という動く可能性のある資本」×「非事業資産で時価総額の6割が埋まる資産構造」</strong>が重なった先回り銘柄。<strong style="color:var(--or2)">2026年6月の役員体制刷新（セコム2名・関電1名の新任）、関電の政策保有株縮減方針、東証の少数株主保護ルール ── この3つが2026〜2027年に同時に効いてくる。</strong>待っている間もDOE3%下限の累進配当＋優待で年5%前後を受け取れる、時間がコストにならない構造。
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="inf">本資料の株価は 2026年8月7日終値 1,624円 を前提に算出。財務数値は2026年3月期 有価証券報告書（2026年6月18日提出）・決算短信（2026年5月13日）・決算説明資料（2026年5月25日）に基づく。土地時価は2026年公示地価等からの<strong>推定値</strong>であり、実際の鑑定評価額とは異なる。</div>
+</div>
+<!-- ══════ P2 土地含み益・NAV ══════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">有報から読む土地の含み益とNAV</h2><span class="sb bg-am">推定 +16億円（中立）</span></div>
+
+  <div class="ok"><strong>最大の発見 ── 土地再評価差額金が「▲13.62億円」。</strong>東洋テックは土地再評価法（1998〜2002年の時限立法）に基づき事業用土地を再評価しており、その差額金が<strong>マイナス</strong>で純資産に計上されている。これは<strong>バブル期に取得した土地を、ポストバブルの底値（2000年前後）まで一度書き下げた</strong>ことを意味する。1990年8月竣工の本社（大阪市浪速区桜川）が典型で、現在の簿価は取得原価ではなく「大阪の地価が最も安かった時期の水準」に張り付いている。</div>
+
+  <div class="sh" style="border-bottom-width:1px;margin-top:26px"><span class="sn">2-1</span><h2 class="st" style="font-size:15px">主要な土地8物件の明細と含み益推定</h2></div>
+
+  <table class="t">
+    <thead><tr>
+      <th>所在地 / 用途</th><th class="r">面積(㎡)</th><th class="r">簿価(百万円)</th><th class="r">簿価単価(円/㎡)</th><th class="r">想定時価(円/㎡)</th><th class="r">含み益(百万円)</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>大阪市浪速区桜川 他</strong><br><span style="font-size:10.5px;color:var(--ink3)">本社機能（1990年8月竣工）</span></td><td class="r mn">3,787.74</td><td class="r mn">1,630</td><td class="r mn">430,294</td><td class="r mn">650,000</td><td class="r hgn">+832</td></tr>
+      <tr><td>東大阪市<br><span style="font-size:10.5px;color:var(--ink3)">メールセンター／金融オペレーション部</span></td><td class="r mn">2,455.97</td><td class="r mn">521</td><td class="r mn">212,240</td><td class="r mn">200,000</td><td class="r hrd">▲30</td></tr>
+      <tr><td>東京都八王子市<br><span style="font-size:10.5px;color:var(--ink3)">賃貸用マンション</span></td><td class="r mn">1,004.93</td><td class="r mn">252</td><td class="r mn">251,143</td><td class="r mn">300,000</td><td class="r hgn">+49</td></tr>
+      <tr class="hl"><td><strong>埼玉県草加市</strong><br><span style="font-size:10.5px;color:var(--ink3)">賃貸用土地（最大の一画）</span></td><td class="r mn">9,959.29</td><td class="r mn">1,944</td><td class="r mn">195,200</td><td class="r mn">250,000</td><td class="r hgn">+546</td></tr>
+      <tr><td>大阪府門真市<br><span style="font-size:10.5px;color:var(--ink3)">賃貸用ビジネスホテル</span></td><td class="r mn">1,448.09</td><td class="r mn">508</td><td class="r mn">351,042</td><td class="r mn">351,000</td><td class="r mn">±0</td></tr>
+      <tr><td>京都府長岡京市<br><span style="font-size:10.5px;color:var(--ink3)">単身者向け集合住宅</span></td><td class="r mn">1,750.97</td><td class="r mn">352</td><td class="r mn">200,927</td><td class="r mn">212,466</td><td class="r hgn">+20</td></tr>
+      <tr><td>大阪府東大阪市<br><span style="font-size:10.5px;color:var(--ink3)">賃貸用テナントビル</span></td><td class="r mn">2,184.73</td><td class="r mn">232</td><td class="r mn">106,326</td><td class="r mn">190,000</td><td class="r hgn">+183</td></tr>
+      <tr><td>京都市山科区<br><span style="font-size:10.5px;color:var(--ink3)">賃貸用テナントビル</span></td><td class="r mn">629.42</td><td class="r mn">243</td><td class="r mn">385,347</td><td class="r mn">385,000</td><td class="r mn">±0</td></tr>
+      <tr class="sm"><td>主要8物件 計</td><td class="r mn">23,221</td><td class="r mn">5,683</td><td class="r mn">244,712</td><td class="r mn">—</td><td class="r hgn">+1,600</td></tr>
+      <tr><td>その他（子会社・小規模拠点）</td><td class="r mn">n.a.</td><td class="r mn">291</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">0（保守）</td></tr>
+      <tr class="sm"><td>連結 土地 合計</td><td class="r mn">—</td><td class="r mn">5,973</td><td class="r mn">—</td><td class="r mn">—</td><td class="r hgn">+1,600</td></tr>
+    </tbody>
+  </table>
+  <div class="note">出所：東洋テック 第62期有価証券報告書「主要な設備の状況」（2026年3月31日現在）。想定時価は2026年公示地価（大阪市浪速区桜川1-4-7＝541,000円/㎡・前年比+10.9%／東大阪市 商業地229,777円・工業地151,057円／草加市 住宅地160,323円・商業地333,600円／八王子市 住宅地131,316円・商業地534,944円／長岡京市 住宅地212,466円）等を用いた<strong>筆者推定</strong>。門真市・山科区は簿価が周辺公示地価を上回るため保守的に簿価据置。</div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">2-2</span><h2 class="st" style="font-size:15px">3ケースでの含み益とNAV</h2></div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">保守ケース</div><div class="sc-p br">2,218円</div><div class="sc-s">NAV／土地含み益 +0.9億円</div>
+      <div class="sc-i">全物件を各市の公示地価下限で評価</div>
+      <div class="sc-i">税後含み益 0.6億円・1株+6円</div>
+      <div class="sc-i">実質的に「BPS＝下値」</div></div>
+    <div class="sc-c"><div class="sc-l bs">中立ケース</div><div class="sc-p bs">2,318円</div><div class="sc-s">NAV／土地含み益 +16.0億円</div>
+      <div class="sc-i">本社は浪速区商業地の中位で評価</div>
+      <div class="sc-i">税後含み益 11.1億円・1株+105円</div>
+      <div class="sc-i">現在株価はNAVの70%</div></div>
+    <div class="sc-c"><div class="sc-l bu">強気ケース</div><div class="sc-p bu">2,437円</div><div class="sc-s">NAV／土地含み益 +34.1億円</div>
+      <div class="sc-i">浪速区商業地平均788,800円/㎡を適用</div>
+      <div class="sc-i">草加を商業地333,600円/㎡で評価</div>
+      <div class="sc-i">税後含み益 23.6億円・1株+224円</div></div>
+    <div class="sc-c"><div class="sc-l bm">現在株価</div><div class="sc-p bm">1,624円</div><div class="sc-s">NAV(中立)比 ▲29.9%</div>
+      <div class="sc-i">PBR 0.73倍（BPS 2,212円）</div>
+      <div class="sc-i">P/NAV 0.70倍</div>
+      <div class="sc-i">上値余地 +43%（中立NAV到達時）</div></div>
+  </div>
+
+  <div class="inf"><strong>率直な評価：</strong>土地の含み益は「巨大」ではない。広済堂のような昭和期取得・都心一等地型ではなく、<strong>大半は不動産事業として近年取得した収益用不動産</strong>で、簿価＝取得価格に近い。含み益の主役は本社土地（+8.3億円）と東大阪テナントビル（+1.8億円）。<strong>東洋テックの真の割安さは「含み益」ではなく「非事業資産の絶対量」にある。</strong></div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">2-3</span><h2 class="st" style="font-size:15px">SOTP（部分の総和）── ここが本丸</h2></div>
+
+  <div class="g4">
+    <div class="c mc"><div class="ml">投資有価証券</div><div class="mv bl">48.7億</div><div class="ms">うち含み益17.3億円<br>26/3期に3.96億円の売却益</div></div>
+    <div class="c mc"><div class="ml">賃貸用不動産</div><div class="mv bl">63.5億</div><div class="ms">簿価ベース<br>6物件・不動産セグメント資産78億</div></div>
+    <div class="c mc"><div class="ml">ネットキャッシュ</div><div class="mv gn">+6.9億</div><div class="ms">現預金86.6億<br>有利子負債79.7億</div></div>
+    <div class="c mc"><div class="ml">時価総額</div><div class="mv am">174億</div><div class="ms">1,624円×1,070万株<br>（自己株控除後）</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <table class="t">
+    <thead><tr><th>SOTP項目</th><th class="r">金額(百万円)</th><th>算定根拠</th></tr></thead>
+    <tbody>
+      <tr><td>警備＋ビル管理事業 EV</td><td class="r mn">18,102</td><td>EBITDA 3,017百万円 × 6.0倍（同業M&A相場5〜8倍の中位）</td></tr>
+      <tr><td>投資有価証券（税後）</td><td class="r mn">4,338</td><td>時価4,869 − 含み益1,735×実効税率30.6%</td></tr>
+      <tr><td>賃貸用不動産（税後時価）</td><td class="r mn">6,903</td><td>簿価6,349 + 含み益799 − 税244</td></tr>
+      <tr><td>事業用土地含み益（税後）</td><td class="r mn">557</td><td>本社・東大阪の含み益802 × (1−30.6%)</td></tr>
+      <tr><td>ネットキャッシュ</td><td class="r mn">693</td><td>現預金8,665 − 有利子負債7,972（受託現預金は除外）</td></tr>
+      <tr class="sm"><td>株主価値 合計</td><td class="r mn">30,593</td><td>1株 <strong>2,901円</strong>（現在比 +79%）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c cl-or">
+      <div style="font:700 11px/1 var(--mono);color:var(--or);letter-spacing:.1em;margin-bottom:10px">EV/EBITDA倍率別の1株価値</div>
+      <div class="bg"><div class="br2"><span>4.0倍（ディープバリュー水準）</span><span class="mn hor">2,329円 / +41%</span></div><div class="bt"><div class="bf" style="width:41%;background:var(--am2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>5.0倍</span><span class="mn hor">2,615円 / +58%</span></div><div class="bt"><div class="bf" style="width:53%;background:var(--or2)"></div></div></div>
+      <div class="bg"><div class="br2"><span><strong>6.0倍（中立）</strong></span><span class="mn hgn">2,901円 / +79%</span></div><div class="bt"><div class="bf" style="width:66%;background:var(--gn2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>7.0倍</span><span class="mn hgn">3,187円 / +93%</span></div><div class="bt"><div class="bf" style="width:83%;background:var(--gn2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>8.0倍（戦略的買収）</span><span class="mn hgn">3,473円 / +110%</span></div><div class="bt"><div class="bf" style="width:100%;background:var(--gn)"></div></div></div>
+      <div class="note">EBITDA(中核)＝27/3期予想 営業利益2,040 − 不動産事業350 + 減価償却1,054 + のれん償却273 ＝ 3,017百万円</div>
+    </div>
+    <div class="c cl-bl">
+      <div style="font:700 11px/1 var(--mono);color:var(--bl);letter-spacing:.1em;margin-bottom:10px">なぜ中核事業EVが1.8倍まで潰れているのか</div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2)">
+        <strong>① 資産の6割が事業と無関係。</strong>投資有価証券48.7億＋賃貸用不動産63.5億＝112億円が、時価総額174億円の64%を占める。市場はこれらを「使われない資産」としてディスカウントしている。<br><br>
+        <strong>② 不動産事業のROAが低い。</strong>セグメント資産78億円に対し営業利益1.78億円（ROA2.3%）。中計は「不動産投資：直接投資→間接投資へのウエイトシフト」を掲げており、<strong>会社自身が直接保有を減らす方向。</strong><br><br>
+        <strong>③ 流動性が極端に薄い。</strong>上位10社＋自己株で発行済の約68%。実質浮動株は3割弱で、機関投資家が入れない。裏を返せば<strong>需給が締まっており、材料が出れば動きは大きい。</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ══════ P3 再編シナリオ ══════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">セコムと警備業界再編のシナリオ</h2><span class="sb bg-or">先回りの妥当性</span></div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font:700 11px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;margin-bottom:12px">大株主構成（2026年3月31日現在・自己株除く）</div>
+      <table class="t">
+        <tbody>
+          <tr class="hl"><td><strong>セコム㈱</strong><span class="bge be-or" style="margin-left:6px">その他の関係会社</span></td><td class="r mn"><strong>2,914,100株</strong></td><td class="r mn hor"><strong>27.22%</strong></td></tr>
+          <tr class="hl"><td><strong>関西電力㈱</strong><span class="bge be-am" style="margin-left:6px">売却候補</span></td><td class="r mn"><strong>1,535,900株</strong></td><td class="r mn ham"><strong>14.34%</strong></td></tr>
+          <tr><td>㈱ディー・ケイ</td><td class="r mn">500,000株</td><td class="r mn">4.67%</td></tr>
+          <tr><td>日本カストディ銀行（関西みらい銀行退給信託）</td><td class="r mn">451,090株</td><td class="r mn">4.21%</td></tr>
+          <tr><td>㈱りそな銀行</td><td class="r mn">400,000株</td><td class="r mn">3.74%</td></tr>
+          <tr><td>東洋テック従業員持株会</td><td class="r mn">349,313株</td><td class="r mn">3.26%</td></tr>
+          <tr><td>㈱ユニテックス</td><td class="r mn">257,500株</td><td class="r mn">2.40%</td></tr>
+          <tr><td>セントラル警備保障㈱ <span class="bge be-bl">同業</span></td><td class="r mn">241,700株</td><td class="r mn">2.26%</td></tr>
+          <tr><td>ＡＩＧ損害保険㈱</td><td class="r mn">215,210株</td><td class="r mn">2.01%</td></tr>
+          <tr><td>㈱三井住友銀行</td><td class="r mn">204,980株</td><td class="r mn">1.91%</td></tr>
+          <tr class="sm"><td>上位10社 計</td><td class="r mn">7,069,793株</td><td class="r mn">66.03%</td></tr>
+          <tr class="sm"><td>＋ 自己株式 724,943株</td><td class="r mn">—</td><td class="r mn">実質浮動株 約3割</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="c cl-or">
+      <div style="font:700 11px/1 var(--mono);color:var(--or);letter-spacing:.1em;margin-bottom:12px">セコムとの関係（有報・支配株主等開示より）</div>
+      <div style="font-size:12px;line-height:1.9;color:var(--ink2)">
+        ・<strong>2006年10月11日</strong>に株式取得。以来20年間、27%台を維持。<br>
+        ・東洋テックは<strong>セコムの持分法適用会社</strong>。<br>
+        ・セコム執行役員<strong>2名が社外取締役</strong>（錦野真二＝人事本部長、堂野敦司＝営業本部長補佐）、<strong>1名が社外監査役</strong>（植松則行＝内部監査担当）。<br>
+        ・東洋テックは<strong>警備対応エリア外の案件をセコムに業務委託</strong>（＝営業地盤が明確に補完関係）。<br>
+        ・<strong>2025大阪・関西万博の警備をセコムを含むJVで共同受注</strong>（受注総額121.25億円）。実務レベルの統合実績が既にある。
+      </div>
+      <div class="note"><strong>読み筋：</strong>資本・人・取引の三層で既に深く結び付いており、「なぜ子会社化しないのか」の方が説明が難しい状態。20年動かなかったのは<strong>関電14.34%という第二極が固定されていたから</strong>と解釈でき、その前提が2026年に崩れつつある。</div>
+    </div>
+  </div>
+
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">3-0</span><h2 class="st" style="font-size:15px">2026年6月17日 ── 取締役会の性格が変わった</h2></div>
+  <div class="ok"><strong>第62期定時株主総会で、社外取締役3名（諸島伸治・福岡規行・長尾誠也）と社外監査役1名（野地小百合）が退任し、代わりに大株主2社から3名が送り込まれた。</strong>同時に代表取締役会長・田中卓氏が退任（相談役へ）、池田博之社長が会長に、専務執行役員・竹野讓氏（元りそな銀行／関西みらいFG執行役員）が社長に昇格。<strong>「経営執行体制の強化と若返り」という説明以上の意味を読み取るべき人事。</strong></div>
+  <table class="t">
+    <thead><tr><th>氏名</th><th>区分</th><th>本業での役職</th><th>読み筋</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>錦野 真二</strong><br><span style="font-size:10.5px;color:var(--ink3)">社外取締役（新任）</span></td><td><span class="bge be-or">セコム</span></td><td>セコム㈱ 執行役員 人事本部長<br><span style="font-size:10.5px;color:var(--ink3)">1988年セコム入社／大阪本部豊中支社長／セコム北陸社長</span></td><td class="hor"><strong>人事本部長＝組織統合の実務責任者。</strong>関西の現場経験と子会社経営経験を併せ持つ。</td></tr>
+      <tr class="hl"><td><strong>堂野 敦司</strong><br><span style="font-size:10.5px;color:var(--ink3)">社外取締役（新任）</span></td><td><span class="bge be-or">セコム</span></td><td>セコム㈱ 執行役員 営業本部長補佐<br><span style="font-size:10.5px;color:var(--ink3)">日本銀行出身（松山支店長・名古屋支店長）／2025年7月セコム入社</span></td><td class="hor"><strong>営業本部＝事業統合の実務。</strong>日銀出身で金融機関との折衝に強く、東洋テックの金融向け事業と親和性が高い。</td></tr>
+      <tr class="hl"><td><strong>黒川 裕之</strong><br><span style="font-size:10.5px;color:var(--ink3)">社外監査役（新任）</span></td><td><span class="bge be-am">関西電力</span></td><td>関西電力㈱ 執行役員 取締役会室長 併 経営企画室グループ事業担当室長<br><span style="font-size:10.5px;color:var(--ink3)">関電不動産開発㈱取締役・㈱オプテージ取締役を兼務</span></td><td class="ham"><strong>グループ事業＝保有株ポートフォリオの管理担当。</strong>売却判断を担う部署の責任者が監査役として内部に入った。</td></tr>
+      <tr><td>福地 敏行<br><span style="font-size:10.5px;color:var(--ink3)">社外取締役（新任）</span></td><td><span class="bge be-bl">独立</span></td><td>CC&amp;C Lab 代表／元 日本アイ・ビー・エム㈱ 取締役副社長</td><td>DX・AI活用の助言役。中計の「AI／DX活用による効率化」に直結。</td></tr>
+      <tr><td>植松 則行<br><span style="font-size:10.5px;color:var(--ink3)">社外監査役（再任）</span></td><td><span class="bge be-or">セコム</span></td><td>セコム㈱ 執行役員 内部監査担当 グループ運営監理部長</td><td>従前から在任。<strong>グループ運営監理＝子会社管理の部署。</strong></td></tr>
+      <tr><td>稲田 浩二<br><span style="font-size:10.5px;color:var(--ink3)">社外取締役（再任）</span></td><td><span class="bge be-am">関西電力</span></td><td>関西電力㈱ 顧問／カナデビア㈱ 社外監査役</td><td>従前から在任。</td></tr>
+      <tr><td>竹野 讓<br><span style="font-size:10.5px;color:var(--ink3)">代表取締役社長（新任）</span></td><td><span class="bge be-gn">社内</span></td><td>元 ㈱りそな銀行 神戸支店長／㈱関西みらいFG 執行役員／㈱りそなHD 執行役</td><td class="hgn"><strong>財務・リスク畑出身の社長。</strong>資本政策の実行者としての適性は高い。</td></tr>
+    </tbody>
+  </table>
+  <div class="note">出所：2026年5月13日開示「代表取締役の異動および取締役候補者、監査役候補者の選任並びに人事異動に関するお知らせ」／第62期有価証券報告書。<br><strong>結果として、取締役9名のうち社外5名の中にセコム2名・関電1名。監査役4名のうちセコム1名・関電1名。大株主2社が取締役会・監査役会の双方に常時アクセスする体制になった。</strong>そして東証の新独立性基準では、この4名全員が「独立役員」ではなくなる。</div>
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">3-1</span><h2 class="st" style="font-size:15px">再編を促す3つの外部圧力</h2></div>
+
+  <div class="g3">
+    <div class="c cf-am">
+      <div style="font:700 10px/1 var(--mono);color:var(--am);letter-spacing:.1em;margin-bottom:8px">圧力① 制度</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>東証・少数株主保護の上場制度見直し（2026年7月3日公表／7月10日施行）</strong><br><br>
+      ・独立役員の独立性基準に<strong>「主要株主およびその業務執行者」を追加</strong> → セコム系3名は独立役員失格（2027年6月総会翌日から）。<br>
+      ・議決権40%以上の大株主を持つ会社は<strong>取締役選任議案の少数株主賛成割合の開示義務</strong>。セコム単独27.42%では対象外だが、<strong>関電分を取得すると41.76%で即対象化。</strong></div>
+    </div>
+    <div class="c cf-bl">
+      <div style="font:700 10px/1 var(--mono);color:var(--bl);letter-spacing:.1em;margin-bottom:8px">圧力② 資本</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>関西電力「経営計画2026」（2026年4月30日）</strong><br><br>
+      ・向こう3年間で<strong>5,500億円以上の保有株式等を売却</strong>する方針を明記。<br>
+      ・きんでん株3,350万株の売却も予定（売却益約1,050億円見込み）。<br>
+      ・東洋テック株は2004年の資本業務提携由来の政策保有株。<strong>25億円規模は関電にとって「処理しやすい端数」であり、優先度が高い。</strong></div>
+    </div>
+    <div class="c cf-or">
+      <div style="font:700 10px/1 var(--mono);color:var(--or);letter-spacing:.1em;margin-bottom:8px">圧力③ 産業構造</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>警備業は再編待ったなしの構造不況＋成長併存業種</strong><br><br>
+      ・労働集約型で<strong>賃上げ・人手不足が直撃</strong>。全国主要828社の売上は約1.92兆円だが中小の体力は限界。<br>
+      ・AI・DX・監視ロボットへの投資は<strong>規模がないと回収できない。</strong><br>
+      ・ALSOKは2025年12月に平和管財株60%取得。東洋テック自身も直近3年で五大テック・アムス・関西ユナイトを買収。<strong>買い手と売り手の境目が消えつつある。</strong></div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">3-2</span><h2 class="st" style="font-size:15px">シナリオ別の確率と株価インパクト</h2></div>
+
+  <table class="t">
+    <thead><tr><th>シナリオ</th><th class="r">確率（筆者評価）</th><th class="r">想定株価</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>A. セコムによる完全子会社化TOB</strong></td><td class="r mn hor">15〜20%</td><td class="r mn hgn"><strong>2,900〜3,500円</strong></td><td>EV/EBITDA 6〜8倍。セコムの取得所要額は226〜271億円（既保有分779万株を除く）。M&A枠（2023年公表・5年2,000億円）に対して十分小さい。</td></tr>
+      <tr><td>B. 関電持分をセコムが相対取得（41.76%へ）</td><td class="r mn ham">20〜25%</td><td class="r mn ham">2,000〜2,400円</td><td>連結子会社化は見送るが支配的地位を確立。市場は「次はTOB」を織り込み始める。取得価格は市場価格＋α。</td></tr>
+      <tr><td>C. 関電持分が第三者・市場に放出</td><td class="r mn hbl">15〜20%</td><td class="r mn hrd">1,400〜1,650円</td><td>一時的な需給悪化。ただし浮動株が増え、アクティビスト参入余地が生まれる点はむしろ中期ポジティブ。</td></tr>
+      <tr><td>D. 資本政策の自助努力（自己株買い・政策保有株売却）</td><td class="r mn hgn">30〜35%</td><td class="r mn ham">1,900〜2,200円</td><td>中計の「資本政策の検討／実施」が具体化。自己株6.34%の消却＋追加取得でEPS・ROE改善。</td></tr>
+      <tr><td>E. 何も起きない（現状維持）</td><td class="r mn">15〜20%</td><td class="r mn">1,500〜1,800円</td><td>それでも配当利回り4.0〜4.7%＋優待。BPSは年100円前後で積み上がりDOE下限も切り上がる。</td></tr>
+    </tbody>
+  </table>
+  <div class="note">確率は筆者の主観的評価であり、根拠は上記の制度改正・関電の公表方針・過去の同種事例に基づく推論。特定のTOBや資本取引の存在を示唆するものではない。</div>
+
+  <div class="sp"></div>
+  <div class="c cl-pu">
+    <div style="font:700 11px/1 var(--mono);color:var(--pu);letter-spacing:.1em;margin-bottom:10px">参考：トスネット（4754）に見る「もう一つの出口」</div>
+    <div style="font-size:12px;line-height:1.85;color:var(--ink2)">2026年6月11日、トスネットは<strong>副社長の保有株を資産管理会社（有限会社元気）へ譲渡する主要株主の異動</strong>と、<strong>長期安定保有を目的とした自己株式取得</strong>を同日開示した。オーナー系警備会社が<strong>資本の集約＝非公開化の布石</strong>を打ち始めている典型例で、業界全体が「上場を続ける意味」を問い直している。<br><br>東洋テックはオーナー企業ではないが、<strong>セコム27.42%＋関電14.34%＋CSP2.26%＝44.02%が事業会社に握られている</strong>という点で、より直接的に再編の当事者になりやすい。<strong>スタンダード市場・時価総額174億円・売買代金日次数百万円という規模は、上場維持コストに対して合理性を失いつつある。</strong></div>
+  </div>
+</div>
+<!-- ══════ P4 決算・中計 ══════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">2026年3月期 決算と第13次中期経営計画</h2><span class="sb bg-bl">34期ぶり最高益</span></div>
+
+  <div class="g4">
+    <div class="c mc"><div class="ml">売上高 26/3期</div><div class="mv bl">430.7億</div><div class="ms">前期比 +23.3%<br>15期連続増収</div></div>
+    <div class="c mc"><div class="ml">営業利益</div><div class="mv gn">29.1億</div><div class="ms">前期比 +177.6%<br>計画24.5億を18.9%超過</div></div>
+    <div class="c mc"><div class="ml">経常利益</div><div class="mv gn">29.9億</div><div class="ms">+181.8%<br>34期ぶりの過去最高益</div></div>
+    <div class="c mc"><div class="ml">純利益</div><div class="mv gn">19.7億</div><div class="ms">+184.1%<br>EPS 188.98円 / ROE 8.7%</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">4-1</span><h2 class="st" style="font-size:15px">万博を剥がした「実力値」が最重要</h2></div>
+
+  <table class="t">
+    <thead><tr><th>区分</th><th class="r">25/3期</th><th class="r">26/3期</th><th class="r">27/3期予想</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>売上高（全社）</td><td class="r mn">34,925</td><td class="r mn">43,071</td><td class="r mn">37,500</td><td>27/3期は▲12.9%（万博反動）</td></tr>
+      <tr><td class="mn" style="padding-left:22px">うち万博関連</td><td class="r mn">—</td><td class="r mn">8,378</td><td class="r mn">0</td><td>ゲート・会場警備JV（受注121億円）</td></tr>
+      <tr class="hl"><td><strong>万博以外の売上</strong></td><td class="r mn"><strong>34,925</strong></td><td class="r mn"><strong>34,693</strong></td><td class="r mn"><strong>37,500</strong></td><td class="hgn">27/3期は万博以外で+8.1%を計画</td></tr>
+      <tr><td>営業利益（全社）</td><td class="r mn">1,049</td><td class="r mn">2,912</td><td class="r mn">2,040</td><td>—</td></tr>
+      <tr><td class="mn" style="padding-left:22px">うち万博関連</td><td class="r mn">—</td><td class="r mn">1,242</td><td class="r mn">0</td><td>利益率14.8%の高収益案件</td></tr>
+      <tr class="hl"><td><strong>万博以外の営業利益</strong></td><td class="r mn"><strong>1,049</strong></td><td class="r mn"><strong>1,670</strong></td><td class="r mn"><strong>2,040</strong></td><td class="hgn">2年で+94%。価格改定が効いている</td></tr>
+      <tr><td>営業利益率（万博以外）</td><td class="r mn">3.0%</td><td class="r mn">4.8%</td><td class="r mn">5.4%</td><td>中計の「質への転換」が数字に出た</td></tr>
+    </tbody>
+  </table>
+  <div class="note">単位：百万円。出所：2026年3月期決算説明資料・決算短信。<strong>27/3期は減収減益予想だが、万博を除いた基礎収益力は一貫して改善している。</strong>市場が「万博の一過性」だけを見て売っているなら、そこが歪み。</div>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c">
+      <div style="font:700 11px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;margin-bottom:10px">セグメント別（26/3期）</div>
+      <table class="t">
+        <thead><tr><th>セグメント</th><th class="r">売上</th><th class="r">構成比</th><th class="r">利益</th><th class="r">利益率</th></tr></thead>
+        <tbody>
+          <tr><td>警備事業</td><td class="r mn">32,291</td><td class="r mn">75.0%</td><td class="r mn">2,081</td><td class="r mn">6.4%</td></tr>
+          <tr><td class="mn" style="padding-left:18px">機械警備</td><td class="r mn">8,741</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn hgn">+5.8%</td></tr>
+          <tr><td class="mn" style="padding-left:18px">常駐警備</td><td class="r mn">15,104</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn hgn">+106.7%</td></tr>
+          <tr><td class="mn" style="padding-left:18px">輸送警備</td><td class="r mn">2,424</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn hgn">+5.3%</td></tr>
+          <tr><td class="mn" style="padding-left:18px">ATM管理</td><td class="r mn">2,157</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn hgn">+7.1%</td></tr>
+          <tr><td>ビル管理事業</td><td class="r mn">10,289</td><td class="r mn">23.9%</td><td class="r mn">687</td><td class="r mn">6.7%</td></tr>
+          <tr><td>不動産事業</td><td class="r mn">491</td><td class="r mn">1.1%</td><td class="r mn">178</td><td class="r mn ham">36.3%</td></tr>
+          <tr class="sm"><td>合計</td><td class="r mn">43,071</td><td class="r mn">100%</td><td class="r mn">2,912</td><td class="r mn">6.8%</td></tr>
+        </tbody>
+      </table>
+      <div class="note">機械警備は<strong>ストック収益</strong>で契約件数78,997件。金融機関向け（輸送・ATM）は構造的にキャッシュレス逆風だが、単価改定で+5〜7%を確保できている点は評価できる。</div>
+    </div>
+    <div class="c">
+      <div style="font:700 11px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;margin-bottom:10px">第13次中期経営計画（2025年4月〜2028年3月）</div>
+      <div style="font-size:12px;line-height:1.9;color:var(--ink2);margin-bottom:12px">
+        <strong>スローガン：</strong>筋肉質な企業体質への転換（「量」の拡大から「質」の向上へ）<br>
+        <strong>目指す姿：</strong>警備・ビル管理を中核とした『総合生活安全企業』
+      </div>
+      <table class="t">
+        <thead><tr><th>2027年度（28/3期）目標</th><th class="r">数値</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mn">400億円</td></tr>
+          <tr><td>EBITDA</td><td class="r mn">25億円</td></tr>
+          <tr><td>営業利益</td><td class="r mn">20.2億円</td></tr>
+          <tr class="hl"><td><strong>ROE</strong></td><td class="r mn hgn"><strong>6.0〜7.0%</strong></td></tr>
+          <tr class="hl"><td><strong>PBR</strong></td><td class="r mn hgn"><strong>1.00〜1.02倍</strong></td></tr>
+          <tr class="hl"><td><strong>株価</strong></td><td class="r mn hor"><strong>2,000円</strong></td></tr>
+          <tr><td>成長投資枠</td><td class="r mn">100億円</td></tr>
+          <tr><td>株主還元</td><td class="r mn">DOE3.0%下限／配当性向50%目途</td></tr>
+        </tbody>
+      </table>
+      <div class="note">26/3期のROE8.7%は万博の一過性要因を含むため、実力ベースでは中計の6〜7%レンジ。<strong>大型M&Aののれん償却3.1億円/年が今後10年間ROEを1.0%強押し下げる</strong>と会社自ら開示。逆に言えば、<strong>のれん償却は現金の出ない費用であり、EV/EBITDAで見れば無関係。</strong></div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">4-2</span><h2 class="st" style="font-size:15px">財務体質の推移</h2></div>
+  <table class="t">
+    <thead><tr><th>指標</th><th class="r">22/3</th><th class="r">23/3</th><th class="r">24/3</th><th class="r">25/3</th><th class="r">26/3</th></tr></thead>
+    <tbody>
+      <tr><td>売上高（百万円）</td><td class="r mn">27,465</td><td class="r mn">30,139</td><td class="r mn">31,249</td><td class="r mn">34,925</td><td class="r mn hgn">43,071</td></tr>
+      <tr><td>営業利益（百万円）</td><td class="r mn">848</td><td class="r mn">844</td><td class="r mn">966</td><td class="r mn">1,049</td><td class="r mn hgn">2,912</td></tr>
+      <tr><td>純資産（百万円）</td><td class="r mn">20,446</td><td class="r mn">20,623</td><td class="r mn">21,312</td><td class="r mn">21,738</td><td class="r mn hgn">23,330</td></tr>
+      <tr><td>自己資本比率</td><td class="r mn">68.4%</td><td class="r mn">65.3%</td><td class="r mn">59.6%</td><td class="r mn">56.0%</td><td class="r mn hgn">59.2%</td></tr>
+      <tr class="hl"><td><strong>BPS</strong></td><td class="r mn">1,935</td><td class="r mn">2,018</td><td class="r mn">2,072</td><td class="r mn">2,099</td><td class="r mn hgn"><strong>2,212</strong></td></tr>
+      <tr><td>EPS</td><td class="r mn">43.61</td><td class="r mn">72.60</td><td class="r mn">60.98</td><td class="r mn">67.09</td><td class="r mn hgn">188.98</td></tr>
+      <tr><td>ROE</td><td class="r mn">2.25%</td><td class="r mn">3.60%</td><td class="r mn">2.94%</td><td class="r mn">3.19%</td><td class="r mn hgn">8.44%</td></tr>
+      <tr><td>PBR（期末）</td><td class="r mn">0.51</td><td class="r mn">0.47</td><td class="r mn">0.62</td><td class="r mn">0.64</td><td class="r mn ham">0.73</td></tr>
+      <tr><td>営業CF（百万円）</td><td class="r mn">783</td><td class="r mn">1,495</td><td class="r mn">1,900</td><td class="r mn">2,861</td><td class="r mn hgn">5,023</td></tr>
+      <tr><td>株主総利回り（5年）</td><td class="r mn">99.0%</td><td class="r mn">100.0%</td><td class="r mn">135.0%</td><td class="r mn">145.9%</td><td class="r mn hgn">178.3%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">26/3期の株価レンジは最高1,900円・最低1,100円。26/3期の最高値1,900円に対し、現在値1,624円は▲15%の位置。</div>
+</div>
+<!-- ══════ P5 配当・優待 ══════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">累進配当と優待 ── 「待つコスト」がマイナスにならない構造</h2><span class="sb bg-pu">総合利回り 4.9〜5.5%</span></div>
+
+  <div class="ok"><strong>DOE3.0%下限＝制度的な配当フロア。</strong>第13次中計から「株主資本配当率（DOE）3.0%を下限として連結配当性向50%を目途」を配当方針に明記。BPS2,212円 × 3.0% ＝ <strong>1株66.4円が理論上の下限配当</strong>。BPSは毎期積み上がるため、<strong>業績が悪化しても配当は切り下がりにくく、BPS成長に連れてフロア自体が上がっていく＝実質的な累進配当。</strong></div>
+
+  <div class="g2">
+    <div class="c">
+      <div style="font:700 11px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;margin-bottom:10px">1株当たり配当の推移</div>
+      <table class="t">
+        <thead><tr><th>年度</th><th class="r">配当</th><th class="r">配当性向</th><th class="r">DOE</th></tr></thead>
+        <tbody>
+          <tr><td>2018</td><td class="r mn">28円</td><td class="r mn">41.9%</td><td class="r mn">—</td></tr>
+          <tr><td>2019</td><td class="r mn">30円</td><td class="r mn">36.3%</td><td class="r mn">—</td></tr>
+          <tr><td>2020</td><td class="r mn">30円</td><td class="r mn">55.9%</td><td class="r mn">—</td></tr>
+          <tr><td>2021</td><td class="r mn">30円</td><td class="r mn">68.8%</td><td class="r mn">1.56%</td></tr>
+          <tr><td>2022</td><td class="r mn">33円</td><td class="r mn">45.5%</td><td class="r mn">1.52%</td></tr>
+          <tr><td>2023</td><td class="r mn">36円</td><td class="r mn">59.0%</td><td class="r mn">1.75%</td></tr>
+          <tr><td>2024（25/3期）</td><td class="r mn">40円</td><td class="r mn">59.6%</td><td class="r mn">1.87%</td></tr>
+          <tr class="hl"><td><strong>2025（26/3期）</strong></td><td class="r mn hgn"><strong>71円</strong></td><td class="r mn">37.6%</td><td class="r mn hgn"><strong>3.3%</strong></td></tr>
+          <tr class="hl"><td><strong>2026（27/3期予想）</strong></td><td class="r mn hgn"><strong>71円</strong></td><td class="r mn">58.7%</td><td class="r mn hgn"><strong>3.2%</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>26/3期の71円には設立60周年記念配当5円が含まれる（普通配66円）。にもかかわらず27/3期予想も71円を据え置いた＝実質的な普通配ベースでの増配。</strong>万博反動で減益予想（EPS189円→121円）の局面で減配しなかったことは、DOE方針の本気度を示す強いシグナル。<strong>8期連続で減配なし。</strong></div>
+    </div>
+    <div class="c cl-pu">
+      <div style="font:700 11px/1 var(--mono);color:var(--pu);letter-spacing:.1em;margin-bottom:10px">TOYO-TECプレミアム優待倶楽部（3月末基準）</div>
+      <table class="t">
+        <thead><tr><th class="r">保有株数</th><th class="r">ポイント</th><th class="r">投資額</th><th class="r">総合利回り</th></tr></thead>
+        <tbody>
+          <tr><td class="r mn">100株</td><td class="r mn">—</td><td class="r mn">162,400円</td><td class="r mn">4.37%</td></tr>
+          <tr class="hl"><td class="r mn"><strong>500株</strong></td><td class="r mn">5,000P</td><td class="r mn">812,000円</td><td class="r mn hgn"><strong>4.99%</strong></td></tr>
+          <tr><td class="r mn">600株</td><td class="r mn">7,000P</td><td class="r mn">991,800円</td><td class="r mn">4.99%</td></tr>
+          <tr><td class="r mn">800株</td><td class="r mn">11,000P</td><td class="r mn">1,299,200円</td><td class="r mn">5.22%</td></tr>
+          <tr class="hl"><td class="r mn"><strong>1,000株</strong></td><td class="r mn">15,000P</td><td class="r mn">1,624,000円</td><td class="r mn hgn"><strong>5.30%</strong></td></tr>
+          <tr><td class="r mn">1,500株</td><td class="r mn">25,000P</td><td class="r mn">2,479,500円</td><td class="r mn">5.30%</td></tr>
+          <tr><td class="r mn">2,000株</td><td class="r mn">35,000P</td><td class="r mn">3,306,000円</td><td class="r mn">5.35%</td></tr>
+          <tr class="hl"><td class="r mn"><strong>2,500株</strong></td><td class="r mn">50,000P</td><td class="r mn">4,060,000円</td><td class="r mn hgn"><strong>5.60%</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="note">1ポイント＝1円相当として算出（5,000種類以上の商品と交換可能）。翌年3月末に同一株主番号で連続2回以上かつ500株以上保有していれば、<strong>ポイントを1回だけ繰り越し可能</strong>（長期保有インセンティブ）。<br><br><strong>500株＝83万円で利回り4.9%は、東証スタンダードの資産バリュー株としてはかなり厚い。長期保有前提なら、株価が動かなくても年5%が積み上がる。</strong></div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">「時間がコストにならない」ことの意味</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;font-size:12px;color:rgba(246,245,239,.62);line-height:1.85">
+      <div style="padding:12px;background:rgba(246,245,239,.05);border-radius:5px"><strong style="color:var(--gn2)">① 5年待った場合の累積リターン</strong><br>総合利回り5.3%（1,000株）× 5年 ＝ <strong style="color:rgba(246,245,239,.95)">累積26.5%</strong>。株価が1,624円のまま動かなくても、取得原価は実質1,194円まで下がる。</div>
+      <div style="padding:12px;background:rgba(246,245,239,.05);border-radius:5px"><strong style="color:var(--am2)">② BPSの自己増殖</strong><br>27/3期予想EPS121円 − 配当71円 ＝ 内部留保50円/年。<strong style="color:rgba(246,245,239,.95)">5年でBPSは2,212円 → 約2,460円へ。</strong>DOE下限配当も66円→74円に切り上がる。</div>
+      <div style="padding:12px;background:rgba(246,245,239,.05);border-radius:5px"><strong style="color:var(--or2)">③ カタリストは「オプション」</strong><br>再編が起きなくても年5%。起きれば2,900〜3,500円。<strong style="color:rgba(246,245,239,.95)">プレミアムを払っていないコールオプションを持っている状態</strong>に近い。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P6 リスク ══════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスクと弱気シナリオ</h2><span class="sb bg-rd">冷静に見るべき点</span></div>
+
+  <div class="inf"><strong>この銘柄の最大の弱点は「カタリストが自分ではコントロールできない」こと。</strong>関電が売るかどうか、セコムが動くかどうかは、東洋テック自身の意思決定ではない。ここを直視した上でポジションサイズを決めるべき。</div>
+
+  <table class="t">
+    <thead><tr><th>リスク</th><th class="r">深刻度</th><th>内容と評価</th></tr></thead>
+    <tbody>
+      <tr><td><strong>① セコムが20年動かなかった実績</strong></td><td class="r"><span class="bge be-rd">高</span></td><td>2006年の取得以来、27%台で固定。持分法適用で連結利益に取り込めており、<strong>あえて100%取りに行く経済合理性が薄い可能性</strong>。労働集約型の低収益事業を丸ごと抱えるリスクをセコムが嫌う展開は十分あり得る。<strong>「起きなかった場合」を前提に配当利回りで正当化できる価格でしか買えない。</strong></td></tr>
+      <tr><td><strong>② 27/3期の減収減益</strong></td><td class="r"><span class="bge be-am">中</span></td><td>売上▲12.9%・営業利益▲30.0%・純利益▲36.0%。万博の剥落は既定路線だが、<strong>会社予想はEPS121円で、これは市場に「成長株ではない」と再認識させる。</strong>短期のセンチメント悪化要因。</td></tr>
+      <tr><td><strong>③ のれん25.2億円の減損リスク</strong></td><td class="r"><span class="bge be-am">中</span></td><td>五大テック・アムス・関西ユナイトの3件のM&Aで発生。年間償却2.7億円。<strong>26/3期には保守的な貸倒引当金2.14億円を計上</strong>しており、買収先の与信・収益に一部ほころびがある可能性。純資産233億円に対する規模なので致命傷ではないが要監視。</td></tr>
+      <tr><td><strong>④ 金融機関依存の構造的逆風</strong></td><td class="r"><span class="bge be-am">中</span></td><td>ATM管理21.6億円・輸送警備24.2億円は<strong>キャッシュレス進展で長期的に縮小する事業</strong>。有報でも「特定の売上先への依存リスク」として明記。直近は価格改定で+5〜7%を確保しているが、数量ベースでは逆風が続く。</td></tr>
+      <tr><td><strong>⑤ 労働集約型・賃上げ圧力</strong></td><td class="r"><span class="bge be-am">中</span></td><td>26/3期の人件費175.7億円（+14.1億円、うちベースアップ2.65億円）。<strong>売上の41%が人件費。</strong>価格転嫁が1年遅れると営業利益は簡単に吹き飛ぶ。第12次中計が未達に終わった主因もこれ。</td></tr>
+      <tr><td><strong>⑥ 流動性リスク</strong></td><td class="r"><span class="bge be-rd">高</span></td><td>上位10社＋自己株で発行済の約68%を占め、<strong>実質浮動株は3割前後。1日の売買代金は数百万円規模。</strong>まとまった金額を建てるにも降りるにも時間がかかる。<strong>「買えたポジションが上限」という制約を最初から織り込む必要がある。</strong></td></tr>
+      <tr><td><strong>⑦ 関電持分の市場放出</strong></td><td class="r"><span class="bge be-am">中</span></td><td>153万株＝浮動株の約半分に相当する量。<strong>相対取引ではなく市場売却・立会外分売で出てくると、短期的に需給が崩れる。</strong>ただし浮動株増加はアクティビスト参入余地を生み、中期的にはポジティブ。</td></tr>
+      <tr><td><strong>⑧ 不動産事業の資産効率</strong></td><td class="r"><span class="bge be-bl">低</span></td><td>セグメント資産78億円に対し営業利益1.78億円（ROA2.3%）。<strong>NAV上は資産だが、収益資産としては非効率。</strong>ただし中計で「直接投資→間接投資へのシフト」が明記されており、売却＝資本還元の原資になるならむしろ機会。</td></tr>
+      <tr><td><strong>⑨ 土地含み益は「大きくない」</strong></td><td class="r"><span class="bge be-bl">低</span></td><td>本稿の推定では中立16億円・税後11億円（1株105円）。<strong>含み益ストーリーだけで買うと期待外れになる。</strong>投資テーゼの主軸はあくまで「非事業資産の絶対量」と「資本構成」に置くべき。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="g3">
+    <div class="c cf-gn"><div style="font:700 10px/1 var(--mono);color:var(--gn);margin-bottom:8px">下値の根拠①</div><div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>DOE3%＝66.4円</strong><br>配当利回り5.0%で評価されるなら株価1,328円が理論下限。過去5年の最低PBRは0.47倍（＝1,040円相当）だが、当時はDOE方針がなかった。</div></div>
+    <div class="c cf-gn"><div style="font:700 10px/1 var(--mono);color:var(--gn);margin-bottom:8px">下値の根拠②</div><div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>非事業資産112億円</strong><br>投資有価証券48.7億＋賃貸用不動産63.5億。時価総額174億円の64%。ここを割り込むと「事業をタダでもらってお釣りが来る」領域。</div></div>
+    <div class="c cf-gn"><div style="font:700 10px/1 var(--mono);color:var(--gn);margin-bottom:8px">下値の根拠③</div><div style="font-size:12px;line-height:1.8;color:var(--ink2)"><strong>自己株6.34%＋現預金86.6億</strong><br>株価下落時に自己株買いを打てる財務余力がある。中計に「資本政策の検討／実施」を明記済み。</div></div>
+  </div>
+</div>
+<!-- ══════ P7 最終評価 ══════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終評価 ── 1,624円に投資妙味はあるか</h2><span class="sb bg-or">結論：ある</span></div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">弱気</div><div class="sc-p br">1,400円</div><div class="sc-s">▲14% / 確率 15%</div>
+      <div class="sc-i">万博反動＋景気後退でPBR0.63倍</div>
+      <div class="sc-i">関電持分が市場放出され需給悪化</div>
+      <div class="sc-i">配当66〜71円で利回り4.7〜5.1%</div>
+      <div class="sc-i">ここは追加投資の水準</div></div>
+    <div class="sc-c"><div class="sc-l bs">中立</div><div class="sc-p bs">2,000円</div><div class="sc-s">+23% / 確率 40%</div>
+      <div class="sc-i">中計目標株価に到達（PBR0.90倍）</div>
+      <div class="sc-i">PER16.5倍・利回り3.55%</div>
+      <div class="sc-i">自己株買い等の資本政策が発動</div>
+      <div class="sc-i">再編なしでも十分到達可能</div></div>
+    <div class="sc-c"><div class="sc-l bu">強気</div><div class="sc-p bu">2,400円</div><div class="sc-s">+48% / 確率 25%</div>
+      <div class="sc-i">PBR1.08倍・NAV(中立)超え</div>
+      <div class="sc-i">関電持分の異動が具体化</div>
+      <div class="sc-i">政策保有株売却＋還元強化</div>
+      <div class="sc-i">EV/EBITDA約4.7倍相当</div></div>
+    <div class="sc-c"><div class="sc-l bm">再編</div><div class="sc-p bm">2,900〜3,500円</div><div class="sc-s">+79〜+116% / 確率 20%</div>
+      <div class="sc-i">セコムによる完全子会社化TOB</div>
+      <div class="sc-i">EV/EBITDA 6〜8倍で評価</div>
+      <div class="sc-i">セコム所要額 226〜271億円</div>
+      <div class="sc-i">M&A枠（5年2,000億円）比で小さい</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="c cl-gn">
+      <div style="font:700 11px/1 var(--mono);color:var(--gn);letter-spacing:.1em;margin-bottom:10px">期待値の計算</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">株価</th><th class="r">確率</th><th class="r">寄与</th></tr></thead>
+        <tbody>
+          <tr><td>弱気</td><td class="r mn">1,400</td><td class="r mn">15%</td><td class="r mn">210</td></tr>
+          <tr><td>中立</td><td class="r mn">2,000</td><td class="r mn">40%</td><td class="r mn">800</td></tr>
+          <tr><td>強気</td><td class="r mn">2,400</td><td class="r mn">25%</td><td class="r mn">600</td></tr>
+          <tr><td>再編</td><td class="r mn">3,200</td><td class="r mn">20%</td><td class="r mn">640</td></tr>
+          <tr class="sm"><td>加重平均株価</td><td class="r mn hgn"><strong>2,250円</strong></td><td class="r mn">100%</td><td class="r mn">—</td></tr>
+          <tr class="sm"><td>現在株価との差</td><td class="r mn hgn"><strong>+39%</strong></td><td class="r mn">—</td><td class="r mn">＋配当利回り4.37%</td></tr>
+        </tbody>
+      </table>
+      <div class="note">下値▲224円に対し上値+1,576円（再編ケース）。<strong>リスク・リワード比は約1：7。</strong>確率加重でも年率換算で二桁のリターンが期待できる形。</div>
+    </div>
+    <div class="c cl-bl">
+      <div style="font:700 11px/1 var(--mono);color:var(--bl);letter-spacing:.1em;margin-bottom:10px">主要バリュエーション指標のまとめ</div>
+      <table class="t">
+        <tbody>
+          <tr><td>株価</td><td class="r mn"><strong>1,624円</strong></td></tr>
+          <tr><td>時価総額（自己株除く）</td><td class="r mn">174億円</td></tr>
+          <tr><td>PBR（BPS 2,212.34円）</td><td class="r mn ham">0.73倍</td></tr>
+          <tr><td>P/NAV（NAV 2,318円・中立）</td><td class="r mn ham">0.70倍</td></tr>
+          <tr><td>予想PER（EPS 120.98円）</td><td class="r mn">13.4倍</td></tr>
+          <tr><td>実績PER（EPS 188.98円）</td><td class="r mn hgn">8.6倍</td></tr>
+          <tr><td>配当利回り（71円）</td><td class="r mn hgn">4.37%</td></tr>
+          <tr><td>総合利回り（1,000株）</td><td class="r mn hgn">5.30%</td></tr>
+          <tr><td>EV/EBITDA（全社）</td><td class="r mn ham">4.8倍</td></tr>
+          <tr class="hl"><td><strong>EV/EBITDA（中核事業）</strong></td><td class="r mn hgn"><strong>1.8倍</strong></td></tr>
+          <tr><td>ネットキャッシュ</td><td class="r mn hgn">+6.9億円</td></tr>
+          <tr><td>自己資本比率</td><td class="r mn">59.2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="sh" style="border-bottom-width:1px"><span class="sn">7-1</span><h2 class="st" style="font-size:15px">今後のモニタリング・カレンダー</h2></div>
+  <div class="tl">
+    <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年7月30日頃</div><div class="ttext"><strong>27/3期 第1四半期決算。</strong>万博剥落後の「素の収益力」が初めて見える最初の四半期。万博以外の営業利益率が5%台を維持できているかが最大の焦点。</div></div>
+    <div class="ti"><div class="td2 am"></div><div class="tdate">2026年10月頃</div><div class="tdate"></div><div class="ttext"><strong>第2四半期決算＋中間配当（35円予定）。</strong>通期計画の進捗と、資本政策（自己株買い）に関する言及の有無を確認。</div></div>
+    <div class="ti"><div class="td2 or"></div><div class="tdate">2026年11月〜2027年3月</div><div class="ttext"><strong>関西電力の保有株売却の進捗。</strong>関電の四半期開示・大量保有報告書の変更報告に注意。東洋テック株の異動が出れば即座に材料化する。</div></div>
+    <div class="ti"><div class="td2 pu"></div><div class="tdate">2027年3月末</div><div class="tdate"></div><div class="ttext"><strong>優待権利確定（500株以上）。</strong>プレミアム優待倶楽部のポイント付与基準日。</div></div>
+    <div class="ti"><div class="td2 rd"></div><div class="tdate">2027年5月中旬</div><div class="ttext"><strong>27/3期 本決算＋第13次中計 最終年度計画。</strong>中計の「株価2,000円・PBR1倍」達成に向けた具体策（資本政策）が示されるかどうかの最重要イベント。</div></div>
+    <div class="ti"><div class="td2 bl"></div><div class="tdate">2027年6月（定時株主総会）</div><div class="ttext"><strong>東証・独立役員独立性基準の適用開始（総会翌日から）。</strong>セコム系3名の独立役員資格が失われるため、<strong>役員体制の見直しがこの総会の議案に現れる可能性が高い。ここが制度カタリストの発火点。</strong></div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="conc">
+    <div class="conc-h">結論：<span>1,624円には投資妙味がある。ただし「再編を待つ株」ではなく「利回りで持ち、再編をオプションとして拾う株」として設計すべき。</span></div>
+    <div class="g3" style="margin-bottom:22px">
+      <div style="text-align:center;padding:16px 12px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">加重平均目標株価</div>
+        <div style="font:700 26px/1 var(--mono);color:#72cc8e">2,250円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">現在比 +39%</div>
+      </div>
+      <div style="text-align:center;padding:16px 12px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">実質的な下値</div>
+        <div style="font:700 26px/1 var(--mono);color:#90b4ec">1,400円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">DOE下限で利回り4.7%が支える</div>
+      </div>
+      <div style="text-align:center;padding:16px 12px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸</div>
+        <div style="font:700 26px/1 var(--mono);color:var(--or2)">3〜5年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">制度・資本の変化が効いてくる期間</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px;margin-bottom:18px">
+      <div class="conc-lbl">保有設計の提案</div>
+      <div class="conc-b">
+        <strong>① 単元は500株以上を基本に。</strong>優待の閾値が500株にあり、総合利回りが4.37%→4.99%に跳ねる。長期保有前提なら500株・1,000株の刻みが効率的。<br>
+        <strong>② 一括ではなく分割。</strong>流動性が薄く、27/3期は減益予想。1Q・2Q決算での失望売りや関電持分の市場放出は「押し目」として使える。<strong>1,400〜1,500円帯は明確な買い増しゾーン。</strong><br>
+        <strong>③ 再編は「起きたらボーナス」と割り切る。</strong>期待値の6割強は再編以外のシナリオ（中立＋強気）で構成されている。セコムが動かなくても、中計の資本政策と累進配当だけで2,000円は説明できる。<br>
+        <strong>④ 撤退条件を先に決める。</strong>（a）DOE3%下限方針の撤回・減配、（b）のれんの大型減損、（c）万博以外の営業利益率が3%台に逆戻り ── このいずれかが出たら投資テーゼは壊れる。
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div class="conc-lbl">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        東洋テックは、<strong style="color:var(--or2)">非事業資産112億円が時価総額174億円の64%を占め、中核の警備・ビル管理事業がEV/EBITDA1.8倍で放置されている資産バリュー株。</strong>そこに<strong style="color:var(--or2)">セコム27.42%＋関電14.34%という「動きうる資本」と、2026〜2027年に効いてくる東証の少数株主保護ルール</strong>が重なる。累進配当（DOE3%下限）と優待で年5%前後を受け取りながら、業界再編という高額のオプションをタダで持てる ── <strong style="color:var(--or2)">これが1,624円の投資妙味の正体であり、「先回り買い」が合理的である理由。</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: EDINET（東洋テック 第62期有価証券報告書 2026.06.18） / TDnet（2026年3月期決算短信 2026.05.13・決算説明資料 2026.05.25・支配株主等に関する事項 2026.06.18） / 第13次中期経営計画（2025.04.24） / 東京証券取引所「少数株主保護に関する上場制度の見直し」（2026.07.03） / 関西電力グループ経営計画2026（2026.04.30） / 国土交通省 地価公示（2026年） · 2026.07.28
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

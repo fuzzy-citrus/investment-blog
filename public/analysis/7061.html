@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本ホスピスホールディングス（7061）最終投資分析 — 診療報酬ショックで▲70%、超過需要×ストックモデルの本質価値</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --bg:#f5f4ef;--bg2:#eceae2;--bg3:#dedad1;
+  --ink:#111217;--ink2:#2a2b33;--ink3:#636470;
+  --rd:#b83030;--rd2:#d84040;
+  --gn:#1b6840;--gn2:#249054;
+  --am:#8e5810;--am2:#bf7c18;
+  --bl:#153480;--bl2:#1e48b8;
+  --hs:#155870;--hs2:#1d7d9f;   /* hospice teal */
+  --warn:#7a3a10;--warn2:#b05018;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d2535 0%,#133050 55%,#0e2030 100%);color:rgba(240,238,230,.85);padding:36px 52px 28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;left:-80px;top:-80px;width:320px;height:320px;border:1px solid rgba(29,125,159,.1);border-radius:50%}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border:1px solid rgba(29,125,159,.06);border-radius:50%}
+.hero-eyebrow{font:600 8px/1 var(--mono);letter-spacing:.22em;color:var(--hs2);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font:700 30px/1.06 var(--head);letter-spacing:-.025em;margin-bottom:6px}
+.hero-title em{color:var(--hs2);font-style:normal}
+.hero-sub{font-size:11px;color:rgba(240,238,230,.38);line-height:1.65;margin-bottom:22px}
+.hero-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.kpi{background:rgba(13,37,53,.32);padding:10px 12px}
+.kpi-l{font:600 8px/1 var(--mono);letter-spacing:.14em;color:rgba(240,238,230,.28);text-transform:uppercase;margin-bottom:4px}
+.kpi-v{font:600 18px/1 var(--mono)}
+.kpi-v.rd{color:#e08888}.kpi-v.gn{color:#68c890}.kpi-v.am{color:#e0a030}.kpi-v.bl{color:#8ab0e8}.kpi-v.hs{color:#5ac8e8}.kpi-v.wh{color:rgba(240,238,230,.9)}
+.kpi-s{font-size:9px;color:rgba(240,238,230,.22);margin-top:2px}
+.hero-verdict{display:flex;align-items:center;gap:16px;background:rgba(29,125,159,.12);border:1px solid rgba(29,125,159,.28);border-radius:var(--r);padding:12px 20px}
+.verdict-score{font:700 44px/1 var(--mono);color:var(--hs2)}
+.verdict-text{font-size:12px;color:rgba(240,238,230,.7);line-height:1.65}
+.verdict-text strong{color:rgba(240,238,230,.95)}
+
+/* NAV */
+.mnav{background:var(--ink);display:flex;overflow-x:auto;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.mnb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(240,238,230,.3);padding:12px 15px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;flex-shrink:0}
+.mnb:hover,.mnb.on{color:rgba(240,238,230,.9);border-bottom-color:var(--hs2)}
+
+/* BODY */
+.body{max-width:1080px;margin:0 auto;padding:36px 48px 80px}
+.chapter{display:none}.chapter.active{display:block}
+.ch-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.ch-num{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.ch-title{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.ch-badge{font:700 9px/1 var(--mono);padding:3px 9px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;margin-left:auto}
+.cb-rd{background:#fce8e8;color:var(--rd)}.cb-gn{background:#dff0e8;color:var(--gn)}.cb-am{background:#fef3e0;color:var(--am)}.cb-bl{background:#dfe8f8;color:var(--bl)}.cb-hs{background:#dff0f8;color:var(--hs)}.cb-warn{background:#fef0e0;color:var(--warn)}
+
+/* SUB TABS */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--bg3);margin-bottom:18px;overflow-x:auto}
+.stab{font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink3);background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all .18s}
+.stab:hover,.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab.on{font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:700px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr 1fr}.body,.hero{padding-left:18px;padding-right:18px}}
+@media(max-width:450px){.g2,.g3,.g4,.hero-kpis{grid-template-columns:1fr}}
+
+/* CARDS */
+.card{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:16px 18px}
+.card-gn{border-left:3px solid var(--gn)}.card-rd{border-left:3px solid var(--rd)}.card-am{border-left:3px solid var(--am)}.card-bl{border-left:3px solid var(--bl)}.card-hs{border-left:3px solid var(--hs)}.card-warn{border-left:3px solid var(--warn)}
+.card-dk{background:var(--ink2);color:rgba(240,238,230,.85);border:none}
+.card-hi-gn{background:#f0f8f4;border:.5px solid #a0d8b8}
+.card-hi-hs{background:#ecf7fb;border:.5px solid #88cce0}
+.card-hi-rd{background:#fdf0f0;border:.5px solid #dca0a0}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.mc-l{font:600 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mc-v{font:600 26px/1 var(--mono);margin-bottom:3px}
+.mc-v.rd{color:var(--rd)}.mc-v.gn{color:var(--gn)}.mc-v.am{color:var(--am)}.mc-v.bl{color:var(--bl)}.mc-v.hs{color:var(--hs)}.mc-v.warn{color:var(--warn)}
+.mc-s{font-size:10px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:middle}
+.tbl tbody tr:hover td{background:var(--bg3)}
+.hi-rd{color:var(--rd);font-weight:600}.hi-gn{color:var(--gn);font-weight:600}.hi-am{color:var(--am);font-weight:600}.hi-bl{color:var(--bl);font-weight:600}.hi-hs{color:var(--hs);font-weight:600}
+.mono{font-family:var(--mono)}
+
+/* BADGE */
+.badge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+.bd-gn{background:#dff0e8;color:var(--gn)}.bd-rd{background:#fce8e8;color:var(--rd)}.bd-am{background:#fef3e0;color:var(--am)}.bd-bl{background:#dfe8f8;color:var(--bl)}.bd-hs{background:#dff0f8;color:var(--hs)}.bd-warn{background:#fef0e0;color:var(--warn)}
+
+/* BAR */
+.bgrp{margin-bottom:11px}
+.blrow{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.btrack{background:var(--bg3);border-radius:2px;overflow:hidden}
+.bfill{border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* MISC */
+.notice{background:#fff8e8;border:.5px solid #e8c870;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:12px}
+.notice strong{color:var(--am2)}
+.good{background:#e8f8f0;border:.5px solid #80c8a0;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:12px}
+.good strong{color:var(--gn2)}
+.warn-box{background:#fdf0e8;border:.5px solid #e09060;border-radius:var(--r);padding:10px 15px;font-size:12px;color:var(--warn);line-height:1.65;margin-bottom:12px}
+.note{font-size:10px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:7px;margin-top:9px;line-height:1.55}
+.divider{height:1px;background:var(--rule);margin:18px 0}
+.spacer{height:14px}
+
+/* CONC */
+.conc{background:var(--ink);color:rgba(240,238,230,.82);border-radius:var(--r);padding:28px 32px}
+.conc-head{font:700 16px/1.1 var(--head);letter-spacing:-.015em;color:rgba(240,238,230,.95);margin-bottom:14px}
+.conc-head span{color:var(--hs2)}
+.conc-lbl{font:700 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(240,238,230,.28);margin-bottom:7px}
+.conc-body{font-size:12px;line-height:1.85;color:rgba(240,238,230,.68)}
+.conc-body strong{color:rgba(240,238,230,.95)}
+
+/* SC grid */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden}
+.sc-col{padding:14px 15px;border-right:.5px solid var(--rule)}
+.sc-col:last-child{border:none}
+.sc-lbl{font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-bottom:7px;margin-bottom:8px;border-bottom:2px solid}
+.sc-lbl.bear{border-color:var(--rd);color:var(--rd)}.sc-lbl.base{border-color:var(--am);color:var(--am)}.sc-lbl.bull{border-color:var(--gn);color:var(--gn)}
+.sc-prob{font:600 32px/1 var(--mono);margin-bottom:4px}
+.sc-prob.bear{color:var(--rd)}.sc-prob.base{color:var(--am)}.sc-prob.bull{color:var(--gn)}
+.sc-sub{font-size:11px;color:var(--ink3);margin-bottom:10px}
+.sc-li{font-size:11px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-li:last-child{border:none}
+.sc-li::before{content:'→ ';color:var(--ink3)}
+
+svg text{font-family:'Noto Sans JP','Space Grotesk',sans-serif}
+</style>
+
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO ══════ -->
+<header class="hero">
+  <p class="hero-eyebrow">最終投資分析レポート 2026.06.02 — 診療報酬改定ショック後・3年保有シナリオ分析</p>
+  <h1 class="hero-title">日本ホスピスホールディングス <em>（7061）</em> — 高値▲70%の逆張り好機か、構造変化の被害者か</h1>
+  <p class="hero-sub">株価596円（2026/6/2時点） ／ 2025年12月期 売上141.7億（＋17%）・純利2.8億（▲56.5%）で利益急減 ／ 全59施設2,024室・3年で4倍規模に拡大 ／
+  2026年6月から診療報酬包括払い導入→訪問看護報酬が実質約半減 ／ 2026年12月期 大幅増益予想（経常利益＋81.6%）は達成されるか
+  ／ 在宅ホスピス専業上場企業・国内唯一 ／ スギHD資本業務提携・業界団体設立で業界標準化を主導</p>
+  <div class="hero-kpis">
+    <div class="kpi"><div class="kpi-l">株価（6/2）</div><div class="kpi-v am">596円</div><div class="kpi-s">高値2,100円超から▲72%<br>時価総額≈50億円</div></div>
+    <div class="kpi"><div class="kpi-l">PER（来期予想）</div><div class="kpi-v gn">8.4倍</div><div class="kpi-s">EPS予想71.2円（2026年12月期）<br>実績PER 18倍</div></div>
+    <div class="kpi"><div class="kpi-l">PBR（実績）</div><div class="kpi-v hs">1.37倍</div><div class="kpi-s">純資産436円/株<br>自己資本比率19.4%</div></div>
+    <div class="kpi"><div class="kpi-l">配当利回り（予想）</div><div class="kpi-v gn">4.19%</div><div class="kpi-s">25円（2025年12月期確定）<br>2026年12月期も25円予想</div></div>
+    <div class="kpi"><div class="kpi-l">施設数・居室数</div><div class="kpi-v hs">59施設</div><div class="kpi-s">2,024室（2025年12月期末）<br>前期比＋25.8%拡大</div></div>
+    <div class="kpi"><div class="kpi-l">2026年12月期予想</div><div class="kpi-v rd">要確認</div><div class="kpi-s">売上165億・経常10億・EPS71.2円<br>診療報酬改定の影響織込み済み？</div></div>
+  </div>
+  <div class="hero-verdict">
+    <div class="verdict-score">B+</div>
+    <div class="verdict-text">
+      <strong>「3年先を買うか、足元のリスクで沈むか」—— 在宅ホスピス市場は構造的成長産業、だが直近は逆風最大局面。</strong><br>
+      2026年6月から診療報酬包括払い導入で訪問看護報酬が約半減という最大リスクが顕在化。
+      一方で株価596円は来期PER8.4倍・配当利回り4.2%・PBR1.4倍と過去最安圏。
+      <strong>稼働回復軌道確認済み・スギHD提携・業界標準化主導・2040年需要爆発というカタリストが同時存在。中長期（3年）に許容リスクを取れる投資家に絞った吟味が必要。</strong>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ NAV ══════ -->
+<nav class="mnav" id="mnav">
+  <button class="mnb on" onclick="showChapter('c0',this)" style="background:rgba(29,125,159,.18);color:#5ac8e8;border-bottom-color:#5ac8e8">★ カタリスト【必見】</button>
+  <button class="mnb"    onclick="showChapter('c1',this)">1. 事業構造・ビジネスモデル</button>
+  <button class="mnb"    onclick="showChapter('c2',this)">2. 業績・財務深掘り</button>
+  <button class="mnb"    onclick="showChapter('c3',this)">3. 診療報酬改定リスク</button>
+  <button class="mnb"    onclick="showChapter('c4',this)">4. 市場・競合分析</button>
+  <button class="mnb"    onclick="showChapter('c5',this)">5. 中計・適時開示チェック</button>
+  <button class="mnb"    onclick="showChapter('c6',this)">6. バリュエーション</button>
+  <button class="mnb"    onclick="showChapter('c7',this)">7. 3ケース・期待価格</button>
+  <button class="mnb"    onclick="showChapter('c8',this)">8. 最終判断</button>
+</nav>
+
+<main class="body">
+
+<!-- ══════════════════════════════════════════════
+  c0: カタリスト【必見】
+══════════════════════════════════════════════ -->
+<div class="chapter active" id="c0">
+  <div class="ch-head"><span class="ch-num">★</span><h2 class="ch-title">日本ホスピス（7061）— なぜ今、この株なのか</h2><span class="ch-badge cb-hs">投資魅力の全体像 2026.06.02</span></div>
+
+  <!-- 一言サマリー -->
+  <div style="background:var(--ink);color:rgba(240,238,230,.88);border-radius:4px;padding:18px 24px;margin-bottom:18px;display:flex;align-items:center;gap:20px">
+    <div style="font:700 52px/1 var(--mono);color:#5ac8e8;flex-shrink:0">B+</div>
+    <div>
+      <div style="font:700 15px/1.3 var(--head);color:#fff;margin-bottom:6px">「2040年に死者170万人・病院→在宅シフトが国策——在宅ホスピス専業・国内唯一の上場企業が株価▲72%の底値圏にいる」</div>
+      <div style="font-size:11px;color:rgba(240,238,230,.55);line-height:1.75">来期PER8.4倍・配当利回り4.2%・ストックビジネス・アセットライト・スギHD提携——最大リスク「診療報酬包括払い（2026年6月〜）」の影響を消化できれば、3年後に複数倍のシナリオがある。</div>
+    </div>
+  </div>
+
+  <!-- 6大カタリスト -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px">
+
+    <!-- ① 在宅看取り需要の爆発 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--hs);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">①</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">多死社会・需要爆発<br><span style="font-weight:400;opacity:.7;font-size:9px">STRUCTURAL DEMAND 2040</span></div>
+        <div style="margin-left:auto;font:700 16px/1 var(--mono);color:#aee8f8">170万人/年</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+          <div style="background:#dff0f8;border-radius:3px;padding:7px 9px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--hs);letter-spacing:.08em;margin-bottom:4px">2040年死者数</div>
+            <div style="font:700 18px/1 var(--mono);color:var(--hs)">170万人</div>
+          </div>
+          <div style="background:#dff0f8;border-radius:3px;padding:7px 9px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--hs);letter-spacing:.08em;margin-bottom:4px">在宅希望率</div>
+            <div style="font:700 18px/1 var(--mono);color:var(--hs)">約60%</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+          末期がん・難病患者は毎年増加。国策として「病院依存→在宅シフト」が推進され、在宅ホスピス施設は<strong>社会インフラ</strong>として不可欠な存在に。現状の施設数は需要の数%を満たすにすぎず、<strong style="color:var(--hs)">市場は10〜20年単位で急拡大確実。</strong>
+        </div>
+        <div style="margin-top:8px;background:#dff0f8;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--hs)">
+          <strong>国の社会保障政策と事業成長方向が完全一致する稀有な事業</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 専業・国内唯一の上場企業 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--bl);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">②</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">専業・国内唯一の上場企業<br><span style="font-weight:400;opacity:.7;font-size:9px">MONOPOLY ON LISTED HOSPICE</span></div>
+        <div style="margin-left:auto;font:700 16px/1 var(--mono);color:#a0c8f8">唯一無二</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7;margin-bottom:9px">
+          「末期がん・難病患者専用ホスピス住宅」に特化した上場企業は日本国内で同社のみ。老人ホーム・介護系大手とは<strong>ターゲット・単価・看護師密度・収益構造がすべて異なる。</strong>
+          入居者1人あたり売上単価は一般老人ホームの2〜3倍。看護師24時間対応が競合参入を困難にしている。
+        </div>
+        <div style="background:#dfe8f8;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--bl)">
+          <strong>競合に同業上場企業が存在しない → 市場急拡大時の最大受益者</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ ストックビジネス×アセットライト -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--gn);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">③</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">ストック型×アセットライト<br><span style="font-weight:400;opacity:.7;font-size:9px">RECURRING + ASSET LIGHT MODEL</span></div>
+        <div style="margin-left:auto;font:700 14px/1.1 var(--mono);color:#a0e0b8">85%→黒字化</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7;margin-bottom:8px">
+          施設は<strong>賃貸主体</strong>のためキャッシュ設備投資が最小。入居者からの月次収入（ストック）が基盤。
+          稼働率85%達成後（30室→約1年、40室→約1.5年）は<strong style="color:var(--gn)">高い営業レバレッジで利益が加速</strong>。
+          安定稼働施設群がキャッシュカウとして新設施設の先行投資を支える構造。
+        </div>
+        <table style="width:100%;font-size:10px;border-collapse:collapse">
+          <tr style="background:#dff0e8"><td style="padding:4px 8px;font-weight:700">稼働85%達成後の施設</td><td style="padding:4px 8px;color:var(--gn);font-weight:700">高利益率で安定収益</td></tr>
+          <tr><td style="padding:4px 8px">立ち上げ中施設</td><td style="padding:4px 8px;color:var(--rd)">先行コストが重荷（一時的）</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ④ 株価▲72%の超割安圏 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--rd);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">④</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">高値▲72%の超割安圏<br><span style="font-weight:400;opacity:.7;font-size:9px">EXTREME PRICE DISLOCATION</span></div>
+        <div style="margin-left:auto;font:700 20px/1 var(--mono);color:#ffc0c0">PER8.4倍</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:9px">
+          <div style="background:#fce8e8;border-radius:3px;padding:6px 8px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:3px">来期PER</div>
+            <div style="font:700 16px/1 var(--mono);color:var(--rd)">8.4×</div>
+          </div>
+          <div style="background:#dff0f8;border-radius:3px;padding:6px 8px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--hs);margin-bottom:3px">配当利回</div>
+            <div style="font:700 16px/1 var(--mono);color:var(--hs)">4.2%</div>
+          </div>
+          <div style="background:#fef3e0;border-radius:3px;padding:6px 8px;text-align:center">
+            <div style="font:600 8px/1 var(--mono);color:var(--am);margin-bottom:3px">PBR</div>
+            <div style="font:700 16px/1 var(--mono);color:var(--am)">1.37×</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+          2026年12月期に会社予想（EPS71.2円）を達成すれば、来期PERは8.4倍という<strong>グロース株としては異例の低水準</strong>。
+          配当利回り4.2%はグロース市場平均（1%前後）の4倍超。<strong style="color:var(--rd)">「診療報酬ショック織り込み済み」</strong>なら底値圏。
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ スギHD提携・業界団体設立 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:var(--am);padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">⑤</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">スギHD提携・業界標準化主導<br><span style="font-weight:400;opacity:.7;font-size:9px">ALLIANCE + INDUSTRY LEADERSHIP</span></div>
+        <div style="margin-left:auto;font:700 14px/1.1 var(--mono);color:#ffe8b0">差別化</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7;margin-bottom:8px">
+          スギホールディングスとの資本業務提携でドラッグストア顧客基盤・物流・施設開発シナジー。
+          加えて2025年4月に<strong>「日本ホスピス住宅推進協会」を設立</strong>（代表：高橋社長）、業界標準化・制度設計への提言で行政との関係を強化。診療報酬改定での過剰請求業者の淘汰→<strong style="color:var(--am)">業界の信頼回復で日本ホスピスの相対的優位が高まる</strong>。
+        </div>
+        <div style="background:#fef3e0;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--am)">
+          <strong>業界乱立・玉石混淆→淘汰後の生き残りポジションに既に立っている</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ 2026年下期からの利益回復加速 -->
+    <div style="background:var(--bg2);border:.5px solid var(--bg3);border-radius:4px;overflow:hidden">
+      <div style="background:#3a6840;padding:9px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font:700 18px/1 var(--mono);color:#fff;opacity:.9;flex-shrink:0">⑥</div>
+        <div style="font:700 11px/1.2 var(--head);color:#fff">稼働回復確認済み・利益の「発射台」<br><span style="font-weight:400;opacity:.7;font-size:9px">OCCUPANCY RECOVERY + PROFIT INFLECTION</span></div>
+        <div style="margin-left:auto;font:700 14px/1 var(--mono);color:#a8e8a8">+145名/Q</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:11px;color:var(--ink2);line-height:1.7;margin-bottom:8px">
+          2025年1Q（稼働率63.3%）で大きく落ち込んだ入居者数は、4月以降の新体制・営業組織強化で<strong>1Q末1,090名→2Q末1,235名（＋145名）</strong>と急回復。2025年6月の経常利益率は7.9%まで戻り、下期（7〜12月）は10.1%の経常利益率を見込む。これが<strong>2026年への「発射台」</strong>となる。
+        </div>
+        <div style="background:#dff0e8;border-radius:3px;padding:6px 10px;font-size:11px;color:var(--gn)">
+          <strong>2025年12月末の入居者数が2026年以降の業績を規定——想定通りに進行中</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 最大リスク（見逃せない） -->
+  <div class="warn-box">
+    <strong>⚠ 最大リスク：2026年6月から診療報酬「包括払い」導入</strong><br>
+    厚労省は2026年6月から、ホスピス型住宅での訪問看護報酬を大幅引き下げ（月最大80〜90万円→45万円程度に実質半減）。
+    過剰請求業者への対応が主目的だが、日本ホスピスへの影響が未定。<strong>2026年12月期の会社予想（売上165億・経常利益10億）にこの影響が十分織り込まれているかがカギ。</strong>
+    ただし日本ホスピスは過剰請求業者ではなく「質の高い看護」を標榜しており、清廉な事業者への影響は軽微との見方もある。
+    また業界団体での行政提言を通じ、優良事業者が評価される仕組みへの制度設計にも関与している。
+  </div>
+
+  <!-- カタリストタイムライン -->
+  <div class="card" style="margin-bottom:0">
+    <div style="font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">カタリスト・タイムライン（2026〜2028）</div>
+    <div style="display:flex;gap:0;position:relative">
+      <div style="position:absolute;top:18px;left:0;right:0;height:2px;background:var(--bg3);z-index:0"></div>
+      <div style="flex:1;text-align:center;padding:0 6px;z-index:1">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--rd);margin:0 auto 8px"></div>
+        <div style="font:700 9px/1 var(--mono);color:var(--rd);margin-bottom:5px">2026年6月</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5">診療報酬<br>包括払い開始<br><span style="color:var(--rd)">最大リスク発現</span></div>
+      </div>
+      <div style="flex:1;text-align:center;padding:0 6px;z-index:1">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--am);margin:0 auto 8px"></div>
+        <div style="font:700 9px/1 var(--mono);color:var(--am);margin-bottom:5px">2026年Q3〜</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5">安定稼働施設の<br>利益貢献増大<br>（2024年4Q〜開設分）</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:0 6px;z-index:1">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--gn);margin:0 auto 8px"></div>
+        <div style="font:700 9px/1 var(--mono);color:var(--gn);margin-bottom:5px">2026年12月期</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5">会社予想<br>経常利益10億（＋82%）<br><span style="color:var(--gn)">EPS71.2円</span></div>
+      </div>
+      <div style="flex:1;text-align:center;padding:0 6px;z-index:1">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--hs);margin:0 auto 8px"></div>
+        <div style="font:700 9px/1 var(--mono);color:var(--hs);margin-bottom:5px">2027年〜</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5">過剰業者淘汰完了<br>優良業者への<br>需要集中期待</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:0 6px;z-index:1">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--bl);margin:0 auto 8px"></div>
+        <div style="font:700 9px/1 var(--mono);color:var(--bl);margin-bottom:5px">2028年以降</div>
+        <div style="font-size:10px;color:var(--ink2);line-height:1.5">施設70〜80棟超<br>2,500〜3,000室体制<br>スギ連携加速</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c1: 事業構造・ビジネスモデル
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c1">
+  <div class="ch-head"><span class="ch-num">01</span><h2 class="ch-title">事業構造・ビジネスモデル</h2><span class="ch-badge cb-hs">在宅ホスピス専業の稀有な構造</span></div>
+
+  <div class="good">
+    <strong>3本柱の相互補完：</strong>ホスピス住宅事業（主軸・高単価）＋訪問看護事業（診療報酬）＋在宅介護事業（介護保険）。3事業が1施設内で完結し、1入居者あたり月売上が老人ホームの2〜3倍に達する。
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-hs">
+      <div style="font:700 10px/1 var(--mono);color:var(--hs);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">ホスピス住宅事業（主軸）</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.8;padding-left:0;list-style:none">
+        <li>→ 末期がん・難病患者専用の賃貸住宅（サ高住・有老ホーム）</li>
+        <li>→ 入居者から家賃＋サービス費（月20〜40万円規模）</li>
+        <li>→ 訪問看護ステーション・訪問介護事務所を併設</li>
+        <li>→ 1室あたり売上：老人ホームの2〜3倍</li>
+        <li>→ 施設規模：30〜44室（1棟あたり）</li>
+      </ul>
+    </div>
+    <div class="card card-bl">
+      <div style="font:700 10px/1 var(--mono);color:var(--bl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">訪問看護・在宅介護事業</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.8;padding-left:0;list-style:none">
+        <li>→ 訪問看護：医療保険（診療報酬）が収入源</li>
+        <li>→ 在宅介護：介護保険が収入源</li>
+        <li>→ 両事業が住宅事業と一体化し高稼働率を支援</li>
+        <li>→ ★診療報酬改定リスクが集中する部分</li>
+        <li>→ 改定後も介護保険部分は影響なし</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <div style="font:700 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">施設損益モデル（稼働率別）</div>
+    <div class="g3">
+      <div>
+        <div style="font:700 9px/1 var(--mono);color:var(--rd);text-transform:uppercase;margin-bottom:8px;letter-spacing:.08em">開設〜8ヶ月（立上げ期）</div>
+        <div class="bgrp"><div class="blrow"><span>稼働率</span><span class="mono">〜50%</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:50%;height:8px;background:var(--rd)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>収益性</span><span class="mono hi-rd">赤字</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:10%;height:8px;background:var(--rd)"></div></div></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">採用・運営コスト先行。<br>全社利益を圧迫する時期。</div>
+      </div>
+      <div>
+        <div style="font:700 9px/1 var(--mono);color:var(--am);text-transform:uppercase;margin-bottom:8px;letter-spacing:.08em">8ヶ月〜1.5年（成長期）</div>
+        <div class="bgrp"><div class="blrow"><span>稼働率</span><span class="mono">50〜85%</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:75%;height:8px;background:var(--am2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>収益性</span><span class="mono hi-am">月次黒字化</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:50%;height:8px;background:var(--am2)"></div></div></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">累積損失を解消中。<br>単月黒字化の発射台。</div>
+      </div>
+      <div>
+        <div style="font:700 9px/1 var(--mono);color:var(--gn);text-transform:uppercase;margin-bottom:8px;letter-spacing:.08em">1.5年以降（安定稼働）</div>
+        <div class="bgrp"><div class="blrow"><span>稼働率</span><span class="mono">85%超</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:90%;height:8px;background:var(--gn2)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>収益性</span><span class="mono hi-gn">高利益率</span></div><div class="btrack" style="height:8px"><div class="bfill" style="width:85%;height:8px;background:var(--gn2)"></div></div></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">キャッシュカウ化。<br>次の施設の先行投資を支援。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>利益の不安定さの本質：</strong>新規施設を年10棟以上開設すると、常に「立上げ期施設」のコスト負担が全社利益を圧迫する。開設ペースを落とせば利益急拡大・高めれば利益圧迫——これは意図的な先行投資であり、将来の収益基盤を積み上げる行為。「利益が減っている = 成長投資をしている」という構造を正確に理解する必要がある。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c2: 業績・財務深掘り
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c2">
+  <div class="ch-head"><span class="ch-num">02</span><h2 class="ch-title">業績・財務の深掘り分析</h2><span class="ch-badge cb-warn">増収・急減益の構造を読む</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="card mc" style="border-top:3px solid var(--hs)"><div class="mc-l">売上高（2025年12月期）</div><div class="mc-v hs">141.7億</div><div class="mc-s">＋17.0%（5期連続増収）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">純利益</div><div class="mc-v rd">2.8億</div><div class="mc-s">▲56.5%（EPS 33.1円）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">営業利益率</div><div class="mc-v am">6.0%</div><div class="mc-s">前期10.6%から急低下</div></div>
+    <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">自己資本比率</div><div class="mc-v bl">19.4%</div><div class="mc-s">前期18.8%からわずかに改善</div></div>
+  </div>
+
+  <div class="stabs">
+    <button class="stab on" onclick="showTab('c2','pl',this)">損益推移</button>
+    <button class="stab"    onclick="showTab('c2','bs',this)">貸借対照表</button>
+    <button class="stab"    onclick="showTab('c2','cf',this)">CF・財務健全性</button>
+    <button class="stab"    onclick="showTab('c2','kpi',this)">KPI・施設進捗</button>
+  </div>
+
+  <div class="spanel active" id="c2-pl">
+    <table class="tbl">
+      <thead>
+        <tr><th>期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS（円）</th><th class="r">営業利益率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2021年12月期</td><td class="r mono">25.7億</td><td class="r mono hi-gn">1.7億</td><td class="r mono">1.9億</td><td class="r mono">1.1億</td><td class="r mono">—</td><td class="r mono hi-gn">6.5%</td></tr>
+        <tr><td>2022年12月期</td><td class="r mono">58.8億</td><td class="r mono hi-gn">6.6億</td><td class="r mono">6.9億</td><td class="r mono">3.6億</td><td class="r mono">—</td><td class="r mono hi-gn">11.3%</td></tr>
+        <tr><td>2023年12月期</td><td class="r mono">98.7億</td><td class="r mono hi-gn">9.7億</td><td class="r mono">10.3億</td><td class="r mono">6.4億</td><td class="r mono">—</td><td class="r mono hi-gn">9.8%</td></tr>
+        <tr><td>2024年12月期</td><td class="r mono">121.2億</td><td class="r mono hi-am">12.9億</td><td class="r mono">10.1億</td><td class="r mono">6.4億</td><td class="r mono">77.95円</td><td class="r mono hi-am">10.6%</td></tr>
+        <tr style="background:#f8f0f0"><td><strong>2025年12月期（実績）</strong></td><td class="r mono hi-hs"><strong>141.7億</strong></td><td class="r mono hi-rd"><strong>8.5億</strong></td><td class="r mono hi-rd">5.5億</td><td class="r mono hi-rd">2.8億</td><td class="r mono hi-rd">33.1円</td><td class="r mono hi-rd">6.0%</td></tr>
+        <tr style="background:#f0f8f4"><td><strong>2026年12月期（会社予想）</strong></td><td class="r mono hi-hs"><strong>165億</strong></td><td class="r mono hi-gn"><strong>15億</strong></td><td class="r mono hi-gn">10億</td><td class="r mono hi-gn">6億</td><td class="r mono hi-gn">71.2円</td><td class="r mono hi-gn">9.1%</td></tr>
+      </tbody>
+    </table>
+    <div class="note">2025年12月期減益の主因：①11施設415室の新規開設コスト先行、②本部・ユニット制組織強化に伴う人件費増（前期比＋数億円規模）、③医療スタッフへの臨時特別賞与支給。いずれも一時的・意図的な先行投資であり構造的悪化ではない。</div>
+  </div>
+
+  <div class="spanel" id="c2-bs">
+    <div class="g2">
+      <div>
+        <div style="font:700 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">資産（総資産189億円）</div>
+        <table class="tbl">
+          <thead><tr><th>項目</th><th class="r">金額</th><th class="r">比率</th></tr></thead>
+          <tbody>
+            <tr><td>現金・預金</td><td class="r mono hi-gn">20.1億</td><td class="r mono">10.6%</td></tr>
+            <tr><td>売上債権等（流動）</td><td class="r mono">10億規模</td><td class="r mono">〜5%</td></tr>
+            <tr><td>有形固定資産（リース資産含む）</td><td class="r mono hi-hs">100〜110億</td><td class="r mono">〜58%</td></tr>
+            <tr><td>その他（敷金・投資等）</td><td class="r mono">50〜60億</td><td class="r mono">〜26%</td></tr>
+            <tr style="background:#e8f0f8"><td><strong>総資産</strong></td><td class="r mono hi-bl"><strong>189億</strong></td><td class="r mono"><strong>100%</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="note">施設は賃貸主体のため、有形固定資産の大半はリース資産（使用権資産）。自社保有資産は少なく、アセットライトを体現している。</div>
+      </div>
+      <div>
+        <div style="font:700 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">負債・純資産（総資産189億円）</div>
+        <table class="tbl">
+          <thead><tr><th>項目</th><th class="r">金額</th><th class="r">比率</th></tr></thead>
+          <tbody>
+            <tr><td>有利子負債（借入金）</td><td class="r mono hi-rd">約32億</td><td class="r mono">〜17%</td></tr>
+            <tr><td>リース債務</td><td class="r mono hi-warn">約80億</td><td class="r mono">〜42%</td></tr>
+            <tr><td>その他負債</td><td class="r mono">約40億</td><td class="r mono">〜21%</td></tr>
+            <tr><td>純資産</td><td class="r mono hi-hs">36.8億</td><td class="r mono">19.4%</td></tr>
+            <tr style="background:#e8f0f8"><td><strong>総資産</strong></td><td class="r mono hi-bl"><strong>189億</strong></td><td class="r mono"><strong>100%</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="note">リース債務80億が実態。ただし賃貸契約解約で縮小可能な「やわらかい負債」。通常の借入金（約32億）は総資産比17%と管理可能水準。自己資本比率19.4%は低いが、リース主体のビジネスモデルとして解釈が必要。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spanel" id="c2-cf">
+    <div class="g3">
+      <div class="card card-gn">
+        <div class="mc-l">営業CF（2025年12月期）</div>
+        <div class="mc-v gn" style="font-size:20px">＋10.5億</div>
+        <div class="mc-s">前期8.4億から改善。キャッシュ生成力は堅調。</div>
+      </div>
+      <div class="card card-rd">
+        <div class="mc-l">投資CF</div>
+        <div class="mc-v rd" style="font-size:20px">▲5.1億</div>
+        <div class="mc-s">前期の▲27.9億から大幅縮小。新設ペース調整で投資抑制。</div>
+      </div>
+      <div class="card card-hs">
+        <div class="mc-l">フリーCF</div>
+        <div class="mc-v hs" style="font-size:20px">＋5.4億</div>
+        <div class="mc-s">2年ぶりのプラスフリーCF。財務柔軟性が向上。</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <table class="tbl">
+      <thead><tr><th>財務安全性指標</th><th class="r">数値</th><th>評価</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>自己資本比率</td><td class="r mono hi-am">19.4%</td><td><span class="badge bd-am">注意</span></td><td>低い水準だがリース主体ビジネス特性を考慮。前期18.8%から改善中。</td></tr>
+        <tr><td>有利子負債比率（借入金/総資産）</td><td class="r mono hi-am">〜17%</td><td><span class="badge bd-am">許容</span></td><td>リース除く純粋な借入金は管理可能な水準。</td></tr>
+        <tr><td>現金残高</td><td class="r mono hi-gn">20.1億</td><td><span class="badge bd-gn">良好</span></td><td>前期15.3億から4.9億増加。流動性に問題なし。</td></tr>
+        <tr><td>ROE</td><td class="r mono hi-am">7.8%</td><td><span class="badge bd-am">低下</span></td><td>前期20.9%から急低下。2026年回復時はROE改善が株価再評価につながる。</td></tr>
+        <tr><td>インタレストカバレッジ</td><td class="r mono hi-am">約1.5〜2倍</td><td><span class="badge bd-am">要注視</span></td><td>利払い能力は確保しているが余裕は少ない。金利上昇リスクあり。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="spanel" id="c2-kpi">
+    <div class="g4" style="margin-bottom:14px">
+      <div class="card mc" style="border-top:3px solid var(--hs)"><div class="mc-l">施設数（2025年12月末）</div><div class="mc-v hs">59棟</div><div class="mc-s">前期48棟から＋11棟</div></div>
+      <div class="card mc" style="border-top:3px solid var(--bl)"><div class="mc-l">居室数</div><div class="mc-v bl">2,024室</div><div class="mc-s">前期1,609室から＋25.8%</div></div>
+      <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">稼働率（2025年12月末）</div><div class="mc-v am">〜68%</div><div class="mc-s">1Qの63.3%から回復中</div></div>
+      <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">目標稼働率</div><div class="mc-v gn">85%</div><div class="mc-s">2024年12月末67.5%から継続改善</div></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>時点</th><th class="r">施設数</th><th class="r">居室数</th><th class="r">入居者数</th><th class="r">稼働率</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>2021年12月末</td><td class="r mono">16棟</td><td class="r mono">480室</td><td class="r mono">—</td><td class="r mono">—</td><td>成長初期段階</td></tr>
+        <tr><td>2022年12月末</td><td class="r mono">28棟</td><td class="r mono">882室</td><td class="r mono">—</td><td class="r mono">—</td><td>急拡大フェーズ開始</td></tr>
+        <tr><td>2023年12月末</td><td class="r mono">43棟</td><td class="r mono">1,415室</td><td class="r mono">—</td><td class="r mono">—</td><td>全国展開加速</td></tr>
+        <tr><td>2024年12月末</td><td class="r mono">48棟</td><td class="r mono">1,609室</td><td class="r mono hi-am">1,087名</td><td class="r mono hi-am">67.5%</td><td>年間8施設開設、後半ラッシュで稼働低下</td></tr>
+        <tr><td>2025年3月末</td><td class="r mono">51棟</td><td class="r mono">1,720室</td><td class="r mono hi-rd">1,090名</td><td class="r mono hi-rd">63.3%</td><td>新体制移行で稼働一時低下</td></tr>
+        <tr><td>2025年6月末</td><td class="r mono">53棟</td><td class="r mono">1,799室</td><td class="r mono hi-gn">1,235名</td><td class="r mono hi-gn">68.6%</td><td>4月以降の施策奏功、＋145名回復</td></tr>
+        <tr style="background:#e8f8f4"><td><strong>2025年12月末</strong></td><td class="r mono hi-hs"><strong>59棟</strong></td><td class="r mono hi-hs"><strong>2,024室</strong></td><td class="r mono hi-gn">推計1,380〜1,400名</td><td class="r mono hi-gn">〜69%</td><td>11施設追加。稼働回復軌道維持</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c3: 診療報酬改定リスク
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c3">
+  <div class="ch-head"><span class="ch-num">03</span><h2 class="ch-title">診療報酬改定リスク — 最大のリスクを定量化する</h2><span class="ch-badge cb-rd">2026年6月〜 包括払い導入</span></div>
+
+  <div class="warn-box" style="margin-bottom:16px">
+    <strong>改定の骨子（2026年6月施行）：</strong>ホスピス型住宅での同一建物訪問看護を対象に、出来高払いから「包括払い」を導入。現行の月最大80〜90万円/人が最大45万円程度に実質半減。一部事業者の過剰・短時間訪問（数十秒）による不正請求対応。20分未満の訪問は出来高でも算定不可に。
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-gn">
+      <div style="font:700 10px/1 var(--mono);color:var(--gn);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">日本ホスピスへの影響が軽微な理由</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.85;padding-left:0;list-style:none">
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>創業理念が「看護の質」：</strong>過剰請求・短時間訪問と無縁。看護師24時間対応が差別化軸</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>業界団体を主導：</strong>厚労省との意見交換・制度設計に関与。優良事業者評価の仕組み構築に注力</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>介護保険収入は影響外：</strong>訪問介護（介護保険）の報酬は今回の改定対象外</li>
+        <li style="padding:4px 0">→ <strong>2026年12月期予想に織り込み：</strong>会社はこの改定を認識した上で増益予想を公表</li>
+      </ul>
+    </div>
+    <div class="card card-rd">
+      <div style="font:700 10px/1 var(--mono);color:var(--rd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">影響が出るリスクシナリオ</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.85;padding-left:0;list-style:none">
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>包括払いで全施設に一律影響：</strong>質の高い訪問でも包括払い上限に収まる場合は減収</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>1人あたり単価下落：</strong>2025年12月期にすでに「利用者1人あたり売上単価が下落」と開示</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ <strong>競合他社の廃業・撤退：</strong>短期的な施設空室増で一時的需要取り込みにも時間がかかる可能性</li>
+        <li style="padding:4px 0">→ <strong>会社予想未達リスク：</strong>改定の実際の影響が予想より大きければ下方修正の可能性</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font:700 10px/1 var(--mono);color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">診療報酬改定の業績影響シナリオ推計（2026年12月期）</div>
+    <table class="tbl">
+      <thead><tr><th>シナリオ</th><th class="r">訪問看護売上減少</th><th class="r">経常利益</th><th class="r">EPS</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr style="background:#dff0e8"><td><strong>楽観（影響軽微）</strong></td><td class="r mono hi-gn">▲1〜2億</td><td class="r mono hi-gn">8〜10億</td><td class="r mono hi-gn">60〜71円</td><td>質の高い訪問のため包括払いでも大きく変わらず。会社予想ほぼ達成</td></tr>
+        <tr style="background:#fef3e0"><td><strong>中立（一定影響）</strong></td><td class="r mono hi-am">▲3〜5億</td><td class="r mono hi-am">5〜7億</td><td class="r mono hi-am">38〜53円</td><td>一部施設で単価下落。増益だが予想未達。稼働回復でカバーしつつある</td></tr>
+        <tr style="background:#fce8e8"><td><strong>悲観（影響大）</strong></td><td class="r mono hi-rd">▲6億以上</td><td class="r mono hi-rd">2〜4億</td><td class="r mono hi-rd">15〜30円</td><td>訪問看護収入が構造的に縮小。2025年12月期水準からほぼ改善なし</td></tr>
+      </tbody>
+    </table>
+    <div class="note">※推計は公開情報をもとにした試算です。正式な業績予想は会社開示情報をご確認ください。2026年12月期第2四半期（2026年8月発表予定）で改定影響の実態が初めて確認できます。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c4: 市場・競合分析
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c4">
+  <div class="ch-head"><span class="ch-num">04</span><h2 class="ch-title">市場・競合分析</h2><span class="ch-badge cb-gn">需要構造と競争優位</span></div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card card-hs">
+      <div style="font:700 10px/1 var(--mono);color:var(--hs);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">市場規模・成長性</div>
+      <div class="bgrp"><div class="blrow"><span>日本の年間死者数（2025年）</span><span class="mono hi-hs">約157万人</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:70%;height:7px;background:var(--hs)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>日本の年間死者数（2040年予測）</span><span class="mono hi-hs">約170万人</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:76%;height:7px;background:var(--hs)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>在宅・施設看取り希望率（内閣府）</span><span class="mono hi-gn">約60%超</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:60%;height:7px;background:var(--gn)"></div></div></div>
+      <div class="bgrp"><div class="blrow"><span>現在の在宅ホスピス実現率（推計）</span><span class="mono hi-rd">〜5%以下</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:5%;height:7px;background:var(--rd)"></div></div></div>
+      <div style="margin-top:10px;background:#dff0f8;border-radius:3px;padding:8px 10px;font-size:11px;color:var(--hs)">
+        <strong>需要と供給の乖離が極めて大きく、10〜20年単位の成長余地が存在</strong>
+      </div>
+    </div>
+    <div class="card card-gn">
+      <div style="font:700 10px/1 var(--mono);color:var(--gn);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">グローバルセクター成長</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.8">
+        <div class="bgrp"><div class="blrow"><span>アジア太平洋在宅ホスピス市場CAGR</span><span class="mono hi-gn">10.9%</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:80%;height:7px;background:var(--gn)"></div></div></div>
+        <div class="bgrp"><div class="blrow"><span>グローバル緩和ケア市場CAGR（〜2031）</span><span class="mono hi-gn">8.1%</span></div><div class="btrack" style="height:7px"><div class="bfill" style="width:65%;height:7px;background:var(--gn2)"></div></div></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink2)">
+          日本はアジア太平洋の中でも政府主導の在宅ケアプログラムが最も充実している国の一つ。高齢化最先進国として在宅ホスピス市場の成長は構造的かつ不可逆。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="tbl" style="margin-bottom:14px">
+    <thead><tr><th>比較項目</th><th>日本ホスピスHD（7061）</th><th>一般老人ホーム系（チャームケア等）</th><th>訪問看護専門（未上場多数）</th></tr></thead>
+    <tbody>
+      <tr><td>入居者ターゲット</td><td class="hi-hs"><strong>末期がん・難病患者（専業）</strong></td><td>一般高齢者</td><td>在宅療養全般</td></tr>
+      <tr><td>1入居者あたり月売上</td><td class="hi-gn"><strong>老人ホームの2〜3倍</strong></td><td>標準</td><td>訪問件数依存</td></tr>
+      <tr><td>看護師密度</td><td class="hi-hs"><strong>24時間365日常駐</strong></td><td>低い（要確認）</td><td>中（ステーション型）</td></tr>
+      <tr><td>上場ステータス</td><td class="hi-gn"><strong>東証グロース（唯一）</strong></td><td>東証プライム・スタンダード</td><td>ほぼ未上場</td></tr>
+      <tr><td>診療報酬改定影響</td><td class="hi-am">直接影響（訪問看護部分）</td><td>間接（低い）</td><td>大きい（主収入が訪問看護）</td></tr>
+      <tr><td>競争優位の源泉</td><td class="hi-hs"><strong>特化・質・ブランド</strong></td><td>規模・施設数</td><td>地域密着・医師連携</td></tr>
+    </tbody>
+  </table>
+
+  <div class="good">
+    <strong>競合参入障壁：</strong>看護師確保（特に緩和ケア専門）が最大の参入障壁。日本ホスピスは「看護師が働きたい職場・看護の理想を実現できる場」として採用競争力を持つ。一般介護事業者がホスピス住宅に参入しても、看護師チームの質・文化を再現するには数年を要する。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c5: 中計・適時開示チェック
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c5">
+  <div class="ch-head"><span class="ch-num">05</span><h2 class="ch-title">中計・適時開示チェック — 前回分析との差異検証</h2><span class="ch-badge cb-bl">IR資料・開示情報の精査</span></div>
+
+  <div class="notice">
+    <strong>主要確認事項：</strong>2025年8月13日発表の2Q決算説明資料・2025年11月14日の3Q短信・2026年2月13日の通期決算短信を参照。中期経営計画は公式資料での明示がないが、IR資料内の将来見通しから把握した。
+  </div>
+
+  <table class="tbl" style="margin-bottom:14px">
+    <thead>
+      <tr><th>確認項目</th><th>前回分析の認識</th><th>最新IR・開示での確認結果</th><th>差異</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2025年12月期通期業績</td>
+        <td>売上高160億予想（2025年5月時点）</td>
+        <td class="hi-am">実績：売上141.7億・経常利益5.5億（下方修正後）</td>
+        <td><span class="badge bd-am">下振れ</span></td>
+      </tr>
+      <tr>
+        <td>2026年12月期予想</td>
+        <td>売上160億・経常17.5億（修正前）</td>
+        <td class="hi-gn">最新：売上165億・経常10億・EPS71.2円（2026/2/13発表）</td>
+        <td><span class="badge bd-rd">利益目標を引き下げ</span></td>
+      </tr>
+      <tr>
+        <td>中期経営計画の修正要否</td>
+        <td>修正なし（2025年2Q時点）</td>
+        <td class="hi-gn">「2026年以降の中期経営計画について修正の必要はないと判断」（2025年2Q IR）</td>
+        <td><span class="badge bd-gn">変更なし</span></td>
+      </tr>
+      <tr>
+        <td>施設稼働率</td>
+        <td>1Q末63.3%（最低水準）</td>
+        <td class="hi-gn">2Q末68.6%に回復（＋5.3pt）、下期10.1%経常利益率見込み</td>
+        <td><span class="badge bd-gn">回復確認</span></td>
+      </tr>
+      <tr>
+        <td>業界団体設立</td>
+        <td>未確認</td>
+        <td class="hi-gn">2025年4月「日本ホスピス住宅推進協会」設立、代表：高橋社長、6社参加</td>
+        <td><span class="badge bd-gn">新規ポジティブ</span></td>
+      </tr>
+      <tr>
+        <td>診療報酬改定</td>
+        <td>包括払い導入リスクとして記載</td>
+        <td class="hi-rd">2026年6月から正式決定。月最大80〜90万→45万円に実質半減</td>
+        <td><span class="badge bd-rd">リスク具体化</span></td>
+      </tr>
+      <tr>
+        <td>スギHD連携</td>
+        <td>資本業務提携として確認</td>
+        <td class="hi-gn">継続・施設共同開発ニュースリリースも継続開示</td>
+        <td><span class="badge bd-gn">変更なし</span></td>
+      </tr>
+      <tr>
+        <td>配当</td>
+        <td>25円（2025年12月期予想）</td>
+        <td class="hi-gn">2025年12月期実績25円確定。2026年12月期も25円予想維持</td>
+        <td><span class="badge bd-gn">変更なし</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="g2">
+    <div class="card card-gn">
+      <div style="font:700 10px/1 var(--mono);color:var(--gn);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">前回分析から変わらないポジティブ点</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.85;padding-left:0;list-style:none">
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 施設拡大ペース（2025年末59施設2,024室）は継続</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 中期成長シナリオ自体は変更なし（会社宣言）</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 配当25円維持（利回り4.2%継続）</li>
+        <li style="padding:4px 0">→ 稼働率回復軌道確認（2025年2Q末68.6%）</li>
+      </ul>
+    </div>
+    <div class="card card-rd">
+      <div style="font:700 10px/1 var(--mono);color:var(--rd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">前回分析から加わった新リスク・修正点</div>
+      <ul style="font-size:12px;color:var(--ink2);line-height:1.85;padding-left:0;list-style:none">
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 診療報酬包括払いが正式決定（2026年6月）</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 2026年12月期の経常利益予想を17.5億→10億に引き下げ</li>
+        <li style="padding:4px 0;border-bottom:.5px solid var(--rule)">→ 1人あたり売上単価下落がすでに2025年に発生</li>
+        <li style="padding:4px 0">→ 3Q累計経常利益は5.1億（前年7.1億比▲28%）と依然厳しい</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c6: バリュエーション
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c6">
+  <div class="ch-head"><span class="ch-num">06</span><h2 class="ch-title">バリュエーション分析</h2><span class="ch-badge cb-hs">596円の本質価値</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">実績PER（2025年12月期）</div><div class="mc-v rd">18.0倍</div><div class="mc-s">EPS 33.1円</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">来期PER（会社予想）</div><div class="mc-v gn">8.4倍</div><div class="mc-s">EPS予想71.2円（2026年）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">PBR（実績）</div><div class="mc-v am">1.37倍</div><div class="mc-s">BPS 436円（2025年末）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--hs)"><div class="mc-l">EV/EBITDA（推計）</div><div class="mc-v hs">約8〜10倍</div><div class="mc-s">EBITDA≈18.2億（2025年）</div></div>
+  </div>
+
+  <table class="tbl" style="margin-bottom:16px">
+    <thead><tr><th>バリュエーション手法</th><th class="r">試算株価</th><th>前提・説明</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>PERバリュエーション（来期EPS×15倍）</td>
+        <td class="r mono hi-gn">1,068円</td>
+        <td>2026年12月期EPS71.2円が達成される場合。成長グロース株の適正PER15倍を適用</td>
+      </tr>
+      <tr>
+        <td>PERバリュエーション（来期EPS×10倍）</td>
+        <td class="r mono hi-am">712円</td>
+        <td>診療報酬改定リスクを保守的に見て低PERを適用した場合の最低ライン</td>
+      </tr>
+      <tr>
+        <td>DCF（保守的・割引率10%・3年成長10%）</td>
+        <td class="r mono hi-am">700〜900円</td>
+        <td>将来CFを割り引いた内在価値。成長が続く前提で現株価596円は下値圏</td>
+      </tr>
+      <tr>
+        <td>PBRバリュエーション（BPS×2倍）</td>
+        <td class="r mono hi-hs">872円</td>
+        <td>ROE改善時の目標PBR2倍。BPS436円×2倍。ROE10%以上回復が前提</td>
+      </tr>
+      <tr>
+        <td>類似業種EV/EBITDA（12倍）</td>
+        <td class="r mono hi-bl">約1,000〜1,200円</td>
+        <td>介護・医療サービス業の比較倍率。EBITDA成長が続く場合</td>
+      </tr>
+      <tr style="background:#fce8e8">
+        <td>ベア・ケース（EPS30円×8倍）</td>
+        <td class="r mono hi-rd">240円</td>
+        <td>診療報酬改定で大きく影響し、2026年も2025年並みの低水準が続く場合</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-hs">
+    <div style="font:700 10px/1 var(--mono);color:var(--hs);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">株価水準の位置づけ</div>
+    <div style="position:relative;height:40px;background:linear-gradient(90deg,var(--rd) 0%,var(--am) 30%,var(--am2) 55%,var(--gn2) 75%,var(--gn) 100%);border-radius:4px;margin-bottom:8px">
+      <div style="position:absolute;bottom:0;left:calc(13% - 1px);width:2px;height:60px;background:var(--ink)"></div>
+      <div style="position:absolute;bottom:-22px;left:calc(13% - 20px);font:700 9px/1 var(--mono);color:var(--rd)">596円</div>
+      <div style="position:absolute;bottom:0;left:calc(45% - 1px);width:2px;height:60px;background:var(--ink)"></div>
+      <div style="position:absolute;bottom:-22px;left:calc(45% - 20px);font:700 9px/1 var(--mono);color:var(--am)">900円</div>
+      <div style="position:absolute;bottom:0;left:calc(70% - 1px);width:2px;height:60px;background:var(--ink)"></div>
+      <div style="position:absolute;bottom:-22px;left:calc(70% - 20px);font:700 9px/1 var(--mono);color:var(--gn)">1,200円</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font:600 9px/1 var(--mono);color:var(--ink3);margin-top:28px">
+      <span>下値リスク（240円）</span>
+      <span>現在株価（596円）</span>
+      <span>中立適正（900円）</span>
+      <span>ブル目標（1,500円）</span>
+    </div>
+    <div class="note">複数の評価軸で「596円は割安圏」という結論は共通。ただし診療報酬改定の影響次第では会社予想EPS71.2円が達成されない可能性があり、不確実性が大きい段階。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c7: 3ケース・期待価格
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c7">
+  <div class="ch-head"><span class="ch-num">07</span><h2 class="ch-title">3年保有シナリオ分析 — ベア／ベース／ブル</h2><span class="ch-badge cb-hs">加重平均期待価格の算出</span></div>
+
+  <div class="notice">
+    <strong>分析前提：</strong>2026年6月2日株価596円を起点に、2028年12月末（約3年後）の株価水準を各シナリオで試算。保有期間中の配当（25円×3年＝75円）を含む総リターンで評価。
+  </div>
+
+  <div class="sc-grid" style="margin-bottom:18px">
+    <div class="sc-col">
+      <div class="sc-lbl bear">Bear シナリオ（確率25%）</div>
+      <div class="sc-prob bear">500円</div>
+      <div class="sc-sub">3年後株価目標（現在比▲16%）</div>
+      <div class="sc-li">診療報酬改定の影響が予想より大きく構造的に減収</div>
+      <div class="sc-li">2026年12月期業績が下方修正（EPS30〜40円）</div>
+      <div class="sc-li">稼働率が改善せず開設ペースを大幅縮小</div>
+      <div class="sc-li">看護師確保困難・人件費高止まり</div>
+      <div class="sc-li">市場がグロース株を敬遠、PER8〜10倍圧縮</div>
+      <div class="sc-li" style="border:none">EPS40円×10倍＝400円〜500円水準</div>
+      <div style="margin-top:10px;background:#fce8e8;border-radius:3px;padding:8px 10px">
+        <div style="font:700 9px/1 var(--mono);color:var(--rd);margin-bottom:4px">3年総リターン（配当込み）</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--rd)">▲1〜0%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">株価▲16%＋配当＋75円<br>元本割れリスクあり</div>
+      </div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl base">Base シナリオ（確率50%）</div>
+      <div class="sc-prob base">1,100円</div>
+      <div class="sc-sub">3年後株価目標（現在比＋85%）</div>
+      <div class="sc-li">2026年12月期業績がほぼ達成（EPS60〜71円）</div>
+      <div class="sc-li">診療報酬改定の影響を1〜2億減収でカバー</div>
+      <div class="sc-li">2027年以降は施設50〜65施設から安定稼働期拡大</div>
+      <div class="sc-li">稼働率が75〜80%まで改善</div>
+      <div class="sc-li">過剰業者淘汰後の需要集中で2027年増益加速</div>
+      <div class="sc-li" style="border:none">EPS80〜100円×12〜15倍＝960〜1,500円</div>
+      <div style="margin-top:10px;background:#fef3e0;border-radius:3px;padding:8px 10px">
+        <div style="font:700 9px/1 var(--mono);color:var(--am);margin-bottom:4px">3年総リターン（配当込み）</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--am)">＋97%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">株価＋85%＋配当75円<br>年率換算：約25%</div>
+      </div>
+    </div>
+    <div class="sc-col">
+      <div class="sc-lbl bull">Bull シナリオ（確率25%）</div>
+      <div class="sc-prob bull">2,200円</div>
+      <div class="sc-sub">3年後株価目標（現在比＋269%）</div>
+      <div class="sc-li">2026年12月期業績大幅達成＋上方修正</div>
+      <div class="sc-li">診療報酬改定で競合淘汰→需要独占が加速</div>
+      <div class="sc-li">スギHD連携で施設開発・顧客紹介が急加速</div>
+      <div class="sc-li">東証プライム市場への昇格・機関投資家参入</div>
+      <div class="sc-li">施設80棟超・稼働率85%超・EPS200〜250円圏</div>
+      <div class="sc-li" style="border:none">EPS200円×12倍＝2,400円水準</div>
+      <div style="margin-top:10px;background:#dff0e8;border-radius:3px;padding:8px 10px">
+        <div style="font:700 9px/1 var(--mono);color:var(--gn);margin-bottom:4px">3年総リターン（配当込み）</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--gn)">＋281%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px">株価＋269%＋配当75円<br>年率換算：約60%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 加重平均期待価格 -->
+  <div style="background:var(--ink);color:rgba(240,238,230,.9);border-radius:4px;padding:20px 24px;margin-bottom:18px">
+    <div style="font:700 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(240,238,230,.35);margin-bottom:14px">加重平均期待価格（3年後）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:16px">
+      <div style="background:rgba(13,37,53,.4);padding:12px 15px;text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);margin-bottom:5px">BEAR（25%）</div>
+        <div style="font:700 18px/1 var(--mono);color:#e08888">500円×25%</div>
+        <div style="font:700 14px/1 var(--mono);color:#e08888;margin-top:5px">= 125円</div>
+      </div>
+      <div style="background:rgba(13,37,53,.4);padding:12px 15px;text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);margin-bottom:5px">BASE（50%）</div>
+        <div style="font:700 18px/1 var(--mono);color:#e0a030">1,100円×50%</div>
+        <div style="font:700 14px/1 var(--mono);color:#e0a030;margin-top:5px">= 550円</div>
+      </div>
+      <div style="background:rgba(13,37,53,.4);padding:12px 15px;text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);margin-bottom:5px">BULL（25%）</div>
+        <div style="font:700 18px/1 var(--mono);color:#68c890">2,200円×25%</div>
+        <div style="font:700 14px/1 var(--mono);color:#68c890;margin-top:5px">= 550円</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px">
+      <div style="text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">加重平均期待株価（3年後）</div>
+        <div style="font:700 42px/1 var(--mono);color:#5ac8e8">1,225円</div>
+        <div style="font-size:11px;color:rgba(240,238,230,.5);margin-top:5px">（125＋550＋550円）</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
+      <div style="text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">配当込み期待リターン</div>
+        <div style="font:700 42px/1 var(--mono);color:#68c890">＋118%</div>
+        <div style="font-size:11px;color:rgba(240,238,230,.5);margin-top:5px">3年累計（年率換算約30%）</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
+      <div style="text-align:center">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">596円に対する期待倍率</div>
+        <div style="font:700 42px/1 var(--mono);color:#e0a030">2.1倍</div>
+        <div style="font-size:11px;color:rgba(240,238,230,.5);margin-top:5px">（配当除く株価ベース）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="good">
+    <strong>期待価値の結論：</strong>加重平均ベースで3年後の期待株価は1,225円（現在比＋106%）。配当込みで＋118%（年率換算約30%）のリターンが期待できる計算。ただしベアシナリオ25%の確率で元本割れとなる点に注意。確率加重後の期待値はポジティブだが、リスク許容度の低い投資家には不向き。
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+  c8: 最終判断
+══════════════════════════════════════════════ -->
+<div class="chapter" id="c8">
+  <div class="ch-head"><span class="ch-num">08</span><h2 class="ch-title">最終投資判断</h2><span class="ch-badge cb-hs">3年保有・中長期投資向け</span></div>
+
+  <div class="g4" style="margin-bottom:20px">
+    <div class="card mc" style="border-top:3px solid var(--hs)"><div class="mc-l">期待株価（3年後）</div><div class="mc-v hs">1,225円</div><div class="mc-s">加重平均・配当除く</div></div>
+    <div class="card mc" style="border-top:3px solid var(--gn)"><div class="mc-l">来期PER（会社予想）</div><div class="mc-v gn">8.4倍</div><div class="mc-s">EPS71.2円（2026年12月期）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--am)"><div class="mc-l">配当利回り（予想）</div><div class="mc-v am">4.2%</div><div class="mc-s">25円（2026年12月期も継続）</div></div>
+    <div class="card mc" style="border-top:3px solid var(--rd)"><div class="mc-l">元本割れ確率</div><div class="mc-v rd">〜25%</div><div class="mc-s">ベアシナリオ（診療報酬ショック）</div></div>
+  </div>
+
+  <table class="tbl" style="margin-bottom:20px">
+    <thead><tr><th>評価軸</th><th class="r">スコア</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>市場成長性・セクター追い風</td><td class="r hi-gn mono"><strong>95点</strong></td><td>多死社会・在宅シフト・2040年需要は構造不変。政府政策と完全一致</td></tr>
+      <tr><td>事業独自性・参入障壁</td><td class="r hi-gn mono"><strong>88点</strong></td><td>国内唯一の専業上場・看護師24時間・質特化。競合再現困難</td></tr>
+      <tr><td>ビジネスモデルの優位性</td><td class="r hi-gn mono"><strong>82点</strong></td><td>ストック収益＋アセットライト。稼働85%以降の利益構造は優秀</td></tr>
+      <tr><td>バリュエーション</td><td class="r hi-gn mono"><strong>80点</strong></td><td>来期PER8.4倍・配当4.2%はグロース株として異例の低水準。割安圏</td></tr>
+      <tr><td>財務健全性</td><td class="r hi-am mono">52点</td><td>自己資本比率19.4%・高レバレッジは継続課題。金利上昇リスクあり</td></tr>
+      <tr><td>短期業績安定性</td><td class="r hi-rd mono"><strong>30点</strong></td><td>利益3期連続悪化。2026年の改定影響が完全に読めない段階</td></tr>
+      <tr><td>規制リスク</td><td class="r hi-rd mono"><strong>35点</strong></td><td>診療報酬改定（2026年6月）が最大リスク。影響額が未確定</td></tr>
+      <tr><td>経営・ガバナンス</td><td class="r hi-am mono">65点</td><td>創業者系経営で方向性明確。ただし東証グロースで機関投資家の参入限定的</td></tr>
+    </tbody>
+  </table>
+
+  <div class="conc">
+    <div class="conc-head">最終投資判断 <span>— 2026.06.02 中計・適時開示精査版</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div>
+        <div class="conc-lbl">株価596円の本質</div>
+        <div class="conc-body">
+          2021年〜2024年の高成長期に株価2,100円超をつけた同社は、診療報酬包括払い決定（2026年6月）という<strong>最大の悪材料を織り込んで▲72%下落</strong>。EPS33円に対してPER18倍は割高だが、<strong>来期EPS71.2円（会社予想）が達成されればPER8.4倍</strong>という超割安状態。問題は「この予想が信頼できるか」という一点に集約される。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">3年保有での投資仮説</div>
+        <div class="conc-body">
+          投資仮説の核心：<strong>「診療報酬改定は過剰請求業者への打撃であり、質の高い日本ホスピスへの影響は相対的に小さい。2026年下期から安定稼働施設が増え、2027年には業績が正常化し株価が800〜1,200円に収束する」</strong>。加重平均期待価格1,225円は現在比+106%。配当込みリターン+118%（年率30%）は中長期投資として魅力的な水準。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">投資前に確認すべき最重要項目</div>
+        <div class="conc-body">
+          <strong>2026年8月の第2四半期決算</strong>が最初の重要確認ポイント。6月から診療報酬改定が適用されるため、7〜9月の損益で実際の影響が初めて数値化される。ここで影響軽微が確認できれば株価が大きく回復し、逆に悪化が確認されれば追加下落リスクがある。現時点では<strong>「最悪シナリオのリスクを取る覚悟」が購入の条件</strong>。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">誰に向いた投資か</div>
+        <div class="conc-body">
+          <strong>◎ 適する投資家：</strong>3年以上の保有が可能・在宅ホスピスの社会的意義を確信・リスク許容度が高い・分散ポートフォリオの一部として組み入れる場合。<br>
+          <strong>× 向かない投資家：</strong>短期（1年未満）保有・元本割れ許容ゼロ・業績安定重視・財務健全性を重視（自己資本比率20%以下が許容できない）。
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div style="text-align:center;padding:10px;background:rgba(240,238,230,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">加重平均期待株価</div>
+        <div style="font:700 22px/1 var(--mono);color:#5ac8e8">1,225円</div>
+        <div style="font-size:10px;color:rgba(240,238,230,.4);margin-top:3px">3年後・配当除く</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(240,238,230,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">来期PER（会社予想）</div>
+        <div style="font:700 22px/1 var(--mono);color:#68c890">8.4倍</div>
+        <div style="font-size:10px;color:rgba(240,238,230,.4);margin-top:3px">EPS71.2円達成前提</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(240,238,230,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">元本割れシナリオ確率</div>
+        <div style="font:700 22px/1 var(--mono);color:#e08888">25%</div>
+        <div style="font-size:10px;color:rgba(240,238,230,.4);margin-top:3px">診療報酬改定の影響大</div>
+      </div>
+      <div style="text-align:center;padding:10px;background:rgba(240,238,230,.05);border-radius:4px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(240,238,230,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px">配当込み期待リターン</div>
+        <div style="font:700 22px/1 var(--mono);color:#e0a030">＋118%</div>
+        <div style="font-size:10px;color:rgba(240,238,230,.4);margin-top:3px">3年累計・年率約30%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(240,238,230,.22);text-align:center;padding:16px;font:500 9px/1 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてなされますようお願いいたします。<br style="margin-bottom:3px">
+  Data: 2025年12月期決算短信（2026/2/13）/ 2025年第3四半期決算短信（2025/11/14）/ 2025年第2四半期決算説明資料（2025/8/13）/
+  共同通信「ホスピス型住宅報酬引き下げ」（2026/2/14）/ 厚労省令和8年度診療報酬改定資料 / Yahoo!ファイナンス / 日本ホスピスHD IRサイト — Version 1.0 2026.06.02
+</footer>
+
+<script>
+function showChapter(id, btn){
+  document.querySelectorAll('.chapter').forEach(ch=>ch.classList.remove('active'));
+  document.querySelectorAll('.mnb').forEach(b=>{b.classList.remove('on');b.style.background='';b.style.color='';b.style.borderBottomColor='';});
+  document.getElementById(id)?.classList.add('active');
+  btn.classList.add('on');
+  if(id==='c0'){btn.style.background='rgba(29,125,159,.18)';btn.style.color='#5ac8e8';btn.style.borderBottomColor='#5ac8e8';}
+  window.scrollTo({top:document.querySelector('.mnav').offsetTop,behavior:'smooth'});
+}
+function showTab(chapId, panelId, btn){
+  const chap = document.getElementById(chapId);
+  chap.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  chap.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(`${chapId}-${panelId}`)?.classList.add('active');
+  btn.classList.add('on');
+}
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bfill').forEach(f=>{
+        const w = f.style.width; f.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=w));
+      });
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+</script>
+</body>
+</html>

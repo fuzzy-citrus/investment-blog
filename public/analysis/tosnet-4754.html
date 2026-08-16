@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>トスネット（4754）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</style></head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 4754 · 2026.07.28 作成</p>
+      <h1 class="ht">株式会社トスネット <em>（4754）</em><br>深堀投資分析レポート</h1>
+      <p class="hs">光通信が「その他の関係会社」化・持分法適用へ（2026/7/10）／ 創業家の株式集約（元気 26.19%→38.08%）<br>ネットキャッシュ48.3億円＝時価総額の68% ／ EV/EBIT 4.4倍 ／ 現株価1,520円はNAV推定1,905円の80%</p>
+    </div>
+    <div class="vb">
+      <div class="vs">○＋</div>
+      <div class="vt">
+        <strong>資産バリュー◎／業績モメンタム×</strong><br>
+        キャッシュ調整後PER 4.2倍・PBR0.84倍。<br>
+        カタリストは「資本」側に集中。<br>
+        <span style="color:var(--or2)">流動性の薄さが最大の実務制約。</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,520円</div><div class="ks">時価総額 約70.7億円（465万株）</div></div>
+    <div class="kv"><div class="kl">ネットキャッシュ</div><div class="kn gn">48.3億円</div><div class="ks">時価総額の68.3%（投有含め75%）</div></div>
+    <div class="kv"><div class="kl">EV / EV倍率</div><div class="kn gn">22.4億円</div><div class="ks">EV/EBIT 4.4倍・EBITDA 3.1倍</div></div>
+    <div class="kv"><div class="kl">土地含み益（中立）</div><div class="kn am">+6.7億円</div><div class="ks">税引後+4.7億／+101円/株</div></div>
+    <div class="kv"><div class="kl">PBR（BPS1,804円）</div><div class="kn bl">0.84倍</div><div class="ks">NAV推定1,905円の80%水準</div></div>
+    <div class="kv"><div class="kl">上位株主集中度</div><div class="kn rd">約80.8%</div><div class="ks">元気38.1%＋光通信20.0%＋セコム15.5%</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--pu2)"></span>資本構成</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--am2)"></span>資産価値・含み益</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>業績・中計</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--or2)"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 カタリスト ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、トスネットなのか</h2><span class="sb bg-gn">6つのカタリスト</span></div>
+
+  <div class="ok">直近2ヶ月（2026年6月〜7月）で、この銘柄の<strong>資本政策イベントが立て続けに3件</strong>発生しています。事業モメンタムは悪化中である一方、「株主構成が動き始めた」という点が、現在のトスネットの投資妙味の中心です。</div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🎯</span>
+      <div class="ct">光通信が「その他の関係会社」に<br>― 持分法適用関連会社化</div>
+      <div class="cb gn">20.04%</div>
+      <div class="cu">2026/7/10開示・議決権合算ベース</div>
+      <div class="cp">光通信グループの議決権が<strong>19.58%→20.04%に到達。7/8に光通信から「トスネットを持分法適用関連会社とする旨、及び決算書類の授受に関する正式な依頼」</strong>があり、7/10付で「その他の関係会社」に該当と判断。<br>単なる純投資から<strong>「損益を取り込む関与」への質的転換</strong>です。持分法適用側は投資先のEPS・配当に強い経済的動機を持ちます。</div>
+      <div class="tgs"><span class="tg tg-gn">7年で0%→20%</span><span class="tg tg-or">増配圧力の制度化</span></div>
+    </div>
+
+    <div class="ca cc-pu">
+      <div class="cn">Catalyst 02 · 最重要</div>
+      <span class="ci">🏛️</span>
+      <div class="ct">創業家が個人株を資産管理会社へ全量集約</div>
+      <div class="cb" style="color:#c98ac0">38.08%</div>
+      <div class="cu">有限会社元気 26.19%→38.08%（2026/6/11）</div>
+      <div class="cp">代表取締役専務・佐藤雅彦氏が<strong>個人保有55.28万株（11.89%）を全量、資産管理会社「有限会社元気」に譲渡し個人保有はゼロに。</strong>開示上は「金商法167条の買集め行為に該当」として公表されています。<br>相続・事業承継対策の定石であると同時に、<strong>非公開化を行う場合の受け皿が1社に整った</strong>ことを意味します。</div>
+      <div class="tgs"><span class="tg tg-am">事業承継の号砲</span><span class="tg tg-gn">MBO受け皿の完成</span></div>
+    </div>
+
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 最重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">ネットキャッシュが時価総額の68%</div>
+      <div class="cb or">48.3億円</div>
+      <div class="cu">時価総額70.7億円 / EV わずか22.4億円</div>
+      <div class="cp">2026年3月末で現預金52.1億円、借入金3.8億円。<strong>投資有価証券4.8億円を加えれば準現金資産53.1億円＝時価総額の75%。</strong><br>EVベースではFY26会社計画（下方修正後）の営業利益5.1億円に対し<strong>EV/EBIT 4.4倍、EV/EBITDA約3.1倍</strong>。実質的に「本業をタダ同然で買える」水準です。</div>
+      <div class="tgs"><span class="tg tg-or">自己資本比率77.5%</span><span class="tg tg-gn">実質無借金</span></div>
+    </div>
+
+    <div class="ca cc-am" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04</div>
+      <span class="ci" style="font-size:22px">🎂</span>
+      <div class="ct" style="color:var(--ink)">創業50周年（2027年3月）と中計の切り替わり</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--am);margin:6px 0 2px">2026年9月期で満了</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">中計「VISION for 50」Step.2の最終年度</div>
+      <div class="cp" style="color:var(--ink2)">現行中計は「創業50周年（2027年3月30日）まで」の6年計画で、<strong>2026年9月期が最終年度。</strong>FY26は大幅未達が確定的なため、次期中計では<strong>資本効率・株主還元の方針提示が避けられない</strong>局面。光通信の関与強化と時期が重なります。</div>
+    </div>
+
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05</div>
+      <span class="ci" style="font-size:22px">🧾</span>
+      <div class="ct" style="color:var(--ink)">創業者への特別功労金3.0億円を計上</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">△300百万円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">2026年9月期中間・特別損失／長期未払金計上</div>
+      <div class="cp" style="color:var(--ink2)">創業者（佐藤康廣・取締役会長）に対する特別功労金3億円を特別損失に計上（未払計上）。<strong>経営陣の世代交代が財務諸表上に現れた。</strong>Catalyst 02の株式集約と同一の文脈で読むべきイベントです。</div>
+    </div>
+
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 06 · 両刃</div>
+      <span class="ci" style="font-size:22px">📉</span>
+      <div class="ct" style="color:var(--ink)">流通株式比率の低下と上場維持基準</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">上位80.8%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">スタンダード基準は流通株式比率25%以上</div>
+      <div class="cp" style="color:var(--ink2)">元気38.1%＋光通信20.0%＋セコム15.5%＋会長3.0%＋持株会2.4%＋自己株1.7%。<strong>安定株主の比率上昇は、流通株式比率の維持を難しくしていく方向</strong>に働きます。改善が難しければ「大株主による売出し」か「非公開化」の二択に収れんします。<br><span style="color:var(--rd);font-weight:600">※東証の流通株式判定は名義単位のため、光通信系ファンドが各10%未満で除外されない可能性あり。実際の比率は要確認。</span></div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      トスネットは、<strong style="color:var(--or2)">「実質無借金＋ネットキャッシュ48億」というバランスシートを、創業家（38%）と光通信（20%）が同時に押さえに来ている資本イベント型の案件。</strong>本業は賃上げコストで足元崩れており、<span style="color:#e09090">業績で買う銘柄ではない。</span>買う理由は「誰が何のために株を集めているのか」であり、その答えが出るまで待てる資金でのみ成立します。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 資本構成 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資本構成 ── 誰が株を握っているのか</h2><span class="sb bg-pu">浮動株は約19%</span></div>
+
+  <table class="t" style="margin-bottom:18px">
+    <thead><tr><th>株主</th><th>属性</th><th class="r">株式数</th><th class="r">比率</th><th>直近の動き</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>有限会社元気</strong></td><td>佐藤雅彦専務の資産管理会社</td><td class="r mn">1,770,800</td><td class="r mn hgn">38.08%</td><td>2026/6/11に佐藤雅彦氏の個人株55.28万株を取得（26.19%→38.08%）</td></tr>
+      <tr class="hl"><td><strong>光通信グループ</strong>（合算）</td><td>その他の関係会社（2026/7/10〜）</td><td class="r mn">931,700</td><td class="r mn hor">20.04%</td><td>2026/6/30時点で20%超。持分法適用関連会社化を要請</td></tr>
+      <tr><td>└ UH Partners 投資事業有限責任組合</td><td>光通信系</td><td class="r mn">355,200</td><td class="r mn">7.66%</td><td>2024〜2025年に買い増し</td></tr>
+      <tr><td>└ 光通信KK投資事業有限責任組合</td><td>光通信系</td><td class="r mn">306,000</td><td class="r mn">6.62%</td><td>—</td></tr>
+      <tr><td>└ エスアイエル投資事業有限責任組合</td><td>光通信系</td><td class="r mn">114,000</td><td class="r mn">2.46%</td><td>—</td></tr>
+      <tr><td>└ ㈱UH Partners / UH Partners 3 他</td><td>光通信系</td><td class="r mn">156,500</td><td class="r mn">3.30%</td><td>2025/9にUH Partners 3が0.89→1.68%</td></tr>
+      <tr class="hl"><td><strong>セコム㈱</strong></td><td>2001年から資本提携</td><td class="r mn">720,000</td><td class="r mn hbl">15.53%</td><td>2025/9末時点。長期安定株主／動きなし</td></tr>
+      <tr><td>佐藤 康廣</td><td>創業者・取締役会長</td><td class="r mn">140,000</td><td class="r mn">3.03%</td><td>2026年3月期に特別功労金3億円を計上</td></tr>
+      <tr><td>トスネット社員持株会</td><td>従業員</td><td class="r mn">109,000</td><td class="r mn">2.36%</td><td>2025年に譲渡制限付株式インセンティブ導入</td></tr>
+      <tr><td>自己株式</td><td>金庫株</td><td class="r mn">81,325</td><td class="r mn">1.72%</td><td>2025年2月に6.7万株取得（9,688万円）</td></tr>
+      <tr><td>山形共立㈱ 他</td><td>取引先等</td><td class="r mn">50,000</td><td class="r mn">1.08%</td><td>—</td></tr>
+      <tr class="sm"><td colspan="3">上位株主 合計</td><td class="r mn">約80.8%</td><td>実質浮動株は<strong>19%前後（約90万株・13.5億円相当）</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh"><span class="sn">02-2</span><h2 class="st">なぜ「デッドロック」が効くのか</h2><span class="sb bg-am">重要な構造</span></div>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="c cl-gn"><div class="ml">スクイーズアウト要件</div>
+      <div style="font:600 22px/1 var(--mono);color:var(--gn);margin:6px 0">2/3 = 66.7%</div>
+      <div class="ms">株式併合による完全子会社化には特別決議（議決権の2/3）が必要。<strong>元気38.08%＋会長3.03%＋持株会2.36%＝約43%では届かない。</strong></div></div>
+    <div class="c cl-am"><div class="ml">元気＋セコム</div>
+      <div style="font:600 22px/1 var(--mono);color:var(--am);margin:6px 0">約59%</div>
+      <div class="ms">セコムが賛同しても2/3に届かず。<strong>非公開化には光通信の同意が事実上の必要条件。</strong></div></div>
+    <div class="c cl-or"><div class="ml">元気＋光通信</div>
+      <div style="font:600 22px/1 var(--mono);color:var(--or);margin:6px 0">約58%</div>
+      <div class="ms">逆に光通信が組んでもセコムが加わらなければ2/3未満。<strong>3者のうち2者だけでは決着しない設計になっている。</strong></div></div>
+  </div>
+
+  <div class="inf"><strong>ここが投資判断の核心です。</strong>元気38.08%は「誰も敵対的に買収できない」防波堤である一方、元気単独でも非公開化はできません。つまり<strong>MBO／TOBが起きるとすれば、それは「合意型」でしか起きない</strong>ということ。合意型は交渉が長引きやすい反面、<span style="font-weight:600">いったん合意すれば公表から実行まで極めて速く、市場は事前にほとんど織り込めません。</span></div>
+
+  <div class="sh"><span class="sn">02-3</span><h2 class="st">光通信の関与強化が意味すること</h2><span class="sb bg-or">増配圧力</span></div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cf-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--gn)">持分法適用の経済的インセンティブ</div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2)">光通信は今後、トスネットの純利益の約20%を持分法投資損益として自社P/Lに取り込みます。同時に<strong>「決算書類の授受」という情報アクセス権</strong>も得ました。<br>光通信は投資先に対し高配当・株主還元を志向する傾向が知られており、<strong>配当性向の引き上げ要求が最も蓋然性の高い次のアクション</strong>です。</div>
+    </div>
+    <div class="c cf-am">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--am)">還元余力は極めて大きい</div>
+      <table class="t" style="font-size:11.5px">
+        <tr><td>年間配当総額（37円）</td><td class="r mn">約1.72億円</td></tr>
+        <tr><td>FY26予想純利益</td><td class="r mn">5.36億円</td></tr>
+        <tr><td>配当性向</td><td class="r mn ham">約32%</td></tr>
+        <tr><td>ネットキャッシュ</td><td class="r mn hgn">48.3億円</td></tr>
+        <tr class="sm"><td>配当性向50%なら</td><td class="r mn">58円（利回り3.9%）</td></tr>
+        <tr class="sm"><td>DOE3%なら</td><td class="r mn">54円（利回り3.6%）</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="note">※光通信の議決権20.04%は各ファンド名義の合算値。個々の名義では10%未満のため、東証の流通株式判定上どう扱われるかは会社の適時開示・コーポレートガバナンス報告書で確認が必要です。</div>
+</div>
+
+<!-- ══════════════════════════════ P3 資産価値 ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">資産価値 ── 土地の含み益はいくらか</h2><span class="sb bg-am">推定 +6.7億円（中立）</span></div>
+
+  <div class="inf"><strong>先に結論を。</strong>「老舗の東北企業＝バブル前取得の巨大な含み益」という期待は、<strong>トスネットには当てはまりません。</strong>有価証券報告書の「主要な設備の状況」から所在地・面積・帳簿価額を洗い出すと、<u>簿価/㎡がすでに現在の地価水準に近い物件が多く</u>、取得は概ね2000年代以降と推定されます。一方で<strong>仙台市の地価が2012年の底から大きく戻していること</strong>が効き、中立ケースで税引後+4.7億円（+101円/株）の押し上げと試算しました。</div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>物件</th><th>所在地</th><th class="r">面積(㎡)</th><th class="r">簿価(千円)</th><th class="r">簿価/㎡</th><th class="r">想定時価/㎡</th><th class="r">含み損益(千円)</th></tr></thead>
+    <tbody>
+      <tr><td>本社他11営業所</td><td>仙台市宮城野区 他</td><td class="r mn">987.8</td><td class="r mn">173,485</td><td class="r mn">175,637</td><td class="r mn">300,000</td><td class="r mn hgn">+122,840</td></tr>
+      <tr><td>本社土地（中野三丁目）</td><td>仙台市宮城野区</td><td class="r mn">1,450.4</td><td class="r mn">129,024</td><td class="r mn">88,958</td><td class="r mn">150,000</td><td class="r mn hgn">+88,536</td></tr>
+      <tr><td>卸町事務所及び倉庫</td><td>仙台市若林区</td><td class="r mn">2,647.1</td><td class="r mn">259,038</td><td class="r mn">97,857</td><td class="r mn">180,000</td><td class="r mn hgn">+217,440</td></tr>
+      <tr><td>宮城野マンション（敷地権）</td><td>仙台市宮城野区</td><td class="r mn">516.5</td><td class="r mn">149,061</td><td class="r mn">288,626</td><td class="r mn">350,000</td><td class="r mn hgn">+31,697</td></tr>
+      <tr><td>中野倉庫</td><td>仙台市宮城野区</td><td class="r mn">344.4</td><td class="r mn">27,450</td><td class="r mn">79,713</td><td class="r mn">150,000</td><td class="r mn hgn">+24,204</td></tr>
+      <tr><td>三洋警備保障</td><td>東京都世田谷区</td><td class="r mn">436.6</td><td class="r mn">109,021</td><td class="r mn">249,676</td><td class="r mn">550,000</td><td class="r mn hgn">+131,136</td></tr>
+      <tr><td>I・C・Cインターナショナル</td><td>札幌市東区</td><td class="r mn">1,482.1</td><td class="r mn">95,051</td><td class="r mn">64,132</td><td class="r mn">95,000</td><td class="r mn hgn">+45,749</td></tr>
+      <tr><td>大盛警備保障</td><td>岩手県盛岡市</td><td class="r mn">1,032.0</td><td class="r mn">72,000</td><td class="r mn">69,769</td><td class="r mn">85,000</td><td class="r mn hgn">+15,718</td></tr>
+      <tr><td>貸事務所</td><td>岩手県盛岡市</td><td class="r mn">593.4</td><td class="r mn">54,616</td><td class="r mn">92,039</td><td class="r mn">110,000</td><td class="r mn hgn">+10,658</td></tr>
+      <tr><td>貸事務所及び駐車場</td><td>新潟市中央区</td><td class="r mn">557.9</td><td class="r mn">129,444</td><td class="r mn">232,028</td><td class="r mn">250,000</td><td class="r mn hgn">+10,026</td></tr>
+      <tr><td>貸事務所及び駐車場</td><td>青森県青森市</td><td class="r mn">464.8</td><td class="r mn">69,891</td><td class="r mn">150,365</td><td class="r mn">160,000</td><td class="r mn hgn">+4,479</td></tr>
+      <tr><td>貸建物及び駐車場</td><td>新潟市西区</td><td class="r mn">129.6</td><td class="r mn">11,003</td><td class="r mn">84,932</td><td class="r mn">90,000</td><td class="r mn">+657</td></tr>
+      <tr><td>貸建物及び駐車場（2025年取得）</td><td>茨城県水戸市</td><td class="r mn">1,163.1</td><td class="r mn">48,559</td><td class="r mn">41,750</td><td class="r mn">41,750</td><td class="r mn">±0</td></tr>
+      <tr><td>アイワ警備保障</td><td>千葉県睦沢町</td><td class="r mn">366.8</td><td class="r mn">3,000</td><td class="r mn">8,180</td><td class="r mn">8,000</td><td class="r mn">△66</td></tr>
+      <tr style="background:var(--rd3)"><td><strong>元気荘（旅館・厚生施設）</strong></td><td>宮城県蔵王町</td><td class="r mn">12,766.8</td><td class="r mn">120,858</td><td class="r mn">9,467</td><td class="r mn">6,000</td><td class="r mn hrd">△44,257</td></tr>
+      <tr style="background:var(--rd3)"><td><strong>研修センター「青春の館」</strong></td><td>宮城県蔵王町</td><td class="r mn">11,030.8</td><td class="r mn">58,715</td><td class="r mn">5,323</td><td class="r mn">4,700</td><td class="r mn hrd">△6,870</td></tr>
+      <tr class="sm"><td colspan="2">事業用土地 合計</td><td class="r mn">35,970.8</td><td class="r mn">1,511,349</td><td class="r mn">42,017</td><td class="r mn">—</td><td class="r mn hgn">+652,614</td></tr>
+      <tr class="sm"><td colspan="2">投資土地（賃貸用）</td><td class="r mn">n.a.</td><td class="r mn">72,085</td><td class="r mn">—</td><td class="r mn">簿価×1.30</td><td class="r mn hgn">+21,626</td></tr>
+      <tr class="hl"><td colspan="4"><strong>土地含み損益 合計（中立ケース・税引前）</strong></td><td colspan="2" class="r"><strong>税引後 +468百万円 ＝ +101円/株</strong></td><td class="r mn hgn"><strong>+674,239</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="c cl-rd mc"><div class="ml">保守ケース</div><div class="mv rd">+2.3億円</div><div class="ms">税引後+1.6億／+34円per株<br>仙台の上昇を半分しか認めない</div></div>
+    <div class="c cl-am mc"><div class="ml">中立ケース</div><div class="mv am">+6.7億円</div><div class="ms">税引後+4.7億／+101円per株<br><strong>本レポートの採用値</strong></div></div>
+    <div class="c cl-gn mc"><div class="ml">強気ケース</div><div class="mv gn">+13.2億円</div><div class="ms">税引後+9.2億／+197円per株<br>仙台商業地・工業地水準に寄せる</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--gn)">追い風：仙台市宮城野区の地価は底から2.8倍</div>
+      <table class="t" style="font-size:11.5px">
+        <tr><th>指標（公示地価）</th><th class="r">円/㎡</th><th class="r">前年比</th></tr>
+        <tr><td>宮城野区 全用途平均（2026年）</td><td class="r mn">216,939</td><td class="r mn hgn">+7.25%</td></tr>
+        <tr><td>└ 商業地</td><td class="r mn">514,133</td><td class="r mn hgn">+10.23%</td></tr>
+        <tr><td>└ 工業地</td><td class="r mn">149,600</td><td class="r mn hgn">+17.08%</td></tr>
+        <tr><td>└ 住宅地</td><td class="r mn">128,405</td><td class="r mn hgn">+5.57%</td></tr>
+        <tr class="sm"><td>過去最低（2012年）</td><td class="r mn">76,205</td><td class="r mn">→ 2026年は<strong>2.85倍</strong></td></tr>
+      </table>
+      <div class="note">仙台駅東口の再開発期待もあり、宮城野区・若林区の上昇は当面続く可能性。土地は2026年3月期中間にも+2.28億円取得しており、会社は不動産を積み増す方針。</div>
+    </div>
+    <div class="c cl-rd">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--rd)">向かい風：蔵王町の2物件が面積の66%</div>
+      <table class="t" style="font-size:11.5px">
+        <tr><th>指標（蔵王町）</th><th class="r">円/㎡</th><th class="r">前年比</th></tr>
+        <tr><td>公示地価 全用途平均（2026年）</td><td class="r mn">12,236</td><td class="r mn hrd">△1.09%</td></tr>
+        <tr><td>└ 住宅地</td><td class="r mn">9,405</td><td class="r mn hrd">△1.64%</td></tr>
+        <tr><td>実際の土地取引平均（2025年）</td><td class="r mn">4,696</td><td class="r mn">公示比△60%</td></tr>
+        <tr class="sm"><td>元気荘の簿価/㎡</td><td class="r mn hrd">9,467</td><td class="r mn">実勢の約2倍</td></tr>
+      </table>
+      <div class="note">蔵王町の地価は1998年をピークに<strong>28年連続で下落</strong>（ピーク比△62%）。元気荘（1993年建設・旅館業）と研修センター（1999年建設）は簿価が実勢を上回る可能性が高く、<strong>減損リスクを内包</strong>します。含み益の源泉ではなく、むしろ将来の特別損失候補。</div>
+    </div>
+  </div>
+
+  <div class="c cf-bl">
+    <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--bl)">試算の前提と限界（正直に）</div>
+    <div style="font-size:11.5px;line-height:1.8;color:var(--ink2)">
+      ① 有報には<strong>賃貸等不動産の時価注記が本レポート作成時点で確認できず</strong>、含み益は当方の推定値です。会社開示の公式数値ではありません。<br>
+      ② 取得時期は「沿革」からの推定であり、個別の取得年は開示されていません。<br>
+      ③ 「想定時価/㎡」は各所在市区町村の2026年公示地価（用途別平均）を基準に、立地・用途で調整したもの。実際の鑑定評価とは乖離し得ます。<br>
+      ④ 税効果は実効税率30.6%を適用。含み益はあくまで<strong>「売却して初めて現金化される」性質</strong>であり、本社・営業所は事業継続上売却できません。<u>TOB価格算定では一定程度考慮されますが、DCF法主体の場合はほとんど反映されない点に注意。</u>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P4 業績・中計 ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">業績と中期経営計画 ── ここが弱点</h2><span class="sb bg-rd">FY26は大幅未達</span></div>
+
+  <div class="inf"><strong>この銘柄の最大の弱点は本業です。</strong>2026年5月14日、会社は通期予想を<strong>売上122.6億→113.3億、営業利益8.8億→5.1億（△42%）</strong>に下方修正。理由は「賃上げの影響」「創業者への特別功労金3億円」「2026年3月31日付で解散した子会社（㈱ビルキャスト）の影響」です。</div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>連結（百万円）</th><th class="r">FY2022/9</th><th class="r">FY2023/9</th><th class="r">FY2024/9</th><th class="r">FY2025/9</th><th class="r">FY2026/9 中計目標</th><th class="r">FY2026/9 修正予想</th></tr></thead>
+    <tbody>
+      <tr><td>売上高</td><td class="r mn">10,030</td><td class="r mn">10,937</td><td class="r mn">11,559</td><td class="r mn">11,907</td><td class="r mn">12,300</td><td class="r mn hrd">11,333</td></tr>
+      <tr><td>営業利益</td><td class="r mn">690</td><td class="r mn">797</td><td class="r mn">817</td><td class="r mn">859</td><td class="r mn">850</td><td class="r mn hrd">510</td></tr>
+      <tr><td>営業利益率</td><td class="r mn">6.88%</td><td class="r mn">7.28%</td><td class="r mn">7.07%</td><td class="r mn">7.22%</td><td class="r mn">6.91%</td><td class="r mn hrd">4.50%</td></tr>
+      <tr><td>経常利益</td><td class="r mn">804</td><td class="r mn">893</td><td class="r mn">901</td><td class="r mn">964</td><td class="r mn">940</td><td class="r mn hrd">715</td></tr>
+      <tr><td>純利益</td><td class="r mn">498</td><td class="r mn">576</td><td class="r mn">891</td><td class="r mn">757</td><td class="r mn">—</td><td class="r mn hrd">536</td></tr>
+      <tr><td>EPS（円）</td><td class="r mn">105.43</td><td class="r mn">121.94</td><td class="r mn">188.62</td><td class="r mn">162.53</td><td class="r mn">—</td><td class="r mn hrd">115.43</td></tr>
+      <tr><td>BPS（円）</td><td class="r mn">1,412</td><td class="r mn">1,522</td><td class="r mn">1,685</td><td class="r mn">1,828</td><td class="r mn">—</td><td class="r mn">1,804 <span style="font-size:10px">(26/3末)</span></td></tr>
+      <tr><td>自己資本比率</td><td class="r mn">71.0%</td><td class="r mn">68.3%</td><td class="r mn">70.8%</td><td class="r mn">75.2%</td><td class="r mn">—</td><td class="r mn hgn">77.5%</td></tr>
+      <tr><td>現金及び預金</td><td class="r mn">4,566</td><td class="r mn">5,421</td><td class="r mn">5,797</td><td class="r mn">6,104</td><td class="r mn">—</td><td class="r mn">5,212 <span style="font-size:10px">(26/3末)</span></td></tr>
+      <tr><td>1株配当（円）</td><td class="r mn">23</td><td class="r mn">30</td><td class="r mn">33</td><td class="r mn">37</td><td class="r mn">—</td><td class="r mn">37</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh"><span class="sn">04-2</span><h2 class="st">中間決算（2026年9月期 上期）の中身</h2><span class="sb bg-rd">警備事業は赤字</span></div>
+
+  <div class="g4" style="margin-bottom:14px">
+    <div class="c mc"><div class="ml">売上高</div><div class="mv rd">5,613</div><div class="ms">百万円／前年同期比 △6.0%</div></div>
+    <div class="c mc"><div class="ml">営業利益</div><div class="mv rd">232</div><div class="ms">百万円／△42.8%</div></div>
+    <div class="c mc"><div class="ml">経常利益</div><div class="mv am">329</div><div class="ms">百万円／△27.3%</div></div>
+    <div class="c mc"><div class="ml">中間純利益</div><div class="mv rd">52</div><div class="ms">百万円／△80.8%（特別功労金3億）</div></div>
+  </div>
+
+  <table class="t" style="margin-bottom:14px">
+    <thead><tr><th>セグメント（上期・百万円）</th><th class="r">売上高</th><th class="r">前年同期比</th><th class="r">セグメント損益</th><th class="r">前年同期</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr><td>警備事業</td><td class="r mn">5,017</td><td class="r mn">△1.1%</td><td class="r mn hrd">△145</td><td class="r mn">△24</td><td>売上の89%を占める本業が<strong>赤字幅拡大。</strong>交通誘導警備△3.3%、施設警備+4.5%</td></tr>
+      <tr><td>ビルメンテナンス事業</td><td class="r mn">79</td><td class="r mn">△21.3%</td><td class="r mn hrd">△1</td><td class="r mn">△4</td><td>2026/3/31に㈱ビルキャストを解散し撤退</td></tr>
+      <tr><td>電源供給事業（I・C・C）</td><td class="r mn">516</td><td class="r mn">△6.2%</td><td class="r mn hgn">+114</td><td class="r mn">+170</td><td><strong>利益率22%の稼ぎ頭。</strong>ただし今期は減益</td></tr>
+      <tr class="sm"><td>報告セグメント計</td><td class="r mn">5,613</td><td class="r mn">△6.0%</td><td class="r mn hrd">△32</td><td class="r mn">+147</td><td>連結営業利益232百万は内部取引消去+265百万による</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-rd">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--rd)">構造問題：価格転嫁が追いついていない</div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2)">警備業は<strong>売上原価のほぼ全てが人件費</strong>という労働集約モデル。2024年以降の賃上げに対し、ゼネコン・建設会社への受注単価交渉が追いつかず、売上総利益率が悪化しています（上期の売上総利益率は31.3%、前年同期32.8%）。<br>会社も「得意先に継続的に受注単価交渉を続ける」としていますが、<strong>効果が出るまでには数四半期のラグ</strong>が見込まれます。<br>加えて警備員は2025年9月期に<strong>2,879名（前期比△160名）</strong>と減少。人手不足が受注機会損失に直結する局面です。</div>
+    </div>
+    <div class="c cl-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--gn)">ストック性・需要面のポジティブ</div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2)">
+        ・<strong>交通誘導警備は工事量に連動する準ストック</strong>。インフラ更新・再開発需要は東北〜首都圏で継続。<br>
+        ・施設警備は<strong>常駐契約＝真のストック収益</strong>で、上期も+4.5%と唯一成長。会社も「積極的に増大を図るべき分野」と位置付け。<br>
+        ・警備業法の検定合格者配置基準義務化は<strong>参入障壁</strong>として機能（有資格者を抱えない業者は受注機会を逸する）。会社は「全警備職員の8割を資格保持者に」を目標。<br>
+        ・電源供給事業（I・C・C）はイベント・コンサート需要で高利益率。<br>
+        ・2026年6月にはグループの㈱日本保安が6社連携で<strong>「AI保安警備」</strong>を開始。
+      </div>
+    </div>
+  </div>
+
+  <div class="c cf-am">
+    <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--am)">中期経営計画「VISION for 50」の位置づけ</div>
+    <div style="font-size:12px;line-height:1.85;color:var(--ink2)">
+      創業50周年（2027年3月30日）までの6年間を、Step.1（FY2021-23）とStep.2（FY2024-26）に分けた計画。キーワードは「革新（イノベーション）」で、①DX（グループ17社中8社で基幹システム刷新済）②ソリューション型営業 ③規模の拡大（M&A・エリア戦略・ロードスタッフ）の3本柱。<br>
+      FY2025まではおおむね計画線上でしたが、<strong>最終年度のFY2026で目標対比 売上△8%・営業利益△40%の未達が確定的。</strong>M&Aは積極的（2023年トップロード、2024年アイワ警備保障・NEXT）ですが、<u>のれん償却が年45百万円発生し利益を圧迫</u>する構造でもあります。<br>
+      <strong>注目点は、2026年11月頃に発表される次期中計。</strong>資本効率（ROE 9.2%→FY26予想6.4%）と株主還元にどこまで踏み込むかが、光通信の関与強化と重なる最初のイベントになります。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P5 バリュエーション ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">バリュエーション ── 1,520円は何を織り込んでいるか</h2><span class="sb bg-or">EV/EBIT 4.4倍</span></div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-bl">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:10px;color:var(--bl)">① 実質バリュエーション（2026年3月末BSベース）</div>
+      <table class="t" style="font-size:12px">
+        <tr><td>株価</td><td class="r mn">1,520円</td></tr>
+        <tr><td>発行済株式数 － 自己株式</td><td class="r mn">4,651,275株</td></tr>
+        <tr class="sm"><td>時価総額</td><td class="r mn">7,070百万円</td></tr>
+        <tr><td>現金及び預金</td><td class="r mn">5,212百万円</td></tr>
+        <tr><td>△ 借入金（短期+長期）</td><td class="r mn">△382百万円</td></tr>
+        <tr class="hl"><td><strong>ネットキャッシュ</strong></td><td class="r mn hgn"><strong>4,830百万円（1,038円/株）</strong></td></tr>
+        <tr><td>＋ 投資有価証券</td><td class="r mn">+480百万円</td></tr>
+        <tr class="sm"><td>準現金資産 計</td><td class="r mn hgn">5,309百万円（時価総額の75.1%）</td></tr>
+        <tr class="hl"><td><strong>EV（企業価値）</strong></td><td class="r mn hor"><strong>2,240百万円</strong></td></tr>
+      </table>
+    </div>
+    <div class="c cl-or">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:10px;color:var(--or)">② 主要倍率</div>
+      <table class="t" style="font-size:12px">
+        <tr><th>指標</th><th class="r">FY26予想</th><th class="r">FY25実績</th></tr>
+        <tr><td>PER</td><td class="r mn">13.2倍</td><td class="r mn">9.4倍</td></tr>
+        <tr class="hl"><td><strong>キャッシュ調整後PER</strong></td><td class="r mn hgn"><strong>4.2倍</strong></td><td class="r mn hgn"><strong>3.0倍</strong></td></tr>
+        <tr><td>EV/EBIT</td><td class="r mn hgn">4.4倍</td><td class="r mn hgn">2.6倍</td></tr>
+        <tr><td>EV/EBITDA</td><td class="r mn hgn">約3.1倍</td><td class="r mn hgn">約2.2倍</td></tr>
+        <tr><td>EV/売上高</td><td class="r mn">0.20倍</td><td class="r mn">0.19倍</td></tr>
+        <tr><td>PBR</td><td class="r mn ham">0.84倍</td><td class="r mn">—</td></tr>
+        <tr><td>NCAV（正味流動資産）/株</td><td class="r mn">989円</td><td class="r mn">株価の65%</td></tr>
+        <tr><td>配当利回り</td><td class="r mn">2.43%</td><td class="r mn">配当性向32%</td></tr>
+        <tr><td>ROE</td><td class="r mn hrd">6.4%予</td><td class="r mn">9.2%</td></tr>
+      </table>
+      <div class="note">キャッシュ調整後PER＝(株価−ネットキャッシュ/株) ÷ EPS。本業だけを買った場合の実質倍率。</div>
+    </div>
+  </div>
+
+  <div class="sh"><span class="sn">05-2</span><h2 class="st">NAV（修正純資産）の積み上げ</h2><span class="sb bg-am">中立 1,905円</span></div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th>項目</th><th class="r">保守</th><th class="r">中立</th><th class="r">強気</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>連結純資産（2026年3月末）</td><td class="r mn">8,391</td><td class="r mn">8,391</td><td class="r mn">8,391</td><td>百万円</td></tr>
+      <tr><td>＋ 土地含み益（税引後）</td><td class="r mn">+158</td><td class="r mn">+468</td><td class="r mn">+915</td><td>P3タブの試算</td></tr>
+      <tr class="sm"><td>修正純資産</td><td class="r mn">8,549</td><td class="r mn">8,859</td><td class="r mn">9,306</td><td>百万円</td></tr>
+      <tr class="hl"><td><strong>NAV / 株</strong></td><td class="r mn"><strong>1,838円</strong></td><td class="r mn hgn"><strong>1,905円</strong></td><td class="r mn"><strong>2,001円</strong></td><td>4,651,275株ベース</td></tr>
+      <tr><td>現株価 / NAV</td><td class="r mn ham">82.7%</td><td class="r mn ham">79.8%</td><td class="r mn ham">76.0%</td><td>ディスカウント17〜24%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh"><span class="sn">05-3</span><h2 class="st">シナリオ別 目標株価</h2><span class="sb bg-or">現在 1,520円</span></div>
+
+  <div class="sc">
+    <div class="sc-c">
+      <div class="sc-l br">Bear ／ 確率25%</div>
+      <div class="sc-p br">1,150円</div>
+      <div class="sc-s">△23% ／ PBR 0.64倍</div>
+      <div class="sc-i">賃上げ転嫁が進まず警備事業の赤字が定着</div>
+      <div class="sc-i">FY27も営業利益5億円前後で低迷</div>
+      <div class="sc-i">資本イベントが動かず市場が失望</div>
+      <div class="sc-i">過去10年のPBR下限は0.54〜0.62倍</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base ／ 確率40%</div>
+      <div class="sc-p bs">1,800円</div>
+      <div class="sc-s">+20% ／ PBR 1.0倍</div>
+      <div class="sc-i">単価交渉が浸透しFY27に営業利益7〜8億円へ回復</div>
+      <div class="sc-i">次期中計で配当性向40〜50%へ引き上げ</div>
+      <div class="sc-i">光通信の持分法適用が増配圧力として作用</div>
+      <div class="sc-i">BPS水準（解散価値）までの評価回復</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull ／ 確率25%</div>
+      <div class="sc-p bu">2,100円</div>
+      <div class="sc-s">+40% ／ NAV 1.10倍</div>
+      <div class="sc-i">自社株買い＋大幅増配の同時発動</div>
+      <div class="sc-i">光通信の追加買い増しで25%超へ</div>
+      <div class="sc-i">流通株式比率対応で大株主が動く</div>
+      <div class="sc-i">業績回復とバランスシート改革の両立</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bm">TOB／MBO ／ 確率10%</div>
+      <div class="sc-p bm">2,300円</div>
+      <div class="sc-s">+53% ／ レンジ1,950〜2,500円</div>
+      <div class="sc-i">元気（創業家）主導のMBOに光通信が合意</div>
+      <div class="sc-i">または光通信主導の完全子会社化</div>
+      <div class="sc-i">国内TOBプレミアム中央値30〜40%を適用</div>
+      <div class="sc-i">NAV1,905円×1.1〜1.3倍で算定</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cf-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--gn)">期待値の計算</div>
+      <table class="t" style="font-size:11.5px">
+        <tr><th>シナリオ</th><th class="r">株価</th><th class="r">確率</th><th class="r">寄与</th></tr>
+        <tr><td>Bear</td><td class="r mn">1,150</td><td class="r mn">25%</td><td class="r mn">287.5</td></tr>
+        <tr><td>Base</td><td class="r mn">1,800</td><td class="r mn">40%</td><td class="r mn">720.0</td></tr>
+        <tr><td>Bull</td><td class="r mn">2,100</td><td class="r mn">25%</td><td class="r mn">525.0</td></tr>
+        <tr><td>TOB/MBO</td><td class="r mn">2,300</td><td class="r mn">10%</td><td class="r mn">230.0</td></tr>
+        <tr class="hl"><td><strong>期待株価</strong></td><td class="r mn hgn"><strong>1,763円</strong></td><td class="r mn">100%</td><td class="r mn hgn"><strong>+17.4%</strong></td></tr>
+      </table>
+      <div class="note">配当利回り2.5%を加えると年間期待リターンは約+20%。ただし実現までのタイムホライズンは1〜3年を想定。</div>
+    </div>
+    <div class="c cf-or">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--or)">リスク・リワード</div>
+      <div style="font:700 30px/1 var(--mono);color:var(--or);margin:10px 0 4px">約 1 : 2.3</div>
+      <div style="font-size:11px;color:var(--ink3);margin-bottom:10px">下値△352円 vs 上値+798円（期待加重の上振れ）</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--ink2)">
+        ネットキャッシュ1,038円/株、NCAV 989円/株が下値を厚くしています。株価がNCAVまで下がるには△34%が必要で、<strong>実質的な下値は1,100〜1,200円圏</strong>と考えられます。<br>
+        一方で上値は「資本イベントが起きるかどうか」に依存し、<u>時期は完全にコントロール不能</u>。非対称性は良好ですが、<strong>「安いまま5年」というシナリオも十分あり得ます。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg">
+    <div class="br2"><span>ネットキャッシュ（1,038円）</span><span class="mn">株価の69%</span></div>
+    <div class="bt"><div class="bf" style="width:69%;background:var(--gn2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span>NCAV・正味流動資産（989円）</span><span class="mn">株価の65%</span></div>
+    <div class="bt"><div class="bf" style="width:66%;background:var(--bl2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span>BPS（1,804円）</span><span class="mn">株価の120%</span></div>
+    <div class="bt"><div class="bf" style="width:100%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span>NAV中立（1,905円）</span><span class="mn">株価の125%</span></div>
+    <div class="bt"><div class="bf" style="width:100%;background:var(--or2)"></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P6 リスク ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスク ── 買う前に飲み込むべきこと</h2><span class="sb bg-rd">7項目</span></div>
+
+  <table class="t" style="margin-bottom:16px">
+    <thead><tr><th style="width:20%">リスク</th><th style="width:10%" class="r">深刻度</th><th>内容と対処</th></tr></thead>
+    <tbody>
+      <tr><td><strong>① 流動性の枯渇</strong></td><td class="r"><span class="bge be-rd">最大</span></td><td>25日平均出来高は<strong>約1,560株（≒230万円/日）</strong>。7/10の出来高は4,700株。<strong>これは「買えても売れない」水準です。</strong>100万円分を建てるだけで数日かかり、悪材料時には値がつかないリスクがある。<u>ポジションサイズは「最悪ゼロでも困らない額」に限定すべき</u>。信用売り残ゼロ・買い残6,000株と需給も薄い。</td></tr>
+      <tr><td><strong>② 本業の収益力低下</strong></td><td class="r"><span class="bge be-rd">高</span></td><td>警備事業セグメントは<strong>FY2025通期△29百万円、FY2026上期△145百万円と赤字が拡大。</strong>連結の利益は電源供給事業（I・C・C）と内部取引消去に依存する歪んだ構造。賃上げの価格転嫁が失敗し続ければ、Bearシナリオが現実化します。</td></tr>
+      <tr><td><strong>③ 資本イベントの不発</strong></td><td class="r"><span class="bge be-am">中〜高</span></td><td>光通信の持分法適用は<strong>「TOBの予告」ではありません。</strong>光通信は多くの投資先を20%前後で長期保有し、配当を享受するだけのケースも多い。また元気38%は敵対的買収の完全な防壁であり、<strong>光通信が単独で経営権を取ることは不可能。</strong>「膠着が10年続く」シナリオを排除できません。</td></tr>
+      <tr><td><strong>④ MBO価格が低く出るリスク</strong></td><td class="r"><span class="bge be-am">中</span></td><td>仮にMBOが実現しても、<strong>買い手が創業家＝現経営陣であるため価格は低く設定されがち。</strong>近年は特別委員会・第三者算定で是正される傾向にありますが、DCF法主体だと業績悪化局面では低い評価になり、<u>ネットキャッシュや土地含み益が十分反映されない可能性</u>があります。1,800円前後での提示なら現値比+20%に留まります。</td></tr>
+      <tr><td><strong>⑤ 蔵王町不動産の減損</strong></td><td class="r"><span class="bge be-am">中</span></td><td>元気荘（旅館業・1993年建設）と研修センター（1999年建設）で<strong>合計23,798㎡・簿価1.80億円。</strong>蔵王町の地価は28年連続下落、実勢取引は公示比△60%。建物を含めれば減損リスクはさらに大きく、<strong>将来の特別損失候補</strong>です。</td></tr>
+      <tr><td><strong>⑥ 人手不足・警備員の高齢化</strong></td><td class="r"><span class="bge be-am">中</span></td><td>警備員は2,879名（前期比△160名）。会社自身が「全警備員に占める60歳以上の割合が約半数」と開示。採用が計画通り進まなければ<strong>受注機会そのものを失います。</strong>労働集約モデルゆえ、人件費上昇とのダブルパンチ。</td></tr>
+      <tr><td><strong>⑦ 情報開示の薄さ</strong></td><td class="r"><span class="bge be-bl">低〜中</span></td><td>決算補足説明資料は「無」。有報の賃貸等不動産時価注記も確認しづらく、<strong>外部からの資産価値検証には限界</strong>があります。ただし機関投資家・アナリスト向け説明会は開催しており、2026年6月にはオンデマンド動画も公開。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="c cf-am">
+    <div style="font:700 12px/1.4 var(--head);margin-bottom:8px;color:var(--am)">ユーザーの当初仮説に対する検証結果</div>
+    <table class="t" style="font-size:12px">
+      <tr><th>仮説</th><th style="width:12%">判定</th><th>検証</th></tr>
+      <tr><td>現預金が時価総額とニアリーイコール</td><td><span class="bge be-am">概ね正</span></td><td>現預金52.1億 vs 時価総額70.7億で<strong>75%</strong>。ネットキャッシュでは68%、投資有価証券込みで76%。「ほぼ同額」ではないが、極めて高い水準であることは事実。</td></tr>
+      <tr><td>ストック性がある</td><td><span class="bge be-am">部分的</span></td><td>施設警備（売上の29%・上期+4.5%）は真のストック。しかし主力の交通誘導警備（同65%）は<strong>工事案件ごとのフロー収益</strong>で、上期△3.3%。ストック比率は思ったほど高くありません。</td></tr>
+      <tr><td>光通信の買い増し圧力</td><td><span class="bge be-gn">正・強化</span></td><td>2018年に0%→5%で登場、7年かけて20.04%まで積み上げ。<strong>2026年7月に持分法適用関連会社化を要請</strong>という決定的な一歩。仮説は想定以上に前進しています。</td></tr>
+      <tr><td>セコム・創業家からMBO/TOB期待</td><td><span class="bge be-am">条件付き</span></td><td>創業家（元気38.08%）への集約は進行中。ただし<strong>セコム15.5%と創業家43%を足しても2/3に届かず、光通信の同意が必須。</strong>「創業家＋セコムでMBO」という単純な絵は成立しません。3者合意が必要という点を織り込むべきです。</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P7 最終評価 ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終評価</h2><span class="sb bg-or">総合 ○＋</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c cl-gn mc"><div class="ml">資産バリュー</div><div class="mv gn">◎</div><div class="ms">EV/EBIT 4.4倍<br>ネットキャッシュ69%</div></div>
+    <div class="c cl-rd mc"><div class="ml">業績モメンタム</div><div class="mv rd">×</div><div class="ms">営業利益△40.7%<br>警備事業は赤字</div></div>
+    <div class="c cl-am mc"><div class="ml">カタリスト</div><div class="mv am">○</div><div class="ms">光通信20%超<br>創業家集約38%</div></div>
+    <div class="c cl-rd mc"><div class="ml">流動性</div><div class="mv rd">×</div><div class="ms">日商 約230万円<br>実務上の最大制約</div></div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">結論：<span>「安さ」は本物。ただし買うのは業績ではなく資本構成。</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
+      <div>
+        <div class="conc-lbl">ブル・ケースの中核</div>
+        <div class="conc-b">
+          時価総額70.7億円に対しネットキャッシュ48.3億円。<strong>本業のEVはわずか22.4億円で、年間5〜8.6億円の営業利益を生む事業がそこに載っています。</strong>EV/EBIT 2.6〜4.4倍は、上場企業として明らかに説明のつかない水準です。<br><br>
+          そこに2026年6〜7月、<strong>創業家が個人株を資産管理会社に全量集約（38.08%）し、光通信が20%を超えて持分法適用を要請</strong>という2つの資本イベントが重なりました。どちらも「株を集めている主体が、経済的リターンを取りに来ている」ことの明確な証拠です。<br><br>
+          土地含み益（中立+6.7億円）は<u>おまけ程度</u>で、NAV 1,905円に対する現株価のディスカウントは20%。株価はネットキャッシュとBPSに挟まれた狭いレンジで、下値は構造的に厚い。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">ベア・ケースの中核</div>
+        <div class="conc-b">
+          <strong>本業は今、確実に悪化しています。</strong>売上の89%を占める警備事業はFY2025から2期連続でセグメント赤字。連結利益は電源供給事業と内部取引消去が支える歪んだ構造で、賃上げの価格転嫁が進まなければ、この「安さ」は正当な安さになります。<br><br>
+          そして<strong>元気38%・光通信20%・セコム15.5%という3すくみは、非公開化に必要な2/3を誰も単独では作れない設計。</strong>合意型でしか動かず、合意には数年かかる可能性があります。<br><br>
+          最も現実的な制約は<span style="color:#e09090">流動性</span>です。日商230万円の板では、まとまった額は建てられず、悪材料時には逃げられません。<strong>この銘柄は「金額を張れない」ことが最大の欠点です。</strong>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)">
+      <div class="conc-lbl">実務的な結論</div>
+      <div class="conc-b" style="max-width:100%">
+        期待株価は加重平均で<strong style="color:var(--or2)">1,763円（現値比+17%）</strong>、配当込みで年率+20%程度。リスク・リワードは約1:2.3で良好です。<br>
+        ただしこれは<strong>「タイミングを選べない代わりに、下値が厚い」タイプの投資</strong>であり、次のような条件でのみ機能します。<br>
+        ① <strong>ポジションは小さく</strong>（流動性の制約から、全損しても困らない額に）／ ② <strong>時間軸は最低2〜3年</strong>（資本イベントは待つしかない）／ ③ <strong>指値でしか買わない</strong>（成行は不利な価格で約定する）／ ④ <strong>配当をもらいながら待てること</strong>を前提にする。<br><br>
+        <span style="color:rgba(246,245,239,.5)">当面の確認ポイント：2026年8月7日の第3四半期決算（単価転嫁の進捗と警備事業セグメント損益）、2026年11月頃の通期決算・次期中期経営計画（株主還元方針）、そして光通信グループの追加大量保有報告。この3つが直近のトリガーです。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="sh"><span class="sn">08</span><h2 class="st">タイムライン</h2><span class="sb bg-bl">直近の動き</span></div>
+  <div class="tl">
+    <div class="ti"><div class="td2 bl"></div><div class="tdate">2001年10月</div><div class="ttext">セコム㈱と資本提携・業務協力を開始（現在15.53%保有）</div></div>
+    <div class="ti"><div class="td2 or"></div><div class="tdate">2018年3月〜2020年3月</div><div class="ttext">光通信が新規参入し、0%→12.96%まで一気に買い上がり</div></div>
+    <div class="ti"><div class="td2 or"></div><div class="tdate">2021〜2025年</div><div class="ttext">光通信グループ（UH Partners等）が段階的に買い増し。2025年9月に19.58%相当へ</div></div>
+    <div class="ti"><div class="td2 am"></div><div class="tdate">2025年7月1日</div><div class="ttext">㈱メーリングジャパンの全株式をラクスル㈱に譲渡（売却益54百万円）── 非中核事業の整理開始</div></div>
+    <div class="ti"><div class="td2 gn"></div><div class="tdate">2025年11月14日</div><div class="ttext">FY2025決算：売上119.1億・営業利益8.6億で中計目標を上回る。増配（33円→37円）</div></div>
+    <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年3月31日</div><div class="ttext">㈱ビルキャストを解散、ビルメンテナンス事業から撤退</div></div>
+    <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年5月14日</div><div class="ttext">業績予想を下方修正：営業利益8.8億→5.1億（△42%）。創業者への特別功労金3億円を計上</div></div>
+    <div class="ti"><div class="td2 pu"></div><div class="tdate">2026年6月11日</div><div class="ttext"><strong>佐藤雅彦専務が個人株55.28万株を全量、有限会社元気へ譲渡。元気は26.19%→38.08%へ</strong></div></div>
+    <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年7月10日</div><div class="ttext"><strong>光通信が「その他の関係会社」に該当（議決権20.04%）。トスネットを持分法適用関連会社とする旨の正式要請を受領</strong></div></div>
+    <div class="ti"><div class="td2 am"></div><div class="tdate">2026年8月7日（予定）</div><div class="ttext">第3四半期決算発表 ── 単価転嫁の進捗を確認する最初のポイント</div></div>
+    <div class="ti"><div class="td2 or"></div><div class="tdate">2026年11月頃（予定）</div><div class="ttext">通期決算 ＋ 次期中期経営計画の発表 ── 株主還元方針が最大の注目点</div></div>
+    <div class="ti"><div class="td2 bl"></div><div class="tdate">2027年3月30日</div><div class="ttext">創業50周年</div></div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink);color:rgba(246,245,239,.32);padding:26px 56px;font-size:10.5px;line-height:1.8">
+  本資料は情報提供のみを目的として作成されたものであり、特定の銘柄の売買を推奨するものではありません。筆者は金融商品取引業者ではなく、投資助言を行う立場にありません。土地の含み益は公表データに基づく推定値であり、会社開示の公式数値ではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: EDINET（有価証券報告書 第49期・半期報告書 第50期）／ TDnet・トスネットIR（2026年5月14日・5月15日・6月11日・7月10日開示）／ 国土交通省 地価公示2026年 ／ 土地代データ ／ IRBANK · 2026.07.28 作成 ／ 株価基準日：2026年8月7日終値 1,520円
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

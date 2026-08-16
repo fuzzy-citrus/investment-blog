@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新晃工業（6458）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:230px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 32px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.22);color:#e09090}
+
+/* BARS */
+.bg-w{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #e8a0a0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+h3.sub{font:700 13px/1.3 var(--head);margin:24px 0 10px;padding-left:9px;border-left:3px solid var(--ink)}
+p.bt2{font-size:12.5px;line-height:1.85;margin-bottom:12px}
+p.bt2 strong{font-weight:700}
+ul.li{font-size:12.5px;line-height:1.8;padding-left:18px;margin-bottom:12px}
+ul.li li{margin-bottom:4px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 6458 · 2026.08.11 作成</p>
+      <h1 class="ht">新晃工業 <em>（6458）</em><br>投資分析レポート</h1>
+      <p class="hs">国内セントラル空調（AHU）最大手・専業 ／ ネット金融資産320億円＝時価総額の40% ／ 金融資産控除後の実質PER6.7倍<br>「資産バリュー株」ではなく「高ROIC事業を簿価で買える株」── 論点は含み益ではなく<strong>還元と中国</strong></p>
+    </div>
+    <div class="vb">
+      <div class="vs">○</div>
+      <div class="vt">
+        <strong>条件付きで妙味あり・分割購入推奨</strong><br>
+        中立1,300円／強気1,700円／弱気950円。<br>
+        期待値1,342円・リスクリワード 1 : 2.1。<br>
+        ただし上期は減益・自社株買い枠切れ。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,190円</div><div class="ks">時価総額 799億円（自己株控除6,714万株）</div></div>
+    <div class="kv"><div class="kl">予想PER</div><div class="kn bl">11.1倍</div><div class="ks">27/3期会社予想EPS 107.23円</div></div>
+    <div class="kv"><div class="kl">PBR</div><div class="kn am">1.22倍</div><div class="ks">26/6末BPS 974.94円</div></div>
+    <div class="kv"><div class="kl">ネット金融資産</div><div class="kn gn">320億円</div><div class="ks">476.8円/株＝株価の40.1%</div></div>
+    <div class="kv"><div class="kl">実質PER（金融資産控除後）</div><div class="kn gn">6.7倍</div><div class="ks">事業EV479億÷純利益72億</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn gn">4.20%</div><div class="ks">年50円・配当性向46.6%</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>含み益・資産精査</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>ニッチトップ性</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>ストック性・成長</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>業績・財務</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク・最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 1,190円は「割安」か</h2><span class="sb bg-gn">条件付きYES</span></div>
+
+  <div class="inf"><strong>最初に結論から。</strong>新晃工業は「土地と株式の巨大な簿外含み益で株価が半値になっている古典的バリュー株」<strong>ではありません</strong>。有価証券は既に時価評価済みでBPSに反映され、土地も1998〜2002年の再評価法適用で簿価が洗い替え済みです。PBR1.22倍は資産的には安くない。<br>それでも1,190円に妙味があると考える理由は別の場所にあります ──<strong>時価総額799億円のうち320億円（40%）が現金＋有価証券で、残る479億円で税後ROIC約15%の事業を買える</strong>という構造です。</div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 最重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">時価総額の40%が金融資産</div>
+      <div class="cb gn">476.8円</div>
+      <div class="cu">1株当たりネット金融資産／株価1,190円比40.1%</div>
+      <div class="cp">現預金176.97億＋投資有価証券230.27億−有利子負債87.07億＝<strong>320.17億円</strong>。株価1,190円のうち477円は金融資産で、事業に払っているのは実質713円。</div>
+      <div class="tgs"><span class="tg tg-gn">26/6末実績値</span><span class="tg tg-or">CB60億控除後</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Thesis 02 · 最重要</div>
+      <span class="ci">⚙️</span>
+      <div class="ct">高ROIC事業をほぼ簿価で買える</div>
+      <div class="cb am">EV≒投下資本</div>
+      <div class="cu">事業EV 479億 vs 投下資本 473億</div>
+      <div class="cp">金融資産を全額控除した事業EVは479億円。一方この事業の投下資本は473億円で、<strong>税後ROICは約14.7%</strong>。資本コスト（6〜7%）の2倍を稼ぐ事業を、市場は簿価＝PBR1.0倍で評価している。</div>
+      <div class="tgs"><span class="tg tg-am">EV/EBIT 4.8倍</span><span class="tg tg-gn">実質PER6.7倍</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Thesis 03 · 質</div>
+      <span class="ci">🏆</span>
+      <div class="ct">ニッチトップ＋ストック62%</div>
+      <div class="cb or">62.1%</div>
+      <div class="cu">工事・サービス52.6%＋ビル管理9.5%</div>
+      <div class="cp">国内セントラル空調（AHU）最大手の専業メーカー。売上の<strong>約半分が更新（リプレース）需要</strong>、6割が工事・保守。中核子会社・新晃アトモスは売上144.75億で<strong>経常利益率28.7%</strong>という異常な収益性を叩き出している。</div>
+      <div class="tgs"><span class="tg tg-or">更新比率49.8%</span><span class="tg tg-gn">AMCA/AHRI国内唯一</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 04 · 逆風</div>
+      <span class="ci" style="font-size:22px">⚠️</span>
+      <div class="ct" style="color:var(--ink)">株価下落の理由は明確に存在する</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">△29.1%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">27/3期1Q 営業利益 前年同期比</div>
+      <div class="cp" style="color:var(--ink2)">7/3の1,262円から1,190円へ約6%下落。背景は<strong>①1Qの大幅減益 ②総還元性向117%→56%への急低下（自社株買い枠が残7億円で枯渇）</strong>。需給の支え役が外れる局面に入った。</div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Thesis 05 · 構造</div>
+      <span class="ci" style="font-size:22px">🎯</span>
+      <div class="ct" style="color:var(--ink)">この株の論点は「含み益」ではなく「資本配分」である</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① 有価証券230億は"死に金"</strong><br>推定取得原価はわずか約56億円、含み益174億円。会社は政策保有株の売却方針を明記済み。売却→還元 or 成長投資への転換が最大の価値創造レバー。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② 中国事業が資本効率の錘</strong><br>上海新晃は総資産107.8億・純資産62.9億を投じて経常△0.62億。会社自ら「中国市場の停滞は構造的」と認定。撤退・縮小の判断が出れば一気に再評価。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ 次期中計が最大の近接イベント</strong><br>move.2027は27/3期が最終年度。<strong>2026年秋〜2027年春に次期中計が公表される公算</strong>。新たな還元枠・中国方針・ROE目標がここで示される。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      新晃工業は、<strong style="color:var(--or2)">売上の6割がストック（更新・保守・ビル管理）で構成されたニッチトップを、金融資産を除けば実質PER6.7倍・EV/EBIT4.8倍で買える案件。</strong>資産の含み益で儲ける株ではなく、「使われていない320億円の金融資産をどう配るか」という資本配分イベントに賭ける株。ただし上期減益と自社株買い枠切れという明確な逆風が同時進行しており、一括ではなく分割で入るのが合理的。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">含み益・現金・土地の徹底精査</h2><span class="sb bg-am">2026年6月末 連結</span></div>
+
+  <h3 class="sub">A. ネット金融資産 ── 1株476.8円は"事実"</h3>
+  <table class="t">
+    <tr><th>項目（2026年6月30日・連結）</th><th class="r">金額（百万円）</th><th class="r">1株当たり</th><th class="r">株価1,190円比</th><th>出所・注記</th></tr>
+    <tr><td>現金及び預金</td><td class="r mn">17,697</td><td class="r mn">263.6円</td><td class="r mn">22.2%</td><td>27/3期1Q決算短信B/S</td></tr>
+    <tr><td>投資有価証券（時価評価後）</td><td class="r mn">23,027</td><td class="r mn">342.9円</td><td class="r mn">28.8%</td><td>3月末18,637から+4,389</td></tr>
+    <tr class="sm"><td>金融資産 小計</td><td class="r mn">40,724</td><td class="r mn">606.5円</td><td class="r mn">51.0%</td><td>―</td></tr>
+    <tr><td>短期借入金</td><td class="r mn hrd">△1,300</td><td class="r mn">△19.4円</td><td class="r mn">―</td><td>―</td></tr>
+    <tr><td>1年内返済予定の長期借入金</td><td class="r mn hrd">△307</td><td class="r mn">△4.6円</td><td class="r mn">―</td><td>―</td></tr>
+    <tr><td>長期借入金</td><td class="r mn hrd">△1,100</td><td class="r mn">△16.4円</td><td class="r mn">―</td><td>―</td></tr>
+    <tr><td>転換社債型新株予約権付社債（CB）</td><td class="r mn hrd">△6,000</td><td class="r mn">△89.4円</td><td class="r mn">―</td><td>2030年満期・転換価額1,386円</td></tr>
+    <tr class="hl"><td><strong>ネット金融資産</strong></td><td class="r mn"><strong>32,017</strong></td><td class="r mn"><strong>476.8円</strong></td><td class="r mn"><strong>40.1%</strong></td><td>―</td></tr>
+  </table>
+  <div class="note">会社開示の「有利子負債残高2,387百万円」（26/3末）はCBを含まない定義。本表は保守的にCB60億円を全額負債として控除している。CBは転換価額1,386円に対し株価1,190円のため現時点では株式性が薄く、負債扱いが妥当。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">B. 有価証券の含み益 ── 174億円。ただし"簿外"ではない</h3>
+  <div class="g2">
+    <div>
+      <table class="t">
+        <tr><th>その他有価証券評価差額金（税効果後）</th><th class="r">百万円</th></tr>
+        <tr><td>2025年3月末</td><td class="r mn">5,419</td></tr>
+        <tr><td>2025年9月末</td><td class="r mn">8,141</td></tr>
+        <tr><td>2026年3月末</td><td class="r mn">9,127</td></tr>
+        <tr class="hl"><td><strong>2026年6月末</strong></td><td class="r mn"><strong>12,102</strong></td></tr>
+        <tr class="sm"><td>15か月間の増加</td><td class="r mn hgn">+123%</td></tr>
+      </table>
+      <div class="note">1Q単独でその他有価証券評価差額金が+2,975百万円。1Qの親会社株主純利益1,072百万円の約2.8倍の含み益が3か月で発生している。包括利益は4,180百万円（純利益の4.3倍）。</div>
+    </div>
+    <div>
+      <table class="t">
+        <tr><th>税前グロス含み益の推計</th><th class="r">百万円</th></tr>
+        <tr><td>評価差額金（税効果後）</td><td class="r mn">12,102</td></tr>
+        <tr><td>÷（1−実効税率30.62%）</td><td class="r mn">÷0.6938</td></tr>
+        <tr class="hl"><td><strong>税前含み益（推計）</strong></td><td class="r mn"><strong>約17,443</strong></td></tr>
+        <tr><td>投資有価証券 簿価（＝時価）</td><td class="r mn">23,027</td></tr>
+        <tr class="sm"><td>逆算した推定取得原価</td><td class="r mn">約5,584</td></tr>
+        <tr class="sm"><td>取得原価比の含み益率</td><td class="r mn ham">約 +312%</td></tr>
+      </table>
+      <div class="note">実効税率30.62%を仮定した推計値。非支配株主持分相当を含まない親会社持分ベース。銘柄別内訳は有価証券報告書106頁の「政策保有株式」欄に記載があるが、本分析では当該頁まで取得できず未確認。</div>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:16px"><strong>重要な論点：その他有価証券は日本基準で時価評価されるため、この174億円の含み益は既に貸借対照表と BPS 974.94円に織り込み済みです。</strong>つまり「PBR1.22倍だが実は含み益で実質PBR0.5倍」という話にはなりません。<br>価値の源泉は含み益の存在ではなく、<strong>取得原価56億円の資産が230億円に育っており、会社が明示的に「売却を進める方針」を掲げていること</strong>。売却すれば税引後で約177億円の現金化が可能で、これは時価総額の22%に相当します。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">C. 土地 ── 含み益への期待は控えめが妥当</h3>
+  <div class="g3">
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">土地 簿価</div><div class="mv am">104.05億</div><div class="ms">26/6末・1株154.9円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">土地再評価差額金</div><div class="mv rd">△7.48億</div><div class="ms">再評価法適用で評価<strong>損</strong>計上済み</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">推計含み益レンジ</div><div class="mv bl">0〜50億</div><div class="ms">未検証の推計・幅を持たせる</div></div>
+  </div>
+
+  <p class="bt2" style="margin-top:16px">土地に大きな期待を置けない理由は3つあります。</p>
+  <table class="t">
+    <tr><th>論点</th><th>内容</th><th>評価</th></tr>
+    <tr><td><strong>① 再評価法を適用済み</strong></td><td>連結B/Sに「土地再評価差額金 △748百万円」が計上されている。これは1998〜2002年に土地再評価法を適用し、事業用土地の簿価を当時の時価に洗い替えた痕跡。しかも<strong>マイナス＝評価損</strong>であり、当時すでに簿価が時価を上回る土地を抱えていたことを示す。</td><td><span class="bge be-rd">ネガ</span></td></tr>
+    <tr><td><strong>② 資産の中心は工場用地</strong></td><td>主要拠点は神奈川県秦野市（神奈川工場・SINKOテクニカルセンター）、岡山県津山市（岡山工場）、大阪府寝屋川市（技術研究所）。これら地方・郊外工場地は2000年代以降の地価上昇の恩恵をほぼ受けていない。</td><td><span class="bge be-rd">ネガ</span></td></tr>
+    <tr><td><strong>③ 都心部の面積は限定的</strong></td><td>大阪市北区南森町（本社）・東京都中央区日本橋浜町（東京本社）は2013年以降の地価上昇で含み益が想定されるが、メーカーの本社機能であり保有面積は小さい。</td><td><span class="bge be-am">中立</span></td></tr>
+    <tr class="sm"><td><strong>④ 直近取得分は時価取得</strong></td><td>26/3期に神奈川工場隣接地を約32億円で取得。土地簿価は25/3末92.04億→26/3末104.05億へ+12.0億。直近取得分に含み益は生じない。</td><td><span class="bge be-am">中立</span></td></tr>
+  </table>
+  <div class="note"><strong>データ取得上の限界：</strong>有価証券報告書（第77期・全106頁）の「賃貸等不動産の時価」注記および「土地の再評価に関する注記」（時価と再評価後帳簿価額の差額）は、PDF取得が23頁相当で打ち切られたため直接確認できていません。上記は開示済みB/S数値と拠点情報からの推論です。正確な数値が必要な場合は有報の該当注記をご確認ください。<br>なお26/3期決算説明資料では、投資65.9億円のうち戦略投資が40.5億円、差額約25億円が「中計事業戦略に直接関連しない投資（賃貸用不動産の取得など）」として区分されており、賃貸等不動産の保有・取得が継続していることは確認できます。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">D. 修正BPSとバリュエーション ── 数字を並べる</h3>
+  <div class="g2">
+    <div>
+      <table class="t">
+        <tr><th>修正純資産アプローチ</th><th class="r">金額</th><th class="r">1株</th></tr>
+        <tr><td>自己資本（26/6末）</td><td class="r mn">65,461</td><td class="r mn">974.94円</td></tr>
+        <tr><td>＋土地含み益（中立20億×税後70%）</td><td class="r mn hgn">+1,400</td><td class="r mn">+20.8円</td></tr>
+        <tr class="hl"><td><strong>修正BPS（中立）</strong></td><td class="r mn"><strong>66,861</strong></td><td class="r mn"><strong>約996円</strong></td></tr>
+        <tr class="sm"><td>株価1,190円 ／ 修正PBR</td><td class="r mn" colspan="2">1.19倍</td></tr>
+      </table>
+      <div class="note">結論：<strong>解散価値ベースでは割安ではない。</strong>この銘柄を「資産バリュー」で語るのは誤り。</div>
+    </div>
+    <div>
+      <table class="t">
+        <tr><th>事業価値アプローチ</th><th class="r">金額（百万円）</th></tr>
+        <tr><td>時価総額（1,190円×6,714万株）</td><td class="r mn">79,902</td></tr>
+        <tr><td>＋有利子負債（CB含む）</td><td class="r mn">+8,707</td></tr>
+        <tr><td>△現金及び預金</td><td class="r mn">△17,697</td></tr>
+        <tr class="sm"><td>一般的なEV</td><td class="r mn">70,912</td></tr>
+        <tr><td>△投資有価証券（非事業資産）</td><td class="r mn">△23,027</td></tr>
+        <tr class="hl"><td><strong>事業EV</strong></td><td class="r mn"><strong>47,885</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="g4" style="margin-top:14px">
+    <div class="c mc"><div class="ml">EV/EBIT</div><div class="mv bl">7.1倍</div><div class="ms">一般EV709億÷営業利益100億</div></div>
+    <div class="c mc"><div class="ml">事業EV/EBIT</div><div class="mv gn">4.8倍</div><div class="ms">有価証券も控除</div></div>
+    <div class="c mc"><div class="ml">事業EV/EBITDA</div><div class="mv gn">3.9倍</div><div class="ms">償却23億加算</div></div>
+    <div class="c mc"><div class="ml">実質PER</div><div class="mv gn">6.7倍</div><div class="ms">事業EV479億÷純利72億</div></div>
+  </div>
+
+  <div class="ok" style="margin-top:16px"><strong>最も重要な発見：事業EV 479億円 ≒ 投下資本 473億円。</strong><br>投下資本＝運転資本204.5億（売上債権215.3＋棚卸49.6−仕入債務60.4）＋有形無形固定資産268.1億。この投下資本が生む営業利益は27/3期予想100億円、<strong>税前ROIC 21.2%・税後ROIC 14.7%</strong>。<br>つまり市場は、資本コストの2倍以上を稼ぐ事業を<strong>ちょうど簿価（PBR1.0倍）で値付け</strong>している。理論的にはROIC/WACC倍率でPBR2倍前後が正当化される事業であり、ここに評価ギャップがあります。</div>
+</div>
+
+<!-- ══════════════════════════════ P3 ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">ニッチトップ性の検証</h2><span class="sb bg-or">参入障壁は本物か</span></div>
+
+  <p class="bt2">「ニッチトップ」は投資家が安易に使う言葉です。新晃工業について、それが実体を伴うかを4つの角度から検証しました。<strong>結論：本物。ただし"独占"ではなく"競合はいるが替えが利きにくい"タイプ。</strong></p>
+
+  <table class="t">
+    <tr><th>検証軸</th><th>ファクト</th><th>障壁の強さ</th></tr>
+    <tr><td><strong>市場ポジション</strong></td><td>国内セントラル空調（業務用AHU＝エアハンドリングユニット）の最大手・専業メーカー。1951年に日本初のクロスフィンコイル／ファンコイルユニットを完成させた業界のパイオニアで、1950年創業から76年の実績。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>製品特性による障壁</strong></td><td>AHUは<strong>多品種少量・完全個別設計</strong>。建物ごとに温度・湿度・清浄度・音・気流の要求仕様が異なり、都度設計・製造する。月ごとの出荷変動も大きく生産量が安定しない。会社自身が「量産メーカーにとっては高い障壁」と表現しており、これはスケール型の大手が入りにくい構造を意味する。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>認証・技術</strong></td><td><strong>AMCA認定・AHRI認証の国内唯一の取得企業</strong>（会社開示）。加えてJIS性能評価。データセンター向けでは冷却塔のCTI認証取得も進める。特許・商標・意匠・実用新案の保有件数240件（2025年度）。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>営業チャネル</strong></td><td>「<strong>業界最大の上流営業部門</strong>」を構え、建物の計画・設計段階から設計事務所・ゼネコンに入り込む。案件情報を最も早く獲得できる立場にあり、これが需要予測精度と受注確度に直結。2024年4月からは生産予約システムを稼働。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>納入実績＝更新権</strong></td><td>霞が関ビル（日本初の超高層ビル・築50年超、3度目の大規模更新）、横浜ランドマークタワー、東京ドームなどで<strong>継続的にAHU更新を受注</strong>。一度納めた建物は事実上のリカーリング権になる。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>競合の撤退</strong></td><td>地方の保守案件には「過去に撤退した大手電機メーカー製AHU」が多数含まれ、これを新晃が引き受けている。<strong>競合の撤退が市場シェアを自動的に押し上げる構造</strong>。</td><td><span class="bge be-gn">強</span></td></tr>
+    <tr><td><strong>弱点：価格支配力</strong></td><td>ただし価格支配力は完全ではない。26/3期は価格改定を進めたが売上総利益率38.2%→38.1%とほぼ横ばい、販管費増を吸収できず営業減益。<strong>顧客がサブコン（設備工事会社）であり、値上げの通りは緩慢</strong>。</td><td><span class="bge be-am">中</span></td></tr>
+    <tr><td><strong>弱点：中国</strong></td><td>アジア（主に中国）は売上の13.6%を占めるが営業損失。「厳しい価格競争」が続き、ニッチトップ性は国内限定。</td><td><span class="bge be-rd">弱</span></td></tr>
+  </table>
+
+  <div class="sp"></div>
+  <h3 class="sub">構造的追い風：セントラル空調の"復権"</h3>
+  <div class="g2">
+    <div class="c cl-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px">冷媒規制が新晃に有利に働く</div>
+      <p style="font-size:12px;line-height:1.75">主力のAHUは熱源からAHU内までの熱搬送に<strong>自然冷媒である冷温水</strong>を使い、高GWP冷媒（HFC等）をほぼ使わない。モントリオール議定書→京都議定書→パリ協定と続く冷媒規制の強化は、そのまま新晃の追い風。<br>近年は簡便性から個別空調が増加していたが、「2050年カーボンニュートラル」を受けて<strong>大規模建物でセントラル空調が再評価されている</strong>。</p>
+    </div>
+    <div class="c cl-bl">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px">両建てのポジション</div>
+      <p style="font-size:12px;line-height:1.75">仮に個別空調が優勢になっても、新晃は<strong>ヒートポンプAHU（個別空調）</strong>も主力に持つ。26/3期の個別空調売上は35億円で、27/3期目標33億円を前倒し達成。<br>27/3期見込は55億円へ大幅上方修正。体育館空調「そよ風アリーナ」、工場暑熱対策「涼風ファクトリー／Chibeta」など新市場も開拓中。<strong>どちらの空調方式が勝っても収益機会がある</strong>という点は見落とされやすい強み。</p>
+    </div>
+  </div>
+
+  <div class="cdk" style="margin-top:16px">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">ニッチトップ性の評価</div>
+    <div style="font-size:13px;line-height:1.85;color:rgba(246,245,239,.72)">
+      新晃工業の障壁は<strong style="color:var(--or2)">「技術特許」型ではなく「現場対応力・納入実績・上流営業」の複合型</strong>。模倣しにくいが、模倣されても即座には崩れない代わりに、劇的な利益率拡大も起きにくい。<br>
+      指標で見れば、売上総利益率38%・営業利益率16%という水準は「よい製造業」だが「圧倒的な独占企業」ではない。<strong style="color:rgba(246,245,239,.95)">むしろ真の収益性はメーカー本体ではなく、工事・保守子会社の新晃アトモス（経常利益率28.7%）に宿っている</strong> ── これが次のタブの主題です。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P4 ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">ストック性と成長市場</h2><span class="sb bg-bl">売上の62%がストック</span></div>
+
+  <h3 class="sub">A. 売上構成 ── フロー事業ではない</h3>
+  <div class="g4">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">工事・サービス</div><div class="mv gn">52.6%</div><div class="ms">新晃アトモス（据付・整備・保守）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">ビル管理</div><div class="mv bl">9.5%</div><div class="ms">千代田ビル管財</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">機器製販（国内）</div><div class="mv am">24.4%</div><div class="ms">AHU/FCU/HP空調機/冷却塔</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">機器製販（海外）</div><div class="mv rd">13.5%</div><div class="ms">主に中国・赤字</div></div>
+  </div>
+  <div class="ok" style="margin-top:14px"><strong>ストック的収益 ＝ 工事・サービス52.6% ＋ ビル管理9.5% ＝ 62.1%（約368億円）。</strong>加えて機器販売そのものも<strong>新規50.2% / 更新49.8%</strong>と、ほぼ半分が既存建物のリプレース需要。<br>「空調機メーカー」という語感から想像されるより、はるかにストック性の高い収益構造です。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">B. 新晃アトモス ── この会社の利益の心臓部</h3>
+  <table class="t">
+    <tr><th>主要子会社（26/3期）</th><th class="r">売上高</th><th class="r">経常利益</th><th class="r">経常利益率</th><th class="r">純資産</th><th class="r">総資産</th></tr>
+    <tr class="hl"><td><strong>新晃アトモス（空調工事・保守）</strong></td><td class="r mn">14,475</td><td class="r mn hgn">4,151</td><td class="r mn hgn">28.7%</td><td class="r mn">10,113</td><td class="r mn">14,815</td></tr>
+    <tr><td>上海新晃空調設備（中国・持分50%）</td><td class="r mn">7,993</td><td class="r mn hrd">△62</td><td class="r mn hrd">△0.8%</td><td class="r mn">6,288</td><td class="r mn">10,780</td></tr>
+    <tr class="sm"><td>（参考）連結全体</td><td class="r mn">59,339</td><td class="r mn">10,061</td><td class="r mn">17.0%</td><td class="r mn">66,847</td><td class="r mn">93,288</td></tr>
+  </table>
+  <div class="note">単位：百万円。有価証券報告書「関係会社の状況」より。連結消去前の単体数値。</div>
+
+  <p class="bt2" style="margin-top:14px"><strong>新晃アトモス1社で連結経常利益の41%（41.51億／100.61億）を稼いでいます。</strong>売上比率は24.4%に過ぎないのに、です。しかも総資産148億円に対し経常41.5億円＝<strong>ROA約28%</strong>。この収益性の源泉は明確です：</p>
+  <ul class="li">
+    <li><strong>自社製品の保守は事実上の独占</strong>。大型建物のAHU整備は建物の空調機能を左右するため、製品知識・工事技術・安全管理の複合ノウハウが必要。他社が入りにくい。</li>
+    <li><strong>需要が構造的に不足</strong>。会社は「空調設備工事市場は規模が増大し人手が常に不足」と明記。供給制約市場＝値決め力がある。</li>
+    <li><strong>他社製AHUも取り込む</strong>。撤退した大手電機メーカー製の保守も獲得しており、母集団が自社納入分を超えて拡大している。</li>
+  </ul>
+  <div class="inf">投資家として注視すべきは、<strong>この28.7%の利益率が維持されるかどうか</strong>。会社は「この分野での人財採用と育成が課題」としており、<strong>成長のボトルネックは需要ではなく施工人員</strong>。人が採れる限り伸びる、という珍しいタイプの事業です。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">C. 中計ターゲット市場の進捗 ── 3勝1敗</h3>
+  <table class="t">
+    <tr><th>ターゲット市場</th><th class="r">25/3期実績</th><th class="r">26/3期実績</th><th class="r">当初27/3期目標</th><th class="r">修正27/3期見込</th><th>評価</th></tr>
+    <tr class="hl"><td><strong>空調設備工事・メンテナンス</strong></td><td class="r mn">123億</td><td class="r mn">146億</td><td class="r mn">126億</td><td class="r mn hgn">150億</td><td><span class="bge be-gn">◎ 前倒し大幅超過</span></td></tr>
+    <tr class="hl"><td><strong>データセンター</strong></td><td class="r mn">43億</td><td class="r mn">50億</td><td class="r mn">55億</td><td class="r mn hgn">55億</td><td><span class="bge be-gn">◎ 順調</span></td></tr>
+    <tr class="hl"><td><strong>個別空調</strong></td><td class="r mn">30億</td><td class="r mn">35億</td><td class="r mn">33億</td><td class="r mn hgn">55億</td><td><span class="bge be-gn">◎ 前倒し達成→上方修正</span></td></tr>
+    <tr><td>再エネ蓄熱</td><td class="r mn">2.4億</td><td class="r mn">0.6億</td><td class="r mn">7億</td><td class="r mn hrd">1.8億</td><td><span class="bge be-rd">△ 未達</span></td></tr>
+  </table>
+  <div class="note">再エネ蓄熱の未達は当初計画に含まれていた水素冷却市場と併せ、脱炭素トレンドが想定ほど広がらなかったことが要因。ただし金額規模が小さく、全体への影響は限定的。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">D. データセンター ── 液冷移行リスクへの反論</h3>
+  <div class="g2">
+    <div class="c cl-rd">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px">弱気論：液冷移行で空冷空調機は不要になる</div>
+      <p style="font-size:12px;line-height:1.75">GPUサーバーの発熱密度上昇により、冷却方式は空冷から液冷（直接液冷・液浸）へ移行が進む。空調機メーカーのDC事業は構造的に縮小する ── これがDC関連空調銘柄への一般的な弱気論。</p>
+    </div>
+    <div class="c cl-gn">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:8px">会社の反論（説得力あり）</div>
+      <ul class="li" style="margin-bottom:0">
+        <li>高熱負荷のGPUサーバーは液冷へ移行するが、<strong>CPUサーバーとデータホール全体の冷却は今後も空冷</strong>。</li>
+        <li>DC建設総量が増えるため、<strong>空冷比率が下がっても空冷空調機の絶対量は拡大</strong>。</li>
+        <li><strong>冷却塔（日本ビー・エー・シー）は冷却方式に関わらず必要</strong>。むしろ液冷移行で冷却液の使用温度が上がり、チラー補助ではなく<strong>熱源主機としての冷却塔の重要性が上昇</strong>。</li>
+        <li>DCへの環境規制強化（PUE低減）でチラーレス志向が高まり、冷却塔の価値がさらに上がる。</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bt2" style="margin-top:12px">この論理は筋が通っています。特に<strong>「液冷移行はむしろ冷却塔にとって追い風」</strong>という主張は、多くの投資家が見落としている点。26/3期にはDC向け大型冷却塔の展示施設「BAC BASE」、DC向け空調機の総合実験棟「SINKO AIR DEVELOPMENT LAB」を神奈川工場に開設し、実機ベースでの顧客開拓を進めています。<br>ただし<strong>DC売上は50億円（連結の8.4%）に過ぎず、この銘柄をDCテーマ株として買うのは筋違い</strong>です。あくまで成長の一要素。</p>
+</div>
+
+<!-- ══════════════════════════════ P5 ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">業績・財務の実態</h2><span class="sb bg-pu">増収減益が2期継続</span></div>
+
+  <h3 class="sub">A. 5期業績推移（連結）</h3>
+  <table class="t">
+    <tr><th>決算期</th><th class="r">売上高</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">BPS</th><th class="r">ROE</th><th class="r">自己資本比率</th><th class="r">配当</th></tr>
+    <tr><td>2022年3月期</td><td class="r mn">41,964</td><td class="r mn">6,048</td><td class="r mn">4,097</td><td class="r mn">53.04</td><td class="r mn">671.71</td><td class="r mn">8.1%</td><td class="r mn">71.6%</td><td class="r mn">16.7</td></tr>
+    <tr><td>2023年3月期</td><td class="r mn">44,805</td><td class="r mn">6,540</td><td class="r mn">4,514</td><td class="r mn">59.54</td><td class="r mn">729.03</td><td class="r mn">8.5%</td><td class="r mn">71.1%</td><td class="r mn">19.0</td></tr>
+    <tr><td>2024年3月期</td><td class="r mn">51,943</td><td class="r mn">9,120</td><td class="r mn">6,580</td><td class="r mn">88.37</td><td class="r mn">823.10</td><td class="r mn hgn">11.3%</td><td class="r mn">69.4%</td><td class="r mn">35.0</td></tr>
+    <tr><td>2025年3月期</td><td class="r mn">57,005</td><td class="r mn hgn">10,615</td><td class="r mn hgn">7,829</td><td class="r mn hgn">107.68</td><td class="r mn">862.26</td><td class="r mn hgn">12.8%</td><td class="r mn">71.7%</td><td class="r mn">50.0</td></tr>
+    <tr class="hl"><td><strong>2026年3月期</strong></td><td class="r mn"><strong>59,339</strong></td><td class="r mn hrd">10,061</td><td class="r mn hrd">6,826</td><td class="r mn hrd">99.59</td><td class="r mn">943.32</td><td class="r mn">11.0%</td><td class="r mn">67.9%</td><td class="r mn">50.0</td></tr>
+    <tr class="sm"><td><strong>2027年3月期 会社予想</strong></td><td class="r mn">63,000</td><td class="r mn">10,600</td><td class="r mn">7,200</td><td class="r mn">107.23</td><td class="r mn">―</td><td class="r mn">―</td><td class="r mn">―</td><td class="r mn">50.0</td></tr>
+  </table>
+  <div class="note">単位：百万円。EPS・BPS・配当は2024年12月1日の1:3株式分割を反映した調整後ベース。25/3期の配当は分割前で年150円（分割後換算50円）。</div>
+
+  <p class="bt2" style="margin-top:14px"><strong>読み取れること：</strong>売上は5期で+41%と着実に伸びているが、利益は25/3期をピークに減益。ROEも12.8%→11.0%へ低下。<strong>26/3期・27/3期1Qと「増収減益／減収減益」が続いており、これが株価の重しになっています。</strong></p>
+
+  <div class="sp"></div>
+  <h3 class="sub">B. 減益の分解 ── 犯人は販管費</h3>
+  <div class="g2">
+    <div class="c">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:10px">26/3期 営業利益 増減要因</div>
+      <div class="bg-w"><div class="br2"><span>売上増による利益増</span><span class="hgn mn">+8.90億</span></div><div class="bt"><div class="bf" style="width:60%;background:var(--gn2)"></div></div></div>
+      <div class="bg-w"><div class="br2"><span>売上総利益率低下</span><span class="hrd mn">△0.65億</span></div><div class="bt"><div class="bf" style="width:5%;background:var(--rd)"></div></div></div>
+      <div class="bg-w"><div class="br2"><span>販管費の増加</span><span class="hrd mn">△13.67億</span></div><div class="bt"><div class="bf" style="width:92%;background:var(--rd)"></div></div></div>
+      <div class="note" style="margin-top:6px">99.86億 → <strong>94.44億（△5.4%）</strong>。人件費・物流費の上昇を価格転嫁で吸収しきれていない。</div>
+    </div>
+    <div class="c">
+      <div style="font:700 12px/1.4 var(--head);margin-bottom:10px">27/3期 会社計画の前提</div>
+      <div class="bg-w"><div class="br2"><span>売上増による利益増</span><span class="hgn mn">+13.96億</span></div><div class="bt"><div class="bf" style="width:88%;background:var(--gn2)"></div></div></div>
+      <div class="bg-w"><div class="br2"><span>売上総利益率<strong>上昇</strong></span><span class="hgn mn">+2.82億</span></div><div class="bt"><div class="bf" style="width:18%;background:var(--gn2)"></div></div></div>
+      <div class="bg-w"><div class="br2"><span>販管費の増加</span><span class="hrd mn">△11.22億</span></div><div class="bt"><div class="bf" style="width:71%;background:var(--rd)"></div></div></div>
+      <div class="note" style="margin-top:6px">94.44億 → <strong>100.00億（+5.9%）</strong>。<span class="hrd">計画達成の鍵は「売上総利益率の上昇」</span>── 26/3期に実現できなかったことを前提に置いている点は要注意。</div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <h3 class="sub">C. 27/3期1Q ── 計画に対する進捗はやや不安</h3>
+  <table class="t">
+    <tr><th>項目</th><th class="r">26/3期1Q</th><th class="r">27/3期1Q</th><th class="r">前年比</th><th class="r">上期会社予想</th><th class="r">2Q単独必要額</th></tr>
+    <tr><td>売上高</td><td class="r mn">12,227</td><td class="r mn hrd">11,445</td><td class="r mn hrd">△6.4%</td><td class="r mn">25,000</td><td class="r mn">13,555</td></tr>
+    <tr><td>営業利益</td><td class="r mn">1,657</td><td class="r mn hrd">1,175</td><td class="r mn hrd">△29.1%</td><td class="r mn">2,800</td><td class="r mn hrd">1,625</td></tr>
+    <tr><td>経常利益</td><td class="r mn">1,917</td><td class="r mn hrd">1,535</td><td class="r mn hrd">△19.9%</td><td class="r mn">3,100</td><td class="r mn">1,565</td></tr>
+    <tr><td>親会社株主純利益</td><td class="r mn">1,312</td><td class="r mn hrd">1,072</td><td class="r mn hrd">△18.3%</td><td class="r mn">2,100</td><td class="r mn">1,028</td></tr>
+    <tr class="sm"><td>日本セグメント営業利益</td><td class="r mn">1,710</td><td class="r mn hrd">1,336</td><td class="r mn hrd">△21.9%</td><td class="r mn">―</td><td class="r mn">―</td></tr>
+    <tr class="sm"><td>アジアセグメント営業損益</td><td class="r mn hrd">△60</td><td class="r mn hrd">△167</td><td class="r mn hrd">悪化</td><td class="r mn">―</td><td class="r mn">―</td></tr>
+  </table>
+  <div class="inf"><strong>2Q単独で営業利益1,625百万円が必要。</strong>前年2Q単独は1,919百万円だったので、前年比△15%でも上期計画は達成できる計算です。会社は「1Qは概ね期初計画どおり」「建設業の供給制約で機器販売の立ち上がりが遅れた」「過去最高水準の受注残を背景に2Q以降で出荷を進める」と説明しており、通期予想は据え置き。<br><strong>受注残が本当に売上に転換するかが、11月の2Q決算で問われます。ここが最初の重要チェックポイント。</strong></div>
+
+  <div class="sp"></div>
+  <h3 class="sub">D. 受注残高 ── 過去最高水準という保険</h3>
+  <table class="t">
+    <tr><th>決算期</th><th class="r">受注高（日本）</th><th class="r">受注高（アジア）</th><th class="r">受注高合計</th><th class="r">受注残高</th><th class="r">受注残 前期比</th></tr>
+    <tr><td>2022年3月期</td><td class="r mn">25,994</td><td class="r mn">3,186</td><td class="r mn">29,181</td><td class="r mn">13,428</td><td class="r mn">―</td></tr>
+    <tr><td>2023年3月期</td><td class="r mn">27,462</td><td class="r mn">3,735</td><td class="r mn">31,198</td><td class="r mn">16,326</td><td class="r mn hgn">+21.6%</td></tr>
+    <tr><td>2024年3月期</td><td class="r mn">31,368</td><td class="r mn">5,946</td><td class="r mn">37,315</td><td class="r mn">20,883</td><td class="r mn hgn">+27.9%</td></tr>
+    <tr><td>2025年3月期</td><td class="r mn">30,119</td><td class="r mn">2,344</td><td class="r mn">32,463</td><td class="r mn">20,069</td><td class="r mn hrd">△3.9%</td></tr>
+    <tr class="hl"><td><strong>2026年3月期</strong></td><td class="r mn"><strong>36,662</strong></td><td class="r mn">1,808</td><td class="r mn"><strong>38,470</strong></td><td class="r mn hgn"><strong>25,728</strong></td><td class="r mn hgn"><strong>+28.2%</strong></td></tr>
+  </table>
+  <div class="note">日本セグメントの受注増の内訳は大型ビル（前期比+41億円）とデータセンター（+37億円）。ただし会社は「長工期の大型案件を一部含む」と注記しており、<strong>受注残が即座に売上に変わるわけではない</strong>点に注意。受注残257億円は新晃単体の国内売上（286億円）の約0.9年分。</div>
+
+  <div class="sp"></div>
+  <h3 class="sub">E. 財務健全性・キャッシュフロー</h3>
+  <div class="g4">
+    <div class="c mc"><div class="ml">自己資本比率</div><div class="mv gn">68.9%</div><div class="ms">26/6末。中計の目安「60%台」に到達</div></div>
+    <div class="c mc"><div class="ml">26/3期 営業CF</div><div class="mv gn">80.1億</div><div class="ms">前期57.4億から大幅改善</div></div>
+    <div class="c mc"><div class="ml">26/3期 FCF</div><div class="mv am">42.4億</div><div class="ms">前期60.0億から減少（投資増）</div></div>
+    <div class="c mc"><div class="ml">26/3期 投資額</div><div class="mv am">65.9億</div><div class="ms">前期30.6億の2.2倍</div></div>
+  </div>
+  <p class="bt2" style="margin-top:14px">財務は極めて健全。ネットキャッシュ状態で、CB60億円を含めても有利子負債87億円に対し現預金177億円。<strong>倒産・希薄化リスクは実質ゼロ</strong>。<br>26/3期の投資65.9億円のうち、戦略投資は40.5億円（神奈川工場の生産能力増強、DC向け熱交換器製造設備増強、SIMA開発など）。中計期間（25/3期〜27/3期）の投資見込は115.6億円で、当初計画135億円（うちM&A枠30億円）に対し△19.4億円。<strong>M&A枠30億円がほぼ手つかずである点は、次期中計での使い道として注目に値します。</strong></p>
+</div>
+
+<!-- ══════════════════════════════ P6 ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト ── 資本政策とM&A可能性</h2><span class="sb bg-gn">次期中計が本命</span></div>
+
+  <h3 class="sub">A. 株主構成（2025年9月30日現在）</h3>
+  <table class="t">
+    <tr><th>株主</th><th class="r">持株数（千株）</th><th class="r">比率</th><th>性格・含意</th></tr>
+    <tr class="hl"><td><strong>株式会社明晃</strong></td><td class="r mn"><strong>13,521</strong></td><td class="r mn"><strong>19.49%</strong></td><td><strong>当社取締役兼専務執行役員・藤井智明氏が代表取締役を務める資産管理会社。</strong>実質的な創業家系の支配株主。MBO・TOBを論じる際の中核。</td></tr>
+    <tr><td>日本マスタートラスト信託銀行（信託口）</td><td class="r mn">7,467</td><td class="r mn">10.76%</td><td>国内機関投資家の受け皿</td></tr>
+    <tr><td>STATE STREET BANK AND TRUST 505025</td><td class="r mn">4,944</td><td class="r mn">7.12%</td><td>海外機関投資家</td></tr>
+    <tr class="hl"><td><strong>ダイキン工業</strong></td><td class="r mn"><strong>4,050</strong></td><td class="r mn"><strong>5.83%</strong></td><td><strong>空調世界最大手が5.8%を保有。</strong>ダイキンは個別空調に強くセントラル空調のAHUは相対的に手薄。補完関係にある。</td></tr>
+    <tr><td>三菱UFJ銀行</td><td class="r mn">2,231</td><td class="r mn">3.21%</td><td>メインバンク・政策保有</td></tr>
+    <tr><td>日本生命保険</td><td class="r mn">1,864</td><td class="r mn">2.68%</td><td>政策保有</td></tr>
+    <tr><td>日本カストディ銀行（信託口）</td><td class="r mn">1,569</td><td class="r mn">2.26%</td><td>―</td></tr>
+    <tr><td>新晃持株会</td><td class="r mn">1,136</td><td class="r mn">1.63%</td><td>従業員持株会</td></tr>
+    <tr><td>エフホールディングス</td><td class="r mn">900</td><td class="r mn">1.29%</td><td>―</td></tr>
+    <tr class="sm"><td>上位10名 合計</td><td class="r mn">39,616</td><td class="r mn">57.11%</td><td>―</td></tr>
+    <tr><td>（別途）自己株式</td><td class="r mn">8,007</td><td class="r mn">10.35%</td><td>発行済比。2025年11月に4,830千株を消却済み</td></tr>
+    <tr><td>（大量保有報告）Goodhart Partners LLP</td><td class="r mn">―</td><td class="r mn hrd">5.77%</td><td><strong>英国の運用会社。2022年3月に7.05%まで買い増したが、2026年2月時点で5.77%まで低下。</strong>売り手として需給の重し。</td></tr>
+  </table>
+
+  <div class="sp"></div>
+  <h3 class="sub">B. カタリスト評価</h3>
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 本命</div>
+      <span class="ci">📋</span>
+      <div class="ct">次期中期経営計画の公表</div>
+      <div class="cb gn">2026年秋〜27年春</div>
+      <div class="cu">move.2027は27/3期が最終年度</div>
+      <div class="cp">現中計は<strong>ROE10%以上・PBR1倍以上を既に達成</strong>（26/3末PBR1.3倍）。次期中計では<strong>新たな自社株買い枠・還元方針・中国事業の扱い・未使用のM&A枠30億円</strong>の使い道が示される公算。この銘柄で最も確度の高いカタリスト。</div>
+      <div class="tgs"><span class="tg tg-gn">確度 高</span><span class="tg tg-or">時期 6〜12か月</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 02 · 資産</div>
+      <span class="ci">📈</span>
+      <div class="ct">政策保有株の売却</div>
+      <div class="cb am">230億円</div>
+      <div class="cu">取得原価推定56億／含み益174億</div>
+      <div class="cp">会社は有報で<strong>「合理的理由がある場合を除き売却を進める方針」</strong>を明記。25年上期に投資有価証券売却益5.31億円を計上した実績あり。売却すれば<strong>税引後約177億円＝時価総額の22%</strong>が現金化される。</div>
+      <div class="tgs"><span class="tg tg-am">方針は開示済み</span><span class="tg tg-bl">ペースは緩慢</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 事業</div>
+      <span class="ci">🇨🇳</span>
+      <div class="ct">中国事業の縮小・撤退判断</div>
+      <div class="cb or">△0.6億</div>
+      <div class="cu">上海新晃：総資産107.8億で経常損失</div>
+      <div class="cp">会社は<strong>「中国市場の停滞は構造的なもの」と明言</strong>。107.8億円の資産がほぼ利益を生んでいない。撤退・縮小・合弁解消のいずれかがあれば、連結ROEは即座に1〜2ポイント改善する。<strong>ただし持分50%の合弁で意思決定は複雑。</strong></div>
+      <div class="tgs"><span class="tg tg-or">インパクト大</span><span class="tg tg-rd">確度 低〜中</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04 · M&A</div>
+      <span class="ci" style="font-size:22px">🤝</span>
+      <div class="ct" style="color:var(--ink)">ダイキンによるTOB</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">確度 低</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">ただしゼロではない</div>
+      <div class="cp" style="color:var(--ink2)">ダイキンは既に5.83%を保有。同社が弱いセントラル空調AHUを新晃が持ち、製品補完性は高い。<strong>買収に必要な実質資金は時価総額863億−ネット金融資産320億＝543億円程度</strong>でダイキンには軽い。<br>ただし明晃19.49%の同意が必須で、<strong>現時点でその兆候はない</strong>。あくまで「下値を支えるオプション」。</div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05 · MBO</div>
+      <span class="ci" style="font-size:22px">🔒</span>
+      <div class="ct" style="color:var(--ink)">創業家によるMBO</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">確度 低</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">動機が弱い</div>
+      <div class="cp" style="color:var(--ink2)">明晃19.49%＋自己株10.35%＋持株会1.63%で実質31%超。資金面ではMBOは十分可能。<br>だが<strong>MBOの典型的動機（PBR1倍割れ・低ROE・上場維持コスト・アクティビスト圧力）がいずれも当てはまらない</strong>。PBR1.2倍、ROE11%、還元は総還元性向117%と極めて積極的。<strong>むしろ「上場したまま株主に報いる」路線を選んでいる会社</strong>。</div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 06 · 需給</div>
+      <span class="ci" style="font-size:22px">📉</span>
+      <div class="ct" style="color:var(--ink)">【逆カタリスト】自社株買い枠の枯渇</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">残 7億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">100億円枠のうち93億円取得済み</div>
+      <div class="cp" style="color:var(--ink2)">総還元性向は<strong>25/3期106.3% → 26/3期117.4% → 27/3期予想56.4%へ急落</strong>。2年間で93億円（時価総額の11%相当）を買った巨大な買い手が消える。<strong>これが7月以降の株価軟調の最有力の説明</strong>であり、次期中計で新枠が出るまで需給の空白期間が続く。</div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <h3 class="sub">C. 転換社債（CB）の希薄化リスク</h3>
+  <table class="t">
+    <tr><th>項目</th><th>内容</th></tr>
+    <tr><td>銘柄</td><td>2030年満期ユーロ円建取得条項付転換社債型新株予約権付社債（2025年4月3日発行）</td></tr>
+    <tr><td>発行額 / 転換価額</td><td class="mn">60億円 / 1,386円</td></tr>
+    <tr><td>潜在株式数</td><td class="mn">4,329,004株（自己株控除後発行済の約6.4%）</td></tr>
+    <tr><td>転換条件</td><td>2029年3月末までは<strong>株価が転換価額の150%（＝2,079円）を20営業日連続で超えた場合のみ</strong>行使可。2029年4月以降は130%（＝1,802円）。</td></tr>
+    <tr class="hl"><td><strong>評価</strong></td><td>現株価1,190円は転換価額1,386円を14%下回り、行使条件の2,079円までは<strong>+75%の距離</strong>。当面の希薄化リスクは実質的にない。<br>むしろ<strong>「株価が2,000円を超えるまで希薄化しない設計」で60億円を調達し、それを全額自社株買いに充てた</strong>という資本政策は、経営陣が株価水準を強く意識している証左として評価できる。</td></tr>
+  </table>
+
+  <div class="sp"></div>
+  <h3 class="sub">D. 還元実績のトラックレコード</h3>
+  <table class="t">
+    <tr><th>決算期</th><th class="r">EPS</th><th class="r">年間配当</th><th class="r">配当性向</th><th class="r">自社株買い</th><th class="r">総還元性向</th></tr>
+    <tr><td>2023年3月期</td><td class="r mn">59.54</td><td class="r mn">19.00</td><td class="r mn">31.9%</td><td class="r mn">―</td><td class="r mn">39.9%</td></tr>
+    <tr><td>2024年3月期</td><td class="r mn">88.37</td><td class="r mn">35.00</td><td class="r mn">39.6%</td><td class="r mn">―</td><td class="r mn">55.1%</td></tr>
+    <tr class="hl"><td>2025年3月期</td><td class="r mn">107.68</td><td class="r mn">50.00</td><td class="r mn">46.4%</td><td class="r mn hgn">36.08億</td><td class="r mn hgn">106.3%</td></tr>
+    <tr class="hl"><td>2026年3月期</td><td class="r mn">99.59</td><td class="r mn">50.00</td><td class="r mn">50.2%</td><td class="r mn hgn">34.29億</td><td class="r mn hgn">117.4%</td></tr>
+    <tr><td>2027年3月期 予想</td><td class="r mn">107.23</td><td class="r mn">50.00</td><td class="r mn">46.6%</td><td class="r mn hrd">約7億</td><td class="r mn hrd">56.4%</td></tr>
+  </table>
+  <div class="note">配当方針は<strong>配当性向の目安50%、業績悪化時もDOE3.5%を下回らない</strong>という下限付き。26/3期の実績DOEは約5.4%と下限を大きく上回っており、<strong>減配リスクは相当低い</strong>。配当利回り4.2%は下値の支えとして機能する。</div>
+</div>
+
+<!-- ══════════════════════════════ P7 ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">ダウンサイドリスクと最終評価</h2><span class="sb bg-rd">冷静に見る</span></div>
+
+  <h3 class="sub">A. リスク評価マトリクス</h3>
+  <table class="t">
+    <tr><th>リスク</th><th>内容</th><th class="r">発生確率</th><th class="r">影響度</th><th class="r">総合</th></tr>
+    <tr><td><strong>① 還元縮小による需給悪化</strong></td><td>2年間で93億円の自社株買いという最大の買い手が消滅。総還元性向117%→56%。次期中計で新枠が出るまで需給の空白。</td><td class="r"><span class="bge be-rd">高</span></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">最重要</span></td></tr>
+    <tr><td><strong>② 受注残の売上転換遅延</strong></td><td>受注残257億は過去最高だが「長工期の大型案件を一部含む」。建設業の働き方改革・供給制約で工期が伸びれば、売上・利益の計上が期ズレする。1Qで既に顕在化。</td><td class="r"><span class="bge be-rd">高</span></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">最重要</span></td></tr>
+    <tr><td><strong>③ コストインフレの継続</strong></td><td>26/3期は販管費が13.67億円増加し営業減益の主因に。人件費・物流費の上昇は構造的で、価格転嫁は「限定的」と会社自ら認めている。27/3期計画は売上総利益率の上昇を前提にしており、これが外れると計画未達。</td><td class="r"><span class="bge be-am">中〜高</span></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">重要</span></td></tr>
+    <tr><td><strong>④ 中国事業の一段の悪化</strong></td><td>27/3期のアジア売上は70億円（△13.5%）を計画。1Qは既に売上△19.6%・営業損失167百万円へ悪化。総資産107.8億円が滞留。減損リスクも視野。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">重要</span></td></tr>
+    <tr><td><strong>⑤ 建設投資サイクルの転換</strong></td><td>売上は大規模建物の建設設備投資に依存。建設費高騰による投資計画見直しが「現れ始めている」と会社が認識。金利上昇・不動産市況悪化が重なると新規案件が減少。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-rd">大</span></td><td class="r"><span class="bge be-am">重要</span></td></tr>
+    <tr><td><strong>⑥ 原材料（銅・アルミ）と中東情勢</strong></td><td>27/3期予想の前提として「中東情勢の緊迫化で原材料の一部が入手性悪化・価格上昇」を会社が明記。現時点の影響は軽微とするが、長期化すれば原価を圧迫。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-bl">中程度</span></td></tr>
+    <tr><td><strong>⑦ 有価証券含み益の逆回転</strong></td><td>投資有価証券230億に対し含み益174億。株式市場が20%下落すればBPSが約50円（5%）減少。<strong>純資産の18.5%が株式市場に連動する</strong>という構造的ボラティリティ。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-bl">小〜中</span></td><td class="r"><span class="bge be-bl">中程度</span></td></tr>
+    <tr><td><strong>⑧ Goodhart等の売り圧力</strong></td><td>Goodhart Partnersは7.05%（2022年）→5.77%（2026年2月）と継続的に売却。残り5.77%＝約390万株の潜在的売り圧力。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-bl">小</span></td><td class="r"><span class="bge be-bl">中程度</span></td></tr>
+    <tr><td>⑨ 施工人員の確保失敗</td><td>最も収益性の高い工事・メンテ事業のボトルネックは需要ではなく人。採用・育成が進まなければ成長が止まる。</td><td class="r"><span class="bge be-am">中</span></td><td class="r"><span class="bge be-bl">小〜中</span></td><td class="r"><span class="bge be-bl">中程度</span></td></tr>
+    <tr><td>⑩ データセンター液冷移行</td><td>DC売上は50億（連結の8.4%）に留まり、仮に空冷需要が減っても全体への影響は限定的。冷却塔はむしろ追い風という会社説明にも一定の説得力。</td><td class="r"><span class="bge be-bl">低〜中</span></td><td class="r"><span class="bge be-bl">小</span></td><td class="r"><span class="bge be-gn">軽微</span></td></tr>
+    <tr><td>⑪ 財務・希薄化リスク</td><td>実質ネットキャッシュ、自己資本比率68.9%、CB転換価額まで+75%。<strong>実質ゼロ</strong>。</td><td class="r"><span class="bge be-gn">極低</span></td><td class="r"><span class="bge be-gn">極小</span></td><td class="r"><span class="bge be-gn">無視可</span></td></tr>
+  </table>
+
+  <div class="sp"></div>
+  <h3 class="sub">B. 株価シナリオ（12〜18か月）</h3>
+  <div class="sc">
+    <div class="sc-c">
+      <div class="sc-l br">弱気 25%</div>
+      <div class="sc-p br">950円</div>
+      <div class="sc-s">△20.2% ／ PBR0.97倍</div>
+      <div class="sc-i">受注残の売上転換が遅れ通期未達</div>
+      <div class="sc-i">中国が一段悪化・減損計上</div>
+      <div class="sc-i">自社株買い不在で需給悪化</div>
+      <div class="sc-i">EPS 90円 × PER10.5倍</div>
+      <div class="sc-i">配当利回り5.3%で下げ止まり</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">中立 45%</div>
+      <div class="sc-p bs">1,300円</div>
+      <div class="sc-s">+9.2% ／ PBR1.33倍</div>
+      <div class="sc-i">27/3期は会社計画をほぼ達成</div>
+      <div class="sc-i">EPS 107円 × PER12倍</div>
+      <div class="sc-i">次期中計で還元は現状維持</div>
+      <div class="sc-i">配当50円を受け取り総リターン+13%</div>
+      <div class="sc-i">中国は赤字継続だが横ばい</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">強気 25%</div>
+      <div class="sc-p bu">1,700円</div>
+      <div class="sc-s">+42.9% ／ PBR1.7倍</div>
+      <div class="sc-i">次期中計で新たな大型還元枠</div>
+      <div class="sc-i">政策保有株の本格売却を開始</div>
+      <div class="sc-i">DC・個別空調・工事が牽引しEPS 120円</div>
+      <div class="sc-i">中国縮小でROE13%台へ</div>
+      <div class="sc-i">PER14倍への評価切り上げ</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bm">TOB/MBO 5%</div>
+      <div class="sc-p bm">1,900円+</div>
+      <div class="sc-s">+60%以上</div>
+      <div class="sc-i">ダイキンまたはPEによる買収</div>
+      <div class="sc-i">明晃19.49%の同意が前提</div>
+      <div class="sc-i">現時点で具体的兆候なし</div>
+      <div class="sc-i">下値を支える"オプション"</div>
+      <div class="sc-i">メインシナリオに織り込まない</div>
+    </div>
+  </div>
+
+  <div class="g4" style="margin-top:14px">
+    <div class="c mc"><div class="ml">期待値（加重平均）</div><div class="mv gn">1,342円</div><div class="ms">+12.8%（配当除く）</div></div>
+    <div class="c mc"><div class="ml">期待トータルリターン</div><div class="mv gn">+17.0%</div><div class="ms">配当50円込み</div></div>
+    <div class="c mc"><div class="ml">下値余地</div><div class="mv rd">△240円</div><div class="ms">弱気950円まで（△20.2%）</div></div>
+    <div class="c mc"><div class="ml">リスク・リワード比</div><div class="mv bl">1 : 2.1</div><div class="ms">下値240円 vs 上値510円（強気）</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <h3 class="sub">C. 何を見て判断するか ── チェックポイント</h3>
+  <div class="tl">
+    <div class="ti"><span class="td2 rd"></span><div class="tdate">2026年11月 · 2Q決算</div><div class="ttext"><strong>最重要チェックポイント。</strong>上期営業利益2,800百万円（2Q単独1,625百万円）を達成できるか。受注残257億円が実際に売上へ転換しているかがここで判明する。未達なら通期下方修正の可能性が高く、弱気シナリオへ。</div></div>
+    <div class="ti"><span class="td2 am"></span><div class="tdate">2026年11〜12月 · 2Q決算説明会</div><div class="ttext">自社株買いの追加枠に関する言及があるか。中計最終年度を迎えるにあたっての次期中計の方向性コメント。中国事業の扱いに関する説明。</div></div>
+    <div class="ti"><span class="td2 gn"></span><div class="tdate">2027年2月 · 3Q決算</div><div class="ttext">通期100億円の営業利益達成の確度が固まる。同時に次期中計の骨子が語られる可能性。</div></div>
+    <div class="ti"><span class="td2 gn"></span><div class="tdate">2027年5月 · 通期決算 ＋ 次期中期経営計画</div><div class="ttext"><strong>最大のカタリスト。</strong>move.2027の後継計画で、新しい還元枠（自社株買い上限額）・ROE目標・政策保有株の売却スケジュール・M&A方針・中国事業の位置づけが示される。ここで強気シナリオへの分岐が決まる。</div></div>
+    <div class="ti"><span class="td2 bl"></span><div class="tdate">随時</div><div class="ttext">投資有価証券の売却（特別利益の計上）、大量保有報告書の変更（Goodhart・ダイキンの動き）、明晃の持株比率変動。</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="conc">
+    <div class="conc-h">最終評価 ── <span>○ 条件付きで妙味あり（分割購入）</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
+      <div>
+        <div class="conc-lbl">買える理由</div>
+        <div class="conc-b">
+          <strong>1,190円という株価は、明白なバーゲンではないが、質に対しては安い。</strong><br><br>
+          ・時価総額799億円のうち<strong>320億円（40%）がネット金融資産</strong>。事業に払っているのは実質479億円。<br>
+          ・その479億円で買える事業は、<strong>税後ROIC約14.7%・投下資本473億円</strong>。市場は高収益事業をちょうど簿価で値付けしている。<br>
+          ・実質PER6.7倍、事業EV/EBIT4.8倍。<br>
+          ・売上の62%がストック、機器販売も約半分が更新需要。<strong>景気後退時の耐性が高い</strong>。<br>
+          ・工事子会社・新晃アトモスの経常利益率28.7%が示す、模倣困難な保守ポジション。<br>
+          ・配当性向50%目安・DOE3.5%下限という明示的な下限付き還元方針。利回り4.2%。<br>
+          ・実質ネットキャッシュ、自己資本比率68.9%で財務リスクは無視できる。
+        </div>
+      </div>
+      <div>
+        <div class="conc-lbl">慎重であるべき理由</div>
+        <div class="conc-b">
+          <strong>「含み益で割安」という物語は成立しない。</strong><br><br>
+          ・有価証券の含み益174億円は<strong>既に時価評価されBPSに反映済み</strong>。簿外資産ではない。<br>
+          ・土地は1998〜2002年の再評価法適用済みで、しかも再評価差額金は<strong>マイナス748百万円</strong>。工場用地中心で含み益期待は控えめ。<br>
+          ・修正PBRは約1.19倍。<strong>解散価値では割安ではない</strong>。<br>
+          ・2期連続の実質減益、27/3期1Qは営業利益△29.1%。<br>
+          ・<strong>2年で93億円という最大の買い手（自社株買い）が消える</strong>。総還元性向117%→56%。<br>
+          ・中国事業に107.8億円の資産が滞留し、ほぼ利益を生んでいない。<br>
+          ・MBO・TOBは「動機が弱く」メインシナリオにはできない。あくまでオプション。
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)">
+      <div class="conc-lbl">実務的な結論</div>
+      <div class="conc-b" style="font-size:12.5px">
+        <strong>この銘柄は「バリュー投資」というより「クオリティを妥当な価格で買う」案件です。</strong>含み益の掘り起こしを期待して入ると失望します。<br><br>
+        1,190円は<strong>買ってよい水準ではあるが、急ぐ理由はない</strong>。理由は、①11月の2Q決算で受注残の売上転換が確認できるまで業績リスクが残ること、②自社株買いの需給支援が切れた空白期間にあること、の2点です。<br><br>
+        <strong>合理的な戦略は3分割。</strong>①現値1,190円近辺で1/3、②11月の2Q決算を確認して1/3（好結果なら追加、未達なら見送り）、③次期中計公表時（2027年5月前後）に還元方針を見て残り1/3。<strong>1,050円以下（配当利回り4.8%超・PBR1.05倍）まで下げれば、前倒しでの買い増しが正当化されます。</strong><br><br>
+        <strong style="color:var(--or2)">最大の上値要因は「次期中計での資本配分の再設計」。</strong>230億円の政策保有株と107億円が眠る中国事業 ── この337億円（時価総額の42%）をどう処理するかで、この会社のROEは11%にも15%にもなり得ます。経営陣は既に「資本コスト経営」を掲げ、2年で93億円の自社株買いとCB活用によるB/Sリバランスを実行してきた実績があります。その延長線上に賭ける価値はあると考えます。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されたものであり、特定の銘柄の売買を推奨するものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: 新晃工業 有価証券報告書（第77期・2026年6月22日提出） / 27年3月期第1四半期決算短信（2026年8月6日） / 26年3月期決算説明会資料（2026年6月11日） / 第77期半期報告書（2025年11月14日） / EDINET · TDNET · 大量保有報告書 · 2026.08.11作成<br>
+  ※ 土地含み益・賃貸等不動産の時価、政策保有株式の銘柄別内訳は有価証券報告書の該当注記が未取得のため推計値・未確認を明記しています。
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

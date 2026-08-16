@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
+<title>4,000万円 高配当バリュー株 × 同額信用キャリー 検証レポート</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0f1216;color:#e8e6e1;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",-apple-system,"Segoe UI",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px 80px}
+header{border-bottom:1px solid #2a2f36;padding:56px 0 32px;margin-bottom:44px}
+.kicker{font-size:11px;letter-spacing:.22em;color:#c9a227;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:30px;line-height:1.4;margin:0 0 10px;font-weight:700;letter-spacing:.01em}
+.sub{color:#8b93a1;font-size:14px;margin:0}
+h2{font-size:19px;margin:56px 0 6px;padding-left:13px;border-left:3px solid #c9a227;font-weight:700}
+h2 .en{display:block;font-size:10px;letter-spacing:.18em;color:#6c7480;font-weight:400;margin-top:3px}
+h3{font-size:14px;color:#c9a227;margin:30px 0 10px;letter-spacing:.04em}
+p{font-size:14px;color:#c3c8d1;margin:12px 0}
+.hero{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#252a31;border:1px solid #252a31;margin:32px 0 8px}
+.hc{background:#161a20;padding:20px 18px}
+.hc .l{font-size:11px;color:#8b93a1;letter-spacing:.05em;margin-bottom:8px}
+.hc .v{font-size:27px;font-weight:700;letter-spacing:-.02em;font-feature-settings:"tnum"}
+.hc .u{font-size:12px;color:#8b93a1;font-weight:400;margin-left:3px}
+.hc .d{font-size:11px;color:#6c7480;margin-top:6px}
+.gold{color:#e0bc4a} .pos{color:#5ab88a} .neg{color:#e0736a} .grey{color:#8b93a1} .red{color:#e05a4f}
+.chart{width:100%;height:auto;display:block;margin:22px 0 6px}
+.g{stroke:#232830;stroke-width:1}
+.axl{stroke:#3a414b;stroke-width:1}
+.ax{font-size:11px;fill:#7d8593;font-family:inherit}
+.ac{text-anchor:middle} .ar{text-anchor:end}
+.lA{fill:none;stroke:#c9a227;stroke-width:2.6}
+.lB{fill:none;stroke:#6c7480;stroke-width:1.8;stroke-dasharray:5 4}
+.lR{fill:none;stroke:#e05a4f;stroke-width:2.6}
+.ml{stroke-width:1.2;stroke-dasharray:3 3;opacity:.8}
+.dA{fill:#c9a227} .dB{fill:#6c7480}
+.lbl{font-size:13px;font-weight:700}
+.bp{fill:#5ab88a} .bn{fill:#e0736a} .bt{fill:#c9a227}
+.wc{stroke:#4a515c;stroke-width:1;stroke-dasharray:3 3}
+.wv{font-size:12px;font-weight:700;fill:#e8e6e1} .wv.gold{fill:#e0bc4a}
+.wl{font-size:10.5px;fill:#8b93a1}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:18px 0;font-feature-settings:"tnum"}
+th{background:#1a1f26;color:#9aa2b0;font-weight:600;font-size:11px;padding:10px 8px;text-align:right;border-bottom:1px solid #2a2f36;letter-spacing:.03em;white-space:nowrap}
+th:first-child{text-align:left}
+td{padding:8px;border-bottom:1px solid #1e232a;color:#d5d9e0}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+td.b{font-weight:700;color:#fff}
+td.s{text-align:center;font-size:11px;font-weight:700}
+tr.hi td{background:#1c2129}
+tr:hover td{background:#171c23}
+.ok{color:#5ab88a} .warn{color:#e0a84a} .bad{color:#e05a4f}
+.cap{font-size:11.5px;color:#6c7480;margin:6px 0 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.card{background:#161a20;border:1px solid #252a31;padding:18px 20px;border-radius:3px}
+.card h4{margin:0 0 8px;font-size:13px;color:#e8e6e1;letter-spacing:.03em}
+.card p{margin:0;font-size:12.5px;color:#9aa2b0;line-height:1.75}
+.note{background:#1a1512;border-left:3px solid #c9a227;padding:16px 20px;margin:24px 0;border-radius:0 3px 3px 0}
+.note strong{color:#e0bc4a}
+.warn-box{background:#1c1412;border-left:3px solid #e05a4f;padding:16px 20px;margin:24px 0;border-radius:0 3px 3px 0}
+.warn-box strong{color:#e0736a}
+.note p,.warn-box p{font-size:13px;margin:6px 0}
+ul{font-size:13px;color:#c3c8d1;padding-left:20px;margin:10px 0} li{margin:7px 0}
+.eq{background:#12161b;border:1px solid #252a31;padding:14px 18px;margin:14px 0;font-size:13.5px;color:#d5d9e0;border-radius:3px;font-feature-settings:"tnum"}
+.eq b{color:#e0bc4a}
+footer{margin-top:64px;padding-top:24px;border-top:1px solid #2a2f36;font-size:11px;color:#5f6773;line-height:1.9}
+@media(max-width:760px){.hero{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}h1{font-size:23px}}
+@media print{body{background:#fff;color:#111}}
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</style></head><body><div class="wrap">
+
+<header>
+<div class="kicker">Margin Carry Model &nbsp;/&nbsp; Revised 2026.07</div>
+<h1>4,000万円 高配当バリュー株 ×<br>同額 信用キャリー 10年モデル</h1>
+<p class="sub">野村證券 買方金利 1.69%（2026年7月改定）／ 配当利回り 4.0% ／ 株価成長 0% を前提とした保守シナリオ</p>
+</header>
+
+<div class="hero">
+<div class="hc"><div class="l">損益分岐 配当利回り</div><div class="v gold">2.00<span class="u">%</span></div><div class="d">1.69% ÷ 84.685%</div></div>
+<div class="hc"><div class="l">合算 実効年利回り</div><div class="v pos">4.54<span class="u">%</span></div><div class="d">現物3.19% + 信用1.35%</div></div>
+<div class="hc"><div class="l">10年後 純資産</div><div class="v">6,236<span class="u">万</span></div><div class="d">現物のみなら 5,474万</div></div>
+<div class="hc"><div class="l">追証ライン（野村・維持率30%）</div><div class="v red">▲27.8<span class="u">%</span></div><div class="d">純資産ゼロは ▲50%</div></div>
+</div>
+<p class="cap">※ 金額は税引後・再投資込み。現物株の時価のみを純資産とし、信用建玉（借入）は資産に含めない。</p>
+
+<h2>1. 結論<span class="en">Executive Summary</span></h2>
+<p>金利1.69%に対し、信用の損益分岐となる<b>税引前配当利回りは約2.00%</b>。配当4.0%の銘柄であれば、信用側は税引後で<span class="pos">年+1.35%</span>のネット収益を生み、現物の税引後配当3.19%に上乗せされて<b class="gold">合算 実効4.54%</b>となります。重要なのは金利の絶対水準ではなく<b>配当と金利のスプレッド</b>で、金利が0.26pt上がっても配当を1pt引き上げられるなら収益性はむしろ改善します。</p>
+<p>ただし収益性の改善は<b>レバレッジ2倍の代償</b>と引き換えです。株価が<span class="red">▲33%</span>で追証、<span class="red">▲50%</span>で自己資本が消滅します。年間キャッシュフロー約182万円に対し、10%の下落は約4.4年分の収益を吹き飛ばす計算になります。</p>
+
+
+<p>なお本モデルは<b>増配・配当性向引き上げ・優待・キャピタル益・TOB/MBOを一切織り込まない下限ケース</b>です。実際の資産バリュー株ではこれらが上振れ要因として乗ってきます（第5章）。さらに、配当落調整金が譲渡損益として扱われることで<b class="gold">損出し・リバランスによる税コントロールが常時可能</b>になる点が、このスキーム最大の構造的な武器です（第6章）。</p>
+
+<h2>2. 利回りの分解<span class="en">Yield Decomposition</span></h2>
+<p>配当4.0%の銘柄を、現物4,000万円＋同額の信用建玉4,000万円で保有した場合の、現物元本に対する実効利回りの積み上げです。</p>
+<svg viewBox="0 0 900 315" class="chart"><line x1="40" y1="243.0" x2="882" y2="243.0" class="g"/><text x="34" y="247.0" class="ax ar">0%</text><line x1="40" y1="214.9" x2="882" y2="214.9" class="g"/><text x="34" y="218.9" class="ax ar">1%</text><line x1="40" y1="186.7" x2="882" y2="186.7" class="g"/><text x="34" y="190.7" class="ax ar">2%</text><line x1="40" y1="158.6" x2="882" y2="158.6" class="g"/><text x="34" y="162.6" class="ax ar">3%</text><line x1="40" y1="130.4" x2="882" y2="130.4" class="g"/><text x="34" y="134.4" class="ax ar">4%</text><line x1="40" y1="102.3" x2="882" y2="102.3" class="g"/><text x="34" y="106.3" class="ax ar">5%</text><line x1="40" y1="74.1" x2="882" y2="74.1" class="g"/><text x="34" y="78.1" class="ax ar">6%</text><line x1="40" y1="46.0" x2="882" y2="46.0" class="g"/><text x="34" y="50.0" class="ax ar">7%</text><line x1="40" y1="243" x2="882" y2="243" class="axl"/><rect x="54.0" y="130.4" width="118.3" height="112.6" rx="2" class="bp"/><text x="113.2" y="121.4" class="wv ac">+4.00%</text><line x1="172.3" y1="130.4" x2="194.3" y2="130.4" class="wc"/><text x="113.2" y="264" class="wl ac">現物 配当</text><text x="113.2" y="279" class="wl ac">（税前）</text><rect x="194.3" y="130.4" width="118.3" height="22.9" rx="2" class="bn"/><text x="253.5" y="121.4" class="wv ac">-0.81%</text><line x1="312.7" y1="153.3" x2="334.7" y2="153.3" class="wc"/><text x="253.5" y="264" class="wl ac">配当課税</text><text x="253.5" y="279" class="wl ac">▲20.315%</text><rect x="334.7" y="58.0" width="118.3" height="95.3" rx="2" class="bp"/><text x="393.8" y="49.0" class="wv ac">+3.39%</text><line x1="453.0" y1="58.0" x2="475.0" y2="58.0" class="wc"/><text x="393.8" y="264" class="wl ac">信用 調整金</text><text x="393.8" y="279" class="wl ac">（受取84.685%）</text><rect x="475.0" y="58.0" width="118.3" height="47.6" rx="2" class="bn"/><text x="534.2" y="49.0" class="wv ac">-1.69%</text><line x1="593.3" y1="105.5" x2="615.3" y2="105.5" class="wc"/><text x="534.2" y="264" class="wl ac">信用 金利</text><text x="534.2" y="279" class="wl ac">▲1.69%</text><rect x="615.3" y="105.5" width="118.3" height="9.7" rx="2" class="bn"/><text x="674.5" y="96.5" class="wv ac">-0.34%</text><line x1="733.7" y1="115.2" x2="755.7" y2="115.2" class="wc"/><text x="674.5" y="264" class="wl ac">譲渡益課税</text><text x="674.5" y="279" class="wl ac">▲20.315%</text><rect x="755.7" y="115.2" width="118.3" height="127.8" rx="2" class="bt"/><text x="814.8" y="106.2" class="wv ac gold">4.54%</text><text x="814.8" y="264" class="wl ac">合算 実効</text><text x="814.8" y="279" class="wl ac">年利回り</text></svg>
+<div class="eq">
+現物側：4.00% ×(1−20.315%) = <b>3.19%</b><br>
+信用側：（4.00%×84.685% − 1.69%）×(1−20.315%) = （3.387% − 1.69%）× 79.685% = <b>+1.35%</b><br>
+合算：<b>4.54%</b>　←　現物元本4,000万円がこの率で複利成長
+</div>
+<p class="cap">※ 信用金利は特定口座内で譲渡損益から控除されるため、実質負担は 1.69%×79.685%＝1.35% となる。分岐点の判定式は 配当×84.685% ＞ 金利 のみで決まる。</p>
+
+<h2>3. 10年間の資産推移<span class="en">10-Year Projection</span></h2>
+<svg viewBox="0 0 880 380" class="chart"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9a227" stop-opacity=".28"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></linearGradient></defs>
+<line x1="70" y1="335.0" x2="860" y2="335.0" class="g"/><text x="60" y="339.0" class="ax ar">3,500</text><line x1="70" y1="284.2" x2="860" y2="284.2" class="g"/><text x="60" y="288.2" class="ax ar">4,000</text><line x1="70" y1="233.3" x2="860" y2="233.3" class="g"/><text x="60" y="237.3" class="ax ar">4,500</text><line x1="70" y1="182.5" x2="860" y2="182.5" class="g"/><text x="60" y="186.5" class="ax ar">5,000</text><line x1="70" y1="131.7" x2="860" y2="131.7" class="g"/><text x="60" y="135.7" class="ax ar">5,500</text><line x1="70" y1="80.8" x2="860" y2="80.8" class="g"/><text x="60" y="84.8" class="ax ar">6,000</text><line x1="70" y1="30.0" x2="860" y2="30.0" class="g"/><text x="60" y="34.0" class="ax ar">6,500</text><path d="M70.0 284.2 L149.0 265.7 L228.0 246.4 L307.0 226.2 L386.0 205.1 L465.0 183.1 L544.0 160.0 L623.0 135.9 L702.0 110.7 L781.0 84.4 L860.0 56.9 L860.0 335.0 L70.0 335.0 Z" fill="url(#gA)"/><path d="M70.0 284.2 L149.0 271.2 L228.0 257.8 L307.0 244.0 L386.0 229.8 L465.0 215.1 L544.0 199.9 L623.0 184.3 L702.0 168.1 L781.0 151.5 L860.0 134.3" class="lB"/><path d="M70.0 284.2 L149.0 265.7 L228.0 246.4 L307.0 226.2 L386.0 205.1 L465.0 183.1 L544.0 160.0 L623.0 135.9 L702.0 110.7 L781.0 84.4 L860.0 56.9" class="lA"/><circle cx="70.0" cy="284.2" r="3" class="dB"/><circle cx="149.0" cy="271.2" r="3" class="dB"/><circle cx="228.0" cy="257.8" r="3" class="dB"/><circle cx="307.0" cy="244.0" r="3" class="dB"/><circle cx="386.0" cy="229.8" r="3" class="dB"/><circle cx="465.0" cy="215.1" r="3" class="dB"/><circle cx="544.0" cy="199.9" r="3" class="dB"/><circle cx="623.0" cy="184.3" r="3" class="dB"/><circle cx="702.0" cy="168.1" r="3" class="dB"/><circle cx="781.0" cy="151.5" r="3" class="dB"/><circle cx="860.0" cy="134.3" r="3" class="dB"/><circle cx="70.0" cy="284.2" r="3.5" class="dA"/><circle cx="149.0" cy="265.7" r="3.5" class="dA"/><circle cx="228.0" cy="246.4" r="3.5" class="dA"/><circle cx="307.0" cy="226.2" r="3.5" class="dA"/><circle cx="386.0" cy="205.1" r="3.5" class="dA"/><circle cx="465.0" cy="183.1" r="3.5" class="dA"/><circle cx="544.0" cy="160.0" r="3.5" class="dA"/><circle cx="623.0" cy="135.9" r="3.5" class="dA"/><circle cx="702.0" cy="110.7" r="3.5" class="dA"/><circle cx="781.0" cy="84.4" r="3.5" class="dA"/><circle cx="860.0" cy="56.9" r="3.5" class="dA"/><text x="70.0" y="357" class="ax ac">0</text><text x="149.0" y="357" class="ax ac">1</text><text x="228.0" y="357" class="ax ac">2</text><text x="307.0" y="357" class="ax ac">3</text><text x="386.0" y="357" class="ax ac">4</text><text x="465.0" y="357" class="ax ac">5</text><text x="544.0" y="357" class="ax ac">6</text><text x="623.0" y="357" class="ax ac">7</text><text x="702.0" y="357" class="ax ac">8</text><text x="781.0" y="357" class="ax ac">9</text><text x="860.0" y="357" class="ax ac">10</text>
+<text x="440.0" y="374" class="ax ac">経過年数</text>
+<text x="854.0" y="42.87251140816366" class="lbl gold ar">6,236万円</text>
+<text x="854.0" y="156.28194143259532" class="lbl grey ar">5,474万円</text></svg>
+<p class="cap"><span class="gold">■</span> 信用併用（合算4.54%複利）　<span class="grey">┈</span> 現物のみ（3.19%複利）　単位：万円</p>
+<table>
+<thead><tr><th>年度</th><th>期首 現物時価<br>(万円)</th><th>信用建玉<br>(万円)</th><th>現物配当<br>税引後</th><th>調整金<br>受取</th><th>信用金利</th><th>信用ネット<br>税引後</th><th>年間税後CF</th><th>期末 現物時価<br>(万円)</th><th>現物のみ<br>(万円)</th></tr></thead>
+<tbody><tr><td class="n">1年目</td><td class="n grey">4,000</td><td class="n grey">4,000</td><td class="n">1,274,960</td><td class="n">1,354,960</td><td class="n neg">▲676,000</td><td class="n pos">541,029</td><td class="n b">1,815,989</td><td class="n b gold">4,182</td><td class="n grey">4,127</td></tr><tr><td class="n">2年目</td><td class="n grey">4,182</td><td class="n grey">4,182</td><td class="n">1,332,843</td><td class="n">1,416,475</td><td class="n neg">▲706,690</td><td class="n pos">565,592</td><td class="n b">1,898,435</td><td class="n b gold">4,371</td><td class="n grey">4,259</td></tr><tr><td class="n">3年目</td><td class="n grey">4,371</td><td class="n grey">4,371</td><td class="n">1,393,354</td><td class="n">1,480,782</td><td class="n neg">▲738,774</td><td class="n pos">591,270</td><td class="n b">1,984,623</td><td class="n b gold">4,570</td><td class="n grey">4,395</td></tr><tr><td class="n">4年目</td><td class="n grey">4,570</td><td class="n grey">4,570</td><td class="n">1,456,611</td><td class="n">1,548,010</td><td class="n neg">▲772,314</td><td class="n pos">618,113</td><td class="n b">2,074,724</td><td class="n b gold">4,777</td><td class="n grey">4,535</td></tr><tr><td class="n">5年目</td><td class="n grey">4,777</td><td class="n grey">4,777</td><td class="n">1,522,741</td><td class="n">1,618,289</td><td class="n neg">▲807,377</td><td class="n pos">646,175</td><td class="n b">2,168,916</td><td class="n b gold">4,994</td><td class="n grey">4,679</td></tr><tr><td class="n">6年目</td><td class="n grey">4,994</td><td class="n grey">4,994</td><td class="n">1,591,873</td><td class="n">1,691,759</td><td class="n neg">▲844,031</td><td class="n pos">675,511</td><td class="n b">2,267,385</td><td class="n b gold">5,221</td><td class="n grey">4,829</td></tr><tr><td class="n">7年目</td><td class="n grey">5,221</td><td class="n grey">5,221</td><td class="n">1,664,144</td><td class="n">1,768,564</td><td class="n neg">▲882,350</td><td class="n pos">706,179</td><td class="n b">2,370,323</td><td class="n b gold">5,458</td><td class="n grey">4,982</td></tr><tr><td class="n">8年目</td><td class="n grey">5,458</td><td class="n grey">5,458</td><td class="n">1,739,696</td><td class="n">1,848,856</td><td class="n neg">▲922,409</td><td class="n pos">738,240</td><td class="n b">2,477,935</td><td class="n b gold">5,706</td><td class="n grey">5,141</td></tr><tr><td class="n">9年目</td><td class="n grey">5,706</td><td class="n grey">5,706</td><td class="n">1,818,677</td><td class="n">1,932,794</td><td class="n neg">▲964,286</td><td class="n pos">771,756</td><td class="n b">2,590,433</td><td class="n b gold">5,965</td><td class="n grey">5,305</td></tr><tr><td class="n">10年目</td><td class="n grey">5,965</td><td class="n grey">5,965</td><td class="n">1,901,245</td><td class="n">2,020,542</td><td class="n neg">▲1,008,064</td><td class="n pos">806,793</td><td class="n b">2,708,038</td><td class="n b gold">6,236</td><td class="n grey">5,474</td></tr></tbody><tfoot><tr><td class="b">10年累計</td><td class="n"></td><td class="n"></td><td class="n b">15,696,144</td><td class="n b">16,681,031</td><td class="n b neg">▲8,322,295</td><td class="n b pos">6,660,659</td><td class="n b gold">22,356,802</td><td class="n b gold">6,236</td><td class="n grey">5,474</td></tr></tfoot>
+</table>
+<div class="grid2">
+<div class="card"><h4>10年後 純資産</h4><p><b class="gold" style="font-size:20px">6,236万円</b>（+2,236万円 / +55.9%）<br>現物のみの場合は 5,474万円。<b class="pos">信用活用による超過は +761万円</b>。</p></div>
+<div class="card"><h4>10年間で支払う金利</h4><p><b class="neg" style="font-size:20px">832万円</b><br>これに対し受け取る調整金は1,668万円。差額836万円（税引前）が信用ポジションの粗利益。</p></div>
+</div>
+
+<h2>4. 配当利回りの感応度<span class="en">Sensitivity</span></h2>
+<p>銘柄選定で配当利回りが変われば、信用のネット収益は大きく振れます。損益分岐2.00%からの距離がそのまま利益幅になるため、<b>3%台と5%台では10年後の差が2倍以上</b>に開きます。</p>
+<table>
+<thead><tr><th>配当利回り<br>(税引前)</th><th>現物<br>税引後</th><th>調整金<br>受取率</th><th>信用ネット<br>(税引後)</th><th>合算<br>実効利回り</th><th>10年後<br>純資産</th><th>現物のみ<br>10年後</th><th>超過</th></tr></thead>
+<tbody><tr class=""><td class="n b">3.0%</td><td class="n">2.39%</td><td class="n">2.54%</td><td class="n pos">+0.68%</td><td class="n b gold">3.07%</td><td class="n">5,411万</td><td class="n grey">5,066万</td><td class="n pos">+345万</td></tr><tr class=""><td class="n b">3.5%</td><td class="n">2.79%</td><td class="n">2.96%</td><td class="n pos">+1.02%</td><td class="n b gold">3.80%</td><td class="n">5,810万</td><td class="n grey">5,267万</td><td class="n pos">+544万</td></tr><tr class="hi"><td class="n b">4.0%</td><td class="n">3.19%</td><td class="n">3.39%</td><td class="n pos">+1.35%</td><td class="n b gold">4.54%</td><td class="n">6,236万</td><td class="n grey">5,474万</td><td class="n pos">+761万</td></tr><tr class=""><td class="n b">4.5%</td><td class="n">3.59%</td><td class="n">3.81%</td><td class="n pos">+1.69%</td><td class="n b gold">5.28%</td><td class="n">6,689万</td><td class="n grey">5,689万</td><td class="n pos">+999万</td></tr><tr class=""><td class="n b">5.0%</td><td class="n">3.98%</td><td class="n">4.23%</td><td class="n pos">+2.03%</td><td class="n b gold">6.01%</td><td class="n">7,171万</td><td class="n grey">5,912万</td><td class="n pos">+1259万</td></tr></tbody>
+</table>
+<p class="cap">網掛けはメインシナリオ（4.0%）。配当が2.00%を下回ると信用ネットはマイナスに転じ、レバレッジが損失を拡大させる側に働く。</p>
+
+
+<h2>5. ベースケースが織り込んでいないもの<span class="en">Upside Not Priced In</span></h2>
+<p>ここまでの試算は<b>意図的に何も期待していないモデル</b>です。株価成長0%、配当利回り一定、増配なし、優待なし、キャピタル益なし。実際の資産バリュー株投資でこれらがすべてゼロで10年間推移する確率はむしろ低く、<b class="gold">ベースケースは floor（下限）として読むべき</b>ものです。織り込んでいない上振れ要因を並べます。</p>
+
+<div class="grid2">
+<div class="card"><h4>インフレ連動の増配</h4><p>日本もインフレ局面に入り、名目利益と配当は伸びやすい環境。<b>年2%の増配</b>が続くだけで10年後は<b class="pos">+341万円</b>。増配は株価が動かなくても利回り自体を押し上げるため、信用のスプレッドを直接広げます。</p></div>
+<div class="card"><h4>配当性向の引き上げ</h4><p>東証のPBR1倍割れ改善要請と資本効率改革は継続中。配当性向30%→50%への引き上げは、それだけで利回りが1.67倍になります。<b>資産バリュー株＝現金・政策保有株を抱えた企業</b>ほど、この余地が大きい。</p></div>
+<div class="card"><h4>優待の拡充・新設</h4><p>個人株主の安定確保を狙う優待新設・拡充の流れ。ただし<b class="neg">優待は現物にのみ付き、信用建玉には付きません</b>。4,000万円の現物側にのみ効く上振れですが、利回り換算では無視できない規模になることがあります。</p></div>
+<div class="card"><h4>キャピタル益（バリュー修正）</h4><p>PBR0.5倍が0.7倍に是正されるだけで+40%。株価が年2%上がるだけでも、<b>レバレッジ2倍なので自己資本には年4%効く</b>。増配2%＋株価2%の組み合わせで10年後<b class="pos">+1,301万円</b>。</p></div>
+<div class="card"><h4>TOB / MBO / 親子上場解消</h4><p>資産バリュー株はTOB・MBOの主戦場。プレミアムは30〜40%が典型。<b>保有の20%が5年目に+40%のTOB</b>を受けただけで10年後<b class="pos">+795万円</b>。ただし上場廃止時は信用建玉を期日前に反対売買する必要があり、ポジションの再構築が発生します。</p></div>
+<div class="card"><h4>自社株買い</h4><p>発行済株式数が減れば1株利益・1株配当が自動的に増加。PBR1倍割れ企業の自社株買いは理論上ただちに1株純資産を増やすため、<b>資産バリュー株では特に効きが強い</b>上振れ要因です。</p></div>
+</div>
+
+<h3>上振れシナリオ別 10年後の純資産</h3>
+<svg viewBox="0 0 880 330" class="chart"><line x1="50" y1="247.6" x2="866" y2="247.6" class="g"/><text x="44" y="251.6" class="ax ar">4,000</text><line x1="50" y1="195.7" x2="866" y2="195.7" class="g"/><text x="44" y="199.7" class="ax ar">5,000</text><line x1="50" y1="143.8" x2="866" y2="143.8" class="g"/><text x="44" y="147.8" class="ax ar">6,000</text><line x1="50" y1="91.9" x2="866" y2="91.9" class="g"/><text x="44" y="95.9" class="ax ar">7,000</text><line x1="50" y1="40.0" x2="866" y2="40.0" class="g"/><text x="44" y="44.0" class="ax ar">8,000</text><line x1="50" y1="258" x2="866" y2="258" class="axl"/><rect x="64" y="131.6" width="104" height="126.4" rx="2" fill="#8b93a1"/><text x="116.0" y="122.6" class="wv ac" fill="#8b93a1">6,236万</text><text x="116.0" y="278" class="wl ac">A ベース</text><text x="116.0" y="292" class="wl ac">配当4%固定・株価0%</text><rect x="196" y="113.9" width="104" height="144.1" rx="2" fill="#5a8bb8"/><text x="248.0" y="104.9" class="wv ac" fill="#5a8bb8">6,577万</text><text x="248.0" y="88.9" class="wl ac" fill="#5ab88a">+341万</text><text x="248.0" y="278" class="wl ac">B 増配年2%</text><text x="248.0" y="292" class="wl ac">株価0%</text><rect x="328" y="120.7" width="104" height="137.3" rx="2" fill="#5ab88a"/><text x="380.0" y="111.7" class="wv ac" fill="#5ab88a">6,444万</text><text x="380.0" y="95.7" class="wl ac" fill="#5ab88a">+209万</text><text x="380.0" y="278" class="wl ac">D 損出しフル活用</text><text x="380.0" y="292" class="wl ac">調整金課税を繰延</text><rect x="460" y="90.3" width="104" height="167.7" rx="2" fill="#b88a5a"/><text x="512.0" y="81.3" class="wv ac" fill="#b88a5a">7,031万</text><text x="512.0" y="65.3" class="wl ac" fill="#5ab88a">+795万</text><text x="512.0" y="278" class="wl ac">F TOB一発</text><text x="512.0" y="292" class="wl ac">5年目/保有20%が+40%</text><rect x="592" y="64.0" width="104" height="194.0" rx="2" fill="#c9a227"/><text x="644.0" y="55.0" class="wv ac" fill="#c9a227">7,537万</text><text x="644.0" y="39.0" class="wl ac" fill="#5ab88a">+1,301万</text><text x="644.0" y="278" class="wl ac">C 増配2%＋株価2%</text><rect x="724" y="51.2" width="104" height="206.8" rx="2" fill="#e0bc4a"/><text x="776.0" y="42.2" class="wv ac" fill="#e0bc4a">7,784万</text><text x="776.0" y="26.2" class="wl ac" fill="#5ab88a">+1,549万</text><text x="776.0" y="278" class="wl ac">E 全部乗り</text><text x="776.0" y="292" class="wl ac">B+C+D</text><text x="440.0" y="324" class="ax ac">10年後 純資産（万円）</text></svg>
+<p class="cap">いずれも配当4.0%・金利1.69%を出発点とし、上振れ要因のみを加えたケース。すべてが同時に起きる前提（E）は楽観的だが、<b>複数が部分的に起きる確率はかなり高い</b>。</p>
+
+<div class="note">
+<p><strong>だからこそ銘柄選定がすべて</strong></p>
+<p>このモデルで唯一コントロールできるのは<b>銘柄</b>です。金利は野村が決め、税率は国が決め、株価は市場が決めますが、「どの銘柄を4,000万円分持つか」だけは完全に自分の裁量です。求める条件を整理すると次の通りです。</p>
+<ul>
+<li><b>配当の持続性</b>：損益分岐2.00%に対し4%なら倍のバッファ。減配してもなおプラス圏に残る余裕があるか（累進配当・減配しない方針の明記があれば理想）</li>
+<li><b>下値の堅さ</b>：PBR1倍割れ、ネットキャッシュ比率、含み資産。追証ライン▲33%まで持ちこたえる「下がりにくさ」そのものがレバレッジの安全余裕になる</li>
+<li><b>上振れの種</b>：政策保有株の縮減余地、親会社の存在、オーナー比率、資本効率改革の進捗</li>
+<li><b>分散</b>：現物と信用で銘柄をずらし、代用価値の目減りと建玉評価損が同時に来る構造を弱める</li>
+</ul>
+<p>逆に言えば、<b>この4条件を満たす銘柄で固められるなら、ベースケース4.54%は現実的にかなり保守的な数字</b>です。</p>
+</div>
+
+<h2>6. 最大の武器 — 調整金のキャピタル扱いと損益通算<span class="en">The Real Edge: Tax Optimisation</span></h2>
+<p>このスキームで一番効くのは、実は利回りそのものではなく<b class="gold">税のコントロール権を手に入れること</b>です。</p>
+
+<div class="eq">
+<b>現物の配当金</b> → 配当所得。源泉20.315%が天引きされて確定する（通算には特定口座の配当受入設定や申告が必要）<br>
+<b>信用の配当落調整金</b> → <b>譲渡損益そのもの</b>。特定口座内で他の売買損益と<b>自動的に通算される</b><br>
+<b>信用金利</b> → こちらも譲渡損益からマイナス。実質負担は 1.69%×79.685% = <b>1.35%</b>
+</div>
+
+<h3>なぜこれが強いのか — 「損出しの受け皿」が毎年確実に用意される</h3>
+<p>通常の現物投資家が含み損を損出ししても、その年に譲渡益がなければ<b>3年間の繰越控除に回るだけ</b>で、還付という形の即効性はありません。確定申告も毎年必要になります。</p>
+<p>ところがこのスキームでは、<b>調整金という譲渡益が毎年ほぼ確実に発生します</b>。初年度で135万円、10年累計で<b>1,668万円</b>。つまり<b class="gold">「損出しをすれば必ず税が戻ってくる状態」が毎年維持される</b>ということです。含み損を抱えた銘柄を年末に整理する動きが、そのまま節税として機能します。</p>
+
+<div class="grid2">
+<div class="card"><h4>効果の大きさ</h4><p>調整金にかかる譲渡益課税は初年度13.8万円、10年累計<b>170万円</b>。これを損出しで毎年相殺しきった場合、実効利回りは4.54%→<b class="gold">4.88%（+0.34pt）</b>、10年後の純資産は<b class="pos">+209万円</b>。</p></div>
+<div class="card"><h4>リバランスが自由になる</h4><p>通常、含み益銘柄を売って乗り換えると譲渡益課税で複利が削れます。しかし口座内に損出し玉と調整金がある状態では<b>口座全体の譲渡損益を年単位で調整できる</b>ため、税負担ゼロで銘柄入れ替えができる年を作れます。</p></div>
+</div>
+
+
+<h3>下落局面を「仕込み直し」に変える回転</h3>
+<p>この仕組みが最も強く効くのは、<b>良い銘柄が下がったとき</b>です。売って損を確定させ、下値で同じ株数を買い直す。同じ銘柄を持ち続けているのに、取得単価だけが切り下がります。</p>
+<svg viewBox="0 0 880 250" class="chart"><rect x="18" y="43" width="190" height="104" rx="4" fill="#161a20" stroke="#8b93a1" stroke-opacity=".55"/><text x="34" y="67" class="wv" fill="#8b93a1" style="font-size:15px">①</text><text x="56" y="67" class="wv" fill="#e8e6e1" style="font-size:13px">株価下落</text><text x="34" y="97" class="wl" fill="#9aa2b0" style="font-size:11.5px">良い銘柄が</text><text x="34" y="114" class="wl" fill="#9aa2b0" style="font-size:11.5px">▲25%下落</text><path d="M212 95 L225 95 M220 91 L225 95 L220 99" stroke="#5f6773" stroke-width="1.6" fill="none"/><rect x="230" y="43" width="190" height="104" rx="4" fill="#161a20" stroke="#5a8bb8" stroke-opacity=".55"/><text x="246" y="67" class="wv" fill="#5a8bb8" style="font-size:15px">②</text><text x="268" y="67" class="wv" fill="#e8e6e1" style="font-size:13px">損出し売却</text><text x="246" y="97" class="wl" fill="#9aa2b0" style="font-size:11.5px">譲渡損を実現</text><text x="246" y="114" class="wl" fill="#9aa2b0" style="font-size:11.5px">維持率も一時改善</text><path d="M424 95 L437 95 M432 91 L437 95 L432 99" stroke="#5f6773" stroke-width="1.6" fill="none"/><rect x="442" y="43" width="190" height="104" rx="4" fill="#161a20" stroke="#5ab88a" stroke-opacity=".55"/><text x="458" y="67" class="wv" fill="#5ab88a" style="font-size:15px">③</text><text x="480" y="67" class="wv" fill="#e8e6e1" style="font-size:13px">調整金と相殺</text><text x="458" y="97" class="wl" fill="#9aa2b0" style="font-size:11.5px">信用の譲渡益と通算</text><text x="458" y="114" class="wl" fill="#9aa2b0" style="font-size:11.5px">源泉税が還付</text><path d="M636 95 L649 95 M644 91 L649 95 L644 99" stroke="#5f6773" stroke-width="1.6" fill="none"/><rect x="654" y="43" width="190" height="104" rx="4" fill="#161a20" stroke="#c9a227" stroke-opacity=".55"/><text x="670" y="67" class="wv" fill="#c9a227" style="font-size:15px">④</text><text x="692" y="67" class="wv" fill="#e8e6e1" style="font-size:13px">下値で買い直し</text><text x="670" y="97" class="wl" fill="#9aa2b0" style="font-size:11.5px">取得単価▲25%</text><text x="670" y="114" class="wl" fill="#9aa2b0" style="font-size:11.5px">実効利回り5.33%へ</text><path d="M749 153 L749 171 L113 171 L113 153 M108 158 L113 153 L118 158" stroke="#c9a227" stroke-width="1.4" fill="none" stroke-dasharray="4 3" opacity=".75"/><text x="440.0" y="190" class="wl ac" fill="#c9a227">下落するたびに取得単価が切り下がり、利回りと上値余地が積み上がる</text></svg>
+<p>この一連の動きで<b>3つのものが同時に手に入ります</b>。</p>
+<ul>
+<li><b>取得価格ベースの配当利回りの上昇</b>：配当額が同じなら、取得単価が25%下がれば利回りは 4.00% → <b class="gold">5.33%</b>。これは以後ずっと続く恒久的な改善です</li>
+<li><b>上値余地の拡大</b>：本源的価値までの距離が広がる。元の株価に戻るだけで <b class="pos">+33.3%</b> のキャピタル</li>
+<li><b>実際に戻ってくる現金</b>：ここが決定的で、実現した譲渡損は<b>信用の調整金という譲渡益と相殺され、源泉徴収された税が還付されます</b></li>
+</ul>
+<p>通常の現物投資家が同じことをしても、その年に譲渡益がなければ<b class="neg">繰越控除に回るだけで現金は1円も戻りません</b>。このスキームでは調整金が毎年ほぼ確実に譲渡益を供給するため、<b class="gold">損出しが即座に還付へ変換されます</b>。しかも還付されたキャッシュは、まさにその「安くなっている局面」で再投資できます。<b>下落が、割引価格と再投資原資を同時に差し出してくる</b>構造です。</p>
+
+<h3>試算：ある年に保有の一部が▲25%下落した場合</h3>
+<table>
+<thead><tr><th>項目</th><th>金額・数値</th><th>効果</th></tr></thead>
+<tbody>
+<tr><td>損出し対象（保有の一部）</td><td class="n">1,000万円 → 750万円</td><td>▲25%</td></tr>
+<tr><td>実現する譲渡損</td><td class="n neg">▲250万円</td><td>売却して翌日以降に買い直し</td></tr>
+<tr><td>その年の信用側 譲渡益（調整金−金利）</td><td class="n pos">+68万円</td><td>相殺の受け皿</td></tr>
+<tr><td class="b">相殺による即時還付</td><td class="n b gold">+13.8万円</td><td class="b">現金として戻る</td></tr>
+<tr><td>残る譲渡損</td><td class="n">182万円</td><td>3年間の繰越控除へ（要確定申告）</td></tr>
+<tr><td>買い直し後の取得単価ベース利回り</td><td class="n b gold">5.33%</td><td>4.00%から恒久的に上昇</td></tr>
+<tr><td>元の株価に戻った場合のキャピタル</td><td class="n pos">+33.3%</td><td>上値余地が拡大</td></tr>
+</tbody>
+</table>
+<p class="cap">売却で現物が一時的に現金化される点も見逃せません。代用有価証券の掛目80%に対し<b>現金は100%評価</b>のため、損出しの実行中は委託保証金維持率がむしろ改善します。下落局面という最も維持率が苦しいタイミングで、この動き自体が緩衝材になります。</p>
+
+<div class="warn-box">
+<p><strong>この戦術が成立する条件</strong></p>
+<p>すべては<b>「良い銘柄が、事業の毀損ではない理由で下がっている」</b>という前提の上に乗っています。減配や構造的な収益悪化で下げている銘柄に同じことをすれば、取得単価を下げながら傷を深くするだけです。<b class="neg">ナンピンの正当化に使うと、レバレッジ2倍のもとで致命傷になります。</b></p>
+<p>その他の実務的な制約：買い直しまでの間に株価が戻ってしまい下で拾えないリスク、同日買い戻しによる取得単価平均化の回避（翌日以降が定石）、売買コストとスプレッド、そして相殺しきれない損失は確定申告を経た3年繰越にとどまる点。</p>
+</div>
+
+<h3>その他の留意点</h3>
+<div class="warn-box">
+<p><strong>損出しの本質は繰り延べ</strong></p>
+<p><b>損出しは「非課税化」ではなく「課税の繰り延べ」です。</b>売却で取得単価が下がるため、将来その銘柄を売るときの譲渡益は増えます。上の+209万円は、10年間の繰り延べを4.5%で複利運用できたことによる時間価値であり、税金が消えたわけではありません。</p>
+<p>実務上の注意：同日中の買い戻しは取得単価が平均化されて効果が薄れるため<b>翌日以降の買い戻しが定石</b>。その間の株価変動リスクと売買コストを負います。また、そもそも損出しには<b>含み損の存在が前提</b>であり、上手くいっている年には使えません。</p>
+</div>
+
+<p>それでも、<b>信用ポジションが「毎年確実に譲渡益を生む装置」として機能し、それが損出し・リバランス・繰越損失の活用を常時オンにしておく</b>という構造的な利点は残ります。金利1.69%という表面的なコストの裏で、これは毎年地味に効き続ける武器です。</p>
+
+<h2>7. 下落ストレス試算<span class="en">Downside Stress Test</span></h2>
+<p>現物4,000万円を代用有価証券（掛目80%）として差し入れ、同額4,000万円を信用建玉とした場合の耐久力です。現物・信用が同率で下落する前提で計算しています。</p>
+<svg viewBox="0 0 880 360" class="chart"><line x1="70" y1="300.0" x2="855" y2="300.0" class="g"/><text x="60" y="304.0" class="ax ar">0</text><line x1="70" y1="231.2" x2="855" y2="231.2" class="g"/><text x="60" y="235.2" class="ax ar">1,000</text><line x1="70" y1="162.5" x2="855" y2="162.5" class="g"/><text x="60" y="166.5" class="ax ar">2,000</text><line x1="70" y1="93.8" x2="855" y2="93.8" class="g"/><text x="60" y="97.8" class="ax ar">3,000</text><line x1="70" y1="25.0" x2="855" y2="25.0" class="g"/><text x="60" y="29.0" class="ax ar">4,000</text>
+<rect x="506.1" y="25" width="348.9" height="275" fill="#e05a4f" opacity=".07"/>
+<line x1="506.1" y1="25" x2="506.1" y2="300" class="ml" stroke="#e05a4f"/><text x="506.1" y="17" class="ax ac" fill="#e05a4f">維持率30%</text><line x1="549.8" y1="25" x2="549.8" y2="300" class="ml" stroke="#e0864f"/><text x="549.8" y="17" class="ax ac" fill="#e0864f">25%</text><line x1="593.3" y1="25" x2="593.3" y2="300" class="ml" stroke="#d6b34f"/><text x="593.3" y="17" class="ax ac" fill="#d6b34f">20%</text><path d="M70.0 25.0 L85.7 27.8 L101.4 30.5 L117.1 33.3 L132.8 36.0 L148.5 38.8 L164.2 41.5 L179.9 44.2 L195.6 47.0 L211.3 49.7 L227.0 52.5 L242.7 55.2 L258.4 58.0 L274.1 60.8 L289.8 63.5 L305.5 66.2 L321.2 69.0 L336.9 71.8 L352.6 74.5 L368.3 77.2 L384.0 80.0 L399.7 82.8 L415.4 85.5 L431.1 88.2 L446.8 91.0 L462.5 93.8 L478.2 96.5 L493.9 99.2 L509.6 102.0 L525.3 104.8 L541.0 107.5 L556.7 110.3 L572.4 113.0 L588.1 115.8 L603.8 118.5 L619.5 121.2 L635.2 124.0 L650.9 126.8 L666.6 129.5 L682.3 132.2 L698.0 135.0 L713.7 137.7 L729.4 140.5 L745.1 143.2 L760.8 146.0 L776.5 148.8 L792.2 151.5 L807.9 154.2 L823.6 157.0 L839.3 159.8 L855.0 162.5" class="lB"/><path d="M70.0 25.0 L85.7 30.5 L101.4 36.0 L117.1 41.5 L132.8 47.0 L148.5 52.5 L164.2 58.0 L179.9 63.5 L195.6 69.0 L211.3 74.5 L227.0 80.0 L242.7 85.5 L258.4 91.0 L274.1 96.5 L289.8 102.0 L305.5 107.5 L321.2 113.0 L336.9 118.5 L352.6 124.0 L368.3 129.5 L384.0 135.0 L399.7 140.5 L415.4 146.0 L431.1 151.5 L446.8 157.0 L462.5 162.5 L478.2 168.0 L493.9 173.5 L509.6 179.0 L525.3 184.5 L541.0 190.0 L556.7 195.5 L572.4 201.0 L588.1 206.5 L603.8 212.0 L619.5 217.5 L635.2 223.0 L650.9 228.5 L666.6 234.0 L682.3 239.5 L698.0 245.0 L713.7 250.5 L729.4 256.0 L745.1 261.5 L760.8 267.0 L776.5 272.5 L792.2 278.0 L807.9 283.5 L823.6 289.0 L839.3 294.5 L855.0 300.0" class="lR"/><text x="70.0" y="322" class="ax ac">▲0%</text><text x="227.0" y="322" class="ax ac">▲10%</text><text x="384.0" y="322" class="ax ac">▲20%</text><text x="541.0" y="322" class="ax ac">▲30%</text><text x="698.0" y="322" class="ax ac">▲40%</text><text x="855.0" y="322" class="ax ac">▲50%</text>
+<text x="440.0" y="352" class="ax ac">株価下落率（現物・信用とも同率下落と仮定）</text>
+<text x="729.4" y="132.5" class="lbl grey ac">現物のみ</text>
+<text x="698.0" y="265.0" class="lbl red ac">信用併用（純資産）</text></svg>
+<p class="cap"><span class="red">■</span> 信用併用時の純資産　<span class="grey">┈</span> 現物のみの場合　単位：万円</p>
+<table>
+<thead><tr><th>株価下落</th><th>委託保証金<br>維持率</th><th>純資産<br>(信用併用)</th><th>純資産<br>(現物のみ)</th><th>ステータス</th></tr></thead>
+<tbody><tr><td class="n b">▲0.0%</td><td class="n">80.0%</td><td class="n">4,000万</td><td class="n grey">4,000万</td><td class="s ok">安全圏</td></tr><tr><td class="n b">▲10.0%</td><td class="n">62.0%</td><td class="n">3,200万</td><td class="n grey">3,600万</td><td class="s ok">安全圏</td></tr><tr><td class="n b">▲20.0%</td><td class="n">44.0%</td><td class="n">2,400万</td><td class="n grey">3,200万</td><td class="s ok">安全圏</td></tr><tr><td class="n b">▲27.8%</td><td class="n">30.0%</td><td class="n">1,778万</td><td class="n grey">2,889万</td><td class="s warn">警戒</td></tr><tr><td class="n b">▲30.6%</td><td class="n">25.0%</td><td class="n">1,555万</td><td class="n grey">2,778万</td><td class="s bad">追証・強制決済領域</td></tr><tr><td class="n b">▲33.3%</td><td class="n">20.0%</td><td class="n">1,334万</td><td class="n grey">2,667万</td><td class="s bad">追証・強制決済領域</td></tr><tr><td class="n b">▲40.0%</td><td class="n">8.0%</td><td class="n">800万</td><td class="n grey">2,400万</td><td class="s bad">追証・強制決済領域</td></tr><tr><td class="n b">▲50.0%</td><td class="n">-10.0%</td><td class="n">0万</td><td class="n grey">2,000万</td><td class="s bad">追証・強制決済領域</td></tr></tbody>
+</table>
+<div class="warn-box">
+<p><strong>レバレッジ2倍が意味すること</strong></p>
+<p>下落率は自己資本に対して<b>2倍で効きます</b>。年間の税引後CF約182万円に対し、株価10%下落＝純資産800万円の毀損は<b>約4.4年分の収益</b>に相当します。配当で年4.5%積み上げても、5年に一度の20%調整で一気に相殺される構造だと理解しておく必要があります。</p>
+<p>維持率の最低ラインは証券会社ごとに異なります。<b>野村證券は30%</b>（法定最低の20%より厳しく、追証の受入期日は発生日から2営業日目）。<b>買方金利1.69%という低金利の恩恵を受け取る代わりに、維持率には人一倍の余裕を持って構える必要があります。</b></p>
+</div>
+
+<h2>8. 実務上の確認事項<span class="en">Practical Checklist</span></h2>
+<div class="grid2">
+<div class="card"><h4>① 制度信用は6か月期限</h4><p>10年キャリーには<b>一般信用（無期限）</b>が必須。野村證券は2026年7月改定で制度・一般とも買方金利1.69%（オンライン専用支店）。一般信用の調整金の支払率は制度信用と異なる場合があるため要確認。</p></div>
+<div class="card"><h4>② 調整金の支払率</h4><p>本モデルは84.685%を前提。証券会社・銘柄によっては100%や別レートのケースもあり、ここが1割違うと信用ネットは0.3%以上動きます。<b>最も感応度の高いパラメータ</b>。</p></div>
+<div class="card"><h4>③ 金利は変動する</h4><p>1.43%→1.69%は約半年での改定。今後さらに上昇すれば損益分岐も上がります。金利2.5%なら分岐は2.95%、3.0%なら3.54%。<b>配当利回りに対する金利のバッファ</b>を常に見ておく必要があります。</p></div>
+<div class="card"><h4>④ 見えにくいコスト</h4><p>管理費（1か月経過ごと・1銘柄あたり上限1,100円）、名義書換料、権利処理関連費用が別途発生。5銘柄なら年6〜7万円程度、利回りに対し0.02%弱の影響。</p></div>
+<div class="card"><h4>⑤ 減配リスクが二重に効く</h4><p>減配は現物の収入を減らすと同時に、信用側を赤字に転落させます。配当4%が2%に減配されると信用ネットはゼロ、そこから株価も下げれば追証圧力が同時に来ます。<b>高配当バリュー株の最大の弱点</b>。</p></div>
+<div class="card"><h4>⑥ 集中リスク</h4><p>現物と信用で同じ銘柄を持つと実質2倍のポジション。代用有価証券の掛目も同じ銘柄の下落で同時に痩せます。<b>現物と信用で銘柄を分散</b>させると、代用価値の目減りと建玉評価損の連動を弱められます。</p></div>
+</div>
+
+<footer>
+本資料は提示された前提条件に基づく機械的な試算であり、投資助言ではありません。私は投資アドバイザーではないため、実際の投資判断はご自身の責任で、必要に応じて専門家にご相談のうえ行ってください。<br>
+株価成長率0%・配当利回り一定・減配なし・信用建玉を毎年末に現物時価と同額へリバランスするという単純化された前提を置いており、実際には減配、株価変動、金利改定、税制変更、証券会社の規定変更などにより結果は大きく異なります。特に配当落調整金の支払率および委託保証金維持率の最低ラインは、必ず野村證券の最新の規定をご確認ください。<br>
+金利出典：野村證券「【信用取引】オンライン専用支店の買方金利1.69％へ変更のお知らせ」（2026年6月25日、2026年7月21日約定分より適用）。作成日：2026年7月31日。
+</footer>
+</div></body></html>
