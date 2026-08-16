@@ -204,7 +204,7 @@ noteUrl: "https://numasoko-value.com/analysis/fenwal-6870.html"
 > ・<strong>サーマルの受注</strong>——前年割れなら半導体サイクル反転を疑う
 > ・<span class="t-red">**品質関連の引当金**</span>——大幅増、または<strong>「特別損失の計上に関するお知らせ」の単独開示が出たら即撤退</strong>
 > ・<strong>通期予想</strong>——下方修正なら「会社計画は保守的」という前提そのものが崩れる
-> ・<span class="t-blue">次のイベントは8月21日の決算補足説明資料と、10月30日の3Q決算</strong>
+> ・<span class="t-blue">次のイベントは8月21日の決算補足説明資料と、10月30日の3Q決算</span>
 
 🧑‍💼**沼田**「<span class="t-green">3Qまでは“ラダーを埋める期間”、3Q後は“持ち切るか降りるかを決める期間”</span>——<strong>この切り分けを、買う前に決めておく</strong>」
 
