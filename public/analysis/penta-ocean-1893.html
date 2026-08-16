@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五洋建設（1893）投資分析レポート</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 44px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eeb0b0}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wn td{background:var(--rd3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 26px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:var(--pu2)}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.cp.lt{color:var(--ink2)}
+.cp.lt strong{color:var(--ink);font-weight:700}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.25);color:#e09090}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px;gap:10px}
+.br2 .lb{color:var(--ink2);font-weight:500}
+.br2 .vl{font-family:var(--mono);font-weight:600;color:var(--ink2)}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:10px;display:flex}
+.bf{border-radius:0 4px 4px 0;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.wrn{background:var(--rd3);border:.5px solid #eeb0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+
+/* CHART */
+.chw{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 20px 12px;position:relative}
+.cht{font-size:11px;font-weight:500;margin-bottom:2px}
+.chs{font-size:10.5px;color:var(--ink3);margin-bottom:10px}
+.chsvg{width:100%;height:auto;display:block;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:rgba(246,245,239,.95);border-radius:5px;padding:7px 10px;font:500 10.5px/1.6 var(--mono);opacity:0;transition:opacity .12s;white-space:nowrap;z-index:50;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.tip.on{opacity:1}
+.lgd{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;color:var(--ink3)}
+.lgd span{display:flex;align-items:center;gap:6px}
+.lgd i{width:14px;height:3px;border-radius:2px;display:inline-block}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body data-palette="#239052,#1e48b8,#e68020,#a83090,#bc7a18">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 1893 五洋建設 · 2026.08.16 rev.2（一次資料で再検証済）</p>
+      <h1 class="ht">五洋建設 <em>（1893）</em><br>統合投資分析レポート</h1>
+      <p class="hs">株価1,438.5円（8/14終値）／ 年初来高値2,257円から▲36.3% ／ PER11.2倍・配当利回り3.6%<br>海洋土木ニッチトップ × 繰越工事高1兆2,701億円 × 洋上風力船団 ─ 「下落＝業績悪化」ではない構造<br><span style="color:var(--or2)">rev.2：SEP船の保有形態と1Q海外受注▲82%の基準年効果を一次資料で再検証・修正</span></p>
+    </div>
+    <div class="vb">
+      <div class="vs">○</div>
+      <div class="vt">
+        <strong>時間分散で拾う対象として合理的／資産バリュー株ではない</strong><br>
+        PER据置きでも配当3.6%＋EPS成長5.5%＝<strong>年約9%</strong>。<br>
+        含み益は限定的、ネット有利子負債1,953億円。<br>
+        <strong>底値を当てる能力を前提にしない設計が可能な銘柄。</strong>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,438.5円</div><div class="ks">時価総額 約4,114億円（2.86億株）</div></div>
+    <div class="kv"><div class="kl">PER（会社予想）</div><div class="kn gn">11.2倍</div><div class="ks">EPS 128.65円／高値時は約17.5倍</div></div>
+    <div class="kv"><div class="kl">PBR（実績）</div><div class="kn rd">2.03倍</div><div class="ks">BPS 709.09円・解散価値では割高</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn gn">3.61%</div><div class="ks">52円・総還元利回り5.3〜6.4%</div></div>
+    <div class="kv"><div class="kl">ROE（26/3実績）</div><div class="kn gn">18.7%</div><div class="ks">中計28年度目標 16%超</div></div>
+    <div class="kv"><div class="kl">繰越工事高</div><div class="kn bl">1兆2,701億円</div><div class="ks">売上計画の1.55年分＝ストック性</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--or2)"></span>総括</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--rd)"></span>急落の解剖</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--gn2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--am2)"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>成長ドライバー</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--pu2)"></span>カタリスト・資本政策</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>テクニカル・需給</button>
+  <button class="tb" onclick="go('p9',this)"><span class="d" style="background:var(--gn2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════ P1 総括 ══════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 何に賭ける投資なのか</h2><span class="sb bg-or">再検証 rev.2</span></div>
+
+  <div class="wrn">⚠️ 最初に一つ、期待と現実を合わせておきます。ご依頼の「土地・有価証券の含み益、現金同等物」という<strong>資産バリューの切り口では、五洋建設は割安ではありません。</strong>土地簿価は335億円しかなく、投資有価証券285億円の含み益（約136億円）は既に純資産に計上済み、そして現金718億円に対し有利子負債1,961億円＝<strong>ネット有利子負債1,243億円（26/3末）／1,953億円（26/6末）の「純負債企業」</strong>です。この銘柄の割安性は資産ではなく<strong>「収益力・キャッシュ創出力・還元利回り」</strong>に宿っています。</div>
+
+  <div class="c" style="border-left:3px solid var(--bl);margin-bottom:16px">
+    <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:10px">🔍 再検証ログ（2026.08.16 rev.2）── 一次資料に当たり直して修正した4点</div>
+    <table class="t">
+      <thead><tr><th>項目</th><th>初版の記述</th><th>再検証後</th><th class="r">結論への影響</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>SEP船の保有形態</strong></td><td style="font-size:11px">「SEP船2隻を自社保有」</td><td style="font-size:11px">CP-8001は自社保有だが、<strong>1,600t吊CP-16001は鹿島建設・寄神建設との3社共同</strong>（船主はPaxOcean／Kuok系）。HLV・CLVもSeatrium／PaxOceanとの共同保有</td><td class="r" style="font-size:11px"><span class="bge be-gn">中立〜やや有利</span><br>参入障壁の主張は弱まるが、<strong>遅延時の損失も薄まる</strong></td></tr>
+        <tr class="hl"><td><strong>1Q海外受注▲82%</strong></td><td style="font-size:11px">「タイミング差だが市場はピークアウトと読んだ」</td><td style="font-size:11px"><strong>前年同期1,246億円は26/3期通期の海外受注2,053億円の60.7%が1四半期に集中した異常値。</strong>26/3期の海外土木受注は+157.8%の一過性急増だった</td><td class="r" style="font-size:11px"><span class="bge be-gn">有利</span><br><strong>急落の主因③は過剰反応の可能性が高い</strong></td></tr>
+        <tr><td>株式数・時価総額</td><td style="font-size:11px">「自己株控除後2億7,160万株／3,907億円」</td><td style="font-size:11px">決算短信の期末自己株式数1,293万株より<strong>2億7,308万株／3,928億円</strong>に修正。BPS709.09円と整合</td><td class="r" style="font-size:11px"><span class="bge be-am">軽微</span></td></tr>
+        <tr><td>減価償却費・EV/EBITDA</td><td style="font-size:11px">「約130億円と推計／8.1倍」</td><td style="font-size:11px">26/3期連結実績は<strong>99.3億円</strong>（短信より）。EV/EBITDAは<strong>約8.5倍</strong>に修正</td><td class="r" style="font-size:11px"><span class="bge be-rd">やや不利</span><br>割安感がわずかに後退</td></tr>
+      </tbody>
+    </table>
+    <p class="note">その他、26/3期受注高は<strong>単体8,511億円（+27.6%）</strong>と確認（土木5,147億円+65.7%、建築3,364億円▲5.6%）。総還元利回りは中計の3年750億円ベースで<strong>5.3〜6.4%</strong>に修正しました。<strong>再検証の結果、投資結論そのものは変わりません</strong>が、「急落の主因の一つ（受注減）は数字の見かけほど深刻ではない」という点が新たに判明しました。</p>
+  </div>
+
+  <div class="cg">
+    <div class="ca cc-or">
+      <div class="cn">Thesis 01 · 最重要</div>
+      <span class="ci">📉</span>
+      <div class="ct">下落の実体は「業績悪化」ではなく「マルチプル収縮」</div>
+      <div class="cb or">17.5 → 11.2倍</div>
+      <div class="cu">予想EPSは128.65円のまま不変</div>
+      <div class="cp">2/12高値2,257円時の予想PERは約17.5倍。現在は11.2倍。<strong>この間、会社予想EPSは一度も下方修正されていない。株価▲36%はほぼ全額がテーマ・プレミアムの剥落である。</strong></div>
+      <div class="tgs"><span class="tg tg-or">業績は無傷</span><span class="tg tg-gn">評価だけが下がった</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 02 · 事業構造</div>
+      <span class="ci">⚓</span>
+      <div class="ct">海洋土木ニッチトップ＋1.55年分の受注残</div>
+      <div class="cb gn">1兆2,701億円</div>
+      <div class="cu">繰越工事高（26/6末・単体）</div>
+      <div class="cp">国内マリコン最大手。SEP船CP-8001を自社保有し、1,600t吊CP-16001は鹿島・寄神との共同運用。<strong>繰越工事高は27/3期売上計画8,180億円の1.55年分</strong>で、ゼネコンとしては極めて高い収益可視性を持つ。</div>
+      <div class="tgs"><span class="tg tg-gn">国内シェア首位</span><span class="tg tg-bl">官需比率が高い</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Thesis 03 · 賭けの本体</div>
+      <span class="ci">🌊</span>
+      <div class="ct">2,000億円級の洋上風力船投資は「先行投資の谷」にいる</div>
+      <div class="cb bl">HLV 1,200億</div>
+      <div class="cu">＋CLV 310億円／28年2〜3月竣工</div>
+      <div class="cp">5,000t吊HLVとケーブル敷設船を建造中（五洋負担約790億円、50%はリース活用）。<strong>着床式の本格化は2029年度以降。稼働までの2〜3年、これは償却と金利だけを生む資産である。</strong>ここが評価の分岐点。</div>
+      <div class="tgs"><span class="tg tg-bl">代替不能アセット</span><span class="tg tg-rd">稼働遅延リスク</span></div>
+    </div>
+    <div class="ca cc-am" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 04 · 還元</div>
+      <span class="ci" style="font-size:22px">💰</span>
+      <div class="ct" style="color:var(--ink)">総還元利回り5.3〜6.4%が下値を支える</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--am);margin:6px 0 2px">3.6% + 1.8〜2.6%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">配当利回り＋自己株式取得利回り</div>
+      <div class="cp lt">中計で配当性向35%→<strong>40%以上</strong>、総還元性向<strong>60%以上</strong>、自己株式取得3年300億円（年約100億円）を明示。株価が下がるほど1株還元の効きが強まる。</div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Thesis 05 · 反対側の論点（正直に）</div>
+      <span class="ci" style="font-size:22px">⚖️</span>
+      <div class="ct" style="color:var(--ink)">「割安」の中身を分解すると、無条件の安さではない</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">① PBR2.03倍</strong><br>解散価値の2倍。含み益を最大限見込んでも修正PBRは1.8倍前後にしか下がらない。「PBR1倍割れの是正」型の割安ではない。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">② FCFがほぼゼロ</strong><br>26/3期は営業CF684億に対し投資CF▲663億。設備投資847億の重い投資期で、フリーCFは実質+21億円しか残っていない。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">③ 26/3期は利益率のピーク</strong><br>営業利益+154.9%の急回復年。国内土木の営業利益率12.3%は歴史的高水準で、27/3期会社計画も純利益+0.9%＝実質横ばい。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:880px">
+      五洋建設は、<strong style="color:var(--or2)">「国土強靭化20兆円＋防衛＋データセンター」という確定した内需の上に、洋上風力という未確定のオプションが乗った二階建て銘柄。</strong>1階部分（PER11倍・利回り3.6%・受注残1.55年分）だけで十分に説明可能な株価まで調整済みであり、2階部分（2,000億円の作業船が稼ぐ2029年度以降）は<strong style="color:var(--or2)">現在の株価にほとんど織り込まれていない</strong>。テーマ株としての人気は死んだが、事業は死んでいない。
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P2 急落の解剖 ══════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">なぜ急落したのか ── 6つの要因を分解</h2><span class="sb bg-rd">1Q決算 8/7発表</span></div>
+
+  <div class="inf">📌 8月7日（金）15:30に27/3期1Q決算を発表 → 8月10日（月）に<strong>▲6.6%（1,499.5円→1,400.5円）、出来高575万株（平常の約3倍）、年初来安値1,390.5円</strong>を記録。ただしP/Lは経常+5.0%の増益着地であり、売られたのは損益ではなく「受注」だった。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">27/3期1Q 損益 ── 数字自体は無難</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">1Q実績</th><th class="r">前年同期比</th><th class="r">通期進捗</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mn">1,822億円</td><td class="r mn hgn">+4.6%</td><td class="r mn">22.3%</td></tr>
+          <tr><td>営業利益</td><td class="r mn">111億円</td><td class="r mn hgn">+8.1%</td><td class="r mn ham">18.8%</td></tr>
+          <tr><td>経常利益</td><td class="r mn">105億円</td><td class="r mn hgn">+5.0%</td><td class="r mn ham">19.4%</td></tr>
+          <tr><td>四半期純利益</td><td class="r mn">71億円</td><td class="r mn hgn">+3.1%</td><td class="r mn">20.3%</td></tr>
+          <tr class="sm"><td>通期予想</td><td class="r mn">修正なし</td><td class="r mn">—</td><td class="r mn">—</td></tr>
+        </tbody>
+      </table>
+      <p class="note">建設業の1Qは季節的に最も薄い四半期。進捗率18.8%は「やや遅い」程度で、それ自体が売り材料になる水準ではない。</p>
+    </div>
+    <div class="c" style="border-left:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">27/3期1Q 受注（単体）── ここが売られた</div>
+      <table class="t">
+        <thead><tr><th>部門</th><th class="r">1Q受注</th><th class="r">前年同期</th><th class="r">増減</th></tr></thead>
+        <tbody>
+          <tr><td>国内土木</td><td class="r mn">846億円</td><td class="r mn">559億円</td><td class="r mn hgn">+51.5%</td></tr>
+          <tr class="wn"><td>国内建築</td><td class="r mn">959億円</td><td class="r mn">1,330億円</td><td class="r mn hrd">▲27.9%</td></tr>
+          <tr class="wn"><td>海外</td><td class="r mn">224億円</td><td class="r mn">1,246億円</td><td class="r mn hrd">▲82.0%</td></tr>
+          <tr class="sm"><td>合計</td><td class="r mn">2,029億円</td><td class="r mn">3,135億円</td><td class="r mn hrd">▲35.3%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">会社説明は「香港で建築、マレーシアで海上土木を受注したが<strong>大型工事なし</strong>」＝タイミング差との整理。<br><strong>【再検証で判明した重要事実】</strong>26/3期の海外受注は通期2,053億円（うち土木1,999億円は前期比<strong>+157.8%</strong>）。<strong>その前年同期＝26年4-6月の1,246億円は、通期の実に60.7%が1四半期に集中していた異常値だった。</strong>▲82%という数字は「異常に高い基準」との比較であり、受注構造の悪化を示すものではない。市場は「受注のピークアウト」と読んだが、統計的にはむしろ<strong>平常への回帰</strong>と読むほうが自然。</p>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:14px">急落の6要因 ── 寄与度のイメージ</div>
+    <div class="bg"><div class="br2"><span class="lb">① マルチプル収縮（テーマ・プレミアムの剥落）</span><span class="vl">寄与 大</span></div><div class="bt"><div class="bf" style="width:38%;background:#e68020"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">② 27/3期計画が実質横ばい（純利益+0.9%）＝成長の急ブレーキ</span><span class="vl">寄与 大</span></div><div class="bt"><div class="bf" style="width:22%;background:#a83090"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">③ 1Q受注▲35.3%（海外▲82%・建築▲27.9%）</span><span class="vl">寄与 中</span></div><div class="bt"><div class="bf" style="width:16%;background:#1e48b8"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">④ 洋上風力の制度混乱（三菱商事の第1ラウンド撤退〜再公募）</span><span class="vl">寄与 中</span></div><div class="bt"><div class="bf" style="width:12%;background:#239052"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">⑤ セクター全体の巻き戻し（東亜建設工業は▲58.7%）</span><span class="vl">寄与 小〜中</span></div><div class="bt"><div class="bf" style="width:8%;background:#bc7a18"></div></div></div>
+    <div class="bg" style="margin-bottom:0"><div class="br2"><span class="lb">⑥ 有利子負債の増加と金利負担（営業590億→経常540億）</span><span class="vl">寄与 小</span></div><div class="bt"><div class="bf" style="width:4%;background:#b42c2c"></div></div></div>
+    <p class="note">※寄与度は当レポートの定性判断による配分であり、統計的に推定された数値ではありません。合計100%になるよう正規化しています。</p>
+  </div>
+
+  <div class="g2">
+    <div>
+      <div style="font-size:11px;font-weight:500;margin-bottom:12px">株価下落のタイムライン</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2025年8月〜2026年2月</div><div class="ttext"><strong>テーマ相場で株価2.3倍：</strong>982円（25年8月始値）→2,257円（26年2/12高値）。データセンター・国土強靭化・防衛・洋上風力の四重テーマで買われた。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年2月12日</div><div class="ttext"><strong>年初来高値2,257円。</strong>同日、東亜建設工業も年初来高値4,680円。<strong>セクター全体の天井が同一日に形成された＝典型的なテーマ相場のブローオフ。</strong></div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年3月</div><div class="ttext">月間で高値2,166.5円→安値1,613円。1か月で▲25%の急落。テーマ資金の一斉退出。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">2026年5月8日</div><div class="ttext"><strong>26/3期決算（純利益+178%の過去最高）＋中期経営計画2026-28を発表。</strong>一時2,172円まで戻すも、<strong>27/3期計画が純利益+0.9%＝実質横ばい</strong>と判明し失速。月末1,778.5円。</div></div>
+        <div class="ti"><div class="td2 or"></div><div class="tdate">2026年7月17日</div><div class="ttext">セクター安値更新（東亜建設工業が年初来安値1,931円）。五洋も1,610円→1,534円へ▲4.7%。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年8月7日（金）15:30</div><div class="ttext"><strong>1Q決算発表。</strong>P/Lは増益だが単体受注▲35.3%。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年8月10日（月）</div><div class="ttext"><strong>▲6.6%、年初来安値1,390.5円、出来高575万株。</strong>高値からの下落率▲38.4%。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年8月12〜14日</div><div class="ttext"><strong>3日続伸で1,438.5円まで戻す。</strong>出来高は190〜300万株に低下＝投げが一巡した可能性。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c cf-am" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:9px">最も重要な検証 ── EPSは下がっていない</div>
+        <table class="t" style="font-size:11.5px">
+          <tbody>
+            <tr><td>2/12高値</td><td class="r mn">2,257円</td><td class="r mn ham">PER 約17.5倍</td></tr>
+            <tr><td>8/10安値</td><td class="r mn">1,390.5円</td><td class="r mn hgn">PER 10.8倍</td></tr>
+            <tr class="sm"><td>8/14終値</td><td class="r mn">1,438.5円</td><td class="r mn hgn">PER 11.2倍</td></tr>
+            <tr><td>会社予想EPS</td><td class="r mn">128.65円</td><td class="r mn">期中<strong>変更なし</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="note">株価は▲36%下落したが、分母（利益）は一切傷んでいない。<strong>下落の100%が「投資家が払ってよいと考える倍率」の変化で説明できる。</strong>これは業績悪化型の下落とは本質的に異なり、センチメントが戻れば再評価も速い。逆に言えば、倍率がさらに下がる余地（PER9〜10倍）も理論上は残る。</p>
+      </div>
+      <div class="c cl-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">同業比較 ── 五洋の下落は「浅い」</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>銘柄</th><th class="r">高値→安値</th><th class="r">下落率</th><th class="r">PER</th><th class="r">PBR</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>五洋建設</strong></td><td class="r mn">2,257→1,390</td><td class="r mn ham">▲38.4%</td><td class="r mn">11.2倍</td><td class="r mn hrd">2.03倍</td></tr>
+            <tr><td>東亜建設工業</td><td class="r mn">4,680→1,931</td><td class="r mn hrd">▲58.7%</td><td class="r mn hgn">10.7倍</td><td class="r mn hgn">1.34倍</td></tr>
+          </tbody>
+        </table>
+        <p class="note">東亜建設工業は今期経常15%減益予想が重なり、より深く売られた。<strong>五洋はPERでは同水準だがPBRでは1.5倍割高</strong>＝市場は五洋の高いROE（18.7% vs 東亜の推定12〜13%）と洋上風力アセットに依然プレミアムを払っている。「マリコンの中で一番安い株」ではない点は認識しておくべき。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P3 事業性・ストック性 ══════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・ニッチトップ性・ストック性</h2><span class="sb bg-gn">受注残1.55年分</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">繰越工事高（26/6末）</div><div class="mv gn">1兆2,701億円</div><div class="ms">国内8,947億＋海外3,755億</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">売上計画に対する年数</div><div class="mv bl">1.55年分</div><div class="ms">8,180億円計画ベース</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">国内土木 営業利益率</div><div class="mv am">12.3%</div><div class="ms">26/3期・歴史的高水準</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">従業員数（連結）</div><div class="mv or">3,991人</div><div class="ms">単体3,439人（技術系2,863人）</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">26/3期 セグメント収益構造</div>
+      <table class="t">
+        <thead><tr><th>部門</th><th class="r">売上高</th><th class="r">セグメント利益</th><th class="r">利益率</th><th class="r">1Q利益率</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>国内土木</strong></td><td class="r mn">3,259億円</td><td class="r mn hgn">402億円</td><td class="r mn hgn"><strong>12.3%</strong></td><td class="r mn">10.4%</td></tr>
+          <tr><td>国内建築</td><td class="r mn">2,734億円</td><td class="r mn">168億円</td><td class="r mn ham">6.1%</td><td class="r mn">6.4%</td></tr>
+          <tr class="wn"><td>海外建設</td><td class="r mn">1,818億円</td><td class="r mn hrd">▲32億円</td><td class="r mn hrd">▲1.8%</td><td class="r mn hrd">▲1.9%</td></tr>
+          <tr><td>その他</td><td class="r mn">132億円</td><td class="r mn">15億円</td><td class="r mn">11.6%</td><td class="r mn">—</td></tr>
+          <tr class="sm"><td>合計</td><td class="r mn">7,943億円</td><td class="r mn">553億円</td><td class="r mn">7.0%</td><td class="r mn">6.1%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">利益の<strong>73%を国内土木（＝海洋土木の本業）が稼ぐ</strong>という極端な構造。海外は26/3期・1Qとも赤字であり、中計では28年度に利益率4.6%・営業利益60億円への転換を織り込んでいる。ここが計画の最大の前提。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">ニッチトップ性 ── 参入障壁が「金額」で測れる稀な業種</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>国内マリコン（海洋土木）最大手。</strong>浚渫・埋立・港湾・護岸という「陸のゼネコンが入れない領域」を持つ。競合は東亜建設工業・東洋建設・若築建設など数社に限られる寡占市場。</div></div>
+          <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>作業船団が実質的な免許。</strong>SEP船CP-8001（800t吊）、大型起重機船CP-5001／CP-4501、カッター浚渫船CASSIOPEIA V、ドラグサクション船ANDROMEDA Vなどを保有。<strong>1,600t吊のCP-16001は鹿島建設・寄神建設との共同プロジェクト</strong>（船主はシンガポールのPaxOcean／Kuok系）で、単独保有ではない点は要注意。</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>新規参入コストが具体額で判明している：</strong>HLV約1,200億円、ケーブル敷設船約310億円、SEP船数百億円。<strong>この金額を出せる建設会社は国内に数社しかない。</strong></div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>船を動かす人がいない。</strong>作業船の運航・施工には熟練の船員・潜水士・施工管理が必要で、資本だけでは複製できない。20代が従業員の30%超という若い年齢構成も長期的な強み。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:14px">ストック性の実体 ── 「受注残」と「制度」の二重構造</div>
+    <div class="g3">
+      <div style="padding:14px;background:var(--gn3);border-radius:var(--r);border-left:3px solid var(--gn)">
+        <div style="font:600 10px/1 var(--mono);color:var(--gn);margin-bottom:8px;letter-spacing:.08em">LAYER 1 ─ 受注残</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--gn);margin-bottom:6px">1兆2,701億円</div>
+        <div style="font-size:11.5px;color:var(--ink2);line-height:1.8">既に契約済みで、あとは工事を進めれば売上になる。国内は前年同期比<strong>+9.3%と増加</strong>しており、1Qの受注減が直ちに売上減にはつながらない。海外は▲12.2%と減少。</div>
+      </div>
+      <div style="padding:14px;background:var(--bl3);border-radius:var(--r);border-left:3px solid var(--bl)">
+        <div style="font:600 10px/1 var(--mono);color:var(--bl);margin-bottom:8px;letter-spacing:.08em">LAYER 2 ─ 制度予算</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--bl);margin-bottom:6px">20兆円強／5年</div>
+        <div style="font-size:11.5px;color:var(--ink2);line-height:1.8">第1次国土強靱化実施中期計画（2025年6月閣議決定）が<strong>2026年度から2030年度まで</strong>執行される。26年度の国土強靱化関係予算は概算要求6.66兆円。<strong>「毎年一定額が降ってくる」という擬似ストック収益。</strong></div>
+      </div>
+      <div style="padding:14px;background:var(--or3);border-radius:var(--r);border-left:3px solid var(--or)">
+        <div style="font:600 10px/1 var(--mono);color:var(--or);margin-bottom:8px;letter-spacing:.08em">LAYER 3 ─ 防衛・将来O&amp;M</div>
+        <div style="font:700 22px/1 var(--mono);color:var(--or);margin-bottom:6px">〜2030年</div>
+        <div style="font-size:11.5px;color:var(--ink2);line-height:1.8">社長が「防衛関連の需要は非常に強い」と明言（鹿児島・沖縄の港湾移設、基地強化）。将来的には<strong>洋上風力のO&amp;M（保守）が本格的なストック収益</strong>になり得るが、これは2030年代の話。</div>
+      </div>
+    </div>
+    <p class="note">ゼネコンは本来フロー型産業だが、五洋建設は①1.55年分の受注残、②5年間20兆円の制度予算、③防衛という長期需要、の三層で<strong>「フローに見えるがストックに近い」収益基盤</strong>を持つ。ただし真のストック（賃料・サブスク型）ではないため、景気・政策の変化には最終的に晒される。</p>
+  </div>
+
+  <div class="cf-bl" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">中期経営計画2026-2028（2026年5月8日公表）の到達点</div>
+    <table class="t">
+      <thead><tr><th>指標</th><th class="r">25年度実績</th><th class="r">28年度計画</th><th class="r">増減</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>売上高</td><td class="r mn">7,943億円</td><td class="r mn">8,800億円</td><td class="r mn hgn">+10.8%</td><td style="font-size:11px">年率3.5%成長＝控えめ</td></tr>
+        <tr><td>営業利益</td><td class="r mn">553億円</td><td class="r mn">635億円</td><td class="r mn hgn">+14.8%</td><td style="font-size:11px">利益率7.0%→7.2%</td></tr>
+        <tr><td>純利益</td><td class="r mn">347億円</td><td class="r mn">380億円</td><td class="r mn ham">+9.5%</td><td style="font-size:11px">EPS 147.4円</td></tr>
+        <tr class="hl"><td><strong>ROE</strong></td><td class="r mn">18.7%</td><td class="r mn hgn"><strong>16.7%</strong></td><td class="r mn hrd">▲2.0pt</td><td style="font-size:11px">自己資本の厚みで低下、それでも16%超</td></tr>
+        <tr><td>国内土木 完工総利益率</td><td class="r mn">—</td><td class="r mn hgn">16.0%</td><td class="r mn">—</td><td style="font-size:11px">営業利益520億円（利益の82%）</td></tr>
+        <tr><td>国内建築 完工総利益率</td><td class="r mn">—</td><td class="r mn">10.1%</td><td class="r mn">—</td><td style="font-size:11px">営業利益340億円</td></tr>
+        <tr class="wn"><td>海外 完工総利益率</td><td class="r mn hrd">赤字</td><td class="r mn ham">4.6%</td><td class="r mn">—</td><td style="font-size:11px"><strong>赤字→営業利益60億円が最大の前提</strong></td></tr>
+        <tr><td>有利子負債</td><td class="r mn">1,961億円</td><td class="r mn hgn">1,660億円</td><td class="r mn hgn">▲301億円</td><td style="font-size:11px">ネットD/E 0.4倍へ</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="color:var(--bl)">28年度純利益380億円・EPS147.4円がそのまま実現すると仮定すると、現在株価1,438.5円は<strong>28年度予想PER 9.8倍</strong>。中計が「達成できる計画」なのか「野心的な計画」なのかの判断が、この投資の中核。売上年率3.5%成長という前提は、ゼネコンとしてはむしろ保守的な部類。</p>
+  </div>
+</div>
+
+<!-- ══════ P4 バリュエーション ══════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">バリュエーション ── 含み益・現金を精査する</h2><span class="sb bg-am">資産では割安でない</span></div>
+
+  <div class="wrn">⚠️ 結論を先に。<strong>土地の含み益・有価証券の含み益・現金同等物を全部足しても、五洋建設は「資産バリュー株」にはなりません。</strong>純資産に加算できる隠れ資産が小さく、しかも現金より借入が1,953億円多い純負債企業だからです。以下、開示ベースで一つずつ潰していきます。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">土地（連結簿価）</div><div class="mv rd">335億円</div><div class="ms">時価総額の8%にすぎない</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">投資有価証券</div><div class="mv am">285億円</div><div class="ms">うち含み益 約136億円（税前）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">現金及び預金</div><div class="mv bl">718億円</div><div class="ms">26/6末は496億円に減少</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">ネット有利子負債</div><div class="mv rd">▲1,953億円</div><div class="ms">26/6末・ネットキャッシュではない</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">① 含み益の精査 ── どこに、いくらあるのか</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">簿価</th><th class="r">含み益</th><th>開示状況</th></tr></thead>
+        <tbody>
+          <tr><td><strong>投資有価証券</strong></td><td class="r mn">285億円</td><td class="r mn ham">約136億円<br><span style="font-size:10px;color:var(--ink3)">（税後94億円）</span></td><td style="font-size:11px"><span class="bge be-rd">既に純資産計上済</span><br>その他有価証券評価差額金94.5億円としてBSに反映済み。<strong>加算してはいけない。</strong></td></tr>
+          <tr><td><strong>土地</strong></td><td class="r mn">335億円</td><td class="r mn hbl">中立335億円<br><span style="font-size:10px;color:var(--ink3)">（税前・レンジ0〜670億円）</span></td><td style="font-size:11px"><span class="bge be-am">開示なし</span><br>賃貸等不動産の重要な注記なし＝事業用地が中心。当レポートの推計値。</td></tr>
+          <tr><td><strong>作業船・機械</strong></td><td class="r mn">1,808億円</td><td class="r mn">実質的に簿価≒時価</td><td style="font-size:11px">新造船中心で含み益なし。ただし<strong>再取得コストは簿価を大きく上回る</strong>（＝参入障壁）。</td></tr>
+          <tr><td>建設仮勘定</td><td class="r mn">932億円</td><td class="r mn">—</td><td style="font-size:11px">建造中のHLV・CLV等。<strong>まだ1円も稼いでいない資産。</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">投資有価証券の含み益が「既に純資産に入っている」点は、バリュー投資では極めて重要な確認事項です。BPS709円は<strong>すでに含み益込みの数字</strong>であり、ここから更に上乗せできるのは実質的に土地だけ。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:9px">② 土地含み益の感応度分析（推計）</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>時価/簿価</th><th class="r">含み益(税前)</th><th class="r">税後</th><th class="r">修正BPS</th><th class="r">修正PBR</th></tr></thead>
+          <tbody>
+            <tr><td>1.0倍（含み益ゼロ）</td><td class="r mn">0億円</td><td class="r mn">0億円</td><td class="r mn">709円</td><td class="r mn hrd">2.03倍</td></tr>
+            <tr><td>1.5倍</td><td class="r mn">167億円</td><td class="r mn">116億円</td><td class="r mn">752円</td><td class="r mn hrd">1.91倍</td></tr>
+            <tr class="hl"><td><strong>2.0倍（中立）</strong></td><td class="r mn">335億円</td><td class="r mn">233億円</td><td class="r mn ham"><strong>794円</strong></td><td class="r mn ham"><strong>1.81倍</strong></td></tr>
+            <tr><td>2.5倍</td><td class="r mn">502億円</td><td class="r mn">349億円</td><td class="r mn">837円</td><td class="r mn">1.72倍</td></tr>
+            <tr><td>3.0倍（極端な強気）</td><td class="r mn">670億円</td><td class="r mn">465億円</td><td class="r mn hgn">880円</td><td class="r mn hgn">1.64倍</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>土地が簿価の3倍だと極端に仮定してもPBRは1.64倍までしか下がらない。</strong>「土地の含み益で割安」という物語は、この会社では成立しません。自己資本1,936億円（26/6末推計・報告BPS709.09円と整合）、株式数2億7,308万株（発行済2億8,601万株−自己株式1,293万株）で試算。実効税率30.5%。</p>
+      </div>
+      <div class="c cf-rd">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">③ 現金同等物 ── ネットキャッシュではなくネットデット</div>
+        <table class="t" style="font-size:11.5px">
+          <tbody>
+            <tr><td>現金及び預金（26/3末）</td><td class="r mn">718億円</td></tr>
+            <tr><td>現金及び預金（26/6末）</td><td class="r mn hrd">496億円</td></tr>
+            <tr><td>有利子負債（26/3末）</td><td class="r mn">1,961億円</td></tr>
+            <tr><td>有利子負債（26/6末）</td><td class="r mn hrd">2,449億円</td></tr>
+            <tr class="sm"><td><strong>ネット有利子負債（26/6末）</strong></td><td class="r mn hrd"><strong>1,953億円</strong></td></tr>
+            <tr><td>自己資本比率（26/6末）</td><td class="r mn ham">24.5%</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>1四半期で有利子負債が488億円増加</strong>。建設業の運転資本は期中に膨らむ季節性があるうえ、作業船の建造代金支払いが重なっている。中計では28年度に1,660億円まで削減する計画だが、<strong>四半期進捗は逆方向。ここは毎四半期チェックすべき最重要項目。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">④ 総合バリュエーション（1,438.5円基準）</div>
+    <table class="t">
+      <thead><tr><th>指標</th><th class="r">数値</th><th>評価</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>PER（27/3期会社予想）</strong></td><td class="r mn hgn"><strong>11.2倍</strong></td><td><span class="bge be-gn">割安</span></td><td style="font-size:11px">EPS128.65円。高値時17.5倍からの収縮。東証プライム建設業として標準〜やや安い。</td></tr>
+        <tr class="hl"><td><strong>PER（中計28年度ベース）</strong></td><td class="r mn hgn"><strong>9.8倍</strong></td><td><span class="bge be-gn">割安</span></td><td style="font-size:11px">EPS147.4円。中計が達成される前提の3年先PER。</td></tr>
+        <tr class="wn"><td>PBR（実績）</td><td class="r mn hrd">2.03倍</td><td><span class="bge be-rd">割高</span></td><td style="font-size:11px">BPS709.09円。含み益考慮後の修正PBRでも1.8倍前後。</td></tr>
+        <tr><td>修正PBR（土地時価2倍想定）</td><td class="r mn ham">約1.82倍</td><td><span class="bge be-am">中立〜割高</span></td><td style="font-size:11px">資産バリューでの割安性は認められない。</td></tr>
+        <tr><td>EV/EBITDA（推計）</td><td class="r mn ham">約8.5倍</td><td><span class="bge be-am">中立</span></td><td style="font-size:11px">EV≒5,881億円（時価総額3,928億＋ネット有利子負債1,953億）÷EBITDA約690億円（営業利益590億＋減価償却99.3億）。</td></tr>
+        <tr class="hl"><td><strong>配当利回り</strong></td><td class="r mn hgn"><strong>3.61%</strong></td><td><span class="bge be-gn">割安</span></td><td style="font-size:11px">52円（前期48円から増配）。配当性向約40%。</td></tr>
+        <tr class="hl"><td><strong>総還元利回り</strong></td><td class="r mn hgn"><strong>5.3〜6.4%</strong></td><td><span class="bge be-gn">強い</span></td><td style="font-size:11px">配当＋自己株式取得（中計 3年300億円＝年約100億円）。<strong>ここが実質的な下値の支え。</strong></td></tr>
+        <tr><td>ROE（26/3実績）</td><td class="r mn hgn">18.7%</td><td><span class="bge be-gn">優良</span></td><td style="font-size:11px">中計28年度16.7%。ROE16%超×PER11倍は日本株では珍しい組合せ。</td></tr>
+        <tr class="wn"><td>フリーCF（26/3期）</td><td class="r mn hrd">約+21億円</td><td><span class="bge be-rd">弱い</span></td><td style="font-size:11px">営業CF684億−投資CF663億。設備投資847億の重投資期でFCFはほぼゼロ。</td></tr>
+      </tbody>
+    </table>
+    <p class="note">※時価総額は自己株式控除後2億7,308万株ベースで3,928億円。発行済株式数2億8,601万株ベースでは4,114億円。減価償却費は26/3期連結実績99.3億円を使用（新造船の稼働に伴い今後増加する見込みで、EV/EBITDAは保守的には8.0〜8.5倍のレンジ）。26/3期の支払利息は35.5億円で、有利子負債の増加に伴い今後拡大する。</p>
+  </div>
+
+  <div class="cf-gn" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">では、どこに「割安性」があるのか ── 4つの根拠</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div><strong>① 利益に対して安い。</strong>ROE18.7%（中計でも16%超）を維持する会社がPER11.2倍。日本株でROE16%超・PER11倍台・利回り3.6%が並ぶ銘柄はごく少数。<br><br><strong>② 還元利回りが実質的な床。</strong>総還元利回り5.3〜6.4%。株価が下がるほど自己株買いの1株効果が高まり、機械的な買い圧力になる。</div>
+      <div><strong>③ 3年先が織り込まれていない。</strong>中計28年度EPS147.4円ベースで9.8倍。かつ洋上風力船（HLV・CLV）が稼ぎ出す29年度以降の収益は中計にすらほぼ含まれていない。<br><br><strong>④ 受注残1.55年分という可視性。</strong>PER11倍が示す「利益の持続性への疑い」に対し、1兆2,701億円の受注残が反証を提供している。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P5 成長ドライバー ══════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">成長ドライバー ── 洋上風力・防災・DC・防衛</h2><span class="sb bg-bl">投資1,000億円/3年</span></div>
+
+  <div class="inf">📌 中計2026-28の投資計画1,000億円のうち<strong>700億円が洋上風力関連</strong>。この一点集中が、この銘柄の上値も下値も決める。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">洋上風力アセット ── 建造中の2隻</div>
+      <table class="t">
+        <thead><tr><th>船種</th><th class="r">建造費</th><th class="r">竣工</th><th>スペック・造船所</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>HLV<br>（大型基礎施工船）</strong></td><td class="r mn hor">約1,200億円</td><td class="r mn">2028年3月</td><td style="font-size:11px">5,000t吊全旋回クレーン。<strong>15〜20MW級風車のモノパイル施工に対応。</strong>シートリウム（シンガポール）。日本船籍・NK船級。</td></tr>
+          <tr class="hl"><td><strong>CLV<br>（ケーブル敷設船）</strong></td><td class="r mn hor">約310億円</td><td class="r mn">2028年2月</td><td style="font-size:11px">電力ケーブルタンク5,000t×2基（計1万t）。トレンチャー・作業ROV搭載。パックスオーシャン（シンガポール）。</td></tr>
+          <tr><td>SEP船 CP-16001<br><span style="font-size:10px;color:var(--ink3)">（共同プロジェクト）</span></td><td class="r mn">—</td><td class="r mn">稼働中</td><td style="font-size:11px">1,600t吊、全長123m×全幅45m、ブーム長130m、15MW級対応。<strong>五洋建設・鹿島建設・寄神建設の3社共同</strong>（船主はPaxOcean／Kuok系のシンガポールSPC）。2023年9月竣工、北九州響灘で稼働実績。</td></tr>
+          <tr><td>SEP船 CP-8001</td><td class="r mn">—</td><td class="r mn">稼働中</td><td style="font-size:11px">800t吊全旋回、自己昇降式、DPS-B搭載。五洋建設保有。</td></tr>
+          <tr><td>風車据付船（3隻目）</td><td class="r mn">—</td><td class="r mn ham">中計に明記</td><td style="font-size:11px">中計は「風車据付船3隻＋HLV＋CLV」の船団を掲げる。社長は「さらに2隻の追加建造も検討」と発言。</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>重要な訂正・補足：</strong>HLV・CLVはSeatrium／PaxOceanとの<strong>共同保有</strong>で、総建造費約1,510億円に対する<strong>五洋建設の負担は約790億円</strong>（約50%はリース活用）。CP-16001も3社共同プロジェクト。つまり<strong>船団の総額ほどには五洋一社のバランスシートは膨らんでいない</strong>──これは参入障壁の主張をやや弱める一方、<strong>稼働遅延時の損失リスクも同じ比率で薄まる</strong>という意味で、投資家にとっては差引きプラスに働く構造です。基礎施工→風車据付→ケーブル敷設まで一貫対応できる体制が2028年に完成する点は変わりません。</p>
+    </div>
+    <div>
+      <div class="c cl-rd" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:9px">⚠️ 洋上風力の現実 ── ここが最大の不確実性</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          2025年2月、<strong>三菱商事連合が第1ラウンドの3海域（計約1.7GW）から撤退。</strong>「現行条件では実行可能な事業計画を構築できない」ことが理由。<br><br>
+          原因は制度設計。第1ラウンドは落札価格が2位比▲22〜30%という異常な安値で、評価点差が35点以上つく一方、実現可能性の点差は7〜10点しかなかった。<br><br>
+          現在は<strong>価格帯（上限・下限）の設定と段階配点、実現可能性の再重み付け</strong>という制度見直しが進行中。事業採算にはPPA込みで20円/kWh超が必要との試算もある。<br><br>
+          <strong>中計でも「着床式の本格化は2029年度以降」と明記。つまり2028年に完成する1,500億円の船は、少なくとも1年は本格稼働しない。</strong>
+        </div>
+      </div>
+      <div class="c cf-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">重要な区別 ── 五洋は「開発者」ではなく「施工者」</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">三菱商事が撤退したのは<strong>発電事業（開発・売電）</strong>のリスク。五洋建設が担うのは<strong>施工（EPC）</strong>であり、電力価格リスクを負わない。<br><br>ただし<strong>「案件が動かなければ施工の仕事も来ない」</strong>という点で無関係ではない。五洋にとってのリスクは価格ではなく<strong>タイミング</strong>。制度見直しが完了して再公募が動き出せば、施工能力を持つ五洋の順番は必ず回ってくる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cg" style="grid-template-columns:repeat(3,1fr)">
+    <div class="ca cc-bl">
+      <div class="cn">Driver 01 · 確度 高</div>
+      <span class="ci">🛡️</span>
+      <div class="ct">国土強靭化 20兆円強</div>
+      <div class="cb bl">2026-30年度</div>
+      <div class="cu">第1次実施中期計画（25年6月閣議決定）</div>
+      <div class="cp">5年間で20兆円強。<strong>うちライフライン強靭化が約10.6兆円。</strong>26年度の国土強靱化関係予算は概算要求6.66兆円（公共事業関係費4.91兆円）。<strong>今年度から執行が始まったばかり。</strong></div>
+      <div class="tgs"><span class="tg tg-bl">閣議決定済み</span><span class="tg tg-gn">開始したばかり</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Driver 02 · 確度 高</div>
+      <span class="ci">⚔️</span>
+      <div class="ct">防衛関連（港湾・基地）</div>
+      <div class="cb gn">〜2030年</div>
+      <div class="cu">南西諸島の港湾移設・基地強化</div>
+      <div class="cp">社長が「防衛関連の需要は非常に強い」と明言。鹿児島・沖縄などでの<strong>軍港移設・基地強化</strong>が2030年頃まで続く見込み。1Qも南関東防衛局27億円、東北防衛局13億円を受注。<strong>国内土木の官庁受注は1Qで+89.0%。</strong></div>
+      <div class="tgs"><span class="tg tg-gn">官需で確実</span><span class="tg tg-or">高採算</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Driver 03 · 確度 中</div>
+      <span class="ci">🖥️</span>
+      <div class="ct">データセンター建設</div>
+      <div class="cb am">国内建築</div>
+      <div class="cu">完工高比率 7%→15%（防衛・強靭化含む）</div>
+      <div class="cp">中計で民間投資領域として<strong>DC建設・国内生産拠点回帰・物流施設・都市再開発</strong>を明示。1Qも「データセンター、住宅、工場等の大型工事を受注」。<strong>ただし1Q国内建築受注は▲27.9%とムラが大きい。</strong></div>
+      <div class="tgs"><span class="tg tg-am">案件のブレ大</span><span class="tg tg-or">利益率は土木より低い</span></div>
+    </div>
+    <div class="ca cc-or" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Driver 04 · 確度 中</div>
+      <span class="ci" style="font-size:22px">🌏</span>
+      <div class="ct" style="color:var(--ink)">海外の黒字転換</div>
+      <div style="font:600 24px/1 var(--mono);color:var(--or);margin:6px 0 2px">▲1.8% → 4.6%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">26/3期実績 → 28年度計画</div>
+      <div class="cp lt">シンガポール中心＋ODA（バングラデシュ・インドネシア）。香港は案件選別。<strong>26/3期▲32億円、1Qも▲1.9%と赤字継続中。ここが黒字化しなければ中計の営業利益635億円は届かない。</strong></div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Driver 05 · 構造改革</div>
+      <span class="ci" style="font-size:22px">🤖</span>
+      <div class="ct" style="color:var(--ink)">DX・GX 250億円投資 ── 人手不足を利益率に変える</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">グローバルDXセンター</strong><br>2026年4月新設。3年後（2029年）にグラブ浚渫・土工の自動化レベル2を先行実施。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">2031年 → 2036年</strong><br>5年後に作業船DX化・山岳トンネル自動施工。10年後にレベル3（自動最適動作判断）普及。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">GX目標</strong><br>2030年までにSCOPE1・2で50%削減、SCOPE3で30%削減（2019年度比）。新造船はメタノールレディ・バッテリー搭載。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P6 カタリスト・資本政策 ══════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト・資本政策 ── MBO/TOBは本命ではない</h2><span class="sb bg-pu">還元こそが本命</span></div>
+
+  <div class="wrn">⚠️ ご関心のMBO・TOBについて先に率直な結論を。<strong>五洋建設でMBOやTOBを主要な投資根拠にするのは無理があります。</strong>時価総額約4,100億円＋ネット有利子負債1,953億円＝買収に必要なEVは6,000億円級。加えてPBR2.03倍・ROE18.7%は「東証のPBR1倍割れ是正要請」の対象外で、アクティビストが割安是正を迫る典型的な標的ではありません。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">株主構成（2026年3月31日）── 支配株主不在の分散型</div>
+      <table class="t">
+        <thead><tr><th>株主</th><th class="r">株数</th><th class="r">比率</th><th>性格</th></tr></thead>
+        <tbody>
+          <tr><td>日本マスタートラスト信託銀行（信託口）</td><td class="r mn">3,936万株</td><td class="r mn ham">14.4%</td><td style="font-size:11px">パッシブ中心の信託口</td></tr>
+          <tr><td>日本生命保険</td><td class="r mn">1,578万株</td><td class="r mn">5.8%</td><td style="font-size:11px">政策保有的</td></tr>
+          <tr><td>ステート・ストリート各口（合算）</td><td class="r mn">2,144万株</td><td class="r mn">7.9%</td><td style="font-size:11px">海外機関投資家</td></tr>
+          <tr><td>日本銀行</td><td class="r mn">599万株</td><td class="r mn">2.2%</td><td style="font-size:11px">ETF経由</td></tr>
+          <tr><td>日本郵便</td><td class="r mn">565万株</td><td class="r mn">2.1%</td><td style="font-size:11px">政策保有的</td></tr>
+          <tr><td>損保ジャパン</td><td class="r mn">428万株</td><td class="r mn">1.6%</td><td style="font-size:11px">政策保有的</td></tr>
+          <tr><td>五洋建設従業員持株会</td><td class="r mn">420万株</td><td class="r mn">1.5%</td><td style="font-size:11px">安定株主</td></tr>
+          <tr class="sm"><td>株主数</td><td class="r mn">72,266名</td><td class="r mn">—</td><td style="font-size:11px">発行済 2億8,601万株</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>親会社・支配株主は存在せず、事業法人の持合いも薄い。</strong>理論上は買収可能な資本構成だが、実務上は①EV6,000億円という規模、②防衛・港湾という安全保障案件を扱う企業への外資買収の政治的ハードル（外為法の事前届出業種）、③PBR2倍という価格、の三重の壁がある。</p>
+    </div>
+    <div>
+      <div class="c cl-pu" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:9px">M&amp;Aシナリオの現実性評価</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>シナリオ</th><th class="r">現実性</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>MBO（経営陣による非公開化）</td><td class="r"><span class="bge be-rd">✕ 極小</span></td><td style="font-size:11px">EV6,000億円級。国内PEでは資金規模が厳しい</td></tr>
+            <tr><td>同意なきTOB／アクティビスト</td><td class="r"><span class="bge be-rd">✕ 小</span></td><td style="font-size:11px">PBR2.0倍・ROE18.7%は割安是正の標的にならない</td></tr>
+            <tr><td>海外マリコンによる買収<br><span style="font-size:10px;color:var(--ink3)">（Boskalis、Van Oord、DEME等）</span></td><td class="r"><span class="bge be-rd">✕ 小</span></td><td style="font-size:11px">防衛・港湾案件。外為法の事前届出対象業種で政治的に困難</td></tr>
+            <tr><td>五洋による他社買収</td><td class="r"><span class="bge be-rd">✕ 否定済</span></td><td style="font-size:11px">社長が<strong>「M&amp;Aによる規模拡大は考えない」</strong>と明言</td></tr>
+            <tr class="hl"><td><strong>自己株式取得（＝自社への買収）</strong></td><td class="r"><span class="bge be-gn">◎ 実行中</span></td><td style="font-size:11px"><strong>3年300億円。これが唯一の確実なM&amp;Aカタリスト</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="note">参考：同業の東洋建設（1890）では2022年以降にYFO・インフロニアによるTOB合戦が起きており、<strong>マリコンがM&amp;Aの対象になり得るセクターであること自体は事実。</strong>ただし東洋建設は五洋の半分以下の時価総額規模であり、条件がまったく異なる。<strong>五洋のM&amp;Aカタリストへの期待は、投資判断のごく小さな一部にとどめるべき。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">本命カタリスト ── 資本政策と制度の6項目</div>
+    <table class="t">
+      <thead><tr><th>カタリスト</th><th class="r">確度</th><th class="r">時間軸</th><th>内容と株価インパクト</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>自己株式取得</strong></td><td class="r"><span class="bge be-gn">高</span></td><td class="r mn">毎年</td><td style="font-size:11px">3年で300億円、年約100億円。<strong>現在の株価水準なら年間約700万株（発行済の2.4%）を消却できる。</strong>従来計画（25-27年300億円）を1年延長して継続。</td></tr>
+        <tr class="hl"><td><strong>増配（配当性向40%以上）</strong></td><td class="r"><span class="bge be-gn">高</span></td><td class="r mn">毎年</td><td style="font-size:11px">従来35%→<strong>40%以上</strong>に引上げ済み。総還元性向60%以上。中間配当制度も24年から導入。28年度EPS147.4円×40%＝<strong>約59円まで増配余地。</strong></td></tr>
+        <tr><td>政策保有株式の削減</td><td class="r"><span class="bge be-am">中</span></td><td class="r mn">〜29/3</td><td style="font-size:11px">純資産比12.1%（26/3）→<strong>10%以下</strong>へ。中計CFでは3年で30億円の売却を計上。金額は小さいがROE改善とガバナンス評価に効く。</td></tr>
+        <tr><td>洋上風力の再公募・第4ラウンド進展</td><td class="r"><span class="bge be-am">中</span></td><td class="r mn">26〜28年</td><td style="font-size:11px">第1ラウンド3海域の再公募と制度見直しが進行中。<strong>入札が動き出せば「船が遊ぶ」懸念が消え、最大のリレーティング材料になる。</strong></td></tr>
+        <tr><td>大型海外案件の受注復活</td><td class="r"><span class="bge be-am">中</span></td><td class="r mn">四半期</td><td style="font-size:11px">1Q▲82%の反動。単発の大型受注（バングラデシュ・マタバリ級1,620億円クラス）が出れば受注懸念は一気に解消。</td></tr>
+        <tr><td>ガバナンス改革の完了</td><td class="r"><span class="bge be-gn">高</span></td><td class="r mn">実施済</td><td style="font-size:11px">2026年6月総会で<strong>社外取締役が5名中5名（うち女性3名）へ。</strong>役員報酬の株式比率を10%→30%に引上げ。J-ESOP導入。海外投資家の評価対象。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cf-gn" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">中計のキャッシュ配分（2026-28年度累計）── 数字で見る資本政策の本気度</div>
+    <div class="bg"><div class="br2"><span class="lb">調整後営業CF（原資）</span><span class="vl">2,170億円</span></div><div class="bt"><div class="bf" style="width:100%;background:#239052"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">成長投資（洋上風力700億・DX/GX250億・人材50億・その他150億）</span><span class="vl">1,000億円 / 46%</span></div><div class="bt"><div class="bf" style="width:46%;background:#1e48b8"></div></div></div>
+    <div class="bg"><div class="br2"><span class="lb">株主還元（配当＋自己株式取得）</span><span class="vl">750億円 / 35%</span></div><div class="bt"><div class="bf" style="width:35%;background:#e68020"></div></div></div>
+    <div class="bg" style="margin-bottom:0"><div class="br2"><span class="lb">借入金返済</span><span class="vl">300億円 / 14%</span></div><div class="bt"><div class="bf" style="width:14%;background:#a83090"></div></div></div>
+    <p class="note" style="color:var(--gn)">営業CFの<strong>35%を株主還元に回す</strong>という配分は、投資負担の重いゼネコンとしては相当に積極的。3年750億円は現在の時価総額（自己株控除後3,928億円）の<strong>19.2%</strong>にあたる。有利子負債はEBITDAの3倍程度に抑制する方針も明示されている。</p>
+  </div>
+</div>
+
+<!-- ══════ P7 リスク ══════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">リスク分析 ── 正直に向き合う</h2><span class="sb bg-rd">7項目</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">① 洋上風力の遅延 ── 最大のリスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>約1,500億円（五洋負担790億円）の船が2028年2〜3月に竣工するが、着床式の本格化は2029年度以降。</strong>制度見直しと再公募が長引けば、償却費と金利だけが先行する期間が伸びる。年間の償却負担は数十億円規模になり得る。<strong>投資テーゼが壊れるとすれば、まずここ。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">② 26/3期は利益率のピークだった可能性</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">営業利益+154.9%、国内土木の営業利益率12.3%は歴史的高水準。<strong>会社自身が27/3期を純利益+0.9%＝実質横ばいと予想している。</strong>1Qの国内土木利益率は10.4%と既に前期通期を下回る。<strong>採算のよい工事の一巡＝利益率の平均回帰</strong>が起きればPER11倍の前提が崩れる。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">③ 財務レバレッジと金利上昇</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">26/6末の有利子負債2,449億円（3月末比+488億円）、自己資本比率24.5%。<strong>営業利益590億円→経常利益540億円という会社計画の50億円の差は、主に金利負担。</strong>日銀の追加利上げは直接的な減益要因になる。中計の1,660億円への削減は逆方向に進行中。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">④ 海外セグメントの赤字継続</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">26/3期▲32億円、1Qも▲1.9%と赤字。<strong>中計は28年度に利益率4.6%・営業利益60億円への転換を前提にしている。</strong>シンガポール・香港の競争環境と為替次第では、この前提が外れる。1Qの海外受注▲82.0%は、この不安を増幅した。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">⑤ 国内建築の受注ブレと低採算</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">1Q受注▲27.9%。データセンター案件は大型かつ単発でブレが大きい。<strong>建築の利益率は6.1〜6.4%と土木の半分。</strong>中計では建築の完工高を3,350億円と土木超えに拡大する計画だが、これは<strong>ミックス悪化＝全社利益率の希薄化</strong>を意味する側面もある。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">⑥ PBR2.03倍＝下値の理論的な床がない</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>BPS709円まで48%の下落余地がある（理論上）。</strong>「解散価値が支える」という論法はこの銘柄では使えない。実際の下値を支えるのはPER倍率と配当利回りであり、いずれもセンチメント次第で変動する。<strong>「資産があるから大丈夫」という安心感でポジションを大きくしないこと。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:8px">⑦ 建設業共通のリスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">資材価格・労務費インフレによる工事採算の悪化、2024年問題（時間外労働上限規制）に伴う工期・コスト増、大型工事での不採算計上（一件で数十億円の損失が出得る）、談合・品質問題などのコンプライアンスリスク。<strong>単一工事の失敗が四半期利益を吹き飛ばす業種構造。</strong></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>2Q以降の受注回復：</strong>単体受注が前年同期比プラス圏に戻るか（11月の2Q発表が最初の答え合わせ）</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>洋上風力の再公募開始：</strong>第1ラウンド3海域の再公募スケジュール確定、第4ラウンド公示</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大型海外受注：</strong>シンガポール・ODA案件で500億円超の単発受注</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自己株式取得の発表：</strong>年100億円ペースの取得決議と、株価下落局面での前倒し実行</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>通期上方修正：</strong>1Q進捗18.8%からの挽回。国内土木の利益率が12%台を維持</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>有利子負債のピークアウト：</strong>2,449億円から反転して減少に転じる</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:10px">📉 ネガティブ監視リスト（撤退トリガー）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>通期業績の下方修正：</strong>特に営業利益590億円の引下げ。これが出たらPER11倍の前提が消える</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>洋上風力の追加撤退・制度後退：</strong>他事業者の撤退、再公募の無期延期</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>作業船の竣工遅延・建造費超過：</strong>HLV/CLVの引渡し延期や追加コスト発生</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>2四半期連続の受注減：</strong>2Qも単体受注が2割超の減少なら「タイミング差」の説明は成立しない</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>大型工事での損失計上：</strong>海外案件での不採算計上</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>還元方針の後退：</strong>自己株式取得の中止・配当性向40%の引下げ</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P8 テクニカル ══════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">テクニカル・需給 ── 調整の位置を測る</h2><span class="sb bg-or">2/3押し完了圏</span></div>
+
+  <div class="chw" style="margin-bottom:16px">
+    <div class="cht">月足推移（2025年8月〜2026年8月）── 終値と月中レンジ</div>
+    <div class="chs">帯＝各月の高値〜安値レンジ／線＝月末終値。2026年2月の2,257円をピークに、戻り高値を切り下げる下降トレンドが継続中。</div>
+    <svg class="chsvg" id="chart" viewBox="0 0 920 300" role="img" aria-label="五洋建設の2025年8月から2026年8月までの月足株価推移"></svg>
+    <div class="tip" id="tip"></div>
+    <div class="lgd">
+      <span><i style="background:#e68020"></i>月末終値</span>
+      <span><i style="background:#c8c4b8;height:10px;width:10px;border-radius:2px"></i>月中の高値〜安値レンジ</span>
+      <span><i style="background:#1e48b8"></i>フィボナッチ節目</span>
+    </div>
+    <p class="note">出所：Yahoo!ファイナンス月足データ。2026年8月は8/14時点。表形式のデータは下の「価格の記録」表を参照。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">押し目の深さ ── フィボナッチで測る</div>
+      <table class="t">
+        <thead><tr><th>水準</th><th class="r">価格</th><th>意味</th></tr></thead>
+        <tbody>
+          <tr><td>起点（25/8安値）</td><td class="r mn">961.9円</td><td style="font-size:11px">上昇の出発点</td></tr>
+          <tr><td>天井（26/2/12）</td><td class="r mn">2,257.0円</td><td style="font-size:11px">上昇幅1,295.1円</td></tr>
+          <tr><td>38.2%押し</td><td class="r mn">1,762円</td><td style="font-size:11px">26年6月に割り込み済み</td></tr>
+          <tr><td>50.0%押し</td><td class="r mn">1,609円</td><td style="font-size:11px">26年7月に割り込み済み</td></tr>
+          <tr class="hl"><td><strong>61.8%押し</strong></td><td class="r mn ham"><strong>1,457円</strong></td><td style="font-size:11px"><strong>現在値1,438.5円はここをわずかに下</strong></td></tr>
+          <tr class="hl"><td><strong>66.7%（2/3）押し</strong></td><td class="r mn hgn"><strong>1,393円</strong></td><td style="font-size:11px"><strong>8/10安値1,390.5円がほぼ完全一致</strong></td></tr>
+          <tr><td>76.4%押し</td><td class="r mn hrd">1,267円</td><td style="font-size:11px">下に抜けた場合の次の目安</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>8月10日の安値1,390.5円は「2/3押し」の1,393円と誤差3円で一致。</strong>教科書的な深押し完了ポイントで反発している。ただしフィボナッチは自己成就的な性格が強く、根拠としては補助的に扱うべき。</p>
+    </div>
+    <div>
+      <div class="c cl-or" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:9px">移動平均線との位置関係（8/14終値1,438.5円）</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>期間</th><th class="r">水準</th><th class="r">乖離率</th><th>状態</th></tr></thead>
+          <tbody>
+            <tr><td>20日線（実測）</td><td class="r mn">約1,516円</td><td class="r mn hrd">▲5.1%</td><td style="font-size:11px">下方・下向き</td></tr>
+            <tr><td>75日線（概算）</td><td class="r mn">約1,600円</td><td class="r mn hrd">▲10.1%</td><td style="font-size:11px">下方・下向き</td></tr>
+            <tr><td>12か月線（実測）</td><td class="r mn">約1,589円</td><td class="r mn hrd">▲9.5%</td><td style="font-size:11px">下方・頭打ち</td></tr>
+            <tr><td>200日線（概算）</td><td class="r mn">約1,650〜1,680円</td><td class="r mn hrd">▲13〜14%</td><td style="font-size:11px">下方・下向き転換中</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>すべての移動平均線の下にあり、線の並びも下降配列。トレンドは明確に下向き。</strong>「安いから買う」を実行する場合、トレンド転換を待たずに拾うことになる点は自覚が必要。75日線1,600円の回復が最初のトレンド転換シグナル。※75日線・200日線は月足データからの概算です。</p>
+      </div>
+      <div class="c cf-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">需給 ── 広済堂型の「信用の重し」はない</div>
+        <table class="t" style="font-size:11.5px">
+          <tbody>
+            <tr><td>信用買残</td><td class="r mn">1,770,200株</td><td class="r mn hgn">発行済の0.6%</td></tr>
+            <tr><td>信用売残</td><td class="r mn">43,800株</td><td class="r mn">—</td></tr>
+            <tr><td>信用倍率</td><td class="r mn ham">40.4倍</td><td class="r mn">買い長</td></tr>
+            <tr><td>平均出来高（直近20日）</td><td class="r mn">約216万株</td><td class="r mn hgn">買残＜1日分</td></tr>
+          </tbody>
+        </table>
+        <p class="note">信用倍率40倍は数字としては高いが、<strong>絶対量が発行済株式数の0.6%・平均出来高の1日分未満</strong>しかない。<strong>「期日の投げ売りが続く」タイプの需給悪ではない。</strong>下落の主体は信用ではなく現物・機関投資家の売り。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">価格の記録 ── 月足（表形式データ）</div>
+      <table class="t">
+        <thead><tr><th>月</th><th class="r">高値</th><th class="r">安値</th><th class="r">終値</th><th class="r">出来高</th></tr></thead>
+        <tbody>
+          <tr><td>2025/08</td><td class="r mn">1,112</td><td class="r mn">961.9</td><td class="r mn">1,067.5</td><td class="r mn">3,438万</td></tr>
+          <tr><td>2025/09</td><td class="r mn">1,198</td><td class="r mn">1,051.5</td><td class="r mn">1,166.0</td><td class="r mn">3,232万</td></tr>
+          <tr><td>2025/10</td><td class="r mn">1,490</td><td class="r mn">1,098</td><td class="r mn">1,414.5</td><td class="r mn">5,798万</td></tr>
+          <tr><td>2025/11</td><td class="r mn">1,728.5</td><td class="r mn hbl">1,363</td><td class="r mn">1,725.0</td><td class="r mn">5,849万</td></tr>
+          <tr><td>2025/12</td><td class="r mn">1,756.5</td><td class="r mn">1,451.5</td><td class="r mn">1,575.5</td><td class="r mn">6,364万</td></tr>
+          <tr><td>2026/01</td><td class="r mn">1,795</td><td class="r mn">1,569</td><td class="r mn">1,621.0</td><td class="r mn">4,639万</td></tr>
+          <tr class="wn"><td><strong>2026/02</strong></td><td class="r mn hrd"><strong>2,257</strong></td><td class="r mn">1,633</td><td class="r mn">2,133.5</td><td class="r mn hrd">6,970万</td></tr>
+          <tr><td>2026/03</td><td class="r mn">2,166.5</td><td class="r mn">1,613</td><td class="r mn">1,627.0</td><td class="r mn">4,658万</td></tr>
+          <tr><td>2026/04</td><td class="r mn">1,878.5</td><td class="r mn">1,601.5</td><td class="r mn">1,750.0</td><td class="r mn">3,903万</td></tr>
+          <tr><td>2026/05</td><td class="r mn ham">2,172</td><td class="r mn">1,681.5</td><td class="r mn">1,778.5</td><td class="r mn">5,929万</td></tr>
+          <tr><td>2026/06</td><td class="r mn">1,866</td><td class="r mn">1,571.5</td><td class="r mn">1,698.5</td><td class="r mn">3,970万</td></tr>
+          <tr><td>2026/07</td><td class="r mn">1,784</td><td class="r mn hbl">1,404</td><td class="r mn">1,508.0</td><td class="r mn">3,651万</td></tr>
+          <tr class="hl"><td><strong>2026/08</strong>（14日まで）</td><td class="r mn">1,591.5</td><td class="r mn hbl"><strong>1,390.5</strong></td><td class="r mn hgn"><strong>1,438.5</strong></td><td class="r mn">2,307万</td></tr>
+        </tbody>
+      </table>
+      <p class="note">2月の6,970万株をピークに出来高は減少傾向。<strong>日次換算では2月の約387万株に対し、8月は約256万株（▲34%）。</strong>直近20営業日の平均出来高は約216万株で、8/10の投げ（575万株）を除けば200万株前後に沈静化している。<strong>売買エネルギーの枯渇は下落局面の終盤でよく見られる現象。</strong></p>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:500;margin-bottom:11px">サポート／レジスタンスのマップ</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>区分</th><th class="r">価格帯</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><td><span class="bge be-rd">抵抗④</span></td><td class="r mn">1,780〜1,870円</td><td style="font-size:11px">26年5-6月の戻り高値帯</td></tr>
+            <tr><td><span class="bge be-rd">抵抗③</span></td><td class="r mn">1,700円</td><td style="font-size:11px">6月終値・7月始値の攻防ライン</td></tr>
+            <tr><td><span class="bge be-am">抵抗②</span></td><td class="r mn">1,590〜1,610円</td><td style="font-size:11px"><strong>75日線・8/6高値。トレンド転換の関門</strong></td></tr>
+            <tr><td><span class="bge be-am">抵抗①</span></td><td class="r mn">1,500〜1,520円</td><td style="font-size:11px">20日線・8/7終値。直近の戻り目標</td></tr>
+            <tr class="hl"><td><strong>現在値</strong></td><td class="r mn hgn"><strong>1,438.5円</strong></td><td style="font-size:11px">8/14終値・3日続伸中</td></tr>
+            <tr class="hl"><td><span class="bge be-gn">支持①</span></td><td class="r mn hgn"><strong>1,363〜1,410円</strong></td><td style="font-size:11px"><strong>25/11安値1,363・26/7安値1,404・26/8安値1,390.5の三点で形成された厚い支持帯</strong></td></tr>
+            <tr><td><span class="bge be-bl">支持②</span></td><td class="r mn">1,267円</td><td style="font-size:11px">76.4%押し。支持帯を割った場合</td></tr>
+            <tr><td><span class="bge be-bl">支持③</span></td><td class="r mn">1,098〜1,166円</td><td style="font-size:11px">25年9-10月の水準。PER8.5倍相当</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="c cf-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">テクニカルの総合判断</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>強気材料：</strong>①2/3押しでピタリと止まった ②1,363〜1,410円の三点支持帯が機能 ③出来高減少＝投げ一巡の兆候 ④8/12以降3日続伸<br><br>
+          <strong>弱気材料：</strong>①全ての移動平均線の下 ②戻り高値の切り下げが継続 ③20日線1,516円すら回復していない ④2月・5月のダブルトップ形成<br><br>
+          <strong>実務的な結論：</strong>底値圏の可能性は高いが、<strong>「底を打った」という確認はまだ取れていない。</strong>打診買いなら現水準、確認を待つなら<strong>1,516円（20日線）回復＋1,600円（75日線）突破</strong>を待つのが定石。逆に<strong>1,363円割れは支持帯崩壊</strong>としてシナリオの見直し局面。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ P9 最終評価 ══════ -->
+<div class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">最終投資判断</h2><span class="sb bg-gn">2026.08.16 rev.2</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">確率加重期待株価</div><div class="mv gn">1,803円</div><div class="ms">現在比 +25.3%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">アナリストコンセンサス</div><div class="mv am">★4.8 強気</div><div class="ms">強気4名・やや強気1名（IFIS）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">高値からの下落率</div><div class="mv or">▲36.3%</div><div class="ms">2,257円→1,438.5円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">リスク・リワード比</div><div class="mv bl">約1 : 1.4</div><div class="ms">Bear1,185円 vs 期待値1,803円</div></div>
+  </div>
+
+  <div class="sc" style="margin-bottom:14px">
+    <div class="sc-c"><div class="sc-l br">Bear</div><div class="sc-p br">20%</div><div class="sc-s">洋上風力の遅延＋下方修正</div><div class="sc-i">1,100〜1,270円</div><div class="sc-i">▲12〜▲24%</div><div class="sc-i">PER8.5〜10倍まで収縮</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base</div><div class="sc-p bs">40%</div><div class="sc-s">会社計画達成・受注は戻る</div><div class="sc-i">1,550〜1,750円</div><div class="sc-i">+8〜+22%</div><div class="sc-i">PER12〜13.6倍へ回復</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull</div><div class="sc-p bu">28%</div><div class="sc-s">中計進捗＋洋上風力再始動</div><div class="sc-i">1,950〜2,250円</div><div class="sc-i">+36〜+56%</div><div class="sc-i">28年度EPS147.4円×13〜15倍</div></div>
+    <div class="sc-c"><div class="sc-l bm">Max</div><div class="sc-p bm">12%</div><div class="sc-s">洋上風力の本格立上げ確認</div><div class="sc-i">2,500〜2,800円</div><div class="sc-i">+74〜+95%</div><div class="sc-i">米系証券の目標株価2,500円</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:18px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">確率加重 期待株価の計算</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">中心株価</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：洋上風力遅延＋下方修正</td><td class="r mn">20%</td><td class="r mn">1,185円</td><td class="r mn">237円</td></tr>
+          <tr><td>Base：会社計画を概ね達成</td><td class="r mn">40%</td><td class="r mn">1,650円</td><td class="r mn">660円</td></tr>
+          <tr><td>Bull：中計進捗＋洋上風力再始動</td><td class="r mn">28%</td><td class="r mn">2,100円</td><td class="r mn">588円</td></tr>
+          <tr><td>Max：洋上風力の本格立上げ</td><td class="r mn">12%</td><td class="r mn">2,650円</td><td class="r mn">318円</td></tr>
+          <tr class="sm"><td>期待値</td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn"><strong>1,803円</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">確率加重期待値は<strong>1,803円（現在比+25.3%）</strong>。確率配分は当レポートの主観的判断であり、統計的推定ではありません。参考として、IFIS掲載の理論株価はPBR基準1,655円・PER基準1,792円、米系大手証券の目標株価は2,500円と、いずれも期待値と同方向を示しています。<br><strong>リスク・リワード：</strong>シナリオベースでは（1,803−1,438.5）÷（1,438.5−1,185）＝<strong>約1 : 1.4</strong>。ただし1,363円を機械的な撤退基準として運用すれば（1,803−1,438.5）÷（1,438.5−1,363）＝<strong>約1 : 4.8</strong>に改善します。<strong>この銘柄のリスク・リワードは「規律を持って運用するかどうか」で3倍以上変わる</strong>という点が実務上の要点です。</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">確率加重期待株価</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">1,803円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 +25.3%</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">想定下値（支持帯）</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">1,363円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 ▲5.2%／割れたら見直し</div>
+        </div>
+      </div>
+      <div class="c cf-bl">
+        <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">実務的な建て方（あくまで一案）</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>①打診（1/3）：</strong>現水準1,400〜1,450円。2/3押しで止まった位置であり、下値目安1,363円までの距離が近く損切り基準を置きやすい。<br><br>
+          <strong>②追加（1/3）：</strong>1,516円（20日線）回復 or 1,363円台での支持帯再確認。<br><br>
+          <strong>③最終（1/3）：</strong>1,600円（75日線）突破でトレンド転換確認後、または11月の2Q決算で受注回復を確認後。<br><br>
+          <strong>撤退基準：</strong>1,363円の明確な下抜け、または通期業績の下方修正。<strong>いずれか一方でも出たら機械的に見直す。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c cf-gn" style="margin-bottom:18px">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:11px">「少しずつ拾う」は妥当か ── 期待リターンを3つの部品に分解する</div>
+    <div class="g2" style="gap:18px">
+      <div>
+        <table class="t">
+          <thead><tr><th>リターンの源泉</th><th class="r">年率</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><td>① 配当</td><td class="r mn hgn">3.6%</td><td style="font-size:11px">52円／1,438.5円。配当性向40%以上で減配耐性あり</td></tr>
+            <tr><td>② 利益成長</td><td class="r mn hgn">3.1%</td><td style="font-size:11px">純利益347億→380億（25→28年度、CAGR）</td></tr>
+            <tr><td>③ 自己株買いによるEPS押上げ</td><td class="r mn hgn">2.4%</td><td style="font-size:11px">株式数2億7,308万株→2億5,780万株（中計EPS147.4円から逆算）</td></tr>
+            <tr class="sm"><td><strong>小計（PER11.2倍のまま動かない場合）</strong></td><td class="r mn hgn"><strong>約9.1%</strong></td><td style="font-size:11px">②＋③＝EPS成長5.5%／年</td></tr>
+            <tr class="hl"><td>④ PERの正常化（11.2倍→13倍）</td><td class="r mn ham">＋約4%</td><td style="font-size:11px">3年で+16%の一時的な押上げ</td></tr>
+            <tr class="hl"><td><strong>合計（PER13倍回帰シナリオ）</strong></td><td class="r mn hgn"><strong>約13.1%</strong></td><td style="font-size:11px">3年で+44.7%（2,082円相当）</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>ここが「少しずつ拾う」の理論的な支え：</strong>PERが一段も回復しなくても年率9%程度が期待できる構造になっている。<strong>「株価が上がらないと儲からない」のではなく「上がらなくても配当と自己株買いで年9%積み上がる」</strong>という点が、時間分散と極めて相性がよい。</p>
+      </div>
+      <div>
+        <table class="t">
+          <thead><tr><th>PER前提</th><th class="r">3年後株価</th><th class="r">配当累計</th><th class="r">通算</th><th class="r">年率</th></tr></thead>
+          <tbody>
+            <tr class="wn"><td>10.0倍（さらに収縮）</td><td class="r mn">1,474円</td><td class="r mn">166円</td><td class="r mn ham">+14.0%</td><td class="r mn ham">+4.5%</td></tr>
+            <tr><td>11.2倍（現状維持）</td><td class="r mn">1,651円</td><td class="r mn">166円</td><td class="r mn hgn">+26.3%</td><td class="r mn hgn">+8.1%</td></tr>
+            <tr class="hl"><td><strong>13.0倍（平均回帰）</strong></td><td class="r mn">1,916円</td><td class="r mn">166円</td><td class="r mn hgn"><strong>+44.7%</strong></td><td class="r mn hgn"><strong>+13.1%</strong></td></tr>
+            <tr><td>14.0倍（テーマ再燃）</td><td class="r mn">2,064円</td><td class="r mn">166円</td><td class="r mn hgn">+55.0%</td><td class="r mn hgn">+15.7%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">中計28年度EPS147.4円ベース。配当は52→55→59円（配当性向40%）と想定。<strong>PER10倍まで沈んでも年率+4.5%とプラスを維持</strong>する点が重要で、これが「時間を味方につけられる」根拠。ただし<strong>この試算は中計の達成が前提</strong>であり、下方修正が出れば全ての行が崩れます。</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px">
+      <div style="padding:12px;background:var(--bg2);border-radius:var(--r);border-left:3px solid var(--gn)">
+        <strong style="color:var(--gn);font-size:11.5px">分割買いが有効な理由①</strong><br>
+        <span style="font-size:11.5px;color:var(--ink2);line-height:1.75">下値の理論的な床（PBR1倍）が遠いため、<strong>底値を当てる能力に賭けない設計</strong>が必要。一度に建てると、1,185円（Bearケース）まで沈んだ時に追加余力が無くなる。</span>
+      </div>
+      <div style="padding:12px;background:var(--bg2);border-radius:var(--r);border-left:3px solid var(--bl)">
+        <strong style="color:var(--bl);font-size:11.5px">分割買いが有効な理由②</strong><br>
+        <span style="font-size:11.5px;color:var(--ink2);line-height:1.75">検証イベントが四半期ごとに来る（<strong>11月2Q＝受注回復の答え合わせ</strong>、2月3Q、5月本決算＋中計進捗）。<strong>情報が増えるたびに買い増しの是非を判断できる</strong>のは、分散執行の最大の利点。</span>
+      </div>
+      <div style="padding:12px;background:var(--bg2);border-radius:var(--r);border-left:3px solid var(--or)">
+        <strong style="color:var(--or);font-size:11.5px">ただし注意点</strong><br>
+        <span style="font-size:11.5px;color:var(--ink2);line-height:1.75">建設株は<strong>単一工事の不採算計上で四半期利益が吹き飛ぶ</strong>業種。「ニッチトップだから安心」と考えて<strong>ポートフォリオの1銘柄に過度な比率を割かない</strong>こと。景気敏感セクターである点も変わりません。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 「安い株」ではなく「安くなった良い会社」</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">「少しずつ拾う」は妥当か → 妥当。ただし理由が違う</div>
+        <div class="conc-b">資産バリューでは割安ではありません（PBR2.03倍、修正でも1.81倍、ネット有利子負債1,953億円）。しかし<strong>時間分散で積み上げる対象としては合理的</strong>です。理由は単純で、<strong>PERが一段も回復しなくても配当3.6%＋EPS成長5.5%＝年約9%が積み上がる</strong>構造だから。PER10倍まで沈むケースでも年率+4.5%とプラスを維持します。「上がるのを待つ」のではなく「持っているだけで積み上がる」タイプなので、<strong>底値を当てる能力を前提にしない設計</strong>が可能です。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">ニッチトップ性とストック性の評価</div>
+        <div class="conc-b"><strong>ニッチトップ性は本物です。</strong>海洋土木は寡占市場で、参入障壁が「HLV1,200億円・CLV310億円・SEP船数百億円」という具体的な金額で測れる稀な業種。<strong>ストック性も擬似的には成立</strong>しています──繰越工事高1兆2,701億円（1.55年分）＋国土強靭化20兆円/5年＋防衛需要〜2030年の三層構造。ただし賃料型の真のストックではないため、政策と景気には最終的に晒されます。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">急落の理由と、テクニカルの位置</div>
+        <div class="conc-b">急落は<strong>業績悪化ではなくマルチプル収縮（PER17.5→11.2倍、EPSは不変）</strong>と、1Q単体受注▲35.3%（海外▲82%）への反応。テーマ相場の天井は2/12にセクター全体で同時形成されており、東亜建設工業▲58.7%に比べれば五洋の▲36.3%は浅い。テクニカルは<strong>8/10安値1,390.5円が2/3押し1,393円とほぼ一致</strong>し、1,363〜1,410円の三点支持帯で反発。出来高も枯れつつあります。ただし<strong>全ての移動平均線の下にあり、トレンド転換の確認はまだ取れていません。</strong></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">1,803円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">+25.3%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">28年度PER</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">9.8倍</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">中計EPS147.4円ベース</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値基準</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">1,363円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">割れたらシナリオ見直し</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2〜3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">洋上風力船の稼働まで</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        五洋建設は、<strong style="color:var(--or2)">資産バリューではなく収益バリューで買う「安くなった良い会社」。</strong>下落▲36%の実体はEPS不変のままのマルチプル収縮であり、ROE18.7%・PER11.2倍・総還元利回り5.3〜6.4%・受注残1.55年分という1階部分だけで現株価は説明できる。2階部分＝2028年竣工の洋上風力船団（HLV1,200億円・CLV310億円）は<strong style="color:var(--or2)">ほぼ株価に織り込まれていない反面、着床式の本格化が2029年度以降であるため「2〜3年間、償却と金利だけを生む」時間リスクを負う。</strong>PBR2.03倍で下値の理論的な床がない点を踏まえ、<strong style="color:var(--or2)">分割執行と1,363円の撤退基準をセットで</strong>運用すべき案件。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。<br>
+  当レポートに含まれる推計値・確率・シナリオは筆者の主観的判断であり、将来を保証するものではありません。<br>
+  Data: 五洋建設 27/3期1Q決算短信・同説明資料（2026.08.07）／26/3期決算短信（2026.05.08）／中期経営計画2026-2028（2026.05.08）／FACT BOOK 2026／第76期有価証券報告書／Yahoo!ファイナンス／野村證券／IFIS株予報／内閣官房 国土強靱化実施中期計画／鹿島建設・寄神建設 プレスリリース（CP-16001, 2023.09.27） · 2026.08.16 rev.2
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+
+/* ── 月足チャート ── */
+(function(){
+  var D=[
+    {m:'25/8',h:1112,l:961.9,c:1067.5},
+    {m:'25/9',h:1198,l:1051.5,c:1166},
+    {m:'25/10',h:1490,l:1098,c:1414.5},
+    {m:'25/11',h:1728.5,l:1363,c:1725},
+    {m:'25/12',h:1756.5,l:1451.5,c:1575.5},
+    {m:'26/1',h:1795,l:1569,c:1621},
+    {m:'26/2',h:2257,l:1633,c:2133.5},
+    {m:'26/3',h:2166.5,l:1613,c:1627},
+    {m:'26/4',h:1878.5,l:1601.5,c:1750},
+    {m:'26/5',h:2172,l:1681.5,c:1778.5},
+    {m:'26/6',h:1866,l:1571.5,c:1698.5},
+    {m:'26/7',h:1784,l:1404,c:1508},
+    {m:'26/8',h:1591.5,l:1390.5,c:1438.5}
+  ];
+  var W=920,H=300,PL=54,PR=118,PT=18,PB=34;
+  var x0=PL,x1=W-PR,y0=PT,y1=H-PB;
+  var VMIN=900,VMAX=2320;
+  var step=(x1-x0)/(D.length-1);
+  function X(i){return x0+i*step}
+  function Y(v){return y1-(v-VMIN)/(VMAX-VMIN)*(y1-y0)}
+  var s='';
+  /* grid */
+  [1000,1200,1400,1600,1800,2000,2200].forEach(function(v){
+    s+='<line x1="'+x0+'" y1="'+Y(v).toFixed(1)+'" x2="'+x1+'" y2="'+Y(v).toFixed(1)+'" stroke="rgba(17,18,23,.08)" stroke-width="1"/>';
+    s+='<text x="'+(x0-9)+'" y="'+(Y(v)+3.5).toFixed(1)+'" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9.5" fill="#636470">'+v.toLocaleString()+'</text>';
+  });
+  /* fib lines */
+  [{v:1762,t:'38.2%押し 1,762',o:3.5},{v:1609,t:'50%押し 1,609',o:3.5},{v:1457,t:'61.8%押し 1,457',o:-1},{v:1393,t:'2/3押し 1,393',o:8}].forEach(function(f){
+    s+='<line x1="'+x0+'" y1="'+Y(f.v).toFixed(1)+'" x2="'+x1+'" y2="'+Y(f.v).toFixed(1)+'" stroke="#1e48b8" stroke-width="1" stroke-dasharray="3 4" opacity=".45"/>';
+    s+='<text x="'+(x1+7)+'" y="'+(Y(f.v)+f.o).toFixed(1)+'" font-family="JetBrains Mono,monospace" font-size="9" fill="#153480">'+f.t+'</text>';
+  });
+  /* range bars */
+  D.forEach(function(d,i){
+    var bw=13;
+    s+='<rect x="'+(X(i)-bw/2).toFixed(1)+'" y="'+Y(d.h).toFixed(1)+'" width="'+bw+'" height="'+Math.max(2,(Y(d.l)-Y(d.h))).toFixed(1)+'" rx="4" fill="#c8c4b8" opacity=".62"/>';
+  });
+  /* close line */
+  var pts=D.map(function(d,i){return X(i).toFixed(1)+','+Y(d.c).toFixed(1)}).join(' ');
+  s+='<polyline points="'+pts+'" fill="none" stroke="#e68020" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  D.forEach(function(d,i){
+    s+='<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(d.c).toFixed(1)+'" r="4.2" fill="#e68020" stroke="#eceae1" stroke-width="2"/>';
+  });
+  /* peak + trough labels */
+  s+='<text x="'+X(6).toFixed(1)+'" y="'+(Y(2257)-9).toFixed(1)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" fill="#b42c2c">高値 2,257</text>';
+  s+='<text x="'+X(12).toFixed(1)+'" y="'+(Y(1390.5)+15).toFixed(1)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" font-weight="600" fill="#1a6640">安値 1,390.5</text>';
+  /* x labels */
+  D.forEach(function(d,i){
+    if(i%2===0||i===D.length-1)
+      s+='<text x="'+X(i).toFixed(1)+'" y="'+(y1+18)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#636470">'+d.m+'</text>';
+  });
+  /* hit areas */
+  D.forEach(function(d,i){
+    s+='<rect class="hit" data-i="'+i+'" x="'+(X(i)-step/2).toFixed(1)+'" y="'+y0+'" width="'+step.toFixed(1)+'" height="'+(y1-y0).toFixed(1)+'" fill="transparent" style="cursor:crosshair"/>';
+  });
+  var svg=document.getElementById('chart');
+  svg.innerHTML=s;
+  var tip=document.getElementById('tip'),wrap=svg.parentNode;
+  svg.querySelectorAll('.hit').forEach(function(r){
+    r.addEventListener('mouseenter',function(e){
+      var d=D[+r.dataset.i];
+      tip.innerHTML='<strong>'+d.m+'</strong><br>終値 '+d.c.toLocaleString()+'円<br>高値 '+d.h.toLocaleString()+'円<br>安値 '+d.l.toLocaleString()+'円';
+      tip.classList.add('on');
+    });
+    r.addEventListener('mousemove',function(e){
+      var b=wrap.getBoundingClientRect();
+      var lx=e.clientX-b.left, ly=e.clientY-b.top;
+      tip.style.left=Math.min(lx+14,b.width-150)+'px';
+      tip.style.top=(ly-10)+'px';
+    });
+    r.addEventListener('mouseleave',function(){tip.classList.remove('on')});
+  });
+})();
+</script>
+</body>
+</html>

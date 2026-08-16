@@ -48,6 +48,7 @@ export const contentThemes: ContentTheme[] = [
     owners: '🦫 堀田（競合優位性）',
     fill: '#EEEDFE', text: '#26215C', sub: '#534AB7', border: '#CECBF6',
     slugs: [
+      'penta-ocean-1893',
       'nihon-gear-6356',
       'tanaken-1450',
       'kitazato-368a',
