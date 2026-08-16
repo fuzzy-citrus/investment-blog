@@ -75,5 +75,5 @@ export const columnAuthors: Record<string, ColumnAuthor> = {
   'dividend-series-03-dividend-as-exit-strategy': C.hanaoka,
   'dividend-series-04-afterword': C.hanaoka,
   'low-payout-internal-compounding': C.numata,
-  'september-rights-2026': C.hanaoka,
+  'august-september-rights-2026': C.hanaoka,
 };
