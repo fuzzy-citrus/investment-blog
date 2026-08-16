@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中央可鍛工業（5607）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:240px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eeb0b0}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wn td{background:var(--rd3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+/* 明色カード（本文が濃色になる派生） */
+.ca.lite{background:var(--bg2);border:.5px solid var(--bg3)}
+.ca.lite .cn{color:var(--ink3);opacity:1}
+.ca.lite .ct{color:var(--ink)}
+.ca.lite .cp{color:var(--ink2)}
+.ca.lite .cp strong{color:var(--ink)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* STACK BAR */
+.stk{display:flex;height:34px;border-radius:4px;overflow:hidden;margin:10px 0 6px;border:.5px solid var(--bg3)}
+.stk div{display:flex;align-items:center;justify-content:center;font:600 10px/1 var(--mono);color:#fff}
+.stkl{display:flex;gap:14px;flex-wrap:wrap;font-size:10.5px;color:var(--ink3)}
+.stkl span::before{content:'■ ';font-size:11px}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.wrn{background:var(--rd3);border:.5px solid #eeb0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 5607 · 名証メイン · 2026.08.16 作成</p>
+      <h1 class="ht">中央可鍛工業 <em>（5607）</em><br>バリュー投資分析レポート</h1>
+      <p class="hs">株価600円（8/14終値）／ BPS 2,034円・PBR 0.30倍 ／ ネットキャッシュ＋投資有価証券だけで508円/株（株価の85%）<br>実質EV 48.5億円 = EV/EBITDA 1.3倍 ／ 「資産の塊 × 死んだ流動性」という日本株の典型的ミスプライス</p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>資産面の割安性は極端。ただし触媒は自前で待つ必要あり</strong><br>
+        PBR0.30倍・PER5.9倍・総合利回り4.0〜4.3%。<br>
+        本業への評価は実質ゼロ近辺。<br>
+        「安い」→「上がる」の橋渡しが最大論点。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">600円</div><div class="ks">時価総額 約96億円（1,602万株）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS 2,034円）</div><div class="kn gn">0.30倍</div><div class="ks">解散価値の3割で取引</div></div>
+    <div class="kv"><div class="kl">現金+有価証券/株</div><div class="kn gn">508円</div><div class="ks">株価の84.7%が金融資産</div></div>
+    <div class="kv"><div class="kl">EV / EBITDA</div><div class="kn bl">1.32倍</div><div class="ks">EV48.5億 ÷ EBITDA36.8億</div></div>
+    <div class="kv"><div class="kl">PER（27/3期予想）</div><div class="kn am">5.9倍</div><div class="ks">実績ベースなら4.3倍</div></div>
+    <div class="kv"><div class="kl">総合利回り（300株）</div><div class="kn gn">4.00→4.28%</div><div class="ks">3年以上継続保有で上昇</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>割安性の構造</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>資産精査・NAV</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--pu2)"></span>急落の解剖</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク・流動性</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>最終評価・戦術</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════
+  P1 割安性の構造
+══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ600円が「割安性の塊」なのか</h2><span class="sb bg-gn">5つの論点</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Point 01 · 最重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">株価の85%が金融資産で埋まる</div>
+      <div class="cb gn">508円 / 600円</div>
+      <div class="cu">ネットキャッシュ293円＋投資有価証券215円</div>
+      <div class="cp">現預金80.7億円▲有利子負債34.5億円＝<strong>ネットキャッシュ46.2億円</strong>。加えて投資有価証券34.0億円。合計80.2億円は時価総額96億円の<strong>84.7%</strong>。事業に必要のない資産だけで株価をほぼ説明できる。</div>
+      <div class="tgs"><span class="tg tg-gn">自己資本比率68.0%</span><span class="tg tg-or">有利子負債倍率0.13倍</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Point 02 · 最重要</div>
+      <span class="ci">🏭</span>
+      <div class="ct">本業への値付けが実質ゼロ</div>
+      <div class="cb am">EV/EBITDA 1.3倍</div>
+      <div class="cu">有価証券も控除すれば0.40倍</div>
+      <div class="cp">時価総額94.7億円（自己株控除）からネットキャッシュを引いたEVは<strong>48.5億円</strong>。EBITDA36.8億円・営業利益18.9億円の事業がこの値段。<strong>投資有価証券まで引けばEVは14.5億円＝EV/EBITDA 0.40倍</strong>という理屈上ありえない水準。</div>
+      <div class="tgs"><span class="tg tg-am">EV/営業利益 2.6倍</span><span class="tg tg-or">実質タダに近い本業</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Point 03 · 重要</div>
+      <span class="ci">📉</span>
+      <div class="ct">PBR 0.30倍 — 解散価値の3割</div>
+      <div class="cb or">0.295倍</div>
+      <div class="cu">BPS 2,034円 vs 株価600円</div>
+      <div class="cp">純資産323億円に対し時価総額96億円。<strong>純資産は5年で232億円→321億円（+38.6%）と着実に積み上がっている</strong>のに株価は追随していない。内部留保の蓄積そのものが「見えないリターン」として毎年BPSに乗り続ける。</div>
+      <div class="tgs"><span class="tg tg-or">解散価値割れ</span><span class="tg tg-gn">BPS成長継続</span></div>
+    </div>
+    <div class="ca cc-bl lite">
+      <div class="cn" style="color:var(--ink3)">Point 04</div>
+      <span class="ci" style="font-size:22px">🎁</span>
+      <div class="ct" style="color:var(--ink)">配当性向12.8%という「還元の伸びしろ」</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">DOE 0.93%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">配当19円／BPS2,034円</div>
+      <div class="cp" style="color:var(--ink2)">配当性向を30%にするだけで<strong>1株30.4円＝利回り5.1%</strong>。DOE2%なら40.7円＝利回り6.8%。<strong>還元余力が「使われていない」ことが、逆に最大のアップサイド。</strong></div>
+    </div>
+    <div class="ca cc-pu lite" style="grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Point 05 · 構造</div>
+      <span class="ci" style="font-size:22px">⚖️</span>
+      <div class="ct" style="color:var(--ink)">なぜこれほど安いのか — ディスカウントの正体を分解する</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① 流動性ディスカウント</strong><br>2026年の年初来出来高195万株（8/14まで）÷発行済1,602万株＝<strong>回転率わずか12%</strong>、2025年通年でも9.3%。1日平均約1.28万株・売買代金770万円前後。機関投資家は物理的に入れない。名証単独上場でスクリーニングにも載りにくい。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② ガバナンス・還元ディスカウント</strong><br>配当性向12.8%、政策保有株34億円、上位株主に銀行・生保が並ぶ持ち合い構造。<strong>「資産はあるが株主に還ってこない」</strong>と市場が値付けしている。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ 事業ディスカウント</strong><br>トヨタ向け8割超の鋳造メーカー。価格決定権が弱く、EV化とICE部品比率への警戒。営業利益率4.9%は改善したがなお薄い。</div>
+      </div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--gn3);border-radius:4px;font-size:12px;color:var(--gn);line-height:1.75">
+        <strong>投資判断の核心はここ：</strong>①は投資家側の資金規模で回避できる（個人なら流動性は制約にならない）。③は事業実態を見れば過大評価されている（後述）。<strong>残る②だけが本当のリスクであり、同時に唯一のカタリスト</strong>。②が動けば①③のディスカウントも同時に剥がれる。
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">株価600円の「中身」— 1株あたり分解</div>
+    <div class="stk">
+      <div style="background:var(--gn2);flex:293">現金 293円</div>
+      <div style="background:var(--bl2);flex:215">有価証券 215円</div>
+      <div style="background:var(--or2);flex:92">事業 92円</div>
+    </div>
+    <div class="stkl">
+      <span style="color:var(--gn)">ネットキャッシュ 293円（48.9%）</span>
+      <span style="color:var(--bl)">投資有価証券 215円（35.8%）</span>
+      <span style="color:var(--or)">事業価値の残余 92円（15.3%）</span>
+    </div>
+    <p class="note">EBITDA36.8億円・営業利益18.9億円・従業員970名・売上387億円の事業に、市場は1株あたり約92円（総額14.5億円）しか払っていない。<strong>営業利益の0.8年分</strong>である。</p>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      中央可鍛工業は、<strong style="color:var(--or2)">「資産の割安性は疑いようがないが、それが解放される保証もない」という日本型ディープバリューの純粋形。</strong>株価600円のうち508円は現金と有価証券で、事業はほぼタダ。勝敗を決めるのは業績予想ではなく、<strong style="color:var(--or2)">還元政策が動くか・時間を味方にできるか</strong>の一点に集約される。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P2 資産精査・NAV
+══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資産精査 ── 現金・有価証券・土地</h2><span class="sb bg-am">NAV 2,100〜2,400円</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">80.7億円</div><div class="ms">26/6末は81.1億円<br>5年で42.6億→80.7億（+89%）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">有利子負債</div><div class="mv rd">34.5億円</div><div class="ms">長期27.3億＋1年内7.1億<br>有利子負債倍率0.13倍</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">投資有価証券</div><div class="mv bl">34.0億円</div><div class="ms">時価評価済み（BPSに反映）<br>受取配当金1.07億円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">土地（簿価）</div><div class="mv am">28.1億円</div><div class="ms">簿外の含み益はここに眠る<br>取得は1944〜1973年が中心</div></div>
+  </div>
+
+  <div class="ok">✅ <strong>まず重要な会計上の整理。</strong>上場有価証券は貸借対照表に<strong>時価</strong>で載っているため、その含み益は既にBPS 2,034円に反映済みです。「有価証券の含み益」はNAVの<u>上乗せ要因ではない</u>。一方、<strong>土地は取得原価のまま</strong>なので、こちらの含み益だけが簿外＝NAVの純増要因になります。この区別を曖昧にした資産分析は数字を二重計上します。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">① 現金同等物 ── ネットキャッシュの実額</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">金額</th><th>コメント</th></tr></thead>
+        <tbody>
+          <tr><td>現金及び預金（26/3末）</td><td class="r mn hgn">80.65億円</td><td style="font-size:11px">26/6末は81.05億円へ増加</td></tr>
+          <tr><td>うち現金及び現金同等物</td><td class="r mn">69.77億円</td><td style="font-size:11px">差額約11億は3カ月超定期</td></tr>
+          <tr><td>長期借入金</td><td class="r mn hrd">27.35億円</td><td style="font-size:11px">26/6末は25.82億へ減少</td></tr>
+          <tr><td>1年内返済予定長期借入金</td><td class="r mn hrd">7.12億円</td><td style="font-size:11px">—</td></tr>
+          <tr class="hl"><td><strong>ネットキャッシュ</strong></td><td class="r mn hgn"><strong>46.18億円</strong></td><td style="font-size:11px"><strong>1株293円（株価の48.9%）</strong></td></tr>
+          <tr class="sm"><td>参考：営業CF（26/3期）</td><td class="r mn">34.48億円</td><td style="font-size:11px">投資CF▲13.19億／FCF+21.3億</td></tr>
+        </tbody>
+      </table>
+      <p class="note">営業CFは5年連続で21〜36億円を計上し、設備投資（年13〜20億円規模）を賄ってなお余剰。<strong>現金が積み上がるのは「稼いでいるのに使い道を決めていない」ため</strong>で、収益力の問題ではない。</p>
+    </div>
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">② 有価証券 ── 「含み益」ではなく「非事業資産」として見る</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">金額</th><th>意味</th></tr></thead>
+        <tbody>
+          <tr><td>投資有価証券（時価）</td><td class="r mn hbl">34.02億円</td><td style="font-size:11px">1株215円相当</td></tr>
+          <tr><td>受取配当金（26/3期）</td><td class="r mn">1.07億円</td><td style="font-size:11px">簿価に対し約3%</td></tr>
+          <tr class="hl"><td><strong>投資有価証券売却益</strong></td><td class="r mn hgn"><strong>5.63億円</strong></td><td style="font-size:11px"><strong>26/3期に特別利益計上＝縮減が実際に進行中</strong></td></tr>
+          <tr><td>持分法投資利益</td><td class="r mn">2.78億円</td><td style="font-size:11px">関連会社の稼ぐ力も別途存在</td></tr>
+          <tr><td>包括利益（26/3期）</td><td class="r mn">32.67億円</td><td style="font-size:11px">純利益22.10億との差10.57億が評価差額等</td></tr>
+          <tr><td>関係会社株式評価損</td><td class="r mn hrd">▲0.61億円</td><td style="font-size:11px">非上場関係会社の減損</td></tr>
+        </tbody>
+      </table>
+      <p class="note">26/3期の純利益22.1億円には<strong>投資有価証券売却益5.63億円（税前）が含まれる</strong>。27/3期予想が純利益▲27.6%減となっている主因の一つがこの剥落であり、実力ベースの悪化ではない点は押さえておきたい。逆に言えば<strong>残り34億円の政策保有株は「将来の利益と現金の在庫」</strong>である。</p>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">③ 土地 ── 唯一の簿外含み益。拠点別に何が起きているか</div>
+    <table class="t">
+      <thead><tr><th>拠点</th><th>所在地</th><th>取得時期の目安</th><th class="r">地価環境（公示地価）</th><th class="r">含み益ポテンシャル</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>熊本工場</strong></td><td>熊本県菊池郡大津町大津土井ノ内31</td><td>1973年設立</td><td class="r mn hrd">工業地 95,500円/㎡<br>前年比 <strong>+33.3%</strong></td><td class="r"><span class="bge be-rd">極大</span></td></tr>
+        <tr><td><strong>本社・日進工場</strong></td><td>愛知県日進市浅田平子1-300</td><td>1944年創業〜</td><td class="r mn ham">浅田町 40.66万円/坪<br>（≒12.3万円/㎡・住宅地）<br>前年比 +5.13%</td><td class="r"><span class="bge be-am">大</span></td></tr>
+        <tr><td><strong>岐阜久尻工場</strong></td><td>岐阜県土岐市泉町久尻</td><td>—（2018年に鋳造棟新設）</td><td class="r mn">地方工業地・低位安定</td><td class="r"><span class="bge be-bl">小</span></td></tr>
+        <tr><td>土岐可鍛工業（子会社）</td><td>岐阜県土岐市</td><td>—</td><td class="r mn">同上</td><td class="r"><span class="bge be-bl">小</span></td></tr>
+        <tr><td>武山鋳造（子会社）ほか</td><td>国内</td><td>—</td><td class="r mn">—</td><td class="r"><span class="bge be-bl">小</span></td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>熊本工場が効いている。</strong>所在地の大津町は、TSMC/JASMが立地する菊陽町の隣接自治体。令和7年地価公示で<strong>大津町の工業地標準地は71,600円/㎡→95,500円/㎡（+33.3%）と熊本県内最高の上昇率</strong>、報道ベースでは工業地の上昇率が全国1位（+29.7%）。1973年取得の簿価に対し、時価は桁で違う可能性が高い。日進工場も名古屋都市圏の住宅需要地であり、簿価は昭和期水準。<br><span style="color:var(--rd)">※各工場の土地面積は有価証券報告書「主要な設備の状況」にのみ開示があり、本レポート作成時点で当該資料を取得できていません。したがって含み益は金額を断定せず、以下のとおり<strong>簿価倍率シナリオ</strong>で提示します。</span></p>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">修正純資産（NAV）── 土地含み益シナリオ別（税効果30%控除後）</div>
+    <table class="t">
+      <thead><tr><th>シナリオ</th><th class="r">土地時価</th><th class="r">含み益（税前）</th><th class="r">税効果後</th><th class="r">修正自己資本</th><th class="r">NAV/株</th><th class="r">株価/NAV</th></tr></thead>
+      <tbody>
+        <tr><td>簿価どおり（含み益ゼロ）</td><td class="r mn">28.1億円</td><td class="r mn">0</td><td class="r mn">0</td><td class="r mn">321.1億円</td><td class="r mn ham"><strong>2,034円</strong></td><td class="r mn ham">29.5%</td></tr>
+        <tr><td>保守（簿価1.5倍）</td><td class="r mn">42.1億円</td><td class="r mn">14.0億円</td><td class="r mn">9.8億円</td><td class="r mn">330.9億円</td><td class="r mn ham"><strong>2,096円</strong></td><td class="r mn ham">28.6%</td></tr>
+        <tr class="hl"><td><strong>中立（簿価2.5倍）</strong></td><td class="r mn">70.2億円</td><td class="r mn">42.1億円</td><td class="r mn">29.5億円</td><td class="r mn">350.6億円</td><td class="r mn hgn"><strong>2,221円</strong></td><td class="r mn hgn">27.0%</td></tr>
+        <tr><td>強気（簿価4.0倍）</td><td class="r mn">112.2億円</td><td class="r mn">84.2億円</td><td class="r mn">58.9億円</td><td class="r mn">380.0億円</td><td class="r mn hor"><strong>2,407円</strong></td><td class="r mn hor">24.9%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">注目すべきは<strong>「土地の含み益をゼロと置いてもNAVは2,034円で、株価はその29.5%」</strong>という点。土地含み益は本件の投資判断を左右する変数ではなく、あくまで<strong>安全余裕の上積み</strong>と捉えるのが正しい。含み益ゼロでも十分に安く、あればなお良い、という構造。</p>
+  </div>
+
+  <div class="cf-am" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">NAVは「目標株価」ではない ── 現実的なフェアバリューの置き方</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>NAV 2,100〜2,400円は「今すぐ全事業と全資産を清算した場合の理論値」であり、そのまま目標株価にはならない。事業を続ける限り土地は換金されず、現金も経営が抱え続けるからだ。<strong>現実的には「非事業資産＋事業のマルチプル評価」で置くべき。</strong></div>
+      <div>ネットキャッシュ46.2億＋投資有価証券34.0億＝80.2億円に、EBITDA36.8億円へ倍率をかけて足す方式なら、<strong>EV/EBITDA 2倍で974円、3倍で1,207円、4倍で1,440円</strong>。同業の自動車部品・鋳造企業が概ね3〜5倍で取引されることを踏まえると、<strong>1,000〜1,400円が理屈上のフェアバリュー帯</strong>となる。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P3 事業性・ストック性
+══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">事業性・ニッチトップ性・ストック性</h2><span class="sb bg-or">「安いだけの会社」ではない</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">売上高（26/3期）</div><div class="mv am">387.2億円</div><div class="ms">前期比 +7.7%</div></div>
+    <div class="c mc"><div class="ml">営業利益</div><div class="mv gn">18.9億円</div><div class="ms">前期比 +59.5%／利益率4.89%</div></div>
+    <div class="c mc"><div class="ml">可鍛事業セグメント利益</div><div class="mv gn">32.95億円</div><div class="ms">前期比 +22.4%／売上375.7億</div></div>
+    <div class="c mc"><div class="ml">連結従業員</div><div class="mv bl">970名</div><div class="ms">単体541名／平均年収675万円</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-or">
+      <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:10px">ニッチトップ性 ── 「参入されない産業」に居座る強み</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>社名が示す通りの専業：</strong>1944年創業、可鍛鋳鉄（マレアブル）を社名に冠する国内数少ない専業メーカー。現在の主力はダクタイル鋳鉄とアルミダイカスト。名証1961年上場という80年超の歴史そのものが、この産業の参入障壁の証明。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>三重の参入障壁：</strong>①溶解炉・造型ラインという巨額の装置 ②車種ごとの金型・木型の資産 ③熟練の鋳造技能。加えて鋳造は騒音・粉じん・高温の典型的3K産業で、<strong>新規参入は事実上存在しない。</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>残存者利益：</strong>国内鋳物業者は高齢化・後継者難・環境規制で廃業と集約が続いている。生き残った側に発注が集中する構造で、<strong>市場が縮小しても個社シェアは上がる</strong>という珍しいポジション。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>トヨタ系の資本関係：</strong>トヨタ自動車4.94%、豊田自動織機3.87%を筆頭株主に持つ。単なる取引先ではなく資本で紐づいた供給網の一部であり、<strong>簡単に切り替えられる立場ではない。</strong></div></div>
+      </div>
+    </div>
+    <div class="c cl-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">ストック性 ── 「一度採用されたら10年以上」の受注構造</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>車種ライフサイクルへの紐づけ：</strong>自動車部品は量産採用が決まると、その車種のモデルライフ（概ね6〜10年）にわたり発注が継続する。加えて生産終了後も補給部品供給が長期間続く。<strong>実質的に10年超の受注残を積み上げる契約型ビジネス。</strong></div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>切替コストの高さ：</strong>鋳造品の変更は型の再製作・工程認証・品質保証のやり直しを伴う。特に保安部品では自動車メーカー側が変更を嫌う。<strong>解約されない＝ストック収入に近い。</strong></div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>製品ポートフォリオ：</strong>エンジンマウントブラケット、タービンハウジング、デフケース、キャリパーサポート、コンプレッサーカバー、デフサポートなど。<strong>構造部品・保安部品が中心</strong>で、コモディティ的な汎用鋳物ではない。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>顧客の広がり：</strong>自動車に加え、産業車両（フォークリフト）・産業用ロボット部品。豊田自動織機が株主に入っていることと整合的で、自動車一本足ではない。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">業績推移 ── コロナ後の底から本格回復局面</div>
+      <table class="t">
+        <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">利益率</th><th class="r">純利益</th><th class="r">現預金</th></tr></thead>
+        <tbody>
+          <tr><td>22/3期</td><td class="r mn">331.9億</td><td class="r mn">1.7億</td><td class="r mn">0.5%</td><td class="r mn">7.8億</td><td class="r mn">42.6億</td></tr>
+          <tr><td>23/3期</td><td class="r mn">335.2億</td><td class="r mn hrd">▲2.9億</td><td class="r mn hrd">▲0.9%</td><td class="r mn">6.7億</td><td class="r mn">34.8億</td></tr>
+          <tr><td>24/3期</td><td class="r mn">332.0億</td><td class="r mn">3.2億</td><td class="r mn">1.0%</td><td class="r mn">8.1億</td><td class="r mn">44.0億</td></tr>
+          <tr><td>25/3期</td><td class="r mn">359.4億</td><td class="r mn">11.9億</td><td class="r mn">3.3%</td><td class="r mn">18.4億</td><td class="r mn">47.0億</td></tr>
+          <tr class="hl"><td><strong>26/3期</strong></td><td class="r mn hgn"><strong>387.2億</strong></td><td class="r mn hgn"><strong>18.9億</strong></td><td class="r mn hgn"><strong>4.89%</strong></td><td class="r mn hgn"><strong>22.1億</strong></td><td class="r mn hgn"><strong>80.7億</strong></td></tr>
+          <tr class="sm"><td>27/3期 会社予想</td><td class="r mn">418.0億</td><td class="r mn">16.0億</td><td class="r mn">3.83%</td><td class="r mn">16.0億</td><td class="r mn">—</td></tr>
+        </tbody>
+      </table>
+      <p class="note">23/3期は原材料・エネルギー高で営業赤字。そこから価格転嫁が浸透し<strong>3期で営業利益率0.5%→4.89%へ回復</strong>。中期計画2025の営業利益率目標「3.5%以上」は達成、売上目標「400億円以上」は387.2億円で未達。</p>
+    </div>
+    <div>
+      <div class="c cf-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">EV化リスクは「思われているほど大きくない」3つの理由</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>① トラック比率が高い。</strong>同社は商用車向けの比率が高いことが特色として挙げられる。商用車は積載・航続・充電インフラの制約から<strong>乗用車より電動化が構造的に遅い</strong>領域で、ICE部品の需要が最も長く残る。<br><br>
+          <strong>② BEVでも要る部品が多い。</strong>デフケース、キャリパーサポート、各種ブラケット、サスペンション関連は駆動方式に関係なく必要。消えるのはタービンハウジング等の一部。<br><br>
+          <strong>③ BEVは重い。</strong>電池搭載で車重が増えるため、シャシー・足回りの鋳造部品は<strong>むしろ大型化・高強度化する</strong>。単価上昇要因になりうる。
+        </div>
+      </div>
+      <div class="c cl-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">弱点も正直に</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>金属家具事業（売上3%）</strong>は27/3期1Qでセグメント損失に転落。規模が小さく本体への影響は限定的だが、資本効率の観点では<strong>整理・売却の対象になりうる非中核事業。</strong><br><br>
+          <strong>価格決定権の弱さ</strong>は構造的。26/3期の利益率改善は値上げ浸透によるもので、原材料が再騰すれば同じ苦しさが戻る。営業利益率4.9%は「回復した」のであって「高い」わけではない。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P4 急落の解剖
+══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">最新決算（27/3期1Q）と株価下落の解剖</h2><span class="sb bg-pu">下げの主犯は為替差損</span></div>
+
+  <div class="inf">📌 2026年8月6日 14:20、27/3期1Q決算を発表。<strong>見出しは「4-6月期(1Q)経常は39％減益」。</strong>同日の株価は高値621円→安値587円、終値602円（前日比▲13円・▲2.1%）。出来高41,900株は平時（1〜2万株）の3〜5倍に膨らんだ。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">1Q売上高</div><div class="mv gn">99.54億円</div><div class="ms">前年同期比 <strong>+9.4%</strong>（増収）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">1Q営業利益</div><div class="mv am">3.48億円</div><div class="ms">前年同期比 ▲14.3%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">1Q経常利益</div><div class="mv rd">4.43億円</div><div class="ms">前年同期比 <strong>▲38.9%</strong></div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">1Q純利益</div><div class="mv rd">3.32億円</div><div class="ms">前年同期比 <strong>▲47.5%</strong></div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">なぜ営業▲14%が経常▲39%に増幅したのか</div>
+      <table class="t">
+        <thead><tr><th>段階</th><th class="r">27/3期1Q</th><th class="r">26/3期1Q</th><th class="r">差</th><th>要因</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mn">99.54億</td><td class="r mn">90.98億</td><td class="r mn hgn">+8.56億</td><td style="font-size:11px">自動車部品の販売増</td></tr>
+          <tr><td>営業利益</td><td class="r mn">3.48億</td><td class="r mn">4.06億</td><td class="r mn hrd">▲0.58億</td><td style="font-size:11px">コスト高騰＋家具の赤字</td></tr>
+          <tr class="wn"><td><strong>営業外収支</strong></td><td class="r mn"><strong>+0.95億</strong></td><td class="r mn"><strong>+3.20億</strong></td><td class="r mn hrd"><strong>▲2.25億</strong></td><td style="font-size:11px;color:var(--rd)"><strong>ここが下落の主因</strong></td></tr>
+          <tr><td>経常利益</td><td class="r mn">4.43億</td><td class="r mn">7.26億</td><td class="r mn hrd">▲2.83億</td><td style="font-size:11px">▲38.9%</td></tr>
+          <tr class="sm"><td>純利益</td><td class="r mn">3.32億</td><td class="r mn">6.33億</td><td class="r mn hrd">▲3.01億</td><td style="font-size:11px">▲47.5%（税負担率の差も影響）</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px;font-size:11px;font-weight:500;margin-bottom:8px">1Qの営業外損益の内訳</div>
+      <table class="t" style="font-size:11.5px">
+        <tbody>
+          <tr><td>受取利息</td><td class="r mn hgn">+0.04億円</td></tr>
+          <tr><td>受取配当金</td><td class="r mn hgn">+0.57億円</td></tr>
+          <tr><td>持分法投資利益</td><td class="r mn hgn">+0.65億円</td></tr>
+          <tr class="wn"><td><strong>為替差損</strong></td><td class="r mn hrd"><strong>▲0.77億円</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>結論：減益の中核は円高による為替差損とその他営業外の剥落であり、本業の劣化ではない。</strong>営業段階の悪化はわずか0.58億円。しかも増収は続いている。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:9px">セグメント別 ── 本業のダメージは軽微</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>セグメント</th><th class="r">売上</th><th class="r">利益</th><th class="r">前年比</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>可鍛事業</strong></td><td class="r mn">96.92億<br><span class="hgn">+9.5%</span></td><td class="r mn"><strong>7.21億</strong></td><td class="r mn ham"><strong>▲5.8%</strong></td></tr>
+            <tr><td>金属家具事業</td><td class="r mn">2.61億<br><span class="hgn">+3.5%</span></td><td class="r mn hrd">▲0.13億</td><td class="r mn hrd">損失転落</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85;margin-top:10px">主力の可鍛事業はセグメント利益<strong>▲5.8%にとどまる</strong>。売上の97%を占めるこの事業が実質横ばいであることが、決算の実態。金属家具は売上の3%に過ぎない。</div>
+      </div>
+      <div class="c cf-am">
+        <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">通期予想はもともと「減益前提」だった</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          27/3期の会社予想は5月11日時点で<strong>売上418億（+7.9%）・営業16億（▲15.4%）・純利益16億（▲27.6%）</strong>。1Q発表でも据え置き（経常進捗22.1%＝ほぼ計画線）。<br><br>
+          純利益▲27.6%の大部分は<strong>26/3期に計上した投資有価証券売却益5.63億円の剥落</strong>。つまり<strong>「減益ガイダンス」は実力の悪化ではなく、一過性益の反動である。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div style="font-size:11px;font-weight:500;margin-bottom:11px">株価の実際の動き ── 「急落」の規模感を数字で確認する</div>
+    <table class="t">
+      <thead><tr><th>日付</th><th class="r">始値</th><th class="r">高値</th><th class="r">安値</th><th class="r">終値</th><th class="r">前日比</th><th class="r">出来高</th></tr></thead>
+      <tbody>
+        <tr><td>8/5（発表前日）</td><td class="r mn">616</td><td class="r mn">620</td><td class="r mn">614</td><td class="r mn">615</td><td class="r mn">+1</td><td class="r mn">8,300株</td></tr>
+        <tr class="wn"><td><strong>8/6（1Q発表日）</strong></td><td class="r mn">615</td><td class="r mn">621</td><td class="r mn hrd"><strong>587</strong></td><td class="r mn"><strong>602</strong></td><td class="r mn hrd"><strong>▲13（▲2.1%）</strong></td><td class="r mn hrd"><strong>41,900株</strong></td></tr>
+        <tr><td>8/7</td><td class="r mn">606</td><td class="r mn">608</td><td class="r mn">600</td><td class="r mn">603</td><td class="r mn hgn">+1</td><td class="r mn">29,500株</td></tr>
+        <tr><td>8/10</td><td class="r mn">604</td><td class="r mn">606</td><td class="r mn">599</td><td class="r mn">605</td><td class="r mn hgn">+2</td><td class="r mn">19,700株</td></tr>
+        <tr><td>8/12</td><td class="r mn">610</td><td class="r mn">611</td><td class="r mn">605</td><td class="r mn">606</td><td class="r mn hgn">+1</td><td class="r mn">26,100株</td></tr>
+        <tr><td>8/13</td><td class="r mn">606</td><td class="r mn">607</td><td class="r mn">599</td><td class="r mn">601</td><td class="r mn hrd">▲5</td><td class="r mn">25,000株</td></tr>
+        <tr class="sm"><td><strong>8/14（直近）</strong></td><td class="r mn">604</td><td class="r mn">605</td><td class="r mn">599</td><td class="r mn"><strong>600</strong></td><td class="r mn hrd">▲1</td><td class="r mn">39,200株</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>正確に言えば「急落」というより「じり安の途中で1日だけ売られた」</strong>が実態。年初来高値750円（2/9）→現在600円で▲20%だが、これは決算1本で作られた下げではなく、2月以降の緩やかな水準訂正の一環。<strong>1Q発表日は瞬間的に587円まで突っ込んだものの終値は602円と戻しており、売り一巡後の値持ちは悪くない。</strong></p>
+  </div>
+
+  <div class="cf-bl" style="border-radius:var(--r);padding:14px 18px">
+    <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">この下落をどう解釈すべきか</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div><strong>過剰反応の側面：</strong>「経常39%減益」という見出しに対し、中身は為替差損0.77億円という<strong>評価性・非現金の営業外項目</strong>が主犯。可鍛事業のセグメント利益は▲5.8%、増収は+9.4%で継続。通期計画も据え置かれ進捗は計画線。<strong>本業の毀損を示す決算ではない。</strong></div>
+      <div><strong>ただし油断は禁物：</strong>この会社は営業利益率5%前後の薄利型で、円高・原材料高・トヨタの減産という<strong>3つの外部変数に業績が振られやすい</strong>体質は事実。1Qの為替差損はその感応度が実際に効くことを示した。「一過性だから無視」ではなく「毎期こうしたブレが起きる会社」と理解すべき。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P5 カタリスト
+══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">カタリスト ── 何が起きればディスカウントは剥がれるか</h2><span class="sb bg-bl">MBO適性は構造的に高い</span></div>
+
+  <div class="wrn">⚠️ 重要な前提：<strong>現時点でMBO・TOB・アクティビスト参入に関する報道・観測・大量保有報告はいずれも確認されていません。</strong>以下は「構造的に該当しやすい条件を満たしている」という分析であり、進行中の案件を示すものではありません。この点は投資判断上、決定的に重要です。</div>
+
+  <div class="cg">
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 01 · 構造的</div>
+      <span class="ci">🎯</span>
+      <div class="ct">MBOの教科書的な条件を満たす</div>
+      <div class="cb bl">実質買収額 50億円</div>
+      <div class="cu">時価総額96億▲ネットキャッシュ46億</div>
+      <div class="cp">PBR0.30倍・オーナー系・名証単独・低流動性という、<strong>近年の日本のMBOが狙い撃ちしてきた条件を完全に満たす。</strong>社長は武山豊氏、大株主に武山尚生氏（2.63%）、子会社に武山鋳造。創業家が経営を握る体制。<strong>買収資金の半分は会社自身の現金で賄える構造。</strong></div>
+      <div class="tgs"><span class="tg tg-bl">創業家経営</span><span class="tg tg-or">名証単独上場</span><span class="tg tg-am">現金で自己資金化</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 02 · 実行中</div>
+      <span class="ci">🔄</span>
+      <div class="ct">政策保有株の相互解消が両サイドで進行</div>
+      <div class="cb gn">5.63億円</div>
+      <div class="cu">26/3期に実現した投資有価証券売却益</div>
+      <div class="cp">同社が保有する側は<strong>既に売却を開始（26/3期に売却益5.63億円）</strong>。残34億円。保有される側では三菱UFJ4.12%・三井住友3.75%・第一生命3.43%・名古屋銀行2.71%の<strong>計14.0%が解消候補</strong>。売却資金の還元、または受け皿としての自己株買いが最も現実的な引き金。</div>
+      <div class="tgs"><span class="tg tg-gn">既に実行実績あり</span><span class="tg tg-or">14%が解消候補</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 時間軸あり</div>
+      <span class="ci">📋</span>
+      <div class="ct">中期計画2025が満了。次期計画が未発表</div>
+      <div class="cb or">400億円</div>
+      <div class="cu">中計2025の売上目標（実績387.2億で未達）</div>
+      <div class="cp">中期計画2025は<strong>26/3期（＝2025年度）で計画期間が終了</strong>。営業利益率3.5%以上の目標は4.89%で達成、売上400億円は未達。<strong>次期中計でROE・PBR・還元方針といった資本効率目標が入れば、それ自体が再評価のトリガー。</strong>逆に入らなければディスカウント継続の追認になる。</div>
+      <div class="tgs"><span class="tg tg-or">発表時期が最大の注目点</span></div>
+    </div>
+    <div class="ca cc-am lite">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04</div>
+      <span class="ci" style="font-size:22px">💴</span>
+      <div class="ct" style="color:var(--ink)">還元政策の転換余地が異常に大きい</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--am);margin:6px 0 2px">12.8% → 30%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">配当性向を業界標準まで引き上げた場合</div>
+      <div class="cp" style="color:var(--ink2)">配当性向30%なら1株30.4円＝<strong>利回り5.07%</strong>。DOE2%なら40.7円＝<strong>利回り6.78%</strong>。自社株買いならネットキャッシュ46.2億円で<strong>時価総額の約49%を買える計算</strong>。何もしていないからこそ、動いた時のインパクトが最大化される。</div>
+    </div>
+    <div class="ca cc-pu lite">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05 · 直近</div>
+      <span class="ci" style="font-size:22px">🎁</span>
+      <div class="ct" style="color:var(--ink)">株主優待の拡充（26年5月11日発表）</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">9月28日</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">2026年9月末基準の権利付最終日</div>
+      <div class="cp" style="color:var(--ink2)">26年5月11日に<strong>「株主優待内容の変更（拡充）」と増配（18円→19円）を同時発表</strong>。長期保有特典の新設は、会社が<strong>安定株主づくりに舵を切った</strong>シグナル。小粒だが方向性としては還元強化の一歩。</div>
+    </div>
+    <div class="ca cc-rd lite">
+      <div class="cn" style="color:var(--ink3)">Catalyst 06 · 逆説的</div>
+      <span class="ci" style="font-size:22px">🏛️</span>
+      <div class="ct" style="color:var(--ink)">名証単独上場という「未消化の伸びしろ」</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">対象外</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">東証の資本コスト経営要請の直接対象外</div>
+      <div class="cp" style="color:var(--ink2)">東証プライム・スタンダードに課された「資本コストや株価を意識した経営」の開示要請が直接には及ばない。<strong>だから改善が遅れている＝裏を返せば、まだ何も織り込まれていない。</strong>市場全体のガバナンス圧力が名証に波及すれば、出発点が低い分だけ変化幅は大きい。</div>
+    </div>
+  </div>
+
+  <div class="c cf-gn">
+    <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">🎁 株主優待の設計を精査する ── 300株が最適解</div>
+    <div class="g2">
+      <div>
+        <table class="t">
+          <thead><tr><th>保有株数</th><th class="r">投資額</th><th class="r">配当（19円）</th><th class="r">優待<br>3年未満</th><th class="r">優待<br>3年以上</th><th class="r">総合利回り</th></tr></thead>
+          <tbody>
+            <tr><td>100株</td><td class="r mn">60,000円</td><td class="r mn">1,900円</td><td class="r mn">500円</td><td class="r mn">500円</td><td class="r mn ham">4.00% → 4.00%</td></tr>
+            <tr class="hl"><td><strong>300株</strong></td><td class="r mn">180,000円</td><td class="r mn">5,700円</td><td class="r mn">1,500円</td><td class="r mn hgn"><strong>2,000円</strong></td><td class="r mn hgn"><strong>4.00% → 4.28%</strong></td></tr>
+            <tr><td>1,000株</td><td class="r mn">600,000円</td><td class="r mn">19,000円</td><td class="r mn">2,000円</td><td class="r mn">3,000円</td><td class="r mn">3.50% → 3.67%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">優待はQUOカード、権利確定は<strong>9月末の年1回</strong>、贈呈は毎年12月。1,000株は投資額が3.3倍になるのに優待は1.5倍にしかならず、総合利回りは逆に低下する。<strong>利回り効率だけを見れば300株が明確な最適点。</strong></p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">継続保有特典の条件を正確に読む</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;background:var(--bg2);padding:12px;border-radius:4px">
+          条件は<strong>「同一株主番号にて、3月末・9月末の株主名簿に、300株（または1,000株）を下回ることなく7回連続して記録されていること」。</strong><br><br>
+          判定は年2回（3月末・9月末）なので、<strong>7回連続＝丸3年の保有</strong>を意味する。2026年9月末が初回判定で、対象になるのは<strong>2023年9月末以前から300株以上を継続保有している株主</strong>。<br><br>
+          <span style="color:var(--rd);font-weight:600">→ 今から新規に買う場合、優待がアップするのは2029年9月末（3年後）。</span>逆に言えば、<strong>この設計は「3年以上持つ株主だけを選別して報いる」という会社の意思表示</strong>であり、長期保有前提の資金とは相性が極めて良い。
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>直近の実務ポイント：</strong>2026年9月末基準の権利付最終日は<strong>9月28日</strong>。ここを取ればカウント1回目が始まる。「早く買い始めるほど3年後が早く来る」という単純な時間の関数になっている。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P6 リスク・流動性
+══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスク分析 ── 正直に向き合う</h2><span class="sb bg-rd">最大の敵は「時間」</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">① バリュートラップ（最重要）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">この株は<strong>2019〜2024年の6年間、PBR0.2倍台に放置され続けた実績がある。</strong>2022年の年間値幅は390〜434円のわずか44円。「割安である」ことは「上がる」ことを意味しない。<strong>カタリストが5年来なかった歴史が実際にある</strong>という事実は重い。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div style="font-size:11px;font-weight:600;color:var(--rd);margin-bottom:8px">② 流動性（ご指摘のとおり深刻）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">2026年の年初来出来高195万株（8/14まで）÷発行済1,602万株＝<strong>回転率12%</strong>、2025年通年は9.3%。1日平均約1.28万株＝売買代金770万円前後。<strong>300株（18万円）なら無問題だが、300万円超のポジションは分割執行が必須、1,000万円超は出口に数日〜数週かかる。</strong>成行は厳禁、指値必須。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">③ トヨタ依存と業績の外部変数感応度</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">トヨタグループ向け8割超。<strong>トヨタの生産計画・北米関税・減産が直撃する。</strong>営業利益率5%前後の薄利型のため、原材料高・エネルギー高・円高のいずれか一つで利益が2〜3割動く。1Qの為替差損0.77億円がその実例。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:8px">④ BPSは床にならない</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">PBR0.30倍で買っても<strong>0.25倍・0.20倍まで下がりうる。</strong>2020年の安値302円時点でもPBRは0.2倍台前半だった計算。<strong>「解散価値以下だから下がらない」という安心感でポジションを大きくしすぎるのが最大の失敗パターン。</strong>需給が薄い銘柄では理論値は機能しない。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div style="font-size:11px;font-weight:600;color:var(--bl);margin-bottom:8px">⑤ 信用買残という上値の重し</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">信用買残<strong>約18万株（売残0株）</strong>。発行済比では1.1%と小さいが、<strong>1日平均出来高1.28万株に対しては約14日分</strong>に相当する。2025年の上昇（400円→669円）で入った買いが残っていれば、戻り局面で断続的に売りが出る。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:8px">⑥ ガバナンスが変わらないリスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">上位株主に銀行・生保が並ぶ持ち合い構造は<strong>「経営陣が株価を意識しなくても済む」体制</strong>でもある。名証単独で東証の要請対象外、配当性向12.8%、アクティビストも不在。<strong>変化を強制する主体が現状どこにもいない</strong>ことが、ディスカウント最大の根拠。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:10px">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>次期中期経営計画の発表：</strong>ROE目標・PBR改善策・還元方針が入るか</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自己株式取得の決議：</strong>ネットキャッシュ46億の使途明示</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>配当性向の方針変更：</strong>「配当性向○%を目安」という文言の登場</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>投資有価証券売却益の再計上：</strong>政策保有株縮減の継続</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告書の提出：</strong>投資ファンド等の参入</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>金属家具事業の整理：</strong>非中核事業の切り離し</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>出来高の恒常的増加：</strong>日次3万株超が定着すれば需給変化</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div style="font-size:11px;font-weight:600;color:var(--or);margin-bottom:10px">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>通期業績予想の下方修正：</strong>2Q・3Q時点での計画未達</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>トヨタの減産発表：</strong>関税・需要減による生産計画の下振れ</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>営業利益率の3%割れ：</strong>価格転嫁の逆回転</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>大型設備投資の発表：</strong>現金が固定化され還元余地が消える</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>次期中計に資本効率目標がない：</strong>ディスカウント継続の追認</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>急速な円高進行：</strong>営業外の為替差損が拡大</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>優待改悪・廃止：</strong>個人株主の離散</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P7 最終評価
+══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">最終投資判断と実行戦術</h2><span class="sb bg-or">2026.08 時点</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">NAV比ディスカウント</div><div class="mv gn">▲73%</div><div class="ms">600円 vs NAV中立2,221円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">フェアバリュー帯</div><div class="mv am">1,000〜1,400円</div><div class="ms">EV/EBITDA 3〜4倍換算</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">確率加重期待株価</div><div class="mv or">782円</div><div class="ms">現在比 +30%（下記シナリオ）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">リスク・リワード比</div><div class="mv bl">約1 : 2.3</div><div class="ms">下値▲80円 vs 期待値+182円</div></div>
+  </div>
+
+  <div class="sc" style="margin-bottom:18px">
+    <div class="sc-c"><div class="sc-l br">Bear（放置継続）</div><div class="sc-p br">30%</div><div class="sc-s">還元不変＋業績下振れ</div><div class="sc-i">480〜560円</div><div class="sc-i">▲20〜▲7%</div><div class="sc-i">2024年レンジへの回帰</div><div class="sc-i">PBR0.24〜0.28倍</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base（現状維持）</div><div class="sc-p bs">35%</div><div class="sc-s">計画線・還元も横ばい</div><div class="sc-i">600〜750円</div><div class="sc-i">0〜+25%</div><div class="sc-i">年初来高値750円への復元</div><div class="sc-i">配当＋優待で年4%を受取</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull（資本政策転換）</div><div class="sc-p bu">25%</div><div class="sc-s">増配・自社株買い・新中計</div><div class="sc-i">900〜1,100円</div><div class="sc-i">+50〜+83%</div><div class="sc-i">PBR0.44〜0.54倍</div><div class="sc-i">配当性向30%なら利回り5%</div></div>
+    <div class="sc-c"><div class="sc-l bm">Max（MBO/TOB）</div><div class="sc-p bm">10%</div><div class="sc-s">創業家MBO・事業会社TOB</div><div class="sc-i">1,200〜1,600円</div><div class="sc-i">+100〜+167%</div><div class="sc-i">PBR0.59〜0.79倍</div><div class="sc-i">現状は報道・観測なし</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:18px">
+    <div class="c">
+      <div style="font-size:11px;font-weight:500;margin-bottom:11px">確率加重 期待株価</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">中心株価</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：放置継続</td><td class="r mn">30%</td><td class="r mn">520円</td><td class="r mn">156円</td></tr>
+          <tr><td>Base：現状維持</td><td class="r mn">35%</td><td class="r mn">675円</td><td class="r mn">236円</td></tr>
+          <tr><td>Bull：資本政策転換</td><td class="r mn">25%</td><td class="r mn">1,000円</td><td class="r mn">250円</td></tr>
+          <tr><td>Max：MBO/TOB</td><td class="r mn">10%</td><td class="r mn">1,400円</td><td class="r mn">140円</td></tr>
+          <tr class="sm"><td><strong>期待値</strong></td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn"><strong>782円（+30%）</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">期待値+30%に加え、保有中は配当＋優待で<strong>年率4.0〜4.3%のキャッシュリターン</strong>が積み上がる。3年保有なら累計12〜13%。<strong>「待つコスト」がマイナスではなくプラスである点が、この銘柄の設計上の美点。</strong></p>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div style="font-size:11px;font-weight:500;margin-bottom:11px">評価アプローチ別の理論株価</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>手法</th><th class="r">前提</th><th class="r">理論株価</th><th class="r">現在比</th></tr></thead>
+          <tbody>
+            <tr><td>PER</td><td class="r mn">8倍</td><td class="r mn">811円</td><td class="r mn hgn">+35%</td></tr>
+            <tr><td>PER</td><td class="r mn">10倍</td><td class="r mn">1,014円</td><td class="r mn hgn">+69%</td></tr>
+            <tr><td>PBR</td><td class="r mn">0.4倍</td><td class="r mn">814円</td><td class="r mn hgn">+36%</td></tr>
+            <tr><td>PBR</td><td class="r mn">0.5倍</td><td class="r mn">1,017円</td><td class="r mn hgn">+70%</td></tr>
+            <tr><td>EV/EBITDA</td><td class="r mn">2倍</td><td class="r mn">974円</td><td class="r mn hgn">+62%</td></tr>
+            <tr class="hl"><td><strong>EV/EBITDA</strong></td><td class="r mn"><strong>3倍</strong></td><td class="r mn hgn"><strong>1,207円</strong></td><td class="r mn hgn"><strong>+101%</strong></td></tr>
+            <tr><td>EV/EBITDA</td><td class="r mn">4倍</td><td class="r mn">1,440円</td><td class="r mn hgn">+140%</td></tr>
+            <tr><td>NAV（中立）</td><td class="r mn">土地2.5倍</td><td class="r mn">2,221円</td><td class="r mn hgn">+270%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">どの手法を使っても800円を下回る評価が出てこない。<strong>「安すぎる」ことについて議論の余地はない</strong>のが本件の特徴。</p>
+      </div>
+      <div class="c cf-gn">
+        <div style="font-size:11px;font-weight:600;color:var(--gn);margin-bottom:8px">実行戦術 ── 流動性を前提にした設計</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>①ロットは300株単位で。</strong>優待効率の最適点であり、1日出来高1.3万株に対しても無視できる規模。<br>
+          <strong>②必ず指値。</strong>板が薄く、成行は数円〜十数円の不利約定を生む。1日の値幅が5〜10円しかない銘柄で、執行コストはリターンを直接削る。<br>
+          <strong>③2026年9月28日を意識。</strong>優待の継続保有カウントを早く開始するほど、3年後の特典到達が早い。<br>
+          <strong>④総投資額の上限を先に決める。</strong>出口に時間がかかる銘柄なので、「明日売れないと困る資金」は入れない。<br>
+          <strong>⑤時間軸は3〜5年。</strong>過去6年放置された実績を踏まえれば、1〜2年で結論を出すのは設計ミス。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 「割安性」と「触媒」を分けて考える</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">割安性について — 疑いなし</div>
+        <div class="conc-b">株価600円のうち<strong>508円がネットキャッシュと投資有価証券</strong>。事業に付いている値段は1株約92円（総額14.5億円）で、営業利益18.9億円の0.8年分。PBR0.30倍、PER5.9倍、EV/EBITDA1.3倍。<strong>土地の含み益をゼロと置いてもNAVは2,034円で株価はその29.5%。</strong>ご指摘のとおり「割安性の塊」であることは、どの角度から検証しても崩れない。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">触媒について — ここが本当の賭け</div>
+        <div class="conc-b">問題は<strong>それを解放する主体が現状いない</strong>こと。名証単独で東証の資本コスト要請の対象外、配当性向12.8%、アクティビスト不在、持ち合い構造。<strong>2019〜2024年にPBR0.2倍台で6年放置された実績</strong>がある。MBOの構造的条件は完璧に揃うが、報道・観測は現時点で一切ない。「安いから上がる」は成立しない前提で臨むべき。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">結論 — 長期・小ロット・優待込みなら合理的</div>
+        <div class="conc-b">この銘柄の正しい持ち方は<strong>「配当＋優待で年4%を受け取りながら、触媒が来るまで3〜5年待つ」</strong>設計。待つコストがプラスであることが救い。<strong>流動性が死んでいることは、個人の300株にとっては制約ではなく、機関投資家を排除して割安を維持してくれる味方</strong>ですらある。ただし、ポジションを大きくした瞬間にその味方は敵に変わる。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">782円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">確率加重 +30%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">フェアバリュー</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">1,000〜1,400円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">EV/EBITDA 3〜4倍</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">保有中の年間利回り</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">4.00→4.28%</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">300株・3年以上継続保有</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">推奨時間軸</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3〜5年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">過去6年放置の実績を踏まえ</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        中央可鍛工業600円は、<strong style="color:var(--or2)">株価の85%が現金と有価証券で埋まり、本業が実質タダで付いてくる日本型ディープバリューの純粋形。</strong>直近の「経常39%減益」は為替差損が主犯で本業の毀損ではない。割安性に議論の余地はないが、それを解放する主体が現時点で不在であることが唯一かつ最大のリスク。<strong style="color:var(--or2)">配当＋優待で年4%を受け取りながら3〜5年待てる資金でのみ、小ロット・指値で組成する</strong>のが合理的な向き合い方。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。<br>
+  本資料は筆者が投資助言を行うものではなく、記載の推定値・シナリオ確率は作成者の仮定に基づくものです。<br>
+  Data: 中央可鍛工業 2026年3月期決算短信・2027年3月期第1四半期決算短信（TDnet） / 株探 / 松井証券 / Yahoo!ファイナンス / IFIS株予報 / ullet / MarkLines / 熊本県 令和7年地価公示 / 土地ドットコム / KAB熊本朝日放送 / 日刊自動車新聞 · 2026.08.16 作成
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

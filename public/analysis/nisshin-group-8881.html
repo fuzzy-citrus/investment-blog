@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日神グループホールディングス（8881）バリュー投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px;max-width:290px}
+.vs{font:700 44px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #f0a8a8}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wn td{background:var(--am3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1.5 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.alert{background:var(--rd3);border:.5px solid #eba8a8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h3{font-size:12px;font-weight:600;margin-bottom:10px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .vb{max-width:none}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Value Research · 8881 · 東証プライム · 2026.08.16 作成</p>
+      <h1 class="ht">日神グループホールディングス <em>（8881）</em><br>バリュー投資 深掘り分析</h1>
+      <p class="hs">株価668円（8/14終値）／ PBR 0.435倍・BPS 1,535.59円 ／ 修正NAV 1,609円（中立）＝ 現株価はNAVの<strong style="color:var(--or2)">41%</strong><br>配当＋優待の総合利回り 6.3〜6.5% ／ 支配株主エヌディファクター35.19% ＝ MBO適格性が最大のカタリスト<br>ただし「不動産含み益が巨大」という仮説は<strong style="color:#e09090">部分的に成立しない</strong> ── 詳細はタブ03へ</p>
+    </div>
+    <div class="vb">
+      <div class="vs">○</div>
+      <div class="vt">
+        <strong>条件付き妙味あり ─ インカム主体の分割買い下がりなら合理的</strong><br>
+        割安性（PBR0.435）は本物。<br>
+        だが再評価の主導権は支配株主側。<br>
+        「利回りで待つ」設計なら機能する。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">668円</div><div class="ks">時価総額 313.6億円／4,695万株</div></div>
+    <div class="kv"><div class="kl">PBR（実績BPS基準）</div><div class="kn gn">0.435倍</div><div class="ks">BPS 1,535.59円（26/3期末）</div></div>
+    <div class="kv"><div class="kl">予想PER</div><div class="kn bl">8.9倍</div><div class="ks">EPS 74.93円（27/3期会社予想）</div></div>
+    <div class="kv"><div class="kl">配当＋優待利回り</div><div class="kn gn">6.36%</div><div class="ks">1,000株・2年目以降ベース</div></div>
+    <div class="kv"><div class="kl">ネット有利子負債</div><div class="kn gn">▲8.6億円</div><div class="ks">26/3期末はネットキャッシュ</div></div>
+    <div class="kv"><div class="kl">支配株主持分</div><div class="kn am">35.19%</div><div class="ks">エヌディファクター（創業家）</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>結論</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--rd)"></span>急落の解剖</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--am2)"></span>資産価値・含み益</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--or2)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--gn2)"></span>実行戦略</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 結論 ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 668円をどう評価するか</h2><span class="sb bg-gn">条件付き妙味あり</span></div>
+
+  <div class="inf">📌 <strong>先に結論から。</strong>「土地の含み益で株価が2倍になる」タイプの銘柄ではありません。含み益の実体は思ったより小さい。しかし<strong>純資産717億円に対して時価総額313.6億円</strong>という単純な事実（1株あたり860円の差）だけで十分に割安であり、そこに<strong>6%超のインカム</strong>と<strong>創業家35%というMBO適格構造</strong>が乗る。妙味は「含み益」ではなく「簿価そのもの＋利回り＋支配構造」にあります。</div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 割安性</div>
+      <span class="ci">💰</span>
+      <div class="ct">純資産の43%でしか評価されていない</div>
+      <div class="cb gn">▲403.6億円</div>
+      <div class="cu">自己資本717.2億円 vs 時価総額313.6億円</div>
+      <div class="cp">1株あたり<strong>860円分の簿価が市場価格に反映されていない</strong>。しかもその簿価の中身は現預金580.8億円・棚卸不動産559.7億円と、実物資産の裏付けが極めて明確。のれんや無形資産はわずか2.45億円。</div>
+      <div class="tgs"><span class="tg tg-gn">PBR 0.435倍</span><span class="tg tg-or">無形資産ほぼゼロ</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Thesis 02 · インカム</div>
+      <span class="ci">🎁</span>
+      <div class="ct">配当＋優待で待てる構造</div>
+      <div class="cb am">6.53%</div>
+      <div class="cu">2,500株・2年目以降が最効率</div>
+      <div class="cp">配当37円（利回り5.54%）＋プレミアム優待倶楽部ポイント。2026年6月にAmazonギフトカードを追加し<strong>優待の換金性が大幅に改善</strong>。買い下がるほど利回りが上がる設計で、580円まで下げれば総合7.5%に。</div>
+      <div class="tgs"><span class="tg tg-am">配当性向 49.4%</span><span class="tg tg-gn">Amazonギフト対応</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Thesis 03 · カタリスト</div>
+      <span class="ci">🔑</span>
+      <div class="ct">MBOの必要条件が揃っている</div>
+      <div class="cb bl">35.19%</div>
+      <div class="cu">エヌディファクター＝社長の資産管理会社</div>
+      <div class="cp">創業家の資産管理会社が筆頭株主。社長・神山隆志氏が両社の代表を兼務。<strong>PBR0.4台・ネットキャッシュ・安定CFという教科書的MBO適格銘柄。</strong>残り約62%の買付所要額は1,000円換算で約291億円。</div>
+      <div class="tgs"><span class="tg tg-bl">非上場親会社等</span><span class="tg tg-or">清原達郎氏 1.18%保有</span></div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Anti-thesis 01</div>
+      <span class="ci" style="font-size:22px">🧱</span>
+      <div class="ct" style="color:var(--ink)">土地の含み益は「大きくない」</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">土地簿価 66.8億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">主要設備の土地は合計わずか約6,147㎡</div>
+      <div class="cp" style="color:var(--ink2)">有形固定資産は総資産の<strong>7.8%（115.4億円）</strong>しかなく、うち土地66.8億円。仮に時価が簿価の1.8倍でも含み益は53億円（税引後37億円）＝<strong>1株あたり79円</strong>。NAVを大きく動かしません。</div>
+    </div>
+    <div class="ca cc-or" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Anti-thesis 02</div>
+      <span class="ci" style="font-size:22px">📉</span>
+      <div class="ct" style="color:var(--ink)">有価証券の含み益は既に計上済み</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--or);margin:6px 0 2px">評価差額金 9.7億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">その他有価証券評価差額金（税引後）</div>
+      <div class="cp" style="color:var(--ink2)">その他有価証券は既に時価評価され純資産に含まれています。<strong>「隠れた有価証券含み益」は存在しない</strong>と考えるべき。政策保有株も2025年度検証で全銘柄継続保有＝売却による還元原資化は当面期待薄。</div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Anti-thesis 03</div>
+      <span class="ci" style="font-size:22px">⛓️</span>
+      <div class="ct" style="color:var(--ink)">再評価の主導権が少数株主にない</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">未開示</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">「資本コストや株価を意識した経営」＝検討中</div>
+      <div class="cp" style="color:var(--ink2)">プライム上場でありながら東証要請への具体的開示は<strong>いまだ「検討を進めてまいります」段階</strong>。創業家35%の下では、株主提案・アクティビズムによる資本政策の強制は事実上不可能。<strong>PBR0.4台は放置され続けうる。</strong></div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-gn">
+      <div class="h3" style="color:var(--gn)">この銘柄が「機能する」条件</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>減配しないこと。</strong>配当37円が維持される限り、668円で5.54%、580円で6.38%のインカムが下値を支える。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>棚卸資産559.7億円が想定利益率で捌けること。</strong>首都圏マンション価格は2026年上期に平均1億135万円（前年比+13.1%）と過去最高。原価計上された用地は"時間差の含み益"。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>多田建設の利益率が急落しないこと。</strong>建設セグメント粗利率は7.7%→14.9%へ改善。受注残408.9億円（+12.2%）が1年分の可視性を提供。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>3年以内に資本政策 or MBOの動きが出ること。</strong>27/3期が中計最終年度。次期中計での資本効率目標の明示が最も現実的な起点。</div></div>
+      </div>
+    </div>
+    <div class="c cl-rd">
+      <div class="h3" style="color:var(--rd)">この銘柄が「壊れる」条件</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>日銀の追加利上げ。</strong>有利子負債572.2億円。+0.5%で年2.9億円＝予想経常利益の約6%が消える。営業→経常の落差は26/3期6.7億→27/3期予想10.0億に拡大中。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>首都圏マンション市況の反転。</strong>2026年上期の初月契約率は64.8%へ低下、販売在庫6,389戸に増加。1億円超の価格帯は明確に需要の天井に近い。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>棚卸資産の評価損。</strong>不動産事業支出金は前期比+38.2%の381.6億円。在庫回転長期化を会社自身が課題と明記。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>低位のMBO価格。</strong>支配株主主導のMBOはプレミアム30〜40%＝870〜930円程度で決着する可能性。BPS1,536円満額は期待しにくい。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      日神グループHDは、<strong style="color:var(--or2)">「不動産の含み益」ではなく「簿価そのものの放置」に賭ける、インカム下支え型のディープバリュー案件。</strong>純資産の43%という値付けと6.3%超の総合利回りが下値を作り、上値は創業家35%が握るMBO・資本政策の一手にかかる。<strong style="color:var(--or2)">待つ対価が支払われる銘柄</strong>であり、待てない資金で持つ銘柄ではありません。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 急落の解剖 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">株価下落の解剖 ── 何が起きたのか</h2><span class="sb bg-rd">高値比 ▲20%</span></div>
+
+  <div class="alert">⚠️ まず事実確認です。<strong>「最新決算（8/7の1Q）での急落」は起きていません。</strong>1Q発表日8/7の株価は前日658円→終値652円（▲0.9%、日中安値640円）で、週間値下がり率ランキングにも入っていません。実際の下落は<strong>2026年2月高値836円 → 6月2日安値613円（▲26.7%）</strong>という4か月の緩やかな崩れであり、その主因は<strong>5月12日の本決算で示された27/3期の減益ガイダンス</strong>です。現在668円は安値から+9.0%戻した位置。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div>
+      <div class="h3">下落プロセスのタイムライン</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2025年11月</div><div class="ttext"><strong>上方修正で急騰。</strong>月足で603円→747円（+24%）。全セグメント増収・利益率改善により通期予想を大幅上方修正。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年2月5日</div><div class="tdate"></div><div class="ttext"><strong>年初来高値836円。</strong>2025年4月安値440円から約1年で+90%。PBRは0.54倍まで戻していた。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">2026年3月末</div><div class="ttext"><strong>権利落ちと優待クロスの解消。</strong>3月27日の信用売残が▲199.5万株と急減＝大規模な優待クロス解消。3月の月足は814円→706円（▲13%）。<span class="bge be-am">需給要因</span></div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年5月12日</div><div class="ttext"><strong>本決算 ── 最高益なのに減益ガイダンス。</strong>26/3期は営業+93.7%の過去最高益。しかし27/3期予想は営業▲10.2%／経常▲16.7%／純利益▲16.6%。当日は718円まで買われたが翌13日に677円（▲4.4%、出来高40.6万株＝年間最大級）。<span class="bge be-rd">主因</span></div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026年6月2日</div><div class="ttext"><strong>年初来安値613円。</strong>PBR0.40倍。「ピークアウト」認定と金利上昇懸念のダブルパンチ。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="tdate">2026年8月7日</div><div class="ttext"><strong>1Q決算 ── 売上▲5.3%／営業▲6.0%／経常▲17.2%／純利益▲29.4%。</strong>ヘッドラインは悪いが、<strong>営業利益の通期進捗率は12.0%と前年同期11.4%を上回る</strong>。株価は652円で引け、その後668円まで戻す。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div class="h3">月足株価推移（直近20か月・終値）</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>年月</th><th class="r">終値</th><th class="r">高値</th><th class="r">安値</th><th>局面</th></tr></thead>
+          <tbody>
+            <tr><td>2025/04</td><td class="r mn">510</td><td class="r mn">533</td><td class="r mn hrd">440</td><td style="font-size:11px">底値圏</td></tr>
+            <tr><td>2025/08</td><td class="r mn">570</td><td class="r mn">579</td><td class="r mn">528</td><td style="font-size:11px">回復</td></tr>
+            <tr class="hl"><td>2025/11</td><td class="r mn hgn">747</td><td class="r mn">750</td><td class="r mn">596</td><td style="font-size:11px">上方修正で急騰</td></tr>
+            <tr class="hl"><td>2026/02</td><td class="r mn">823</td><td class="r mn hgn"><strong>836</strong></td><td class="r mn">780</td><td style="font-size:11px">年初来高値</td></tr>
+            <tr class="wn"><td>2026/03</td><td class="r mn">706</td><td class="r mn">817</td><td class="r mn">683</td><td style="font-size:11px">権利落ち・優待クロス解消</td></tr>
+            <tr class="wn"><td>2026/05</td><td class="r mn">642</td><td class="r mn">718</td><td class="r mn">641</td><td style="font-size:11px">本決算・減益ガイダンス</td></tr>
+            <tr><td>2026/06</td><td class="r mn">643</td><td class="r mn">659</td><td class="r mn hrd"><strong>613</strong></td><td style="font-size:11px">年初来安値</td></tr>
+            <tr><td>2026/07</td><td class="r mn">670</td><td class="r mn">690</td><td class="r mn">639</td><td style="font-size:11px">下げ止まり</td></tr>
+            <tr class="sm"><td>2026/08</td><td class="r mn hor"><strong>668</strong></td><td class="r mn">671</td><td class="r mn">640</td><td style="font-size:11px">1Q通過・横ばい</td></tr>
+          </tbody>
+        </table>
+        <p class="note">8月は8/14終値時点。年初来高値836円（2/5）比▲20.1%、年初来安値613円（6/2）比+9.0%。52週安値は549円。</p>
+      </div>
+      <div class="c cf-am">
+        <div class="h3" style="color:var(--am)">需給の重し ── 信用買残</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">2026年8月7日時点で<strong>信用買残79.9万株（発行済の1.70%）／信用売残2.45万株／信用倍率32.6倍</strong>。1日出来高10〜20万株に対し買残は5〜8日分。高値圏で入った信用の投げが戻りを重くしている一方、絶対量は大きくなく、需給は「重い」が「詰まってはいない」水準です。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">減益ガイダンスの中身 ── 「悪化」ではなく「正常化」</div>
+    <table class="t">
+      <thead><tr><th>項目</th><th class="r">25/3期実績</th><th class="r">26/3期実績</th><th class="r">27/3期会社予想</th><th class="r">27/3期1Q実績</th><th>読み方</th></tr></thead>
+      <tbody>
+        <tr><td>売上高</td><td class="r mn">76,235</td><td class="r mn">87,815</td><td class="r mn">88,000</td><td class="r mn">13,632</td><td style="font-size:11px">横ばい計画。1Q進捗15.5%</td></tr>
+        <tr><td>営業利益</td><td class="r mn">3,447</td><td class="r mn hgn">6,678<span style="font-size:10px">（+93.7%）</span></td><td class="r mn ham">6,000<span style="font-size:10px">（▲10.2%）</span></td><td class="r mn">717</td><td style="font-size:11px"><strong>中計目標50億を大幅超過</strong></td></tr>
+        <tr><td>経常利益</td><td class="r mn">3,069</td><td class="r mn hgn">6,004<span style="font-size:10px">（+95.6%）</span></td><td class="r mn hrd">5,000<span style="font-size:10px">（▲16.7%）</span></td><td class="r mn">536</td><td style="font-size:11px">減益率が営業より大きい＝金利</td></tr>
+        <tr><td>純利益</td><td class="r mn">2,057</td><td class="r mn hgn">4,196<span style="font-size:10px">（+103.9%）</span></td><td class="r mn hrd">3,500<span style="font-size:10px">（▲16.6%）</span></td><td class="r mn">310</td><td style="font-size:11px">1Q進捗8.9%（前年10.5%）</td></tr>
+        <tr class="wn"><td><strong>営業−経常の差</strong></td><td class="r mn">378</td><td class="r mn">674</td><td class="r mn hrd"><strong>1,000</strong></td><td class="r mn">181</td><td style="font-size:11px"><strong>金利負担が2年で2.6倍</strong></td></tr>
+        <tr><td>ROE</td><td class="r mn">3.0%</td><td class="r mn">6.0%</td><td class="r mn">約4.9%</td><td class="r mn">—</td><td style="font-size:11px">資本コスト（8%前後）に未達</td></tr>
+        <tr><td>1株配当</td><td class="r mn">23円</td><td class="r mn hgn">35円</td><td class="r mn hgn">37円</td><td class="r mn">—</td><td style="font-size:11px">減益でも増配（配当性向49.4%）</td></tr>
+      </tbody>
+    </table>
+    <p class="note">単位：百万円。26/3期の急増益は、建設セグメントの売上総利益率が7.7%→14.9%へ跳ねたことによる部分が大きく、会社自身が27/3期をその正常化局面と位置づけています。なお中期経営計画の27/3期目標は「売上880億円・営業利益50億円」で、<strong>会社予想の営業60億円は計画を1年前倒しで上回る水準</strong>。「業績が壊れた」のではなく「異常値からの巡航速度復帰」というのが実態です。</p>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-rd">
+      <div class="h3" style="color:var(--rd)">市場が本当に嫌気したもの（推定）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        ① <strong>金利負担の増加トレンド。</strong>営業−経常の差が378→674→1,000（予想）と拡大。有利子負債は26/3期に129.1億円増えて572.2億円、D/Eレシオ0.8倍へ。日銀の利上げ局面と真正面からぶつかる財務構造。<br><br>
+        ② <strong>在庫の膨張。</strong>不動産事業支出金が前期比+38.2%の381.6億円。会社自身が「未完成在庫の回転期間長期化」を対処すべき課題として明記。<br><br>
+        ③ <strong>建設高収益の持続性への疑い。</strong>粗利率14.9%は歴史的異常値。<br><br>
+        ④ <strong>還元姿勢の後退観測。</strong>従来の「配当性向50%目安」から、事業環境の不透明性を踏まえ手元資金確保を重視する方向へのトーン変化。
+      </div>
+    </div>
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">それでも壊れていないもの</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        ① <strong>1Qの営業利益進捗は前年超え。</strong>12.0% vs 前年同期11.4%。第4四半期に引渡しが集中する季節性を踏まえれば計画線上。<br><br>
+        ② <strong>建設受注残408.9億円（+12.2%）。</strong>年間完成工事高の約1年分。可視性は高い。<br><br>
+        ③ <strong>減益でも増配。</strong>35円→37円。還元姿勢自体は維持。<br><br>
+        ④ <strong>自己資本比率は1Qで48.7%→50.0%に改善。</strong>総資産は1,474億→1,408億に圧縮され、レバレッジは季節要因で戻っている。<br><br>
+        ⑤ <strong>中計目標（営業50億）を上回る計画。</strong>減益ガイダンスは「計画未達」ではない。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P3 資産価値 ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">資産価値と含み益の精査</h2><span class="sb bg-am">仮説の検証結果</span></div>
+
+  <div class="alert">🔍 <strong>ご想定の「不動産含み益が大きい」という仮説について。</strong>結論から言うと、<strong>有形固定資産としての土地含み益は限定的</strong>です。日神グループHDは総資産1,474億円のうち有形固定資産がわずか115.4億円（7.8%）。有価証券報告書の「主要な設備の状況」から積み上げた<strong>土地の帳簿価額は約66.8億円、面積は合計約6,147㎡</strong>にすぎません。分譲マンションデベロッパーは土地を"在庫"として持ち回転させるビジネスであり、賃貸ビルを溜め込む会社とは資産構造が根本的に違います。<strong>ただし、これは「割安でない」という意味ではまったくありません。</strong>下記③④が本命です。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">総資産</div><div class="mv bl">1,474億円</div><div class="ms">26/3期末・前期比+10.6%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">580.8億円</div><div class="ms">時価総額の1.85倍</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">棚卸不動産</div><div class="mv am">559.7億円</div><div class="ms">販売用178.1＋事業支出金381.6</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">有形固定資産</div><div class="mv rd">115.4億円</div><div class="ms">総資産のわずか7.8%</div></div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">① 土地の含み益 ── 有価証券報告書「主要な設備の状況」からの実額積み上げ（2026年3月31日現在）</div>
+    <table class="t">
+      <thead><tr><th>保有会社／事業所</th><th>所在地</th><th>用途</th><th class="r">土地簿価</th><th class="r">面積</th><th class="r">簿価単価</th></tr></thead>
+      <tbody>
+        <tr><td>日神グループHD 本社</td><td>東京都新宿区</td><td>賃貸</td><td class="r mn hor">18.15億円</td><td class="r mn">909.92㎡</td><td class="r mn">199.5万円/㎡</td></tr>
+        <tr><td>日神グループHD 賃貸資産</td><td>—</td><td>賃貸</td><td class="r mn hor">20.75億円</td><td class="r mn">1,432.24㎡</td><td class="r mn">144.9万円/㎡</td></tr>
+        <tr><td>多田建設 本社</td><td>東京都江東区</td><td>自用</td><td class="r mn">12.28億円</td><td class="r mn">773.93㎡</td><td class="r mn">158.7万円/㎡</td></tr>
+        <tr><td>日神管財</td><td>東京都新宿区</td><td>賃貸</td><td class="r mn">5.31億円</td><td class="r mn">513.58㎡</td><td class="r mn">103.3万円/㎡</td></tr>
+        <tr><td>多田建設</td><td>東京都大田区</td><td>自用</td><td class="r mn">3.33億円</td><td class="r mn">413.56㎡</td><td class="r mn">80.4万円/㎡</td></tr>
+        <tr><td>日神不動産</td><td>東京都新宿区</td><td>賃貸</td><td class="r mn">2.70億円</td><td class="r mn">725.68㎡</td><td class="r mn">37.1万円/㎡</td></tr>
+        <tr><td>多田建設</td><td>千葉県印西市</td><td>賃貸</td><td class="r mn">2.00億円</td><td class="r mn">1,081.44㎡</td><td class="r mn">18.5万円/㎡</td></tr>
+        <tr><td>日神グループHD 横浜</td><td>横浜市中区</td><td>賃貸</td><td class="r mn">1.94億円</td><td class="r mn">183.87㎡</td><td class="r mn">105.4万円/㎡</td></tr>
+        <tr><td>その他（本社自用・日神管財自用）</td><td>東京都新宿区</td><td>自用</td><td class="r mn">0.32億円</td><td class="r mn">113.0㎡</td><td class="r mn">—</td></tr>
+        <tr class="sm"><td><strong>合計</strong></td><td>—</td><td>—</td><td class="r mn"><strong>約66.8億円</strong></td><td class="r mn"><strong>約6,147㎡</strong></td><td class="r mn"><strong>約108.6万円/㎡</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>読み方：</strong>①保有面積が絶対的に小さい（約6,147㎡＝サッカーコート1面弱）。②既に簿価単価が100万円/㎡超と高く、バブル期以降の取得と推定され、簿価がほぼ時価に近い可能性がある物件も含まれる。③建物簿価は約42.6億円で、取得原価ベースでは大きく償却が進んでおり賃料は出るが評価額の押し上げ効果は限定的。<br>なお当社は連結財務諸表で「賃貸等不動産の時価等」の注記を開示していないと見られ（賃貸等不動産の簿価が約80億円＝総資産の5.4%と重要性に乏しいため）、<strong>時価の実額は外部から確認できません。</strong>以下はレンジ推定です。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">土地含み益シナリオ → 修正NAV</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">時価/簿価</th><th class="r">含み益</th><th class="r">税引後(30%控除)</th><th class="r">修正NAV/株</th><th class="r">現株価の位置</th></tr></thead>
+        <tbody>
+          <tr><td>簿価＝時価</td><td class="r mn">1.0倍</td><td class="r mn">0</td><td class="r mn">0</td><td class="r mn">1,529円</td><td class="r mn ham">43.7%</td></tr>
+          <tr><td>保守</td><td class="r mn">1.3倍</td><td class="r mn">20.0億円</td><td class="r mn">14.0億円</td><td class="r mn ham">1,559円</td><td class="r mn ham">42.9%</td></tr>
+          <tr class="hl"><td><strong>中立（推奨）</strong></td><td class="r mn">1.8倍</td><td class="r mn">53.4億円</td><td class="r mn">37.4億円</td><td class="r mn hgn"><strong>1,609円</strong></td><td class="r mn hgn"><strong>41.5%</strong></td></tr>
+          <tr><td>強気</td><td class="r mn">2.5倍</td><td class="r mn">100.2億円</td><td class="r mn">70.1億円</td><td class="r mn hor">1,678円</td><td class="r mn hor">39.8%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">ベースは26/3期末 自己資本717.19億円（自己株式控除後46,905千株）。<strong>時価が簿価の2.5倍でもNAVは1,529円→1,678円と約10%しか動かない</strong>のがポイント。含み益はこの銘柄の主役ではありません。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--am)">② 有価証券の含み益 ── 既にBSに反映済み</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">純資産の部に<strong>「その他有価証券評価差額金 9.70億円」（税引後）</strong>が計上されています。すなわち投資有価証券は既に時価評価されており、<strong>簿外の含み益は原則として存在しません。</strong>税引前の含み益は概ね14億円程度と推定され、これはBPS1,535.59円に既に織り込み済みです。<br><br>投資その他の資産は合計68.91億円（投資有価証券のほか敷金・繰延税金資産等を含む）。<br><br>なお政策保有株式については、2025年度に上場全銘柄を検証した結果<strong>「保有の合理性が認められたため売却を見送る」</strong>としており、売却益の還元原資化は当面期待できません。</div>
+      </div>
+      <div class="c cl-gn">
+        <div class="h3" style="color:var(--gn)">③ 現金 ── 時価総額の1.85倍</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">26/3期末の<strong>現金及び預金580.79億円</strong>は時価総額313.6億円の1.85倍。有利子負債572.23億円を差し引いても<strong>ネットキャッシュ8.6億円のプラス</strong>で、実質無借金の状態にあります（1Q末は季節要因でネット有利子負債101.6億円）。<br><br>キャッシュフロー計算書上の「現金及び現金同等物」は374.52億円で、差額約206億円は預入期間3か月超の定期預金等。<strong>即時流動性はやや劣るが、資産の実在性は高い。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cf-bl" style="border-radius:var(--r);padding:16px 20px;margin-bottom:14px">
+    <div class="h3" style="color:var(--bl)">④ 本命 ── 「含み益」の実体は棚卸資産559.7億円にある</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>分譲マンションデベロッパーにとって、含み益は固定資産ではなく<strong>販売用不動産・不動産事業支出金（＝用地と仕掛工事）に潜みます。</strong>これらは取得原価で計上され、値上がり分はP/Lの売上総利益として実現します。<br><br>26/3期の売上総利益率は14.0%→16.0%へ改善し、建設セグメントの粗利率は7.7%→14.9%へ跳ねました。これは<strong>過去に安く仕込んだ用地と、値上がりした販売価格の差が実現した結果</strong>にほかなりません。</div>
+      <div>市況の追い風は強い。不動産経済研究所によれば<strong>2026年上半期の首都圏新築マンション平均価格は1億135万円と初の1億円超（前年同期比+13.1%）、㎡単価151.4万円（+12.1%）、東京23区は1億4,249万円（+9.1%）。</strong><br><br>棚卸資産559.7億円に対して仮に想定粗利率16%が乗るなら、そこに眠る潜在的な粗利は<strong>90億円規模</strong>。これは時価総額313.6億円の約29%に相当します。ただしこれは<strong>「含み益」ではなく「今後2〜3年のP/Lで実現するフロー」</strong>であり、市況が反転すれば逆に評価損リスクに変わる両刃の剣です。</div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h3">⑤ 結局のところ ── 最大の"含み"は簿価そのもの</div>
+    <table class="t">
+      <thead><tr><th>資産項目</th><th class="r">金額</th><th class="r">時価総額比</th><th>含み益の有無・性質</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>現金及び預金</strong></td><td class="r mn hgn"><strong>580.8億円</strong></td><td class="r mn hgn">1.85倍</td><td style="font-size:11px">含み益なし。ただし額面通りの価値。有利子負債572.2億とほぼ相殺</td></tr>
+        <tr class="hl"><td><strong>棚卸不動産</strong></td><td class="r mn ham"><strong>559.7億円</strong></td><td class="r mn ham">1.78倍</td><td style="font-size:11px"><strong>実質的な含み益の本命。</strong>原価計上・値上がり分は将来の粗利で実現</td></tr>
+        <tr><td>売上債権等</td><td class="r mn">130.9億円</td><td class="r mn">0.42倍</td><td style="font-size:11px">含み益なし</td></tr>
+        <tr><td>有形固定資産（うち土地66.8億）</td><td class="r mn">115.4億円</td><td class="r mn">0.37倍</td><td style="font-size:11px">土地含み益は推定20〜100億円。<strong>額としては小さい</strong></td></tr>
+        <tr><td>投資その他の資産</td><td class="r mn">68.9億円</td><td class="r mn">0.22倍</td><td style="font-size:11px">有価証券は時価評価済み。<strong>簿外含み益なし</strong></td></tr>
+        <tr class="sm"><td><strong>純資産（自己資本）</strong></td><td class="r mn"><strong>717.2億円</strong></td><td class="r mn hgn"><strong>2.29倍</strong></td><td style="font-size:11px"><strong>1株1,535.59円。市場価格668円との差＝1株860円</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="note">つまり本銘柄の投資妙味は「隠れた含み益の発掘」ではなく、<strong>「実在が明確で換金性も高い簿価が、市場でその43%にしか評価されていない」という一点</strong>に集約されます。のれん・無形資産は2.45億円しかなく、純資産の質は極めて高い。それでもPBR0.435に放置されている理由は、ROE6%という低収益性と、資本政策を動かせない支配構造にあります（タブ05・06参照）。</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P4 事業性 ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性・ストック性・ニッチトップ性</h2><span class="sb bg-bl">垂直統合が本質</span></div>
+
+  <div class="ok">✅ この会社の構造的な強みは<strong>「用地取得 → 設計 → 施工（内製ゼネコン）→ 販売 → 管理 → リフォーム」の一気通貫</strong>にあります。建設コストが高騰し、外注ゼネコンの選別受注で用地を持っていても建てられないデベロッパーが増えるなか、<strong>100年の歴史を持つマンション建設特化ゼネコン「多田建設」を100%子会社に持つこと</strong>が最大の差別化要因です。</div>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h3" style="color:var(--bl)">建設事業（多田建設）</div>
+      <div style="font:600 24px/1 var(--mono);color:var(--bl);margin-bottom:4px">393.8億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:10px">売上構成比 44.8% ／ セグメント利益 38.4億円（利益率9.8%）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8">創業100年、マンション建築特化の中堅ゼネコン。<strong>外部受注比率は約90%</strong>でグループ内工事に依存しない独立採算。売上総利益率は7.7%→14.9%へ改善、<strong>受注残高408.9億円（+12.2%）＝約1年分</strong>。人手不足と工期長期化で「建てられる会社」が希少資源化しており、選別受注による価格交渉力が最大の追い風。</div>
+      <div class="note"><span class="bge be-gn">ニッチトップ性 高</span> マンション施工に特化した中堅ゼネコンという立ち位置は代替が効きにくい</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">不動産事業（日神不動産）</div>
+      <div style="font:600 24px/1 var(--mono);color:var(--am);margin-bottom:4px">314.1億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:10px">売上構成比 35.8% ／ セグメント利益 15.2億円（利益率4.8%）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8">「パレステージ」「デュオステージ」ブランド。26/3期の新築マンション引渡は<strong>347戸（+22.0%）</strong>と大手比では小粒だが、首都圏の駅近・中小規模用地に特化。<strong>個人投資家向けワンルームマンション販売の展開</strong>を新たな課題に掲げる。利益率4.8%は業界内で低位で、用地取得競争と在庫回転長期化が制約。</div>
+      <div class="note"><span class="bge be-am">ストック性 低</span> 典型的なフロー事業。四半期業績が大きく振れる主因</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--gn)">
+      <div class="h3" style="color:var(--gn)">不動産管理事業（日神管財ほか）</div>
+      <div style="font:600 24px/1 var(--mono);color:var(--gn);margin-bottom:4px">170.0億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:10px">売上構成比 19.4% ／ セグメント利益 18.2億円（利益率10.7%）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8"><strong>管理戸数36,470戸（+1,232戸、+3.5%）。うちグループ外12,022戸で外部比率33.0%と上昇中。</strong>目標は「1,000棟・4万戸」。グループ内から年400〜500戸が自動的に積み上がる構造で、営業コストが低く<strong>利益率10%台</strong>を安定的に確保。3セグメント中もっとも質の高い収益源。</div>
+      <div class="note"><span class="bge be-gn">ストック性 高</span> ただし下記の注意点あり</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cf-am">
+      <div class="h3" style="color:var(--am)">⚠️ ストック性の落とし穴 ── 管理事業は"純粋なストック"ではない</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">不動産管理セグメントの26/3期売上は<strong>前期比+57.1%</strong>と急増しました。管理戸数は+3.5%しか増えていないのに売上が1.57倍になった理由は、<strong>セグメント内の「不動産売上（買取再販・一棟売却等）が+190.5%」</strong>と伸びたためです。<br><br>実際、27/3期1Qでは同セグメント売上が<strong>▲38.4%（利益▲43.8%）</strong>とリバウンドしています。<br><br><strong>純粋な管理フィー収入は概ね100億円前後・利益10億円前後</strong>と見るのが妥当で、セグメント数字をそのままストック収益と読むと過大評価になります。実質的なストック収益は<strong>時価総額の3分の1程度をカバーする水準</strong>と理解すべきです。</div>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div class="h3">セグメント利益の構成（26/3期）</div>
+        <div class="bg"><div class="br2"><span>建設事業</span><span class="mn">38.4億円 · 52.8%</span></div><div class="bt"><div class="bf" style="width:52.8%;background:var(--bl)"></div></div></div>
+        <div class="bg"><div class="br2"><span>不動産管理事業</span><span class="mn">18.2億円 · 25.0%</span></div><div class="bt"><div class="bf" style="width:25.0%;background:var(--gn)"></div></div></div>
+        <div class="bg"><div class="br2"><span>不動産事業</span><span class="mn">15.2億円 · 20.8%</span></div><div class="bt"><div class="bf" style="width:20.8%;background:var(--am)"></div></div></div>
+        <div class="bg" style="margin-bottom:0"><div class="br2"><span>その他</span><span class="mn">0.1億円 · 0.2%</span></div><div class="bt"><div class="bf" style="width:1%;background:var(--ink3)"></div></div></div>
+        <p class="note">セグメント利益合計71.9億円から全社費用等の調整額を差し引き、営業利益66.8億円。<strong>利益の過半を稼ぐのは"デベロッパー"ではなく"ゼネコン"</strong>である点は投資判断上重要です。</p>
+      </div>
+      <div class="c cl-pu">
+        <div class="h3" style="color:var(--pu)">見落とされがちな資産 ── 私募リート運用</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">86%子会社の<strong>日神不動産投資顧問</strong>が、機関投資家向け私募リート「日神プライベートレジリート投資法人」を運用。開発物件の出口を自前で確保しつつ、<strong>AMフィーというストック型手数料収入</strong>を生む構造。証券化事業は中期経営計画の重点KPIに位置づけられています。規模はまだ小さいものの、<strong>「造って売る」から「造って回す」への転換装置</strong>として注目に値します。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">グループ構成と垂直統合の全体像</div>
+    <table class="t">
+      <thead><tr><th>会社</th><th class="r">議決権</th><th>役割</th><th>バリューチェーン上の位置</th></tr></thead>
+      <tbody>
+        <tr><td><strong>日神不動産</strong></td><td class="r mn">100%</td><td>マンション企画・開発・分譲販売</td><td style="font-size:11px">用地取得 → 企画 → 販売（パレステージ／デュオステージ）</td></tr>
+        <tr class="hl"><td><strong>多田建設</strong></td><td class="r mn">100%</td><td>建築・土木工事、不動産開発</td><td style="font-size:11px"><strong>施工の内製化。外部受注90%で独立採算。最大の利益源</strong></td></tr>
+        <tr><td><strong>日神管財</strong></td><td class="r mn">100%</td><td>マンション管理</td><td style="font-size:11px">竣工後の管理受託 → 36,470戸のストック</td></tr>
+        <tr><td>日神不動産投資顧問</td><td class="r mn">86%</td><td>私募リートのAM業務</td><td style="font-size:11px">開発物件の出口確保＋AMフィー</td></tr>
+        <tr><td>日神ファイナンス</td><td class="r mn">100%</td><td>損害保険代理、貸付</td><td style="font-size:11px">周辺収益（火災保険等）</td></tr>
+        <tr><td>シンコー</td><td class="r mn">100%</td><td>建設資材リース</td><td style="font-size:11px">施工コストの内部化</td></tr>
+      </tbody>
+    </table>
+    <p class="note">連結従業員数663名（うち臨時465名）。持株会社本体は11名。従業員数は5年で714→663名と減少しており、1人当たり売上高は上昇傾向。</p>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">市場環境 ── 追い風の側面</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        ・首都圏新築マンション：2026年上期の平均価格<strong>1億135万円（+13.1%）で初の1億円超</strong>、㎡単価151.4万円（+12.1%）<br>
+        ・東京23区は<strong>1億4,249万円（+9.1%）</strong><br>
+        ・供給戸数は7,989戸と<strong>5年連続の減少</strong>＝需給は締まっている<br>
+        ・建設業の人手不足・工期長期化が構造化 → <strong>施工能力を持つ側の交渉力が上昇</strong><br>
+        ・2024年問題以降、中小ゼネコンの淘汰が進み多田建設のポジションが相対的に強化
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div class="h3" style="color:var(--or)">市場環境 ── 逆風の側面</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        ・<strong>初月契約率64.8%（前年比▲1.8pt）</strong>と好不調の分岐点70%を下回る<br>
+        ・<strong>販売在庫6,389戸（前年6,026戸から増加）</strong><br>
+        ・平均1億円超は明確に一次取得層の手が届かない水準 → 価格上昇の持続性に疑問<br>
+        ・住宅ローン金利上昇が需要を直撃<br>
+        ・日神の主戦場はコンパクト〜ファミリーの中価格帯であり、<strong>価格上昇の恩恵より需要減退の打撃を受けやすいセグメント</strong><br>
+        ・用地取得競争の激化を会社自身が課題として明記
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P5 カタリスト ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">カタリスト分析 ── MBO・TOB・資本政策</h2><span class="sb bg-pu">創業家35.19%が鍵</span></div>
+
+  <div class="inf">📌 バリュー株がバリュートラップに終わるか再評価されるかは、<strong>「誰が引き金を引けるか」</strong>で決まります。日神グループHDの場合、引き金を引けるのは実質的に<strong>創業家の資産管理会社エヌディファクター（35.19%）</strong>のみ。これは<strong>「アクティビストによる強制は不可能」だが「MBOは極めて実行しやすい」</strong>という非対称な構造を意味します。</div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div class="h3">株主構成（2026年3月31日現在・上位10名／株主数15,324名）</div>
+    <table class="t">
+      <thead><tr><th>順位</th><th>株主名</th><th class="r">持株数</th><th class="r">比率</th><th>属性・示唆</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>1</td><td><strong>エヌディファクター株式会社</strong></td><td class="r mn"><strong>16,505,000株</strong></td><td class="r mn hgn"><strong>35.19%</strong></td><td style="font-size:11px"><strong>創業家の資産管理会社。「非上場の親会社等」として開示。代表取締役＝神山隆志（日神GHD社長）。事業はゴルフ場運営・資産管理、資本金1,000万円、総資産59.2億円・純資産42.9億円</strong></td></tr>
+        <tr><td>2</td><td>日本マスタートラスト信託銀行</td><td class="r mn">3,218,100株</td><td class="r mn">6.86%</td><td style="font-size:11px">信託口（インデックス等）</td></tr>
+        <tr><td>3</td><td>神山和郎</td><td class="r mn">1,402,180株</td><td class="r mn ham">2.99%</td><td style="font-size:11px">創業家個人。取締役（エヌディファクター）</td></tr>
+        <tr><td>4</td><td>内藤征吾</td><td class="r mn">1,158,600株</td><td class="r mn">2.47%</td><td style="font-size:11px">個人大株主</td></tr>
+        <tr><td>5</td><td>日本カストディ銀行（金銭信託課税口）</td><td class="r mn">997,800株</td><td class="r mn">2.13%</td><td style="font-size:11px">信託口</td></tr>
+        <tr><td>6</td><td>日本カストディ銀行（信託口）</td><td class="r mn">695,900株</td><td class="r mn">1.48%</td><td style="font-size:11px">信託口</td></tr>
+        <tr><td>7</td><td>日神GH社員持株会</td><td class="r mn">687,934株</td><td class="r mn">1.47%</td><td style="font-size:11px">安定株主</td></tr>
+        <tr><td>8</td><td>日神GH取引先持株会</td><td class="r mn">627,160株</td><td class="r mn">1.34%</td><td style="font-size:11px">安定株主</td></tr>
+        <tr><td>9</td><td>DFA INTL SMALL CAP VALUE</td><td class="r mn">571,497株</td><td class="r mn hbl">1.22%</td><td style="font-size:11px">米ディメンショナルの小型バリュー戦略</td></tr>
+        <tr class="wn"><td>10</td><td><strong>清原達郎</strong></td><td class="r mn">551,200株</td><td class="r mn hor"><strong>1.18%</strong></td><td style="font-size:11px"><strong>著名バリュー投資家（元タワー投資顧問）。同氏の保有は「ネットキャッシュ比率の高い割安小型株」という同氏の投資哲学と完全に整合</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="note">創業家関連（エヌディファクター＋神山和郎）で<strong>38.18%</strong>、持株会を含めた安定株主で概ね41%。外国人株式保有比率は10%未満。発行済株式総数46,951,260株（自己株式46,039株を含む）。</p>
+  </div>
+
+  <div class="cg">
+    <div class="ca cc-pu">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🔐</span>
+      <div class="ct">MBO／非公開化</div>
+      <div class="cb" style="color:var(--pu2)">約291億円</div>
+      <div class="cu">残り約62%を1,000円で買い付けた場合の所要額</div>
+      <div class="cp">創業家が既に35.19%を保有し、社長が両社の代表を兼務。<strong>PBR0.435倍・実質ネットキャッシュ・安定的な営業CF・アセットバック</strong>という、LBOファイナンスが組みやすい典型的な条件が揃う。上場維持コストと開示負担、東証のPBR改善圧力が「上場する意味」を年々薄めている。<strong>確度：中（3年以内で15〜20%程度と想定）</strong></div>
+      <div class="tgs"><span class="tg tg-gn">実行可能性 高</span><span class="tg tg-am">タイミングは会社側次第</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 02 · 蓋然性高</div>
+      <span class="ci">📋</span>
+      <div class="ct">次期中期経営計画での資本政策</div>
+      <div class="cb bl">27/3期</div>
+      <div class="cu">現中計の最終年度 → 2026年度中〜2027年5月に新中計</div>
+      <div class="cp">現中計（27/3期・売上880億／営業50億）は<strong>営業利益で1年前倒し達成済み。</strong>長期ビジョンは30/3期に売上1,000億・営業65億。次期中計で<strong>ROE目標・PBR1倍への道筋・自己株式取得</strong>が示されれば、PBR0.43→0.6への修正だけで株価は920円。<strong>確度：高（何らかの新計画は必ず出る）</strong></div>
+      <div class="tgs"><span class="tg tg-bl">時期が読める</span><span class="tg tg-or">内容次第で失望も</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 03 · 未消化</div>
+      <span class="ci">🏛️</span>
+      <div class="ct">東証要請への対応がまだ出ていない</div>
+      <div class="cb or">未開示</div>
+      <div class="cu">「資本コストや株価を意識した経営」＝検討中</div>
+      <div class="cp">コーポレート・ガバナンス報告書（2026年6月26日提出）では、東証要請への対応は<strong>「取締役会で議論のうえ、当社グループの対応と開示について検討を進めてまいります」</strong>との記載にとどまる。プライム上場でPBR0.4台にもかかわらず<strong>未対応＝伸びしろがそのまま残っている</strong>状態。開示そのものがイベントになりうる。</div>
+      <div class="tgs"><span class="tg tg-or">未対応＝伸びしろ</span><span class="tg tg-am">遅延リスクも同義</span></div>
+    </div>
+    <div class="ca cc-gn" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04</div>
+      <span class="ci" style="font-size:22px">💵</span>
+      <div class="ct" style="color:var(--ink)">増配余地と株主還元</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--gn);margin:6px 0 2px">37円 → 50円超</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">30/3期・営業65億達成時の配当性向50%換算</div>
+      <div class="cp" style="color:var(--ink2)">配当は23円→35円→37円と2年で1.6倍。長期ビジョン達成時の純利益を約38億円と置けばEPS約81円、配当性向50%で<strong>約40円</strong>。さらに<strong>自己株式取得はここ数年ほぼ実績がなく、実施されれば純粋なサプライズ</strong>。時価総額313.6億円に対し現預金580.8億円という構造は、還元余地の大きさを示唆します。</div>
+    </div>
+    <div class="ca cc-am" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05</div>
+      <span class="ci" style="font-size:22px">🎁</span>
+      <div class="ct" style="color:var(--ink)">優待拡充による個人株主基盤の強化</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--am);margin:6px 0 2px">Amazon対応</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">2026年6月上旬より交換開始（ポイントの95%相当）</div>
+      <div class="cp" style="color:var(--ink2)">プレミアム優待倶楽部にAmazonギフトカードを追加。<strong>優待の実質換金性が大きく改善</strong>し、個人投資家の需要を直接刺激します。実際、3月末の権利取りでは信用売残が一時約200万株積み上がるほどのクロス需要が発生。<strong>3月に向けた需給の追い風は毎年繰り返される</strong>構造要因です。</div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Anti-Catalyst</div>
+      <span class="ci" style="font-size:22px">🚫</span>
+      <div class="ct" style="color:var(--ink)">アクティビズムは効かない</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">38.18%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">創業家関連の議決権比率</div>
+      <div class="cp" style="color:var(--ink2)">創業家＋持株会で約41%。<strong>株主提案の可決も、敵対的TOBも、事実上不可能</strong>です。清原達郎氏やDFAの保有は「割安性の傍証」として意味があっても、<strong>圧力としては機能しません。</strong>再評価の主導権は完全に会社側にあり、これがPBR0.4台が長期間放置されうる構造的理由です。</div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">カタリスト評価の要約</div>
+    <div style="font-size:14px;line-height:1.85;color:rgba(246,245,239,.85);max-width:880px">
+      <strong style="color:var(--or2)">「起きれば大きいが、いつ起きるかは会社が決める」</strong>── これが日神グループHDのカタリスト構造です。逆に言えば、<strong style="color:rgba(246,245,239,.95)">カタリストを待つ間のコストを配当＋優待の6%超が補ってくれる</strong>点が、この銘柄を"待てるバリュー株"にしています。カタリスト待ちのコストがゼロに近いことこそが、本銘柄の実質的な強みです。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P6 リスク ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">リスク分析 ── 正直に向き合う</h2><span class="sb bg-rd">下値は613円では止まらない可能性</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">① 金利上昇（最大のリスク）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">有利子負債<strong>572.2億円</strong>（26/3期末、前期比+129.1億円）。営業利益と経常利益の差は25/3期3.8億→26/3期6.7億→27/3期予想10.0億と<strong>2年で2.6倍に拡大</strong>。1Qも181百万円（前年同期115百万円）と+57%。<br><br><strong>金利+0.5%で年約2.9億円＝予想経常利益の約6%が消える計算。</strong>日銀の追加利上げは、この銘柄にとって単なるマクロ要因ではなく直接的な減益要因です。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">② 棚卸資産の膨張と評価損</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">不動産事業支出金は<strong>前期比+38.2%の381.6億円</strong>、販売用不動産と合わせ559.7億円。会社自身が「未完成在庫の回転期間長期化」を対処すべき課題に挙げています。<br><br>首都圏の初月契約率は64.8%と好不調の分岐点70%を割り込み、販売在庫も6,389戸に増加。<strong>価格が1億円を超えた市場は需要の天井に近く、市況反転時の評価損リスクは無視できません。</strong>この規模の在庫に5%の評価損が出れば28億円＝予想純利益の8割が吹き飛びます。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">③ 建設事業の利益率正常化</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">売上総利益率<strong>7.7%→14.9%</strong>という跳ね方は明らかに異常値です。「建設コスト高騰を請負金額に転嫁できる環境」と「前期繰越案件の計上」という一時的要因が重なった結果であり、会社自身が27/3期をその反動局面と位置づけています。<br><br>利益の52.8%を建設が稼ぐ構造上、<strong>ここが5%台に戻れば全社営業利益は40億円台まで落ちうる</strong>。これが今の株価に織り込まれているかは判断が分かれます。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">④ ストック性の過大評価</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">不動産管理セグメントの26/3期+57.1%増収は、大半が<strong>セグメント内の不動産売上（+190.5%）</strong>によるもの。1Qには▲38.4%とリバウンドしています。<br><br><strong>「管理戸数36,470戸のストックビジネス」というイメージだけで評価すると、実態を2〜3割過大に見積もることになります。</strong>純粋な管理フィーは概ね売上100億円・利益10億円規模と見ておくべきです。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h3" style="color:var(--pu)">⑤ 支配株主リスク（両刃）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">エヌディファクター35.19%はMBOの必要条件であると同時に、<strong>少数株主が資本政策を一切動かせない</strong>という制約でもあります。<br><br>コーポレート・ガバナンス報告書では「支配株主との取引を行う際における少数株主保護の方策」が<strong>「なし」</strong>と記載されています。<strong>MBOが実施される場合も、価格の主導権は会社側にあり、BPS1,536円を大きく下回る水準で決着する可能性は十分にあります。</strong>典型的なプレミアム30〜40%なら870〜930円です。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h3" style="color:var(--bl)">⑥ バリュートラップ化と流動性</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">ROE6.0%は資本コスト（8%前後）に届いておらず、<strong>理論的にもPBR1倍は正当化されません</strong>（成長率2%・資本コスト8%ならフェアPBRは約0.67倍）。政策保有株も全銘柄継続保有、東証要請への開示も未了。<strong>「割安が是正されない状態」が5年続いても不思議ではない</strong>のがこの銘柄の実像です。<br><br>加えて1日出来高10〜20万株（約1億円）と薄く、まとまった売買には向きません。信用買残79.9万株・信用倍率32.6倍も戻りの重石です。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>次期中期経営計画の発表：</strong>ROE・PBR目標、自己株式取得の明記があるか</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>「資本コストや株価を意識した経営」の開示：</strong>検討中からの脱却</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自己株式取得の発表：</strong>過去に実績が乏しいだけにインパクト大</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告書：</strong>ファンドの新規参入、または創業家側の買い増し</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>2Q（11月）での上方修正：</strong>建設利益率が想定超で維持されるケース</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>証券化事業・私募リートの資産規模拡大：</strong>ストック化の進展</div></div>
+      </div>
+    </div>
+    <div class="c cf-rd">
+      <div class="h3" style="color:var(--rd)">📉 ネガティブ監視リスト（撤退トリガー候補）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>減配：</strong>投資テーゼの前提が崩れる。即時見直し</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>棚卸資産の評価損計上：</strong>市況反転の確定シグナル</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>優待制度の改悪・廃止：</strong>個人株主需給の崩壊要因</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>建設セグメント利益率の急低下：</strong>四半期で7%を割るか</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>首都圏マンション初月契約率が60%割れ：</strong>需要減退の確認</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>日銀の連続利上げ：</strong>政策金利1.0%超なら経常利益への影響を再計算</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>自己資本比率が45%割れ：</strong>レバレッジの限界水準</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="alert">🧭 <strong>下値の考え方。</strong>BPS1,535.59円は「床」として一切機能していません（現在PBR0.435倍）。実務的な下値の目安は<strong>過去のPBRレンジ</strong>です。2025年4月の安値440円はPBR約0.30倍、52週安値549円は約0.36倍。<strong>市況悪化シナリオではPBR0.33倍＝約510円まで想定しておくのが健全</strong>で、これは現在値から▲24%。「解散価値以下だから下がらない」という発想は、この銘柄では通用しません。</div>
+</div>
+
+<!-- ══════════════════════════════ P7 実行戦略 ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">実行戦略 ── 利回りで待つ買い下がり設計</h2><span class="sb bg-gn">2,500株が最効率</span></div>
+
+  <div class="ok">✅ ご想定の<strong>「優待もあるので利回りに納得できるなら買い下がり」という戦略は、この銘柄に対して構造的に正しい</strong>と考えます。理由は3つ。①カタリストの時期が読めない銘柄であり、待機コストをインカムで賄う設計が合理的。②優待が株数階段制のため、買い下がると利回りが二重に改善する。③下値がPBR0.33倍（約510円）まで想定される以上、一括投入は非効率だからです。</div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div class="h3">株主優待の設計（プレミアム優待倶楽部・3月末基準／2026年6月拡充）</div>
+    <table class="t">
+      <thead><tr><th>保有株数</th><th class="r">初年度ポイント</th><th class="r">2年目以降</th><th class="r">投資額（668円）</th><th class="r">配当金</th><th class="r">総合利回り<br>（初年度）</th><th class="r">総合利回り<br>（2年目以降）</th></tr></thead>
+      <tbody>
+        <tr><td>1,000〜1,499株</td><td class="r mn">5,000</td><td class="r mn">5,500</td><td class="r mn">668,000円</td><td class="r mn">37,000円</td><td class="r mn">6.29%</td><td class="r mn hgn">6.36%</td></tr>
+        <tr><td>1,500〜1,999株</td><td class="r mn">7,000</td><td class="r mn">7,700</td><td class="r mn">1,002,000円</td><td class="r mn">55,500円</td><td class="r mn">6.24%</td><td class="r mn">6.31%</td></tr>
+        <tr><td>2,000〜2,499株</td><td class="r mn">10,000</td><td class="r mn">11,000</td><td class="r mn">1,336,000円</td><td class="r mn">74,000円</td><td class="r mn">6.29%</td><td class="r mn hgn">6.36%</td></tr>
+        <tr class="hl"><td><strong>2,500〜3,999株</strong></td><td class="r mn">15,000</td><td class="r mn">16,500</td><td class="r mn">1,670,000円</td><td class="r mn">92,500円</td><td class="r mn hgn"><strong>6.44%</strong></td><td class="r mn hgn"><strong>6.53%</strong></td></tr>
+        <tr><td>4,000〜9,999株</td><td class="r mn">18,000</td><td class="r mn">19,800</td><td class="r mn">2,672,000円</td><td class="r mn">148,000円</td><td class="r mn">6.21%</td><td class="r mn">6.28%</td></tr>
+        <tr><td>10,000株以上</td><td class="r mn">20,000</td><td class="r mn">22,000</td><td class="r mn">6,680,000円</td><td class="r mn">370,000円</td><td class="r mn">5.84%</td><td class="r mn hrd">5.87%</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>ポイント：</strong>①<strong>2,500株が利回り効率の最大点</strong>（次点は1,000株・2,000株）。10,000株以上はポイントの伸びが鈍り効率が落ちます。②連続2回以上かつ1,000株以上の継続保有で初年度ポイントの1.1倍。③2026年6月上旬より<strong>Amazonギフトカードへの交換が可能（保有ポイントの95%相当）</strong>。厳密にはギフト券換算で利回りは約5%目減りしますが（2,500株・2年目で6.53%→6.48%）、換金性の改善のほうが実利は大きい。④100株・500株では優待対象外である点に注意。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">価格別 総合利回り（2,500株・2年目以降ベース）</div>
+      <table class="t">
+        <thead><tr><th class="r">株価</th><th class="r">PBR</th><th class="r">投資額</th><th class="r">配当利回り</th><th class="r">総合利回り</th><th>位置づけ</th></tr></thead>
+        <tbody>
+          <tr><td class="r mn">700円</td><td class="r mn">0.456</td><td class="r mn">1,750,000</td><td class="r mn">5.29%</td><td class="r mn">6.23%</td><td style="font-size:11px">7月高値圏。妙味薄</td></tr>
+          <tr class="wn"><td class="r mn"><strong>668円</strong></td><td class="r mn">0.435</td><td class="r mn">1,670,000</td><td class="r mn">5.54%</td><td class="r mn ham"><strong>6.53%</strong></td><td style="font-size:11px"><strong>現在値。初回買付の水準として妥当</strong></td></tr>
+          <tr><td class="r mn">640円</td><td class="r mn">0.417</td><td class="r mn">1,600,000</td><td class="r mn">5.78%</td><td class="r mn">6.81%</td><td style="font-size:11px">8/7の日中安値</td></tr>
+          <tr class="hl"><td class="r mn"><strong>620円</strong></td><td class="r mn">0.404</td><td class="r mn">1,550,000</td><td class="r mn">5.97%</td><td class="r mn hgn"><strong>7.03%</strong></td><td style="font-size:11px"><strong>年初来安値圏。2回目の買付候補</strong></td></tr>
+          <tr class="hl"><td class="r mn"><strong>580円</strong></td><td class="r mn">0.378</td><td class="r mn">1,450,000</td><td class="r mn">6.38%</td><td class="r mn hgn"><strong>7.52%</strong></td><td style="font-size:11px"><strong>52週安値549円に接近。3回目の候補</strong></td></tr>
+          <tr class="hl"><td class="r mn"><strong>530円</strong></td><td class="r mn">0.345</td><td class="r mn">1,325,000</td><td class="r mn hgn">6.98%</td><td class="r mn hgn"><strong>8.22%</strong></td><td style="font-size:11px"><strong>2025年秋の水準。4回目の候補</strong></td></tr>
+          <tr><td class="r mn">500円</td><td class="r mn">0.326</td><td class="r mn">1,250,000</td><td class="r mn">7.40%</td><td class="r mn hor">8.72%</td><td style="font-size:11px">市況悪化シナリオの中心値</td></tr>
+          <tr><td class="r mn">470円</td><td class="r mn">0.306</td><td class="r mn">1,175,000</td><td class="r mn">7.87%</td><td class="r mn hor">9.28%</td><td style="font-size:11px">2025年4月安値440円に接近。要再検証</td></tr>
+        </tbody>
+      </table>
+      <p class="note">配当37円（27/3期会社予想）が維持される前提。減配された場合、この表は全面的に書き換わります。</p>
+    </div>
+    <div>
+      <div class="c cf-gn" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--gn)">買い下がりラダーの設計例（総額約235万円）</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>回</th><th class="r">価格</th><th class="r">株数</th><th class="r">累計</th><th class="r">平均単価</th></tr></thead>
+          <tbody>
+            <tr><td>1回目（現在）</td><td class="r mn">668円</td><td class="r mn">1,000株</td><td class="r mn">1,000株</td><td class="r mn">668円</td></tr>
+            <tr><td>2回目</td><td class="r mn">620円</td><td class="r mn">500株</td><td class="r mn">1,500株</td><td class="r mn">652円</td></tr>
+            <tr class="hl"><td>3回目</td><td class="r mn">580円</td><td class="r mn">1,000株</td><td class="r mn hgn"><strong>2,500株</strong></td><td class="r mn">623円</td></tr>
+            <tr class="sm"><td>4回目</td><td class="r mn">530円</td><td class="r mn">1,500株</td><td class="r mn">4,000株</td><td class="r mn hgn"><strong>588円</strong></td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85;margin-top:10px">全段執行時の投資額<strong>235.3万円</strong>、平均取得単価<strong>588円</strong>。<br>この時点の配当＋優待（4,000株・2年目19,800pt）は年<strong>167,800円＝総合利回り7.13%</strong>。<br><br><strong>設計の要点：</strong>①3回目終了時点で2,500株＝優待効率の最大点に到達させる。②4回目で4,000株の階段に乗せる。③これ以上の買い増しは利回り効率が落ちるため行わない。④<strong>各段は「価格」ではなく「利回り」で判断する</strong>（例：総合7%を超えたら買う）。</div>
+      </div>
+      <div class="c cl-rd">
+        <div class="h3" style="color:var(--rd)">買い下がりを止める条件（重要）</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">買い下がり戦略の最大の敵は「シナリオが壊れた銘柄を買い続けること」です。以下のいずれかが起きたら<strong>買い増しを即時停止し、保有継続の是非を再検討</strong>してください。<br><br>・<strong>減配または配当方針の後退</strong><br>・<strong>棚卸資産の評価損計上</strong><br>・<strong>優待制度の改悪・廃止</strong><br>・建設セグメントの四半期利益率が7%割れ<br>・自己資本比率45%割れ<br><br>また、価格が470円（PBR0.31倍）を割り込んだ場合は「割安の深化」ではなく「市場が何かを織り込み始めた」と解釈し、いったん手を止めるのが安全です。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh" style="margin-top:8px"><span class="sn">08</span><h2 class="st">シナリオ別 目標株価</h2><span class="sb bg-or">確率加重期待値 816円</span></div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">X：市況悪化</div><div class="sc-p br">20%</div><div class="sc-s">在庫評価損・金利上昇</div><div class="sc-i">株価 470〜550円</div><div class="sc-i">PBR 0.31〜0.36倍</div><div class="sc-i">中心値 510円（▲24%）</div></div>
+    <div class="sc-c"><div class="sc-l bs">A：現状維持</div><div class="sc-p bs">40%</div><div class="sc-s">計画線・増配継続・資本政策なし</div><div class="sc-i">株価 700〜820円</div><div class="sc-i">PBR 0.46〜0.53倍</div><div class="sc-i">中心値 760円（+14%）</div></div>
+    <div class="sc-c"><div class="sc-l bu">B：資本政策強化</div><div class="sc-p bu">25%</div><div class="sc-s">次期中計でROE/PBR目標＋自社株買い</div><div class="sc-i">株価 870〜1,080円</div><div class="sc-i">PBR 0.57〜0.70倍</div><div class="sc-i">中心値 950円（+42%）</div></div>
+    <div class="sc-c"><div class="sc-l bm">C：MBO／TOB</div><div class="sc-p bm">15%</div><div class="sc-s">創業家主導の非公開化</div><div class="sc-i">株価 1,000〜1,300円</div><div class="sc-i">BPSの65〜85%水準</div><div class="sc-i">中心値 1,150円（+72%）</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">確率加重 期待株価</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">中心株価</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>X：市況悪化</td><td class="r mn">20%</td><td class="r mn">510円</td><td class="r mn">102円</td></tr>
+          <tr><td>A：現状維持</td><td class="r mn">40%</td><td class="r mn">760円</td><td class="r mn">304円</td></tr>
+          <tr><td>B：資本政策強化</td><td class="r mn">25%</td><td class="r mn">950円</td><td class="r mn">238円</td></tr>
+          <tr><td>C：MBO／TOB</td><td class="r mn">15%</td><td class="r mn">1,150円</td><td class="r mn">173円</td></tr>
+          <tr class="sm"><td><strong>期待株価</strong></td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn"><strong>816円</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">現在値668円に対し<strong>+22.2%</strong>。ここに配当＋優待の年6.4%が加わるため、3年保有なら<strong>累計期待リターンは40%超</strong>。ただし期待値の内訳を見ると、上振れの半分近くをMBO（確率15%）に依存している点は認識しておく必要があります。</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">確率加重期待値</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">816円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 +22.2%（配当除く）</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">想定下値</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">510円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 ▲23.7%／PBR0.33倍</div>
+        </div>
+      </div>
+      <div class="c cf-bl">
+        <div class="h3" style="color:var(--bl)">リスク・リワードの読み方</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">下値▲158円に対し、上値はシナリオBで+282円、シナリオCで+482円。<strong>単純なリスク・リワード比は約1：1.8〜1：3.1。</strong>広済堂型の「1：6」のような極端な非対称性はありません。<br><br>ただし<strong>年6.4%のインカムを勘定に入れると景色が変わります。</strong>3年保有すれば累計インカムは約19%＝約127円分。これを下値クッションと考えれば実質的な下値は383円相当となり、<strong>実効リスク・リワードは1：2.3〜1：3.9まで改善</strong>します。<br><br><strong>この銘柄はキャピタルゲイン狙いではなく、インカムを組み込んだトータルリターンで評価すべき</strong>というのが結論です。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 668円は「妙味あり」。ただし理由はご想定と少し違う</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">投資テーゼの本質</div>
+        <div class="conc-b">妙味の源泉は<strong>不動産の含み益ではなく、簿価そのものの放置</strong>です。土地簿価はわずか66.8億円・6,147㎡で、時価が2.5倍でもNAVは1,529円→1,678円と10%しか動きません。有価証券の含み益も既にBS計上済み。<strong>本当の論点は「純資産717億円が時価総額313億円でしか評価されていない」という一点</strong>で、その簿価の中身は現預金580.8億円と棚卸不動産559.7億円という極めて実在性の高い資産です。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">668円の評価と買い下がり</div>
+        <div class="conc-b">PBR0.435倍・予想PER8.9倍・配当＋優待6.53%（2,500株）。<strong>初回買付の水準として妥当</strong>ですが、下値はBPSでは止まらず、過去レンジからPBR0.33倍＝約510円まで想定すべきです。<strong>668円→620円→580円→530円の4段ラダーで平均588円・4,000株（総合利回り7.13%）を目指す設計</strong>が、この銘柄の性格に最も適合します。各段は価格ではなく<strong>「総合利回り7%超で買う」</strong>という利回り基準で判断してください。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">時間軸と撤退条件</div>
+        <div class="conc-b">カタリストの主導権は創業家35.19%にあり、<strong>少数株主から圧力をかける手段は存在しません。</strong>27/3期が中計最終年度であることから、次期中計（2026年度中〜2027年5月）が最も現実的な起点。<strong>ここで資本効率目標が示されなければ、3年程度で資金の再配分を検討すべき</strong>局面です。撤退トリガーは明確に<strong>「減配」「棚卸資産の評価損」「優待改悪」</strong>の3つ。これらが出たら価格に関係なく再検討してください。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">修正NAV（中立）</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">1,609円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">現株価はNAVの41.5%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">確率加重期待値</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">816円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">+22.2%（配当除く）</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">総合利回り（最効率）</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">6.53%</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">2,500株・2年目以降</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">想定下値</div>
+        <div style="font:700 24px/1 var(--mono);color:#e09090">510円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">PBR0.33倍・BPSは床にならない</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        日神グループHDは、<strong style="color:var(--or2)">「含み益の発掘」ではなく「純資産の43%という値付けの是正」に賭ける、インカム下支え型ディープバリュー案件。</strong>下値はBPSではなくPBR0.33倍（約510円）で見積もるべきだが、配当＋優待6.5%が待機コストをほぼ相殺する。<strong style="color:var(--or2)">利回り基準の分割買い下がりで2,500〜4,000株を組み上げ、次期中期経営計画とMBOの可能性を3年スパンで待つ</strong>── これが668円という価格に対する現実的な答えです。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は公開情報に基づく情報提供のみを目的として作成されており、特定銘柄の売買を推奨するものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  数値は2026年8月16日時点の公開情報に基づく。株価は2026年8月14日終値668円。土地の時価は推定値であり実額の開示はありません。<br>
+  Data: EDINET 有価証券報告書第52期（2026.6.25提出） / 2026年3月期決算短信・2027年3月期第1四半期決算短信（TDnet） / コーポレート・ガバナンスに関する報告書（2026.6.26） / 第52回定時株主総会招集通知 / 株主優待制度拡充のお知らせ（2026.6.2） / 非上場の親会社等の決算に関するお知らせ / 決算説明資料 / 不動産経済研究所「首都圏 新築分譲マンション市場動向 2026年上半期」 / Yahoo!ファイナンス / 株探 / ログミーFinance · 2026.08.16
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
