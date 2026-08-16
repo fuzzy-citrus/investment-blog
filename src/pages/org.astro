@@ -1,12 +1,12 @@
----
+﻿---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BookSidebar from '../components/BookSidebar.astro';
-import { characters, rivalOrgs, teamLabels } from '../data/characters';
+import { characters, rivalOrgs, teamLabels, founderLegends } from '../data/characters';
 
 const founder = characters.find(c => c.team === 'founder')!;
 const manager = characters.find(c => c.team === 'manager')!;
+const trainee = characters.find(c => c.team === 'trainee')!;
 const teamA   = characters.filter(c => c.team === 'teamA');
 const teamB   = characters.filter(c => c.team === 'teamB');
 const cross   = characters.filter(c => c.team === 'cross');
@@ -28,11 +28,11 @@ const cross   = characters.filter(c => c.team === 'cross');
 
       <div class="org-chart">
 
-        <!-- FOUNDER -->
+        <!-- FOUNDER (＋ 尊敬するレジェンドを横にリスト) -->
         <div class="tier">
           <div class="tier-label">FOUNDER</div>
-          <div class="row row-single">
-            <a href={`/characters#${founder.id}`} class="card-link">
+          <div class="side-row">
+            <a href={`/characters#${founder.id}`} class="card-link main-card-link">
             <div class="card card-founder">
               <div class="avatar" style={`background:${founder.avatarColor}`}>{founder.emoji}</div>
               <div class="body">
@@ -43,16 +43,30 @@ const cross   = characters.filter(c => c.team === 'cross');
               </div>
             </div>
             </a>
+
+            <aside class="side-box legends-box">
+              <div class="side-box-label">🏛 尊敬するレジェンド<span class="scroll-hint">▾ scroll</span></div>
+              <div class="side-scroll">
+                <ul class="legends-list">
+                  {founderLegends.map(l => (
+                    <li class="legend-item">
+                      <div class="legend-head"><span class="legend-name">{l.name}</span><span class="legend-tag">{l.tag}</span></div>
+                      <p class="legend-note">{l.note}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
         </div>
 
-        <div class="connector"><div class="line"></div></div>
+        <div class="connector connector-left"><div class="line"></div></div>
 
-        <!-- MANAGER -->
+        <!-- MANAGER (＋ TRAINEE を横に：まだ正式な部下ではない) -->
         <div class="tier">
           <div class="tier-label">MANAGER</div>
-          <div class="row row-single">
-            <a href={`/characters#${manager.id}`} class="card-link">
+          <div class="side-row">
+            <a href={`/characters#${manager.id}`} class="card-link main-card-link">
             <div class="card card-manager">
               <div class="avatar" style={`background:${manager.avatarColor}`}>{manager.emoji}</div>
               <div class="body">
@@ -63,10 +77,28 @@ const cross   = characters.filter(c => c.team === 'cross');
               </div>
             </div>
             </a>
+
+            <aside class="side-box trainee-box">
+              <div class="side-box-label trainee-label">🌱 TRAINEE — {teamLabels['trainee']}<span class="prov">（仮）</span></div>
+              <div class="side-scroll">
+                <a href={`/characters#${trainee.id}`} class="card-link">
+                <div class="card card-sm card-trainee">
+                  <div class="avatar sm" style={`background:${trainee.avatarColor}`}>{trainee.emoji}</div>
+                  <div class="body">
+                    <div class="name-row"><strong class="sm">{trainee.name}</strong><span class="species">{trainee.species}</span></div>
+                    <p class="catch sm">{trainee.catchphrase}</p>
+                    <blockquote class="sm">「{trainee.quote}」</blockquote>
+                    <div class="tags">{trainee.tags.map(t => <span class="tag">{t}</span>)}</div>
+                    <div class="trainee-future">🦎<span class="arrow">→</span>🐉 <em>今は未熟なトカゲ。いつか龍になる</em></div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </aside>
           </div>
         </div>
 
-        <div class="connector"><div class="line"></div></div>
+        <div class="connector connector-left"><div class="line"></div></div>
 
         <!-- TEAM A : 4枚横並び -->
         <div class="tier">
@@ -88,7 +120,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           </div>
         </div>
 
-        <div class="connector"><div class="line"></div></div>
+        <div class="connector connector-left"><div class="line"></div></div>
 
         <!-- TEAM B (3枚) + CROSS (1枚) 横並び -->
         <div class="tier">
@@ -158,8 +190,7 @@ const cross   = characters.filter(c => c.team === 'cross');
 
       </div>
     </main>
-    <BookSidebar />
-    <Footer />
+        <Footer />
   </body>
 </html>
 
@@ -214,7 +245,7 @@ const cross   = characters.filter(c => c.team === 'cross');
   /* カード行 */
   .row { display: flex; justify-content: center; gap: 0.7em; }
   .row-single .card { width: 100%; }
-  .row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7em; width: 100%; }
+  .row-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.7em; width: 100%; }
   .row-rivals { gap: 0.7em; }
   .row-rivals .card { flex: 1 1 220px; max-width: 320px; }
 
@@ -243,6 +274,93 @@ const cross   = characters.filter(c => c.team === 'cross');
   }
   .card-founder { border-color: var(--accent); border-width: 2px; }
   .card-manager { border-color: #6ba4d4; border-width: 2px; }
+  /* メインカード＋サイドパネル（FOUNDER:レジェンド / MANAGER:見習い） */
+  /* ペアを中央寄せ＝メインは中央やや左、右に固定サイズのサイドパネル */
+  .side-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2em;
+    width: 100%;
+  }
+  /* 左右の枠を同じ固定高さに揃える（210px） */
+  .side-row .main-card-link { flex: 0 1 400px; width: auto; }
+  .side-row .main-card-link .card { box-sizing: border-box; height: 210px; }
+  .side-box {
+    flex: 0 0 248px;
+    width: 248px;
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+  }
+  .side-box-label {
+    font-size: 0.62em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgb(var(--gray-dark));
+    margin-bottom: 0.4em;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .scroll-hint {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: rgb(var(--gray));
+    letter-spacing: 0;
+  }
+  /* 両サイドパネル共通：同じ固定サイズ＋内部スクロール */
+  .side-scroll {
+    flex: 1 1 auto;          /* 固定高さの side-box 内でラベル下を埋める */
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 8px;
+    padding-right: 3px;
+  }
+  .side-scroll::-webkit-scrollbar { width: 6px; }
+  .side-scroll::-webkit-scrollbar-thumb { background: #cfd6cf; border-radius: 3px; }
+  /* 主役カード（野村・沼田）は中央やや左にあるので、その間の縦線も同じだけ左へずらして連続させる */
+  @media (min-width: 721px) {
+    .connector-left .line { transform: translateX(calc((248px + 1.2em) / -2)); }
+  }
+
+  /* 尊敬するレジェンド・リスト（野村の横） */
+  .legends-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.6em 0.7em;
+    background: #fffdf6;
+    border: 1.5px solid #e8d9a0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55em;
+  }
+  .legend-item { border-left: 2px solid #d9b94a; padding-left: 0.55em; }
+  .legend-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.35em; }
+  .legend-name { font-size: 0.76em; font-weight: 700; color: rgb(var(--black)); }
+  .legend-tag {
+    font-size: 0.58em; font-weight: 700; color: #8a6d12;
+    background: #f6ecc8; padding: 0.08em 0.42em; border-radius: 3px;
+  }
+  .legend-note { font-size: 0.66em; color: rgb(var(--gray-dark)); line-height: 1.45; margin: 0.15em 0 0; }
+
+  /* 見習い（仮）パネル（沼田の横） */
+  .trainee-label { color: #6f9e36; }
+  .trainee-label .prov { color: rgb(var(--gray)); font-weight: 600; }
+  .card-trainee { border-color: #8bc34a; border-width: 1.5px; border-style: dashed; }
+  .trainee-future {
+    margin-top: 0.5em;
+    font-size: 0.66em;
+    color: #6f9e36;
+    display: flex;
+    align-items: center;
+    gap: 0.15em;
+    line-height: 1.3;
+  }
+  .trainee-future .arrow { color: #bcd89a; margin: 0 0.1em; }
+  .trainee-future em { font-style: italic; color: rgb(var(--gray-dark)); }
   .card-cross   { border-color: var(--accent); border-style: dashed; }
   .card-rival   { border: 1.5px dashed #ccc; background: #fafafa; }
 
@@ -308,8 +426,19 @@ const cross   = characters.filter(c => c.team === 'cross');
   }
 
   @media (max-width: 720px) {
-    .row-4 { grid-template-columns: repeat(2, 1fr); }
+    .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .row-rivals .card { max-width: 100%; flex-basis: 100%; }
+    .side-row { flex-direction: column; align-items: center; gap: 0.9em; }
+    .side-row .main-card-link { flex: 0 0 auto; width: min(400px, 100%); }
+    .side-row .main-card-link .card { height: auto; }
+    .side-box {
+      flex: 0 0 auto;
+      width: min(400px, 100%);
+      height: auto;
+    }
+    /* モバイルでは入れ子スクロールを避け、自然に伸ばす */
+    .side-scroll { flex: none; min-height: 0; height: auto; overflow: visible; }
+    .scroll-hint { display: none; }
   }
   @media (max-width: 480px) {
     .row-4 { grid-template-columns: 1fr; }

@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
-import FallbackImage from '../assets/blog-placeholder-1.jpg';
+import FallbackImage from '../../public/images/company-characters.png';
 import { SITE_TITLE } from '../consts';
 import { Font } from 'astro:assets';
 
@@ -11,18 +11,29 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	ogType?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, ogType = 'website' } = Astro.props;
 ---
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CXLOMZOBJ4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CXLOMZOBJ4');
+</script>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
 	rel="alternate"
@@ -46,7 +57,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta name="description" content={description} />
 
 <!-- Open Graph -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -56,6 +67,8 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <!-- Twitter Card -->
 <meta property="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@numasoko_value" />
+<meta name="twitter:creator" content="@numasoko_value" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
@@ -68,5 +81,5 @@ const { title, description, image = FallbackImage } = Astro.props;
 	"name": "沼底バリュー商会",
 	"url": Astro.site?.toString() ?? "",
 	"description": "日本の割安株・TOB発掘・低PBR銘柄に特化した個人投資家の実践記録ブログ。野村証券の低金利信用を活用した中レバレッジ戦略で資産形成を目指す。",
-	"sameAs": ["https://github.com/fuzzy-citrus/investment-blog"]
+	"sameAs": ["https://x.com/numasoko_value", "https://github.com/fuzzy-citrus/investment-blog"]
 })} />

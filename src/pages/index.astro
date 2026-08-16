@@ -1,16 +1,57 @@
----
+﻿---
 import Comments from '../components/Comments.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import BookSidebar from '../components/BookSidebar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 5);
+const allPosts = (await getCollection('blog'))
+	.filter(p => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = allPosts.slice(0, 10);
+// コラムは新着順（pubDate降順）で表示
+const columns = allPosts.filter(p => !p.data.stockCard);
+
+// ヒーローに表示する最新更新日（＝最新公開記事の pubDate）
+const latestUpdate = allPosts[0]?.data.pubDate;
+const latestUpdateLabel = latestUpdate?.toLocaleDateString('ja-JP', {
+	timeZone: 'Asia/Tokyo',
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+// 📋 紹介銘柄ウォッチリスト：stockCard.rating から自動生成
+// draft は allPosts の時点で除外済み → 在庫記事は公開した瞬間に自動で載る（手動追加は不要）
+const RATING_ORDER = ['A++', 'A+', 'A', 'A-', 'B++', 'B+', 'B'];
+const RATING_CLASS: Record<string, string> = {
+	'A++': 'rA-plus-plus',
+	'A+': 'rA-plus',
+	'A': 'rA',
+	'A-': 'rA-minus',
+	'B++': 'rB-plus-plus',
+	'B+': 'rB-plus',
+	'B': 'rB',
+};
+const watchlist = allPosts
+	.filter((p) => p.data.stockCard?.rating)
+	.map((p) => {
+		const sc = p.data.stockCard!;
+		const rating = sc.rating!;
+		return {
+			href: `/blog/${p.id}/`,
+			ratingClass: RATING_CLASS[rating],
+			ratingBase: rating.charAt(0),
+			ratingSup: rating.slice(1).replace('-', '−'),
+			name: sc.shortName ?? sc.companyName,
+			ticker: sc.ticker,
+			rank: RATING_ORDER.indexOf(rating),
+			pub: p.data.pubDate.valueOf(),
+		};
+	})
+	.sort((a, b) => (a.rank !== b.rank ? a.rank - b.rank : b.pub - a.pub));
 ---
 
 <!doctype html>
@@ -28,179 +69,95 @@ const posts = (await getCollection('blog')).sort(
 				<h1>沼田課長の投資記録</h1>
 				<p class="hero-desc">〜 低金利 × 中レバレッジ × 高安全域 〜</p>
 				<div class="hero-tags">
-					<span class="tag">割安日本個別株</span>
-					<span class="tag">TOB発掘</span>
-					<span class="tag">低配当性向・増配余力大</span>
-					<span class="tag">東証ガバナンス改革</span>
+					<a class="tag" href="/map#asset-value"><span class="tag-emoji">🦦</span>資産バリュー</a>
+					<a class="tag" href="/map#moat"><span class="tag-emoji">🦫</span>ニッチ独占</a>
+					<a class="tag" href="/map#tob-event"><span class="tag-emoji">🐊</span>TOB発掘</a>
+					<a class="tag" href="/map#risk-leverage"><span class="tag-emoji">🧓</span>野村流</a>
+					<a class="tag" href="/map#philosophy"><span class="tag-emoji">🧑‍💼</span>投資哲学</a>
+					<a class="tag" href="/map#income"><span class="tag-emoji">🐝</span>高配当・増配</a>
 				</div>
+				<div class="hero-concept-wrap">
+					<a href="/concept/" class="hero-concept-btn">
+						<span class="hero-concept-icon">💎</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">経営コンセプト</span>
+							<span class="hero-concept-sub">投資哲学と買い方</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/holdings.html" class="hero-concept-btn">
+						<span class="hero-concept-icon">📊</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">保有銘柄と損益</span>
+							<span class="hero-concept-sub">集計 2026年7月27日</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/margin/" class="hero-concept-btn">
+						<span class="hero-concept-icon">🧓</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">野村流信用錬金術</span>
+							<span class="hero-concept-sub">低金利レバレッジ</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/value/" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">🦦</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-new">NEW</span>
+							<span class="hero-concept-label">バリュー株の魅力</span>
+							<span class="hero-concept-sub">割安株投資の体系</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+				</div>
+				{latestUpdateLabel && (
+					<p class="hero-updated">📅 最終更新：{latestUpdateLabel}</p>
+				)}
 			</section>
 
-			<section class="about-blog">
-				<h2>バリュー商会とは</h2>
-				<div class="about-grid">
-					<div class="about-item">
-						<span class="about-icon">🧑‍💼</span>
-						<div>
-							<div class="about-label">運営者</div>
-							<div class="about-text">保有資産約5,000万円。野村流錬金術を駆使する沼田堅一課長を主人公に、バリュー商会の資産を実際の投資成績と直結させて育てていく実践記録です。</div>
-						</div>
-					</div>
-					<div class="about-item">
-						<span class="about-icon">🎯</span>
-						<div>
-							<div class="about-label">目標</div>
-							<div class="about-text"><strong>バリュー商会の資産推移＝筆者本人の運用成績です。</strong>中間目標：2028年に1億円、最終目標：2030年に2億円以上。<br /><span class="about-note-inline">※注目銘柄は紹介しますがポジション全部の公開はしてません。インデックスやテーマ株・モメンタムも時々混ざるのでブレは多少あります。</span></div>
-						</div>
-					</div>
-					<div class="about-item">
-						<span class="about-icon">📊</span>
-						<div>
-							<div class="about-label">投資スタンス</div>
-							<div class="about-text">メインはバリュー株・TOB発掘・割安発掘。紹介銘柄・戦略は野村証券の口座で実際に売買しながら更新します。</div>
-						</div>
-					</div>
-					<div class="about-item">
-						<span class="about-icon">🏦</span>
-						<div>
-							<div class="about-label">野村の錬金術（低金利レバレッジ）</div>
-							<div class="about-text">野村証券の信用金利は<strong>年1.43%</strong>。配当利回りが<strong>1.79%以上</strong>あれば、税金を考慮しても利ザヤでプラスの追加収益が見込めます。そこそこの配当利回りでも<strong>配当性向が低くキャッシュを溜め込んでいるニッチトップ銘柄</strong>なら積極的に集める方針。下値余地が小さく、信用金利を配当で上回れる銘柄を狙い撃ちします。</div>
-						</div>
-					</div>
-				</div>
-				<p class="about-note">※このブログは自身の投資手法や成績を振り返り、今後に活かす場所として活用しています。</p>
-			</section>
+			<div class="wl-col-grid">
 
-			<div class="theme-pillars">
-				<div class="tp-item">
-					<svg viewBox="0 0 60 60" class="tp-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<circle cx="30" cy="30" r="26" stroke="currentColor" stroke-width="0.8" opacity="0.25"/>
-						<path d="M24 26 L21 36 Q16 44 30 44 Q44 44 39 36 L36 26 Z" stroke="currentColor" stroke-width="1.8"/>
-						<line x1="23" y1="26" x2="37" y2="26" stroke="currentColor" stroke-width="1.8"/>
-						<line x1="25" y1="23" x2="35" y2="23" stroke="currentColor" stroke-width="1.8"/>
-						<path d="M17 39 Q17 44 30 44 Q43 44 43 39 Z" fill="currentColor" opacity="0.2"/>
-						<polygon points="30,10 32,16 39,16 34,20 36,26 30,23 24,26 26,20 21,16 28,16" fill="currentColor" opacity="0.75"/>
-						<circle cx="10" cy="30" r="7" stroke="#c9992a" stroke-width="1.2" opacity="0.75"/>
-						<line x1="7" y1="30" x2="13" y2="30" stroke="#c9992a" stroke-width="1" opacity="0.75"/>
-						<line x1="10" y1="26" x2="10" y2="34" stroke="#c9992a" stroke-width="1" opacity="0.75"/>
-					</svg>
-					<span class="tp-title">金融錬金術</span>
-					<span class="tp-desc">低金利で借りて<br/>配当で上回る</span>
-				</div>
-				<div class="tp-item">
-					<svg viewBox="0 0 60 60" class="tp-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M30 5 Q40 8 42 18 Q43 28 37 34 Q28 40 19 36 Q11 30 13 20 Q15 10 30 5 Z" stroke="currentColor" stroke-width="1.4" opacity="0.65"/>
-						<path d="M21 18 L26 23 M26 18 L21 23" stroke="#c9992a" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
-						<path d="M32 27 L37 32 M37 27 L32 32" stroke="#c9992a" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/>
-						<circle cx="43" cy="46" r="12" stroke="currentColor" stroke-width="1.8"/>
-						<line x1="52" y1="55" x2="58" y2="59" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-						<polygon points="43,37 51,45 43,54 35,45" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
-					</svg>
-					<span class="tp-title">割安宝探し</span>
-					<span class="tp-desc">割安発掘・不動産含み益<br/>隠れた価値を掘り出す</span>
-				</div>
-				<div class="tp-item">
-					<svg viewBox="0 0 60 60" class="tp-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<polygon points="30,5 8,50 52,50" stroke="currentColor" stroke-width="1.8" opacity="0.72"/>
-						<line x1="30" y1="2" x2="30" y2="8" stroke="currentColor" stroke-width="1.8"/>
-						<polygon points="30,2 42,6 30,10" fill="currentColor" opacity="0.9"/>
-						<circle cx="44" cy="47" r="7" stroke="currentColor" stroke-width="1.5" opacity="0.65"/>
-						<circle cx="44" cy="47" r="3" fill="currentColor" opacity="0.5"/>
-						<line x1="44" y1="38" x2="44" y2="36" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="44" y1="58" x2="44" y2="56" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="35" y1="47" x2="33" y2="47" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="55" y1="47" x2="53" y2="47" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="38" y1="41" x2="36.5" y2="39.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="51" y1="54" x2="52.5" y2="55.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="38" y1="53" x2="36.5" y2="54.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-						<line x1="51" y1="41" x2="52.5" y2="39.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
-					</svg>
-					<span class="tp-title">ニッチトップ応援</span>
-					<span class="tp-desc">競合が入れない市場<br/>小さな技術の巨人</span>
-				</div>
+				<section class="watchlist">
+					<div class="watchlist-header">
+						<span class="watchlist-title">📋 紹介銘柄</span>
+						<a href="/blog/" class="columns-all-link">すべて見る →</a>
+					</div>
+					<div class="watchlist-rows">
+						{watchlist.map((s) => (
+							<a href={s.href} class="wl-row">
+								<span class={`wl-rating ${s.ratingClass}`}>{s.ratingBase}{s.ratingSup && <sup>{s.ratingSup}</sup>}</span>
+								<span class="wl-name">{s.name} <span class="wl-code">{s.ticker}</span></span>
+								<span class="wl-arrow">→</span>
+							</a>
+						))}
+					</div>
+				</section>
+
+				<section class="columns-section">
+					<div class="columns-header">
+						<span class="columns-title">📝 投資コラム</span>
+						<a href="/blog/?type=column" class="columns-all-link">すべて見る →</a>
+					</div>
+					<div class="columns-rows">
+						{columns.map((post) => (
+							<a href={`/blog/${post.id}/`} class="col-row">
+								<span class="col-icon">📖</span>
+								<span class="col-title">{post.data.title}</span>
+								<span class="col-date"><FormattedDate date={post.data.pubDate} /></span>
+								<span class="col-arrow">→</span>
+							</a>
+						))}
+					</div>
+				</section>
+
 			</div>
-
-			<section class="asset-status">
-				<div class="asset-header">
-					<span class="asset-launch-badge">🚀 スタートライン — 2026年5月</span>
-					<span class="asset-account">野村証券 実口座</span>
-				</div>
-				<div class="asset-main">
-					<div class="asset-amounts">
-						<div class="asset-amt-block">
-							<div class="asset-amt-label">現在総資産（2026年5月）</div>
-							<div class="asset-amt-val val-now"><strong>4,474万円</strong></div>
-							<div class="asset-now-sub">評価損益 <span class="pos">+816万円</span></div>
-						</div>
-						<div class="asset-amt-arrow">
-							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-						</div>
-						<div class="asset-amt-block">
-							<div class="asset-amt-label">中間目標 2028年</div>
-							<div class="asset-amt-val val-mid"><strong>1億円</strong></div>
-						</div>
-						<div class="asset-amt-arrow">
-							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-						</div>
-						<div class="asset-amt-block">
-							<div class="asset-amt-label">最終目標 2030年</div>
-							<div class="asset-amt-val val-goal"><strong>2億円</strong></div>
-						</div>
-					</div>
-					<div class="asset-bar-wrap">
-						<div class="asset-bar">
-							<div class="asset-bar-fill" style="width:22.4%">
-								<span class="asset-bar-now">NOW<br/>22%</span>
-							</div>
-							<div class="asset-bar-mid-marker">
-								<span class="asset-bar-mid-label">1億<br/>2028</span>
-							</div>
-							<div class="asset-bar-goal">2億</div>
-						</div>
-						<div class="asset-bar-scale">
-							<span>0</span><span>5,000万</span><span>1億</span><span>1.5億</span><span>2億</span>
-						</div>
-					</div>
-				</div>
-				<div class="asset-chart-wrap">
-					<img src="/images/nomura-asset-chart.png" alt="野村証券 資産推移チャート（2025年3月〜2026年4月）" class="asset-chart-img" />
-				</div>
-				<p class="asset-update-rule">📅 月初に前月末の成績が反映されます</p>
-				<p class="asset-brand-note">📊 この資産推移は沼底バリュー商会（筆者本人）の野村証券実口座の運用成績です。</p>
-				<p class="asset-disclaimer">※ 投資勧誘ではありません。</p>
-			</section>
-
-			<section class="watchlist">
-				<div class="watchlist-header">
-					<span class="watchlist-title">📋 紹介銘柄 現況レポート</span>
-					<span class="watchlist-updated">2026年5月更新</span>
-				</div>
-				<div class="watchlist-rows">
-					<a href="/blog/tobu-network-9036/" class="wl-row">
-						<span class="wl-rating rA-plus">A<sup>+</sup></span>
-						<span class="wl-name">東部ネットワーク <span class="wl-code">9036</span></span>
-						<span class="wl-status"><span class="wl-dot green"></span>継続強気ホールド — 基本出口まで保有</span>
-						<span class="wl-arrow">→</span>
-					</a>
-					<a href="/blog/shinyei-3004/" class="wl-row">
-						<span class="wl-rating rA">A</span>
-						<span class="wl-name">神栄 <span class="wl-code">3004</span></span>
-						<span class="wl-status"><span class="wl-dot yellow"></span>依然割安継続 — 下がればロット追加検討</span>
-						<span class="wl-arrow">→</span>
-					</a>
-					<a href="/blog/kitazato-368a/" class="wl-row">
-						<span class="wl-rating rA-minus">A<sup>−</sup></span>
-						<span class="wl-name">北里コーポレーション <span class="wl-code">368A</span></span>
-						<span class="wl-status"><span class="wl-dot yellow"></span>強気継続で監視 — 下落で買い増し検討</span>
-						<span class="wl-arrow">→</span>
-					</a>
-				</div>
-			</section>
 
 			<div class="method-note">
 				<span class="method-icon">🤖</span>
 				<div>
-					<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。参考値であり投資勧誘ではありません。 <a href="/about#分析スタンス">詳しくはAboutへ →</a></p>
-					<p>不動産含み益の計算は、有価証券報告書に記載の具体的な物件情報と取得時期をもとにAIによる公示価格分析をパワープレイで実行して算出しています。ブレはあるかもですがそこまで変な予測にはなっていないはずです。</p>
+					<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。<strong>今すぐ株価が収束する想定ではなく、3年程度保有した場合の到達目安</strong>です。参考値であり投資勧誘ではありません。</p>
+					<p>不動産含み益は「有価証券報告書に記載の物件所在地・地積・取得時期」と「国土交通省の公示価格データ」を照合し、AIによるエリア別地価分析で算出しています。<strong>実際の物件情報ベース</strong>なので精度は相応にあるはずです。ブレはあります。</p>
 				</div>
 			</div>
 
@@ -259,19 +216,96 @@ const posts = (await getCollection('blog')).sort(
 				<a href="/org" class="all-posts-link">組織図で見る →</a>
 			</section>
 
-			<section class="home-comments">
-				<h2>コメント・ご意見</h2>
-				<p class="home-comments-desc">記事の感想・銘柄への意見・質問など、お気軽にどうぞ。</p>
-				<Comments pageId="home" />
-			</section>
-		</main>
+			</main>
 		<Footer />
 
-		<BookSidebar />
 	</body>
 </html>
 
 <style>
+	/* ── Hero Concept Button ── */
+	.hero-concept-wrap {
+		margin-top: 1.1em;
+		display: flex;
+		gap: 6px;
+		justify-content: center;
+		flex-wrap: wrap;
+		max-width: 940px;
+		margin-inline: auto;
+	}
+	.hero-concept-btn {
+		flex: 1 1 0;
+		box-sizing: border-box;
+		min-width: 0;
+		max-width: 172px;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.22em;
+		background: rgba(255,255,255,0.92);
+		border: 1.5px solid rgba(232,184,75,0.7);
+		border-radius: 8px;
+		padding: 0.28em 0.4em 0.28em 0.38em;
+		text-decoration: none;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		transition: background 0.15s, transform 0.1s;
+	}
+	.hero-concept-btn:hover {
+		background: #fff;
+		transform: translateY(-1px);
+		border-color: #e8b84b;
+	}
+	.hero-concept-icon { font-size: 0.82em; flex-shrink: 0; }
+	.hero-concept-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.05em;
+		min-width: 0;
+		overflow: hidden;
+	}
+	.hero-concept-label {
+		font-size: 0.63em;
+		white-space: nowrap;
+		font-weight: 900;
+		color: #1a3a5c;
+		letter-spacing: 0.02em;
+	}
+	.hero-concept-sub {
+		font-size: 0.49em;
+		color: #888;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	/* 新設ページの目印。ボタンの枠外に出す */
+	.hero-concept-new {
+		position: absolute;
+		top: -9px;
+		right: -7px;
+		background: #e0453a;
+		color: #fff;
+		font-size: 0.5em;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		padding: 2px 7px;
+		border-radius: 999px;
+		box-shadow: 0 2px 6px rgba(224,69,58,0.4);
+		z-index: 2;
+	}
+	.hero-concept-arrow {
+		font-size: 0.58em;
+		flex-shrink: 0;
+		font-weight: 700;
+		color: #b8860b;
+	}
+	.hero-updated {
+		margin: 0.8em auto 0;
+		font-size: 0.68em;
+		color: rgb(var(--gray));
+		letter-spacing: 0.04em;
+		text-align: center;
+	}
+
 	/* ── Asset Status ── */
 	.asset-status {
 		background: linear-gradient(135deg, #1a3a1c 0%, #0f2610 100%);
@@ -446,9 +480,33 @@ const posts = (await getCollection('blog')).sort(
 		margin: 0;
 		line-height: 1.5;
 	}
+	/* ── 2-column grid: watchlist + columns ── */
+	.wl-col-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1em;
+		margin-bottom: 2em;
+		align-items: start;
+	}
+	/* 狭い画面では3列を維持できないので縦積みに戻す */
+	@media (max-width: 640px) {
+		.hero-concept-wrap { gap: 8px; }
+		.hero-concept-btn {
+			flex: 1 1 100%;
+			max-width: 320px;
+			padding: 0.4em 0.8em 0.4em 0.65em;
+		}
+		.hero-concept-label { font-size: 0.8em; }
+		.hero-concept-sub { font-size: 0.62em; }
+		.hero-concept-icon { font-size: 1.1em; }
+	}
+	@media (max-width: 600px) {
+		.wl-col-grid { grid-template-columns: 1fr; }
+	}
+
 	/* ── Watchlist ── */
 	.watchlist {
-		margin-bottom: 2em;
+		margin-bottom: 0;
 		border: 1px solid #dde3ec;
 		border-radius: 10px;
 		overflow: hidden;
@@ -471,17 +529,27 @@ const posts = (await getCollection('blog')).sort(
 		font-size: 0.65em;
 		color: rgb(var(--gray));
 	}
-	.watchlist-rows { display: flex; flex-direction: column; }
+	.watchlist-rows {
+		display: flex;
+		flex-direction: column;
+		max-height: 9.2em;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: #b8c8b8 transparent;
+	}
+	.watchlist-rows::-webkit-scrollbar { width: 4px; }
+	.watchlist-rows::-webkit-scrollbar-track { background: transparent; }
+	.watchlist-rows::-webkit-scrollbar-thumb { background: #c4d4c4; border-radius: 4px; }
 	.wl-row {
 		display: flex;
 		align-items: center;
-		gap: 0.75em;
-		padding: 0.7em 1em;
+		gap: 0.6em;
+		padding: 0.5em 0.8em;
 		text-decoration: none;
 		color: rgb(var(--gray-dark));
 		border-bottom: 1px solid #f0f2f5;
 		transition: background 0.12s;
-		flex-wrap: wrap;
 	}
 	.wl-row:last-child { border-bottom: none; }
 	.wl-row:hover { background: #f5faf5; }
@@ -496,9 +564,13 @@ const posts = (await getCollection('blog')).sort(
 		letter-spacing: 0.02em;
 	}
 	.wl-rating sup { font-size: 0.7em; }
+	.rA-plus-plus { background: linear-gradient(135deg, #ffe680 0%, #f0a830 100%); color: #5a3a00; border: 1px solid #d89020; box-shadow: 0 0 6px rgba(240,168,48,0.5); font-weight: 900; }
 	.rA-plus  { background: #fff4cc; color: #8a6a00; border: 1px solid #e8c840; }
 	.rA       { background: #e6f5ee; color: var(--accent-dark); border: 1px solid #a8d8bc; }
 	.rA-minus { background: #eef5ee; color: #3a7a58; border: 1px solid #b8d8c4; }
+	.rB-plus-plus { background: #e7f0f7; color: #2f4a72; border: 1px solid #a3bbd6; font-weight: 700; }
+	.rB       { background: #eef2f8; color: #4a5a80; border: 1px solid #b8c4dc; }
+	.rB-plus  { background: #edf2f8; color: #3a4e78; border: 1px solid #aabcd8; }
 	.wl-name {
 		font-size: 0.85em;
 		font-weight: 700;
@@ -526,6 +598,7 @@ const posts = (await getCollection('blog')).sort(
 	}
 	.wl-dot.green  { background: #3cb86a; }
 	.wl-dot.yellow { background: #e8b84b; }
+	.wl-dot.red    { background: #e05555; }
 	.wl-arrow {
 		font-size: 0.85em;
 		color: var(--accent);
@@ -537,6 +610,79 @@ const posts = (await getCollection('blog')).sort(
 		.wl-row { gap: 0.5em; }
 		.wl-status { flex-basis: 100%; }
 		.wl-arrow { display: none; }
+	}
+
+	/* ── Columns Section ── */
+	.columns-section {
+		margin-bottom: 0;
+		border: 1px solid #dde3ec;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+	.columns-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.55em 1em;
+		background: #f0f4f8;
+		border-bottom: 1px solid #dde3ec;
+	}
+	.columns-title {
+		font-size: 0.78em;
+		font-weight: 700;
+		color: var(--accent-dark);
+		letter-spacing: 0.04em;
+	}
+	.columns-all-link {
+		font-size: 0.7em;
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.columns-all-link:hover { color: var(--accent-dark); }
+	.columns-rows {
+		display: flex;
+		flex-direction: column;
+		max-height: 9.2em;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: #b8c4d0 transparent;
+	}
+	.columns-rows::-webkit-scrollbar { width: 4px; }
+	.columns-rows::-webkit-scrollbar-track { background: transparent; }
+	.columns-rows::-webkit-scrollbar-thumb { background: #c4ccd8; border-radius: 4px; }
+	.col-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.45em;
+		padding: 0.55em 0.8em;
+		text-decoration: none;
+		color: rgb(var(--gray-dark));
+		border-bottom: 1px solid #f0f2f5;
+		transition: background 0.12s;
+		flex-wrap: wrap;
+	}
+	.col-row:last-child { border-bottom: none; }
+	.col-row:hover { background: #f5f8fc; }
+	.col-icon { font-size: 0.8em; flex-shrink: 0; margin-top: 0.15em; }
+	.col-title {
+		font-size: 0.76em;
+		flex: 1;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		min-width: 0;
+	}
+	.col-date { display: none; }
+	.col-arrow {
+		font-size: 0.75em;
+		color: var(--accent);
+		font-weight: 700;
+		flex-shrink: 0;
+		align-self: center;
 	}
 
 	/* ── About Blog ── */
@@ -602,6 +748,21 @@ const posts = (await getCollection('blog')).sort(
 		padding: 3em 1em 2em;
 		border-bottom: 1px solid rgb(var(--gray-light));
 		margin-bottom: 2em;
+		position: relative;
+		overflow: hidden;
+	}
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: url('/images/hero-characters.png') center center / cover no-repeat;
+		opacity: 0.22;
+		pointer-events: none;
+		z-index: 0;
+	}
+	.hero > * {
+		position: relative;
+		z-index: 1;
 	}
 	.hero-badge {
 		display: inline-block;
@@ -627,17 +788,26 @@ const posts = (await getCollection('blog')).sort(
 	}
 	.hero-tags {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5em;
+		flex-wrap: nowrap;
+		gap: 0.3em;
 		justify-content: center;
+		max-width: 100%;
 	}
 	.tag {
 		background: var(--accent-light);
 		color: var(--accent-dark);
-		font-size: 0.8em;
-		padding: 0.2em 0.8em;
+		font-size: 0.7em;
+		padding: 0.22em 0.55em;
 		border-radius: 4px;
 		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background 0.15s, color 0.15s;
+	}
+	.tag:hover { background: var(--accent); color: #fff; }
+	.tag-emoji { margin-right: 0.25em; font-size: 1em; }
+	@media (max-width: 680px) {
+		.hero-tags { flex-wrap: wrap; }
 	}
 	.method-note {
 		display: flex;
@@ -672,7 +842,14 @@ const posts = (await getCollection('blog')).sort(
 		list-style: none;
 		padding: 0;
 		margin: 0 0 1em;
+		max-height: calc(3 * 5em);
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0,0,0,0.15) transparent;
+		border-radius: 6px;
 	}
+	.post-list::-webkit-scrollbar { width: 4px; }
+	.post-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
 	.post-list li {
 		border-bottom: 1px solid rgb(var(--gray-light));
 	}
@@ -719,6 +896,7 @@ const posts = (await getCollection('blog')).sort(
 		align-items: center;
 		gap: 0.4em;
 		flex: 1;
+		min-width: 0;
 		text-decoration: none;
 		color: inherit;
 		border-radius: 8px;
@@ -800,5 +978,15 @@ const posts = (await getCollection('blog')).sort(
 		.tp-item { border-right: none; border-bottom: 1px solid #dde8dd; flex-direction: row; justify-content: flex-start; gap: 0.8em; text-align: left; }
 		.tp-item:last-child { border-bottom: none; }
 		.tp-svg { width: 36px; height: 36px; flex-shrink: 0; }
+	}
+	/* メンバー8人は狭い画面で横一列に収まらない（役職名が keep-all で縮まない）ため
+	   4人×2段に折り返して横スクロールを防ぐ */
+	@media (max-width: 640px) {
+		.member-emojis {
+			flex-wrap: wrap;
+			justify-content: center;
+			row-gap: 0.9em;
+		}
+		.member-item { flex: 0 0 calc(25% - 0.3em); }
 	}
 </style>

@@ -1,4 +1,4 @@
----
+﻿---
 import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
@@ -6,16 +6,51 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
 import Header from '../components/Header.astro';
-import BookSidebar from '../components/BookSidebar.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, stockCard, noteUrl } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, stockCard, noteUrl, related } = Astro.props;
 
-const allPosts = (await getCollection('blog'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.filter(p => p.data.title !== title)
-	.slice(0, 3);
+const analysisFileMap: Record<string, string> = {
+	'9036': 'tobu-network-9036',
+	'7485': 'okaya-kouki-7485',
+	'9045': 'keihan-hd-9045',
+	'7868': 'kozosodo-hd-7868',
+	'2327': 'nssol-2327',
+	'1450': 'tanaken-1450',
+	'5900': 'daiken-5900',
+	'1716': 'daiichi-cutter-1716',
+	'4820': 'em-systems-4820',
+	'9755': 'oyo-9755',
+};
+const analysisExists = new Set(['9036','8071','4685','9414','3004','368A','6165','7061','7485','9045','7868','2327','1450','5900','1716','4820','9755']);
+// 完全版分析ファイルは noteUrl（…/analysis/<slug>.html）から自動導出。
+// 新規銘柄は noteUrl を書くだけでヒーローの「📊 完全版分析資料」リンクが出る（上のマップは旧記事のフォールバック）
+const analysisFromNote = noteUrl?.match(/\/analysis\/([^/]+)\.html$/)?.[1] ?? null;
+const analysisFile = analysisFromNote
+	?? (stockCard && analysisExists.has(stockCard.ticker)
+		? (analysisFileMap[stockCard.ticker] ?? stockCard.ticker)
+		: null);
+
+// 株価の基準日＝記事公開日。古い記事の currentPrice を「今の株価」と誤読させないための表示
+const priceAsOf = pubDate.toLocaleDateString('ja-JP', {
+	timeZone: 'Asia/Tokyo',
+	year: 'numeric',
+	month: 'numeric',
+	day: 'numeric',
+});
+
+const blogAll = (await getCollection('blog')).filter((p) => !p.data.draft);
+// related frontmatter（スラッグ配列）で指定された記事を優先。未指定は最新3件にフォールバック
+const relatedPicked = (related ?? [])
+	.map(slug => blogAll.find(p => p.id === slug))
+	.filter((p): p is NonNullable<typeof p> => Boolean(p) && p!.data.title !== title);
+const allPosts = relatedPicked.length > 0
+	? relatedPicked.slice(0, 4)
+	: blogAll
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+		.filter(p => p.data.title !== title)
+		.slice(0, 3);
 
 const articleJsonLd = {
 	"@context": "https://schema.org",
@@ -37,7 +72,7 @@ const articleJsonLd = {
 
 <html lang="ja">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} ogType="article" />
 		<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 		<style>
 			main {
@@ -59,6 +94,25 @@ const articleJsonLd = {
 				background: #1a2535;
 				padding: 2em 0;
 			}
+			.stock-hero.theme-event {
+				background: #271400 !important;
+			}
+			.stock-hero.theme-event .stock-category {
+				background: rgba(240,130,40,0.18) !important;
+				border: 1px solid rgba(240,130,40,0.5) !important;
+				color: #f09040 !important;
+			}
+			.stock-hero.theme-event .stock-verdict {
+				background: rgba(240,130,40,0.12) !important;
+				border: 1px solid rgba(240,130,40,0.4) !important;
+			}
+			.stock-hero.theme-event .verdict-price {
+				color: #f09040 !important;
+			}
+			.stock-hero.theme-event .kpi-value.green { color: #f09040 !important; }
+			.stock-hero.theme-event .stock-analysis-link { background: rgba(0,0,0,0.35); }
+			.stock-hero.theme-event .stock-analysis-link a { color: #f09040 !important; }
+			.stock-hero.theme-event .stock-analysis-link a:hover { color: #ffc880 !important; }
 			.stock-hero-inner {
 				max-width: 720px;
 				margin: 0 auto;
@@ -72,6 +126,8 @@ const articleJsonLd = {
 				flex-wrap: wrap;
 				margin-bottom: 1.2em;
 			}
+			.stock-hero-top > div:first-child { flex: 1 1 0; min-width: 0; }
+			.stock-verdict { flex-shrink: 0; }
 			.stock-badge {
 				font-size: 0.65em;
 				font-weight: 700;
@@ -129,6 +185,14 @@ const articleJsonLd = {
 				color: rgba(255,255,255,0.5);
 				margin-top: 0.2em;
 			}
+			.stock-scenario-note {
+				text-align: right;
+				font-size: 0.6em;
+				color: rgba(255,255,255,0.28);
+				margin-bottom: 0.7em;
+				margin-top: -0.3em;
+				letter-spacing: 0.02em;
+			}
 			.stock-kpis {
 				display: grid;
 				grid-template-columns: repeat(5, 1fr);
@@ -159,6 +223,12 @@ const articleJsonLd = {
 			.kpi-value.red   { color: #e06868; }
 			.kpi-value.amber { color: #e8803a; }
 			.kpi-value.blue  { color: #7ab0e8; }
+			.kpi-asof {
+				font-size: 0.58em;
+				color: rgba(255,255,255,0.35);
+				margin-top: 0.3em;
+				font-variant-numeric: tabular-nums;
+			}
 			/* prose */
 			.prose {
 				width: 720px;
@@ -205,6 +275,10 @@ const articleJsonLd = {
 				.stock-kpis { grid-template-columns: repeat(3, 1fr); }
 				.stock-name { font-size: 1.3em; }
 				.verdict-price { font-size: 1.4em; }
+					.prose { padding: 1em 0.6em; }
+					.title { padding: 0.5em 0; }
+					.title h1 { font-size: 1.5em; line-height: 1.4; }
+					.stock-hero-inner { padding: 0 1em; }
 			}
 			/* ── Related posts ── */
 			.related-posts {
@@ -325,6 +399,38 @@ const articleJsonLd = {
 				margin: 0 auto;
 				padding: 0 1.5em 3em;
 			}
+			/* ── Share buttons ── */
+			.share-section {
+				max-width: 720px;
+				margin: 1.5em auto 0;
+				padding: 0 1.5em;
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.share-label {
+				font-size: 0.72em;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				color: rgb(var(--gray));
+				text-transform: uppercase;
+			}
+			.share-buttons { display: flex; gap: 0.5em; flex-wrap: wrap; }
+			.share-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4em;
+				font-size: 0.78em;
+				font-weight: 600;
+				padding: 0.45em 1em;
+				border-radius: 5px;
+				text-decoration: none;
+				transition: opacity 0.15s;
+			}
+			.share-btn:hover { opacity: 0.8; }
+			.hatena-btn { background: #00a4de; color: white; }
+			.x-btn { background: #000; color: white; }
 		</style>
 	</head>
 
@@ -333,7 +439,7 @@ const articleJsonLd = {
 		<main>
 			<article data-pagefind-body>
 				{stockCard ? (
-					<div class="stock-hero">
+					<div class={`stock-hero${stockCard.cardTheme === 'event' ? ' theme-event' : ''}`}>
 						<div class="stock-hero-inner">
 							<div class="stock-hero-top">
 								<div>
@@ -345,18 +451,20 @@ const articleJsonLd = {
 									<div class="stock-category">{stockCard.category}</div>
 								</div>
 								<div class="stock-verdict">
-									<div class="verdict-label">期待価格</div>
+									<div class="verdict-label">{stockCard.cardTheme === 'event' ? 'TOB・売却決着時の 期待価格' : '3年保有想定の 期待価格'}</div>
 									<div class="verdict-price">{stockCard.targetPrice.toLocaleString()}円</div>
 									<div class="verdict-upside">現在比 {stockCard.upside}</div>
 								</div>
 							</div>
+							<div class="stock-scenario-note">{stockCard.cardTheme === 'event' ? 'TOB・売却公表で決着 — 売却中止・長期化なら撤退を検討' : 'シナリオが大きく崩れない限り保有継続 — 崩れた場合は売却を検討'}</div>
 							<div class="stock-kpis">
 								<div class="kpi">
 									<div class="kpi-label">現在株価</div>
 									<div class="kpi-value amber">{stockCard.currentPrice.toLocaleString()}円</div>
+									<div class="kpi-asof">{priceAsOf}時点</div>
 								</div>
 								<div class="kpi">
-									<div class="kpi-label">期待価格</div>
+									<div class="kpi-label">3年期待価格</div>
 									<div class="kpi-value green">{stockCard.targetPrice.toLocaleString()}円</div>
 								</div>
 								<div class="kpi">
@@ -372,11 +480,13 @@ const articleJsonLd = {
 									<div class="kpi-value red">{stockCard.modifiedPBR}</div>
 								</div>
 							</div>
-							<div class="stock-analysis-link">
-								<a href={`/analysis/${stockCard.ticker === '9036' ? 'tobu-network-9036' : stockCard.ticker}.html`} target="_blank" rel="noopener">
-									📊 完全版分析資料を見る（全タブ展開）→
-								</a>
-							</div>
+							{stockCard && analysisFile && (
+								<div class="stock-analysis-link">
+									<a href={`/analysis/${analysisFile}.html`} target="_blank" rel="noopener">
+										📊 完全版分析資料を見る（全タブ展開）→
+									</a>
+								</div>
+							)}
 						</div>
 					</div>
 				) : (
@@ -401,6 +511,22 @@ const articleJsonLd = {
 				</div>
 			</article>
 
+			<div class="share-section">
+				<span class="share-label">シェアする</span>
+				<div class="share-buttons">
+					<a href={`https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(title)}`}
+					   target="_blank" rel="noopener noreferrer" class="share-btn hatena-btn">
+						<img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png"
+						     alt="はてなブックマーク" width="16" height="16" style="vertical-align:middle;" />
+						はてブ
+					</a>
+					<a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}&hashtags=バリュー投資,日本株`}
+					   target="_blank" rel="noopener noreferrer" class="share-btn x-btn">
+						𝕏 シェア
+					</a>
+				</div>
+			</div>
+
 			{allPosts.length > 0 && (
 				<aside class="related-posts">
 					<h2 class="related-title">関連記事</h2>
@@ -421,9 +547,9 @@ const articleJsonLd = {
 				<div class="note-cta">
 					<a class="note-cta-box" href={noteUrl} target="_blank" rel="noopener">
 						<div class="note-cta-text">
-							<div class="note-cta-label">note 有料記事</div>
+							<div class="note-cta-label">完全版レポート（無料公開）</div>
 							<div class="note-cta-title">完全版分析レポートを読む</div>
-							<div class="note-cta-desc">シナリオ試算・リスク完全版・財務モデル含む深掘り版</div>
+							<div class="note-cta-desc">シナリオ試算・リスク完全版・財務モデル含む深掘り版を無料で公開中</div>
 						</div>
 						<span class="note-cta-btn">読みに行く →</span>
 					</a>
@@ -434,7 +560,6 @@ const articleJsonLd = {
 				<Comments pageId={Astro.url.pathname} />
 			</div>
 		</main>
-		<BookSidebar />
 		<Footer />
 	</body>
 </html>

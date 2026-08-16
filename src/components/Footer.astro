@@ -4,6 +4,10 @@ const today = new Date();
 
 <footer>
 	<p class="tagline">沼田課長と愉快な部下たちの投資記録</p>
+	<a href="https://x.com/numasoko_value" target="_blank" rel="noopener" class="footer-x" aria-label="X（旧Twitter）をフォロー">
+		<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+		<span>@numasoko_value をフォロー</span>
+	</a>
 	<p>&copy; {today.getFullYear()} 沼底バリュー商会. All rights reserved.</p>
 </footer>
 <style>
@@ -20,5 +24,23 @@ const today = new Date();
 	}
 	p {
 		margin: 0.2em 0;
+	}
+	.footer-x {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4em;
+		margin: 0.5em 0;
+		padding: 0.4em 0.9em;
+		border: 1px solid rgba(255,255,255,0.3);
+		border-radius: 20px;
+		color: rgba(255,255,255,0.9);
+		text-decoration: none;
+		font-size: 0.85em;
+		transition: background 0.15s, border-color 0.15s;
+	}
+	.footer-x:hover {
+		background: rgba(255,255,255,0.12);
+		border-color: rgba(255,255,255,0.5);
+		color: white;
 	}
 </style>

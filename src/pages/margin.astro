@@ -1,0 +1,299 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// STEPごとの配色。/map のテーマカラーと揃えてある（同じ色＝同じ世界観）。
+const TONES = {
+	risk: { fill: '#FAEEDA', text: '#412402', accent: '#854F0B', border: '#FAC775' },
+	asset: { fill: '#E1F5EE', text: '#04342C', accent: '#0F6E56', border: '#9FE1CB' },
+	tob: { fill: '#FAECE7', text: '#4A1B0C', accent: '#993C1D', border: '#F5C4B3' },
+	philosophy: { fill: '#E6F1FB', text: '#042C53', accent: '#185FA5', border: '#B5D4F4' },
+	income: { fill: '#FBEAF0', text: '#4B1528', accent: '#993556', border: '#F4C0D1' },
+} as const;
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+const byId = new Map(posts.map((p) => [p.id, p]));
+
+// 信用キャリーの体系。slug は公開されたものだけが自動で表示される（draftは除外）。
+// 新しく書いたらここに1行足すだけでよい。
+const sections = [
+	{
+		step: 'STEP 1',
+		tone: 'risk',
+		heading: 'まず前提｜金利と配当の関係を知る',
+		lead: '信用のコストは「金利」だが、同時に<b>配当落調整金という収入</b>もある。<b>どこが損益分岐なのか</b>を最初に押さえる。',
+		items: [
+			{ id: 'nomura-margin-rate-1-69-alchemy', role: '入口', note: '買方金利<b>1.69%</b>への引き上げを、配当落調整金<b>84.685%</b>と損益分岐<b>2.00%</b>から読み解く。損出し＋3年繰越の節税まで。' },
+		],
+	},
+	{
+		step: 'STEP 2',
+		tone: 'philosophy',
+		heading: '次に規模｜「いくらまで建ててよいか」',
+		lead: '<b>銘柄より先に決めるべきはサイズ</b>。委託保証金維持率と<b>野村の追証ライン30%</b>から、レバレッジの上限を引く。',
+		items: [
+			{ id: 'margin-maintenance-rate-balance', role: 'レバレッジ論①', note: '<b>代用掛目80%込み</b>の実務式でストレステスト。レバ<b>1.2倍/1.5倍/2倍</b>で追証到達がどう変わるか。段階の踏み方。' },
+		],
+	},
+	{
+		step: 'STEP 3',
+		tone: 'asset',
+		heading: 'そして収益｜「そのレバレッジは何を稼ぐか」',
+		lead: '配当4%×金利1.69%で<b>合算4.54%</b>。ただしそれは<b>株価成長ゼロの下限ケース</b>で、内部複利が乗れば話は変わる。',
+		items: [
+			{ id: 'margin-carry-10year-model', role: 'レバレッジ論②', note: '10年シミュレーション。増配2%＋株価2%で<b>+1,301万円の上振れ</b>。<b>調整金が譲渡損益扱い</b>であることの税メリットまで。' },
+		],
+	},
+	{
+		step: 'STEP 4',
+		tone: 'tob',
+		heading: '応用｜口座・制度・商品ごとの使い分け',
+		lead: '同じ信用でも、<b>何に載せるかで性質が変わる</b>。NISAとの比較、代用の作法、債券ETFでの注意点。',
+		items: [
+			{ id: 'nisa-vs-margin-expected-return', role: '制度比較', note: '<b>NISAの非課税</b>と、<b>特定口座×信用の損益通算</b>。どちらが期待値で勝つのか。' },
+			{ id: 'debt-credit-trading-strategy', role: '実務', note: '<b>信用二階建ての危険</b>と、代用有価証券の作法。追証ラインまでの余裕をどう確保するか。' },
+			{ id: 'virtual-mortgage-strategy', role: '応用', note: '低金利の信用を<b>「住宅ローンのように」使う</b>発想。ただし<b>追証ラインは30%と厳しい</b>。' },
+			{ id: 'us-treasury-etf-hedge-2255-237a', role: '商品別', note: '債券ETFのキャリー。日本株バリューと違い<b>“資産の床”がない</b>ため、サイズはより保守的に。' },
+		],
+	},
+	{
+		step: 'STEP 5',
+		tone: 'income',
+		heading: '土台｜生き残るための資金管理',
+		lead: 'レバレッジを使う人ほど、<b>退場しない設計</b>が要る。暴落局面の実例と、<b>規律の作り方</b>。',
+		items: [
+			{ id: 'capital-management-survival', role: '哲学', note: '資金管理と<b>生き残りの技術</b>。レバレッジをかけた者がどう退場していくのか。' },
+			{ id: 'holdings-status-05-crash-entry', role: '実践', note: '<b>セリングクライマックス</b>での分割エントリー。急落を買い場に変える作法。' },
+			{ id: 'kioxia-285a-crash-analysis', role: '時事', note: '<b>信用倍率36倍</b>の重さが何を意味するか。需給で急落を読む実例。' },
+		],
+	},
+];
+
+const has = (id: string) => byId.has(id);
+const toneVars = (t: keyof typeof TONES) => {
+	const c = TONES[t];
+	return `--fill:${c.fill};--text:${c.text};--accent:${c.accent};--bd:${c.border}`;
+};
+const title = (id: string) => byId.get(id)?.data.title ?? id;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="野村流・信用キャリー完全ガイド | 沼底バリュー商会"
+			description="野村證券の買方金利1.69%を使った信用キャリーを体系的にまとめた特設ページ。損益分岐は配当利回り2.00%、配当4%なら合算実効4.54%。追証ラインは維持率30%で、レバ1.2倍なら株価マイナス74%・1.5倍ならマイナス50%・2倍ならマイナス27.8%で到達する。金利と配当の関係、建ててよい規模、10年の収益シミュレーション、NISAとの比較、資金管理までを順に読める記事マップ。投資助言ではありません。"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="mg-hero">
+				<div class="mg-badge">🧓 野村流レバレッジ</div>
+				<h1><span class="mg-hl">野村流信用錬金術</span><span class="mg-badge-full">完全ガイド</span></h1>
+				<p class="mg-desc">低金利の信用を<b>「配当で肩代わりさせる」設計</b>と、<b>その代償</b>を、順を追って</p>
+			</section>
+
+			<section class="mg-nums">
+				<div class="mg-num t-blue">
+					<div class="mg-num-l">損益分岐となる配当利回り</div>
+					<div class="mg-num-v">2.00<span>%</span></div>
+					<div class="mg-num-d">金利1.69% ÷ 調整金84.685%</div>
+				</div>
+				<div class="mg-num t-green">
+					<div class="mg-num-l">配当4%時の合算実効利回り</div>
+					<div class="mg-num-v">4.54<span>%</span></div>
+					<div class="mg-num-d">現物3.19% ＋ 信用1.35%</div>
+				</div>
+				<div class="mg-num t-red">
+					<div class="mg-num-l">野村の追証ライン</div>
+					<div class="mg-num-v">30<span>%</span></div>
+					<div class="mg-num-d">法定最低20%より厳しい</div>
+				</div>
+			</section>
+
+			<section class="mg-table-wrap">
+				<h2 class="mg-h2">レバレッジ別・追証に届く下落率</h2>
+				<p class="mg-note">実務式（委託保証金−建玉評価損）÷建玉金額、現物株の代用掛目80%、追証ライン30%で計算</p>
+				<div class="mg-scroll">
+					<table class="mg-table">
+						<thead>
+							<tr><th>現物:信用</th><th>実質レバ</th><th>平時</th><th>▲30%時</th><th>追証(30%)到達</th><th>位置づけ</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>100 : 20</td><td><b>1.2倍</b></td><td>400%</td><td>250%</td><td class="ok"><b>▲74.0%</b></td><td>入口。事実上、追証は来ない</td></tr>
+							<tr class="hi"><td>100 : 50</td><td><b>1.5倍</b></td><td>160%</td><td>82%</td><td class="ok"><b>▲50.0%</b></td><td><b>実用上の上限</b>。半値暴落に耐える</td></tr>
+							<tr><td>100 : 75</td><td>1.75倍</td><td>107%</td><td>45%</td><td class="warn"><b>▲37.1%</b></td><td>やや攻めた水準</td></tr>
+							<tr><td>100 : 100</td><td><b>2.0倍</b></td><td>80%</td><td class="ng">26%</td><td class="ng"><b>▲27.8%</b></td><td>限界値。相応のリスクを取っている自覚が要る</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="mg-callout">
+					<b>野村の“超低金利”は、そのまま余裕にはならない。</b>
+					買方金利1.69%は他社比でも低くキャリーの武器になるが、その分<b>追証ラインは30%と厳しめ</b>で、受入期日も発生日から2営業日目と短い。
+					<b>低金利の恩恵を受け取る代わりに、維持率には人一倍の余裕を持って構える</b>——これが野村で信用を使う作法。
+				</div>
+			</section>
+
+			<section class="mg-steps">
+				<h2 class="mg-h2">読む順番｜信用キャリーの体系</h2>
+				{sections.map((sec) => {
+					const live = sec.items.filter((it) => has(it.id));
+					return live.length === 0 ? null : (
+						<div class="mg-step" style={toneVars(sec.tone)}>
+							<div class="mg-step-head">
+								<span class="mg-step-badge">{sec.step}</span>
+								<h3>{sec.heading}</h3>
+								<span class="mg-step-count">{live.length}本</span>
+							</div>
+							<p class="mg-step-lead" set:html={sec.lead} />
+							<ul class="mg-list">
+								{live.map((it) => (
+									<li>
+										<a href={`/blog/${it.id}/`}>
+											<span class="mg-role">{it.role}</span>
+											<span class="mg-title">{title(it.id)}</span>
+											<span class="mg-note-s" set:html={it.note} />
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					);
+				})}
+			</section>
+
+			<section class="mg-report">
+				<h2 class="mg-h2">完全版レポート</h2>
+				<p class="mg-note">記事の元になった検証資料。10年の年次推移、感応度分析、下落ストレス試算まで。</p>
+				<a class="mg-report-btn" href="/analysis/margin-carry-10year-model">
+					📊 4,000万円 高配当バリュー株 × 同額信用キャリー 10年モデル →
+				</a>
+			</section>
+
+			<p class="mg-disc">
+				※本ページは投資助言ではありません。掲載の数値は一定の前提を置いたモデル試算であり、実際には減配・株価変動・金利改定・税制変更・証券会社の規定変更などにより結果は大きく異なります。
+				配当落調整金の支払率、委託保証金維持率の最低ライン、代用有価証券の掛目は証券会社ごとに異なるため、必ずご自身の口座の最新の規定をご確認ください。
+				信用取引はレバレッジにより損失が預託額を上回る可能性があります。投資はご自身の判断と責任でお願いします。
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* global.css の main は width:720px 固定のため、width も上書きしないと
+	   モバイルで横スクロールが出る（box-sizing も明示） */
+	main {
+		width: 100%;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 3vw, 32px) 64px;
+		box-sizing: border-box;
+	}
+	.mg-hero { text-align: center; padding: 38px 0 10px; }
+	.mg-badge {
+		display: inline-block; font-size: 0.78rem; letter-spacing: .08em; font-weight: 700;
+		background: linear-gradient(90deg, #FAEEDA, #FEF3E0);
+		color: #854F0B; border: 1px solid #FAC775;
+		padding: 5px 13px; border-radius: 999px; margin-bottom: 14px;
+	}
+	.mg-hero h1 { font-size: 2.05rem; margin: 0 0 8px; line-height: 1.3; }
+	.mg-hl { background: linear-gradient(transparent 62%, #FFE68A 62%); padding: 0 2px; }
+	.mg-badge-full {
+		display: inline-block; font-size: 0.95rem; vertical-align: middle;
+		background: #412402; color: #FAEEDA; padding: 4px 11px;
+		border-radius: 6px; margin-left: 10px;
+	}
+	.mg-desc { color: rgb(var(--gray)); margin: 0; font-size: 0.98rem; }
+	.mg-desc b { color: #854F0B; }
+
+	.mg-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 8px; }
+	.mg-num { border-radius: 10px; padding: 18px 16px; text-align: center; border: 1px solid; border-top: 4px solid; }
+	.mg-num.t-blue { background: #F5F9FE; border-color: #B5D4F4; border-top-color: #185FA5; }
+	.mg-num.t-green { background: #F3FBF8; border-color: #9FE1CB; border-top-color: #0F6E56; }
+	.mg-num.t-red { background: #FEF6F5; border-color: #F5C4B3; border-top-color: #b3261e; }
+	.mg-num-l { font-size: 0.78rem; color: rgb(var(--gray)); margin-bottom: 8px; font-weight: 600; }
+	.mg-num-v { font-size: 2.15rem; font-weight: 900; letter-spacing: -.02em; }
+	.mg-num-v span { font-size: 1.0rem; margin-left: 2px; font-weight: 700; }
+	.t-blue .mg-num-v { color: #185FA5; }
+	.t-green .mg-num-v { color: #0F6E56; }
+	.t-red .mg-num-v { color: #b3261e; }
+	.mg-num-d { font-size: 0.74rem; color: rgb(var(--gray)); margin-top: 6px; }
+
+	.mg-h2 { font-size: 1.22rem; margin: 44px 0 6px; padding-left: 12px; border-left: 5px solid #E8B84B; }
+	.mg-note { font-size: 0.82rem; color: rgb(var(--gray)); margin: 0 0 14px; }
+
+	.mg-scroll { overflow-x: auto; }
+	.mg-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 620px; }
+	.mg-table th { background: #f6f2ea; text-align: left; padding: 10px 9px; border-bottom: 2px solid #e8e3d9; white-space: nowrap; font-size: 0.8rem; }
+	.mg-table td { padding: 10px 9px; border-bottom: 1px solid #eee8dc; }
+	.mg-table tr.hi td { background: #f2f9f4; }
+	.mg-table .ok { color: #1f7a4d; }
+	.mg-table .warn { color: #a8700c; }
+	.mg-table .ng { color: #b3261e; }
+
+	.mg-callout {
+		background: #FFF9EC; border-left: 4px solid #E8B84B; border-radius: 0 8px 8px 0;
+		padding: 15px 18px; margin: 18px 0 0; font-size: 0.88rem; line-height: 1.85;
+	}
+
+	.mg-step {
+		margin-top: 26px; padding: 16px 16px 18px;
+		background: color-mix(in srgb, var(--fill) 45%, #fff);
+		border: 1px solid var(--bd);
+		border-left: 5px solid var(--accent);
+		border-radius: 10px;
+	}
+	.mg-step-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+	.mg-step-badge {
+		font-size: 0.7rem; font-weight: 900; letter-spacing: .06em;
+		background: var(--text); color: #fff; padding: 4px 10px; border-radius: 5px; flex-shrink: 0;
+	}
+	.mg-step-head h3 { margin: 0; font-size: 1.06rem; color: var(--text); }
+	.mg-step-count {
+		margin-left: auto; flex-shrink: 0;
+		font-size: 0.7rem; font-weight: 800; color: var(--accent);
+		background: #fff; border: 1px solid var(--bd);
+		padding: 3px 9px; border-radius: 999px;
+	}
+	.mg-step-lead { font-size: 0.86rem; color: #4a4a4a; margin: 10px 0 12px; line-height: 1.9; }
+	.mg-step-lead :global(b) { color: var(--accent); font-weight: 800; }
+
+	.mg-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+	.mg-list a {
+		display: block; background: #fff; border: 1px solid var(--bd);
+		border-left: 4px solid var(--bd); border-radius: 8px;
+		padding: 12px 14px; text-decoration: none; color: inherit;
+		transition: border-left-color .15s, transform .1s, box-shadow .15s;
+	}
+	.mg-list a:hover { border-left-color: var(--accent); transform: translateY(-1px); box-shadow: 0 3px 12px rgba(0,0,0,.08); }
+	.mg-role {
+		display: inline-block; font-size: 0.68rem; font-weight: 900; letter-spacing: .03em;
+		background: var(--fill); color: var(--accent); padding: 3px 9px; border-radius: 999px; margin-bottom: 6px;
+	}
+	.mg-title { display: block; font-weight: 700; font-size: 0.93rem; line-height: 1.55; color: #1a3a5c; }
+	.mg-note-s { display: block; font-size: 0.78rem; color: rgb(var(--gray)); margin-top: 5px; line-height: 1.75; }
+	.mg-note-s :global(b) { color: var(--text); font-weight: 700; }
+
+	.mg-report-btn {
+		display: block; text-align: center; background: #412402; color: #FAEEDA;
+		padding: 15px 18px; border-radius: 9px; text-decoration: none; font-weight: 700;
+		font-size: 0.92rem; transition: background .15s;
+	}
+	.mg-report-btn:hover { background: #5a3305; }
+
+	.mg-disc { font-size: 0.74rem; color: rgb(var(--gray)); line-height: 1.9; margin-top: 34px; }
+
+	@media (max-width: 720px) {
+		.mg-nums { grid-template-columns: 1fr; }
+		.mg-hero h1 { font-size: 1.55rem; }
+		.mg-badge-full { display: block; margin: 10px auto 0; width: fit-content; }
+		.mg-num-v { font-size: 1.75rem; }
+		.mg-step { padding: 14px 12px 16px; }
+		.mg-step-head h3 { font-size: 0.98rem; }
+		.mg-step-count { margin-left: 0; }
+	}
+</style>

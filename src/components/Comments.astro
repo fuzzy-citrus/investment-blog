@@ -3,10 +3,12 @@ interface Props {
   pageId: string;
 }
 const { pageId } = Astro.props;
+const SHOW_COMMENTS = false; // true に変えるだけで有効化
 const COMMENTS_API = 'https://investment-blog-comments.fuzzy-citrus-yk02.workers.dev';
 // Blog URL: https://investment-blog-2lc.pages.dev
 ---
 
+{SHOW_COMMENTS && (
 <section class="comments-section">
   <h2 class="comments-heading">コメント</h2>
 
@@ -36,9 +38,10 @@ const COMMENTS_API = 'https://investment-blog-comments.fuzzy-citrus-yk02.workers
     <p class="no-api-msg">（コメント機能は本番環境でご利用いただけます）</p>
   )}
 </section>
+)}
 
-<script define:vars={{ COMMENTS_API, pageId }}>
-  if (COMMENTS_API) {
+<script define:vars={{ SHOW_COMMENTS, COMMENTS_API, pageId }}>
+  if (SHOW_COMMENTS && COMMENTS_API) {
     const api = COMMENTS_API.replace(/\/$/, '');
     const list = document.getElementById('comments-list');
     const form = document.getElementById('comment-form');

@@ -1,0 +1,257 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title="会社紹介 | 沼底バリュー商会" description="バリュー商会の概要・投資スタンス・資産推移。沼田課長が野村証券の実口座で運用する実践投資記録です。" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="company-hero">
+				<div class="company-badge">🏢 バリュー商会</div>
+				<h1>会社紹介</h1>
+				<p class="company-desc">バリュー商会の成績です</p>
+			</section>
+
+			<section class="about-blog">
+				<h2>バリュー商会とは</h2>
+				<div class="about-grid">
+					<div class="about-item">
+						<span class="about-icon">🧑‍💼</span>
+						<div>
+							<div class="about-label">運営者</div>
+							<div class="about-text">保有資産約5,000万円。野村流錬金術を駆使する沼田堅一課長を主人公に、バリュー商会の資産を実際の投資成績と直結させて育てていく実践記録です。</div>
+						</div>
+					</div>
+					<div class="about-item">
+						<span class="about-icon">🎯</span>
+						<div>
+							<div class="about-label">目標</div>
+							<div class="about-text"><strong>バリュー商会の資産推移＝筆者本人の運用成績です。</strong>中間目標：2028年に1億円、最終目標：2030年に2億円以上。<br /><span class="about-note-inline">※注目銘柄は紹介しますがポジション全部の公開はしてません。インデックスやテーマ株・モメンタムも時々混ざるのでブレは多少あります。</span></div>
+						</div>
+					</div>
+					<div class="about-item">
+						<span class="about-icon">📊</span>
+						<div>
+							<div class="about-label">投資スタンス</div>
+							<div class="about-text">メインは日本個別株・TOB銘柄発掘・ニッチトップ戦略。紹介銘柄・戦略は野村証券の口座で実際に売買しながら更新します。</div>
+						</div>
+					</div>
+					<div class="about-item">
+						<span class="about-icon">🏦</span>
+						<div>
+							<div class="about-label">野村の錬金術（低金利レバレッジ）</div>
+							<div class="about-text">野村証券の信用買い方金利は<strong>年1.69%</strong>（0.5%時代から段階的に上昇）。配当落調整金と税金まで織り込んだ損益分岐は配当利回り<strong>約2.0%</strong>で、<strong>3〜4%の本質的バリュー銘柄</strong>なら金利上昇後もなおキャリーはプラス。配当性向が低くキャッシュを溜め込んでいるニッチトップを、下値余地が小さいうちに集める方針。金利上昇はむしろインフレ本格化のサインと捉えています。</div>
+						</div>
+					</div>
+				</div>
+				<p class="about-note">※このブログは自身の投資手法や成績を振り返り、今後に活かす場所として活用しています。</p>
+			</section>
+
+			<section class="asset-status">
+				<div class="asset-header">
+					<span class="asset-launch-badge">🚀 スタートライン — 2026年5月</span>
+					<span class="asset-account">野村証券 実口座</span>
+				</div>
+				<div class="asset-main">
+					<div class="asset-amounts">
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">現在総資産（2026年6月）</div>
+							<div class="asset-amt-val val-now"><strong>4,326万円</strong></div>
+							<div class="asset-now-sub">評価損益 <span class="pos">+374万円</span></div>
+						</div>
+						<div class="asset-amt-arrow">
+							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</div>
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">中間目標 2028年</div>
+							<div class="asset-amt-val val-mid"><strong>1億円</strong></div>
+						</div>
+						<div class="asset-amt-arrow">
+							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</div>
+						<div class="asset-amt-block">
+							<div class="asset-amt-label">最終目標 2030年</div>
+							<div class="asset-amt-val val-goal"><strong>2億円</strong></div>
+						</div>
+					</div>
+					<div class="asset-bar-wrap">
+						<div class="asset-bar">
+							<div class="asset-bar-fill" style="width:21.6%">
+								<span class="asset-bar-now">NOW<br/>21%</span>
+							</div>
+							<div class="asset-bar-mid-marker">
+								<span class="asset-bar-mid-label">1億<br/>2028</span>
+							</div>
+							<div class="asset-bar-goal">2億</div>
+						</div>
+						<div class="asset-bar-scale">
+							<span>0</span><span>5,000万</span><span>1億</span><span>1.5億</span><span>2億</span>
+						</div>
+					</div>
+				</div>
+				<div class="asset-chart-wrap">
+					<img src="/images/nomura-asset-chart-202607.png" alt="野村証券 資産推移チャート（2025年6月〜2026年7月）" class="asset-chart-img" />
+				</div>
+				<p class="asset-update-rule">📅 月初に前月末の成績が反映されます</p>
+				<p class="asset-brand-note">📊 この資産推移は沼底バリュー商会（筆者本人）の野村証券実口座の運用成績です。</p>
+				<p class="asset-disclaimer">※ 投資勧誘ではありません。</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main { max-width: 760px; margin: 0 auto; padding: 1em 1em 4em; }
+
+	.company-hero {
+		text-align: center;
+		padding: 2.5em 1em 1.8em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 2em;
+		position: relative;
+		overflow: hidden;
+	}
+	.company-hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: url('/images/company-characters.png') center center / cover no-repeat;
+		opacity: 0.22;
+		pointer-events: none;
+		z-index: 0;
+	}
+	.company-hero > * {
+		position: relative;
+		z-index: 1;
+	}
+	.company-badge {
+		display: inline-block;
+		background: var(--accent-light);
+		color: var(--accent-dark);
+		font-weight: bold;
+		font-size: 0.85em;
+		padding: 0.3em 1em;
+		border-radius: 999px;
+		margin-bottom: 0.8em;
+	}
+	.company-hero h1 { font-size: 2em; margin-bottom: 0.4em; }
+	.company-desc { color: rgb(var(--gray)); font-size: 0.95em; margin: 0; }
+
+	/* About */
+	.about-blog {
+		margin-bottom: 2.5em;
+		padding: 1.4em 1.2em;
+		background: #f8faf8;
+		border: 1px solid #dde8dd;
+		border-radius: 10px;
+	}
+	.about-blog h2 {
+		font-size: 1.1em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin: 0 0 1em;
+	}
+	.about-grid { display: flex; flex-direction: column; gap: 0.85em; margin-bottom: 0.9em; }
+	.about-item { display: flex; gap: 0.75em; align-items: flex-start; }
+	.about-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 0.05em; }
+	.about-label {
+		font-size: 0.7em; font-weight: 700; letter-spacing: 0.08em;
+		color: var(--accent-dark); text-transform: uppercase; margin-bottom: 0.2em;
+	}
+	.about-text { font-size: 0.85em; color: rgb(var(--gray-dark)); line-height: 1.65; }
+	.about-note-inline {
+		font-size: 0.9em; color: rgb(var(--gray));
+		display: block; margin-top: 0.4em; line-height: 1.6;
+	}
+	.about-note {
+		font-size: 0.76em; color: rgb(var(--gray));
+		margin: 0; padding-top: 0.8em; border-top: 1px dashed #ccd8cc;
+	}
+
+	/* Asset Status */
+	.asset-status {
+		background: linear-gradient(135deg, #1a3a1c 0%, #0f2610 100%);
+		border-radius: 12px;
+		padding: 1.4em 1.5em;
+		margin-bottom: 2em;
+		color: #fff;
+		position: relative;
+		overflow: hidden;
+	}
+	.asset-status::before {
+		content: '📈';
+		position: absolute; right: -10px; bottom: -15px;
+		font-size: 7em; opacity: 0.05; line-height: 1; pointer-events: none;
+	}
+	.asset-header {
+		display: flex; justify-content: space-between; align-items: center;
+		margin-bottom: 1.1em; flex-wrap: wrap; gap: 0.4em;
+	}
+	.asset-launch-badge {
+		background: rgba(126,217,87,0.18); border: 1px solid rgba(126,217,87,0.4);
+		color: #a0e870; font-size: 0.72em; font-weight: 700;
+		padding: 0.25em 0.8em; border-radius: 999px; letter-spacing: 0.04em;
+	}
+	.asset-account { font-size: 0.68em; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.06em; }
+	.asset-main { margin-bottom: 1.2em; }
+	.asset-amounts { display: flex; align-items: center; gap: 0; margin-bottom: 0.9em; }
+	.asset-amt-block { flex: 1; min-width: 0; }
+	.asset-amt-arrow { flex: 0 0 48px; display: flex; align-items: center; justify-content: center; padding: 0 2px; }
+	.asset-amt-label {
+		font-size: 0.6em; font-weight: 700; letter-spacing: 0.08em;
+		text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.2em; white-space: nowrap;
+	}
+	.asset-amt-val { font-size: 1.05em; color: #fff; }
+	.asset-amt-val strong { font-size: 1.35em; }
+	.val-now strong { color: #7ed957; }
+	.val-mid strong { color: #a0c8ff; }
+	.val-goal strong { color: #e8b84b; }
+	.asset-bar { background: rgba(255,255,255,0.1); border-radius: 6px; height: 28px; position: relative; overflow: visible; margin-bottom: 0.35em; }
+	.asset-bar-fill {
+		width: 25%; height: 100%;
+		background: linear-gradient(90deg, #2c7a2e, #7ed957);
+		border-radius: 6px; position: relative;
+		display: flex; align-items: center; justify-content: flex-end;
+	}
+	.asset-bar-now {
+		position: absolute; right: -30px; top: -2px;
+		font-size: 0.5em; font-weight: 700; color: #7ed957;
+		text-align: center; line-height: 1.2; white-space: nowrap;
+	}
+	.asset-bar-mid-marker {
+		position: absolute; left: 50%; top: 0; height: 100%;
+		width: 1px; background: rgba(160,200,255,0.45); pointer-events: none;
+	}
+	.asset-bar-mid-label {
+		position: absolute; left: 4px; top: -1px;
+		font-size: 0.48em; font-weight: 700; color: #a0c8ff;
+		text-align: center; line-height: 1.2; white-space: nowrap;
+	}
+	.asset-bar-goal {
+		position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+		font-size: 0.6em; font-weight: 700; color: rgba(255,255,255,0.4);
+	}
+	.asset-bar-scale {
+		display: flex; justify-content: space-between;
+		font-size: 0.58em; color: rgba(255,255,255,0.3); padding: 0 2px;
+	}
+	.asset-now-sub { font-size: 0.72em; color: rgba(255,255,255,0.5); margin-top: 0.15em; }
+	.asset-now-sub .pos { color: #7ed957; font-weight: 700; }
+	.asset-chart-wrap { margin: 1em 0; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+	.asset-chart-img { width: 100%; display: block; }
+	.asset-brand-note {
+		font-size: 0.72em; color: rgba(255,255,255,0.6);
+		margin: 0.8em 0 0.2em; padding-top: 0.7em;
+		border-top: 1px solid rgba(255,255,255,0.1); font-weight: 600;
+	}
+	.asset-update-rule { font-size: 0.68em; color: rgba(255,255,255,0.45); margin: 0.3em 0; }
+	.asset-disclaimer { font-size: 0.65em; color: rgba(255,255,255,0.3); margin: 0; }
+</style>

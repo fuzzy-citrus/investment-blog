@@ -1,15 +1,15 @@
----
+﻿---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import BookSidebar from '../../components/BookSidebar.astro';
+import { columnAuthors } from '../../data/columnAuthors';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog'))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
@@ -50,6 +50,22 @@ const posts = (await getCollection('blog')).sort(
 			.post-card:hover {
 				box-shadow: 0 4px 12px rgba(0,0,0,10%);
 			}
+			.post-card.has-author {
+				border-left: 5px solid var(--author-accent);
+			}
+			.author-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35em;
+				align-self: flex-start;
+				font-size: 0.72em;
+				font-weight: 700;
+				padding: 0.2em 0.7em;
+				border-radius: 20px;
+				margin-bottom: 0.5em;
+				letter-spacing: 0.02em;
+			}
+			.author-emoji { font-size: 1.15em; }
 			.post-card a {
 				display: flex;
 				align-items: stretch;
@@ -117,12 +133,49 @@ const posts = (await getCollection('blog')).sort(
 			.stock-card:hover {
 				box-shadow: 0 4px 14px rgba(0,0,0,18%);
 			}
+			.stock-card.theme-event {
+				border: 2.5px solid rgba(220,50,50,0.85);
+				box-shadow: 0 0 0 3px rgba(220,50,50,0.12), 0 0 18px rgba(220,50,50,0.22), 0 2px 12px rgba(0,0,0,20%);
+			}
+			.stock-card.theme-event:hover {
+				box-shadow: 0 0 0 3px rgba(220,50,50,0.22), 0 0 28px rgba(220,50,50,0.35), 0 4px 20px rgba(0,0,0,25%);
+			}
+			/* イベント案件注意バナー */
+			.event-warning {
+				display: flex;
+				align-items: center;
+				gap: 0.6em;
+				background: rgba(220,50,50,0.07);
+				border: 1px solid rgba(220,50,50,0.3);
+				border-left: 3px solid rgba(220,50,50,0.8);
+				border-radius: 6px;
+				padding: 0.55em 0.9em;
+				margin-bottom: 0.5em;
+				font-size: 0.78em;
+				color: #b03030;
+				line-height: 1.5;
+			}
+			.event-warning-icon {
+				font-size: 1em;
+				flex-shrink: 0;
+			}
+			.event-warning strong {
+				font-weight: 700;
+			}
 			.stock-card a {
 				display: block;
 				text-decoration: none;
 				color: inherit;
 				background: #1a2535;
 			}
+			.stock-card.theme-event a { background: #271400; }
+			.stock-card.theme-event .stock-card-category {
+				background: rgba(240,130,40,0.18);
+				border: 1px solid rgba(240,130,40,0.5);
+				color: #f09040;
+			}
+			.stock-card.theme-event .stock-card-target { color: #f09040; }
+			.stock-card.theme-event .sc-kpi-value.green { color: #f09040; }
 			.stock-card-header {
 				padding: 1em 1.3em 0.8em;
 				display: flex;
@@ -131,7 +184,7 @@ const posts = (await getCollection('blog')).sort(
 				gap: 1em;
 				flex-wrap: wrap;
 			}
-			.stock-card-left {}
+			.stock-card-left { flex: 1 1 0; min-width: 0; }
 			.stock-card-badge {
 				font-size: 0.6em;
 				font-weight: 700;
@@ -164,6 +217,15 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.stock-card-verdict {
 				text-align: right;
+				flex: 0 0 auto;
+			}
+			.stock-card-scenario-note {
+				text-align: right;
+				font-size: 0.58em;
+				color: rgba(255,255,255,0.28);
+				margin-top: -0.3em;
+				margin-bottom: 0.6em;
+				letter-spacing: 0.02em;
 			}
 			.stock-card-verdict-label {
 				font-size: 0.6em;
@@ -238,9 +300,18 @@ const posts = (await getCollection('blog')).sort(
 			/* フィルタータブ */
 			.filter-bar {
 				display: flex;
+				align-items: center;
+				justify-content: space-between;
 				gap: 0.5em;
 				margin-bottom: 1.5em;
 				flex-wrap: wrap;
+			}
+			.filter-tabs { display: flex; gap: 0.5em; flex-wrap: wrap; }
+			.filter-note {
+				font-size: 0.68em;
+				color: #888;
+				text-align: right;
+				line-height: 1.5;
 			}
 			.filter-btn {
 				padding: 0.4em 1.1em;
@@ -280,16 +351,26 @@ const posts = (await getCollection('blog')).sort(
 		<main>
 			<h1>銘柄＆戦略の紹介</h1>
 			<div class="filter-bar">
-				<button class="filter-btn" data-filter="stock">銘柄紹介</button>
-				<button class="filter-btn" data-filter="column">投資コラム</button>
-				<button class="filter-btn" data-filter="all">すべて</button>
+				<div class="filter-tabs">
+					<button class="filter-btn" data-filter="stock">銘柄紹介</button>
+					<button class="filter-btn" data-filter="column">投資コラム</button>
+					<button class="filter-btn" data-filter="all">すべて</button>
+				</div>
+				<div class="filter-note">シナリオが大きく崩れない限り保有継続<br/>崩れた場合は売却を検討</div>
 			</div>
 			<ul class="post-list">
 				{posts.map((post) => (
 					<li data-type={post.data.stockCard ? 'stock' : 'column'}>
 						{post.data.stockCard ? (
 							/* 銘柄分析カード */
-							<div class="stock-card">
+							<>
+							{post.data.stockCard?.cardTheme === 'event' && (
+								<div class="event-warning">
+									<span class="event-warning-icon">⚠️</span>
+									<span><strong>要警戒・期限あり案件</strong> — イベント（TOB・売却）の決着次第でシナリオが大きく変わります。売却中止・長期化の場合は即撤退を検討してください。</span>
+								</div>
+							)}
+							<div class={`stock-card${post.data.stockCard?.cardTheme === 'event' ? ' theme-event' : ''}`}>
 								<a href={`/blog/${post.id}/`}>
 									<div class="stock-card-header">
 										<div class="stock-card-left">
@@ -301,7 +382,7 @@ const posts = (await getCollection('blog')).sort(
 											<div class="stock-card-category">{post.data.stockCard.category}</div>
 										</div>
 										<div class="stock-card-verdict">
-											<div class="stock-card-verdict-label">期待価格</div>
+											<div class="stock-card-verdict-label">{post.data.stockCard?.cardTheme === 'event' ? 'TOB・売却決着時の 期待価格' : '3年保有想定の 期待価格'}</div>
 											<div class="stock-card-target">{post.data.stockCard.targetPrice.toLocaleString()}円</div>
 											<div class="stock-card-upside">現在比 {post.data.stockCard.upside}</div>
 										</div>
@@ -313,7 +394,7 @@ const posts = (await getCollection('blog')).sort(
 											<div class="sc-kpi-value amber">{post.data.stockCard.currentPrice.toLocaleString()}円</div>
 										</div>
 										<div class="sc-kpi">
-											<div class="sc-kpi-label">期待価格</div>
+											<div class="sc-kpi-label">3年期待価格</div>
 											<div class="sc-kpi-value green">{post.data.stockCard.targetPrice.toLocaleString()}円</div>
 										</div>
 										<div class="sc-kpi">
@@ -329,21 +410,28 @@ const posts = (await getCollection('blog')).sort(
 											<div class="sc-kpi-value red">{post.data.stockCard.modifiedPBR}</div>
 										</div>
 									</div>
-									<div class="stock-card-note">※ 期待価格はベア／ベース／ブル確率加重平均・3年保有想定</div>
+
 									<div class="stock-card-footer">
 										<FormattedDate date={post.data.pubDate} />
 										<span>→ 分析を読む</span>
 									</div>
 								</a>
 							</div>
+							</>
 						) : (
 							/* 通常記事カード */
-							<div class="post-card">
+							<div class={`post-card${columnAuthors[post.id] ? ' has-author' : ''}`} style={columnAuthors[post.id] ? `--author-accent:${columnAuthors[post.id].accent}` : ''}>
 								<a href={`/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={220} height={140} src={post.data.heroImage} alt="" />
 									)}
 									<div class="post-card-body">
+										{columnAuthors[post.id] && (
+											<span class="author-badge" style={`background:${columnAuthors[post.id].fill};color:${columnAuthors[post.id].text}`}>
+												<span class="author-emoji">{columnAuthors[post.id].emoji}</span>
+												{columnAuthors[post.id].name}の発信
+											</span>
+										)}
 										<h4 class="post-title">{post.data.title}</h4>
 										{post.data.cardDesc
 											? <p class="post-desc" set:html={post.data.cardDesc} />

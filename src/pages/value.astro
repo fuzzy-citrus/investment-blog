@@ -1,0 +1,452 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+const byId = new Map(posts.map((p) => [p.id, p]));
+
+// STEPごとの配色。/map のテーマカラーと揃えてある（同じ色＝同じ世界観）。
+const TONES = {
+	philosophy: { fill: '#E6F1FB', text: '#042C53', accent: '#185FA5', border: '#B5D4F4' },
+	asset: { fill: '#E1F5EE', text: '#04342C', accent: '#0F6E56', border: '#9FE1CB' },
+	tob: { fill: '#FAECE7', text: '#4A1B0C', accent: '#993C1D', border: '#F5C4B3' },
+	income: { fill: '#FBEAF0', text: '#4B1528', accent: '#993556', border: '#F4C0D1' },
+	risk: { fill: '#FAEEDA', text: '#412402', accent: '#854F0B', border: '#FAC775' },
+	moat: { fill: '#EEEDFE', text: '#26215C', accent: '#534AB7', border: '#CECBF6' },
+} as const;
+
+// バリュー株の体系。slug は公開されたものだけが自動で表示される（draftは除外）。
+// 新しく書いたらここに1行足すだけでよい。
+const sections = [
+	{
+		step: 'STEP 1',
+		tone: 'philosophy',
+		heading: 'まず理屈｜なぜ「安い株」が勝てるのか',
+		lead: '割安株が報われるのは<b>根性論ではない</b>。<b>価格と価値がずれる仕組み</b>と、<b>そのずれが埋まる理由</b>を先に押さえる。',
+		items: [
+			{ id: 'value-concept', role: '入口', note: '「価値」とは何か。<b>価格と価値を分けて考える</b>という、すべての出発点。' },
+			{ id: 'why-value-stocks-win', role: '原理', note: 'なぜバリュー株は長期で勝つのか。<b>期待の低さが生む非対称</b>を、構造から説明する。' },
+			{ id: 'efficient-market-hypothesis', role: '反論', note: '「市場は効率的だから割安株など無い」への回答。<b>歪みはどこに残るのか</b>。' },
+			{ id: 'japan-market-distortion-01', role: '土壌', note: '日本市場に歪みが多い理由。<b>PBR1倍割れが放置されてきた</b>構造的背景。' },
+		],
+	},
+	{
+		step: 'STEP 2',
+		tone: 'asset',
+		heading: '次に物差し｜何をもって「安い」と言うか',
+		lead: 'PERやPBRは便利だが、<b>使い方を間違えると罠になる</b>。うちが実際に何を見ているかを開示する。',
+		items: [
+			{ id: 'per-value-investing', role: '指標①', note: 'PERの正しい使い方と、<b>低PERが罠になる典型パターン</b>。' },
+			{ id: 'good-stock-vs-good-company', role: '思考法', note: '<b>「良い会社」と「良い株」は違う</b>。良い会社が高すぎれば悪い株になる。' },
+			{ id: 'net-net-graham-investing', role: '古典', note: 'グレアムのネットネット。<b>流動資産だけで時価総額を上回る</b>という極端な安全域。' },
+			{ id: 'how-to-find-net-net-japan', role: '実践', note: '日本株でネットネットをどう探すか。<b>スクリーニングの具体的な条件</b>。' },
+		],
+	},
+	{
+		step: 'STEP 3',
+		tone: 'tob',
+		heading: '触媒を重ねる｜「安いだけ」で終わらせない',
+		lead: '安さは、<b>それを解消する力がなければ永久に安いまま</b>だ。外圧・TOB・資本政策という<b>“動く理由”</b>をどう見つけるか。',
+		items: [
+			{ id: 'activist-front-running-01', role: '先回り①', note: '総論。<b>安い資産には、いつか必ず外圧が来る</b>。だから来る前に座っておく。' },
+			{ id: 'activist-front-running-02', role: '先回り②', note: 'スマートマネー編。<b>光通信・重田氏の買い方</b>から、プロの目線を逆算する。' },
+			{ id: 'activist-front-running-03', role: '先回り③', note: '実践編。先回りできる割安株を見分ける<b>チェックリスト</b>。' },
+			{ id: 'activist-front-running-real-cases', role: '先回り実例', note: 'ダイケン・群栄・遠藤に外圧が続々。<b>純投資→重要提案→MBO</b>という“温度の階段”。' },
+			{ id: 'value-tob-strategy-2026', role: 'TOB', note: 'TOBが起きる会社の条件と、<b>起きなくても負けない買い方</b>。' },
+		],
+	},
+	{
+		step: 'STEP 4',
+		tone: 'income',
+		heading: '待つ技術｜時間を、敵から味方に変える',
+		lead: '割安株の最大の敵は<b>下落ではなく時間</b>だ。配当と優待は<b>その時間を耐えるための燃料</b>になる。だが逆に、<b>株価が動かないまま、保有年数だけ価値に対して安くなっていく株</b>もある——<b>安さと、還元の強さは別の軸</b>だ。',
+		items: [
+			{ id: 'dividend-series-01-what-is-dividend', role: '配当①', note: 'そもそも配当とは何か。<b>企業から株主への現金移転</b>をどう評価するか。' },
+			{ id: 'dividend-series-02-low-payout-opportunity', role: '配当②', note: '<b>低配当性向という妙味</b>。まだ配っていない会社ほど、増配余地が残っている。' },
+			{ id: 'dividend-series-03-dividend-as-exit-strategy', role: '配当③', note: '配当を出口戦略として使う。<b>売らずに回収する</b>という考え方。' },
+			{ id: 'dividend-series-04-afterword', role: '配当④', note: 'シリーズの総括。インカムを<b>ポートフォリオのどこに置くか</b>。' },
+			{ id: 'low-payout-internal-compounding', role: '裏返し', note: '<b>配らない会社</b>に長く乗るという選択。税の繰り延べが生む<b>社内複利</b>と、それが本物か見分ける式。' },
+		],
+	},
+	{
+		step: 'STEP 5',
+		tone: 'risk',
+		heading: '規律｜含み損とどう向き合うか',
+		lead: 'バリュー投資で最も難しいのは、<b>買った後</b>だ。下がったときに何を考え、<b>いつ降りるか</b>を、あらかじめ決めておく。',
+		items: [
+			{ id: 'value-investor-decision-unrealized-loss', role: '意思決定①', note: '含み損を抱えたとき、何を基準に持ち続けるか。<b>買値は判断材料にならない</b>。' },
+			{ id: 'value-investor-decision-withdrawal', role: '意思決定②', note: '撤退の判断。<b>「間違えた」と認めるための基準</b>を、先に紙に書く。' },
+			{ id: 'value-investor-decision-afterword', role: '意思決定③', note: 'シリーズの総括。<b>規律とは、判断が歪む前に決めておくこと</b>。' },
+		],
+	},
+	{
+		step: 'STEP 6',
+		tone: 'moat',
+		heading: '巨人と、相場全体',
+		lead: '最後に視野を広げる。<b>バフェットが日本で何を買ったのか</b>、そして今の相場をどう見ているか。',
+		items: [
+			{ id: 'buffett-japan-trading-houses', role: '事例研究', note: 'バフェットの日本商社株。彼が見ていたのは<b>成長ではなく、価格と価値の差</b>だった。' },
+			{ id: 'japan-stock-midterm-outlook-2026', role: 'マクロ', note: '日本株の中期見通し。バリュー投資家として、<b>相場全体をどう構えるか</b>。' },
+		],
+	},
+	{
+		step: 'STEP 7',
+		tone: 'asset',
+		heading: '最後に実践｜歪みが生まれる場所へ、探しに行く',
+		lead: 'ここまでの物差しと規律を持ったら、あとは<b>狩り場を知るだけ</b>。割安株はランダムに落ちておらず、<b>「セクターごと投げ売られた場所」</b>と<b>「制度が動く場所」</b>に偏って現れる。実際に当商会が歪みを見つけた現場を並べる。',
+		items: [
+			{ id: 'construction-selloff-opportunity', role: '業種の歪み', note: '建設の“箱売り”で一括りに売られた中に、<b>資産で守られた会社</b>が混ざっている。' },
+			{ id: 'healthcare-selloff-opportunity', role: '業種の歪み', note: '診療報酬改定で投げ売られたヘルスケア。<b>制度改定は毎回同じ形で歪みを作る</b>。' },
+			{ id: 'broadcasting-selloff-opportunity', role: '業種の歪み', note: '斜陽産業として売られた放送局。<b>だが資産とIPは別勘定で残っている</b>。' },
+			{ id: 'saas-death-japan-it', role: '業種の歪み', note: 'SaaSの成長神話が剥がれた後の日本IT。<b>期待が消えた場所に価格の歪みが残る</b>。' },
+			{ id: 'disaster-recovery-demand-value-stocks', role: '制度・需要', note: 'インフラ更新と防災の需要を、<b>上流の地味な会社</b>で拾うという発想。' },
+			{ id: 'food-tax-cut-1percent-value-stocks', role: '制度・需要', note: '食品減税で誰の財布が潤うのか。<b>テーマの誤読を避けて安いものだけを拾う</b>。' },
+			{ id: 'hidden-policy-stock-kitazato', role: '政策株', note: '政策の追い風を、テーマ株ではなく<b>“地味な受益企業”</b>で受け取る。' },
+			{ id: 'hidden-policy-stock-nihon-hospice', role: '政策株', note: '同上。<b>国の制度が需要を作る領域</b>で、静かに伸びる会社を探す。' },
+			{ id: 'prime-market-strategy', role: '市場区分', note: 'プライム・スタンダードという<b>区分そのものが生む評価の差</b>。' },
+		],
+	},
+] as const;
+
+const has = (id: string) => byId.has(id);
+const title = (id: string) => byId.get(id)?.data.title ?? id;
+const toneVars = (t: keyof typeof TONES) => {
+	const c = TONES[t];
+	return `--fill:${c.fill};--text:${c.text};--accent:${c.accent};--bd:${c.border}`;
+};
+
+// ── ヒーローの数字はウォッチリストから自動集計 ──
+const cards = posts.filter((p) => p.data.stockCard?.rating);
+const stockCount = cards.length;
+
+const pbrValues = cards
+	.map((p) => parseFloat(String(p.data.stockCard?.modifiedPBR ?? '').replace(/[^\d.]/g, '')))
+	.filter((n) => Number.isFinite(n) && n > 0);
+const pbrAvg = pbrValues.length
+	? (pbrValues.reduce((a, b) => a + b, 0) / pbrValues.length).toFixed(2)
+	: '—';
+const pbrUnder1 = pbrValues.filter((n) => n < 1).length;
+
+const columnCount = sections.reduce(
+	(n, sec) => n + sec.items.filter((it) => has(it.id)).length,
+	0,
+);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="バリュー株の魅力｜割安株投資の体系ガイド | 沼底バリュー商会"
+			description="なぜ「安い株」が長期で勝つのかを、理屈・物差し・触媒・待ち方・規律・探し方の順に体系立てて読める特設ページ。価格と価値を分けて考えるという出発点から、PERとPBRの正しい使い方、グレアムのネットネット、アクティビストやTOBという“安さを解消する力”の見つけ方、配当を握力に変える設計、含み損を抱えたときの意思決定基準、そして最後にセクターごと投げ売られた場所と制度が動く場所という歪みの現場まで。当商会が実際に紹介した銘柄の平均修正PBRも掲載。投資助言ではありません。"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="vl-hero">
+				<div class="vl-badge">🦦 割安発掘</div>
+				<h1><span class="vl-hl">バリュー株の魅力</span><span class="vl-badge-full">体系ガイド</span></h1>
+				<p class="vl-desc">なぜ「安い株」が勝つのか。<b>理屈</b>から、<b>探し方</b>、<b>待ち方</b>、そして<b>降り方</b>まで</p>
+			</section>
+
+			<section class="vl-nums">
+				<div class="vl-num t-blue">
+					<div class="vl-num-l">紹介した銘柄</div>
+					<div class="vl-num-v">{stockCount}<span>銘柄</span></div>
+					<div class="vl-num-d">評価ランク付きで公開中</div>
+				</div>
+				<div class="vl-num t-green">
+					<div class="vl-num-l">その平均修正PBR</div>
+					<div class="vl-num-v">{pbrAvg}<span>倍</span></div>
+					<div class="vl-num-d">うち<b>{pbrUnder1}銘柄</b>が1倍割れ</div>
+				</div>
+				<div class="vl-num t-amber">
+					<div class="vl-num-l">このページの記事</div>
+					<div class="vl-num-v">{columnCount}<span>本</span></div>
+					<div class="vl-num-d">読む順番に並べてある</div>
+				</div>
+			</section>
+
+			<section class="vl-intro">
+				<h2 class="vl-h2">バリュー投資を、3行で</h2>
+				<div class="vl-callout">
+					<p class="vl-c1"><span class="vl-cn">①</span><b>「価格」と「価値」は違う。</b>市場がつける値段は、その会社の中身とは別物として動く。</p>
+					<p class="vl-c2"><span class="vl-cn">②</span><b>その差は、いつか埋まる。</b>資産、配当、外圧——<b>埋める力が働く場所</b>を選んで座る。</p>
+					<p class="vl-c3"><span class="vl-cn">③</span><b>ただし、いつ埋まるかは選べない。</b>だから<b>待てる設計</b>と、<b>降りる基準</b>を先に用意しておく。</p>
+				</div>
+				<p class="vl-note">
+					当商会が扱うのは、この3行を満たす銘柄だけです。<b class="vl-red">派手な成長株は追いません。</b>
+					<b class="vl-green">「当たれば大きく、外れても小さく」</b>——その非対称の側に立ち続けるための考え方を、以下の順で公開しています。
+				</p>
+
+				<div class="vl-axes">
+					<h3 class="vl-axes-h">よく混同される、2つの軸</h3>
+					<div class="vl-axes-grid">
+						<div class="vl-axis a-green">
+							<span class="vl-axis-n">軸 ①</span>
+							<b class="vl-axis-t">安さ</b>
+							<p>資産や利益に対して、<b>いくらで買えるか</b>。PBR・修正NCAV・EV・純金融資産で測る。</p>
+						</div>
+						<div class="vl-axis a-pink">
+							<span class="vl-axis-n">軸 ②</span>
+							<b class="vl-axis-t">還元の強さ</b>
+							<p>その価値が<b>いつ・どれだけ株主へ渡されるか</b>。配当・優待・自社株買いで測る。</p>
+						</div>
+					</div>
+					<p class="vl-axes-note">
+						この2つは<b class="vl-green">独立している</b>。<b>還元が厚くても安いままの株</b>はあるし、逆に<b>還元が渋いまま、株価は動かないのに保有年数だけ価値に対して安くなっていく株</b>もある。
+						後者では<b class="vl-red">「待つコスト」がマイナスになる</b>——時間が敵ではなく<b class="vl-green">味方</b>に変わる。
+						<b>還元が渋いという一点だけで減点してきた銘柄群には、もう一度、別の物差しを当てる価値がある。</b>
+					</p>
+				</div>
+			</section>
+
+			<section class="vl-steps">
+				<h2 class="vl-h2">読む順番｜バリュー株投資の体系</h2>
+				{sections.map((sec) => {
+					const live = sec.items.filter((it) => has(it.id));
+					return live.length === 0 ? null : (
+						<div class="vl-step" style={toneVars(sec.tone)}>
+							<div class="vl-step-head">
+								<span class="vl-step-badge">{sec.step}</span>
+								<h3>{sec.heading}</h3>
+								<span class="vl-step-count">{live.length}本</span>
+							</div>
+							<p class="vl-step-lead" set:html={sec.lead} />
+							<ul class="vl-list">
+								{live.map((it) => (
+									<li>
+										<a href={`/blog/${it.id}/`}>
+											<span class="vl-role">{it.role}</span>
+											<span class="vl-title">{title(it.id)}</span>
+											<span class="vl-note-s" set:html={it.note} />
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					);
+				})}
+			</section>
+
+			<section class="vl-next">
+				<h2 class="vl-h2">この先へ</h2>
+				<div class="vl-next-grid">
+					<a class="vl-next-btn n-blue" href="/map/">
+						🗺️ コンテンツマップ<span>テーマ別に全記事を俯瞰する</span>
+					</a>
+					<a class="vl-next-btn n-amber" href="/margin/">
+						🧓 野村流信用錬金術<span>低金利のレバレッジを重ねる設計</span>
+					</a>
+					<a class="vl-next-btn n-green" href="/holdings.html">
+						📊 保有銘柄と損益<span>実際に何をいくらで持っているか</span>
+					</a>
+					<a class="vl-next-btn n-purple" href="/concept/">
+						💎 経営コンセプト<span>投資哲学と買い方の全体像</span>
+					</a>
+				</div>
+			</section>
+
+			<p class="vl-disc">
+				※本ページは投資助言ではありません。掲載している記事の数値・評価ランク・目標株価は、いずれも執筆時点の一定の前提に基づく暫定的なものであり、
+				その後の株価変動・決算・制度変更により妥当性を失うことがあります。平均修正PBRは当商会が紹介した銘柄の紹介時点（または直近更新時点）の値を単純平均したもので、
+				特定の投資成果を示すものではありません。個別銘柄は例示であり、投資はご自身の判断と責任でお願いします。
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* global.css の main は width:720px 固定のため、width も上書きしないと
+	   モバイルで横スクロールが出る（box-sizing も明示） */
+	main {
+		width: 100%;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 3vw, 32px) 64px;
+		box-sizing: border-box;
+	}
+
+	/* ── ヒーロー ── */
+	.vl-hero { text-align: center; padding: 38px 0 10px; }
+	.vl-badge {
+		display: inline-block; font-size: 0.78rem; letter-spacing: .08em; font-weight: 700;
+		background: linear-gradient(90deg, #E1F5EE, #E6F1FB);
+		color: #04342C; border: 1px solid #9FE1CB;
+		padding: 5px 13px; border-radius: 999px; margin-bottom: 14px;
+	}
+	.vl-hero h1 { font-size: 2.05rem; margin: 0 0 8px; line-height: 1.3; }
+	.vl-hl {
+		background: linear-gradient(transparent 62%, #FFE68A 62%);
+		padding: 0 2px;
+	}
+	.vl-badge-full {
+		display: inline-block; font-size: 0.95rem; vertical-align: middle;
+		background: #04342C; color: #E1F5EE; padding: 4px 11px;
+		border-radius: 6px; margin-left: 10px;
+	}
+	.vl-desc { color: rgb(var(--gray)); margin: 0; font-size: 0.98rem; }
+	.vl-desc b { color: #0F6E56; }
+
+	/* ── 数字カード（3色） ── */
+	.vl-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 8px; }
+	.vl-num {
+		border-radius: 10px; padding: 18px 16px; text-align: center;
+		border: 1px solid; border-top: 4px solid;
+	}
+	.vl-num.t-blue { background: #F5F9FE; border-color: #B5D4F4; border-top-color: #185FA5; }
+	.vl-num.t-green { background: #F3FBF8; border-color: #9FE1CB; border-top-color: #0F6E56; }
+	.vl-num.t-amber { background: #FEFAF1; border-color: #FAC775; border-top-color: #854F0B; }
+	.vl-num-l { font-size: 0.78rem; color: rgb(var(--gray)); margin-bottom: 8px; font-weight: 600; }
+	.vl-num-v { font-size: 2.15rem; font-weight: 900; letter-spacing: -.02em; }
+	.vl-num-v span { font-size: 1.0rem; margin-left: 2px; font-weight: 700; }
+	.t-blue .vl-num-v { color: #185FA5; }
+	.t-green .vl-num-v { color: #0F6E56; }
+	.t-amber .vl-num-v { color: #854F0B; }
+	.vl-num-d { font-size: 0.74rem; color: rgb(var(--gray)); margin-top: 6px; }
+	.t-green .vl-num-d b { color: #0F6E56; }
+
+	/* ── 見出し ── */
+	.vl-h2 {
+		font-size: 1.22rem; margin: 44px 0 6px; padding-left: 12px;
+		border-left: 5px solid #E8B84B;
+	}
+
+	/* ── 3行コールアウト（1行ずつ色を変える） ── */
+	.vl-callout { margin-top: 14px; display: grid; gap: 8px; }
+	.vl-callout p {
+		margin: 0; padding: 13px 16px; border-radius: 8px;
+		font-size: 0.92rem; line-height: 1.85;
+		border: 1px solid; border-left: 5px solid;
+	}
+	.vl-cn { font-weight: 900; margin-right: 6px; font-size: 1.05rem; }
+	.vl-c1 { background: #F5F9FE; border-color: #B5D4F4; border-left-color: #185FA5; color: #042C53; }
+	.vl-c1 .vl-cn, .vl-c1 b { color: #185FA5; }
+	.vl-c2 { background: #F3FBF8; border-color: #9FE1CB; border-left-color: #0F6E56; color: #04342C; }
+	.vl-c2 .vl-cn, .vl-c2 b { color: #0F6E56; }
+	.vl-c3 { background: #FEF7F4; border-color: #F5C4B3; border-left-color: #993C1D; color: #4A1B0C; }
+	.vl-c3 .vl-cn, .vl-c3 b { color: #993C1D; }
+
+	.vl-note { font-size: 0.88rem; color: rgb(var(--gray)); margin: 12px 0 0; line-height: 1.9; }
+	.vl-red { color: #b3261e; }
+	.vl-green { color: #0F6E56; }
+
+	/* ── 2つの軸（安さ／還元の強さ） ── */
+	.vl-axes {
+		margin-top: 22px; padding: 16px 16px 18px;
+		background: #FBFAF7; border: 1px solid #E5E0D4;
+		border-left: 5px solid #E8B84B; border-radius: 10px;
+	}
+	.vl-axes-h {
+		margin: 0 0 12px; font-size: 0.95rem; color: #5C4708;
+		letter-spacing: .01em;
+	}
+	.vl-axes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+	.vl-axis {
+		padding: 12px 14px; border-radius: 8px; background: #fff;
+		border: 1px solid; border-top: 4px solid;
+	}
+	.vl-axis.a-green { border-color: #9FE1CB; border-top-color: #0F6E56; }
+	.vl-axis.a-pink { border-color: #F4C0D1; border-top-color: #993556; }
+	.vl-axis-n {
+		display: inline-block; font-size: 0.66rem; font-weight: 900;
+		letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; margin-bottom: 7px;
+	}
+	.a-green .vl-axis-n { background: #E1F5EE; color: #0F6E56; }
+	.a-pink .vl-axis-n { background: #FBEAF0; color: #993556; }
+	.vl-axis-t { display: block; font-size: 1.02rem; font-weight: 800; margin-bottom: 5px; }
+	.a-green .vl-axis-t { color: #04342C; }
+	.a-pink .vl-axis-t { color: #4B1528; }
+	.vl-axis p { margin: 0; font-size: 0.8rem; line-height: 1.8; color: #4a4a4a; }
+	.a-green .vl-axis p b { color: #0F6E56; }
+	.a-pink .vl-axis p b { color: #993556; }
+	.vl-axes-note {
+		margin: 12px 0 0; font-size: 0.84rem; line-height: 1.95; color: #4a4a4a;
+	}
+	.vl-axes-note b { color: #5C4708; }
+	.vl-axes-note b.vl-red { color: #b3261e; }
+	.vl-axes-note b.vl-green { color: #0F6E56; }
+
+	/* ── STEPブロック（tone変数で色分け） ── */
+	.vl-step {
+		margin-top: 26px; padding: 16px 16px 18px;
+		background: color-mix(in srgb, var(--fill) 45%, #fff);
+		border: 1px solid var(--bd);
+		border-left: 5px solid var(--accent);
+		border-radius: 10px;
+	}
+	.vl-step-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+	.vl-step-badge {
+		background: var(--text); color: #fff; font-size: 0.7rem; font-weight: 900;
+		letter-spacing: .06em; padding: 4px 10px; border-radius: 5px; flex-shrink: 0;
+	}
+	.vl-step-head h3 { font-size: 1.06rem; margin: 0; color: var(--text); }
+	.vl-step-count {
+		margin-left: auto; flex-shrink: 0;
+		font-size: 0.7rem; font-weight: 800; color: var(--accent);
+		background: #fff; border: 1px solid var(--bd);
+		padding: 3px 9px; border-radius: 999px;
+	}
+	.vl-step-lead { font-size: 0.86rem; color: #4a4a4a; margin: 10px 0 12px; line-height: 1.9; }
+	.vl-step-lead :global(b) { color: var(--accent); font-weight: 800; }
+
+	/* ── 記事カード ── */
+	.vl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+	.vl-list a {
+		display: block; text-decoration: none; background: #fff;
+		border: 1px solid var(--bd); border-left: 4px solid var(--bd);
+		border-radius: 8px; padding: 12px 14px;
+		transition: border-left-color .15s, transform .1s, box-shadow .15s;
+	}
+	.vl-list a:hover {
+		border-left-color: var(--accent); transform: translateY(-1px);
+		box-shadow: 0 3px 12px rgba(0,0,0,.08);
+	}
+	.vl-role {
+		display: inline-block; font-size: 0.68rem; font-weight: 900;
+		background: var(--fill); color: var(--accent); padding: 3px 9px;
+		border-radius: 999px; margin-bottom: 6px; letter-spacing: .03em;
+	}
+	.vl-title { display: block; font-size: 0.93rem; font-weight: 700; color: #1a3a5c; line-height: 1.55; }
+	.vl-note-s { display: block; font-size: 0.78rem; color: rgb(var(--gray)); margin-top: 5px; line-height: 1.75; }
+	.vl-note-s :global(b) { color: var(--text); font-weight: 700; }
+
+	/* ── 回遊ボタン（4色） ── */
+	.vl-next-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+	.vl-next-btn {
+		display: block; text-decoration: none; text-align: left;
+		background: #fff; border: 1.5px solid; border-left-width: 5px; border-radius: 8px;
+		padding: 13px 15px; font-size: 0.93rem; font-weight: 800;
+		transition: background .15s, transform .1s;
+	}
+	.vl-next-btn:hover { transform: translateY(-1px); }
+	.vl-next-btn span { display: block; font-size: 0.74rem; font-weight: 400; color: rgb(var(--gray)); margin-top: 4px; }
+	.n-blue { border-color: #B5D4F4; border-left-color: #185FA5; color: #042C53; }
+	.n-blue:hover { background: #F5F9FE; }
+	.n-amber { border-color: #FAC775; border-left-color: #854F0B; color: #412402; }
+	.n-amber:hover { background: #FEFAF1; }
+	.n-green { border-color: #9FE1CB; border-left-color: #0F6E56; color: #04342C; }
+	.n-green:hover { background: #F3FBF8; }
+	.n-purple { border-color: #CECBF6; border-left-color: #534AB7; color: #26215C; }
+	.n-purple:hover { background: #F7F6FE; }
+
+	.vl-disc { font-size: 0.72rem; color: rgb(var(--gray)); line-height: 1.9; margin-top: 40px; }
+
+	@media (max-width: 720px) {
+		.vl-axes-grid { grid-template-columns: 1fr; }
+		.vl-hero h1 { font-size: 1.5rem; }
+		.vl-badge-full { font-size: 0.8rem; margin-left: 6px; }
+		.vl-nums { grid-template-columns: 1fr; gap: 10px; }
+		.vl-num { padding: 14px 12px; }
+		.vl-num-v { font-size: 1.75rem; }
+		.vl-next-grid { grid-template-columns: 1fr; }
+		.vl-h2 { font-size: 1.1rem; }
+		.vl-step { padding: 14px 12px 16px; }
+		.vl-step-head h3 { font-size: 0.98rem; }
+		.vl-step-count { margin-left: 0; }
+	}
+</style>

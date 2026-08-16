@@ -1,0 +1,355 @@
+---
+---
+<!-- 資産推移サイドバー（左側・1100px以上表示） -->
+<div class="asset-sb">
+
+  <div class="asset-sb-logo">
+    <div class="asset-sb-logo-emblem">
+      <svg viewBox="0 0 48 56" width="38" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+          <polygon points="0,0 0,7 9,3.5" fill="#e8b84b"/>
+        </marker>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- 左ビル -->
+      <rect x="1" y="24" width="11" height="22" rx="1" fill="#2a2520" stroke="rgba(232,184,75,0.4)" stroke-width="1"/>
+      <rect x="3" y="27" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.5"/>
+      <rect x="7" y="27" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.4"/>
+      <rect x="3" y="32" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.4"/>
+      <rect x="7" y="32" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.3"/>
+      <!-- 中央高層ビル -->
+      <rect x="14" y="10" width="20" height="36" rx="1.5" fill="#1a1815" stroke="#e8b84b" stroke-width="1.5"/>
+      <rect x="17" y="14" width="5" height="3.5" rx="0.5" fill="#f5d47a" opacity="0.85"/>
+      <rect x="25" y="14" width="5" height="3.5" rx="0.5" fill="#f5d47a" opacity="0.85"/>
+      <rect x="17" y="21" width="5" height="3.5" rx="0.5" fill="#f5d47a" opacity="0.7"/>
+      <rect x="25" y="21" width="5" height="3.5" rx="0.5" fill="#e8b84b" opacity="0.95"/>
+      <rect x="17" y="28" width="5" height="3.5" rx="0.5" fill="#f5d47a" opacity="0.55"/>
+      <rect x="25" y="28" width="5" height="3.5" rx="0.5" fill="#f5d47a" opacity="0.55"/>
+      <rect x="20" y="37" width="8" height="9" rx="1" fill="#2a2520" stroke="#e8b84b" stroke-width="0.8"/>
+      <!-- 右ビル -->
+      <rect x="36" y="20" width="11" height="26" rx="1" fill="#2a2520" stroke="rgba(232,184,75,0.4)" stroke-width="1"/>
+      <rect x="38" y="23" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.5"/>
+      <rect x="42" y="23" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.4"/>
+      <rect x="38" y="28" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.4"/>
+      <rect x="42" y="28" width="3" height="2" rx="0.4" fill="#e8b84b" opacity="0.3"/>
+      <!-- 沼地（水面）左右ビル外側まで広げ -->
+      <path d="M0,46 Q8,43 24,44 Q40,43 48,46 L48,56 L0,56 Z" fill="#0d0d08" opacity="0.95"/>
+      <!-- 水面の波紋 -->
+      <path d="M1,47 Q8,45.5 16,47 Q24,48.5 32,47 Q40,45.5 47,47" stroke="rgba(232,184,75,0.4)" stroke-width="1" fill="none"/>
+      <path d="M2,50 Q10,49 20,50.5 Q30,52 40,50.5 Q44,50 47,50.5" stroke="rgba(232,184,75,0.25)" stroke-width="0.8" fill="none"/>
+      <!-- 葦（左端） -->
+      <line x1="3" y1="47" x2="3" y2="39" stroke="#5a4020" stroke-width="1.3" stroke-linecap="round"/>
+      <ellipse cx="3" cy="38.2" rx="1.2" ry="2.6" fill="#7a5c28" opacity="0.9"/>
+      <line x1="7" y1="47.5" x2="7" y2="41" stroke="#5a4020" stroke-width="1" stroke-linecap="round"/>
+      <ellipse cx="7" cy="40.2" rx="1" ry="2.2" fill="#7a5c28" opacity="0.7"/>
+      <!-- 葦（右端） -->
+      <line x1="45" y1="47" x2="45" y2="39" stroke="#5a4020" stroke-width="1.3" stroke-linecap="round"/>
+      <ellipse cx="45" cy="38.2" rx="1.2" ry="2.6" fill="#7a5c28" opacity="0.9"/>
+      <line x1="41" y1="47.5" x2="41" y2="41" stroke="#5a4020" stroke-width="1" stroke-linecap="round"/>
+      <ellipse cx="41" cy="40.2" rx="1" ry="2.2" fill="#7a5c28" opacity="0.7"/>
+      <!-- 曲線矢印（ホッケースティック型：横ばい→急上昇） -->
+      <path d="M 4,44 C 20,44 38,22 42,6"
+        stroke="#e8b84b" stroke-width="3" fill="none"
+        stroke-linecap="round"
+        marker-end="url(#arr)"
+        filter="url(#glow)"/>
+    </svg>
+    </div>
+    <div class="asset-sb-logo-text">沼底<br>バリュー商会</div>
+  </div>
+
+  <div class="asset-sb-body">
+  <p class="asset-sb-about-head">🏢 バリュー商会とは</p>
+  <ul class="asset-sb-about-list">
+    <li><span class="asset-sb-li-icon">🧑‍💼</span><span class="asset-sb-li-text">沼田課長の実践投資記録</span></li>
+    <li><span class="asset-sb-li-icon">🎯</span><span class="asset-sb-li-text">日本個別株・TOB銘柄発掘・ニッチトップ戦略</span></li>
+    <li><span class="asset-sb-li-icon">🏦</span><span class="asset-sb-li-text">野村信用金利<strong>1.69%</strong>を活用</span></li>
+    <li><span class="asset-sb-li-icon">📊</span><span class="asset-sb-li-text">紹介銘柄は実口座で売買</span></li>
+  </ul>
+  <div class="asset-sb-divider"></div>
+
+  <p class="asset-sb-head">🚀 資産推移は<br>バリュー商会の成績です</p>
+
+  <div class="asset-sb-account">野村証券 実口座</div>
+
+  <div class="asset-sb-now-label">現在総資産</div>
+  <div class="asset-sb-now-val">4,326<span class="asset-sb-unit">万円</span></div>
+  <div class="asset-sb-bar-wrap">
+    <div class="asset-sb-bar">
+      <div class="asset-sb-bar-fill" style="width:21.6%">
+      </div>
+      <div class="asset-sb-mid-marker">
+        <span class="asset-sb-mid-label">1億</span>
+      </div>
+    </div>
+    <div class="asset-sb-bar-ends">
+      <span>0</span><span>2億</span>
+    </div>
+  </div>
+
+  <div class="asset-sb-chart-wrap">
+    <img src="/images/nomura-asset-chart-202607.png" alt="資産推移チャート" class="asset-sb-chart" />
+  </div>
+
+  <p class="asset-sb-note">📅 月初に前月末成績を反映</p>
+  </div>
+</div>
+
+<style is:global>
+  .asset-sb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc((100vw - 760px) / 2);
+    max-width: 160px;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    gap: 0.22em;
+    z-index: 9;
+    background: linear-gradient(170deg, #252525 0%, #1a1a1a 100%);
+    border-right: 1px solid rgba(232,184,75,0.25);
+    border-radius: 0;
+    padding: 78px 0 0.4em;
+    color: #fff;
+  }
+  .asset-sb::-webkit-scrollbar { display: none; }
+  .asset-sb-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.6em 0 0.5em;
+    width: 100%;
+    border-bottom: 1px solid rgba(232,184,75,0.2);
+    margin-bottom: 0.3em;
+    flex-shrink: 0;
+  }
+  .asset-sb-logo-emblem {
+    filter: drop-shadow(0 0 6px rgba(232,184,75,0.4));
+  }
+  .asset-sb-logo-text {
+    font-size: 0.52em;
+    font-weight: 800;
+    color: #f5d47a;
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  .asset-sb-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.22em;
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.4em 0.5em 0.8em;
+    scrollbar-width: none;
+  }
+  .asset-sb-body::-webkit-scrollbar { display: none; }
+  @media (min-width: 1100px) {
+    .asset-sb { display: flex; }
+  }
+  .asset-sb-about-head {
+    font-size: 0.6em;
+    font-weight: 800;
+    color: #f5d47a;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+    width: 100%;
+  }
+  .asset-sb-about-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+  }
+  .asset-sb-about-list li {
+    font-size: 0.52em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.55;
+    padding: 0.25em 0.35em;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    display: block;
+    padding-left: 1.8em;
+    text-indent: -1.8em;
+  }
+  .asset-sb-li-icon {
+    font-size: 1.1em;
+    margin-right: 0.3em;
+  }
+  .asset-sb-li-text {
+    color: rgba(255,255,255,0.75);
+  }
+  .asset-sb-about-list li strong {
+    color: #e8b84b;
+  }
+  .asset-sb-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(232,184,75,0.2);
+    margin: 0;
+  }
+  .asset-sb-head {
+    font-size: 0.6em;
+    font-weight: 800;
+    color: #f5d47a;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+    border-bottom: 1px solid rgba(232,184,75,0.25);
+    padding-bottom: 0.45em;
+    width: 100%;
+  }
+  .asset-sb-account {
+    font-size: 0.52em;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .asset-sb-now-label {
+    font-size: 0.52em;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-top: 0;
+  }
+  .asset-sb-now-val {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: #e8b84b;
+    line-height: 1.1;
+  }
+  .asset-sb-unit {
+    font-size: 0.55em;
+    font-weight: 700;
+    color: rgba(232,184,75,0.7);
+    margin-left: 0.1em;
+  }
+  .asset-sb-pl {
+    font-size: 0.56em;
+    margin-top: -0.1em;
+  }
+  .asset-sb-pl-plus {
+    color: #e8b84b;
+    font-weight: 700;
+  }
+  .asset-sb-bar-wrap {
+    width: 100%;
+    margin-top: 0;
+  }
+  .asset-sb-bar {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    height: 14px;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 0.2em;
+  }
+  .asset-sb-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #b8860b, #e8b84b);
+    border-radius: 4px;
+    position: relative;
+  }
+  .asset-sb-bar-now {
+    position: absolute;
+    right: -22px;
+    top: -14px;
+    font-size: 0.48em;
+    font-weight: 800;
+    color: #fff;
+    white-space: nowrap;
+    line-height: 1.2;
+    background: rgba(0,0,0,0.45);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+  }
+  .asset-sb-mid-marker {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: rgba(160,200,255,0.4);
+  }
+  .asset-sb-mid-label {
+    position: absolute;
+    left: 3px;
+    top: 0;
+    font-size: 0.48em;
+    color: #a0c8ff;
+    font-weight: 700;
+    line-height: 14px;
+    white-space: nowrap;
+  }
+  .asset-sb-bar-ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.48em;
+    color: rgba(255,255,255,0.3);
+  }
+  .asset-sb-targets {
+    display: flex;
+    gap: 0.4em;
+    width: 100%;
+    margin-top: 0.3em;
+  }
+  .asset-sb-target {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.06);
+    border-radius: 5px;
+    padding: 0.25em 0.2em;
+    gap: 0.1em;
+  }
+  .asset-sb-target-year {
+    font-size: 0.5em;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .asset-sb-target-val {
+    font-size: 0.65em;
+    font-weight: 800;
+  }
+  .asset-sb-target-val.mid  { color: #a0c8ff; }
+  .asset-sb-target-val.goal { color: #e8b84b; }
+  .asset-sb-chart-wrap {
+    width: 88%;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 0.3em;
+  }
+  .asset-sb-chart {
+    width: 100%;
+    display: block;
+  }
+  .asset-sb-note {
+    font-size: 0.5em;
+    color: rgba(255,255,255,0.3);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .asset-sb-chart-wrap {
+    margin-top: 0;
+  }
+</style>

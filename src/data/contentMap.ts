@@ -1,0 +1,152 @@
+// コンテンツマップのテーマ定義（/map ページ用）
+// 新しい記事を追加したら、該当テーマの slugs に id を足すだけでOK。
+// どのテーマにも入っていない公開記事は /map 上で「未分類」として表示される。
+
+export interface ContentTheme {
+  id: string;
+  name: string;
+  owners: string;       // 担当キャラ（発信元）
+  fill: string;         // 見出し背景（light fill）
+  text: string;         // 見出しタイトル色（dark）
+  sub: string;          // 担当キャラ色（mid）
+  border: string;       // 区切り線色
+  slugs: string[];      // 所属記事のスラッグ（表示順）
+  note?: string;        // 空白地帯などの注記
+}
+
+export const contentThemes: ContentTheme[] = [
+  {
+    id: 'asset-value',
+    name: '資産バリュー（含み益・ネットネット）',
+    owners: '🦦 河内（割安発掘） ／ 🦉 夜見（財務）',
+    fill: '#E1F5EE', text: '#04342C', sub: '#0F6E56', border: '#9FE1CB',
+    slugs: [
+      'tokai-electronics-8071',
+      'okaya-kouki-7485',
+      'punch-industry-6165',
+      'tobu-network-9036',
+      'shinyei-3004',
+      'shinyei-3004-q1-recheck',
+      'keihan-hd-9045',
+      'daiken-5900',
+      'daiichi-cutter-1716',
+      'oyo-9755',
+      'sakurajima-futo-9353',
+      'katakura-3001',
+      'tv-tokyo-9413',
+      'gunei-chemical-4229',
+      'hoshiwa-denki-6748',
+      'endo-lighting-6932',
+      'lighting-sector-summary',
+      'showa-kagaku-4990',
+      'efficient-market-hypothesis',
+    ],
+  },
+  {
+    id: 'moat',
+    name: 'ニッチ独占・モート',
+    owners: '🦫 堀田（競合優位性）',
+    fill: '#EEEDFE', text: '#26215C', sub: '#534AB7', border: '#CECBF6',
+    slugs: [
+      'nihon-gear-6356',
+      'tanaken-1450',
+      'kitazato-368a',
+      'ryoyu-systems-4685',
+      'ryoyu-systems-4685-q1-recheck',
+      'nihon-hospice-7061',
+      'em-systems-4820',
+      'shinko-kogyo-6458',
+    ],
+  },
+  {
+    id: 'tob-event',
+    name: 'TOB・イベントドリブン',
+    owners: '🐊 待伏（TOB担当）',
+    fill: '#FAECE7', text: '#4A1B0C', sub: '#993C1D', border: '#F5C4B3',
+    slugs: [
+      'kozosodo-hd-7868',
+      'tokyo-crematorium-monopoly-discount',
+      'activist-front-running-01',
+      'activist-front-running-02',
+      'activist-front-running-03',
+      'nssol-2327',
+      'nihon-bs-hoso-9414',
+      'value-tob-strategy-2026',
+      'spacex-ipo-spcx-2026',
+      'daiken-5900-activist-entry',
+      'activist-front-running-real-cases',
+      'tosnet-4754',
+      'security-sector-consolidation',
+      'sankyo-frontier-9639',
+      'fenwal-6870',
+      'fujikura-kasei-4620',
+    ],
+  },
+  {
+    id: 'risk-leverage',
+    name: '資金管理・レバレッジ・口座戦略',
+    owners: '🦞 守田（リスク） ／ 🧓 野村（レバレッジ）',
+    fill: '#FAEEDA', text: '#412402', sub: '#854F0B', border: '#FAC775',
+    slugs: [
+      'capital-management-survival',
+      'value-investor-decision-unrealized-loss',
+      'value-investor-decision-withdrawal',
+      'value-investor-decision-afterword',
+      'debt-credit-trading-strategy',
+      'nomura-margin-rate-1-69-alchemy',
+      'holdings-status-01-saas',
+      'holdings-status-02-kitazato-shinyei',
+      'holdings-status-03-kozosodo-tobu',
+      'holdings-status-04-okaya-tokai',
+      'holdings-status-05-crash-entry',
+      'kioxia-285a-crash-analysis',
+      'margin-maintenance-rate-balance',
+      'margin-carry-10year-model',
+      'virtual-mortgage-strategy',
+      'nisa-vs-margin-expected-return',
+      'us-treasury-etf-hedge-2255-237a',
+      'prime-market-strategy',
+    ],
+  },
+  {
+    id: 'philosophy',
+    name: '投資哲学・基礎・マクロ',
+    owners: '🧑‍💼 沼田課長（統合・哲学）',
+    fill: '#E6F1FB', text: '#042C53', sub: '#185FA5', border: '#B5D4F4',
+    slugs: [
+      'japan-market-distortion-01',
+      'net-net-graham-investing',
+      'buffett-japan-trading-houses',
+      'how-to-find-net-net-japan',
+      'value-concept',
+      'why-value-stocks-win',
+      'per-value-investing',
+      'good-stock-vs-good-company',
+      'japan-stock-midterm-outlook-2026',
+      'saas-death-japan-it',
+      'construction-selloff-opportunity',
+      'healthcare-selloff-opportunity',
+      'broadcasting-selloff-opportunity',
+      'disaster-recovery-demand-value-stocks',
+      'food-tax-cut-1percent-value-stocks',
+      'hidden-policy-stock-kitazato',
+      'hidden-policy-stock-nihon-hospice',
+    ],
+  },
+  {
+    id: 'income',
+    name: 'インカム（配当・優待）',
+    owners: '🐝 花岡（高配当） ／ 🦩 優田（優待）',
+    fill: '#FBEAF0', text: '#4B1528', sub: '#993556', border: '#F4C0D1',
+    slugs: [
+      'dividend-series-01-what-is-dividend',
+      'dividend-series-02-low-payout-opportunity',
+      'dividend-series-03-dividend-as-exit-strategy',
+      'dividend-series-04-afterword',
+      'low-payout-internal-compounding',
+      'towns-197a',
+      'toyo-tec-9686',
+      'yamau-hd-5284',
+    ],
+  },
+];

@@ -1,14 +1,33 @@
----
+﻿---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BookSidebar from '../components/BookSidebar.astro';
 ---
 
 <!doctype html>
 <html lang="ja">
 	<head>
 		<BaseHead title="筆者紹介 | バリュー商会" description="沼田堅一 — バリュー商会 プレイングマネージャー" />
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ProfilePage",
+			"mainEntity": {
+				"@type": "Person",
+				"name": "沼田 堅一",
+				"alternateName": "ぬまた けんいち",
+				"jobTitle": "個人投資家 ／ バリュー商会 プレイングマネージャー",
+				"description": "投資歴9年の個人投資家。日本の割安個別株とTOB・水準訂正の先回り買いを主戦場とし、上場廃止TOBヒット20件超の実績を持つ。",
+				"email": "citrus.y9k6.bg@gmail.com",
+				"url": "https://numasoko-value.com/about/",
+				"sameAs": ["https://x.com/numasoko_value"],
+				"knowsAbout": ["バリュー株投資", "TOB（株式公開買付け）", "低PBR銘柄", "ネットネット株", "信用取引", "日本の小型株", "割安株スクリーニング"],
+				"worksFor": {
+					"@type": "Organization",
+					"name": "沼底バリュー商会",
+					"url": "https://numasoko-value.com/"
+				}
+			}
+		})} />
 	</head>
 	<body>
 		<Header />
@@ -170,9 +189,42 @@ import BookSidebar from '../components/BookSidebar.astro';
 				</div>
 			</section>
 
+			<section class="section owner-section" id="owner-info">
+				<h2>運営者情報・免責事項</h2>
+				<dl class="owner-dl">
+					<div class="owner-row">
+						<dt>運営者</dt>
+						<dd>沼田 堅一（ペンネーム）／ 沼底バリュー商会</dd>
+					</div>
+					<div class="owner-row">
+						<dt>連絡先</dt>
+						<dd><a href="mailto:citrus.y9k6.bg@gmail.com">citrus.y9k6.bg@gmail.com</a></dd>
+					</div>
+					<div class="owner-row">
+						<dt>投資歴</dt>
+						<dd>個人投資家として約9年。超分散の高配当投資から始まり、インデックス・米国株モメンタム・債券・コモディティを一通り経験した後、現在は「日本の割安個別株 × TOB・水準訂正の先回り買い」を主戦場とする。上場廃止TOBヒット20件超、上場維持を含む水準訂正・買収案件は合計30件超。</dd>
+					</div>
+					<div class="owner-row">
+						<dt>投資スタンス</dt>
+						<dd>資産性バリュー（現金・不動産含み益などの裏付け）と収益性バリュー（低PERによる早期回収）の2軸で割安株を発掘。野村証券の低金利信用を「無理しない範囲」で活用し、配当・優待でインカムをブーストしながらカタリスト（TOB・親子上場解消・アクティビスト）を待つ中期保有型。</dd>
+					</div>
+					<div class="owner-row">
+						<dt>保有・利益相反</dt>
+						<dd>記事で取り上げる銘柄は、筆者がすでに保有または注目しているものが大半です。そのため強気バイアスがかかっている可能性があります。特定銘柄の売買を推奨する意図はなく、ポジショントークが含まれうる点をご了承ください。</dd>
+					</div>
+					<div class="owner-row">
+						<dt>資格・免責</dt>
+						<dd>筆者は金融商品取引業者ではなく、投資助言・代理業の登録もしていません。当ブログは個人の投資記録・情報提供であり、特定の銘柄や投資手法を勧誘・推奨するものではありません。掲載情報の正確性には努めますが完全性を保証するものではなく、内容に基づく投資判断・その結果生じたいかなる損失についても、筆者は一切の責任を負いません。<strong>最終的な投資判断は必ずご自身の責任と判断で行ってください。</strong></dd>
+					</div>
+					<div class="owner-row">
+						<dt>最終更新</dt>
+						<dd>2026年6月11日</dd>
+					</div>
+				</dl>
+			</section>
+
 		</main>
-		<BookSidebar />
-		<Footer />
+				<Footer />
 	</body>
 </html>
 
@@ -181,6 +233,39 @@ import BookSidebar from '../components/BookSidebar.astro';
 		max-width: 720px;
 		margin: 0 auto;
 		padding: 2.5em 1em 4em;
+	}
+
+	/* 運営者情報・免責 */
+	.owner-section {
+		background: #fafbfc;
+		border: 1px solid #e4e8ee;
+		border-radius: 10px;
+		padding: 1.5em 1.6em;
+	}
+	.owner-dl { margin: 0; }
+	.owner-row {
+		display: grid;
+		grid-template-columns: 6.5em 1fr;
+		gap: 0.8em;
+		padding: 0.7em 0;
+		border-bottom: 1px solid #eceff3;
+	}
+	.owner-row:last-child { border-bottom: none; }
+	.owner-row dt {
+		font-weight: 700;
+		font-size: 0.82em;
+		color: var(--accent-dark);
+		padding-top: 0.1em;
+	}
+	.owner-row dd {
+		margin: 0;
+		font-size: 0.86em;
+		line-height: 1.7;
+		color: rgb(var(--gray-dark));
+	}
+	.owner-row dd a { color: var(--accent-dark); }
+	@media (max-width: 520px) {
+		.owner-row { grid-template-columns: 1fr; gap: 0.25em; }
 	}
 
 	/* プロフィールヒーロー */
