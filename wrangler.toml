@@ -1,0 +1,2 @@
+name = "investment-blog"
+pages_build_output_dir = "dist"

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保有銘柄と損益の総括 | 沼底バリュー商会</title>
+<style>
+:root{--bg:#f5f4ee;--card:#fff;--ink:#111217;--ink3:#636470;--line:#e2e0d6;
+--gn:#1a6640;--rd:#b42c2c;--head:#1f3864;--link:#1e48b8;--mono:'SFMono-Regular',Consolas,monospace;}
+@media(prefers-color-scheme:dark){:root{--bg:#16171c;--card:#1f2128;--ink:#f2f1ea;--ink3:#9a9ba5;--line:#2c2e37;--head:#dfe8f8;--link:#90b4ec;}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:24px 16px}
+.wrap{max-width:900px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+h1{font-size:20px;letter-spacing:.02em}
+.asof{font-size:12px;color:var(--ink3);font-family:var(--mono)}
+.sub{font-size:12.5px;color:var(--ink3);margin:2px 0 4px;line-height:1.65}
+.back{font-size:12px;color:var(--head);text-decoration:none;margin-bottom:16px;display:inline-block}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;flex:1;min-width:150px}
+.sc .l{font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.sc .v{font:600 20px/1 var(--mono)}
+.pos{color:var(--gn)}.neg{color:var(--rd)}
+.tbwrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+th{background:var(--head);color:#fff;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:9px 10px;text-align:left;position:sticky;top:0}
+@media(prefers-color-scheme:dark){th{color:#111}}
+td{padding:8px 10px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+.r{text-align:right;font-family:var(--mono)}
+.nm{font-weight:600}
+.nm a{color:var(--link);text-decoration:none;border-bottom:1px dotted var(--link)}
+.nm a:hover{border-bottom-style:solid}
+.cd{font-family:var(--mono);color:var(--ink3);font-size:12px}
+.ct{font-size:11px;color:var(--ink3)}
+tfoot td{font-weight:700;background:rgba(31,56,100,.06);border-top:2px solid var(--head)}
+@media(prefers-color-scheme:dark){tfoot td{background:rgba(223,232,248,.06)}}
+.note{font-size:11px;color:var(--ink3);margin-top:14px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">← 沼底バリュー商会トップへ</a>
+  <div class="top">
+    <h1>📊 保有銘柄と損益の総括</h1>
+    <div class="asof">集計日：2026年7月27日 大引け時点</div>
+  </div>
+  <p class="sub">沼底バリュー商会の全保有ポジションについて、買値・現在値・評価損益を一覧化した<b>総括資料</b>です（銘柄名から各紹介記事へ。個別の投資判断・解説はそちらをご覧ください）。</p>
+  <div class="sum">
+    <div class="sc"><div class="l">取得額 合計</div><div class="v">81,274,471 円</div></div>
+    <div class="sc"><div class="l">評価額 合計</div><div class="v">88,537,580 円</div></div>
+    <div class="sc"><div class="l">評価損益</div><div class="v pos">+7,263,109 円</div></div>
+    <div class="sc"><div class="l">損益率</div><div class="v pos">+8.9%</div></div>
+  </div>
+  <div class="tbwrap">
+    <table>
+      <thead><tr>
+        <th>銘柄</th><th>コード</th><th class="r">保有株数</th><th class="r">平均取得</th><th class="r">現在値</th><th class="r">評価損益</th><th class="r">損益率</th><th>分類</th>
+      </tr></thead>
+      <tbody>
+      <tr>
+        <td class="nm"><a href="/blog/tobu-network-9036/">東部ネットワーク</a></td><td class="cd">9036</td>
+        <td class="r">27,500</td><td class="r">1,216</td><td class="r">1,363</td>
+        <td class="r pos">+4,042,500</td><td class="r pos">+12.1%</td>
+        <td class="ct">資産バリュー・最大ポジション</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/kitazato-368a/">北里コーポレーション</a></td><td class="cd">368A</td>
+        <td class="r">3,300</td><td class="r">1,181</td><td class="r">1,409</td>
+        <td class="r pos">+752,400</td><td class="r pos">+19.3%</td>
+        <td class="ct">隠れ国策・資産</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/nssol-2327/">日鉄ソリューションズ</a></td><td class="cd">2327</td>
+        <td class="r">1,100</td><td class="r">3,278.9</td><td class="r">3,904</td>
+        <td class="r pos">+687,610</td><td class="r pos">+19.1%</td>
+        <td class="ct">IT・割安成長</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/kozosodo-hd-7868/">広済堂HD</a></td><td class="cd">7868</td>
+        <td class="r">17,300</td><td class="r">497.3</td><td class="r">530</td>
+        <td class="r pos">+565,710</td><td class="r pos">+6.6%</td>
+        <td class="ct">資産バリュー・主力</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/shinyei-3004/">神栄</a></td><td class="cd">3004</td>
+        <td class="r">2,400</td><td class="r">2,099</td><td class="r">2,235</td>
+        <td class="r pos">+326,400</td><td class="r pos">+6.5%</td>
+        <td class="ct">資産バリュー</td>
+      </tr>
+      <tr>
+        <td class="nm">テクセンドフォトマスク</td><td class="cd"></td>
+        <td class="r">200</td><td class="r">3,490</td><td class="r">4,290</td>
+        <td class="r pos">+160,000</td><td class="r pos">+22.9%</td>
+        <td class="ct">半導体・成長</td>
+      </tr>
+      <tr>
+        <td class="nm">ウエストHD</td><td class="cd">1407</td>
+        <td class="r">200</td><td class="r">2,249.5</td><td class="r">2,783</td>
+        <td class="r pos">+106,700</td><td class="r pos">+23.7%</td>
+        <td class="ct">成長・打診</td>
+      </tr>
+      <tr>
+        <td class="nm">グリムス</td><td class="cd">3150</td>
+        <td class="r">200</td><td class="r">2,331</td><td class="r">2,646</td>
+        <td class="r pos">+63,000</td><td class="r pos">+13.5%</td>
+        <td class="ct">成長・打診</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/em-systems-4820/">EMシステムズ</a></td><td class="cd">4820</td>
+        <td class="r">2,000</td><td class="r">504.9</td><td class="r">559</td>
+        <td class="r pos">+108,100</td><td class="r pos">+10.7%</td>
+        <td class="ct">ニッチIT</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/endo-lighting-6932/">遠藤照明</a></td><td class="cd">6932</td>
+        <td class="r">100</td><td class="r">2,348</td><td class="r">2,600</td>
+        <td class="r pos">+25,200</td><td class="r pos">+10.7%</td>
+        <td class="ct">資本イベント・照明</td>
+      </tr>
+      <tr>
+        <td class="nm">ソニーG</td><td class="cd">6758</td>
+        <td class="r">200</td><td class="r">3,308</td><td class="r">3,574</td>
+        <td class="r pos">+53,200</td><td class="r pos">+8.0%</td>
+        <td class="ct">大型・急落打診</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/okaya-kouki-7485/">岡谷鋼機</a></td><td class="cd">7485</td>
+        <td class="r">200</td><td class="r">4,815</td><td class="r">5,140</td>
+        <td class="r pos">+65,000</td><td class="r pos">+6.7%</td>
+        <td class="ct">資産バリュー・板薄</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/punch-industry-6165/">パンチ工業</a></td><td class="cd">6165</td>
+        <td class="r">400</td><td class="r">474</td><td class="r">506</td>
+        <td class="r pos">+12,800</td><td class="r pos">+6.8%</td>
+        <td class="ct">資産バリュー</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/hoshiwa-denki-6748/">星和電機</a></td><td class="cd">6748</td>
+        <td class="r">1,000</td><td class="r">704.8</td><td class="r">753</td>
+        <td class="r pos">+48,200</td><td class="r pos">+6.8%</td>
+        <td class="ct">資産バリュー・照明</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/keihan-hd-9045/">京阪HD</a></td><td class="cd">9045</td>
+        <td class="r">300</td><td class="r">3,090</td><td class="r">3,295</td>
+        <td class="r pos">+61,500</td><td class="r pos">+6.6%</td>
+        <td class="ct">資産バリュー・サブ</td>
+      </tr>
+      <tr>
+        <td class="nm">小田原エンジニアリング</td><td class="cd">6149</td>
+        <td class="r">400</td><td class="r">2,060</td><td class="r">2,187</td>
+        <td class="r pos">+50,800</td><td class="r pos">+6.2%</td>
+        <td class="ct">ニッチ製造</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/oyo-9755/">応用地質</a></td><td class="cd">9755</td>
+        <td class="r">1,000</td><td class="r">2,751</td><td class="r">2,843</td>
+        <td class="r pos">+92,000</td><td class="r pos">+3.3%</td>
+        <td class="ct">国策インフラ</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/daiken-5900/">ダイケン</a></td><td class="cd">5900</td>
+        <td class="r">2,000</td><td class="r">845.7</td><td class="r">859</td>
+        <td class="r pos">+26,600</td><td class="r pos">+1.6%</td>
+        <td class="ct">資産バリュー</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/ryoyu-systems-4685/">菱友システムズ</a></td><td class="cd">4685</td>
+        <td class="r">2,400</td><td class="r">2,839</td><td class="r">2,883</td>
+        <td class="r pos">+105,600</td><td class="r pos">+1.5%</td>
+        <td class="ct">IT・割安成長</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/us-treasury-etf-hedge-2255-237a/">iシェアーズ米国債25年超</a></td><td class="cd">237A</td>
+        <td class="r">6,480</td><td class="r">154.2</td><td class="r">156</td>
+        <td class="r pos">+11,664</td><td class="r pos">+1.2%</td>
+        <td class="ct">ヘッジ・保険</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/nihon-bs-hoso-9414/">日本BS放送</a></td><td class="cd">9414</td>
+        <td class="r">6,500</td><td class="r">919.1</td><td class="r">916</td>
+        <td class="r neg">▲20,475</td><td class="r neg">▲0.3%</td>
+        <td class="ct">放送・BS課金</td>
+      </tr>
+      <tr>
+        <td class="nm"><a href="/blog/nihon-hospice-7061/">日本ホスピス</a></td><td class="cd">7061</td>
+        <td class="r">2,200</td><td class="r">605</td><td class="r">568</td>
+        <td class="r neg">▲81,400</td><td class="r neg">▲6.1%</td>
+        <td class="ct">隠れ国策・多死社会</td>
+      </tr>
+      </tbody>
+      <tfoot><tr>
+        <td class="nm">合計（22銘柄）</td><td></td><td></td><td></td><td></td>
+        <td class="r pos">+7,263,109</td><td class="r pos">+8.9%</td><td></td>
+      </tr></tfoot>
+    </table>
+  </div>
+  <p class="note">※ 主要保有のみ。金額は「保有株数×株価」で、信用建玉ぶんも現物換算で合算しています。サイトの資産推移グラフは<b>現物ポジションと確定益（現金）のみ</b>の評価で信用の含み損益を反映しないため、本表とは相応の差異が出ます（別々のモノサシ）。星和電機・遠藤照明は紹介記事を準備中のためリンク未設定。このほか、先週末の急落で打診したプライム大型（日立・SBI・神戸鋼・富士通・NEC・東京エネシス等）を少量分散保有していますが、実験的な枠のため本表には含めていません。<br>本資料は情報提供のみを目的とし、投資勧誘・助言ではありません。</p>
+</div>
+</body>
+</html>

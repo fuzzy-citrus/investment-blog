@@ -1,5 +1,8 @@
 # build output
 dist/
+
+# Cloudflare API token (秘密情報)
+.cf_token
 # generated types
 .astro/
 
@@ -22,3 +25,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 保有データの元ファイル（実ポジション・打診リストを含むため公開リポジトリには入れない）
+portfolio-holdings.xlsx
