@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑩｜菱友システムズ（4685）— 防衛・宇宙IT準独占×PER10倍割安×流通株式問題でTOB圧力、三菱重工系5期連続最高益の割安ニッチトップ"
 description: "F-15改修・P-1哨戒機・H3ロケットの基幹ITを独占。国家機密レベルの参入障壁で代替不可能。5期連続最高益・ROE20%超にもかかわらずPER10倍。流通株式比率問題が三菱重工によるTOB・非上場化を迫る。加重平均期待株価3,818円（+32%）。手元資金102億円が時価総額の28%。"
+cardDesc: "F-15改修・P-1哨戒機・H3ロケットの基幹ITを独占。<span class='card-highlight'>5期連続最高益・ROE20%超でPER10倍</span>。"
 pubDate: "2026-06-03"
 stockCard:
   rating: "A-"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+36〜+94%"
   downside: "▲14%"
   modifiedPBR: "1.50倍"
-  category: "防衛IT・準独占SIer・TOB候補"
+  category: "三菱重工系の防衛SIer"
 related: ["holdings-status-01-saas", "nssol-2327", "punch-industry-6165", "em-systems-4820"]
 ---
 

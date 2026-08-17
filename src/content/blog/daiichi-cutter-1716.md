@@ -2,7 +2,7 @@
 title: "銘柄紹介｜第一カッター興業（1716）— 時価総額の53%が現金・PBR0.79倍・EV/経常3.9倍の『国策インフラ維持補修』資産バリュー。TANAKENと真逆の『守り』で待てる"
 description: "コンクリートの切断・穿孔（コア抜き）で国内トップ級の第一カッター興業（1716）。時価総額約170億のうちネットキャッシュ約90億（約53%）、PBR0.79倍、EV/経常わずか3.9倍で『事業をほぼタダで買える』資産バリュー。FY25の利益大底からFY26は3Q累計で経常+32.5%・純利+49.5%と回復が鮮明で通期経常を20.5億へ上方修正。国土強靱化5年20兆円強と高速道路リニューアルの長期官需が追い風で、資材高はむしろ『新設→更新』シフトと予算インフレ連動で相対優位。妙味を実現益に変える鍵は増配・自社株買いの実行。TANAKEN（A−）が高ROE×低PERの攻め、こちらは現金過半×国策の守り。評価B+。"
 pubDate: "2026-07-08T10:00:00+09:00"
-cardDesc: "<span class='card-highlight'>時価総額の約53%が現金、PBR0.79倍、EV/経常3.9倍。事業をほぼタダ同然で買える資産バリュー。</span>大底から回復（3Q経常+32.5%）＋国策インフラ維持補修（国土強靱化20兆円強）。資材高はむしろ相対優位。<span class='card-note'>TANAKEN（攻め）と真逆の『守り』。評価B+の待てるバランスシート型。</span>"
+cardDesc: "<span class='card-highlight'>時価総額の約53%がネットキャッシュ</span>。PBR0.79倍で、国が進めるインフラ維持補修がそのまま本業になる。"
 related: ["construction-selloff-opportunity", "tanaken-1450", "oyo-9755", "daiken-5900"]
 draft: false
 stockCard:
@@ -14,7 +14,7 @@ stockCard:
   upside: "+26〜+50%"
   downside: "▲10%"
   modifiedPBR: "0.79倍"
-  category: "現金53%×PBR0.79×国策インフラ維持補修"
+  category: "コンクリート切断の国内首位"
 noteUrl: "https://numasoko-value.com/analysis/daiichi-cutter-1716.html"
 ---
 

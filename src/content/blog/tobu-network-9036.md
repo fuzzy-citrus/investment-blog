@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介①｜東部ネットワーク（9036）— 不動産含み益リッチ銘柄"
 description: "横浜・海老名の土地含み益+130%、修正PBR0.21倍。非上場化確率95%の出口まで見えている、典型的なバリュー商会案件。"
+cardDesc: "横浜・海老名の<span class='card-highlight'>土地含み益+130%、修正PBR0.21倍</span>。非上場化という出口まで見えている資産バリュー。"
 pubDate: "2026-05-08"
 stockCard:
   rating: "A++"
@@ -12,7 +13,7 @@ stockCard:
   downside: "▲16%"
   modifiedPBR: "0.21倍"
   delistProb: "95%"
-  category: "不動産含み益"
+  category: "貨物運送・倉庫"
 related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "keihan-hd-9045", "shinyei-3004"]
 ---
 

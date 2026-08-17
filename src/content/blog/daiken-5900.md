@@ -2,7 +2,7 @@
 title: "銘柄紹介｜ダイケン（5900）— PBR0.34倍・土地含み益42億×現金45億の『資産リッチ』超割安株。流動性は薄いが長期枠ならA+級"
 description: "東証スタンダードの建築金物ニッチトップ、ダイケン（5900）。BPS2,496円に対し株価848円＝PBR0.34倍で解散価値の約3分の1。淀川区の昭和期取得土地に含み益42億、現金＋政策保有株45.7億（時価総額の約9割）、無借金・自己資本80.8%。三木製作所M&Aで駐輪機も強化。低ROE・創業家支配で触媒待ちの時間リスクはあるが資産の裏付けは極厚。流動性が薄い超マイナー株ゆえ、安くなれば少しずつ拾う長期枠として妙味。近況B++、長期枠ならA+。"
 pubDate: "2026-07-02T18:00:00+09:00"
-cardDesc: "<span class='card-highlight'>解散価値の約3分の1（PBR0.34倍）。土地含み益42億＋現金・保有株45億＋無借金＝とにかく資産リッチ。</span>触媒待ちの時間はかかるが、下値は資産が何重にも守る。流動性が薄いので、安くなれば少しずつ。<span class='card-note'>近況B++／長期枠ならA+の資産バリュー。河内・堀田が独占資産を語る。</span>"
+cardDesc: "BPS2,496円に対し<span class='card-highlight'>株価848円＝PBR0.34倍</span>で解散価値の3分の1。淀川区の昭和期取得地に含み益42億円。"
 draft: false
 stockCard:
   rating: "B++"
@@ -13,7 +13,7 @@ stockCard:
   upside: "+37〜+136%"
   downside: "▲17%"
   modifiedPBR: "0.28倍"
-  category: "土地含み益×ネットキャッシュ×資産リッチ"
+  category: "建築金物のニッチトップ"
 noteUrl: "https://numasoko-value.com/analysis/daiken-5900.html"
 related: ["construction-selloff-opportunity", "keihan-hd-9045", "tobu-network-9036", "oyo-9755"]
 ---

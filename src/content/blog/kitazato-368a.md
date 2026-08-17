@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介③｜北里コーポレーション（368A）— 生殖医療消耗品の国内唯一上場株、PER11.9倍×無借金×政策追い風"
 description: "日本の体外受精（IVF）消耗品市場を独占し110ヵ国に展開。PER11.9倍・FCFイールド7.5%・自己資本比率93.2%・現金134億で上場来最低圏に放置。少子化対策39.1兆円の直接受益株。"
+cardDesc: "体外受精の消耗品市場を国内独占し110ヵ国へ展開。<span class='card-highlight'>PER11.9倍・自己資本比率93.2%</span>で上場来最低圏に放置されている。"
 pubDate: "2026-05-18"
 stockCard:
   rating: "A"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+41〜+120%"
   downside: "▲25%"
   modifiedPBR: "2.35倍"
-  category: "生殖医療・政策株"
+  category: "生殖医療（IVF）消耗品"
 related: ["holdings-status-02-kitazato-shinyei", "hidden-policy-stock-kitazato", "nihon-hospice-7061", "ryoyu-systems-4685"]
 noteUrl: "https://numasoko-value.com/analysis/368A.html"
 ---

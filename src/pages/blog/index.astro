@@ -247,9 +247,20 @@ const posts = (await getCollection('blog'))
 			}
 			.stock-card-desc {
 				padding: 0 1.3em 0.8em;
-				font-size: 0.78em;
-				color: rgba(255,255,255,0.45);
-				line-height: 1.5;
+				font-size: 0.8em;
+				color: rgba(255,255,255,0.62);
+				line-height: 1.65;
+			}
+			/* 暗色カード上では card-highlight / card-note の既定色が沈むため上書き */
+			.stock-card-desc :global(.card-highlight) {
+				color: #5dcca8;
+				font-weight: 700;
+			}
+			.stock-card-desc :global(.card-note) {
+				display: block;
+				margin-top: 0.5em;
+				font-size: 0.92em;
+				color: rgba(255,255,255,0.4);
 			}
 			.stock-card-kpis {
 				display: grid;
@@ -374,7 +385,7 @@ const posts = (await getCollection('blog'))
 								<a href={`/blog/${post.id}/`}>
 									<div class="stock-card-header">
 										<div class="stock-card-left">
-											<div class="stock-card-badge">銘柄分析 — {post.data.stockCard.category}</div>
+											<div class="stock-card-badge">銘柄分析</div>
 											<div class="stock-card-name">
 												{post.data.stockCard.companyName}
 												<span class="stock-card-ticker">（{post.data.stockCard.ticker}）</span>
@@ -387,7 +398,9 @@ const posts = (await getCollection('blog'))
 											<div class="stock-card-upside">現在比 {post.data.stockCard.upside}</div>
 										</div>
 									</div>
-									<div class="stock-card-desc">{post.data.description}</div>
+									{post.data.cardDesc
+										? <div class="stock-card-desc" set:html={post.data.cardDesc} />
+										: <div class="stock-card-desc">{post.data.description}</div>}
 									<div class="stock-card-kpis">
 										<div class="sc-kpi">
 											<div class="sc-kpi-label">現在株価</div>

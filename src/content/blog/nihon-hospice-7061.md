@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑨｜日本ホスピスHD（7061）— 株価▲72%の在宅ホスピス専業・国内唯一の上場企業、診療報酬ショック後の底値圏で来期PER8.4倍×配当4.2%【2040年多死社会の受益者】"
 description: "高値2,100円超から▲72%で株価596円。在宅ホスピス専業・国内唯一の上場企業が診療報酬改定ショックで叩き売られている。2040年に死者170万人・在宅希望率60%という構造的需要に、来期PER8.4倍・配当4.2%・スギHD提携・稼働回復確認済みが重なる。診療報酬リスクを許容できる3年投資家向け。"
+cardDesc: "国内唯一の上場専業が診療報酬改定で<span class='card-highlight'>高値から▲72%</span>。2040年に死者170万人・在宅希望率60%という構造需要は消えない。"
 pubDate: "2026-06-02"
 stockCard:
   rating: "B+"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+51〜+150%"
   downside: "▲25%"
   modifiedPBR: "1.37倍"
-  category: "在宅ホスピス・ストック型・グロース底値"
+  category: "在宅ホスピス専業"
 related: ["hidden-policy-stock-nihon-hospice", "kitazato-368a", "per-value-investing", "ryoyu-systems-4685"]
 ---
 

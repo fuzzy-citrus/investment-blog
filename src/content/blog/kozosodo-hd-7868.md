@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑧｜広済堂ホールディングス（7868）— 東京博善「売却検討公表」×NAV50%ディスカウント、TOB最頻値800〜900円で確率加重期待価格967円の制度的決着待ち【火葬場・イベントドリブン】"
 description: "東京都内シェア70%超の火葬場「東京博善」の売却検討を会社が公表。中国資本問題・国会質問・規制強化見通しという三重の政治圧力が「KKR買収＝中国資本脱却」という形での制度的決着を引き寄せている。NAV1,021円に対し株価521円はNAVの50%水準。BPS床▲5.6%のダウンサイドに対し+54〜+73%のアップサイドという非対称構造を解説。"
+cardDesc: "<span class='card-highlight'>都内シェア70%超の火葬場「東京博善」の売却検討を会社が公表</span>。政治圧力を背景に、制度的な決着が近いイベント案件。"
 pubDate: "2026-06-09"
 stockCard:
   rating: "A+"
@@ -12,7 +13,7 @@ stockCard:
   upside: "+54〜+73%"
   downside: "▲10%"
   modifiedPBR: "1.06倍"
-  category: "TOBイベント・火葬場資産"
+  category: "火葬場運営・印刷"
   cardTheme: "event"
 related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "nssol-2327", "nihon-bs-hoso-9414"]
 noteUrl: "https://numasoko-value.com/analysis/kozosodo-hd-7868.html"

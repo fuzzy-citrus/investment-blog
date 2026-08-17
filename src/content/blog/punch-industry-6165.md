@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑧｜パンチ工業（6165）— 宇宙テーマがゼロコストで付いてくるPBR0.65倍、調整ネットキャッシュが時価総額の93%を占める格安宇宙関連株"
 description: "株価539円の93%が現金・売掛金で裏付けられた調整ネットキャッシュ構造。PBR0.65倍の精密金型部品シェア1位が、YAOKI月面挑戦とSpaceX上場連想という宇宙テーマをほぼゼロコストで内包。3年期待リターン+77%。iSpaceやアストロスケールとのバリュエーション比較で見えてくる圧倒的な割安。"
+cardDesc: "<span class='card-highlight'>株価539円の93%が現金と売掛金で裏付けられる</span>。PBR0.65倍に、YAOKI月面挑戦という宇宙テーマが乗る。"
 pubDate: "2026-06-01"
 stockCard:
   rating: "B+"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+67〜+187%"
   downside: "▲12%"
   modifiedPBR: "0.65倍"
-  category: "精密金型・宇宙テーマ・ネットキャッシュ"
+  category: "精密金型部品でシェア1位"
 related: ["tokai-electronics-8071", "okaya-kouki-7485", "spacex-ipo-spcx-2026"]
 ---
 

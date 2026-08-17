@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介｜日本ギア工業（6356）— 原発バルブ駆動部シェア90%超なのにPER11倍。配当0.7%に騙されるな、正体は『見えない複利マシン』"
 description: "原発バルブアクチュエーター国内シェア90%超で、原発回帰はこの会社抜きでは成り立たない代替不能インフラ。火力・水力・上下水道・対米原子力（FLS）まで複数の巨大テーマを『複数取り』しながら、営業利益率24.9%（競合最高）なのにPERは競合の半分・11倍。配当0.7%の正体はEPS9割超を非課税再投資するROE13%の内部複利装置。エネルギーインフラで最も割安なニッチトップを対話形式で解説。評価A・強気。"
+cardDesc: "<span class='card-highlight'>国内シェア90%超の代替不能インフラ</span>。原発回帰はこの会社抜きに成立せず、渋い配当性向がそのまま社内複利に回る。"
 pubDate: "2026-06-17"
 stockCard:
   rating: "A"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+46〜+115%"
   downside: "▲12%"
   modifiedPBR: "1.38倍"
-  category: "原発バルブ独占×内部複利"
+  category: "原発バルブ駆動装置"
 noteUrl: "https://numasoko-value.com/analysis/nihon-gear-6356.html"
 related: ["low-payout-internal-compounding", "dividend-series-02-low-payout-opportunity", "good-stock-vs-good-company", "per-value-investing"]
 ---

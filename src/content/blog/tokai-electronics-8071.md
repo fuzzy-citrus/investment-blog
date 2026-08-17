@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑦｜東海エレクトロニクス（8071）— 純キャッシュ3,783円が株価2,800円を上回る「異常なネットネット」×粗利率16%改善【名証・電子部品商社】"
 description: "時価総額65.9億円に対し現金119億円（純キャッシュ89億円＝1株3,783円）。株価2,800円を純キャッシュだけで上回る異常なネットネット株。PBR0.34倍・修正PBR0.24倍。粗利率12%→16%のFA/AI転換を2026/3期決算が実証。3年期待リターン+53%。"
+cardDesc: "<span class='card-highlight'>純キャッシュだけで1株3,783円と、株価2,800円を上回る</span>。PBR0.34倍の、典型的なネットネット株。"
 pubDate: "2026-06-01"
 stockCard:
   rating: "A+"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+36〜+107%"
   downside: "▲10%"
   modifiedPBR: "0.24倍"
-  category: "電子部品・ネットネット・現金超過"
+  category: "電子部品の技術商社"
 related: ["low-payout-internal-compounding", "tv-tokyo-9413", "efficient-market-hypothesis", "okaya-kouki-7485"]
 ---
 

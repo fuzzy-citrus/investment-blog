@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑥｜岡谷鋼機（7485）— PBR0.35倍×投資有証が時価総額の1.7倍×357年創業、保有株をディスカウントで買える実質ネットネット"
 description: "純資産5,177億円に対し時価総額1,830億円（PBR0.35倍）。投資有価証券だけで時価総額を170%超逆転。トヨタ・三菱UFJなど日本最優良株をまとめて割引購入できる構造。東北特殊鋼TOB売却益・ティラド急騰など複数カタリストが進行中。2026年6月に株式分割完了。名古屋の357年老舗商社。"
+cardDesc: "純資産5,177億に対し時価総額1,830億＝<span class='card-highlight'>PBR0.35倍</span>。投資有価証券だけで時価総額を170%超え、優良株をまとめて割引で持てる。"
 pubDate: "2026-05-31"
 stockCard:
   rating: "A"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+40〜183%"
   downside: "▲15%"
   modifiedPBR: "0.35倍"
-  category: "商社・保有有価証券・ネットネット"
+  category: "名古屋の老舗専門商社"
 related: ["low-payout-internal-compounding", "holdings-status-04-okaya-tokai", "tokai-electronics-8071", "efficient-market-hypothesis"]
 ---
 

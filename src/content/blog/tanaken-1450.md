@@ -2,7 +2,7 @@
 title: "銘柄紹介｜TANAKEN（1450）— 資材高に強い『解体専業で国内唯一の上場』がROE16%×PER8倍×配当4%。建設株とまとめ売りされた再開発・国策の受益ディープバリュー"
 description: "都心の大型解体を握る『持たざる経営』のTANAKEN（旧・田中建設工業／1450）。解体は資材を積まず、鉄スクラップは売却収入＝資材インフレに構造的に強いのに、『建設株』として一括で売られPER8倍・ROE16%・配当4%に放置。老朽化×再開発×規制強化という国策の追い風、実質無借金・自己資本76.6%の資産性、売上7年2.4倍の成長性を併せ持つ。低PERの主因は非上場の親会社が59.6%を握る支配株主ディスカウント（親は非上場＝厳密には親子上場ではないが、利益相反・低流動性という経済実態は同型）で、還元強化・資本再編なら再評価の触媒に。評価A−。"
 pubDate: "2026-07-07T10:00:00+09:00"
-cardDesc: "<span class='card-highlight'>解体は資材を『積まず・むしろ売る』。資材高に強いのに『建設株』一括売りでPER8倍・ROE16%・配当4%に放置。</span>国策（再開発・規制強化）の追い風＋実質無借金＋売上7年2.4倍。<span class='card-note'>解体専業で国内唯一の上場。評価A−の稼ぐ力対比ディープバリュー。</span>"
+cardDesc: "資材を積まず鉄スクラップは売却収入になるため<span class='card-highlight'>資材インフレに構造的に強い</span>のに、「建設株」として一括で安く置かれている。"
 related: ["construction-selloff-opportunity", "daiichi-cutter-1716", "nssol-2327", "kozosodo-hd-7868"]
 draft: false
 stockCard:
@@ -14,7 +14,7 @@ stockCard:
   upside: "+25〜+75%"
   downside: "▲13%"
   modifiedPBR: "1.29倍"
-  category: "解体専業唯一・資材高耐性・親会社支配割安"
+  category: "都心大型解体の専業"
 noteUrl: "https://numasoko-value.com/analysis/tanaken-1450.html"
 ---
 

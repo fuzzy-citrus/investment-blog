@@ -1,7 +1,7 @@
 ---
 title: "銘柄紹介｜テレビ東京HD（9413）— 時価総額の68%が現金、放送＋ポケモン・NARUTOのアニメIPをEV/EBITDA1.9倍でタダ同然に買える。ただしTOBは放送法で封印された『持って報われる』バリュー株"
 description: "『無理してでも観たい』を作るテレビ東京HD（9413）。今の正体は、時価総額の68%（1株2,479円）を現金・有価証券が占め、放送＋アニメIPの全事業をEV/EBITDA1.9倍でタダ同然に買える資産バリュー株。PBR0.90倍で解散価値割れ。しかもポケモンやNARUTOなどのアニメIPが海外ゲーム化・配信で二桁成長し、いまや利益の過半をアニメ・配信が稼ぐ。留保は、放送法のマスメディア集中排除・外資規制＋筆頭株主の日経33%でTOB/MBOが事実上封印されている点＝買収プレミアムは望めず、カタリストは自律的な資本政策（政策株売却・還元強化）に限られる。低ROE7.4%のバリュートラップ性も。日本BS放送（9414）との『同じ放送でもTOBで報われる型／持って報われる型』の対比つき。評価B+。"
-cardDesc: "<span class='card-highlight'>時価総額の68%が現金。放送＋ポケモン・NARUTOのアニメIPをEV/EBITDA1.9倍でタダ同然に買える解散価値割れ（PBR0.90倍）。</span>ただしTOBは放送法＋日経33%で封印＝『持って報われる』型。<span class='card-note'>日本BS放送との対比つき。ライバルも乱入。評価B+。</span>"
+cardDesc: "<span class='card-highlight'>時価総額の68%（1株2,479円）が現金と有価証券</span>。放送とアニメIPの全事業が、EV/EBITDA1.9倍で買える計算。"
 pubDate: "2026-07-23T10:00:00+09:00"
 related: ["nihon-bs-hoso-9414", "tokai-electronics-8071", "saas-death-japan-it", "sakurajima-futo-9353"]
 draft: false
@@ -15,7 +15,7 @@ stockCard:
   upside: "+21〜+65%"
   downside: "▲25%"
   modifiedPBR: "0.90倍"
-  category: "現金68%×EV/EBITDA1.9倍×アニメIP成長"
+  category: "テレビ東京・アニメIP"
 noteUrl: "https://numasoko-value.com/analysis/tv-tokyo-9413.html"
 ---
 

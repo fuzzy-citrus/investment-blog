@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介⑦｜日鉄ソリューションズ（2327）— 純資産40%が0.2%で眠るITサービス大手、アクティビスト外圧×防衛策消滅で確率加重IRR+17%の非対称投資【親子上場・イベント投資】"
 description: "日本製鉄63.4%子会社のITサービス大手。純資産40%（944億円）が親会社CMS口座に年利0.2%で眠り、ROEが同業の3分の1（10.9%）に抑制される構造的歪み。アクティビスト3D Investment Partnersが538億投下・10.1%保有。6月19日総会後に防衛策が消滅し「買い増し解禁」へ。確率加重IRR+16.8%、変革確率78%の非対称リターン構造を解説。"
+cardDesc: "<span class='card-highlight'>純資産の40%（944億円）が親会社口座に年利0.2%で眠る</span>。ROEは同業の3分の1で、是正されれば景色が変わる。"
 pubDate: "2026-06-09"
 stockCard:
   rating: "B++"
@@ -11,7 +12,7 @@ stockCard:
   upside: "+24〜+58%"
   downside: "▲25%"
   modifiedPBR: "2.28倍"
-  category: "親子上場・ITサービス・アクティビスト"
+  category: "日本製鉄系のITサービス大手"
 related: ["holdings-status-01-saas", "kozosodo-hd-7868", "ryoyu-systems-4685", "em-systems-4820"]
 noteUrl: "https://numasoko-value.com/analysis/nssol-2327.html"
 ---

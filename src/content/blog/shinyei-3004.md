@@ -1,6 +1,7 @@
 ---
 title: "銘柄紹介②｜神栄（3004）— 政策保有株が時価総額の91%、センサー世界首位がほぼ無料でついてくる"
 description: "政策保有株5銘柄の現在時価が時価総額88億円の91.2%に達する超特殊構造。修正PBR0.71倍・配当利回り5.21%・湿度センサー世界首位の三重割安。"
+cardDesc: "<span class='card-highlight'>政策保有株5銘柄の時価が時価総額の91.2%</span>。修正PBR0.71倍・配当利回り5.21%で、湿度センサーは世界首位。"
 pubDate: "2026-05-24"
 stockCard:
   rating: "A-"
@@ -12,7 +13,7 @@ stockCard:
   downside: "▲37%"
   modifiedPBR: "0.75倍"
   delistProb: "センサー世界首位"
-  category: "政策保有株含み益"
+  category: "神戸の老舗専門商社"
 related: ["holdings-status-02-kitazato-shinyei", "okaya-kouki-7485", "tobu-network-9036", "value-concept"]
 ---
 

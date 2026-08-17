@@ -2,7 +2,7 @@
 title: "銘柄紹介｜櫻島埠頭（9353）— 時価総額43億の港湾会社が、52億円分の三菱UFJ株を抱えている。『MUFGを2割引で間接保有して、大阪港の独占埠頭がタダでついてくる』証券含み益型ディープバリュー"
 description: "大阪港唯一の独立系商業埠頭・櫻島埠頭（9353）。時価総額約43億円に対し、保有する三菱UFJ株150万株超の時価は約52億円——全株売却の税引後手取り約42億円だけで時価総額に到達し、EBITDA9.2億円の港湾事業がほぼ無料でついてくる。PBR0.53倍・NAV中立5,296円比▲47%。MUFGの増配が受取配当金として流れ込み、累進配当（40円→54円）の原資が自動で膨らむ『銀行株ミニファンド＋独占インフラ』構造。個人投資家が半年で10.25%を買い集め、有報には『売却について検討する方針』も明記。ただし含み資産の実体は土地ではなく有価証券＝MUFG連動リスクと、極小流動性・万年割安リスクを直視して評価B++。東部ネットワーク（A++)との対比で『同じ資産バリューでも中身が違う』を解説。"
 pubDate: "2026-07-19T01:00:00+09:00"
-cardDesc: "<span class='card-highlight'>時価総額43億の会社の金庫に、52億円分の三菱UFJ株。実質『MUFGの間接保有＋大阪港独占埠頭がタダ』。</span>個人投資家が半年で10.25%買い集め・有報に売却検討の明記・累進配当54円。<span class='card-note'>東部ネットワークとの対比で読む証券含み益型。評価B++。</span>"
+cardDesc: "時価総額約43億に対し、<span class='card-highlight'>保有する三菱UFJ株の時価だけで約52億</span>。税引後の手取りでも時価総額を上回る。"
 related: ["katakura-3001", "tobu-network-9036", "holdings-status-04-okaya-tokai", "kozosodo-hd-7868"]
 draft: false
 stockCard:
@@ -14,7 +14,7 @@ stockCard:
   upside: "+22〜+88%"
   downside: "▲25%"
   modifiedPBR: "0.53倍"
-  category: "MUFG間接保有×大阪港独占×証券含み益"
+  category: "大阪港の商業埠頭"
 noteUrl: "https://numasoko-value.com/analysis/sakurajima-futo-9353.html"
 ---
 
