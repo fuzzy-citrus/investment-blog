@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ニフティライフスタイル（4262）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:245px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eaa8a8}
+.ch{font:700 13px/1.3 var(--head);margin-bottom:8px}
+.cx{font-size:12px;line-height:1.75;color:var(--ink2)}
+.cx strong{font-weight:700}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wr td{background:var(--rd3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 26px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.rd{color:#e09090}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+.tg-rd{background:rgba(180,44,44,.25);color:#e09090}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* WATERFALL */
+.wf{display:flex;align-items:flex-end;gap:8px;height:200px;padding:14px 0;border-bottom:1px solid var(--rule);margin-bottom:8px}
+.wf-c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.wf-b{width:100%;border-radius:3px 3px 0 0}
+.wf-v{font:600 11px/1 var(--mono);margin-bottom:5px}
+.wf-l{font-size:10px;color:var(--ink3);margin-top:6px;text-align:center;line-height:1.3}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #eaa8a8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+h3.sub{font:700 14px/1.2 var(--head);margin:24px 0 12px;padding-left:9px;border-left:3px solid var(--ink)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px;margin-top:18px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+.disc{margin-top:26px;font-size:10.5px;color:var(--ink3);line-height:1.7;border-top:.5px solid var(--rule);padding-top:14px}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 4262 · 東証グロース · 2026.08.17 作成 / 一次情報照合済 rev.2</p>
+      <h1 class="ht">ニフティライフスタイル <em>（4262）</em><br>統合投資分析レポート</h1>
+      <p class="hs">現金45.7億円＝時価総額の52% ／ EV/営業利益 3.2倍・現金控除後PER 5.0倍 ／ 配当利回り4.7%<br>「土地の含み益」はゼロ、代わりに<strong style="color:rgba(246,245,239,.8)">ネットキャッシュ・取引先集中・商標</strong>が論点 ／ 親会社ニフティ64.96%保有</p>
+    </div>
+    <div class="vb">
+      <div class="vs">○</div>
+      <div class="vt">
+        <strong>やや強気 ／ 小口・分散前提</strong><br>
+        バリュー指標は明確に割安。<br>
+        ただし成長鈍化と生成AI構造リスクが<br>
+        「安さの理由」である可能性も高い。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,363円</div><div class="ks">2026/8/14終値(+1.04%)・時価総額87.1億円</div></div>
+    <div class="kv"><div class="kl">ネットキャッシュ/株</div><div class="kn gn">716円</div><div class="ks">株価の52.5%が現金</div></div>
+    <div class="kv"><div class="kl">EV/営業利益</div><div class="kn gn">3.2倍</div><div class="ks">EV 41.3億 ÷ 会社計画13.13億</div></div>
+    <div class="kv"><div class="kl">予想PER / PBR</div><div class="kn bl">10.5倍 / 1.42倍</div><div class="ks">現金控除後の実質PERは5.0倍</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn gn">4.70%</div><div class="ks">年64円・配当性向49%（方針50%）</div></div>
+    <div class="kv"><div class="kl">1Q営業益進捗</div><div class="kn rd">14.1%</div><div class="ks">前期同期19.2% → 下方修正リスク</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--or2)"></span>サマリー</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--rd)"></span>最新決算(1Q)</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--gn2)"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--am2)"></span>資産精査・含み益</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--pu2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 サマリー ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論：3つの事実で捉える</h2><span class="sb bg-or">Executive Summary</span></div>
+
+  <div class="inf">
+    <strong>先に前提の確認（要チェック）：</strong>参照している「最新決算」は <strong>2027年3月期 第1四半期（2026年7月30日発表）</strong>です。一方、株価1,363円は<strong>2026年8月14日の終値で、前日比＋14円（+1.04%）の上昇</strong>でした（52週レンジ 1,255〜1,489円）。<br>
+    つまり<strong>「PTSで相当売られている」という状況は、8月14日終値時点の公開データからは確認できません</strong>。①7月30日の1Q決算直後の反応を指している、②8月17日の場中／PTSでの動き、③本レポート作成後の新規開示、のいずれかと思われます。もし③であれば本レポートに未反映です。この1点だけご確認ください。
+  </div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c cl-gn">
+      <div class="ch">FACT 1 ／ 現金が株価の半分</div>
+      <div class="cx">現預金 <span class="mn hgn">45.7億円</span>（1株716円）に対し時価総額87.1億円。実質的に投資家は<strong>事業を41.3億円で買っている</strong>。会社計画の営業利益13.13億に対し<strong>EV/営業利益 3.2倍</strong>。無借金・自己資本比率85.6%。</div>
+    </div>
+    <div class="c cl-rd">
+      <div class="ch">FACT 2 ／ 土地の含み益はゼロ</div>
+      <div class="cx">上場時Ⅰの部で本店は<strong>新宿フロントタワー（賃借ビル）</strong>、キャッシュフロー計算書に<strong>「敷金及び保証金の差入による支出」</strong>を計上＝<strong>土地・建物は非保有</strong>。2025年7月にも本社移転済み。<strong>「隠れ資産」は現金だけ</strong>で、逆に<span class="hrd">のれん（推定10〜13億円）</span>という潜在的な"隠れ負債"を抱える。</div>
+    </div>
+    <div class="c cl-am">
+      <div class="ch">FACT 3 ／ 安さには理由がある</div>
+      <div class="cx">1Q営業益▲19.0%、通期進捗14.1%（前期19.2%）。購入領域の需要減退＋生成AI投資。加えて<strong>生成AI検索は「まとめ検索」型アグリゲーターに最も逆風</strong>。市場はターミナルバリューを疑い始めている。</div>
+    </div>
+  </div>
+
+  <h3 class="sub">投資妙味の判定：ご質問への直接回答</h3>
+  <table class="t">
+    <thead><tr><th>論点</th><th style="width:90px">判定</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>1,363円は割安か</strong></td><td><span class="bge be-gn">割安</span></td><td>EV/営業利益3.2倍・現金控除後PER5.0倍・配当利回り4.7%・ROE13.6%・無借金。定量的には日本株の中でも上位の割安圏。</td></tr>
+      <tr class="wr"><td><strong>土地の含み益</strong></td><td><span class="bge be-rd">ゼロ（確認済）</span></td><td>土地・建物を保有していないアセットライト企業。本社は賃借（敷金・保証金を差入）。<strong>公示地価も取得時期も分析対象が存在しない</strong>。含み益シナリオは成立しない。</td></tr>
+      <tr class="wr"><td><strong>有価証券の含み益</strong></td><td><span class="bge be-rd">ほぼゼロ</span></td><td>政策保有株・投資有価証券の目立った残高は確認できず。純投資的な有価証券ポートフォリオは持たない。</td></tr>
+      <tr class="wr"><td><strong>取引先集中</strong></td><td><span class="bge be-rd">極めて高い</span></td><td>上場時Ⅰの部で<strong>㈱リクルート1社が売上の48.0%</strong>（2021/3期）。2022/3期2Q累計でもリクルート42.6%・LIFULL 12.0%。<strong>2社で過半</strong>。</td></tr>
+      <tr class="hl"><td><strong>現金同等物</strong></td><td><span class="bge be-gn">45.7億円</span></td><td>1株716円＝株価の52.5%。総資産71.4億のうち64%が現金。<strong>ここが最大の"含み"</strong>。</td></tr>
+      <tr><td><strong>ストック性</strong></td><td><span class="bge be-am">中程度</span></td><td>収益は<strong>成果報酬型（送客課金）＝フロー</strong>。SaaS的なMRRではない。ただしアプリ累計DL1,300万超・SEO資産・ブランドが「擬似ストック」を形成。</td></tr>
+      <tr class="hl"><td><strong>ニッチトップ性</strong></td><td><span class="bge be-gn">明確にあり</span></td><td>ニフティ不動産＝大手14社横断検索で国内トップ。掲載1,400万件超・絞込150条件。ニフティ温泉も温浴施設ジャンルで月間350万人。</td></tr>
+      <tr><td><strong>市場成長</strong></td><td><span class="bge be-am">市場は伸びるが自社は鈍化</span></td><td>不動産テック市場は2030年度に2022年度比2.5倍の2.4兆円予測（矢野経済）。一方で会社の1Q売上は+3.2%と失速。<strong>市場成長を取り込めていない</strong>のが問題。</td></tr>
+      <tr class="hl"><td><strong>MBO/TOB</strong></td><td><span class="bge be-am">財務的には容易／時期は不明</span></td><td>親会社ニフティ(株)が<strong>64.96%</strong>保有→ノジマ(7419)の孫会社。少数株主35.0%に50%プレミアムでも45.8億円＝手元現金45.7億円とほぼ同額。<strong>ただし2026年6月の変更報告書は「保有減少」で、親会社は買い増していない</strong>。</td></tr>
+      <tr class="wr"><td><strong>買い手の選択肢</strong></td><td><span class="bge be-rd">ノジマ系のみ</span></td><td>社名・サービス名の<strong>「ニフティ」商標はニフティ(株)からの使用許諾</strong>で、子会社・関連会社でなくなれば使用できない可能性がある旨をⅠの部が明記。<strong>第三者への売却は現実的に困難</strong>。</td></tr>
+      <tr class="wr"><td><strong>ダウンサイド</strong></td><td><span class="bge be-rd">構造リスク大</span></td><td>生成AI／ゼロクリック検索（2026年調査で23.9%）はアグリゲーターに直撃するレイヤー。加えて上流ポータルへの依存・のれん減損・流動性の低さ。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="c cf-am">
+    <div class="ch" style="color:var(--am)">一言でいうと</div>
+    <div class="cx"><strong>「純粋なネットキャッシュ・バリュー株 × 親子上場イベント株」であり、成長株ではない。</strong><br>
+    広済堂のような"土地の含み益"ストーリーは存在せず、代わりに<strong>キャッシュそのもの</strong>と<strong>資本構造（親会社64.96%）</strong>が投資妙味の源泉です。株価1,363円は、事業価値をほぼ3年分の営業利益でしか評価していない水準で、明らかに悲観が織り込まれています。ただし<strong>その悲観は根拠のないものではなく</strong>、生成AIによる検索行動変化という、この会社のビジネスモデルの中核を直撃しうるテーマが背後にあります。「安いから買う」ではなく<strong>「安さの理由が構造破壊でないと判断できるか」</strong>が投資可否の分岐点です。</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 最新決算 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">最新決算：なぜ売られたのか</h2><span class="sb bg-rd">2027/3期 1Q</span></div>
+
+  <div class="warn">
+    <strong>売られた理由は明快：「増収なのに大幅減益」＋「進捗率の異常な低さ」。</strong>売上高12.65億円は1Qとして過去最高ですが、営業利益は▲19.0%、純利益は▲26.1%。通期営業利益計画13.13億円に対する1Q進捗はわずか<strong>14.1%</strong>（前期同期は19.2%）で、市場は通期下方修正リスクを織り込みにいっています。
+  </div>
+
+  <div class="g4" style="margin-bottom:20px">
+    <div class="c mc"><div class="ml">1Q 売上高</div><div class="mv gn">12.65億</div><div class="ms">前年同期比 +3.2%<br>1Qとして過去最高</div></div>
+    <div class="c mc"><div class="ml">1Q 営業利益</div><div class="mv rd">約1.85億</div><div class="ms">前年同期比 <strong>▲19.0%</strong><br>利益率14.6%（前期18.6%）</div></div>
+    <div class="c mc"><div class="ml">1Q 経常利益</div><div class="mv rd">1.90億</div><div class="ms">前年同期比 ▲16.3%</div></div>
+    <div class="c mc"><div class="ml">1Q 純利益</div><div class="mv rd">約1.16億</div><div class="ms">前年同期比 <strong>▲26.1%</strong></div></div>
+  </div>
+
+  <h3 class="sub">進捗率で見る通期計画のハードル</h3>
+  <div class="bg">
+    <div class="br2"><span>売上高進捗（今期1Q）</span><span class="mn hgn">21.8% <span style="color:var(--ink3)">／ 前期同期 23.4%</span></span></div>
+    <div class="bt"><div class="bf" style="width:21.8%;background:var(--gn2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span>営業利益進捗（今期1Q）</span><span class="mn hrd">14.1% <span style="color:var(--ink3)">／ 前期同期 19.2%</span></span></div>
+    <div class="bt"><div class="bf" style="width:14.1%;background:var(--rd)"></div></div>
+  </div>
+  <p class="note">残り3四半期で営業利益11.28億円（前年同期の9.61億円に対し<strong>+17.4%</strong>）を稼ぐ必要があり、1Qのトレンドが継続すれば計画未達の可能性は小さくない。ただし1〜3月の引越シーズンを含む4Qが最大の稼ぎ時であるため、季節性を踏まえれば挽回余地はある。</p>
+
+  <h3 class="sub">減益の3要因と、その"質"</h3>
+  <div class="g3">
+    <div class="c cl-rd">
+      <div class="ch">① 購入領域の需要減退</div>
+      <div class="cx"><span class="bge be-rd">構造・外部要因</span><br>物価高と<strong>金利上昇</strong>により住宅購入検討者が減少。日銀の利上げ局面が続く限り継続する逆風。ニフティ不動産の売買領域は賃貸より単価が高いため、利益への感応度が大きい。<br><strong>質：悪い</strong>（自社でコントロール不能）</div>
+    </div>
+    <div class="c cl-am">
+      <div class="ch">② マーケティング施策の不調</div>
+      <div class="cx"><span class="bge be-am">一時要因（会社説明）</span><br>集客施策の最適化に伴う「一時的な獲得効率の低下」と会社は説明。広告投下効率の悪化は改善余地がある一方、<strong>AI検索で自然流入が減れば有料集客への依存が構造的に高まる</strong>可能性も。<br><strong>質：判断保留</strong></div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ch">③ 生成AI関連の先行投資</div>
+      <div class="cx"><span class="bge be-bl">戦略投資</span><br>2026年7月には「生成AI向け広告支援体制」を構築するなど積極投資。<strong>短期の利益を犠牲にして競争優位を築く動き</strong>で、方向性としては正しい。ただし成果が出るまで利益率は圧迫される。<br><strong>質：良い（ただし成果は未証明）</strong></div>
+    </div>
+  </div>
+
+  <h3 class="sub">通期業績と過去実績</h3>
+  <table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">前期比</th><th class="r">営業利益</th><th class="r">前期比</th><th class="r">営業利益率</th><th class="r">純利益</th><th class="r">年間配当</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2024/3期</td><td class="r mn">35.59億</td><td class="r mn hgn">+18.3%</td><td class="r mn">9.33億</td><td class="r mn hgn">+63.4%</td><td class="r mn">26.2%</td><td class="r mn">－</td><td class="r mn">－</td></tr>
+      <tr><td class="mn">2025/3期</td><td class="r mn">49.4億</td><td class="r mn hgn">+38.7%</td><td class="r mn">10.03億</td><td class="r mn hgn">+7.5%</td><td class="r mn">20.3%</td><td class="r mn">6.17億</td><td class="r mn">－</td></tr>
+      <tr><td class="mn">2026/3期</td><td class="r mn">52.38億</td><td class="r mn ham">+6.1%</td><td class="r mn">11.89億</td><td class="r mn hgn">+18.5%</td><td class="r mn">22.7%</td><td class="r mn">7.78億</td><td class="r mn">59円</td></tr>
+      <tr class="sm"><td class="mn">2027/3期 会社計画</td><td class="r mn">57.90億</td><td class="r mn hgn">+10.5%</td><td class="r mn">13.13億</td><td class="r mn hgn">+10.4%</td><td class="r mn">22.7%</td><td class="r mn">8.31億</td><td class="r mn hgn">64円</td></tr>
+      <tr class="hl"><td class="mn">└ 1Q実績</td><td class="r mn">12.65億</td><td class="r mn ham">+3.2%</td><td class="r mn">約1.85億</td><td class="r mn hrd">▲19.0%</td><td class="r mn hrd">14.6%</td><td class="r mn">約1.16億</td><td class="r mn">中間32円</td></tr>
+    </tbody>
+  </table>
+  <p class="note">2025/3期は+38.7%増収だが、うち大半はドアーズ社（2024年5月、取得価額17.5億円／売上10.4億円）とGiRAFFE&Co.社のM&A寄与。<strong>オーガニック成長率は一桁台前半に鈍化している</strong>点が最大の懸念。設立以来8期連続増収というトラックレコードは、後半はM&Aで支えられている。</p>
+
+  <h3 class="sub">株価の位置</h3>
+  <div class="g4">
+    <div class="c mc"><div class="ml">現在値</div><div class="mv am">1,363円</div><div class="ms">2026年8月時点</div></div>
+    <div class="c mc"><div class="ml">年初来安値</div><div class="mv rd">1,255円</div><div class="ms">2026/6/26<br>現値は+8.6%の位置</div></div>
+    <div class="c mc"><div class="ml">10年来高値</div><div class="mv bl">1,823円</div><div class="ms">2021/12/24（上場直後）<br>現値は▲25%</div></div>
+    <div class="c mc"><div class="ml">10年来安値</div><div class="mv gn">764円</div><div class="ms">2024/8/7<br>≒のれん控除後BPS779円</div></div>
+  </div>
+  <p class="note">興味深いのは、上場来安値764円が「のれんを控除した実質純資産779円/株」とほぼ一致していること。市場は過去の最悪期に、この銘柄を<strong>実質解散価値</strong>で評価していた。現在の1,363円はそこから+78%の位置にあり、"底値バリュー"ではない点は認識しておくべき。</p>
+</div>
+
+<!-- ══════════════════════════════ P3 バリュエーション ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">バリュエーション：EVで見ると別の会社に見える</h2><span class="sb bg-gn">割安度 A</span></div>
+
+  <div class="ok">
+    <strong>この銘柄の本質は「PER10.5倍の会社」ではなく「EV/営業利益3.2倍の会社」です。</strong>時価総額87.1億円のうち45.7億円（52.5%）が現金であるため、表面PERは実態を大きく歪めています。事業に対して支払っている実額は41.3億円にすぎません。
+  </div>
+
+  <h3 class="sub">時価総額から事業価値（EV）への分解</h3>
+  <div class="wf">
+    <div class="wf-c"><div class="wf-v mn">87.2億</div><div class="wf-b" style="height:100%;background:var(--bl2)"></div><div class="wf-l">時価総額<br>1,363円×638.9万株</div></div>
+    <div class="wf-c"><div class="wf-v mn hrd">▲45.7億</div><div class="wf-b" style="height:52.5%;background:var(--gn2)"></div><div class="wf-l">現金及び預金<br>（1株716円）</div></div>
+    <div class="wf-c"><div class="wf-v mn">0億</div><div class="wf-b" style="height:1%;background:var(--ink3)"></div><div class="wf-l">有利子負債<br>実質無借金</div></div>
+    <div class="wf-c"><div class="wf-v mn hor">41.4億</div><div class="wf-b" style="height:47.5%;background:var(--or2)"></div><div class="wf-l"><strong>企業価値 EV</strong><br>事業に払う実額</div></div>
+    <div class="wf-c"><div class="wf-v mn ham">13.1億</div><div class="wf-b" style="height:15%;background:var(--am2)"></div><div class="wf-l">今期営業利益計画<br>EV/OP＝3.2倍</div></div>
+  </div>
+
+  <h3 class="sub">マルチプル一覧（株価1,363円ベース）</h3>
+  <table class="t">
+    <thead><tr><th>指標</th><th class="r">値</th><th>評価</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>EV / 営業利益</td><td class="r mn hgn">3.15倍</td><td><span class="bge be-gn">極めて割安</span></td><td>成長企業として異常な水準。日本の情報通信セクター中央値は概ね8〜15倍。</td></tr>
+      <tr class="hl"><td>EV / EBITDA</td><td class="r mn hgn">約2.7倍</td><td><span class="bge be-gn">極めて割安</span></td><td>のれん償却含むEBITDA約15億で試算。PEファンドの買収適正圏（6〜10倍）を大きく下回る。</td></tr>
+      <tr class="hl"><td>現金控除後PER</td><td class="r mn hgn">5.0倍</td><td><span class="bge be-gn">極めて割安</span></td><td>EV41.3億 ÷ 予想純利益8.31億。事業だけを見れば5年で回収。</td></tr>
+      <tr><td>予想PER（表面）</td><td class="r mn hbl">10.5倍</td><td><span class="bge be-bl">割安</span></td><td>予想EPS130.0円。グロース市場平均を大きく下回る。</td></tr>
+      <tr><td>PBR</td><td class="r mn ham">1.42倍</td><td><span class="bge be-am">中立</span></td><td>BPS約959円。ただし純資産の75%が現金なので、PBRの解釈には注意。</td></tr>
+      <tr><td>PBR（のれん控除後）</td><td class="r mn ham">1.75倍</td><td><span class="bge be-am">やや割高</span></td><td>実質純資産約779円/株。ここが理論的な最終下値。</td></tr>
+      <tr class="hl"><td>配当利回り</td><td class="r mn hgn">4.70%</td><td><span class="bge be-gn">高水準</span></td><td>年64円（中間32・期末32）。配当性向49%で方針の50%と整合。<strong>グロース市場では極めて稀</strong>。</td></tr>
+      <tr><td>総合利回り（配当＋優待）</td><td class="r mn hgn">約6.2%</td><td><span class="bge be-gn">高水準</span></td><td>100株保有でニフティ温泉電子チケット2,000円相当＝優待利回り1.47%。配当4.70%と合算。</td></tr>
+      <tr><td>ROE（会社予想）</td><td class="r mn hgn">13.6%</td><td><span class="bge be-gn">良好</span></td><td>自己資本比率85.6%＝レバレッジをかけずに13%超。<strong>現金を除いた事業ROEは実質40%超</strong>の高収益体質。</td></tr>
+      <tr><td>ネットキャッシュ比率</td><td class="r mn hgn">52.5%</td><td><span class="bge be-gn">極めて厚い</span></td><td>1株716円。株価の半分以上が現金という状態。</td></tr>
+    </tbody>
+  </table>
+  <p class="note">※ 現金45.74億円は2026年3月期末47.22億円から1Qの現預金減少1.48億円を控除した推計値。有利子負債は自己資本比率85.6%・負債合計約10億円の内訳から実質ゼロと想定（大半が買掛金・未払金・未払法人税等と推定）。EBITDAは営業利益＋減価償却費・のれん償却費（推定約2億円）。</p>
+
+  <h3 class="sub">なぜここまで安いのか：ディスカウントの分解</h3>
+  <div class="g2">
+    <div class="c cf-rd">
+      <div class="ch" style="color:var(--rd)">ディスカウント要因（＝安さの理由）</div>
+      <div class="cx">
+        <strong>① 生成AIによるターミナルバリュー毀損懸念</strong>：最大の要因。市場は「10年後にこの事業が存在するか」を疑っている。<br>
+        <strong>② 流動性ディスカウント</strong>：親会社64.96%保有で浮動株時価総額は約30億円。機関投資家が入れない。<br>
+        <strong>③ グロース市場ディスカウント</strong>：市場区分自体が資金流入に乏しい。<br>
+        <strong>④ 成長鈍化</strong>：オーガニック成長率が一桁前半に低下、M&A依存。<br>
+        <strong>⑤ 現金を寝かせている</strong>：45億円を保有しROEを希薄化。資本効率への不信。
+      </div>
+    </div>
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">リレーティング要因（＝安さの解消経路）</div>
+      <div class="cx">
+        <strong>① 親会社によるTOB</strong>：最も確度の高い解消経路（後述）。<br>
+        <strong>② 大型自社株買い</strong>：現金45億の一部を投入すれば1株価値が直接的に上昇。既に32,000株の取得実績あり。<br>
+        <strong>③ 東証グロースの上場維持基準対応</strong>：2030年3月以降「上場5年経過で時価総額100億円」。現87億は<strong>未達</strong>で、改善計画の開示義務が生じうる。<br>
+        <strong>④ AI活用での増益実証</strong>：生成AI投資が回収局面に入れば懸念が期待に反転。<br>
+        <strong>⑤ 増配継続</strong>：32円→59円→64円のトレンド。配当性向50%方針。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P4 資産精査 ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">資産精査：含み益はどこにあるのか</h2><span class="sb bg-am">B/S Deep Dive</span></div>
+
+  <div class="warn">
+    <strong>結論を先に：この会社に「土地の含み益」「有価証券の含み益」は存在しません。</strong>広済堂HDのような不動産型バリュー投資のロジックは<strong>適用できません</strong>。本銘柄の資産的な魅力は<strong>純粋に現金45.7億円（1株716円）</strong>の一点に集約されます。むしろ注意すべきはM&Aで積み上がった<strong>のれん（推定10〜13億円）</strong>という減損リスク資産です。
+  </div>
+
+  <h3 class="sub">連結バランスシート概観（2026年6月30日／1Q末）</h3>
+  <table class="t">
+    <thead><tr><th>科目</th><th class="r">金額</th><th class="r">構成比</th><th class="r">1株換算</th><th>含み益の有無・コメント</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>現金及び預金</strong></td><td class="r mn hgn">約45.7億</td><td class="r mn">64%</td><td class="r mn hgn">716円</td><td>簿価＝時価。<strong>唯一かつ最大の"実質的な含み"</strong>。時価総額の52.5%。</td></tr>
+      <tr><td>売掛金・その他流動資産</td><td class="r mn">約12億</td><td class="r mn">17%</td><td class="r mn">188円</td><td>回収は良好（ポータル送客課金は短サイクル）。含み益なし。</td></tr>
+      <tr class="wr"><td><strong>のれん</strong>（推定）</td><td class="r mn hrd">10〜13億</td><td class="r mn">15〜18%</td><td class="r mn hrd">157〜203円</td><td><span class="bge be-rd">減損リスク</span>2021/3期末は1.77億だったが、DFO・GiRAFFE&Co.・ドアーズ（取得17.5億／純資産6億）で積み上がり。<strong>含み"損"側の資産</strong>。</td></tr>
+      <tr class="wr"><td><strong>土地</strong></td><td class="r mn hrd">0</td><td class="r mn">0%</td><td class="r mn hrd">0円</td><td><strong>保有なし（一次情報で確認）</strong>。本店は新宿フロントタワー（賃借）、2025年7月に再度移転。CFに敷金保証金の差入を計上。<span class="bge be-rd">含み益ゼロ</span></td></tr>
+      <tr><td>建物附属設備・工具器具備品</td><td class="r mn">約1〜2億</td><td class="r mn">2%</td><td class="r mn">約23円</td><td>賃借物件の造作・PC等。耐用年数6〜15年／4〜8年。含み益なし。</td></tr>
+      <tr class="wr"><td><strong>投資有価証券</strong></td><td class="r mn hrd">ほぼゼロ</td><td class="r mn">－</td><td class="r mn hrd">－</td><td>政策保有株・純投資ポートフォリオを保有していない。<span class="bge be-rd">含み益ゼロ</span></td></tr>
+      <tr class="sm"><td><strong>総資産</strong></td><td class="r mn">約71.4億</td><td class="r mn">100%</td><td class="r mn">1,118円</td><td>前期末74.65億から▲4.3%（法人税等の支払い等）</td></tr>
+      <tr><td>負債合計</td><td class="r mn">約10.1億</td><td class="r mn">14.4%</td><td class="r mn">158円</td><td><strong>有利子負債は実質ゼロ</strong>と推定。買掛金・未払金・未払法人税等が主体。上場時Ⅰの部でも固定負債は資産除去債務のみ。</td></tr>
+      <tr class="sm"><td><strong>純資産</strong></td><td class="r mn">約61.3億</td><td class="r mn">85.6%</td><td class="r mn">960円</td><td>自己資本比率85.6%（前期末83.2%から改善）</td></tr>
+    </tbody>
+  </table>
+  <p class="note">※ 現金・総資産・純資産・自己資本比率は開示ベース。売掛金／のれん／有形固定資産の内訳は総資産と自己資本比率、および過去のM&A取得価額（ドアーズ17.5億円・純資産6億円）から逆算した<strong>推計値</strong>であり、正確な数値は有価証券報告書の注記でご確認ください。</p>
+
+  <h3 class="sub">3段階の「下値」— どこまで下がりうるか</h3>
+  <div class="g3">
+    <div class="c mc cf-gn"><div class="ml">第1の下値</div><div class="mv gn">716円</div><div class="ms"><strong>ネットキャッシュ</strong><br>現金45.7億 ÷ 638.9万株<br>現値比 <span class="hrd">▲47.5%</span></div></div>
+    <div class="c mc cf-am"><div class="ml">第2の下値</div><div class="mv am">779円</div><div class="ms"><strong>のれん控除後純資産</strong><br>実質解散価値<br>現値比 <span class="hrd">▲42.8%</span></div></div>
+    <div class="c mc cf-bl"><div class="ml">第3の下値</div><div class="mv bl">959円</div><div class="ms"><strong>BPS（帳簿純資産）</strong><br>PBR1倍水準<br>現値比 <span class="hrd">▲29.6%</span></div></div>
+  </div>
+  <p class="note">2024年8月の上場来安値764円は、ちょうど「のれん控除後純資産779円」の水準でした。<strong>市場が最悪を織り込むと、この銘柄は実質解散価値まで売られる</strong>という実績があります。逆にいえば、そこが構造的なフロアとして機能してきたともいえます。現在の1,363円からその水準までは▲43%の距離があり、<strong>「ネットキャッシュがあるから下がらない」とは言えない</strong>点に注意が必要です。</p>
+
+  <h3 class="sub">キャッシュの使い道 — ここが最大の論点</h3>
+  <div class="g2">
+    <div class="c cl-gn">
+      <div class="ch">株主にとって望ましいシナリオ</div>
+      <div class="cx">
+        <strong>大型自社株買い</strong>：仮に現金の30%（約14億円）を1,400円で自社株買いすると約100万株＝発行済の15.6%を消却でき、EPSは約18%押し上げられる。株価インパクトは極めて大きい。<br><br>
+        <strong>特別配当</strong>：現金45.7億のうち事業運転に必要なのは10〜15億程度。30億円を還元すれば1株469円の特別配当が理論上可能。
+      </div>
+    </div>
+    <div class="c cl-rd">
+      <div class="ch">株主にとってリスクとなるシナリオ</div>
+      <div class="cx">
+        <strong>高値掴みのM&A</strong>：中計「XPANSION 2030」の売上120億円目標を達成するには年率23%成長が必要で、<strong>オーガニックでは到底届かない＝大型M&Aが前提</strong>。焦った買収は新たなのれん減損の種になる。<br><br>
+        <strong>現金の死蔵</strong>：45億円を寝かせ続ければROEは希薄化し、バリュエーションは低位に固定される。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P5 事業性 ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">事業性・ストック性・ニッチトップ</h2><span class="sb bg-bl">Business Quality</span></div>
+
+  <h3 class="sub">事業構造：「ポータルのポータル」というポジション</h3>
+  <div class="c cl-bl" style="margin-bottom:16px">
+    <div class="cx">ニフティ不動産は自ら物件を掲載するのではなく、<strong>SUUMO・LIFULL HOME'S・at home など大手14社の情報を横断検索できる「まとめ検索」サービス</strong>です。ユーザーは重複物件を排除しながら一括比較でき、事業者側は追加の送客チャネルを得る。収益は主に<strong>送客に応じた成果報酬</strong>です。<br><br>
+    このポジションには明確な二面性があります。<span class="hgn">強み</span>＝在庫（物件）を自前で持たずに国内最大級の網羅性を実現でき、極めて資本効率が高い。<span class="hrd">弱み</span>＝<strong>価値の源泉が上流のポータルに依存しており、掲載元が離脱すればサービスが成立しない</strong>。交渉力の非対称性は構造的です。</div>
+  </div>
+
+  <h3 class="sub">ニッチトップ性の評価</h3>
+  <table class="t">
+    <thead><tr><th>サービス</th><th>領域</th><th>ポジション</th><th style="width:80px">評価</th><th>実績指標</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>ニフティ不動産</strong></td><td>不動産ポータル横断検索</td><td>国内トップ。大手14社を一括検索、直接掲載型（SUUMO等）とは異なるレイヤーで実質的に競合不在</td><td><span class="bge be-gn">ニッチトップ</span></td><td class="mn">アプリ累計DL 1,300万超（+10.8%）／掲載物件1,400万件超／絞込条件150以上</td></tr>
+      <tr class="hl"><td><strong>ニフティ温泉</strong></td><td>温浴施設情報</td><td>温泉・サウナ領域の情報サイトとしてジャンルトップ級。株主優待の原資にもなり送客の内製循環を形成</td><td><span class="bge be-gn">ニッチトップ</span></td><td class="mn">月間利用者 約350万人</td></tr>
+      <tr><td><strong>外壁塗装の窓口</strong>（ドアーズ）</td><td>リフォームマッチング</td><td>外壁塗装特化。全国のリフォーム店・塗装会社ネットワーク保有。ニフティ不動産とのクロスセル前提</td><td><span class="bge be-am">有力プレイヤー</span></td><td class="mn">買収時 売上10.4億／営業益1.73億</td></tr>
+      <tr><td><strong>GiRAFFE&Co. 他</strong></td><td>デジタルマーケティング支援</td><td>SEOコンサル・DFO（データフィード最適化）。自社の集客ノウハウを外販するモデル</td><td><span class="bge be-am">周辺事業</span></td><td class="mn">2023年9月子会社化</td></tr>
+    </tbody>
+  </table>
+  <p class="note">「ニッチトップ」という評価軸では明確に合格です。特にニフティ不動産の「アグリゲーターの中で唯一の全国規模プレイヤー」というポジションは、後発が同じネットワークを再構築するのが難しい点で参入障壁があります。ただし<strong>この障壁は、上流のポータルが直接ユーザーを囲い込む戦略に転じた場合、あるいは検索行動そのものが変わった場合には無力</strong>である点が重要です。</p>
+
+  <h3 class="sub">ストック性の厳密な評価 — ここは冷静に</h3>
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cf-rd">
+      <div class="ch" style="color:var(--rd)">ストック性は「弱い」— 収益構造の事実</div>
+      <div class="cx">この会社の収益は<strong>成果報酬型の送客課金が中心＝典型的なフロー収益</strong>です。SaaSのような月額契約やMRRの積み上げではありません。<br><br>
+      したがって「解約率が低いから来期の売上が読める」という<strong>本来の意味でのストックビジネスではない</strong>。1Qで購入領域の需要が落ちた瞬間に売上成長が+3.2%まで急減速したことが、その脆弱性を実証しています。<strong>需要変動がダイレクトに損益に伝播する構造</strong>です。</div>
+    </div>
+    <div class="c cf-gn">
+      <div class="ch" style="color:var(--gn)">ただし「擬似ストック」は存在する</div>
+      <div class="cx"><strong>① アプリ基盤</strong>：累計DL1,300万超（+10.8%）。アプリは検索エンジンを介さない直接流入チャネルで、<strong>生成AI時代における最大の防波堤</strong>。<br>
+      <strong>② 習慣・ブランド</strong>：引越・住み替えは数年に一度だが、検討期間中は毎日訪問する。想起される第一想起の獲得は資産。<br>
+      <strong>③ 掲載元との契約基盤</strong>：14社との接続は一度築けば安定的。<br>
+      <strong>④ 温泉の高頻度性</strong>：ニフティ温泉は月350万人が繰り返し利用する<strong>真のリピート資産</strong>。</div>
+    </div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span>ストック性スコア（SaaS=100、純広告=0 とした相対評価）</span><span class="mn ham">45 / 100</span></div>
+    <div class="bt"><div class="bf" style="width:45%;background:var(--am2)"></div></div>
+  </div>
+  <p class="note">評価：<strong>中程度</strong>。「ストック性が強い」と表現するのは実態よりやや強すぎます。正確には「<strong>資産の再利用性が高いフロービジネス</strong>」— つまり、いったん作ったアプリ・SEO資産・掲載ネットワークが繰り返し収益を生む構造ではあるが、収益そのものは契約で固定されていない、という位置づけです。営業利益率22.7%という高収益はこの資産再利用性の裏返しです。</p>
+
+  <h3 class="sub">市場成長性</h3>
+  <div class="g3">
+    <div class="c mc cf-gn"><div class="ml">不動産テック市場</div><div class="mv gn">2.4兆円</div><div class="ms">2030年度予測（矢野経済研究所）<br>2022年度比 <strong>約2.5倍</strong></div></div>
+    <div class="c mc cf-gn"><div class="ml">うちBtoC領域</div><div class="mv gn">1.86兆円</div><div class="ms">2030年度予測<br>2022年度比 約2.6倍<br>マッチングサービスが牽引</div></div>
+    <div class="c mc cf-rd"><div class="ml">当社の直近成長率</div><div class="mv rd">+3.2%</div><div class="ms">2027/3期1Q 売上高<br><strong>市場成長を取り込めていない</strong></div></div>
+  </div>
+  <p class="note"><strong>これが本レポートで最も重要な矛盾です。</strong>市場は年率10%超で拡大する予測なのに、同社の直近成長率は+3.2%。市場成長が本物なら同社はシェアを失っているか、成長の果実が上流のポータルや新興プレイヤーに流れていることになります。中計「XPANSION 2030」（2030年3月期 売上120億円・営業利益20億円・ROE15%以上）は<strong>売上で年率23%成長を要求</strong>しており、今期計画+10.5%との乖離は明白。<span class="hrd">中計の実現確度は現時点で低い</span>と見るのが妥当で、達成にはM&A依存が避けられません。</p>
+</div>
+
+<!-- ══════════════════════════════ P6 カタリスト ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト：この銘柄が動く理由</h2><span class="sb bg-pu">5つの起爆剤</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🎯</span>
+      <div class="ct">親会社の手元現金で買える親子上場</div>
+      <div class="cb gn">42.5億円</div>
+      <div class="cu">少数株主35.0%を40%プレミアムで買収する総額</div>
+      <div class="cp">親会社ニフティ(株)が<strong>64.96%を保有</strong>し、その上にノジマ(7419)。少数株主持分は約223.9万株・時価30.5億円。<strong>40%プレミアム（1,908円）でも総額42.5億円で、対象会社が持つ現金45.7億円を下回る</strong>。実質ネットコストほぼゼロで完全子会社化が可能という、極めて稀な構造。</div>
+      <div class="tgs"><span class="tg tg-gn">実行コスト実質ゼロ</span><span class="tg tg-or">東証の親子上場圧力</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 02 · 重要</div>
+      <span class="ci">📊</span>
+      <div class="ct">東証グロース 上場維持基準の厳格化</div>
+      <div class="cb or">100億円</div>
+      <div class="cu">2030年3月以降、上場5年経過で必要な時価総額</div>
+      <div class="cp">現在の時価総額<strong>87.1億円は基準未達</strong>。2021年12月上場のため当然に適用対象。選択肢は①時価総額を100億超へ引き上げる（＝還元強化・IR強化）②スタンダード市場へ移行 ③非公開化 の3つ。<strong>どの経路も株主にとって中立〜ポジティブ</strong>。改善計画の開示が近づけば材料視されやすい。</div>
+      <div class="tgs"><span class="tg tg-or">制度的な期限</span><span class="tg tg-am">あと+15%で基準達成</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 03 · 重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">配当性向50%方針と増配トレンド</div>
+      <div class="cb am">4.70%</div>
+      <div class="cu">年間64円（中間32円＋期末32円）の配当利回り</div>
+      <div class="cp">配当は<strong>32円 → 59円 → 64円</strong>と急拡大。配当性向50%を目途とする方針を明示。グロース市場で4.7%の利回りは極めて異例で、<strong>下値を支える強力なアンカー</strong>。加えて2026年3月期には自己株式32,000株の取得を完了しており、還元手段の多様化も進む。</div>
+      <div class="tgs"><span class="tg tg-am">配当性向50%明示</span><span class="tg tg-gn">自社株買い実績あり</span></div>
+    </div>
+  </div>
+  <div class="cg">
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 04</div>
+      <span class="ci">🏦</span>
+      <div class="ct">45.7億円のM&A・還元余力</div>
+      <div class="cb bl">52.5%</div>
+      <div class="cu">時価総額に対する現金比率</div>
+      <div class="cp">現金の30%（約14億円）を自社株買いに投じれば<strong>発行済の約15%を消却でき、EPSは18%押し上げ</strong>られる。ドアーズ（17.5億円）のような案件をもう1件実行する余力もある。<strong>使い方次第で株価が構造的に変わる規模</strong>の余剰資本。</div>
+      <div class="tgs"><span class="tg tg-bl">無借金・自己資本比率85.6%</span></div>
+    </div>
+    <div class="ca cc-pu">
+      <div class="cn">Catalyst 05</div>
+      <span class="ci">🤖</span>
+      <div class="ct">生成AI投資の回収局面入り</div>
+      <div class="cb bl">反転</div>
+      <div class="cu">現在は減益要因、成功すれば最大の再評価材料</div>
+      <div class="cp">2026年7月に<strong>生成AI向け広告支援体制</strong>を構築、「SUMAI発掘ナビ」等の新サービスも投入。今は費用として利益を圧迫しているが、<strong>AI時代の新しい集客レイヤーを押さえられれば、現在の最大リスクが最大の強みに反転</strong>する。ここが決算ごとの最重要ウォッチポイント。</div>
+      <div class="tgs"><span class="tg tg-bl">両刃の剣</span><span class="tg tg-rd">未証明</span></div>
+    </div>
+    <div class="ca cc-rd">
+      <div class="cn">Anti-Catalyst</div>
+      <span class="ci">⚠️</span>
+      <div class="ct">逆カタリスト：通期下方修正</div>
+      <div class="cb rd">14.1%</div>
+      <div class="cu">1Q営業利益進捗（前期同期19.2%）</div>
+      <div class="cp">最も近い将来に起こりうるイベントは、残念ながら<strong>ポジティブなものではなく2Q（10月末発表予定）での通期下方修正</strong>。1Qの進捗率と購入領域の需要環境を踏まえると相応の確率がある。<strong>この通過を待ってから入る戦略も合理的</strong>。</div>
+      <div class="tgs"><span class="tg tg-rd">2Q決算 10月末</span></div>
+    </div>
+  </div>
+
+  <h3 class="sub">TOB／完全子会社化のシミュレーション</h3>
+  <table class="t">
+    <thead><tr><th>プレミアム</th><th class="r">TOB価格</th><th class="r">現値比</th><th class="r">少数株主買収総額</th><th class="r">対象会社の現金との差</th><th>実現可能性の所見</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">+30%</td><td class="r mn">1,772円</td><td class="r mn hgn">+30.0%</td><td class="r mn">39.7億円</td><td class="r mn hgn">▲6.1億（現金で足りる）</td><td>近年のTOBでは低めの部類。少数株主の反発リスク。</td></tr>
+      <tr class="hl"><td class="mn"><strong>+40%</strong></td><td class="r mn"><strong>1,908円</strong></td><td class="r mn hgn"><strong>+40.0%</strong></td><td class="r mn"><strong>42.7億円</strong></td><td class="r mn hgn"><strong>▲3.0億（現金で足りる）</strong></td><td><strong>最頻値ゾーン。</strong>日本のTOBプレミアム中央値に近い水準。</td></tr>
+      <tr class="hl"><td class="mn"><strong>+50%</strong></td><td class="r mn"><strong>2,044円</strong></td><td class="r mn hgn"><strong>+50.0%</strong></td><td class="r mn"><strong>45.8億円</strong></td><td class="r mn ham"><strong>±0.0億（ほぼ均衡）</strong></td><td><strong>妥当性の上限圏。</strong>特別委員会が要求しうる水準。</td></tr>
+      <tr><td class="mn">+60%</td><td class="r mn">2,181円</td><td class="r mn hgn">+60.0%</td><td class="r mn">48.8億円</td><td class="r mn hrd">+3.1億（現金では不足）</td><td>EV/営業利益で6.4倍。事業価値としてはまだ割安。</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><strong>この表の意味：</strong>+50%のプレミアム（2,044円）を払っても、買収総額45.5億円は対象会社が保有する現金45.7億円とほぼ同額です。つまり買い手は<strong>実質的に自己資金をほとんど使わずに、営業利益13億円を生む事業を100%手に入れられる</strong>ことになります。財務的な合理性は圧倒的で、これが本銘柄最大のアップサイド・オプションです。<br><br>
+  <span class="hrd">ただし重要な留保：</span>これは「起きたら大きい」オプションであって、<strong>時期は誰にも読めません</strong>。親会社が動く必然性は現時点で公表されておらず、5年動かない可能性も十分にあります。またTOB価格が上記より低く提示され、少数株主が不利な条件を飲まされるリスクも現実に存在します。<strong>TOB期待を主たる投資根拠にすべきではなく、あくまで「配当4.7%をもらいながら待つ間の無料オプション」として位置づけるのが健全</strong>です。</p>
+</div>
+
+<!-- ══════════════════════════════ P7 リスク ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">ダウンサイドリスク：安さの理由を直視する</h2><span class="sb bg-rd">Risk</span></div>
+
+  <div class="warn">
+    バリュー株の最大の敵は「割安なまま放置される（バリュートラップ）」ことではなく、<strong>「割安に見えた理由が構造破壊だった」</strong>ことです。本銘柄には、後者に該当しうるリスクが1つ明確に存在します。
+  </div>
+
+  <h3 class="sub">リスクの重み付け</h3>
+  <div class="bg">
+    <div class="br2"><span><strong>① 生成AI／ゼロクリック検索による集客構造の破壊</strong></span><span class="mn hrd">深刻度 95 / 確度 高</span></div>
+    <div class="bt"><div class="bf" style="width:95%;background:var(--rd)"></div></div>
+  </div>
+  <div class="c cl-rd" style="margin-bottom:16px">
+    <div class="cx"><strong>これが本銘柄の存亡を左右する唯一最大のリスクです。</strong>2026年の調査では、検索利用者の<strong>約24%が生成AIの回答だけで完結しサイトを訪問していない</strong>（ゼロクリック）とされます。<br><br>
+    問題は、ニフティ不動産のような「まとめ検索・比較サイト」が<strong>生成AIが最も代替しやすいレイヤーそのもの</strong>であることです。「東京23区で駅徒歩5分・2LDK・15万円以下の物件を比較して」という要求は、まさにLLMが得意とするタスクです。情報を集約して比較可能な形で提示するという同社の価値提供が、AIアシスタントに直接吸収されうる。<br><br>
+    <strong>反論可能な点：</strong>①アプリ経由の直接流入（累計DL1,300万超）は検索エンジンを迂回する ②不動産物件は在庫データベースへのアクセス権が必要で、LLM単体では最新の物件情報を持てない ③会社自身が生成AI向け広告支援に投資しており「AIに引用される側」に回ろうとしている。<br><br>
+    <strong>とはいえ、</strong>この論点に確定的な答えが出るまで市場がマルチプルを戻す理由は乏しく、<strong>EV/営業利益3倍という異常な安さの大半はこの不確実性で説明できます</strong>。</div>
+  </div>
+
+  <div class="bg">
+    <div class="br2"><span><strong>② 購入領域の需要減退（金利上昇・物価高）</strong></span><span class="mn hrd">深刻度 70 / 確度 高</span></div>
+    <div class="bt"><div class="bf" style="width:70%;background:var(--rd)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>③ 通期下方修正リスク（1Q進捗14.1%）</strong></span><span class="mn ham">深刻度 55 / 確度 中〜高</span></div>
+    <div class="bt"><div class="bf" style="width:55%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>④ 上流ポータルへの依存（掲載元の離脱リスク）</strong></span><span class="mn ham">深刻度 65 / 確度 低〜中</span></div>
+    <div class="bt"><div class="bf" style="width:65%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>⑤ のれん減損（ドアーズ・GiRAFFE&Co.）</strong></span><span class="mn ham">深刻度 40 / 確度 中</span></div>
+    <div class="bt"><div class="bf" style="width:40%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>⑥ 流動性リスク（浮動株時価総額 約30億円）</strong></span><span class="mn ham">深刻度 45 / 確度 高（常時）</span></div>
+    <div class="bt"><div class="bf" style="width:45%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>⑦ 中期経営計画の未達（年率23%成長が必要）</strong></span><span class="mn ham">深刻度 35 / 確度 高</span></div>
+    <div class="bt"><div class="bf" style="width:35%;background:var(--am2)"></div></div>
+  </div>
+  <div class="bg">
+    <div class="br2"><span><strong>⑧ 少数株主軽視・不利な条件でのTOB</strong></span><span class="mn ham">深刻度 50 / 確度 低</span></div>
+    <div class="bt"><div class="bf" style="width:50%;background:var(--am2)"></div></div>
+  </div>
+
+  <h3 class="sub">個別リスクの補足</h3>
+  <table class="t">
+    <thead><tr><th style="width:150px">リスク</th><th>内容と対処</th></tr></thead>
+    <tbody>
+      <tr><td><strong>② 金利上昇</strong></td><td>日銀の利上げ局面が続けば住宅ローン金利上昇→購入検討者減少。売買領域は賃貸より単価が高く利益感応度が大。<strong>賃貸領域は相対的に堅調で、ポートフォリオ内で一部相殺される</strong>のが救い。マクロ次第で自社にコントロール手段はない。</td></tr>
+      <tr><td><strong>③ 下方修正</strong></td><td>2Q発表（10月末見込み）が最初の関門。1Qのトレンドが継続すれば通期13.13億円は届かない。<strong>逆にここを通過して株価が下がりきれば、より良いエントリーになる</strong>。</td></tr>
+      <tr><td><strong>④ 依存関係</strong></td><td>SUUMO（リクルート）・LIFULL HOME'S・at home が掲載を引き揚げればサービスが成立しない。現状は「追加の送客チャネル」としてWin-Winだが、上流が自社アプリでの直接囲い込みを強化する戦略に転じれば関係は変わる。<strong>構造的な交渉力の非対称性は解消不能</strong>。</td></tr>
+      <tr><td><strong>⑤ のれん</strong></td><td>ドアーズは取得価額17.5億円に対し純資産6億円、差額のれんは推定11億円強。外壁塗装業界は景気敏感かつ業界評判リスクもある。<strong>買収事業の業績が計画未達なら減損＝一過性の大幅減益</strong>。ただしキャッシュアウトは伴わない。</td></tr>
+      <tr><td><strong>⑥ 流動性</strong></td><td>親会社64.96%＋自己株式を除くと浮動株は実質30億円程度。<strong>買うのは容易でも売るのは難しい</strong>。ポジションサイズを抑えるべき最大の実務的理由。機関投資家が入れないためリレーティングも起きにくい。</td></tr>
+      <tr><td><strong>⑧ ガバナンス</strong></td><td>親会社が64.96%を握る以上、<strong>少数株主の意思は基本的に通らない</strong>。TOB時に不当に低い価格が提示されるリスク、あるいは逆に永久に何も起きないリスク、その両方を受け入れる必要がある。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════ P8 最終評価 ══════════════════════════════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">最終評価とシナリオ</h2><span class="sb bg-or">Conclusion</span></div>
+
+  <h3 class="sub">4シナリオ（12〜24ヶ月）</h3>
+  <div class="sc">
+    <div class="sc-c">
+      <div class="sc-l br">Bear · 確率30%</div>
+      <div class="sc-p br">950〜1,050円</div>
+      <div class="sc-s">現値比 ▲23〜▲30%</div>
+      <div class="sc-i">2Qで通期下方修正</div>
+      <div class="sc-i">生成AI懸念が本格化しマルチプル切下げ</div>
+      <div class="sc-i">EPS100円 × PER10倍</div>
+      <div class="sc-i">下限は実質解散価値779円</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base · 確率40%</div>
+      <div class="sc-p bs">1,550〜1,650円</div>
+      <div class="sc-s">現値比 +14〜+21%</div>
+      <div class="sc-i">会社計画をほぼ達成（EPS130円）</div>
+      <div class="sc-i">PER12倍まで小幅リレーティング</div>
+      <div class="sc-i">配当64円を確保しつつ横ばい〜緩やか上昇</div>
+      <div class="sc-i">実質「配当4.7%＋オプション保有」</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull · 確率20%</div>
+      <div class="sc-p bu">1,950〜2,100円</div>
+      <div class="sc-s">現値比 +43〜+54%</div>
+      <div class="sc-i">大型自社株買い（現金の30%投入）</div>
+      <div class="sc-i">グロース基準対応で時価総額100億超へ</div>
+      <div class="sc-i">AI投資が増益に転化</div>
+      <div class="sc-i">EV/営業利益6倍まで是正</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bm">TOB · 確率10%</div>
+      <div class="sc-p bm">1,900〜2,200円</div>
+      <div class="sc-s">現値比 +39〜+61%</div>
+      <div class="sc-i">ニフティ／ノジマによる完全子会社化</div>
+      <div class="sc-i">プレミアム40〜60%が中心圏</div>
+      <div class="sc-i">買収総額は対象会社の現金でほぼ賄える</div>
+      <div class="sc-i">時期は完全に読めない</div>
+    </div>
+  </div>
+  <p class="note">加重期待値：0.30×1,000 + 0.40×1,600 + 0.20×2,025 + 0.10×2,050 = <strong class="mn hgn">約1,550円（現値比 +13.7%）</strong>。加えて年間配当64円（+4.7%）を受け取るため、<strong>期待トータルリターンは約+18%</strong>。リスク・リワードは悪くないが、Bearシナリオの下落幅（▲23〜30%）も相応に大きく、<strong>「大きく張る銘柄ではない」</strong>というのが率直な評価です。</p>
+
+  <h3 class="sub">投資チェックリスト</h3>
+  <table class="t">
+    <thead><tr><th>評価軸</th><th style="width:110px">スコア</th><th>コメント</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>割安性（バリュー）</td><td><span class="bge be-gn">A</span></td><td>EV/営業利益3.2倍、現金控除後PER5.0倍、配当4.7%。定量面は文句なし。</td></tr>
+      <tr class="hl"><td>財務健全性</td><td><span class="bge be-gn">A</span></td><td>実質無借金、自己資本比率85.6%、現金が時価総額の52.5%。</td></tr>
+      <tr class="hl"><td>収益性</td><td><span class="bge be-gn">A－</span></td><td>営業利益率22.7%、ROE13.6%（現金除く事業ROEは40%超）。</td></tr>
+      <tr class="hl"><td>ニッチトップ性</td><td><span class="bge be-gn">A－</span></td><td>ニフティ不動産・ニフティ温泉とも明確なジャンルトップ。</td></tr>
+      <tr><td>株主還元</td><td><span class="bge be-gn">B+</span></td><td>配当性向50%方針、増配トレンド、自社株買い実績あり。ただし規模はまだ小さい。</td></tr>
+      <tr><td>カタリスト</td><td><span class="bge be-am">B</span></td><td>親子上場解消・グロース基準・還元強化と材料は豊富だが、<strong>いずれも時期が読めない</strong>。</td></tr>
+      <tr><td>ストック性</td><td><span class="bge be-am">C+</span></td><td>成果報酬型のフロー収益。擬似ストック（アプリ・SEO資産）はあるが契約ストックではない。</td></tr>
+      <tr class="wr"><td>成長性</td><td><span class="bge be-rd">C</span></td><td>オーガニック+3.2%。市場は伸びるのに取り込めていない。中計は非現実的。</td></tr>
+      <tr class="wr"><td>事業の持続性（AI耐性）</td><td><span class="bge be-rd">C－</span></td><td><strong>最大の弱点。</strong>アグリゲーターはAI代替の最前線。10年後の姿が描きにくい。</td></tr>
+      <tr class="wr"><td>流動性・ガバナンス</td><td><span class="bge be-rd">C－</span></td><td>浮動株30億円、親会社64.96%。少数株主の立場は構造的に弱い。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sp"></div>
+  <div class="conc">
+    <div class="conc-h">総合判断：<span>やや強気（○）</span> — ただし「小口・分散・配当を受け取りながら待つ」前提で</div>
+
+    <div class="conc-lbl">Answer — 1,363円に投資妙味はあるか</div>
+    <div class="conc-b"><strong>あります。ただし「割安だから上がる」タイプではなく、「割安なので下値が限定的で、配当4.7%を受け取りながらイベントを待てる」タイプです。</strong>EV/営業利益3.2倍・現金控除後PER5.0倍という水準は、日本株全体でも際立って安い部類で、事業がゼロ成長で横ばいでも損はしにくい価格です。</div>
+
+    <div class="conc-lbl">ご質問への訂正 — 含み益ストーリーは成立しません</div>
+    <div class="conc-b">土地・投資有価証券の<strong>含み益はいずれもゼロ</strong>です。本社は賃借、政策保有株も持たないアセットライト企業で、広済堂HDのような「簿価と時価の乖離」を突く投資アプローチは適用できません。代わりに<strong>現金45.7億円（1株716円・株価の52.5%）</strong>が唯一かつ十分に強力な資産的裏付けであり、加えて<strong>のれん推定10〜13億円</strong>という逆方向のリスク資産がある点は必ず織り込んでください。</div>
+
+    <div class="conc-lbl">最大の魅力 — 資本構造という無料オプション</div>
+    <div class="conc-b">親会社ニフティ(株)が64.96%を保有し、少数株主35.0%を<strong>50%プレミアムで買い取っても45.5億円＝対象会社の現金45.7億円で足りる</strong>。買い手が実質自己資金ゼロで営業利益13億円の事業を取れる構造は、財務的に見て極めて合理的です。加えて東証グロースの上場維持基準厳格化（2030年3月以降、時価総額100億円）に対し現在87億円は未達で、<strong>何らかの是正アクションを取らざるを得ない制度的な期限</strong>も設定されています。</div>
+
+    <div class="conc-lbl">最大の懸念 — 生成AIがビジネスモデルの中核を狙っている</div>
+    <div class="conc-b">「複数のポータルを横断して比較する」という同社の価値提供は、<strong>生成AIが最も代替しやすいレイヤーそのもの</strong>です。2026年の調査で検索の約24%がゼロクリック化しているという事実は、この懸念が抽象論ではないことを示しています。EV/営業利益3倍という異常な安さの大半は、市場がこの銘柄のターミナルバリューを疑っていることの表れであり、<strong>「なぜこんなに安いのか分からない」のではなく、理由ははっきりしている</strong>と理解すべきです。アプリ累計DL1,300万という直接流入基盤が防波堤になるかどうかが分水嶺になります。</div>
+
+    <div class="conc-lbl">実務的な戦略</div>
+    <div class="conc-b">
+      <strong>① 打診買いは可、フルポジションは不可。</strong>浮動株30億円という流動性を踏まえ、ポートフォリオの数%に留めるのが現実的。<br>
+      <strong>② 2Q決算（10月末見込み）を分割エントリーの節目に。</strong>1Q進捗14.1%からして下方修正の可能性は無視できず、そこで下げたところを拾うほうがリスク・リワードは改善します。<br>
+      <strong>③ 下値の目安は3段階。</strong>BPS 959円 → のれん控除後純資産 779円 → ネットキャッシュ 716円。上場来安値764円は実質解散価値とほぼ一致しており、過去に市場がそこまで売った実績があることは忘れないでください。<br>
+      <strong>④ TOBは「無料のオプション」として扱う。</strong>それを主たる投資根拠にすると、何も起きない5年間に耐えられなくなります。あくまで配当4.7%が本体、TOBはボーナスです。<br>
+      <strong>⑤ 四半期ごとのウォッチポイント。</strong>ⓐオーガニック成長率が+3%台から回復するか ⓑ営業利益率が22%台に戻るか ⓒ生成AI関連投資が売上に転化しているか ⓓ自社株買い・特別配当の発表 ⓔ親会社の動き。
+    </div>
+  </div>
+
+  <div class="disc">
+    <strong>【重要な注意事項】</strong><br>
+    本レポートは公開情報（決算短信・決算説明資料・報道・各種調査）に基づく分析であり、投資勧奨を目的とするものではありません。筆者は投資助言業者ではなく、記載内容は個別の投資推奨ではありません。<br>
+    <strong>数値の確度について：</strong>株価1,363円・発行済株式数6,388,677株を前提としています。売上高・営業利益・純利益・配当・総資産・純資産・自己資本比率・現金及び現金同等物は開示情報ベースですが、<strong>1Q末（2026年6月30日）の現金残高、のれん残高、有利子負債、売掛金、有形固定資産の各内訳は、開示された総資産・自己資本比率・過去のM&A取得価額から逆算した推計値</strong>を含みます。実際の投資判断にあたっては、必ず有価証券報告書・四半期決算短信の原本で数値をご確認ください。<br>
+    <strong>参照した最新決算は2027年3月期第1四半期（2026年7月30日発表）</strong>です。それ以降の開示（業績修正・資本政策等）がある場合は本レポートに反映されていません。<br>
+    株式投資は元本割れの可能性があります。最終的な投資判断はご自身の責任でお願いいたします。
+  </div>
+</div>
+
+</main>
+
+<script>
+function go(id, btn){
+  document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

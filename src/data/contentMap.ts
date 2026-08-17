@@ -142,6 +142,7 @@ export const contentThemes: ContentTheme[] = [
     owners: '🐝 花岡（高配当） ／ 🦩 優田（優待）',
     fill: '#FBEAF0', text: '#4B1528', sub: '#993556', border: '#F4C0D1',
     slugs: [
+      'nifty-lifestyle-4262',
       'dividend-series-01-what-is-dividend',
       'dividend-series-02-low-payout-opportunity',
       'dividend-series-03-dividend-as-exit-strategy',
