@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東海染工（3577）投資分析 ── 資産バリュー×ストック転換</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 44px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eaa8a8}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td.r,.t td .mn{white-space:nowrap}
+.t td.mn{white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.tsm{font-size:11.5px}
+.tsm td{padding:6px 8px}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s3{grid-template-columns:repeat(3,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 30px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#d090c8}
+.cu{font:500 9px/1.5 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #e6a0a0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h4{font-size:11px;font-weight:600;margin-bottom:11px}
+
+/* WATERFALL */
+.wf{display:flex;flex-direction:column;gap:6px;margin:6px 0 4px}
+.wf-r{display:grid;grid-template-columns:190px 1fr 96px;gap:10px;align-items:center;font-size:11.5px}
+.wf-b{height:20px;border-radius:3px;position:relative;background:var(--bg3)}
+.wf-f{height:100%;border-radius:3px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s3{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .wf-r{grid-template-columns:120px 1fr 80px;font-size:10.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 3577 東証スタンダード／名証プレミア · 2026.08.18 作成 · 株価949円時点</p>
+      <h1 class="ht">東海染工 <em>（3577）</em> 資産バリュー投資分析レポート</h1>
+      <p class="hs">時価総額29.9億円 ／ 現預金31.9億円＋投資有価証券44.0億円 ／ 土地21.9万㎡（簿価17.5億円）<br>修正NAV 3,960円（中立）＝株価は<strong style="color:var(--or2)">NAVの24%</strong>／PBR 0.36倍・ネット金融資産だけで株価の1.58倍</p>
+    </div>
+    <div class="vb">
+      <div class="vs">◎</div>
+      <div class="vt">
+        <strong>3年後 確率加重期待株価 1,446円<br>（配当込 1,541円・+62%）</strong><br>
+        バリューとしては「相当に妙味あり」。<br>
+        ただし還元が動かないバリュートラップが<br>最大の敵。<span style="color:var(--or2)">分割・長期・小額</span>が前提。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">949円</div><div class="ks">時価総額 29.9億円（自己株控除後）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS 2,640円）</div><div class="kn gn">0.36倍</div><div class="ks">解散価値の3分の1</div></div>
+    <div class="kv"><div class="kl">修正NAV（中立）</div><div class="kn gn">3,960円</div><div class="ks">株価はNAVの24%水準</div></div>
+    <div class="kv"><div class="kl">ネット金融資産／株</div><div class="kn bl">1,498円</div><div class="ks">税考慮後でも株価の1.58倍</div></div>
+    <div class="kv"><div class="kl">土地含み益（中立・税前）</div><div class="kn rd">約59.5億円</div><div class="ks">時価総額の約2.0倍</div></div>
+    <div class="kv"><div class="kl">配当利回り／DOE</div><div class="kn am">2.63% / 0.95%</div><div class="ks">還元余力は極めて大</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>資産精査</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>NAV分析</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>事業性・ストック性</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>業績・財務</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>3年後シナリオ</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════
+  P1 投資テーゼ
+══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 949円は「妙味あり」。ただし条件付き</h2><span class="sb bg-gn">資産バリュー最上位クラス</span></div>
+
+  <div class="ok">✅ <strong>資産の絶対量では、日本の上場企業でも屈指の割安水準。</strong>現預金31.9億円だけで時価総額29.9億円を上回り、投資有価証券44.0億円（含み益率248%）を足すと株価の2.5倍。そのうえで土地21.9万㎡（簿価わずか17.5億円＝㎡単価およそ7,900円）が丸ごと「タダ」で付いてくる。</div>
+
+  <div class="cg">
+    <!-- C1 -->
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 核心</div>
+      <span class="ci">💰</span>
+      <div class="ct">ネット金融資産だけで株価の1.58倍</div>
+      <div class="cb gn">1,498円</div>
+      <div class="cu">現預金＋投資有価証券−有利子負債−含み益課税 ÷ 3,156千株</div>
+      <div class="cp">現預金31.9億＋投資有価証券44.0億−有利子負債19.0億＝<strong>56.9億円</strong>。有価証券含み益31.4億円への課税（30.5%）を引いても47.3億円＝1株1,498円。<strong>株価949円で買うと、金融資産だけで▲549円の「持参金付き」。</strong>事業・不動産のEVは実質マイナス。</div>
+      <div class="tgs"><span class="tg tg-gn">EV（金融資産控除後）▲17億円</span><span class="tg tg-or">ネットネット株</span></div>
+    </div>
+    <!-- C2 -->
+    <div class="ca cc-am">
+      <div class="cn">Thesis 02 · 含み益</div>
+      <span class="ci">🏭</span>
+      <div class="ct">昭和期取得の土地21.9万㎡が簿価約7,900円/㎡</div>
+      <div class="cb am">+59.5億円</div>
+      <div class="cu">中立ケース・税前／時価総額の約2.0倍</div>
+      <div class="cp">1941年設立。浜松4.24万㎡・清須2.28万㎡・羽島3.21万㎡は取得後50〜80年で簿価がほぼ償却済み。<strong>路線価ベースの工業地単価は簿価の10〜30倍。</strong>さらにタイ4.11万㎡（簿価1.2億）・インドネシア6.63万㎡（簿価0.4億）が控える。</div>
+      <div class="tgs"><span class="tg tg-am">簿価/時価 = 約1/4</span><span class="tg tg-or">実売実績で検証済</span></div>
+    </div>
+    <!-- C3 -->
+    <div class="ca cc-or">
+      <div class="cn">Thesis 03 · カタリスト</div>
+      <span class="ci">🇹🇭</span>
+      <div class="ct">タイ子会社の解散・清算＝土地4.1万㎡の現金化</div>
+      <div class="cb or">最大20億円級</div>
+      <div class="cu">2026年7月24日決議・98.92%出資・バンコク近郊</div>
+      <div class="cp">1963年設立の染色子会社を解散清算。<strong>プラプラデーン（サムットプラーカーン県）の敷地41,136㎡は簿価わずか1.21億円。</strong>周辺相場5,000〜25,000バーツ/㎡から逆算すると時価9〜24億円。会社は「影響額は精査中」と開示保留中で、<strong>時価総額29.9億円の企業に対して単発で数億〜十数億円の特別利益が出うる。</strong></div>
+      <div class="tgs"><span class="tg tg-or">既に決議済み</span><span class="tg tg-gn">1〜2年内に判明</span></div>
+    </div>
+    <!-- C4 -->
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 04 · ストック性</div>
+      <span class="ci" style="font-size:22px">👶</span>
+      <div class="ct" style="color:var(--ink)">保育124拠点＝「染色屋」から生活関連へ</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">売上の約33%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">子育て支援＋洗濯＋倉庫の非繊維ストック事業</div>
+      <div class="cp" style="color:var(--ink2)">トットメイト＋マミーズで<strong>保育所102（病院内55・企業内32・認可15）＋放課後児童クラブ21＋児発1、従業員約1,900名。</strong>自治体・病院・企業との年度契約でスイッチングコストが高く、実質ストック収益。染色加工が赤字の中で連結の黒字を支えている。</div>
+    </div>
+    <!-- C5 -->
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Thesis 05 · なぜこの値段なのか（＝最大のリスク）</div>
+      <span class="ci" style="font-size:22px">⚠️</span>
+      <div class="ct" style="color:var(--ink)">「資産はあるが、still 動かない」──割安の理由は正当</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">① 本業が赤字</strong><br>染色加工は2026年3月期に営業損失▲1.1億円。2027年3月期1Qも▲1.66億円。ROE 2.7%、ROIC 4.5%。資産だけあって稼げていない。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">② 還元が極端に薄い</strong><br>配当25円＝DOE 0.95%。自己資本83億円に対し年8千万円しか還元していない。自社株買いの実績なし。自己株は既に12.7%を保有。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--pu)">③ 流動性と支配構造</strong><br>実質発行株式316万株、流通株式時価総額11.4億円（基準10億円ギリギリ）。創業家系＋政策保有で約5割が固定。機関投資家は事実上入れない。</div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8;padding:10px;background:var(--pu3);border-radius:4px"><strong style="color:var(--pu)">→ 投資判断：</strong>「割安だから上がる」ではなく<strong>「割安×資産現金化イベントが実際に始まっている」</strong>点を買う銘柄。政策保有株の連続売却（2024年8月・2025年10月・2026年1月・4月・7月と5回）、遊休地売却（2024年12月・譲渡益74百万円）、タイ子会社清算と、<strong>資産を現金に換える動きは既に「実行フェーズ」に入っている。</strong>問題はその現金が株主に回るかどうか。</div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      東海染工は、<strong style="color:var(--or2)">「稼げない本業」と「稼ぎすぎた過去の資産」が同居する典型的な日本型ディープバリュー。</strong>時価総額29.9億円に対しネット金融資産47億円・土地含み益59億円（中立）を抱え、株価は修正NAVの24%。<strong style="color:var(--or2)">タイ子会社清算・政策保有株縮減・名古屋事業所再編という現金化イベントが同時進行しており、</strong>3年で1,600円前後（+70%）が中心シナリオ。ただし還元姿勢が変わらなければ800円台に沈むバリュートラップ、というのが下値の姿。
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P2 資産精査
+══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">資産精査 ── 現金・有価証券・土地</h2><span class="sb bg-am">2026年6月末 連結BS基準</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">31.9億円</div><div class="ms">時価総額29.9億円を単独で上回る</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">投資有価証券（時価）</div><div class="mv am">44.0億円</div><div class="ms">取得原価12.6億／含み益率248%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">土地（簿価）</div><div class="mv or">17.5億円</div><div class="ms">21.9万㎡＝㎡単価7,974円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">有利子負債</div><div class="mv rd">19.0億円</div><div class="ms">短期6.45＋長期12.55億円</div></div>
+  </div>
+
+  <!-- 有価証券 -->
+  <div class="c" style="margin-bottom:14px">
+    <div class="h4">① 投資有価証券 ── 昭和期からの政策保有株が「隠れた現金製造機」</div>
+    <div class="g2">
+      <div>
+        <table class="t tsm">
+          <tbody>
+            <tr><td>投資有価証券（2026年6月末・時価）</td><td class="r mn"><strong>43.99億円</strong></td></tr>
+            <tr><td>その他有価証券評価差額金（税効果後・純資産計上済）</td><td class="r mn hgn">21.79億円</td></tr>
+            <tr><td>逆算：含み益（税前、実効税率30.5%）</td><td class="r mn hgn"><strong>31.36億円</strong></td></tr>
+            <tr><td>逆算：取得原価</td><td class="r mn">12.63億円</td></tr>
+            <tr class="sm"><td>含み益率（取得原価対比）</td><td class="r mn hor"><strong>+248%</strong></td></tr>
+            <tr><td>全売却時の税負担（概算）</td><td class="r mn hrd">▲9.56億円</td></tr>
+            <tr class="hl"><td><strong>税引後の実現可能額</strong></td><td class="r mn hgn"><strong>34.4億円</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="note">主要株主に、りそな銀行4.97%・三菱UFJ銀行4.51%・日清紡HD3.68%・東陽倉庫3.09%・長瀬産業2.08%・オー・ジー1.88%が並ぶ。<strong>これらとの相互持合いが投資有価証券の中身と推定される。</strong>取得原価12.6億円に対し時価44.0億円という含み益率は、大半が昭和〜平成初期取得であることを強く示唆。</p>
+      </div>
+      <div>
+        <div class="c cl-gn" style="background:#eef9f3;border-color:#a8dabc">
+          <div class="h4" style="color:var(--gn)">売却は「口だけ」ではない ── 実行履歴</div>
+          <div class="tl">
+            <div class="ti"><div class="td2 gn"></div><div class="tdate">2024年8月</div><div class="ttext">上場2銘柄売却 → 投資有価証券売却益 <strong>85百万円</strong></div></div>
+            <div class="ti"><div class="td2 gn"></div><div class="tdate">2025年10月</div><div class="ttext">売却に伴う特別利益計上見込を開示 → 業績予想上方修正</div></div>
+            <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年1月</div><div class="ttext">投資有価証券売却益の発生・業績予想修正</div></div>
+            <div class="ti"><div class="td2 gn"></div><div class="tdate">2026年4月</div><div class="ttext">投資有価証券売却益の発生・業績予想修正</div></div>
+            <div class="ti"><div class="td2 or"></div><div class="tdate">2026年7月</div><div class="ttext">上場1銘柄売却 → 売却益 <strong>110百万円</strong>／純利益予想を150→250百万円に上方修正</div></div>
+          </div>
+          <p class="note" style="border-color:#a8dabc">＝ <strong>2年で5回、ほぼ四半期ごとに政策保有株を売っている。</strong>1銘柄あたり売却益0.9〜1.1億円ペース。残高44億円をこのペースで崩すと10年超かかるが、意思決定は既に「縮減」で固まっている。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 土地 -->
+  <div class="c" style="margin-bottom:14px">
+    <div class="h4">② 土地 ── 有価証券報告書「主要な設備の状況」からの全物件精査（2026年3月末）</div>
+    <table class="t">
+      <thead><tr><th>物件</th><th>所在地</th><th class="r">面積</th><th class="r">簿価</th><th class="r">簿価単価</th><th class="r">想定時価単価<br>（中立）</th><th class="r">推定時価</th><th class="r">含み損益</th></tr></thead>
+      <tbody>
+        <tr><td><strong>浜松事業所</strong></td><td>静岡県浜松市中央区中田町846</td><td class="r mn">42,412㎡</td><td class="r mn">1.06億</td><td class="r mn">2,491円</td><td class="r mn ham">35,000円</td><td class="r mn">14.84億</td><td class="r mn hgn">+13.79億</td></tr>
+        <tr><td><strong>名古屋事業所</strong></td><td>愛知県清須市西枇杷島町子新田1-2</td><td class="r mn">22,808㎡</td><td class="r mn">1.46億</td><td class="r mn">6,410円</td><td class="r mn ham">70,000円</td><td class="r mn">15.97億</td><td class="r mn hgn">+14.50億</td></tr>
+        <tr><td><strong>岐阜事業所</strong></td><td>岐阜県羽島市小熊町3-615</td><td class="r mn">32,087㎡</td><td class="r mn">1.79億</td><td class="r mn">5,593円</td><td class="r mn ham">24,000円</td><td class="r mn">7.70億</td><td class="r mn hgn">+5.91億</td></tr>
+        <tr><td>賃貸用土地</td><td>名古屋市北区</td><td class="r mn">6,754㎡</td><td class="r mn">7.61億</td><td class="r mn">112,652円</td><td class="r mn ham">160,000円</td><td class="r mn">10.81億</td><td class="r mn hgn">+3.20億</td></tr>
+        <tr><td>賃貸用商業施設</td><td>大阪府吹田市</td><td class="r mn">899㎡</td><td class="r mn">0.83億</td><td class="r mn">92,325円</td><td class="r mn ham">220,000円</td><td class="r mn">1.98億</td><td class="r mn hgn">+1.15億</td></tr>
+        <tr><td>賃貸用駐車場</td><td>兵庫県川西市</td><td class="r mn">917㎡</td><td class="r mn">0.48億</td><td class="r mn">51,996円</td><td class="r mn ham">135,000円</td><td class="r mn">1.24億</td><td class="r mn hgn">+0.76億</td></tr>
+        <tr><td>賃貸用倉庫</td><td>静岡県浜松市</td><td class="r mn">2,506㎡</td><td class="r mn">0.06億</td><td class="r mn">2,207円</td><td class="r mn ham">35,000円</td><td class="r mn">0.88億</td><td class="r mn hgn">+0.82億</td></tr>
+        <tr><td>賃貸用住宅</td><td>滋賀県湖南市</td><td class="r mn">3,383㎡</td><td class="r mn">2.21億</td><td class="r mn">65,187円</td><td class="r mn ham">32,000円</td><td class="r mn">1.08億</td><td class="r mn hrd">▲1.12億</td></tr>
+        <tr><td>賃貸用住宅</td><td>奈良県橿原市</td><td class="r mn">101㎡</td><td class="r mn">0.07億</td><td class="r mn">71,584円</td><td class="r mn ham">70,000円</td><td class="r mn">0.07億</td><td class="r mn">▲0.00億</td></tr>
+        <tr class="sm"><td colspan="2">国内小計（提出会社）</td><td class="r mn">111,867㎡</td><td class="r mn">15.56億</td><td class="r mn">13,913円</td><td class="r mn">—</td><td class="r mn">54.56億</td><td class="r mn hgn">+39.00億</td></tr>
+        <tr><td><strong>タイ子会社</strong><br><span style="font-size:10px;color:var(--ink3)">98.92%出資・清算決議済</span></td><td>タイ王国サムットプラーカーン県<br>プラプラデーン</td><td class="r mn">41,136㎡</td><td class="r mn">1.21億</td><td class="r mn">2,944円</td><td class="r mn ham">8,000THB<br>≒38,480円</td><td class="r mn">15.83億</td><td class="r mn hgn">+14.46億<br><span style="font-size:10px">（帰属後）</span></td></tr>
+        <tr><td><strong>インドネシア子会社</strong><br><span style="font-size:10px;color:var(--ink3)">54.2%出資・稼働中</span></td><td>インドネシア共和国<br>ブカシ県</td><td class="r mn">66,257㎡</td><td class="r mn">0.42億</td><td class="r mn">636円</td><td class="r mn ham">USD110<br>≒17,502円</td><td class="r mn">11.60億</td><td class="r mn hgn">+6.06億<br><span style="font-size:10px">（帰属後）</span></td></tr>
+        <tr class="hl"><td colspan="2"><strong>合計</strong></td><td class="r mn"><strong>219,260㎡</strong></td><td class="r mn"><strong>17.19億</strong></td><td class="r mn"><strong>7,841円</strong></td><td class="r mn">—</td><td class="r mn"><strong>81.99億</strong></td><td class="r mn hgn"><strong>+59.52億</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>評価方法：</strong>各所在地の2026年相続税路線価（工業地・住宅地の市区町村平均）を0.8で割り戻して公示地価相当に換算し、そこから大規模画地としての規模格差（▲25〜35%）を控除して単価を設定。為替は2026年8月17日TTM（1THB=4.81円、1USD=159.11円）。海外は出資比率で按分。連結BS上の土地17.48億円との差0.29億円は国内子会社の少額物件。</p>
+  </div>
+
+  <div class="cf-gn" style="border-radius:var(--r);padding:14px 18px;margin-bottom:14px">
+    <div class="h4" style="color:var(--gn)">📌 含み益推計の「答え合わせ」── 2024年12月の実売事例</div>
+    <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+      2024年12月20日、兵庫県宝塚市・川西市の遊休地<strong>886.65㎡</strong>を㈱リノウエストへ譲渡し、<strong>固定資産売却益 約74百万円</strong>を計上。譲渡価額・簿価は非開示だが、<strong>売却益だけで㎡あたり83,460円</strong>。同エリアの住宅地相場は13〜15万円/㎡であり、逆算すると<strong>簿価は時価の3〜4割程度</strong>だったことになる。本レポートで用いた「簿価/時価≒1/4」という前提は、この実売データと整合的である。
+    </div>
+  </div>
+
+  <div class="inf">📌 注意：本レポートの土地時価は<strong>公示地価・路線価からの推計値</strong>であり、有価証券報告書に開示される「賃貸等不動産の時価」注記の実額とは異なる可能性がある。工場用地は用途制限・土壌汚染調査コスト・原状回復費用が実現価格を押し下げる要因となる（染色工場跡地は特に土壌・地下水調査が必須）。ベアケースでは、これらを織り込み国内単価を3〜4割低く置いている。</div>
+</div>
+
+<!-- ══════════════════════════════
+  P3 NAV分析
+══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">NAV分析 ── 株価はNAVの24%</h2><span class="sb bg-or">3ケース比較</span></div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div class="h4">修正純資産（NAV）の積み上げ ── 中立ケース</div>
+    <div class="wf">
+      <div class="wf-r"><div>自己資本（2026/6末）</div><div class="wf-b"><div class="wf-f" style="width:67%;background:var(--bl2)"></div></div><div class="mn r" style="text-align:right">83.3億円</div></div>
+      <div class="wf-r"><div>＋ 土地含み益（税前）</div><div class="wf-b"><div class="wf-f" style="width:48%;background:var(--gn2)"></div></div><div class="mn r" style="text-align:right;color:var(--gn)">+59.5億円</div></div>
+      <div class="wf-r"><div>− 含み益への税負担（30%）</div><div class="wf-b"><div class="wf-f" style="width:14%;background:var(--rd)"></div></div><div class="mn r" style="text-align:right;color:var(--rd)">▲17.9億円</div></div>
+      <div class="wf-r"><div><strong>＝ 修正純資産 NAV</strong></div><div class="wf-b"><div class="wf-f" style="width:100%;background:var(--or2)"></div></div><div class="mn r" style="text-align:right;font-weight:600">125.0億円</div></div>
+      <div class="wf-r"><div><strong>現在の時価総額</strong></div><div class="wf-b"><div class="wf-f" style="width:24%;background:var(--ink3)"></div></div><div class="mn r" style="text-align:right;font-weight:600">29.9億円</div></div>
+    </div>
+    <p class="note">※有価証券含み益は既に時価評価済みで自己資本に反映済み（繰延税金負債も計上済み）のため、二重計上を避けて加算していない。非支配株主持分13.0億円は自己資本から除外済み。</p>
+  </div>
+
+  <div class="sc s3">
+    <div class="sc-c"><div class="sc-l br">保守（Conservative）</div><div class="sc-p br">3,491円</div><div class="sc-s">株価はNAVの27.2%</div><div class="sc-i">土地含み益 38.4億円（税前）</div><div class="sc-i">工場地は路線価の6〜7割で評価</div><div class="sc-i">土壌汚染・用途制限を強く織込</div><div class="sc-i">海外土地は下限相場を採用</div></div>
+    <div class="sc-c"><div class="sc-l bs">中立（Base・推奨）</div><div class="sc-p bs">3,960円</div><div class="sc-s">株価はNAVの24.0%</div><div class="sc-i">土地含み益 59.5億円（税前）</div><div class="sc-i">路線価÷0.8−規模格差25〜35%</div><div class="sc-i">2024年実売事例と整合</div><div class="sc-i">海外は中位相場×出資比率</div></div>
+    <div class="sc-c"><div class="sc-l bu">強気（Bull）</div><div class="sc-p bu">4,520円</div><div class="sc-s">株価はNAVの21.0%</div><div class="sc-i">土地含み益 84.8億円（税前）</div><div class="sc-i">物流・再開発用地としての需要</div><div class="sc-i">清須・浜松は名古屋/浜松圏の希少大区画</div><div class="sc-i">バンコク近郊の再開発需要</div></div>
+  </div>
+
+  <div class="g2" style="margin-top:16px">
+    <div class="c">
+      <div class="h4">1株当たり価値の階層 ── どこまでが「硬い」か</div>
+      <table class="t">
+        <thead><tr><th>階層</th><th class="r">1株価値</th><th class="r">対株価</th><th>硬さ</th></tr></thead>
+        <tbody>
+          <tr><td>現預金のみ</td><td class="r mn">1,010円</td><td class="r mn">1.06倍</td><td><span class="bge be-gn">確定</span></td></tr>
+          <tr><td>＋投資有価証券（税後）−有利子負債</td><td class="r mn hgn"><strong>1,498円</strong></td><td class="r mn hgn"><strong>1.58倍</strong></td><td><span class="bge be-gn">ほぼ確定</span></td></tr>
+          <tr><td>BPS（会計上の純資産）</td><td class="r mn">2,640円</td><td class="r mn">2.78倍</td><td><span class="bge be-gn">監査済</span></td></tr>
+          <tr class="hl"><td><strong>修正NAV（中立）</strong></td><td class="r mn hor"><strong>3,960円</strong></td><td class="r mn hor"><strong>4.17倍</strong></td><td><span class="bge be-am">推計</span></td></tr>
+          <tr><td>修正NAV（強気）</td><td class="r mn">4,520円</td><td class="r mn">4.76倍</td><td><span class="bge be-or">推計</span></td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>重要：</strong>「1,498円」までは実質的に検証可能な硬い数字。株価949円はこの硬い部分にすら63%の水準でしか評価されていない。</p>
+    </div>
+    <div>
+      <div class="c cl-bl" style="margin-bottom:12px">
+        <div class="h4" style="color:var(--bl)">EV（企業価値）で見ると事業は「マイナス評価」</div>
+        <table class="t tsm">
+          <tbody>
+            <tr><td>時価総額</td><td class="r mn">29.95億円</td></tr>
+            <tr><td>＋ 有利子負債</td><td class="r mn">+19.00億円</td></tr>
+            <tr><td>− 現預金</td><td class="r mn">▲31.86億円</td></tr>
+            <tr class="sm"><td>EV（現預金のみ控除）</td><td class="r mn hbl"><strong>17.09億円</strong></td></tr>
+            <tr><td>− 投資有価証券（税後34.4億円）</td><td class="r mn">▲34.43億円</td></tr>
+            <tr class="hl"><td><strong>EV（金融資産控除後）</strong></td><td class="r mn hrd"><strong>▲17.34億円</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="note">2027年3月期予想EBITDA約7.7億円（営業利益4.5億＋減価償却3.2億）に対し、<strong>EV/EBITDA 2.2倍</strong>。金融資産まで控除するとEVはマイナス。つまり<strong>事業・工場・土地21.9万㎡がすべて「値段ゼロ以下」で付いてくる計算。</strong></p>
+      </div>
+      <div class="c cf-am">
+        <div class="h4" style="color:var(--am)">なぜ市場は無視しているのか</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          ①1日の売買代金が数百万〜数千万円規模で機関投資家が入れない、②染色加工という「構造斜陽」のラベル、③ROE 2.7%で利益からは何も説明できない、④会社自身が株主資本コストを<strong>1.44%</strong>と認識しており資本効率への感度が低い、⑤東証PBR改善要請への回答も「PBR1倍以上を目指す」という定性目標にとどまり期限・数値目標がない。<br><br><strong>要するに、割安なのではなく「割安に据え置かれる理由が揃っている」。この構造が変わるかどうかが投資判断の全て。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P4 事業性・ストック性
+══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性・ストック性・ニッチトップ性</h2><span class="sb bg-bl">6セグメント構成</span></div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h4">セグメント別実績（2027年3月期 第1四半期・実績）</div>
+      <table class="t">
+        <thead><tr><th>セグメント</th><th class="r">売上高</th><th class="r">前年同期比</th><th class="r">営業損益</th><th>性格</th></tr></thead>
+        <tbody>
+          <tr><td><strong>染色加工</strong></td><td class="r mn">1,946百万</td><td class="r mn hrd">▲12.0%</td><td class="r mn hrd">▲166百万</td><td><span class="bge be-rd">フロー・循環</span></td></tr>
+          <tr><td><strong>子育て支援</strong></td><td class="r mn">1,071百万</td><td class="r mn hgn">+3.9%</td><td class="r mn hgn">+5百万</td><td><span class="bge be-gn">ストック</span></td></tr>
+          <tr><td>縫製品販売</td><td class="r mn">134百万</td><td class="r mn hgn">+2.8%</td><td class="r mn hgn">+9百万</td><td><span class="bge be-am">フロー</span></td></tr>
+          <tr><td>倉庫</td><td class="r mn">55百万</td><td class="r mn">—</td><td class="r mn hgn">+6百万</td><td><span class="bge be-gn">ストック</span></td></tr>
+          <tr><td>洗濯</td><td class="r mn">50百万</td><td class="r mn hgn">+12.3%</td><td class="r mn hgn">+5百万</td><td><span class="bge be-gn">ストック・高収益</span></td></tr>
+          <tr><td>機械販売</td><td class="r mn">3百万</td><td class="r mn">—</td><td class="r mn hrd">▲5百万</td><td><span class="bge be-bl">ニッチ</span></td></tr>
+          <tr class="sm"><td>連結（消去後）</td><td class="r mn">3,198百万</td><td class="r mn hrd">▲6.8%</td><td class="r mn hrd">▲127百万</td><td>下期偏重（52%）</td></tr>
+        </tbody>
+      </table>
+      <p class="note">売上は春夏物主体で<strong>下期に約52%が集中</strong>する季節性があり、1Qの営業赤字は構造的。2027年3月期通期は営業利益450百万円（前期比+174.9%）を会社計画。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h4" style="color:var(--gn)">👶 子育て支援 ── 実質的なストック事業</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          ㈱トットメイト（100%）＋㈱マミーズ（98.2%）。<strong>2026年4月時点で保育所102ヶ所（病院内55・企業内32・認可15）、放課後児童クラブ21ヶ所、児童発達支援1ヶ所、従業員約1,900名。</strong>愛知・岐阜・三重・静岡の東海4県に密集。<br><br>
+          病院内・企業内保育は<strong>「委託先を替えると医師・看護師が辞める」構造</strong>のためスイッチングコストが極めて高く、契約は事実上自動更新。名古屋市のトワイライトスクール（放課後事業）も自治体公募の継続受託。<br><br>
+          2026年4月には名古屋市13校＋瀬戸市1校を新規開所、2027年3月期1Qにも認可保育園1園と放課後14施設を開始。<strong>年商約42億円・連結売上の約3割まで成長し、染色加工の赤字を補填する屋台骨。</strong>
+        </div>
+      </div>
+      <div class="c cl-bl">
+        <div class="h4" style="color:var(--bl)">🧺 洗濯事業 ── 小さいが最も筋の良い事業</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          清須の名古屋事業所内にリネン洗濯設備。ホテルリネン中心で<strong>営業利益率10%（1Q：売上50百万／営業利益5百万）</strong>と全社で最も高い。取扱数量は年10%前後で増加、継続的な価格改定も通っている。インバウンド・ホテル稼働率上昇の直接的な受益事業。規模は小さいが<strong>「染色工場の設備・排水インフラ・人員を横展開できる」という点で参入障壁のある成長ストック。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cf-bl">
+      <div class="h4" style="color:var(--bl)">🏆 ニッチトップ性 ── 「綿の染色整理で国内トップシェア」</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        会社自身が<strong>「綿製品で国内トップシェア」</strong>を標榜。生産能力は浜松事業所が月産300万m（無地〜捺染）、岐阜事業所が月産100万m（短繊維ニット専門）、名古屋事業所が企画・型彫刻・デジタルプリント。海外はインドネシアが月産450万ヤード。<br><br>
+        <strong>参入障壁は「排水処理設備と用途地域」。</strong>染色整理は大量の水と排水処理を要し、現在の日本で新規に染色工場の許認可を取ることは事実上不可能。国内の染色整理業は1990年代から事業所数が激減し、生き残った少数のプレイヤーによる寡占が進んでいる。<br><br>
+        <strong>差別化技術：</strong>名古屋事業所のデジタルプリント（型不要・小ロット・クイックレスポンス）、撥水／形態安定／防汚／抗菌／光触媒などの機能加工、スポーツ向け吸汗速乾。PFAS不使用対応も課題として明記。
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div class="h4" style="color:var(--or)">⚠️ ただし「ニッチトップ＝儲かる」ではない</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+        <strong>市場そのものが縮小しているため、トップシェアが収益に直結していない。</strong>
+        <div style="margin-top:10px">
+        ・染色加工の営業損益：2025年3月期 +1.4億円 → 2026年3月期 <strong>▲1.1億円</strong> → 2027年3月期1Q <strong>▲1.66億円</strong><br>
+        ・受注高 8.8億円（前年比▲9.8%）／受注残高 4.2億円（前年比<strong>▲19.0%</strong>）と先行指標も悪化<br>
+        ・官公庁向けユニフォームの仕様変更で生産が抑制<br>
+        ・インドネシアは米通商政策の影響で中国製品が流入、市況停滞<br>
+        ・原材料・エネルギー（木屑チップ）価格の上昇が継続
+        </div>
+        <div style="margin-top:10px;padding:9px;background:rgba(196,104,20,.12);border-radius:4px"><strong>市場成長性の評価：国内アパレル向けは長期縮小（年▲2〜4%）。ユニフォーム・資材向けは横ばい。「残存者利益」は理論上あるが、実現には値上げ貫徹と固定費削減が必要で、現状はまだ達成できていない。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h4">海外事業 ── 連結利益の主柱はインドネシア</div>
+    <div class="g2">
+      <div>
+        <table class="t tsm">
+          <thead><tr><th>P.T. TOKAI TEXPRINT INDONESIA</th><th class="r">金額</th></tr></thead>
+          <tbody>
+            <tr><td>設立</td><td class="r mn">1990年9月</td></tr>
+            <tr><td>出資比率</td><td class="r mn">54.2%</td></tr>
+            <tr><td>所在地</td><td class="r mn">ブカシ県</td></tr>
+            <tr><td>売上高</td><td class="r mn">39.3億円</td></tr>
+            <tr><td>経常利益</td><td class="r mn hgn">4.2億円</td></tr>
+            <tr class="hl"><td>当期純利益</td><td class="r mn hgn"><strong>3.4億円</strong></td></tr>
+            <tr><td>土地</td><td class="r mn">66,257㎡（簿価0.42億円）</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>連結経常利益3.1億円に対し、インドネシア単体で4.2億円。</strong>つまり国内本体は経常赤字で、海外子会社が連結を支えている構図。一方で45.8%が非支配株主持分に流出しており、連結純利益2.0億円のうち相当部分が外部に漏れる。<strong>非支配株主持分の買取りは有力な資本政策オプション。</strong></p>
+      </div>
+      <div class="c cl-or" style="background:var(--or3);border-color:#f0c870">
+        <div class="h4" style="color:var(--or)">🇹🇭 タイ子会社 ── 赤字撤退＝土地の現金化</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          TOKAI DYEING CO.,(THAILAND) LTD.（98.92%出資、1963年6月設立）。スクールユニフォーム向けの晒・白仕上げが中心だったが、<strong>3期連続営業赤字</strong>（2024年3月期▲51百万円／2025年3月期▲17百万円／2026年3月期▲15百万円）。<br><br>
+          <strong>2026年7月24日、解散・清算を決議。</strong>敷地41,136㎡（簿価1.21億円＝2,944円/㎡）はバンコク中心部から約10kmのプラプラデーン地区。周辺の売買事例は2,630〜25,000バーツ/㎡（工業地帯は約25,000バーツ/㎡）。<br><br>
+          <strong>大規模画地の卸値として5,000〜12,000バーツ/㎡を置くと時価9.9〜23.7億円。時価総額29.9億円の会社に対して、1件のイベントで数億〜十数億円の特別利益が出る可能性。</strong>会社は業績影響を「精査中」として未開示。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P5 業績・財務
+══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">業績・財務</h2><span class="sb bg-pu">2026年3月期実績／2027年3月期計画</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">売上高（26/3期）</div><div class="mv am">137.8億円</div><div class="ms">前期比▲3.9%</div></div>
+    <div class="c mc"><div class="ml">営業利益（26/3期）</div><div class="mv rd">1.64億円</div><div class="ms">前期比▲61.0%</div></div>
+    <div class="c mc"><div class="ml">経常利益（26/3期）</div><div class="mv rd">3.11億円</div><div class="ms">前期比▲45.4%</div></div>
+    <div class="c mc"><div class="ml">純利益（26/3期）</div><div class="mv rd">2.02億円</div><div class="ms">前期比▲35.2%／EPS 64.01円</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="h4">主要経営指標の推移（連結）</div>
+      <table class="t">
+        <thead><tr><th>期</th><th class="r">売上高</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">包括利益</th><th class="r">BPS</th><th class="r">ROE</th></tr></thead>
+        <tbody>
+          <tr><td>2022/3</td><td class="r mn">111.4億</td><td class="r mn">1.15億</td><td class="r mn">0.48億</td><td class="r mn">3.97億</td><td class="r mn">1,927円</td><td class="r mn">0.8%</td></tr>
+          <tr><td>2023/3</td><td class="r mn">130.6億</td><td class="r mn">1.90億</td><td class="r mn">1.01億</td><td class="r mn">3.38億</td><td class="r mn">1,973円</td><td class="r mn">1.6%</td></tr>
+          <tr><td>2024/3</td><td class="r mn">132.2億</td><td class="r mn">1.36億</td><td class="r mn">1.30億</td><td class="r mn">8.10億</td><td class="r mn">2,166円</td><td class="r mn">2.0%</td></tr>
+          <tr><td>2025/3</td><td class="r mn">143.5億</td><td class="r mn hgn">5.69億</td><td class="r mn hgn">3.12億</td><td class="r mn">6.83億</td><td class="r mn">2,270円</td><td class="r mn">4.5%</td></tr>
+          <tr class="hl"><td><strong>2026/3</strong></td><td class="r mn">137.8億</td><td class="r mn">3.11億</td><td class="r mn">2.02億</td><td class="r mn hgn"><strong>9.15億</strong></td><td class="r mn"><strong>2,500円</strong></td><td class="r mn">2.7%</td></tr>
+          <tr class="sm"><td>2027/3予</td><td class="r mn">145.0億</td><td class="r mn hgn">6.50億</td><td class="r mn hgn">2.50億</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">約3.0%</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>注目すべきは「純利益」ではなく「包括利益」。</strong>2026年3月期の純利益2.02億円に対し包括利益は9.15億円。差額の大半は<strong>その他有価証券評価差額金の増加6.43億円</strong>。会計上の利益は小さくても、株主価値は年間9億円ペースで積み上がっている（時価総額29.9億円に対し年率30%相当）。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h4" style="color:var(--gn)">財務健全性 ── 極めて保守的</div>
+        <table class="t tsm">
+          <tbody>
+            <tr><td>総資産（2026/6末）</td><td class="r mn">157.5億円</td></tr>
+            <tr><td>純資産</td><td class="r mn">96.3億円</td></tr>
+            <tr><td>うち非支配株主持分</td><td class="r mn">13.0億円</td></tr>
+            <tr><td>自己資本</td><td class="r mn hgn"><strong>83.3億円</strong></td></tr>
+            <tr><td>自己資本比率</td><td class="r mn hgn">52.9%（4年で+6.6pt）</td></tr>
+            <tr><td>ネットキャッシュ（現預金−有利子負債）</td><td class="r mn hgn">+12.9億円</td></tr>
+            <tr><td>営業CF（2026/3期）</td><td class="r mn">5.57億円</td></tr>
+            <tr><td>設備投資計画</td><td class="r mn">5.30億円</td></tr>
+            <tr><td>退職給付に係る負債</td><td class="r mn">4.36億円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="c cl-rd">
+        <div class="h4" style="color:var(--rd)">還元は極端に薄い ── ここが変われば別会社</div>
+        <table class="t tsm">
+          <thead><tr><th>DOE（純資産配当率）</th><th class="r">1株配当</th><th class="r">利回り@949円</th></tr></thead>
+          <tbody>
+            <tr class="sm"><td>0.95%（現状）</td><td class="r mn">25円</td><td class="r mn">2.63%</td></tr>
+            <tr><td>2.0%</td><td class="r mn ham">53円</td><td class="r mn ham">5.6%</td></tr>
+            <tr><td>3.0%</td><td class="r mn hgn">79円</td><td class="r mn hgn">8.3%</td></tr>
+            <tr><td>4.0%</td><td class="r mn hor">106円</td><td class="r mn hor">11.1%</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="border-color:rgba(180,44,44,.2)">配当性向は2027年3月期予想EPS 79.20円に対し31.6%だが、<strong>自己資本83億円に対する還元は年0.8億円だけ。</strong>DOE3%は自己資本の3%＝年2.5億円で、営業CF5.6億円の範囲内。<strong>還元方針の変更だけで利回り8%銘柄に化ける余地がある</strong>のが、この銘柄の非対称性の源泉。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h4">株主構成 ── 創業家＋政策保有で約5割が固定（2026年3月末）</div>
+    <div class="g2">
+      <div>
+        <table class="t tsm">
+          <thead><tr><th>順位</th><th>株主</th><th class="r">持株数</th><th class="r">比率</th><th>属性</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><strong>ミソノサービス㈱</strong></td><td class="r mn">547千株</td><td class="r mn hor"><strong>17.33%</strong></td><td><span class="bge be-or">創業家資産管理会社</span></td></tr>
+            <tr><td>2</td><td>㈱りそな銀行</td><td class="r mn">156千株</td><td class="r mn">4.97%</td><td><span class="bge be-bl">政策保有</span></td></tr>
+            <tr><td>3</td><td>㈱三菱UFJ銀行</td><td class="r mn">142千株</td><td class="r mn">4.51%</td><td><span class="bge be-bl">政策保有</span></td></tr>
+            <tr><td>4</td><td>八代興産㈱</td><td class="r mn">134千株</td><td class="r mn">4.26%</td><td><span class="bge be-or">創業家関連</span></td></tr>
+            <tr><td>5</td><td>日清紡ホールディングス㈱</td><td class="r mn">116千株</td><td class="r mn">3.68%</td><td><span class="bge be-bl">取引先</span></td></tr>
+            <tr><td>6</td><td>八代芳明</td><td class="r mn">106千株</td><td class="r mn">3.36%</td><td><span class="bge be-or">創業家</span></td></tr>
+            <tr><td>7</td><td>東陽倉庫㈱</td><td class="r mn">97千株</td><td class="r mn">3.09%</td><td><span class="bge be-bl">取引先</span></td></tr>
+            <tr><td>8</td><td>八代和彦</td><td class="r mn">93千株</td><td class="r mn">2.96%</td><td><span class="bge be-or">創業家</span></td></tr>
+            <tr><td>9</td><td>長瀬産業㈱</td><td class="r mn">65千株</td><td class="r mn">2.08%</td><td><span class="bge be-bl">取引先</span></td></tr>
+            <tr><td>10</td><td>オー・ジー㈱</td><td class="r mn">59千株</td><td class="r mn">1.88%</td><td><span class="bge be-bl">取引先</span></td></tr>
+            <tr class="sm"><td colspan="2">創業家系合計（1+4+6+8）</td><td class="r mn">880千株</td><td class="r mn hor"><strong>27.91%</strong></td><td>—</td></tr>
+            <tr class="sm"><td colspan="2">政策保有・取引先合計（2,3,5,7,9,10）</td><td class="r mn">635千株</td><td class="r mn hbl"><strong>20.21%</strong></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="c cf-am">
+          <div class="h4" style="color:var(--am)">株式数の実像</div>
+          <table class="t tsm">
+            <tbody>
+              <tr><td>発行済株式総数</td><td class="r mn">3,614,252株</td></tr>
+              <tr><td>自己株式</td><td class="r mn hor">458,241株（12.7%）</td></tr>
+              <tr class="sm"><td>実質発行済株式数</td><td class="r mn"><strong>3,156,011株</strong></td></tr>
+              <tr><td>発行可能株式総数</td><td class="r mn">10,000,000株</td></tr>
+              <tr><td>2026年3月期株価レンジ</td><td class="r mn">775〜1,029円</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="border-color:#f0d080"><strong>自己株式12.7%は既に「実質的な自社株買い済み」の状態。</strong>これを消却すれば1株価値は自動的に押し上がる。加えて、創業家27.9%＋自己株12.7%＝40.6%を握った状態でのMBOは、残り約60%（時価ベースで約18億円）を取れば成立する計算になる。</p>
+        </div>
+        <div class="warn" style="margin-top:12px;margin-bottom:0">⚠️ <strong>上場維持基準はギリギリ。</strong>2025年3月末時点の流通株式時価総額は<strong>11.42億円</strong>（東証スタンダード基準10億円）、流通株式比率32.2%（基準25%）。2024年3月末には802百万円と<strong>基準割れしていた</strong>ため、2024年9月に立会外分売を実施して適合させた経緯がある。株価が約860円を割ると再び基準を割り込む計算で、<strong>会社には株価を維持する強い動機がある一方、維持コストに疲れれば非公開化に傾く。</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P6 カタリスト
+══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト ── MBO・TOB・資産現金化</h2><span class="sb bg-gn">6つの引き金</span></div>
+
+  <div class="cg">
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 01 · 進行中・確度高</div>
+      <span class="ci">🇹🇭</span>
+      <div class="ct">タイ子会社清算に伴う土地売却</div>
+      <div class="cb or">9〜24億円</div>
+      <div class="cu">敷地41,136㎡ 簿価1.21億円／時価総額の30〜80%</div>
+      <div class="cp">2026年7月24日に解散・清算決議済み。<strong>業績影響は「精査中」として未開示＝逆に言えば開示を要するほどの金額になる可能性がある。</strong>清算完了は通常1〜2年。売却益は特別利益として計上され、増配・特別配当の原資になりうる。</div>
+      <div class="tgs"><span class="tg tg-or">決議済み</span><span class="tg tg-gn">1〜2年内</span></div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 02 · 進行中</div>
+      <span class="ci">📉</span>
+      <div class="ct">政策保有株式44億円の継続縮減</div>
+      <div class="cb gn">年1〜2銘柄</div>
+      <div class="cu">売却益は1銘柄あたり0.9〜1.1億円ペース</div>
+      <div class="cp">「資本コストや株価を意識した経営」で<strong>政策保有株式の縮減を明記</strong>し、2年で5回売却を実行。「獲得した資金は成長投資や株主還元に配分」と明言。<strong>残高44億円＝時価総額の1.5倍が原資として控えている。</strong>ペースが年1銘柄から複数銘柄へ加速すれば、還元も一段変わる。</div>
+      <div class="tgs"><span class="tg tg-gn">方針明記済</span><span class="tg tg-am">ペースが課題</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 03 · 進行中</div>
+      <span class="ci">🏗️</span>
+      <div class="ct">名古屋事業所（清須市22,808㎡）の再編</div>
+      <div class="cb am">遊休化余地</div>
+      <div class="cu">2026年6月よりサンプル加工設備を浜松へ移管</div>
+      <div class="cp">2026年6月26日開示。<strong>清須の名古屋事業所から浜松事業所へサンプル加工設備を移管、特別損失72百万円（設備移設・建屋改修・退職特別加算金）を計上。</strong>名古屋事業所は企画・型彫刻・デジタルプリント機能へ縮小し、名古屋市に隣接する22,808㎡の一部が遊休化する可能性。同社は遊休地を継続的に売却しており、次の売却候補になりうる。</div>
+      <div class="tgs"><span class="tg tg-am">移管進行中</span><span class="tg tg-or">名古屋隣接の希少大区画</span></div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 04 · 構造</div>
+      <span class="ci" style="font-size:22px">🤝</span>
+      <div class="ct" style="color:var(--ink)">MBO／非公開化の構造的成立性</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">買収所要 約18億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">創業家27.9%＋自己株12.7%を除く約60%を時価で取得した場合</div>
+      <div class="cp" style="color:var(--ink2)"><strong>会社の現預金31.9億円だけでMBOの買収資金を賄える異例の構造。</strong>創業家系が既に27.9%、自己株が12.7%。上場維持基準がギリギリで維持コストも重い。TOBが出るとすれば<strong>NAV（3,960円）の40〜55%＝1,600〜2,200円</strong>あたりが現実解。<br><br><span style="color:var(--rd);font-weight:600">※現時点でMBO・TOBの具体的な観測報道や大量保有報告書は確認されていない。あくまで構造上の可能性。</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 05</div>
+      <span class="ci" style="font-size:22px">📊</span>
+      <div class="ct" style="color:var(--ink)">東証PBR改善要請と「PBR1倍以上」目標</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">PBR 0.36 → 1.0</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">目標達成なら理論株価2,640円</div>
+      <div class="cp" style="color:var(--ink2)">2024年1月・12月、2025年12月と<strong>3回にわたり「資本コストや株価を意識した経営」を開示。「収益改善およびPBR1倍以上を目指します」と明記。</strong>ROE目標10%以上（実績2.7%）も掲げる。<strong>期限が未設定・具体策が薄いのが弱点</strong>だが、開示を繰り返すこと自体が改善圧力の受け皿になっている。</div>
+    </div>
+    <div class="ca cc-gn" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Catalyst 06</div>
+      <span class="ci" style="font-size:22px">🧩</span>
+      <div class="ct" style="color:var(--ink)">子育て支援事業の切り出し／非支配株主持分の買取り</div>
+      <div style="font:600 22px/1 var(--mono);color:var(--gn);margin:6px 0 2px">潜在的な事業再編</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">保育124拠点は単独でも買い手のつく資産</div>
+      <div class="cp" style="color:var(--ink2)">保育所102＋学童21＋従業員1,900名の東海地区最大級プラットフォームは、保育大手やPEにとって魅力的なM&A対象。<strong>仮にEV/EBITDA 8倍で評価すれば単独で20〜30億円規模。</strong>また、インドネシア子会社の非支配株主持分45.8%（13.0億円）の買取りは、連結利益の流出を止める最も効率的な資本政策。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h4" style="color:var(--gn)">📈 ポジティブ監視リスト（買い増し／保有継続の根拠）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>タイ土地の売却金額開示：</strong>特別利益の実額が判明した瞬間が最大の再評価トリガー</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>還元方針の数値化：</strong>DOE導入・配当性向目標・自己株買いの発表</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自己株式458千株の消却：</strong>1株価値の即時向上</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>政策保有株の売却ペース加速：</strong>年1銘柄→複数銘柄へ</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>染色加工の黒字転換：</strong>値上げ貫徹・浜松集約の効果発現</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告書の提出：</strong>アクティビスト・事業会社の参入</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>中期経営計画の数値目標公表：</strong>現在は定性目標のみ</div></div>
+      </div>
+    </div>
+    <div class="c cf-rd">
+      <div class="h4" style="color:var(--rd)">📉 ネガティブ監視リスト（撤退を検討すべき兆候）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>タイ土地売却が「影響軽微」で終わる：</strong>含み益推計の前提が崩れる</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>染色加工の赤字が2期以上継続：</strong>構造赤字の固定化</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>受注残高のさらなる減少：</strong>現在すでに前年比▲19.0%</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>売却資金が設備投資に全額吸収：</strong>還元に回らない</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>流通株式時価総額の基準割れ：</strong>株価860円割れで再抵触</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>インドネシア子会社の減益・為替急変：</strong>連結利益の柱が崩れる</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>3年間何も動かない：</strong>バリュートラップ確定として資金移動</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P7 リスク
+══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">ダウンサイドリスク ── 正直に向き合う</h2><span class="sb bg-rd">バリュートラップが最大の敵</span></div>
+
+  <div class="warn">⚠️ <strong>この銘柄で最も高い確率で起きる「悪いこと」は、株価が暴落することではなく、何も起きないまま3年が過ぎることである。</strong>資産は積み上がるが株価は800〜1,000円のレンジに張り付き、機会費用だけが積み上がる──これが本命のダウンサイドシナリオ。</div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h4" style="color:var(--rd)">① バリュートラップ（最重要）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">会社が認識する<strong>株主資本コストは1.44%</strong>。この数字を前提にすればROIC 4.53%でも「コストを上回っている」ことになり、抜本的な資本政策の必要性を感じない。<strong>PBR 0.36倍が「経営課題」として認識されていない可能性が構造的に高い。</strong>創業家＋政策保有で約50%を握るため、外部から変化を強制する手段も乏しい。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h4" style="color:var(--rd)">② 本業（染色加工）の構造赤字</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">売上の約6割を占める主力が赤字。2026年3月期▲1.1億円、2027年3月期1Q▲1.66億円。<strong>受注高▲9.8%・受注残高▲19.0%と先行指標も悪化。</strong>国内アパレル市場の縮小は不可逆で、値上げ・集約だけで黒字化できる保証はない。赤字が続けば現金と有価証券を食い潰す「資産の逆流」も起こりうる。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h4" style="color:var(--am)">③ 流動性リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">実質発行株式316万株、流通株式時価総額11.4億円。<strong>1日の売買代金は数百万〜数千万円規模で、まとまった金額はそもそも建てられないし降りられない。</strong>好材料が出れば一気に上がるが、悪材料では買い手が消える。<strong>ポジションサイズは「最悪、数ヶ月かけて降りる」前提で決める必要がある。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h4" style="color:var(--am)">④ 土地含み益の実現可能性</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">工場用地は稼働中である限り売れない。<strong>染色工場跡地は土壌・地下水汚染調査が必須で、対策費が数億円規模になることもある。</strong>本レポートの時価は公示地価・路線価からの推計であり、実現価格は3〜5割低い可能性がある。また滋賀県湖南市の賃貸用住宅のように<strong>含み損を抱えた物件も実在する</strong>（簿価65,187円/㎡に対し相場は3万円台）。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h4" style="color:var(--bl)">⑤ 海外・為替リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">海外売上高比率29.9%。<strong>連結経常利益3.1億円に対しインドネシア子会社単体が4.2億円</strong>＝実質的に利益の全てが海外由来で、しかも45.8%は非支配株主に流出する。米通商政策の変化で中国製品がインドネシア市場に流入し市況は停滞中。為替換算調整勘定は<strong>▲5.4億円</strong>の累積マイナス。円高転換は自己資本・海外資産価値の双方を押し下げる。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h4" style="color:var(--pu)">⑥ 上場維持基準・規制リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">流通株式時価総額11.42億円は基準10億円に対し余裕14%。<strong>株価が約860円を割ると再抵触</strong>（2024年3月末には実際に基準割れしていた）。加えてPFAS規制、排水規制、有害物質規制への対応コストは今後増加する見込み。染色業は環境規制の直撃を受ける業種であり、<strong>設備更新負担が還元余力を奪う。</strong></div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h4">下値の検証 ── どこで止まるか</div>
+    <table class="t">
+      <thead><tr><th>下値の根拠</th><th class="r">株価水準</th><th class="r">現値比</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>2026年3月期の実際の安値</td><td class="r mn ham">775円</td><td class="r mn hrd">▲18.3%</td><td style="font-size:11px">直近1年で実際に付けた水準</td></tr>
+        <tr><td>上場維持基準（流通株式時価総額10億円）</td><td class="r mn ham">約860円</td><td class="r mn hrd">▲9.4%</td><td style="font-size:11px">会社が防衛せざるを得ないライン</td></tr>
+        <tr class="hl"><td><strong>ネット金融資産／株（税後）</strong></td><td class="r mn hgn"><strong>1,498円</strong></td><td class="r mn hgn">+57.8%</td><td style="font-size:11px">理論的な床。ただし機能した実績なし</td></tr>
+        <tr><td>BPS</td><td class="r mn">2,640円</td><td class="r mn hgn">+178%</td><td style="font-size:11px">PBR1倍。会社の目標水準</td></tr>
+        <tr class="sm"><td>本レポートのベア想定</td><td class="r mn hrd"><strong>780円</strong></td><td class="r mn hrd"><strong>▲17.8%</strong></td><td style="font-size:11px">BPS 2,600円 × PBR 0.30倍</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>「資産があるから下がらない」は成立しない。</strong>この銘柄は既にPBR 0.36倍で放置されており、理論的な床（ネット金融資産1,498円）は一度も機能していない。市場全体が調整すれば流動性の薄さから0.30倍まで掘られる。<strong>下値は「▲20%程度」と割り切って、そこから逆算してポジションサイズを決めるべき。</strong></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+  P8 3年後シナリオ
+══════════════════════════════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">3年後（2029年）シナリオ ── ベア／ベース／ブル</h2><span class="sb bg-or">期待株価 1,446円</span></div>
+
+  <div class="inf">📌 前提：3年間で①タイ子会社清算の決着、②政策保有株式の継続売却、③2027〜2029年3月期の利益蓄積、④還元方針の変化有無 が判明する。株価はBPS×PBRで算定し、配当は3年累計で加算。</div>
+
+  <div class="sc s3">
+    <div class="sc-c">
+      <div class="sc-l br">Bear ／ 確率 35%</div>
+      <div class="sc-p br">780円</div>
+      <div class="sc-s">▲17.8%（配当込 ▲9.9%）</div>
+      <div class="sc-i">BPS 2,600円 × PBR 0.30倍</div>
+      <div class="sc-i">染色加工の赤字が定着、純利益1.0億円（EPS 32円）</div>
+      <div class="sc-i">タイ土地は簿価近辺でしか売れず特別利益は軽微</div>
+      <div class="sc-i">配当25円据置（3年で75円）、自社株買いなし</div>
+      <div class="sc-i">株式市場調整で有価証券評価差額金が縮小</div>
+      <div class="sc-i">「何も起きない」＝バリュートラップの完成</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base ／ 確率 45%</div>
+      <div class="sc-p bs">1,630円</div>
+      <div class="sc-s">+71.8%（配当込 +81.2%）</div>
+      <div class="sc-i">BPS 3,250円 × PBR 0.50倍</div>
+      <div class="sc-i">タイ土地売却で税後7億円前後の資産増</div>
+      <div class="sc-i">政策保有株の売却が年1〜2銘柄で継続</div>
+      <div class="sc-i">染色加工は損益均衡、子育て・洗濯が伸長</div>
+      <div class="sc-i">純利益3.5億円（EPS 111円）、経常7〜8億円</div>
+      <div class="sc-i">配当を段階的に25→35円へ（3年で90円）</div>
+      <div class="sc-i">PBRは0.36→0.50へ是正（NAVの41%）</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull ／ 確率 20%</div>
+      <div class="sc-p bu">2,200円</div>
+      <div class="sc-s">+131.8%（配当込 +146.6%）</div>
+      <div class="sc-i">BPS 3,600円 × PBR 0.61倍</div>
+      <div class="sc-i">タイ土地が上限近くで売却、特別配当を実施</div>
+      <div class="sc-i">政策保有株を大幅縮減し大型自社株買い</div>
+      <div class="sc-i">自己株式458千株を消却</div>
+      <div class="sc-i">名古屋事業所の一部土地を売却</div>
+      <div class="sc-i">純利益5.0億円（EPS 158円）、DOE 2〜3%へ</div>
+      <div class="sc-i">またはMBO／TOB成立（1,800〜2,200円が現実解）</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h4">確率加重期待値</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">3年後株価</th><th class="r">配当累計</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>Bear</td><td class="r mn">35%</td><td class="r mn">780円</td><td class="r mn">75円</td><td class="r mn">273円</td></tr>
+          <tr><td>Base</td><td class="r mn">45%</td><td class="r mn">1,630円</td><td class="r mn">90円</td><td class="r mn">734円</td></tr>
+          <tr><td>Bull</td><td class="r mn">20%</td><td class="r mn">2,200円</td><td class="r mn">140円</td><td class="r mn">440円</td></tr>
+          <tr class="sm"><td><strong>期待株価</strong></td><td class="r mn">100%</td><td class="r mn hgn"><strong>1,446円</strong></td><td class="r mn">—</td><td class="r mn hgn"><strong>+52.4%</strong></td></tr>
+          <tr class="hl"><td><strong>配当込 期待トータルリターン</strong></td><td class="r mn">—</td><td class="r mn hor"><strong>1,541円</strong></td><td class="r mn">—</td><td class="r mn hor"><strong>+62.4%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">年率換算（Base・配当込・3年）で<strong>約21.9%のIRR</strong>。リスク・リワード比は下値▲169円に対し上値（Base）+681円で<strong>約1：4.0</strong>。</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">期待株価（3年後）</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">1,446円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 +52.4%</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">最大下値（Bear）</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">780円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 ▲17.8%</div>
+        </div>
+      </div>
+      <div class="c cf-bl">
+        <div class="h4" style="color:var(--bl)">TOB／MBOが出た場合の価格レンジ</div>
+        <table class="t tsm">
+          <thead><tr><th>プレミアム基準</th><th class="r">TOB価格</th><th class="r">現在比</th></tr></thead>
+          <tbody>
+            <tr><td>直近株価＋30%（一般的下限）</td><td class="r mn">1,230円</td><td class="r mn">+30%</td></tr>
+            <tr><td>BPS（PBR1倍）</td><td class="r mn ham">2,640円</td><td class="r mn ham">+178%</td></tr>
+            <tr class="hl"><td><strong>NAV（3,960円）の40〜55%</strong></td><td class="r mn hgn"><strong>1,600〜2,200円</strong></td><td class="r mn hgn"><strong>+69〜132%</strong></td></tr>
+            <tr><td>ネット金融資産＋事業価値</td><td class="r mn">1,800円前後</td><td class="r mn">+90%</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="border-color:#9ab4e8">近年の日本のMBOでは<strong>「PBR1倍未満・NAV大幅割れ」でのTOB価格に対する少数株主の異議申立てが増えており</strong>、資産バリュー銘柄のTOB価格は以前より高めに設定される傾向。本件でも1,600円未満のTOBは反対運動を招きやすい。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 「妙味はある。ただし枚数と時間軸を間違えないこと」</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">949円は買いか</div>
+        <div class="conc-b"><strong>結論：バリュー投資として妙味あり。</strong>現預金31.9億円＋投資有価証券44.0億円（税後34.4億円）に対し時価総額29.9億円。<strong>ネット金融資産だけで1株1,498円＝株価の1.58倍</strong>で、土地21.9万㎡・事業・保育124拠点がすべてタダ以下。修正NAV 3,960円に対し株価はその24%。<strong>「資産の絶対量」という一点では、日本の上場企業でも最上位クラスの割安。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">ただし本業は買っていない</div>
+        <div class="conc-b">染色加工は営業赤字、受注残▲19%、ROE 2.7%。<strong>「ニッチトップ」ではあっても「儲かるニッチ」ではない。</strong>ストック性があるのは子育て支援（保育102＋学童21）と洗濯だが、営業利益は合計で1.8億円程度と規模が小さい。<strong>この銘柄は「事業を買う」のではなく「資産の現金化イベントを買う」投資であり、事業改善に期待しすぎないこと。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">執行と撤退のルール</div>
+        <div class="conc-b">流通株式時価総額11.4億円という薄さから、<strong>ポジションは「数ヶ月かけて降りられる枚数」に限定。</strong>下値は780〜860円を想定し、900円台前半での分割買いが妥当。<strong>撤退条件は明確に：①タイ土地売却が「影響軽微」で終わる、②染色加工の赤字が2期以上続く、③3年経っても還元方針が数値化されない</strong>──いずれかに該当したら、資産の多寡にかかわらず資金を移す。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">3年後 期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">1,446円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">配当込 +62.4%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">修正NAV（中立）</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">3,960円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">株価はNAVの24%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">硬い下限（金融資産）</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">1,498円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">ただし床として機能した実績なし</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">リスク・リワード</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">約 1 : 4</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">下値▲169円 / 上値+681円</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        東海染工949円は、<strong style="color:var(--or2)">「稼げない本業」を割り引いてもなお、金融資産だけで株価の1.6倍・修正NAVで4.2倍という日本屈指のディープバリュー。</strong>タイ子会社清算（土地4.1万㎡）・政策保有株44億円の継続売却・名古屋事業所再編という<strong style="color:var(--or2)">現金化イベントが同時進行しており、「資産があるだけ」の段階から「資産が動き始めた」段階に入っている。</strong>3年で1,630円（Base）が中心、期待値1,446円。ただし還元方針が数値化されなければ800円台のバリュートラップに沈むため、<strong style="color:var(--or2)">枚数を絞り、撤退条件を先に決めてから入る銘柄。</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は公開情報に基づく分析であり、情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。<br>
+  土地時価・含み益は公示地価・路線価からの推計値であり、実際の売却価格を保証するものではありません。<br>
+  Data: EDINET 有価証券報告書 第106期（2026年6月25日提出・S100YJEV） / 東海染工 決算短信・適時開示（2024〜2026年） / 国税庁路線価2026 / 国土交通省地価公示2026 / 三菱UFJリサーチ&コンサルティング為替相場（2026年8月17日）／ トットメイト公式 · 2026.08.18
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
