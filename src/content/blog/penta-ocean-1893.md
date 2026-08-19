@@ -48,6 +48,37 @@ noteUrl: "https://numasoko-value.com/analysis/penta-ocean-1893.html"
 
 ---
 
+## 🧑‍💼 なぜ、うちがこの一枚を触るのか
+
+🧑‍💼**沼田**「<span class="t-amber">先に、読者が抱くはずの違和感に答えておく</span>。<strong>時価総額3,910億円のプライム大型株を、しかもPBR1.93倍で紹介する——これはうちの型から明確に外れている</strong>」
+
+🦎**日向**「<span class="t-blue">正直、いつも扱っている小型株と並べると眩暈がします</span>」
+
+| | 前日に扱った東証スタンダードの小型株 | <strong>五洋建設(1893)</strong> |
+|---|---|---|
+| 時価総額 | 30億円 | <strong>3,910億円</strong>（<span class="t-amber">130倍</span>） |
+| PBR | 0.36倍 | <span class="t-red">1.93倍</span> |
+| 1日の売買代金 | 100万円 | <strong>43.9億円</strong>（<span class="t-amber">約4,400倍</span>） |
+| 1日の約定回数 | 5回 | <strong>5,597回</strong> |
+
+🧑‍💼**沼田**「<span class="t-green">だが、うちが探しているのは『安い株』ではない。『価値に対して安い株』だ</span>。<strong>そして安さには、少なくとも2種類ある</strong>」
+
+> ⚖️ **2種類の安さは、由来がまったく違う**
+> ・<span class="t-blue"><strong>資産の安さ（PBR）</strong></span>——<span class="t-amber">誰も見ていないから安い</span>。<strong>見られるまで待つ投資</strong>。東海染工がこちら
+> ・<span class="t-green"><strong>収益の安さ（PER）</strong></span>——<span class="t-amber">みんなが見ていて、期待が剥げたから安い</span>。<strong>期待が正常化するのを待つ投資</strong>。五洋建設はこちら
+
+🧑‍💼**沼田**「<span class="t-red">前者は『発見されるか』に賭ける。後者は『戻るか』に賭ける</span>。<strong>どちらも当商会の守備範囲だが、うちは前者ばかり書いてきたので、後者を1枚も置かないのは片手落ちだと考えた</strong>」
+
+🦞**守田**「<span class="t-amber">大型を触る利点も、正直に言っておけ</span>」
+
+> 🪙 **大型だからこその、2つの実利**
+> ・<span class="t-green"><strong>降りられる</strong></span>——<span class="t-blue">売買代金43.9億円なら、個人のサイズは板に影響しない。東海染工では逆立ちしてもできないことだ</span>
+> ・<span class="t-green"><strong>期待が剥げたときの落差が大きい</strong></span>——<span class="t-amber">2,257円→1,367円で<strong>▲39%</strong>。小型株では、そもそもここまでの期待が乗らない</span>
+
+🧑‍💼**沼田**「<span class="t-red">誤解のないように書いておくが、これは『大型株もやります』という宣言ではない</span>。<strong>うちの中心は今後も資産バリューだ</strong>。<span class="t-blue">ただ、収益の安さが極まった一枚が出てきたときに、型を理由に見送るのは違うと判断した——それだけの話だ</span>」
+
+---
+
 ## 🦉 では何が安いのか｜下落の100%が「倍率」だった
 
 🦉**夜見**「<span class="t-green">ここがこの銘柄で最も重要な事実です</span>」
@@ -135,6 +166,33 @@ noteUrl: "https://numasoko-value.com/analysis/penta-ocean-1893.html"
 | 有利子負債 | 1,961億円 | <span class="t-blue">1,660億円へ削減</span> |
 
 🦉**夜見**「<span class="t-blue">28年度EPS147.4円がそのまま実現すると仮定すると、現在株価1,367円は<strong>28年度予想PER9.3倍</strong></span>。<span class="t-amber">売上年率3.5%成長という前提は、ゼネコンとしてはむしろ保守的な部類です</span>」
+
+---
+
+## 🌊 この1枚が、いくつのテーマに跨っているか
+
+🦫**堀田**「<span class="t-green">ここは強調しておきたい</span>。<strong>この会社が乗っているテーマの数は、1銘柄としては異常だ</strong>」
+
+| テーマ | 規模・時間軸 | 五洋の関わり方 |
+|---|---|---|
+| <strong>国土強靱化</strong> | <span class="t-green"><strong>2026〜2030年度で20兆円強</strong></span><br>26年度概算要求6.66兆円 | 港湾・海岸・河川の防災。<span class="t-blue">毎年一定額が降ってくる擬似ストック</span> |
+| <strong>防衛</strong> | 〜2030年 | <span class="t-amber">鹿児島・沖縄の港湾移設、基地強化</span>。社長が「需要は非常に強い」と明言 |
+| <strong>データセンター</strong> | 進行中 | 造成・基礎。<span class="t-blue">内需の一角として受注に反映済み</span> |
+| <strong>洋上風力</strong> | <span class="t-red">本格化は2029年度以降</span> | <span class="t-amber">5,000t吊HLV 1,200億円＋ケーブル敷設船310億円を建造中</span>（五洋負担約790億円） |
+| <strong>港湾・空港の維持更新</strong> | 定常 | 浚渫・埋立という<span class="t-green">本業そのもの</span> |
+
+🦫**堀田**「<span class="t-red">普通、1社でこれだけのテーマには乗れない</span>。<strong>乗れているのは、テーマを追いかけて事業を広げたからではない</strong>」
+
+🦫**堀田**「<span class="t-green">逆だ。<strong>テーマのほうが、海に集まってきた</strong></span>。<span class="t-blue">防災も、防衛も、洋上風力も、データセンターの用地も、行き着く先が『海と水際の土木』だった。そこを寡占していたから、勝手に複数のテーマが重なった</span>」
+
+🧑‍💼**沼田**「<span class="t-amber">ここが、いわゆるテーマ株との決定的な違いだ</span>。<strong>テーマ株は、テーマに合わせて会社が動く。この会社は、動かないまま複数のテーマが乗ってきた</strong>」
+
+🦞**守田**「<span class="t-red">ただし、数の多さを強みと数え上げるのは危険だ</span>。<strong>確定しているのは国土強靱化・防衛・データセンターまでで、洋上風力は未確定のオプションにすぎない</strong>」
+
+> 🏗️ **二階建てとして分けて読む**
+> ・<span class="t-green"><strong>1階（確定した内需）</strong></span>——国土強靱化20兆円＋防衛＋データセンター。<strong>受注残1兆2,701億円＝1.55年分がその証拠</strong>
+> ・<span class="t-amber"><strong>2階（未確定のオプション）</strong></span>——洋上風力。<span class="t-red">船は2028年2〜3月竣工だが、着床式の本格化は2029年度以降。それまでは償却と金利だけが出ていく</span>
+> ・<span class="t-blue"><strong>そして現在の株価は、1階だけでほぼ説明がつく水準にある</strong></span>——<span class="t-green">2階はほとんど値段に入っていない</span>
 
 ---
 
