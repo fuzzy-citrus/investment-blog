@@ -4,7 +4,7 @@ description: "2026年8月19日、日本株は広範に売られ、当商会が�
 cardDesc: "<span class='card-highlight'>「人の行く裏に道あり花の山」には、道幅という前提が抜けている。小型の割安株は常に裏道だが、細くて大きくは通れない。</span>板が厚いまま値段だけが裏道になる日——8月19日の急落で大型ニッチトップを9枚。デクセリアルズ・カーリット・五洋・ミネベアの4社は終値が30日レンジの底と重なった。まだ下げる可能性は普通にある。それでも試せるのは、損切りしても損益通算で2割が戻り、実質の損が8割に圧縮されるから。<span class='card-note'>サテライト枠限定・特定口座前提のダメ元トレードです。投資助言ではありません。</span>"
 pubDate: "2026-08-20T10:00:00+09:00"
 related: ["penta-ocean-1893", "value-investor-decision-unrealized-loss", "august-rights-2026", "good-stock-vs-good-company"]
-draft: true
+draft: false
 ---
 
 > 🦦 「割安発掘担当の河内です。<span class="t-amber">今日は、銘柄紹介ではありません</span>。<strong>実際に買った日の、実験記録です</strong>」
