@@ -21,6 +21,7 @@ export const contentThemes: ContentTheme[] = [
     owners: '🦦 河内（割安発掘） ／ 🦉 夜見（財務）',
     fill: '#E1F5EE', text: '#04342C', sub: '#0F6E56', border: '#9FE1CB',
     slugs: [
+      'toso-5956',
       'tokai-senko-3577',
       'nisshin-group-8881',
       'chuo-malleable-5607',
