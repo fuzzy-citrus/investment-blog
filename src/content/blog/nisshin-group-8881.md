@@ -20,8 +20,6 @@ noteUrl: "https://numasoko-value.com/analysis/nisshin-group-8881.html"
 
 > 🐊 「イベント担当の待伏です。<span class="t-green">今日は『不動産リッチ銘柄』として、勇んで有価証券報告書を開きました</span>。<strong>そして、しょんぼりして戻ってきました</strong>」
 
-🐊**待伏**「<span class="t-red">日神グループホールディングス（8881）が持っている土地、全部足して<strong>約6,147㎡</strong>でした</span>。<span class="t-amber">サッカーコート、1面に届きません</span>」
-
 🦉**夜見**「<span class="t-blue">待伏さん、落ち着いてください</span>。<strong>それは『割安でない』という意味ではまったくありません</strong>。<span class="t-green">この会社のリッチさは、別の場所にあります</span>」
 
 ---
