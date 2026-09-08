@@ -31,3 +31,6 @@ portfolio-holdings.xlsx
 
 # ダッシュボードの旧版（差し替え前の控えをローカルに置いてあるだけ。公開リポジトリには入れない）
 _archive/
+
+# Python のキャッシュ
+__pycache__/
