@@ -4,7 +4,7 @@ description: "沼底バリュー商会の保有状況アップデート第5弾�
 cardDesc: "<span class='card-highlight'>主要保有は含み益+726万・+8.9%（7/27時点）。牽引は資産バリューの中小型（北里+19%・NSSOL+19%・広済堂+57万）。</span>加えて先週末の日経-4,000円超の底で、普段買わないプライム大型を分散打診。<span class='card-note'>セリクラと価格帯別出来高で測る“急落買いの作法”。現況⑤・沼田×守田×野村。</span>"
 pubDate: "2026-07-28T10:00:00+09:00"
 draft: false
-related: ["holdings-status-04-okaya-tokai", "daiken-5900-activist-entry", "capital-management-survival", "nomura-margin-rate-1-69-alchemy"]
+related: ["holdings-status-04-okaya-tokai", "daiken-5900-activist-entry", "capital-management-survival", "nomura-margin-rate-1-69-alchemy", "kioxia-285a-crash-analysis"]
 ---
 
 > 🧑‍💼 「[保有状況アップデート](/blog/holdings-status-04-okaya-tokai/)の第5弾だ。例によって手の内を晒す。<span class="t-green">主要保有22銘柄の評価損益は、7月27日の大引けで+726万円・+8.9%</span>——おかげさまで、かなりプラスにできている。だが今日の本題は損益自慢ではない。<strong>“普段は買わないプライムの大型を、先週末の投げ売りの底で拾えた”——その作法を掘り下げる</strong>」

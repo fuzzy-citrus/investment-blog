@@ -15,7 +15,7 @@ stockCard:
   modifiedPBR: "0.57倍"
   category: "フェノール樹脂・半導体材料"
 noteUrl: "https://numasoko-value.com/analysis/gunei-chemical-4229.html"
-related: ["daiken-5900-activist-entry", "activist-front-running-01", "katakura-3001", "how-to-find-net-net-japan"]
+related: ["daiken-5900-activist-entry", "activist-front-running-01", "katakura-3001", "how-to-find-net-net-japan", "fujikura-kasei-4620"]
 ---
 
 > 🦦 「株価4,670円の会社が、1株あたり現金と有価証券だけで3,594円を抱えてるんですよ。<span class="t-green">株価の77%が“中身の現金”。事業にはたった1,076円しか払っていない</span>——しかもその事業が、半導体の“ある一分野”に食い込んだニッチトップ。これ、どういう値付けなんですか」

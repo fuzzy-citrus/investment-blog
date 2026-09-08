@@ -14,7 +14,7 @@ stockCard:
   modifiedPBR: "1.38倍"
   category: "原発バルブ駆動装置"
 noteUrl: "https://numasoko-value.com/analysis/nihon-gear-6356.html"
-related: ["low-payout-internal-compounding", "dividend-series-02-low-payout-opportunity", "good-stock-vs-good-company", "per-value-investing"]
+related: ["low-payout-internal-compounding", "dividend-series-02-low-payout-opportunity", "good-stock-vs-good-company", "per-value-investing", "shinko-kogyo-6458"]
 ---
 
 > 🐝 「配当利回り0.7%？　ふふ、これを"ショボい"と切り捨てる人は、この会社の正体を見抜けていません。これは<span class="t-green">『見えない複利マシン』</span>ですよ」

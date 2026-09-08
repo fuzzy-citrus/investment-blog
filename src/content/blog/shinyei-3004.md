@@ -14,7 +14,7 @@ stockCard:
   modifiedPBR: "0.75倍"
   delistProb: "センサー世界首位"
   category: "神戸の老舗専門商社"
-related: ["holdings-status-02-kitazato-shinyei", "okaya-kouki-7485", "tobu-network-9036", "value-concept"]
+related: ["holdings-status-02-kitazato-shinyei", "okaya-kouki-7485", "tobu-network-9036", "value-concept", "shinyei-3004-q1-recheck"]
 ---
 
 > 📈 **現況更新（2026-08-12）**：株価2,069円（紹介時比▲2.0%）。7/31の1Q決算日に<strong>▲7.46%</strong>、8/4に年初来安値2,013円をつけたが、その後5営業日で下げ止まり8/10は+1.42%と反発。最終赤字の正体は<strong>前年のMS&AD売却益の反動とコンデンサ撤退特損</strong>で、経常は+0.7%とほぼ横ばい。ただし検証の結果、本文の<strong>「来期EPS約486円」は誤りで会社予想は318.4円</strong>、<strong>「修正PBR0.71倍」も二重計上の疑い</strong>があり、訂正3件を続報にまとめた。<strong>ただし訂正したのは当方の計算であって会社の中身ではなく</strong>（318.4円は5/14に開示済みで市場は最初からこれを見ていた）、訂正後もPER6.5倍・PBR0.75倍・利回り5.32%・政策保有株が時価総額の93%と安いため、<strong>現況ランクはA−で据え置き</strong>（引き下げの引き金は2Qの下方修正）。買い増しは2Q決算後。詳細は[1Q決算後の再検証（続報）](/blog/shinyei-3004-q1-recheck/)へ。※本文の数値は紹介時（2026年5月）のものです。

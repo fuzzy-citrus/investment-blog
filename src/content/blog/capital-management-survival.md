@@ -3,7 +3,7 @@ title: "投資の資金管理とは？なぜ最重要なのか｜暴落で買い
 description: "バリューもグロースもテクニカルも、長く生き残った投資家が口を揃えて語る唯一の共通項——それが資金管理。「最も重要なのはリターンではなく生き残ること」。暴落時に本当に辛いのは含み損ではなく『安いと分かっても買えないこと』。守田退三が語る、未来の行動力を守る技術。"
 pubDate: "2026-06-13"
 cardDesc: "<span class='card-highlight'>「投資で最も避けるべきは、間違うことではない。正しいと思った時に動けないことだ」</span>全投資家に共通する最重要テーマ＝資金管理。<span class='card-note'>守田が主役の「投資家の意思決定論」シリーズ①。暴落で買える余力を残す技術。</span>"
-related: ["debt-credit-trading-strategy", "nisa-vs-margin-expected-return", "virtual-mortgage-strategy", "japan-stock-midterm-outlook-2026"]
+related: ["debt-credit-trading-strategy", "nisa-vs-margin-expected-return", "virtual-mortgage-strategy", "japan-stock-midterm-outlook-2026", "us-treasury-etf-hedge-2255-237a"]
 ---
 
 > 「投資で最も避けるべき事態は、間違うことではない。**正しいと思った時に、動けないこと**だ」

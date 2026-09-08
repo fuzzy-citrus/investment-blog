@@ -15,7 +15,7 @@ stockCard:
   modifiedPBR: "0.49倍"
   category: "プラント防爆照明トップ"
 noteUrl: "https://numasoko-value.com/analysis/hoshiwa-denki-6748.html"
-related: ["low-payout-internal-compounding", "gunei-chemical-4229", "daiken-5900-activist-entry", "katakura-3001"]
+related: ["low-payout-internal-compounding", "gunei-chemical-4229", "daiken-5900-activist-entry", "katakura-3001", "fenwal-6870"]
 ---
 
 > 🦦 「株価738円、PBR0.49倍。<span class="t-green">時価総額の45%は政策保有株で、事業の値段はEV/EBIT3.2倍</span>。しかも本業は、営業利益率20%の“ある照明”のニッチトップ——なのに、その高収益事業が、低PBRの陰にすっぽり隠れて見えていない。今日は、そういう“地味だけど底堅い”一枚を開けます」

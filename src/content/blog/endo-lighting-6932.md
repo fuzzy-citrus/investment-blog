@@ -15,7 +15,7 @@ stockCard:
   modifiedPBR: "1.00倍"
   category: "商業施設向け照明メーカー"
 noteUrl: "https://numasoko-value.com/analysis/endo-lighting-6932.html"
-related: ["hoshiwa-denki-6748", "daiken-5900-activist-entry", "gunei-chemical-4229", "activist-front-running-01"]
+related: ["hoshiwa-denki-6748", "daiken-5900-activist-entry", "gunei-chemical-4229", "activist-front-running-01", "lighting-sector-summary"]
 ---
 
 > 🦦 「[前回の星和電機](/blog/hoshiwa-denki-6748/)は“政策保有株の含み益が45%も詰まった、静かな資産バリュー”でした。今日の遠藤照明は——<span class="t-red">その真逆</span>。掘っても含み益はほぼ出てこない。<span class="t-blue">なのに、買える理由がちゃんとある</span>。同じ“照明の2枚看板”でも、買う理由がまるで違うんです」
