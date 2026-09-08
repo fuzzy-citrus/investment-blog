@@ -3,7 +3,7 @@ title: "銘柄紹介｜EMシステムズ（4820）— 調剤レセコンでシ�
 description: "調剤薬局向けレセコンで国内シェア42.8%＝4割超の首位、EMシステムズ（4820）。医療DX令和ビジョン2030×改正医療法（2030年末カルテ普及率100%を法定化）という『公的資金でDXが義務化される市場』の寡占受益株。月額サブスク＋保守中心の完全ストック型で解約されにくく、自己資本比率73.9%・実質無借金・ネットキャッシュ約64億の要塞財務。中計期間は配当性向100%方針で、FY27計画47円なら現値504円で利回り9.3%。ただし電子処方箋特需の剥落で直近Q1は営業益▲86%・中間配当も減額と『特需の谷』の真っ最中。国策は右肩上がりでなく階段状＝無料のオプションとして評価。評価B+。"
 pubDate: "2026-07-09T10:00:00+09:00"
 cardDesc: "<span class='card-highlight'>シェア42.8%の完全ストック型</span>。配当性向100%の高還元に、2030年カルテ普及率100%の法定化が追い風。"
-related: ["healthcare-selloff-opportunity", "saas-death-japan-it", "ryoyu-systems-4685", "nssol-2327"]
+related: ["healthcare-selloff-opportunity", "saas-death-japan-it", "ryoyu-systems-4685", "nssol-2327", "nifty-lifestyle-4262"]
 draft: false
 stockCard:
   rating: "B+"

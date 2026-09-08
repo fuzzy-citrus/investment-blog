@@ -1,5 +1,5 @@
 ---
-title: "銘柄紹介④｜京阪ホールディングス（9045）— 私鉄セクター最高の不動産含み益と整理容易性"
+title: "銘柄紹介｜京阪ホールディングス（9045）— 私鉄セクター最高の不動産含み益と整理容易性"
 description: "土地含み益5,000〜7,000億円（時価総額の1.4〜2.0倍）を大阪・京都の都心に集中保有。整理しやすい立地構成と小型時価総額がアクティビスト参入の必要条件を満たす。待てる配当2.9%付き。"
 cardDesc: "<span class='card-highlight'>土地含み益5,000〜7,000億円＝時価総額の1.4〜2.0倍</span>を大阪・京都の都心に集中保有。9月に優待乗車証の権利。"
 pubDate: "2026-05-22"
@@ -14,7 +14,7 @@ stockCard:
   modifiedPBR: "0.59倍"
   category: "関西私鉄・沿線不動産"
 noteUrl: "https://numasoko-value.com/analysis/keihan-hd-9045.html"
-related: ["holdings-status-03-kozosodo-tobu", "tobu-network-9036", "nihon-bs-hoso-9414", "prime-market-strategy"]
+related: ["holdings-status-03-kozosodo-tobu", "tobu-network-9036", "nihon-bs-hoso-9414", "prime-market-strategy", "toc-8841", "cigar-butt-special-2026"]
 ---
 
 > 📈 **現況更新（2026-07-14）**：株価3,238円（紹介時比+1.0%）。現況ランクは<strong>B据え置き</strong>で、300株（取得3,090円）をサブ枠として静かにホールド中。詳細は[紹介銘柄の現況③](/blog/holdings-status-03-kozosodo-tobu/)へ。※本文の数値は紹介時（2026-05-22）のものです。

@@ -1,6 +1,6 @@
 // コンテンツマップのテーマ定義（/map ページ用）
 // 新しい記事を追加したら、該当テーマの slugs に id を足すだけでOK。
-// どのテーマにも入っていない公開記事は /map 上で「未分類」として表示される。
+// どのテーマにも入っていない公開記事は /map 上で「その他」に自動で入る。
 
 export interface ContentTheme {
   id: string;
@@ -22,6 +22,15 @@ export const contentThemes: ContentTheme[] = [
     fill: '#E1F5EE', text: '#04342C', sub: '#0F6E56', border: '#9FE1CB',
     slugs: [
       'toso-5956',
+      'cigar-butt-special-2026',
+      'nanshin-7399',
+      'sanko-6964',
+      'kawasaki-setsubi-1777',
+      'doshisha-7483',
+      'daishin-chemical-4629',
+      'nankai-chemical-4040',
+      'nakayama-steel-5408',
+      'toc-8841',
       'tokai-senko-3577',
       'nisshin-group-8881',
       'chuo-malleable-5607',
@@ -93,6 +102,10 @@ export const contentThemes: ContentTheme[] = [
     owners: '🦞 守田（リスク） ／ 🧓 野村（レバレッジ）',
     fill: '#FAEEDA', text: '#412402', sub: '#854F0B', border: '#FAC775',
     slugs: [
+      'weekly-2026w36-midlarge-56buys',
+      'core-satellite-onkabu-design',
+      'crash-day-satellite-nichetop-2026aug',
+      'small-short-overvaluation-2026',
       'capital-management-survival',
       'value-investor-decision-unrealized-loss',
       'value-investor-decision-withdrawal',
@@ -144,6 +157,8 @@ export const contentThemes: ContentTheme[] = [
     owners: '🐝 花岡（高配当） ／ 🦩 優田（優待）',
     fill: '#FBEAF0', text: '#4B1528', sub: '#993556', border: '#F4C0D1',
     slugs: [
+      'august-rights-2026',
+      'ex-rights-overdrop-check-2026aug',
       'nifty-lifestyle-4262',
       'dividend-series-01-what-is-dividend',
       'dividend-series-02-low-payout-opportunity',
@@ -155,5 +170,14 @@ export const contentThemes: ContentTheme[] = [
       'toyo-tec-9686',
       'yamau-hd-5284',
     ],
+  },
+  {
+    // どのテーマにも入っていない公開記事は、/map 側でここへ自動的に流し込まれる。
+    // slugs を手で埋める必要はない（埋めれば固定表示も可能）。
+    id: 'other',
+    name: 'その他',
+    owners: '🦎 日向（見習い・仕分け中）',
+    fill: '#EEF0F2', text: '#22282E', sub: '#5A646E', border: '#CBD2D8',
+    slugs: [],
   },
 ];

@@ -3,7 +3,7 @@ title: "銘柄紹介｜タウンズ（197A）— 利回り5.8%の『28円以上�
 description: "感染症の抗原検査キット（POCT）で国内有力のタウンズ（197A）。独自のブラックライン技術（白金-金コロイド）で発熱外来の現場に選ばれ、ROE約40%・営業利益率30%前後の高収益。PER約8.9倍・配当利回り約5.8%で、中計に『2030年まで28円以上』と明文化した下方硬直の累進配当をもらいながら、感染症流行時の業績・株価上振れをオプションとして待てる設計。ただし割安の正体は、感染症減速（3Q単独の営業利益率10.8%）・中計初年度27.6%未達・CITICキャピタル約40%の売却進行中・スズケン単一卸依存という正当なディスカウント。PBR3.2倍で資産の下値保護はなく、主力にはしない準主力（3〜5%上限）。評価B+。"
 pubDate: "2026-07-16T12:00:00+09:00"
 cardDesc: "独自のブラックライン技術で発熱外来に定着し<span class='card-highlight'>ROE約40%・営業利益率30%前後</span>。累進配当5.8%が、待つ間の原資になる。"
-related: ["healthcare-selloff-opportunity", "em-systems-4820", "kitazato-368a", "dividend-series-01-what-is-dividend"]
+related: ["healthcare-selloff-opportunity", "em-systems-4820", "kitazato-368a", "dividend-series-01-what-is-dividend", "food-tax-cut-1percent-value-stocks"]
 draft: false
 stockCard:
   rating: "B+"

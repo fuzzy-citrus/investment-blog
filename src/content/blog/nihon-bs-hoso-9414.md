@@ -1,5 +1,5 @@
 ---
-title: "銘柄紹介⑤｜日本BS放送（9414）— PBR0.66倍×ビックカメラ61%保有×神田一等地含み益、実態BPS比▲49%割安のTOB候補"
+title: "銘柄紹介｜日本BS放送（9414）— PBR0.66倍×ビックカメラ61%保有×神田一等地含み益、実態BPS比▲49%割安のTOB候補"
 description: "実態BPS 1,800円に対し株価909円（▲49%割安）。神田駿河台の本社ビルに40〜100億円の含み益。ビックカメラが61.35%を保有する完全子会社化候補。東証ガバナンス改革の直接ターゲット。配当3.3%を受け取りながらTOBを待てる典型バリュー株。"
 cardDesc: "実態BPS1,800円に対し<span class='card-highlight'>株価909円＝▲49%</span>。神田駿河台の本社ビルに含み益40〜100億円、ビックカメラが61.35%保有。"
 pubDate: "2026-05-31"
@@ -13,7 +13,7 @@ stockCard:
   downside: "▲12%"
   modifiedPBR: "0.51倍"
   category: "BS放送局"
-related: ["tv-tokyo-9413", "kozosodo-hd-7868", "value-tob-strategy-2026", "keihan-hd-9045"]
+related: ["tv-tokyo-9413", "kozosodo-hd-7868", "value-tob-strategy-2026", "keihan-hd-9045", "broadcasting-selloff-opportunity"]
 ---
 
 > 🐊 「時価総額162億円で、神田駿河台の一等地を簿価40億で持ってる。ビックカメラが61%握ってて、完全子会社化のコストも小さい。これは待ち伏せ案件だ」
