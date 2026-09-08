@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>南海化学（4040）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 20px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #e8a8a8}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.tw{overflow-x:auto}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc.c3{grid-template-columns:repeat(3,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg-w{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #e8a8a8;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h3{font-size:11px;font-weight:600;margin-bottom:10px}
+.stars{font:600 11px/1 var(--mono);letter-spacing:.08em}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.c3{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 4040 · 2026.09.02 作成</p>
+      <h1 class="ht">南海化学 <em>（4040・東証スタンダード）</em><br>統合投資分析レポート</h1>
+      <p class="hs">現在株価 3,930円 ／ EV/EBITDA 2.6倍・PBR 0.68倍・配当性向10.4% ／ 実質PBR（土地含み益調整後・中立）0.61倍<br>3年後 確率加重期待株価 6,380円（+62%）／ 「資産の実証」× 「還元余地」× 「ニッチトップ」型のバリュー案件</p>
+    </div>
+    <div class="vb">
+      <div class="vs">A−</div>
+      <div class="vt">
+        <strong>投資妙味あり — ただし自助努力型</strong><br>
+        EV/EBITDA 2.6倍は明確な割安。<br>
+        富士アミド65億円売却で資産価値は実証済み。<br>
+        弱点はカタリストの時間軸とMBO蓋然性の低さ。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">3,930円</div><div class="ks">時価総額 91.6億円／自己株控除 78.5億円</div></div>
+    <div class="kv"><div class="kl">PER（会社予想）</div><div class="kn gn">6.3倍</div><div class="ks">実力ベースでは4.7〜5.3倍</div></div>
+    <div class="kv"><div class="kl">PBR（BPS 5,746円）</div><div class="kn bl">0.68倍</div><div class="ks">土地含み益調整後 0.61倍</div></div>
+    <div class="kv"><div class="kl">EV / EBITDA</div><div class="kn gn">2.6倍</div><div class="ks">EV 92.9億円／EBITDA 36億円</div></div>
+    <div class="kv"><div class="kl">配当性向</div><div class="kn rd">10.4%</div><div class="ks">65円・利回り1.65%（増配余地大）</div></div>
+    <div class="kv"><div class="kl">3年後 期待株価</div><div class="kn am">6,380円</div><div class="ks">確率加重・現在比 +62%</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>割安性</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>含み益・NAV</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>事業性・ニッチ</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>決算・中計</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--or2)"></span>3年シナリオ</button>
+</nav>
+
+<main class="bd">
+
+<!-- P1 -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、南海化学なのか</h2><span class="sb bg-gn">6つの論点</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 最重要</div>
+      <span class="ci">🏭</span>
+      <div class="ct">資産価値は「推定」でなく「実証済み」</div>
+      <div class="cb gn">65億円</div>
+      <div class="cu">富士アミドケミカル（東京都北区浮間）遊休地の売却額</div>
+      <div class="cp">2025年11月28日引渡し。<strong>売却額65億円は現在の時価総額91.6億円の71%に相当</strong>し、連結の土地簿価は11.3億円→4.7億円へ。1件の遊休地売却で自己資本比率が37.4%→56.8%に跳ねた。<strong>「昭和期取得の土地に巨大な含み益がある」という仮説が、この会社では既に現金で証明されている。</strong></div>
+      <div class="tgs"><span class="tg tg-gn">簿価の約10倍で売却</span><span class="tg tg-or">BSを一変させた</span></div>
+    </div>
+
+    <div class="ca cc-am">
+      <div class="cn">Thesis 02 · 最重要</div>
+      <span class="ci">📉</span>
+      <div class="ct">EV/EBITDA 2.6倍という水準</div>
+      <div class="cb am">2.6倍</div>
+      <div class="cu">EV 92.9億円 ÷ EBITDA 36.0億円（2027/3期計画）</div>
+      <div class="cp">自己株控除後時価総額78.5億円＋ネット有利子負債14.4億円＝EV 92.9億円。<strong>営業利益23億円・減価償却13億円を稼ぐ事業体が、実質3年弱のEBITDAで買える値段。</strong>国内中小型化学の一般的レンジ（5〜7倍）の半値以下。</div>
+      <div class="tgs"><span class="tg tg-am">PER 6.3倍</span><span class="tg tg-gn">PBR 0.68倍</span></div>
+    </div>
+
+    <div class="ca cc-or">
+      <div class="cn">Thesis 03 · カタリスト</div>
+      <span class="ci">💰</span>
+      <div class="ct">配当性向10.4%という異常な低さ</div>
+      <div class="cb or">10.4%</div>
+      <div class="cu">2027/3期 会社予想（年65円）</div>
+      <div class="cp">自己資本比率58.9%・ネット有利子負債14億円まで財務が改善した企業の配当性向が10%台。会社は株主質問への回答で<strong>「拡大した原資をもとに、配当水準の向上をはじめとした還元拡充を検討」</strong>と明言。性向30%なら187円（利回り4.8%）、実力EPS 800円ベースなら240円（同6.1%）。</div>
+      <div class="tgs"><span class="tg tg-or">増配余地 ×3倍</span><span class="tg tg-bl">会社が明言</span></div>
+    </div>
+
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 04 · 需給</div>
+      <span class="ci" style="font-size:22px">🔁</span>
+      <div class="ct" style="color:var(--ink)">自己株式が発行済の14.3%</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">332,159株</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">簿価11.7億円・時価13.1億円（2026/6末）</div>
+      <div class="cp" style="color:var(--ink2)">2026年2月に<strong>上場後初の自社株買い</strong>（40,700株・1.5億円）を実施済み。既に14.3%を金庫株で抱えており、消却されれば資本政策の明確な転換シグナルになる。発行済2,330,330株という極小の資本構成も需給面では効きやすい。</div>
+    </div>
+
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 05 · 事業質</div>
+      <span class="ci" style="font-size:22px">🥇</span>
+      <div class="ct" style="color:var(--ink)">「国内2社」のニッチトップを3つ持つ</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--pu);margin:6px 0 2px">国内2社 ×3</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">高度さらし粉／クロルピクリン／廃硫酸リサイクル</div>
+      <div class="cp" style="color:var(--ink2)">高度さらし粉は国内生産シェア約60%・<strong>医薬グレード製造は当社のみ</strong>。クロルピクリン（土壌くん蒸剤）も国内製造2社。廃硫酸リサイクルも対応可能なのは2社のみ。<strong>いずれも許認可・登録が参入障壁になる寡占ニッチ。</strong></div>
+    </div>
+
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Thesis 06 · 業績</div>
+      <span class="ci" style="font-size:22px">📈</span>
+      <div class="ct" style="color:var(--ink)">会社予想が明らかに保守的</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">進捗 36.1%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">1Q純利益4.55億円 ÷ 通期予想12.6億円</div>
+      <div class="cp" style="color:var(--ink2)">1Q経常利益は+94.0%、純利益は+118.9%。<strong>通期予想は経常23.4億円に対し純利益12.6億円＝転換率54%と不自然に低い</strong>（1Q実績の転換率は71%）。実力純利益15〜17億円なら<strong>実力PERは4.7〜5.3倍</strong>まで下がる。</div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      南海化学は、<strong style="color:var(--or2)">「隠れ資産の存在を1件65億円の売却で自ら証明した」直後に、EV/EBITDA 2.6倍・配当性向10%で放置されている企業。</strong>投資妙味の本体は土地含み益そのものより、<strong style="color:var(--or2)">還元余地とニッチトップ事業の収益力が株価にまったく織り込まれていないこと</strong>にある。カタリストはTOBのような外圧ではなく、増配・自社株買い・次期中計という自助努力型であり、時間軸は読みにくい。
+    </div>
+  </div>
+</div>
+
+<!-- P2 -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">バリュー投資の観点からの割安性</h2><span class="sb bg-am">EV/EBITDA 2.6倍</span></div>
+
+  <div class="inf">📌 <strong>重要な前提：自己株式13〜14%の扱い。</strong>発行済2,330,330株のうち332,159株（14.3%）は金庫株。ポータル表示の時価総額91.6億円は自己株を含む。買収価値・EV計算では自己株を控除した1,998,171株＝<strong>実質時価総額78.5億円</strong>で見るのが正しく、割安度はさらに一段深くなる。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">EV / EBITDA</div><div class="mv gn">2.6倍</div><div class="ms">中小型化学の目安5〜7倍の半値以下</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">PER（会社予想）</div><div class="mv am">6.3倍</div><div class="ms">実力ベース 4.7〜5.3倍</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">PBR（実績BPS）</div><div class="mv bl">0.68倍</div><div class="ms">含み益調整後（中立）0.61倍</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">PSR</div><div class="mv or">0.36倍</div><div class="ms">売上217億円に対し時価78.5億円</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">バリュエーション計算の内訳（2026年6月末BS・株価3,930円）</div>
+      <table class="t">
+        <tbody>
+          <tr><td>発行済株式数</td><td class="r mn">2,330,330株</td></tr>
+          <tr><td>自己株式数</td><td class="r mn hrd">△332,159株（14.3%）</td></tr>
+          <tr class="sm"><td>実質株式数</td><td class="r mn">1,998,171株</td></tr>
+          <tr><td>時価総額（自己株控除）</td><td class="r mn">7,853百万円</td></tr>
+          <tr><td>＋ 有利子負債（借入金・社債）</td><td class="r mn">3,384百万円</td></tr>
+          <tr><td>△ 現金及び預金</td><td class="r mn hgn">△1,948百万円</td></tr>
+          <tr class="hl"><td><strong>EV（企業価値）</strong></td><td class="r mn hgn"><strong>9,289百万円</strong></td></tr>
+          <tr><td>2027/3期 営業利益（会社計画）</td><td class="r mn">2,300百万円</td></tr>
+          <tr><td>2027/3期 減価償却費（会社計画）</td><td class="r mn">1,300百万円</td></tr>
+          <tr class="sm"><td>EBITDA</td><td class="r mn">3,600百万円</td></tr>
+          <tr class="hl"><td><strong>EV / EBITDA</strong></td><td class="r mn hgn"><strong>2.58倍</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">※発行済ベース（自己株を控除しない）で計算しても EV/EBITDA 2.94倍。どちらで見ても水準は変わらない。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--gn)">「実力PER」の考え方 ── 会社予想の歪み</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>項目</th><th class="r">会社予想</th><th class="r">1Q実績年率</th></tr></thead>
+          <tbody>
+            <tr><td>経常利益</td><td class="r mn">2,340</td><td class="r mn">2,568</td></tr>
+            <tr><td>純利益</td><td class="r mn hrd">1,260</td><td class="r mn hgn">1,820</td></tr>
+            <tr><td>経常→純利益 転換率</td><td class="r mn hrd">53.8%</td><td class="r mn hgn">70.9%</td></tr>
+            <tr><td>EPS</td><td class="r mn">624円</td><td class="r mn">911円</td></tr>
+            <tr class="sm"><td>PER</td><td class="r mn">6.3倍</td><td class="r mn hgn">4.3倍</td></tr>
+          </tbody>
+        </table>
+        <p class="note">前期の実効税率は31.4%。会社予想の46%という控除率は、土壌対策関連の特別損失計上を織り込んだ保守的な置きと推測される。仮に純利益15〜17億円で着地すれば実力PERは4.7〜5.3倍。<strong>1Qの純利益進捗36.1%はこの見立てを支持する。</strong></p>
+      </div>
+      <div class="c cf-am">
+        <div class="h3" style="color:var(--am)">株主還元の伸びしろ</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>配当性向</th><th class="r">1株配当</th><th class="r">利回り</th></tr></thead>
+          <tbody>
+            <tr><td>10.4%（現行予想）</td><td class="r mn">65円</td><td class="r mn">1.65%</td></tr>
+            <tr><td>20%</td><td class="r mn">125円</td><td class="r mn ham">3.18%</td></tr>
+            <tr class="hl"><td>30%</td><td class="r mn">187円</td><td class="r mn hgn">4.76%</td></tr>
+            <tr><td>実力EPS800円 × 30%</td><td class="r mn">240円</td><td class="r mn hgn">6.11%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h3">キャッシュ・フロー面の評価 ── ここは手放しで褒められない</div>
+    <div class="g3">
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2);padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">① 営業CFは不安定</strong><br>2026/3期の営業CFは△2.59億円。前受金の振替と法人税支払い増が主因の一過性だが、2025/3期も＋1.81億円と薄い。営業利益17億円の会社としてキャッシュ創出は見た目ほど強くない。</div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2);padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--am)">② 設備投資が重い</strong><br>中計3年で総額100億円、2027/3期は30.6億円。減価償却13億円の2.4倍。<strong>成長投資である一方、当面フリーCFは出にくく、増配・自社株買いの原資は土地売却代金の残余に依存する。</strong></div>
+      <div style="font-size:12px;line-height:1.85;color:var(--ink2);padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--gn)">③ ただし財務は激変</strong><br>ネット有利子負債は2025/3期末39.4億円→2026/3期末16.4億円→2026/6期末14.4億円。自己資本比率37.4%→58.9%。<strong>借入余力が復活しており、投資と還元を両立できる状態に戻った。</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- P3 -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">含み益の精査 ── 土地・有価証券・現金</h2><span class="sb bg-or">実証データからの逆算</span></div>
+
+  <div class="ok">✅ <strong>この会社の含み益分析には「実際に売れた値段」という他社にはない検証データがある。</strong>2025年11月、連結子会社 富士アミドケミカル（東京都北区浮間・2023年3月に廃業した唯一の関東拠点）の跡地を<strong>65億円</strong>で売却。同時に土壌対策・解体等の「売却対応費用」として<strong>約33億円</strong>が発生した。この実績値が、残存土地の評価にそのまま使える係数になる。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c cl-or">
+      <div class="h3" style="color:var(--or)">検証① 富士アミド案件の分解（2025年11月28日引渡し）</div>
+      <table class="t">
+        <tbody>
+          <tr><td>売却額</td><td class="r mn hgn"><strong>6,500百万円</strong></td></tr>
+          <tr><td>△ 土壌対策費用・解体費等（繰延計上分）</td><td class="r mn hrd">△約3,300百万円</td></tr>
+          <tr><td>△ 土地簿価（推定）</td><td class="r mn">△約660百万円</td></tr>
+          <tr><td>固定資産売却益（連結PL計上額）</td><td class="r mn ham">2,519百万円</td></tr>
+          <tr><td>△ 税金等</td><td class="r mn hrd">△約1,700百万円</td></tr>
+          <tr class="hl"><td><strong>会社説明の「実質手取り益」</strong></td><td class="r mn hgn"><strong>約1,200〜1,665百万円</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>導かれる係数：①土地は簿価の約10倍で売れた ②売却額の約51%が土壌対策・解体費で消える ③残りに約30%課税。</strong>化学工場跡地の含み益を額面で数えてはいけない、という重要な実証。</p>
+    </div>
+    <div class="c cl-bl">
+      <div class="h3" style="color:var(--bl)">検証② 公示地価からの面積逆算（クロスチェック）</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">数値</th></tr></thead>
+        <tbody>
+          <tr><td>東京都北区浮間 公示地価（2026年）</td><td class="r mn">169.0万円/坪＝51.1万円/㎡</td></tr>
+          <tr><td>売却時（2025年）推定水準</td><td class="r mn">約48万円/㎡</td></tr>
+          <tr><td>大規模工場跡地の実勢（公示の70%想定）</td><td class="r mn">約34万円/㎡</td></tr>
+          <tr class="sm"><td>逆算面積レンジ</td><td class="r mn hbl">約13,500〜19,100㎡</td></tr>
+        </tbody>
+      </table>
+      <p class="note">1.3〜1.9haの旧化学工場跡地という規模感は、廃業拠点として整合的。公示地価ベースの推計が実売価格をよく説明できることが確認できるため、同じ手法を残存3工場に適用する。</p>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">残存土地の所在地・取得時期・公示地価（2026年1月1日時点／国土交通省 地価公示）</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>事業所</th><th>所在地</th><th class="r">操業開始</th><th class="r">町域 公示地価</th><th class="r">工業地 実勢想定</th><th>性格</th></tr></thead>
+      <tbody>
+        <tr><td><strong>和歌山工場</strong></td><td>和歌山市小雑賀1-1-38</td><td class="r mn">1918年</td><td class="r mn ham">16.56万円/坪<br>（5.01万円/㎡）</td><td class="r mn">2.5〜3.5万円/㎡</td><td style="font-size:11px">電解（苛性ソーダ・塩素）のマザー工場。周辺に花王・日本製鉄等の顧客が集積</td></tr>
+        <tr><td><strong>青岸工場</strong></td><td>和歌山市湊1342</td><td class="r mn">1910年〜</td><td class="r mn ham">14.12万円/坪<br>（4.27万円/㎡）</td><td class="r mn">2.0〜2.8万円/㎡</td><td style="font-size:11px">硫酸・環境リサイクル・水処理剤。臨海工業地</td></tr>
+        <tr><td><strong>土佐工場</strong></td><td>高知市桟橋通4-10-1</td><td class="r mn">1959年</td><td class="r mn ham">周辺 23.0〜27.7万円/坪<br>（6.96〜8.39万円/㎡）</td><td class="r mn">3.0〜4.5万円/㎡</td><td style="font-size:11px">クロルピクリン・高度さらし粉・脱塩。港湾部</td></tr>
+        <tr class="sm"><td colspan="3">連結 土地簿価（2026年6月末）</td><td class="r mn hrd" colspan="3"><strong>410百万円</strong>（2026年3月末 472百万円／2025年9月末 1,131百万円）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">土佐工場の桟橋通は公示地点の町域一覧に単独計上がないため、隣接する若草町（23.01万円/坪）・塩屋崎町（27.74万円/坪）・竹島町（23.17万円/坪）から推定。<strong>本社（大阪市西区南堀江「四ツ橋スタービル」）・東京支店は賃借と見られ、土地保有はない。</strong>中国子会社（如皋南海水処理剤）は土地使用権であり日本の含み益概念とは異なる。</p>
+  </div>
+
+  <div class="warn">⚠️ <strong>最大の不確実性は「面積」。</strong>有価証券報告書の「主要な設備の状況」に記載される各工場の土地面積は本レポート作成時点で取得できなかったため、以下は<strong>設備規模・従業員263名・有形固定資産77.8億円という制約条件から置いた推定値</strong>である。ここが上下すれば含み益の絶対額は大きく動く。数値は幅で捉えるべきもので、点推定として扱ってはならない。</div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">土地含み益の3ケース推計（面積は推定値）</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>ケース</th><th class="r">推定総面積</th><th class="r">土地時価</th><th class="r">△簿価</th><th class="r">含み益（グロス）</th><th class="r">△土壌対策・解体費</th><th class="r">正味含み益</th><th class="r">税引後</th><th class="r">1株換算</th></tr></thead>
+      <tbody>
+        <tr><td>保守</td><td class="r mn">9.5万㎡</td><td class="r mn">23.2億円</td><td class="r mn">△4.1億</td><td class="r mn">19.1億円</td><td class="r mn hrd">△11.6億（時価の50%）</td><td class="r mn">7.5億円</td><td class="r mn ham">5.3億円</td><td class="r mn ham"><strong>264円</strong></td></tr>
+        <tr class="hl"><td><strong>中立（推奨）</strong></td><td class="r mn">13.0万㎡</td><td class="r mn">39.0億円</td><td class="r mn">△4.1億</td><td class="r mn">34.9億円</td><td class="r mn hrd">△15.6億（時価の40%）</td><td class="r mn">19.3億円</td><td class="r mn hgn">13.5億円</td><td class="r mn hgn"><strong>676円</strong></td></tr>
+        <tr><td>強気</td><td class="r mn">18.0万㎡</td><td class="r mn">62.8億円</td><td class="r mn">△4.1億</td><td class="r mn">58.7億円</td><td class="r mn hrd">△15.7億（時価の25%）</td><td class="r mn">43.0億円</td><td class="r mn hor">30.1億円</td><td class="r mn hor"><strong>1,506円</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">土壌対策費の控除率は富士アミド実績（売却額の約51%）を上限の目安とし、稼働継続前提では全面浄化が不要である点を織り込んで保守50%／中立40%／強気25%を適用。税率30%。<strong>「稼働中の工場用地は事業を畳まない限り換金できない」ため、この含み益は解散価値としての意味に留まり、キャッシュ化の蓋然性は低い。</strong></p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-am">
+      <div class="h3" style="color:var(--am)">有価証券の含み益 ── ほぼゼロと結論</div>
+      <table class="t" style="font-size:11.5px">
+        <tbody>
+          <tr><td>投資有価証券（2026/3末）</td><td class="r mn">520百万円</td></tr>
+          <tr><td>その他有価証券評価差額金</td><td class="r mn">133百万円（税引後）</td></tr>
+          <tr><td>持分法適用会社への投資額</td><td class="r mn">263百万円</td></tr>
+          <tr><td>長期貸付金</td><td class="r mn">217百万円</td></tr>
+          <tr><td>退職給付に係る資産（積立超過）</td><td class="r mn hgn">494百万円</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>上場有価証券は既に時価評価されBS・BPSに反映済みのため、追加の隠れ含み益は存在しない。</strong>政策保有株を全額売却しても5.2億円＝1株260円で、株価インパクトは限定的。<strong>「有価証券の含み益」は本件の投資判断材料にならない</strong>というのが精査の結論。強いて言えば退職給付の積立超過4.9億円（1株247円）が地味なプラス。</p>
+    </div>
+    <div class="c cl-bl">
+      <div class="h3" style="color:var(--bl)">現金同等物 ── ネットキャッシュ企業ではない</div>
+      <table class="t" style="font-size:11.5px">
+        <thead><tr><th>項目</th><th class="r">金額</th><th class="r">1株換算</th></tr></thead>
+        <tbody>
+          <tr><td>現金及び預金（2026/6末）</td><td class="r mn">1,948百万円</td><td class="r mn">975円</td></tr>
+          <tr><td>有利子負債（借入金・社債）</td><td class="r mn hrd">3,384百万円</td><td class="r mn hrd">1,693円</td></tr>
+          <tr class="sm"><td>ネット有利子負債</td><td class="r mn">1,436百万円</td><td class="r mn">719円</td></tr>
+          <tr><td>（参考）2025/3末 ネット有利子負債</td><td class="r mn">3,937百万円</td><td class="r mn">1,970円</td></tr>
+        </tbody>
+      </table>
+      <p class="note">現金は株価の24.8%相当を持つが、有利子負債がそれを上回るため<strong>ネットキャッシュ銘柄ではない</strong>。ただし1年で純有利子負債を39.4億円→14.4億円へ圧縮した改善速度は評価に値する。<strong>「現金で割安」ではなく「稼ぐ力に対して安い」タイプの銘柄</strong>と整理すべき。</p>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h3">修正NAV（含み益調整後）と実質PBR</div>
+    <table class="t">
+      <thead><tr><th>ケース</th><th class="r">自己資本</th><th class="r">＋土地含み益（税引後）</th><th class="r">修正純資産</th><th class="r">修正BPS</th><th class="r">実質PBR</th><th class="r">NAV比 現株価</th></tr></thead>
+      <tbody>
+        <tr><td>保守</td><td class="r mn">11,482百万</td><td class="r mn">＋530百万</td><td class="r mn">12,012百万</td><td class="r mn ham">6,010円</td><td class="r mn ham">0.65倍</td><td class="r mn">65%</td></tr>
+        <tr class="hl"><td><strong>中立（推奨）</strong></td><td class="r mn">11,482百万</td><td class="r mn">＋1,350百万</td><td class="r mn">12,832百万</td><td class="r mn hgn"><strong>6,422円</strong></td><td class="r mn hgn"><strong>0.61倍</strong></td><td class="r mn hgn"><strong>61%</strong></td></tr>
+        <tr><td>強気</td><td class="r mn">11,482百万</td><td class="r mn">＋3,010百万</td><td class="r mn">14,492百万</td><td class="r mn hor">7,253円</td><td class="r mn hor">0.54倍</td><td class="r mn">54%</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><strong>結論：土地の含み益はたしかに存在するが、修正PBRを0.68倍→0.61倍にする程度のインパクトであり、これ単独で株価が2倍になる類の材料ではない。</strong>広済堂HDのような「NAVが株価の2倍」型ではなく、<strong>本件の割安性の主戦場はEV/EBITDA 2.6倍という収益力側にある。</strong>土地は「下値を厚くする保険」として評価するのが正しい距離感。</p>
+  </div>
+</div>
+
+<!-- P4 -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性・ニッチトップ性・ストック性</h2><span class="sb bg-bl">国内2社の寡占を3つ</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">高度さらし粉 国内シェア</div><div class="mv gn">約60%</div><div class="ms">国内製造2社／医薬グレードは当社のみ</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">クロルピクリン</div><div class="mv am">国内2社</div><div class="ms">土壌くん蒸剤・農薬登録が障壁</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">廃硫酸リサイクル</div><div class="mv or">国内2社</div><div class="ms">1950年代から先駆的に実施</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">廃硫酸リサイクル率</div><div class="mv bl">4.1%</div><div class="ms">国内排出170万t／処理7万t＝開拓余地25倍</div></div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">セグメント別の姿（2027年3月期 会社計画ベース）とストック性評価</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>事業</th><th class="r">売上計画</th><th>主要製品</th><th>競争構造</th><th class="r">ストック性</th><th>評価根拠</th></tr></thead>
+      <tbody>
+        <tr><td><strong>基礎化学品</strong></td><td class="r mn">114.6億円</td><td style="font-size:11px">苛性ソーダ・塩素・塩酸・硫酸</td><td style="font-size:11px">大手（AGC・東ソー・トクヤマ）は100万t規模。当社は地場立脚</td><td class="r"><span class="stars ham">★★★☆☆</span></td><td style="font-size:11px">和歌山工場周辺に花王・日本製鉄・エア・ウォーター等が集積。物流費で優位だが市況・数量変動あり</td></tr>
+        <tr class="hl"><td><strong>機能化学品</strong></td><td class="r mn">12.7億円</td><td style="font-size:11px">高度さらし粉・次亜塩素酸ソーダ・グルコサミン・酢酸ナトリウム</td><td style="font-size:11px">高度さらし粉は国内2社（旧3社）</td><td class="r"><span class="stars hgn">★★★★☆</span></td><td style="font-size:11px">プール・上水・温泉の殺菌は毎年必ず消費される代替不能需要。医薬グレードは当社独占</td></tr>
+        <tr><td><strong>アグリ</strong></td><td class="r mn">24.5億円</td><td style="font-size:11px">クロルピクリン製剤</td><td style="font-size:11px">国内製造2社のみ</td><td class="r"><span class="stars hgn">★★★★☆</span></td><td style="font-size:11px">連作障害対策で毎作使用。農薬登録が実質的な参入障壁。ただし作付面積減は構造的逆風</td></tr>
+        <tr class="hl"><td><strong>環境リサイクル</strong></td><td class="r mn">19.1億円</td><td style="font-size:11px">廃硫酸リサイクル・脱塩（セメント原料の塩素除去）</td><td style="font-size:11px">廃硫酸処理可能なのは国内2社</td><td class="r"><span class="stars hgn">★★★★★</span></td><td style="font-size:11px"><strong>排出者は処理を止められず、委託先も選べない。</strong>処理委託は事実上のサブスク。市場開拓余地25倍</td></tr>
+        <tr><td><strong>各種塩</strong></td><td class="r mn">46.3億円</td><td style="font-size:11px">路面凍結防止剤・梅用塩・食品用塩</td><td style="font-size:11px">エヌエムソルト（連結子会社）</td><td class="r"><span class="stars hrd">★★☆☆☆</span></td><td style="font-size:11px"><strong>天候依存が最大の弱点。</strong>2026/3期は暖冬で数量△15.8%。上期はセグメント損失も</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">化学品事業のセグメント利益率は2026/3期実績14.6%→2027/3期計画17.0%。各種塩は7.5%→7.8%。<strong>利益の実質は化学品事業（セグメント利益24.7億円／全体の89%）で作られており、塩事業は売上の割に利益貢献が薄い。</strong></p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c cl-gn">
+      <div class="h3" style="color:var(--gn)">成長ドライバー ── 環境リサイクルが本命</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>市場の絶対量：</strong>国内の廃硫酸排出は年170万トン。うちリサイクルされているのは約7万トン（4.1%）。<strong>循環経済の要請が強まるほど、処理できる2社に需要が集中する構造。</strong></div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>半導体国産化：</strong>半導体洗浄工程は硫酸を大量使用。国内新設ファブの立ち上がりに伴い廃硫酸排出量が増加する。<strong>「AI・半導体投資 → 廃酸処理」という間接的な成長連鎖。</strong></div></div>
+        <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>脱塩事業：</strong>2023年10月に土佐工場で開始。セメント原料から塩素を除去する。拡販済みだが増設判断には時間を要すると会社は説明。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>研究段階：</strong>廃硫黄リサイクル（2027〜2028年度に環境アセス）、全固体電池の硫化物系電解質リサイクル、リン回収。<strong>塩素・水素・硫黄という3元素を握るポジションが将来の選択肢を生む。</strong></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c cl-bl" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--bl)">「地場立脚」という差別化 ── 実は堀になっている</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">電解製品（苛性ソーダ・塩素）は<strong>重量あたり単価が低く、輸送費が競争力を決める商品</strong>。大手は100万トン規模で全国供給するが、その分だけ物流コストを負う。<br><br>南海化学は和歌山工場の周辺に花王・日本製鉄・エア・ウォーターといった大口需要家が集積する立地を選び、<strong>「近いから安い」という構造的優位</strong>を持つ。規模で勝てない代わりに、その商圏では誰も価格で勝てない。<br><br>2026/3期・2027/3期の増益要因の主因が<strong>「販売価格の是正」（+10.2億円）</strong>であることも、この価格決定力の裏付けになっている。</div>
+      </div>
+      <div class="c cf-gn">
+        <div class="h3" style="color:var(--gn)">ニッチトップ性の質を採点する</div>
+        <div class="bg-w"><div class="br2"><span>参入障壁（許認可・登録・設備）</span><span class="mn hgn">A</span></div><div class="bt"><div class="bf" style="width:88%;background:var(--gn2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>需要の反復性（ストック性）</span><span class="mn hgn">A−</span></div><div class="bt"><div class="bf" style="width:80%;background:var(--gn2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>価格決定力</span><span class="mn ham">B+</span></div><div class="bt"><div class="bf" style="width:70%;background:var(--am2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>市場成長性</span><span class="mn ham">B</span></div><div class="bt"><div class="bf" style="width:60%;background:var(--am2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>市場規模の大きさ（伸びしろの絶対額）</span><span class="mn hrd">C+</span></div><div class="bt"><div class="bf" style="width:42%;background:var(--rd)"></div></div></div>
+        <p class="note"><strong>「小さな市場で圧倒的」という典型的ニッチトップ。</strong>裏返せば、勝っても市場が小さいため爆発的な成長は望みにくい。バリュー株としては十分だがグロース株ではない、という整理。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P5 -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">決算・財務・中期経営計画</h2><span class="sb bg-pu">自己資本比率 37.4%→58.9%</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">2027/3期 売上計画</div><div class="mv am">217.0億円</div><div class="ms">前期比 +3.0%</div></div>
+    <div class="c mc"><div class="ml">2027/3期 営業利益計画</div><div class="mv gn">23.0億円</div><div class="ms">+35.3%・過去最高益更新</div></div>
+    <div class="c mc"><div class="ml">1Q 経常利益</div><div class="mv gn">6.42億円</div><div class="ms">前年同期比 +94.0%</div></div>
+    <div class="c mc"><div class="ml">1Q 純利益 進捗率</div><div class="mv or">36.1%</div><div class="ms">通期予想12.6億円に対し4.55億円</div></div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">業績推移（百万円）</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">配当</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>2022/3</td><td class="r mn">17,434</td><td class="r mn">739</td><td class="r mn">716</td><td class="r mn">462</td><td class="r mn">360円</td><td class="r mn">—</td><td style="font-size:11px">上場前</td></tr>
+        <tr><td>2023/3</td><td class="r mn">19,601</td><td class="r mn">796</td><td class="r mn">886</td><td class="r mn">504</td><td class="r mn">392円</td><td class="r mn">15円</td><td style="font-size:11px">上場前（2023年4月 東証スタンダード上場）</td></tr>
+        <tr><td>2024/3</td><td class="r mn">19,987</td><td class="r mn">1,564</td><td class="r mn">1,780</td><td class="r mn">1,158</td><td class="r mn">587円</td><td class="r mn">50円</td><td style="font-size:11px">中間配当を開始</td></tr>
+        <tr><td>2025/3</td><td class="r mn">20,900</td><td class="r mn">1,306</td><td class="r mn">1,456</td><td class="r mn">1,015</td><td class="r mn">506円</td><td class="r mn">55円</td><td style="font-size:11px">増収減益（人件費・物流費・原料高）</td></tr>
+        <tr class="hl"><td><strong>2026/3</strong></td><td class="r mn">21,063</td><td class="r mn hgn">1,700</td><td class="r mn hgn">1,760</td><td class="r mn hgn">2,776</td><td class="r mn hgn">1,376円</td><td class="r mn">60円</td><td style="font-size:11px"><strong>富士アミド土地売却益25.19億円を含む</strong></td></tr>
+        <tr class="sm"><td><strong>2027/3 計画</strong></td><td class="r mn">21,700</td><td class="r mn hgn">2,300</td><td class="r mn hgn">2,340</td><td class="r mn hrd">1,260</td><td class="r mn">624円</td><td class="r mn ham">65円</td><td style="font-size:11px">営業・経常は過去最高。純利益は特殊要因剥落＋保守的な置き</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">2026/3期の営業利益率8.1%、経常利益率8.4%。<strong>ROEは28.6%（土地売却益を除くと12.5%）。</strong>売上は5年で+21%と地味だが、価格是正が浸透した2026/3期以降に利益率が一段上がっている点が本質的な変化。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="h3">貸借対照表の変化 ── 1年で別会社になった</div>
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">2025/3末</th><th class="r">2026/3末</th><th class="r">2026/6末</th></tr></thead>
+        <tbody>
+          <tr><td>総資産</td><td class="r mn">22,471</td><td class="r mn">19,554</td><td class="r mn">19,494</td></tr>
+          <tr><td>自己資本</td><td class="r mn">8,399</td><td class="r mn">11,050</td><td class="r mn hgn">11,482</td></tr>
+          <tr><td style="color:var(--gn);font-weight:600">自己資本比率</td><td class="r mn">37.4%</td><td class="r mn hgn">56.5%</td><td class="r mn hgn"><strong>58.9%</strong></td></tr>
+          <tr><td>現金及び預金</td><td class="r mn">1,703</td><td class="r mn">2,040</td><td class="r mn">1,948</td></tr>
+          <tr><td style="color:var(--gn);font-weight:600">有利子負債</td><td class="r mn">5,627</td><td class="r mn hgn">3,322</td><td class="r mn hgn"><strong>3,384</strong></td></tr>
+          <tr><td>ネット有利子負債</td><td class="r mn hrd">3,937</td><td class="r mn">1,282</td><td class="r mn hgn">1,436</td></tr>
+          <tr><td>土地（簿価）</td><td class="r mn">—</td><td class="r mn">472</td><td class="r mn">410</td></tr>
+          <tr><td>投資有価証券</td><td class="r mn">—</td><td class="r mn">520</td><td class="r mn">—</td></tr>
+          <tr><td>BPS</td><td class="r mn">4,174円</td><td class="r mn">5,542円</td><td class="r mn hgn">5,746円</td></tr>
+        </tbody>
+      </table>
+      <p class="note">BPSは1年で4,174円→5,746円へ+37.7%。<strong>にもかかわらず株価は年初来安値3,010円（4/28）を付けており、資産の増加が株価にほとんど織り込まれていない。</strong></p>
+    </div>
+    <div>
+      <div class="c cl-pu" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--pu)">中期経営計画（2024〜2026年度）の達成状況</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>目標項目</th><th class="r">目標</th><th class="r">2027/3計画</th><th class="r">判定</th></tr></thead>
+          <tbody>
+            <tr><td>売上高</td><td class="r mn">240億円</td><td class="r mn hrd">217億円</td><td class="r"><span class="bge be-rd">未達</span></td></tr>
+            <tr><td>経常利益率</td><td class="r mn">8%</td><td class="r mn hgn">10.8%</td><td class="r"><span class="bge be-gn">超過達成</span></td></tr>
+            <tr><td>ROE</td><td class="r mn">10%以上</td><td class="r mn hgn">約12.5%</td><td class="r"><span class="bge be-gn">達成</span></td></tr>
+            <tr><td>設備投資（3年累計）</td><td class="r mn">100億円</td><td class="r mn">30.6億円/年</td><td class="r"><span class="bge be-am">進行中</span></td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>「量は未達・質は超過達成」という良い形の未達。</strong>会社は数量を追わず「選択と集中」（2027/3計画で数量差△2.5億円）を選び、販売単価差+10.2億円で増益を作る戦略に転じている。<strong>2027年5月頃に発表される次期中計で資本効率・還元目標が明示されるかどうかが最大の注目点。</strong></p>
+      </div>
+      <div class="c cf-bl">
+        <div class="h3" style="color:var(--bl)">株主還元の推移と足元の変化</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 bl"></div><div class="tdate">〜2023/3期</div><div class="ttext">期末15円の固定配当のみ</div></div>
+          <div class="ti"><div class="td2 bl"></div><div class="tdate">2024/3期</div><div class="ttext">中間配当を開始（年50円）</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="tdate">2026/2</div><div class="ttext"><strong>上場後初の自己株式取得</strong>（40,700株・1.5億円、3月に取得終了）</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="tdate">2026/3末</div><div class="ttext"><strong>株主優待を新設</strong>（100株以上／1〜3年3,000円相当、3年以上5,000円相当の特産品）</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="tdate">2026/5</div><div class="ttext">年65円へ5円増配（3期連続増配）</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="tdate">2026/6</div><div class="ttext">株主質問への回答で<strong>「還元拡充を検討」</strong>と明記</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h3">株主構成（最新有価証券報告書ベース）── 独立系だが安定株主が厚い</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th class="r">順位</th><th>株主</th><th class="r">持株数</th><th class="r">比率</th><th>属性</th></tr></thead>
+      <tbody>
+        <tr><td class="r mn">1</td><td>日本カストディ銀行（信託口）</td><td class="r mn">252,095</td><td class="r mn hbl">11.70%</td><td style="font-size:11px">信託・投信・年金</td></tr>
+        <tr><td class="r mn">2</td><td>南海化学従業員持株会</td><td class="r mn">82,100</td><td class="r mn">3.81%</td><td style="font-size:11px">安定株主</td></tr>
+        <tr><td class="r mn">3</td><td>東亞合成</td><td class="r mn">70,000</td><td class="r mn">3.25%</td><td style="font-size:11px">同業（化学）・安定株主</td></tr>
+        <tr><td class="r mn">4</td><td>ソーダニッカ</td><td class="r mn">63,000</td><td class="r mn">2.92%</td><td style="font-size:11px">化学商社・安定株主</td></tr>
+        <tr><td class="r mn">5</td><td>大中物産</td><td class="r mn">54,516</td><td class="r mn">2.53%</td><td style="font-size:11px">取引先</td></tr>
+        <tr><td class="r mn">6</td><td>野村信託銀行（投信口）</td><td class="r mn">54,000</td><td class="r mn">2.51%</td><td style="font-size:11px">投信</td></tr>
+        <tr><td class="r mn">7-10</td><td>不動恒産／根岸運送／尼崎製罐／協和商事</td><td class="r mn">199,292</td><td class="r mn">9.25%</td><td style="font-size:11px">取引先・安定株主</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note"><strong>親会社・支配株主は不在</strong>（1951年に中山製鋼所から分社化したが2013年に資本関係が消滅）。一方で事業会社の安定株主が上位に厚く並び、従業員持株会も3.81%。<strong>アクティビストが入りにくく、敵対的TOBも成立しにくい構造。</strong>ガバナンス圧力は外部からより、経営陣の自発性に依存する。</p>
+  </div>
+</div>
+
+<!-- P6 -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">ダウンサイドリスク</h2><span class="sb bg-rd">正直に列挙する</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">① 南海トラフ地震 ── 構造的かつ回避不能</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>主力3工場すべてが和歌山市・高知市の臨海部に立地している。</strong>南海トラフ巨大地震の想定震源域の直上であり、津波浸水域とも重なる。生産拠点の地理的分散がまったく効いていない点は、この銘柄の最大の構造リスク。<strong>PBR0.68倍という評価の一部はこのリスクの反映と考えるべきで、単純な「市場の誤り」ではない。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">② 土壌汚染の潜在債務</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">1906年創業・1918年操業開始の化学工場群。<strong>富士アミド1件で土壌対策・解体費が約33億円（売却額の51%）発生した実績</strong>は、残る3工場にも同種の潜在債務が眠っていることを示唆する。土地含み益を数える一方で、この負債側を無視するのは片手落ち。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">③ 電力コスト</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">食塩電解は代表的な電力多消費プロセス。電気料金の改定は原価に直撃する。同社は「電解稼働の最適化」を課題に掲げているが、<strong>コスト構造の主要変数を自社で制御できない</strong>ことに変わりはない。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">④ 各種塩事業の天候依存</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">売上46億円のうち相当部分が路面凍結防止剤。2026/3期は暖冬で販売数量が前年比△15.8%、上期はセグメント損失△0.39億円に沈んだ。<strong>毎年の業績に「賭け」の要素を持ち込む部門</strong>で、温暖化トレンドは構造的な逆風。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">⑤ 事故リスク（実際に起きている）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">2025年8月に土佐工場で火災が発生（最終報は10月）。<strong>高度さらし粉の輸出が減少し、火災損失26百万円を計上。</strong>爆発性・毒性のある製品（塩素、クロルピクリン、さらし粉）を扱う以上、事故は「起きうる」ではなく「周期的に起きる」前提で見るべき。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h3" style="color:var(--bl)">⑥ 価格是正シナリオの持続性</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">2027/3期の増益は<strong>販売単価差+10.2億円がほぼ全て</strong>で、数量は△2.5億円のマイナス。値上げは顧客の抵抗と代替検討を招くため無限には続かない。<strong>「値上げが一巡した後に何で伸ばすか」がまだ数字で示されていない。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h3" style="color:var(--bl)">⑦ 設備投資とフリーCF</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">中計3年で100億円、2027/3期は30.6億円（減価償却13億円の2.4倍）。営業CFは2026/3期が△2.59億円、2025/3期が+1.81億円と薄い。<strong>土地売却代金が尽きた後、投資と増配を同時に回せるかは未証明。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h3" style="color:var(--pu)">⑧ 流動性リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">発行済2,330,330株・時価総額91.6億円・株価3,930円（単元100株＝約39万円）。<strong>出来高が細く、まとまった売買でスプレッドが開く。</strong>年初来で3,010円〜4,275円と42%のレンジを振れており、機関投資家が入りにくいサイズであること自体が割安放置の一因。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h3" style="color:var(--pu)">⑨ カタリスト不発リスク（最重要）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>この銘柄には「決着させる外圧」がない。</strong>親会社なし・アクティビストなし・安定株主が厚い。増配も自社株買いも経営陣の自発性次第。上場3年目でMBOの蓋然性も低い。<strong>安いまま3年間何も起きない可能性は現実的なシナリオとして20〜30%見ておくべき。</strong></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>次期中期経営計画（2027年5月頃）：</strong>ROE・PBR・総還元性向の数値目標が入るか</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自己株式332,159株の消却：</strong>発行済の14.3%。実施されれば資本政策の転換シグナル</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>配当性向の引き上げ：</strong>20%超（125円超）への修正</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>通期予想の上方修正：</strong>純利益12.6億円→15億円超</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>環境リサイクルの設備決定：</strong>排水処理設備高度化・廃硫酸処理量の拡大公表</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告書：</strong>ファンドの新規参入</div></div>
+      </div>
+    </div>
+    <div class="c cf-rd">
+      <div class="h3" style="color:var(--rd)">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>工場事故・火災の再発：</strong>特に主力の和歌山・青岸工場</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>電力料金の大幅改定：</strong>電解採算の悪化</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>価格是正の頭打ち：</strong>四半期のセグメント利益率が15%割れ</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>暖冬の2年連続：</strong>各種塩事業のセグメント損失定着</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>設備投資の膨張：</strong>有利子負債の再増加・自己資本比率50%割れ</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>還元姿勢の後退：</strong>次期中計で還元方針に言及がない</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P7 -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">3年後（2029年3月期）シナリオと最終評価</h2><span class="sb bg-or">期待株価 6,380円</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">確率加重期待株価</div><div class="mv gn">6,380円</div><div class="ms">現在比 +62.3%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">3年配当（期待値）</div><div class="mv am">296円</div><div class="ms">トータル期待リターン +69.9%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">期待年率リターン</div><div class="mv or">+19.3%</div><div class="ms">3年CAGR</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">リスク・リワード比</div><div class="mv bl">約1 : 3.1</div><div class="ms">下値△780円 vs 上値+2,450円</div></div>
+  </div>
+
+  <div class="sc c3" style="margin-bottom:18px">
+    <div class="sc-c">
+      <div class="sc-l br">Bear ── 停滞</div><div class="sc-p br">30%</div><div class="sc-s">目標株価 3,150円（△19.8%）</div>
+      <div class="sc-i">売上205億／営業利益14.0億（率6.8%）</div>
+      <div class="sc-i">純利益9.5億・EPS 476円</div>
+      <div class="sc-i">PER 6.6倍・PBR 0.43倍</div>
+      <div class="sc-i">配当55円へ減配、3年累計180円</div>
+      <div class="sc-i" style="color:var(--rd)">前提：電力費高騰＋値上げ一巡＋暖冬継続＋農薬需要減。還元も現状維持で見直されない</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bs">Base ── 中計路線の延長</div><div class="sc-p bs">45%</div><div class="sc-s">目標株価 6,300円（+60.3%）</div>
+      <div class="sc-i">売上240億／営業利益26.0億（率10.8%）</div>
+      <div class="sc-i">純利益18.0億・EPS 901円</div>
+      <div class="sc-i">PER 7.0倍・PBR 0.79倍</div>
+      <div class="sc-i">配当性向25%＝225円、3年累計315円</div>
+      <div class="sc-i" style="color:var(--am)">前提：次期中計で還元方針を明示。環境リサイクルが緩やかに拡大し、価格是正が定着</div>
+    </div>
+    <div class="sc-c">
+      <div class="sc-l bu">Bull ── 再評価</div><div class="sc-p bu">25%</div><div class="sc-s">目標株価 10,400円（+164.6%）</div>
+      <div class="sc-i">売上265億／営業利益33.0億（率12.5%）</div>
+      <div class="sc-i">純利益23.0億・EPS 1,151円</div>
+      <div class="sc-i">PER 9.0倍へリレーティング</div>
+      <div class="sc-i">自己株消却＋配当性向35%、3年累計400円</div>
+      <div class="sc-i" style="color:var(--gn)">前提：半導体国産化で廃硫酸処理が本格離陸。PBR改善要請への明確な対応。あるいはTOB/MBOの発生</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">確率加重 期待株価の内訳</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">目標株価</th><th class="r">加重寄与</th><th class="r">3年配当</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：停滞</td><td class="r mn">30%</td><td class="r mn">3,150円</td><td class="r mn">945円</td><td class="r mn">180円</td></tr>
+          <tr><td>Base：中計路線</td><td class="r mn">45%</td><td class="r mn">6,300円</td><td class="r mn">2,835円</td><td class="r mn">315円</td></tr>
+          <tr><td>Bull：再評価</td><td class="r mn">25%</td><td class="r mn">10,400円</td><td class="r mn">2,600円</td><td class="r mn">400円</td></tr>
+          <tr class="sm"><td>期待値</td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn">6,380円</td><td class="r mn hgn">296円</td></tr>
+        </tbody>
+      </table>
+      <p class="note">トータル期待値6,676円＝現在比+69.9%、年率+19.3%。<strong>Bearでも△19.8%に留まるのは、修正BPS 6,010〜7,253円という資産の裏付けが下値を支えるため。</strong>ただしP6⑨のとおり「3年間何も起きない」ことは十分ありうる。</p>
+    </div>
+    <div>
+      <div class="c cf-am" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--am)">MBO／TOB 価格帯の試算</div>
+        <table class="t" style="font-size:11.5px">
+          <thead><tr><th>評価手法</th><th class="r">1株価値</th><th class="r">現在比</th></tr></thead>
+          <tbody>
+            <tr><td>PBR 1.0倍</td><td class="r mn">5,746円</td><td class="r mn ham">+46%</td></tr>
+            <tr><td>EV/EBITDA 4倍</td><td class="r mn">6,488円</td><td class="r mn ham">+65%</td></tr>
+            <tr class="hl"><td><strong>EV/EBITDA 5倍</strong></td><td class="r mn hgn"><strong>8,290円</strong></td><td class="r mn hgn"><strong>+111%</strong></td></tr>
+            <tr><td>EV/EBITDA 6倍</td><td class="r mn hor">10,091円</td><td class="r mn hor">+157%</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><strong>最頻値ゾーンは5,500〜7,000円（+40〜78%）。</strong>ただし発生確率は3年以内で10〜15%と低く見るべき。<strong>①2023年4月上場でまだ3年目 ②取引先の安定株主が上位に厚い ③親会社・アクティビスト不在 ④土壌汚染の潜在債務がデューデリの障害</strong>——非公開化を阻む要因が揃っている。カタリストとして「期待して待つ」対象ではなく、「起きたら儲かるオプション」として無償で付いてくる程度に位置づけるのが妥当。</p>
+      </div>
+      <div class="c cl-gn">
+        <div class="h3" style="color:var(--gn)">カタリスト別の確度評価</div>
+        <div class="bg-w"><div class="br2"><span>増配・配当性向の引き上げ</span><span class="mn hgn">70%</span></div><div class="bt"><div class="bf" style="width:70%;background:var(--gn2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>次期中計での資本効率目標</span><span class="mn hgn">60%</span></div><div class="bt"><div class="bf" style="width:60%;background:var(--gn2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>自社株買いの継続</span><span class="mn ham">55%</span></div><div class="bt"><div class="bf" style="width:55%;background:var(--am2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>環境リサイクルの本格拡大</span><span class="mn ham">45%</span></div><div class="bt"><div class="bf" style="width:45%;background:var(--am2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>自己株式（14.3%）の消却</span><span class="mn ham">40%</span></div><div class="bt"><div class="bf" style="width:40%;background:var(--am2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>追加の遊休不動産売却</span><span class="mn hrd">30%</span></div><div class="bt"><div class="bf" style="width:30%;background:var(--or2)"></div></div></div>
+        <div class="bg-w"><div class="br2"><span>MBO／TOB</span><span class="mn hrd">10〜15%</span></div><div class="bt"><div class="bf" style="width:13%;background:var(--rd)"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 結論：3,930円は投資妙味あり（A−）</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">なぜ「買える」のか</div>
+        <div class="conc-b"><strong>EV/EBITDA 2.6倍という水準が、この投資の核心。</strong>営業利益23億円・減価償却13億円を稼ぐ事業体が実質3年弱のEBITDAで買える。加えて①ニッチトップ3種の参入障壁 ②配当性向10.4%という3倍の増配余地 ③自己株14.3% ④富士アミド65億円売却で実証済みの資産価値 ⑤1Q進捗36.1%が示す会社予想の保守性。<strong>割安の理由が「事業が悪い」ではなく「小さくて誰も見ていない」であることが重要。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">含み益の正しい距離感</div>
+        <div class="conc-b">土地含み益（税引後・中立）は13.5億円＝1株676円で、修正PBRは0.68倍→<strong>0.61倍</strong>。広済堂HD型の「NAVが株価の2倍」ではない。<strong>富士アミドの実績が示すとおり、化学工場跡地は売却額の約51%が土壌対策・解体費で消える。</strong>有価証券は既に時価評価済みで追加の含み益はほぼゼロ、現金もネット有利子負債14.4億円でネットキャッシュではない。<strong>資産は「下値の保険」であって、上値のエンジンではない。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">最大の弱点と持ち方</div>
+        <div class="conc-b"><strong>この銘柄には決着させる外圧がない。</strong>親会社なし・アクティビスト不在・取引先安定株主が厚い・上場3年目でMBOも遠い。カタリストは増配と次期中計という自発性頼み。したがって<strong>「3年間何も起きない」を30%見込んだうえで、下値が資産で守られている前提で持つ</strong>のが正しい形。単元39万円と1単位が重く流動性も薄いため、ポジションは小さめに、分割で入る。<strong>2027年5月頃の次期中計が最大の判定日。</strong></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">EV/EBITDA</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2.6倍</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">中小型化学の目安5〜7倍</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">修正BPS（中立）</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">6,422円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">実質PBR 0.61倍</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">3年期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">6,380円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">年率 +19.3%（配当込み）</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">判定日</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">2027年5月</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">次期中期経営計画の発表</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        南海化学は、<strong style="color:var(--or2)">隠れ資産の存在を1件65億円の売却で自ら証明した直後に、EV/EBITDA 2.6倍・配当性向10.4%で放置されている「ニッチトップ×還元余地」型のバリュー案件。</strong>土地含み益は下値を守る保険にすぎず、上値を作るのは収益力の再評価と株主還元の正常化。<strong style="color:var(--or2)">外圧のない自助努力型ゆえに時間軸は読めないが、下値が資産で守られた状態で年率19%の期待値を取りに行ける構図</strong>であり、3,930円は投資に値する水準と判断する。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。<br>
+  土地面積・工業地実勢単価・3年後業績は筆者の推定値を含み、将来の結果を保証するものではありません。<br>
+  Data: 南海化学 2026年3月期決算短信・2027年3月期第1四半期決算短信・決算説明資料・投資家質問回答（TDnet）／EDINET（E38504）／国土交通省 地価公示2026／ログミーFinance ／ Yahoo!ファイナンス · 2026.09.02
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

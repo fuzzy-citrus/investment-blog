@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大伸化学（4629）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:240px}
+.vs{font:700 44px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eeb0b0}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.tw{overflow-x:auto}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule);background:var(--bg2)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 26px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 32px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg2{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px;gap:10px}
+.br2 span:last-child{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.bt{background:var(--bg3);border-radius:4px;overflow:hidden;height:11px}
+.bf{border-radius:4px;height:100%}
+
+/* STACK BAR */
+.stk{display:flex;height:34px;border-radius:5px;overflow:hidden;gap:2px;margin:10px 0 6px}
+.stk div{display:flex;align-items:center;justify-content:center;font:600 10px/1 var(--mono);color:#fff}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.be-pu{background:var(--pu3);color:var(--pu)}
+.src{display:inline-block;font:600 8px/1 var(--mono);padding:2px 6px;border-radius:3px;letter-spacing:.04em;vertical-align:middle}
+.src-d{background:var(--bl3);color:var(--bl)}
+.src-e{background:var(--am3);color:var(--am)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.wr{background:var(--rd3);border:.5px solid #eeb0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.h3{font-size:11px;font-weight:600;margin-bottom:10px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc4{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 4629 · 東証スタンダード · 2026.09.02</p>
+      <h1 class="ht">大伸化学 <em>（4629）</em><br>統合投資分析レポート</h1>
+      <p class="hs">シンナー国内シェア約3割の専業首位／ 現金85.9億円・実質無借金 vs 時価総額100.7億円<br>事業価値（EV）は実質14.8億円 ── 今期営業利益19.6億円をEV0.75倍で買う「現金と値上げ」の二層構造</p>
+    </div>
+    <div class="vb">
+      <div class="vs">A−</div>
+      <div class="vt">
+        <strong>3年後期待株価 3,245円 · 現在比+48%</strong><br>
+        現株価2,200円のうち1,877円が現金。<br>
+        NCAV 2,713円＞株価＝ネットネット。<br>
+        論点は「割安か」ではなく「解放されるか」。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">2,200円</div><div class="ks">時価総額 100.7億円（457.5万株）</div></div>
+    <div class="kv"><div class="kl">PBR（BPS 3,803円）</div><div class="kn bl">0.58倍</div><div class="ks">修正BPS 4,040円なら0.54倍</div></div>
+    <div class="kv"><div class="kl">PER（会社予想）</div><div class="kn gn">7.9倍</div><div class="ks">予想EPS 279.8円（8/7上方修正）</div></div>
+    <div class="kv"><div class="kl">ネットキャッシュ</div><div class="kn gn">85.9億円</div><div class="ks">時価総額の85%・有利子負債ゼロ</div></div>
+    <div class="kv"><div class="kl">EV／今期営業利益</div><div class="kn or">0.75倍</div><div class="ks">EV 14.8億円 vs 営業利益19.6億円</div></div>
+    <div class="kv"><div class="kl">NCAV／株</div><div class="kn gn">約2,713円</div><div class="ks">株価はNCAVの0.81倍＝ネットネット</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>バリュエーション</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>含み益精査</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--bl2)"></span>事業性・ニッチトップ</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--pu2)"></span>インフレ・値上げ</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>3ケース予想・結論</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════ P1 投資テーゼ ══════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、大伸化学なのか</h2><span class="sb bg-gn">5つの論点</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 最重要</div>
+      <span class="ci">💰</span>
+      <div class="ct">現金が時価総額の85%を占める</div>
+      <div class="cb gn">85.9億円</div>
+      <div class="cu">現金及び預金／有利子負債はゼロ</div>
+      <div class="cp">2026年3月期末の現金及び預金は<strong>8,587百万円</strong>。有利子負債は実質ゼロで、<strong>ネットキャッシュ85.9億円は時価総額100.7億円の85%。1株あたり1,877円が現金</strong>という異常な水準。</div>
+      <div class="tgs"><span class="tg tg-gn">4期で現金2.2倍</span><span class="tg tg-or">実質無借金</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Thesis 02 · 最重要</div>
+      <span class="ci">⚡</span>
+      <div class="ct">事業価値が実質14.8億円で買える</div>
+      <div class="cb or">EV 0.75倍</div>
+      <div class="cu">EV14.8億円 ÷ 今期営業利益19.6億円</div>
+      <div class="cp">株価2,200円から現金1,877円を引くと、市場が事業に付けている値段は<strong>1株323円＝14.8億円</strong>。今期営業利益19.6億円、過去5年平均でも10億円を稼ぐ事業がこの値段。<strong>EV/EBITDAは0.6倍前後。</strong></div>
+      <div class="tgs"><span class="tg tg-or">EV/EBIT 0.75倍</span><span class="tg tg-am">正常化でも1.1倍</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Thesis 03 · 事業</div>
+      <span class="ci">🏭</span>
+      <div class="ct">シンナー国内シェア約3割の専業首位</div>
+      <div class="cb am">シェア約30%</div>
+      <div class="cu">代理店約900社・全国即納体制</div>
+      <div class="cp">1952年創業のシンナー専業メーカー。主顧客は塗料・インキ業界。<strong>危険物（消防法第4類）の貯蔵・配送許可と900代理店網は新規参入が事実上不可能な参入障壁。</strong>縮小市場のなかで出荷数量は前期+1.6%とシェアを取っている。</div>
+      <div class="tgs"><span class="tg tg-am">ニッチトップ</span><span class="tg tg-gn">数量+1.6%</span></div>
+    </div>
+    <div class="ca cc-pu">
+      <div class="cn">Thesis 04 · 収益</div>
+      <span class="ci">📈</span>
+      <div class="ct">インフレが利益に直撃（1Qで実証済み）</div>
+      <div class="cb bl">営業+522%</div>
+      <div class="cu">2027年3月期1Q・数量横ばい／単価上昇</div>
+      <div class="cp">1Qは<strong>出荷数量ほぼ前年並みのまま販売単価上昇だけで売上+38.0%、営業利益+522%、営業利益率3.4%→8.4%。</strong>在庫評価益とスプレッド拡大の二重の恩恵。会社は8/7に通期を上方修正した。</div>
+      <div class="tgs"><span class="tg tg-bl">価格転嫁実証</span><span class="tg tg-or">上方修正済み</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Thesis 05 · 株主構成</div>
+      <span class="ci">🎯</span>
+      <div class="ct">光通信6.5% × 創業家25.4%</div>
+      <div class="cb bl">MBO射程</div>
+      <div class="cu">時価総額100億円・現金85億円の非効率</div>
+      <div class="cp">光通信は2023年10月に5%超を報告し、2024年10月に買い増し。創業家（坪井典明13.21%＋有限会社坪井12.16%）が25.4%を握る。<strong>還元強化とMBO、どちらの出口でも株価が動く株主構成。</strong></div>
+      <div class="tgs"><span class="tg tg-gn">光通信在籍</span><span class="tg tg-am">オーナー25%</span></div>
+    </div>
+    <div class="ca cc-rd" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3)">Counter-Thesis · 最大の弱点</div>
+      <span class="ci" style="font-size:22px">⚠️</span>
+      <div class="ct" style="color:var(--ink)">現金が「死蔵」され続けるリスク</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--rd);margin:6px 0 2px">配当性向16%</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">方針は「25%目安」なのに今期予想は45円据え置き</div>
+      <div class="cp" style="color:var(--ink2)">中期経営計画も「資本コストや株価を意識した経営」の開示も見当たらない。<strong>現金は4期で2.2倍に膨らんだが還元は動いていない。これが典型的なバリュートラップの姿でもある。</strong></div>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      大伸化学は、<strong style="color:var(--or2)">「時価総額の85%が現金」という静的な資産割安と、「溶剤インフレによる価格転嫁」という動的な収益改善が同時に走っている二層構造の案件。</strong>株価2,200円はNCAV 2,713円を下回るネットネット水準で、事業価値は実質14.8億円。問題は割安かどうかではなく、<strong style="color:var(--or2)">還元・MBO・市況のいずれかで現金と収益力が「解放」されるまで待てるか</strong>という一点に尽きる。
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="inf">📌 <strong>本レポートの数値表記ルール：</strong><span class="src src-d">開示</span> は有価証券報告書・決算短信・会社IRで確認した数値、<span class="src src-e">推計</span> は筆者が公示地価・業界水準・BS構成から推定した数値です。連結貸借対照表の明細注記（投資有価証券の内訳・その他有価証券評価差額金）はPDF本文から取得できなかったため、当該項目は推計値として明示しています。</div>
+</div>
+
+<!-- ══════════ P2 バリュエーション ══════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">バリュエーション ── 株価2,200円の分解</h2><span class="sb bg-am">ネットネット水準</span></div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div class="h3">株価2,200円の中身 ── 現金1,877円 ＋ 事業323円</div>
+    <div class="stk">
+      <div style="flex:1877;background:var(--gn2)">現金 1,877円（85.3%）</div>
+      <div style="flex:323;background:var(--or2)">事業 323円</div>
+    </div>
+    <p class="note">市場は、今期営業利益19.6億円（過去5年平均10.1億円）を稼ぐシンナー国内首位の事業に、<strong>わずか14.8億円</strong>しか値段を付けていない。営業利益の0.75年分、正常化利益（13億円想定）でも1.1年分。</p>
+  </div>
+
+  <div class="c" style="margin-bottom:16px">
+    <div class="h3">1株あたり価値の階段 ── どの物差しで見ても株価が下</div>
+    <div class="bg2"><div class="br2"><span>株価（2026/9/2）</span><span>2,200円</span></div><div class="bt"><div class="bf" style="width:54.5%;background:var(--ink2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>現金及び預金／株 <span class="src src-d">開示</span></span><span>1,877円（株価の85%）</span></div><div class="bt"><div class="bf" style="width:46.5%;background:var(--gn2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>NCAV（正味流動資産）／株 <span class="src src-e">推計</span></span><span>約2,713円（株価/NCAV 0.81倍）</span></div><div class="bt"><div class="bf" style="width:67.2%;background:var(--bl2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>BPS（2026年3月期） <span class="src src-d">開示</span></span><span>3,803円（PBR 0.58倍）</span></div><div class="bt"><div class="bf" style="width:94.2%;background:var(--am2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>修正BPS（含み益税引後・中立） <span class="src src-e">推計</span></span><span>4,040円（修正PBR 0.54倍）</span></div><div class="bt"><div class="bf" style="width:100%;background:var(--or2)"></div></div></div>
+    <p class="note">NCAV＝流動資産−総負債。総資産26,092百万円から固定資産推計4,988百万円（有形固定資産3,808＋無形80＋投資その他1,100）を差し引いた流動資産21,104百万円から、総負債8,692百万円を控除して算出。ベンジャミン・グレアムの古典的ネットネット基準（株価＜NCAV×2/3＝1,809円）には届かないものの、<strong>株価がNCAVを下回る銘柄は東証全体でも限られる。</strong></p>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">株式指標一覧（株価2,200円ベース）</div>
+      <table class="t">
+        <tbody>
+          <tr><td>時価総額</td><td class="r mn">100.7億円</td></tr>
+          <tr><td>発行済株式数（自己株控除）</td><td class="r mn">4,575,177株</td></tr>
+          <tr><td>PER（2027/3会社予想 EPS279.8円）</td><td class="r mn hgn"><strong>7.86倍</strong></td></tr>
+          <tr><td>PER（2026/3実績 EPS194.39円）</td><td class="r mn">11.3倍</td></tr>
+          <tr><td>PBR（BPS 3,803円）</td><td class="r mn hgn"><strong>0.578倍</strong></td></tr>
+          <tr><td>EV（時価総額−ネットキャッシュ）</td><td class="r mn hor"><strong>14.8億円</strong></td></tr>
+          <tr><td>EV／今期予想営業利益</td><td class="r mn hor"><strong>0.75倍</strong></td></tr>
+          <tr><td>EV／正常化営業利益（13億円）</td><td class="r mn">1.14倍</td></tr>
+          <tr><td>配当利回り（年45円予想）</td><td class="r mn">2.05%</td></tr>
+          <tr><td>配当性向（予想EPS比）</td><td class="r mn hrd">16.1%</td></tr>
+          <tr><td>ROE（2026/3実績）</td><td class="r mn">5.2%</td></tr>
+          <tr><td>ROE（2027/3予想）</td><td class="r mn">約7.4%</td></tr>
+          <tr class="sm"><td>自己資本比率</td><td class="r mn">66.7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--gn)">現金は4期で2.2倍 ── 蓄積の軌跡 <span class="src src-d">開示</span></div>
+        <table class="t">
+          <thead><tr><th>期末</th><th class="r">現金及び現金同等物</th><th class="r">1株換算</th></tr></thead>
+          <tbody>
+            <tr><td>2022年3月期</td><td class="r mn">38.3億円</td><td class="r mn">837円</td></tr>
+            <tr><td>2023年3月期</td><td class="r mn">41.1億円</td><td class="r mn">898円</td></tr>
+            <tr><td>2024年3月期</td><td class="r mn">49.5億円</td><td class="r mn">1,082円</td></tr>
+            <tr><td>2025年3月期</td><td class="r mn">63.7億円</td><td class="r mn">1,393円</td></tr>
+            <tr class="hl"><td><strong>2026年3月期</strong></td><td class="r mn hgn"><strong>85.9億円</strong></td><td class="r mn hgn"><strong>1,877円</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="note">2026年3月期は純利益8.9億円に対し現金が22.2億円増加。運転資本の圧縮と減価償却の内部留保が効いている。<strong>同期間に有利子負債はゼロのまま、自己資本比率は62.4%→66.7%へ上昇。</strong></p>
+      </div>
+      <div class="c cf-am">
+        <div class="h3" style="color:var(--am)">「現金85.9億円」の質を割り引く</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">売上346億円・売上債権と棚卸資産で115億円前後を回す運転資本型のビジネスであり、危険物在庫の仕入変動や与信リスクへの備えとして<strong>実務上20〜30億円は事業に張り付いている</strong>と見るべき。<br><br>それでも<strong>余剰現金は55〜65億円＝時価総額の55〜65%。</strong>この余剰分だけで自社株買いをすれば発行済の50%超を消却できる計算になる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c cf-gn">
+    <div class="h3" style="color:var(--gn)">バリュー投資家としての結論 ── 「安さ」は疑いようがない</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px;color:var(--ink2);line-height:1.85">
+      <div>PBR0.58倍・PER7.9倍・EV/EBIT0.75倍・株価/NCAV0.81倍。<strong>この4つが同時に成立している銘柄は東証スタンダードでも希少。</strong>加えて有利子負債ゼロ、自己資本比率66.7%、5期連続黒字、赤字転落の履歴なし。定量的なバリュー条件は満たしきっている。</div>
+      <div>したがって論点は「割安か」ではなく<strong>「なぜ割安なのか、そして何がそれを解消するのか」。</strong>答えは①IRの不在（中計なし・説明会なし・PBR対応開示なし）②流動性の低さ（株主数1,054名）③市況依存の利益変動──この3つ。解消の鍵は次章以降のカタリストにある。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ P3 含み益精査 ══════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">含み益精査 ── 土地・有価証券</h2><span class="sb bg-or">土地は主役ではない</span></div>
+
+  <div class="inf">📌 <strong>結論を先に：</strong>本社（東京都港区芝大門1-9-9）は賃借ビルであり、保有不動産は<strong>越谷工場と兵庫工場の2件のみ・合計54,285㎡</strong>。土地含み益は中立ケースで税引後8.1億円（1株176円）と、時価総額の8%程度にとどまる。<strong>この会社のバリューは土地ではなく現金にある。</strong></div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">保有土地の全容 ── 有価証券報告書「設備の状況」ベース <span class="src src-d">開示</span></div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>事業所</th><th>所在地</th><th class="r">取得時期</th><th class="r">土地面積</th><th class="r">土地簿価</th><th class="r">簿価単価</th><th class="r">設備合計簿価</th></tr></thead>
+      <tbody>
+        <tr><td><strong>越谷工場</strong><br><span style="font-size:10.5px;color:var(--ink3)">化学品製造設備・樹脂カット事業部</span></td><td>埼玉県越谷市七左町4-316</td><td class="r mn">1970年5月</td><td class="r mn">24,548㎡</td><td class="r mn">13.55億円</td><td class="r mn hrd">55,215円/㎡</td><td class="r mn">22.48億円</td></tr>
+        <tr><td><strong>兵庫工場</strong><br><span style="font-size:10.5px;color:var(--ink3)">化学品製造設備</span></td><td>兵庫県神崎郡福崎町西治字拝尾860-26</td><td class="r mn">1985年5月</td><td class="r mn">29,737㎡</td><td class="r mn">5.37億円</td><td class="r mn ham">18,075円/㎡</td><td class="r mn">13.10億円</td></tr>
+        <tr class="sm"><td>合計</td><td>—</td><td class="r mn">—</td><td class="r mn">54,285㎡</td><td class="r mn">18.93億円</td><td class="r mn">34,870円/㎡</td><td class="r mn">35.58億円</td></tr>
+        <tr><td>本社・大阪支店・名古屋支店<br>福岡営業所・仙台営業所</td><td>港区芝大門／大阪市中央区伏見町／名古屋市中村区名駅南／福岡市中央区赤坂／仙台市青葉区中央</td><td class="r mn">—</td><td class="r" colspan="4"><span class="bge be-bl">賃借</span> 有報上「重要な設備がないため記載を省略」。本社は野村不動産芝大門ビルに入居しており自社所有ではない。</td></tr>
+        <tr><td>山崎梱包運輸（100%子会社）</td><td>埼玉県越谷市新川町1-2-1</td><td class="r mn">2022年10月取得</td><td class="r" colspan="4">運送業・資本金1,225万円。有報上は「重要な設備がないため記載を省略」</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">越谷工場は1960年に草加市で操業開始した工場を1970年に移転して設置。2008年に樹脂カット事業部（越谷第二工場）を増設しており、簿価単価55,215円/㎡は昭和45年取得の原初取得地に後年の増設用地が混ざった加重平均と考えられる。兵庫工場は1985年（昭和60年）取得で、バブル前の水準。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="h3">対応する2026年公示地価 <span class="src src-d">開示</span></div>
+      <table class="t">
+        <thead><tr><th>地点</th><th class="r">2026年公示</th><th class="r">前年比</th></tr></thead>
+        <tbody>
+          <tr><td>越谷市 工業地平均</td><td class="r mn hor">12.0万円/㎡</td><td class="r mn hgn">+5.0%</td></tr>
+          <tr><td>越谷市 宅地平均</td><td class="r mn">14.1万円/㎡</td><td class="r mn hgn">+3.1%</td></tr>
+          <tr><td>越谷市 蒲生（住宅地・工場至近）</td><td class="r mn">13.2万円/㎡</td><td class="r mn hgn">+3.0%</td></tr>
+          <tr class="hl"><td><strong>福崎町 西治字白輪（工業地）</strong><br><span style="font-size:10.5px;color:var(--ink3)">兵庫工場と同一の「西治」地区</span></td><td class="r mn hor"><strong>2.4万円/㎡</strong></td><td class="r mn hgn"><strong>+7.6%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">兵庫工場は所在地（福崎町西治）と公示地点（西治字白輪、大規模倉庫が見られる工業地域）が同一字内で、市況の当てはめ精度が高い。越谷工場は七左町4丁目＝南越谷駅の南西約1.5km、準工業地域で住宅と工場が混在するエリア。</p>
+    </div>
+    <div>
+      <div class="c cl-or" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--or)">評価にあたっての3つの補正</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>大規模画地の減価：</strong>24,548㎡・29,737㎡という一団地は買い手が限られる。公示地価（標準地は小規模）に対し15〜30%の減価を織り込むのが実務的。</div></div>
+          <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>土壌汚染の潜在コスト：</strong>有機溶剤（トルエン・キシレン等）を50年以上扱ってきた製造拠点。売却・転用時には土壌・地下水の調査と対策費が発生しうる。<strong>本レポートでは2〜4億円を控除。</strong></div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>換金は「事業ごと」なら可能：</strong>越谷は南越谷至近の準工業地で物流・住宅転用余地があり、実現性は決して低くない。ただし稼働中の主力工場であり、単体売却は現実的でない。</div></div>
+        </div>
+      </div>
+      <div class="c cf-rd">
+        <div class="h3" style="color:var(--rd)">土地含み益は「主役」ではない</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">中立ケースの税引後含み益8.1億円は<strong>時価総額の8%、1株あたり176円</strong>。強気ケースでも340円。<br><br>広済堂HDのような「土地が時価総額の何倍」という構図はここには存在しない。<strong>大伸化学で効いているのは含み益ではなく、BSに額面で載っている現金85.9億円である。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">土地含み益の3ケース試算 <span class="src src-e">推計</span></div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>ケース</th><th class="r">越谷 想定単価</th><th class="r">越谷 時価</th><th class="r">兵庫 想定単価</th><th class="r">兵庫 時価</th><th class="r">含み益（税引前）</th><th class="r">土壌対策控除</th><th class="r">税引後含み益</th><th class="r">1株換算</th></tr></thead>
+      <tbody>
+        <tr><td>保守<br><span style="font-size:10.5px;color:var(--ink3)">工業地公示の70%</span></td><td class="r mn">8.5万円/㎡</td><td class="r mn">20.9億円</td><td class="r mn">1.9万円/㎡</td><td class="r mn">5.7億円</td><td class="r mn">7.6億円</td><td class="r mn hrd">▲4.0億円</td><td class="r mn ham">2.5億円</td><td class="r mn ham"><strong>54円</strong></td></tr>
+        <tr class="hl"><td><strong>中立（推奨）</strong><br><span style="font-size:10.5px;color:var(--ink3)">工業地公示の90%／同地区公示の92%</span></td><td class="r mn">11.0万円/㎡</td><td class="r mn">27.0億円</td><td class="r mn">2.2万円/㎡</td><td class="r mn">6.5億円</td><td class="r mn">14.6億円</td><td class="r mn hrd">▲3.0億円</td><td class="r mn hgn"><strong>8.1億円</strong></td><td class="r mn hgn"><strong>176円</strong></td></tr>
+        <tr><td>強気<br><span style="font-size:10.5px;color:var(--ink3)">物流用地としての実勢・地価上昇継続</span></td><td class="r mn">14.5万円/㎡</td><td class="r mn">35.6億円</td><td class="r mn">2.6万円/㎡</td><td class="r mn">7.7億円</td><td class="r mn">24.4億円</td><td class="r mn hrd">▲2.0億円</td><td class="r mn hor">15.5億円</td><td class="r mn hor"><strong>340円</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">実効税率30.6%で税効果控除。越谷の想定単価は、越谷市工業地公示12.0万円/㎡・宅地平均14.1万円/㎡・蒲生13.2万円/㎡を基準に、大規模画地の減価を織り込んだレンジ。兵庫は同一字内の公示2.4万円/㎡を上限とした。地価は越谷+5.0%／福崎+7.6%と上昇中で、待つほど含み益は積み上がる。</p>
+  </div>
+
+  <div class="g2">
+    <div class="c cl-am">
+      <div class="h3" style="color:var(--am)">投資有価証券の含み益 <span class="src src-e">推計・要確認</span></div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">連結BSの明細注記が取得できなかったため、以下は<strong>BS構成からの逆算による推計</strong>。総資産26,092百万円から現金8,588・有形固定資産約3,808・売上債権と棚卸約11,500を差し引くと、投資その他の資産は<strong>10〜15億円規模</strong>と見られる。<br><br>大株主に丸善石油化学（2.84%）・三井住友銀行（3.69%）・三菱UFJ銀行（1.60%）・日本生命（5.11%）が並ぶ相互保有構造から、政策保有株を<strong>8〜12億円程度</strong>保有していると推定。含み益は保守2億／中立4億／強気7億円（税引後1.4／2.8／4.9億円＝1株30／61／107円）。<br><br><strong>※実額は2026年6月25日提出の有報「有価証券関係」注記で要確認。</strong></div>
+    </div>
+    <div class="c">
+      <div class="h3">修正BPSと修正PBR</div>
+      <table class="t">
+        <thead><tr><th>ケース</th><th class="r">BPS</th><th class="r">土地</th><th class="r">証券</th><th class="r">修正BPS</th><th class="r">修正PBR</th></tr></thead>
+        <tbody>
+          <tr><td>保守</td><td class="r mn">3,803</td><td class="r mn">+54</td><td class="r mn">+30</td><td class="r mn ham">3,887円</td><td class="r mn ham">0.566倍</td></tr>
+          <tr class="hl"><td><strong>中立</strong></td><td class="r mn">3,803</td><td class="r mn">+176</td><td class="r mn">+61</td><td class="r mn hgn"><strong>4,040円</strong></td><td class="r mn hgn"><strong>0.545倍</strong></td></tr>
+          <tr><td>強気</td><td class="r mn">3,803</td><td class="r mn">+340</td><td class="r mn">+107</td><td class="r mn hor">4,250円</td><td class="r mn hor">0.518倍</td></tr>
+        </tbody>
+      </table>
+      <p class="note">含み益を加味しても修正PBRは0.52〜0.57倍。<strong>含み益の有無で結論は変わらない</strong>という点が、この銘柄の分析上の重要なポイント。裏を返せば、土地の再評価に賭ける必要がなく、額面どおりの現金と稼ぐ力だけで投資判断が完結する。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ P4 事業性 ══════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性・ニッチトップ性・ストック性</h2><span class="sb bg-bl">縮小市場のシェアテイカー</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">シンナー国内シェア</div><div class="mv bl">約30%</div><div class="ms">専業メーカーとして国内首位</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">代理店網</div><div class="mv gn">約900社</div><div class="ms">全国即納体制</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">出荷数量（2026/3期）</div><div class="mv or">+1.6%</div><div class="ms">縮小市場でシェア拡大</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">従業員数（連結）</div><div class="mv am">235名</div><div class="ms">1人あたり売上1.47億円</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">製品別売上構成（2026年3月期） <span class="src src-d">開示</span></div>
+      <table class="t">
+        <thead><tr><th>製品区分</th><th class="r">売上高</th><th class="r">構成比</th></tr></thead>
+        <tbody>
+          <tr><td><strong>単一溶剤類</strong><br><span style="font-size:10.5px;color:var(--ink3)">トルエン・キシレン・酢酸エチル等の単体溶剤</span></td><td class="r mn">135.1億円</td><td class="r mn hbl">39.0%</td></tr>
+          <tr><td><strong>印刷用溶剤類</strong><br><span style="font-size:10.5px;color:var(--ink3)">インキ希釈・洗浄</span></td><td class="r mn">62.4億円</td><td class="r mn hbl">18.0%</td></tr>
+          <tr><td><strong>特殊シンナー類</strong><br><span style="font-size:10.5px;color:var(--ink3)">塗料メーカー指定配合品</span></td><td class="r mn">39.5億円</td><td class="r mn ham">11.4%</td></tr>
+          <tr><td><strong>洗浄用シンナー類</strong></td><td class="r mn">21.2億円</td><td class="r mn ham">6.1%</td></tr>
+          <tr><td><strong>その他シンナー類・塗料等</strong></td><td class="r mn">77.9億円</td><td class="r mn">22.5%</td></tr>
+          <tr class="sm"><td>合計（製造品294.4＋商品51.4＋その他0.3）</td><td class="r mn">346.1億円</td><td class="r mn">100%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">報告セグメントは「化学品事業」の単一セグメント。製造品が売上の85%を占め、単なる商社ではなく調合メーカーであることが利益率の源泉。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--gn)">ニッチトップの中身 ── 4層の参入障壁</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>①法規制の壁：</strong>シンナーは消防法の危険物第4類。製造・貯蔵・運搬すべてに許可が要り、毒劇法・有機則・特化則も重なる。<strong>新規参入は許認可の段階で止まる。</strong></div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>②物流の壁：</strong>危険物を少量多品種で全国即納する網は一朝一夕には作れない。2022年に山崎梱包運輸を完全子会社化して自社物流を内製化した。</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>③スペックインの壁：</strong>特殊シンナーは塗料メーカーの指定配合。乾燥速度・レベリング・仕上がりが塗料と一体で設計されるため、<strong>認定を取った配合は簡単には切り替えられない。</strong></div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>④販路の壁：</strong>代理店約900社。塗装店・印刷所という細かい末端まで届く販売網そのものが資産。</div></div>
+        </div>
+      </div>
+      <div class="c cf-gn">
+        <div class="h3" style="color:var(--gn)">ストック性の実体</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">シンナーは設備ではなく<strong>操業に比例して消える副資材</strong>。塗装現場・印刷現場が動く限り毎月消費され、発注は継続的・反復的になる。契約型ストックではないが、<strong>「顧客の操業量に連動する消耗品リピート」という実質的なストック収益。</strong><br><br>5期連続黒字、営業利益レンジ8.0〜12.5億円と、市況変動を受けながらも赤字に落ちない安定性がこれを裏づけている。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="h3">業績トラックレコード（5期＋今期予想） <span class="src src-d">開示</span></div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">営業利益率</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">BPS</th><th class="r">自己資本比率</th></tr></thead>
+      <tbody>
+        <tr><td>2022年3月期</td><td class="r mn">313.0億</td><td class="r mn">9.93億</td><td class="r mn">3.17%</td><td class="r mn">10.32億</td><td class="r mn">6.94億</td><td class="r mn">151.72円</td><td class="r mn">3,171.82円</td><td class="r mn">62.4%</td></tr>
+        <tr><td>2023年3月期</td><td class="r mn">343.9億</td><td class="r mn">12.53億</td><td class="r mn">3.64%</td><td class="r mn">13.07億</td><td class="r mn">9.55億</td><td class="r mn">208.96円</td><td class="r mn">3,375.09円</td><td class="r mn">63.3%</td></tr>
+        <tr><td>2024年3月期</td><td class="r mn">324.6億</td><td class="r mn hrd">8.25億</td><td class="r mn hrd">2.54%</td><td class="r mn">9.39億</td><td class="r mn">6.27億</td><td class="r mn">137.09円</td><td class="r mn">3,502.03円</td><td class="r mn">66.4%</td></tr>
+        <tr><td>2025年3月期</td><td class="r mn">347.1億</td><td class="r mn hrd">7.99億</td><td class="r mn hrd">2.30%</td><td class="r mn">8.74億</td><td class="r mn">5.88億</td><td class="r mn">128.55円</td><td class="r mn">3,610.83円</td><td class="r mn">65.6%</td></tr>
+        <tr><td>2026年3月期</td><td class="r mn">346.1億</td><td class="r mn hgn">11.70億</td><td class="r mn">3.38%</td><td class="r mn">12.36億</td><td class="r mn">8.89億</td><td class="r mn">194.39円</td><td class="r mn">3,803.16円</td><td class="r mn">66.7%</td></tr>
+        <tr class="hl"><td><strong>2027年3月期 会社予想</strong><br><span style="font-size:10.5px;color:var(--ink3)">2026年8月7日 上方修正</span></td><td class="r mn hgn"><strong>384.7億</strong></td><td class="r mn hgn"><strong>19.60億</strong></td><td class="r mn hgn"><strong>5.09%</strong></td><td class="r mn hgn"><strong>20.30億</strong></td><td class="r mn hgn"><strong>12.80億</strong></td><td class="r mn hgn"><strong>279.8円</strong></td><td class="r mn">—</td><td class="r mn">—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">5期を通じて売上は313〜347億円のレンジ内で安定、営業利益は8.0〜12.5億円（平均10.1億円）。<strong>今期予想19.6億円は過去5年レンジの上限を6割上回る異常値であり、これを「正常な収益力」と見るのは危険。</strong>本レポートでは正常化営業利益を13億円前後と置いている。</p>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-am">
+      <div class="h3" style="color:var(--am)">市場成長 ── 構造的には縮む市場</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">国内塗料市場は数量ベースで横ばい〜微減。加えて<strong>水性化・粉体化・ハイソリッド化・UV硬化への置換とVOC規制の強化</strong>が、溶剤系シンナーの長期需要を年1〜2%ペースで削っていく。これは避けられない構造逆風。<br><br>ただし置換は緩慢で、<strong>木工・金属塗装・自動車補修・印刷インキ・洗浄用途では溶剤系が残り続ける。</strong>撤退が相次いで供給者が減れば、残存者の価格決定力はむしろ強まる。</div>
+    </div>
+    <div class="c cf-bl">
+      <div class="h3" style="color:var(--bl)">それでも数量は増えている ── シェアテイカーの証拠</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">2026年3月期の出荷数量は<strong>前期比+1.6%。</strong>会社は「新規ユーザーの開拓を中心に販売拡大」と説明している。市場が縮むなかで数量を伸ばしているということは、<strong>撤退する中小溶剤業者の顧客を吸収している</strong>ということ。<br><br>縮小市場における最後の勝者（last man standing）型の構図で、シェアと価格決定力が同時に上がる局面に入っている可能性がある。<strong>成長率ではなく「集約による質の向上」で評価すべき事業。</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ P5 インフレ ══════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">インフレ・値上げ ── 1Qで起きたこと</h2><span class="sb bg-pu">数量横ばい・単価だけで営業+522%</span></div>
+
+  <div class="ok">✅ ご指摘のとおり「値上げが通る局面」に入っています。ただし利益の中身は<strong>①スプレッド拡大（恒常的）</strong>と<strong>②在庫評価益（一過性）</strong>の混合であり、両者の切り分けが投資判断の核心になります。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--pu)"><div class="ml">1Q売上高</div><div class="mv am">116.4億円</div><div class="ms">前年同期比 +38.0%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">1Q営業利益</div><div class="mv gn">9.75億円</div><div class="ms">前年同期比 +522%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">1Q営業利益率</div><div class="mv or">8.4%</div><div class="ms">前期通期3.4%→2.5倍に</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">通期予想への進捗</div><div class="mv bl">49.7%</div><div class="ms">1Qだけで通期予想の半分</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">値上げが利益に効く「二重の経路」</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>経路① 在庫評価益（一過性）：</strong>安く仕入れた在庫を値上げ後の価格で販売する期ズレ利益。棚卸資産30億円規模のこの会社では、溶剤価格が3割上がれば<strong>数億円単位の一時益</strong>が乗る。市況が下げに転じれば同額が評価損として逆流する。</div></div>
+        <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>経路② スプレッド拡大（半恒常）：</strong>需給が逼迫すると、値上げが原料上昇を上回って通る。<strong>1Qは出荷数量ほぼ横ばいのまま単価上昇だけで売上+38%</strong>＝値上げが完全に浸透した証拠。この分は市況が高止まりする限り継続する。</div></div>
+        <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>会社自身は保守的：</strong>通期予想は営業利益19.6億円＝営業利益率5.1%。1Qの8.4%に対し、<strong>2Q以降は4.0%程度まで戻る前提</strong>を置いている。会社も一過性分を織り込み済みと読める。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c cl-pu" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--pu)">値上げが通る構造要因</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>① 中東発の供給不安：</strong>2026年に入りイラン情勢を背景に、トルエン・キシレン・メタノール等の芳香族系溶剤の調達不安と品薄が業界内で広く報じられている。<br><br><strong>② 国内石化の構造再編：</strong>エチレンクラッカーの統廃合が進み、副生する芳香族の国内供給余力が細っている。輸入依存が高まるほど円安と海上輸送コストが売価に転嫁されやすくなる。<br><br><strong>③ 供給者の減少：</strong>規制対応コストに耐えられない中小調合業者の撤退が進み、残存者の値決め力が上がる。</div>
+      </div>
+      <div class="c cf-rd">
+        <div class="h3" style="color:var(--rd)">逆回転のシナリオも同じ構造</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">中東情勢が沈静化し、アジアの芳香族供給が回復すれば、<strong>在庫評価損＋スプレッド縮小</strong>で営業利益率は2%台に沈む。<strong>2024年3月期（2.54%）・2025年3月期（2.30%）がまさにその状態だった。</strong><br><br>今期の19.6億円は「良い時の顔」であり、悪い時の顔は8億円。この振れ幅を前提に置かないと、ピークの利益にPERを掛けて高値を掴むことになる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c">
+    <div class="h3">四半期の推移で見る利益率のブレ幅</div>
+    <div class="bg2"><div class="br2"><span>2025年3月期 通期（市況軟化局面）</span><span>営業利益率 2.30%</span></div><div class="bt"><div class="bf" style="width:27.4%;background:var(--rd)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>2024年3月期 通期</span><span>営業利益率 2.54%</span></div><div class="bt"><div class="bf" style="width:30.2%;background:var(--rd)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>2026年3月期 通期</span><span>営業利益率 3.38%</span></div><div class="bt"><div class="bf" style="width:40.2%;background:var(--am2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>2027年3月期 通期 会社予想</span><span>営業利益率 5.09%</span></div><div class="bt"><div class="bf" style="width:60.6%;background:var(--or2)"></div></div></div>
+    <div class="bg2"><div class="br2"><span>2027年3月期 第1四半期 実績</span><span>営業利益率 8.38%</span></div><div class="bt"><div class="bf" style="width:100%;background:var(--gn2)"></div></div></div>
+    <p class="note">正常化利益の置きどころ：過去5年平均の営業利益率3.0%に、値上げ定着分（+1.0〜1.5pt）を上乗せした<strong>4.0〜4.5%＝売上370億円で営業利益15〜17億円</strong>が中立の姿。本レポートのBaseケースはこれをやや保守的に取っている。</p>
+  </div>
+</div>
+
+<!-- ══════════ P6 カタリスト ══════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">カタリスト ── 現金と収益力を「解放」する引き金</h2><span class="sb bg-gn">還元 × MBO × 制度</span></div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">株主構成（2026年3月31日現在） <span class="src src-d">開示</span></div>
+      <table class="t">
+        <thead><tr><th>順位</th><th>株主</th><th class="r">持株数</th><th class="r">比率</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>1</td><td><strong>坪井 典明</strong>（創業家）</td><td class="r mn">604千株</td><td class="r mn hgn"><strong>13.21%</strong></td></tr>
+          <tr class="hl"><td>2</td><td><strong>有限会社坪井</strong>（資産管理会社）</td><td class="r mn">556千株</td><td class="r mn hgn"><strong>12.16%</strong></td></tr>
+          <tr class="hl"><td>3</td><td><strong>光通信KK投資事業有限責任組合</strong></td><td class="r mn">297千株</td><td class="r mn hor"><strong>6.50%</strong></td></tr>
+          <tr><td>4</td><td>日本生命保険相互会社</td><td class="r mn">234千株</td><td class="r mn">5.11%</td></tr>
+          <tr><td>5</td><td>三井住友銀行</td><td class="r mn">169千株</td><td class="r mn">3.69%</td></tr>
+          <tr><td>6</td><td>大伸化学従業員持株会</td><td class="r mn">136千株</td><td class="r mn">2.98%</td></tr>
+          <tr><td>7</td><td>丸善石油化学</td><td class="r mn">130千株</td><td class="r mn">2.84%</td></tr>
+          <tr><td>8</td><td>INTERACTIVE BROKERS LLC</td><td class="r mn">92千株</td><td class="r mn">2.01%</td></tr>
+          <tr><td>9</td><td>DEUTSCHE BANK AG</td><td class="r mn">82千株</td><td class="r mn">1.80%</td></tr>
+          <tr><td>10</td><td>三菱UFJ銀行</td><td class="r mn">73千株</td><td class="r mn">1.60%</td></tr>
+          <tr class="sm"><td colspan="2">創業家＋従持＋政策保有（推定）</td><td class="r mn">—</td><td class="r mn">約45%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">株主数はわずか1,054名。発行済4,592,000株（自己株16,823株）。<strong>創業家25.4%＋従業員持株会2.98%で28.4%、銀行・生保・丸善石化の政策保有を加えると約45%が「動かない株」。</strong>浮動株が薄いため、需給が動くと株価の振れは大きい。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="h3" style="color:var(--gn)">光通信の存在が意味すること</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 gn"></div><div class="tdate">2023年10月</div><div class="ttext">光通信が大量保有報告書を提出、保有比率が<strong>5%を超えた</strong>と報告。</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="tdate">2024年10月</div><div class="ttext">変更報告書No.2で<strong>保有比率の増加</strong>を報告。買い増しを継続。</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="tdate">2026年3月末</div><div class="ttext">光通信KK投資事業有限責任組合として<strong>6.50%を保有。</strong>大株主3位。</div></div>
+          <div class="ti"><div class="td2 bl"></div><div class="tdate">意味</div><div class="ttext">光通信は低PBR・キャッシュリッチ小型株に入り、増配・自社株買いを促す投資行動で知られる。<strong>①還元強化の圧力源になる ②創業家による安値MBOの牽制になる（安値では応募しない）</strong>という二重の効果。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cg" style="grid-template-columns:repeat(3,1fr)">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 蓋然性 高</div>
+      <span class="ci">💴</span>
+      <div class="ct">増配 ── 方針どおりなら70円</div>
+      <div class="cb gn">+56%増配余地</div>
+      <div class="cu">配当性向25%目安 vs 実績16.1%</div>
+      <div class="cp">会社の配当方針は「安定配当継続、<strong>配当性向25%程度を目安</strong>」。今期予想EPS279.8円に25%を掛ければ<strong>70円</strong>だが、現状予想は45円据え置き。<strong>中間・期末での増配発表が最も近いカタリスト。</strong>70円なら利回り3.2%。</div>
+      <div class="tgs"><span class="tg tg-gn">11月中間決算が節目</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 02 · 蓋然性 中</div>
+      <span class="ci">🔁</span>
+      <div class="ct">自社株買い ── 現金85.9億円の使い道</div>
+      <div class="cb or">最大50%消却</div>
+      <div class="cu">余剰現金55〜65億円／時価総額100.7億円</div>
+      <div class="cp">仮に<strong>15億円の自社株買いで発行済の約15%、30億円なら約30%</strong>を消却できる規模感。EPSは比例して押し上がり、PBR0.58倍での買付は1株あたり純資産を増価させる。<strong>光通信の在籍がこの実行確率を押し上げる。</strong></div>
+      <div class="tgs"><span class="tg tg-or">PBR0.58倍での買付は理論上ほぼ常に正当化される</span></div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">Catalyst 03 · 蓋然性 中</div>
+      <span class="ci">🤝</span>
+      <div class="ct">MBO／TOB ── 構造は完全に整っている</div>
+      <div class="cb bl">3,500〜4,500円</div>
+      <div class="cu">想定される買収価格レンジ</div>
+      <div class="cp">創業家25.4%、時価総額100億円、現金85億円、無借金、単一事業。<strong>買収に必要な実質資金は差引15億円という異例の構造。</strong>PEとの共同MBOでも銀行借入でも成立する。ただし光通信がいるため安値では通らず、<strong>修正BPS4,040円前後が交渉の下限になりやすい。</strong></div>
+      <div class="tgs"><span class="tg tg-bl">オーナー25.4%</span><span class="tg tg-am">買収実質15億円</span></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-bl">
+      <div class="h3" style="color:var(--bl)">制度サイド ── 東証の低PBR是正圧力</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">東証はスタンダード市場を含め「資本コストや株価を意識した経営」の開示を継続的に求めているが、<strong>大伸化学は中期経営計画も当該開示も公表が確認できない。</strong><br><br>これは<strong>「未着手だから、着手した瞬間にサプライズになる」</strong>という裏返しでもある。ROE5%・PBR0.58倍という数字は開示要請の直撃対象であり、開示を迫られれば還元方針の見直しが伴う可能性が高い。</div>
+    </div>
+    <div class="c cf-or">
+      <div class="h3" style="color:var(--or)">政策保有株の縮減</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">大株主に三井住友銀行3.69%・三菱UFJ銀行1.60%・日本生命5.11%・丸善石油化学2.84%が並ぶ。<strong>コーポレートガバナンス・コードの下で銀行・生保側は政策保有株の売却を進めており、放出は避けられない流れ。</strong><br><br>短期的には需給の重しだが、<strong>会社が自社株買いで受け皿になれば一気に持株比率と株価の両方が動く。</strong>逆に大伸側が保有する政策保有株を売れば、それ自体が還元原資になる。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ P7 リスク ══════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">リスク分析 ── 正直に向き合う</h2><span class="sb bg-rd">最大の敵は「時間」</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">① 業績ピークを買うリスク（最重要）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">今期予想営業利益19.6億円は過去5年レンジ（8.0〜12.5億円）の上限を6割上回る。<strong>在庫評価益とスプレッド拡大という市況要因の寄与が大きく、恒常的な収益力ではない。</strong>市況が反転すれば営業利益は8億円台に戻り、PERは一気に25倍相当まで悪化して見える。株価はすでに4月安値1,287円から+71%上昇しており、<strong>上方修正はある程度織り込まれている。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="h3" style="color:var(--rd)">② バリュートラップ（現金の死蔵）</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">現金は4期で38億→86億円に膨らんだが、配当は据え置き、自社株買いの実績も乏しい。<strong>中期経営計画なし、決算説明会なし、PBR対応の開示なし。</strong>創業家が25%を握るオーナー企業で、外部からの規律が働きにくい。「安いまま10年」という展開は十分にありうる。<strong>光通信が動かなければ何も起きない、という依存構造が最大の弱点。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">③ 長期の数量逓減</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">塗料の水性化・粉体化・ハイソリッド化、UV硬化への置換、VOC排出規制の強化。<strong>溶剤系シンナーは構造的に縮む市場</strong>であり、年1〜2%の数量減が長期のベースライン。現在の数量増（+1.6%）は競合の撤退による一時的なシェア獲得の側面が強く、<strong>吸収し尽くせば市場減衰が表面化する。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">④ 原料調達の地政学リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">有報の事業等のリスク筆頭が「原材料市況リスク（中東地域等の地政学リスクや海外経済の動向）」。<strong>値上げが通る局面の裏側は、そもそも原料が調達できないリスク。</strong>供給途絶が長引けば数量が落ち、値上げ益を数量減が相殺する。円安進行も調達コストを押し上げる。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h3" style="color:var(--pu)">⑤ 事故・土壌汚染の潜在債務</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">危険物を50年以上扱う製造拠点。<strong>火災・爆発事故は一発で企業価値を毀損しうる。</strong>また越谷・兵庫の工場用地は将来の売却・転用時に土壌・地下水の調査と対策費が発生する可能性があり、本レポートでも含み益から2〜4億円を控除している。<strong>簿外債務として意識しておくべき項目。</strong></div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="h3" style="color:var(--bl)">⑥ 流動性・安値MBOリスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">株主数1,054名、浮動株が薄く、出来高も限定的。<strong>まとまった売買で株価が大きく動くため、機関投資家の参入は期待しにくい。</strong>また創業家25.4%というオーナー構造は、<strong>NAVを大きく下回る価格でのMBO提案という「安値での強制退出」リスク</strong>も同時に抱える（光通信の存在がこれを一定程度抑止する）。</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>増配・自社株買い：</strong>配当性向25%方針への回帰（年70円）、自社株買いの取締役会決議</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>再上方修正：</strong>11月の中間決算で通期予想の再引き上げ（1Q進捗49.7%は明らかに保守的）</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>光通信の買い増し：</strong>変更報告書での保有比率上昇</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>IRの変化：</strong>中期経営計画の公表、「資本コストや株価を意識した経営」の開示、決算説明会の開催</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>溶剤市況：</strong>トルエン・キシレンの国内価格が高止まり／輸入通関単価の上昇継続</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div class="h3" style="color:var(--or)">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>市況反落：</strong>芳香族溶剤のスポット価格急落 → 在庫評価損の発生</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>利益率の失速：</strong>四半期営業利益率が5%を割り込む（スプレッド縮小のサイン）</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>数量の前年割れ：</strong>出荷数量がマイナスに転じる（水性化の加速）</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>光通信の売却：</strong>変更報告書での保有比率低下</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>安値MBO：</strong>プレミアム30%未満（≒2,900円未満）でのMBO発表 → 修正BPS4,040円対比で明確に不十分</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="wr">⚠️ <strong>撤退条件を先に決めておく：</strong>①3年以内に還元方針（増配・自社株買い）が一切動かない ②営業利益率が2%台に定着し数量も減少に転じる ③光通信が持分を売却── このいずれかが成立したら、割安さの根拠が「解放されない資産」に変わったと判断し、資金を移すべき局面。</div>
+</div>
+
+<!-- ══════════ P8 3ケース ══════════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">3年後（2029年3月期）3ケース予想と最終判断</h2><span class="sb bg-or">2026.09 確定版</span></div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">Bear（確率30%）</div><div class="sc-p br">1,700円</div><div class="sc-s">▲23% ／ 市況反落・還元動かず</div><div class="sc-i">溶剤市況が2027年後半に反落</div><div class="sc-i">在庫評価損＋スプレッド縮小</div><div class="sc-i">水性化で数量▲1.5%/年</div><div class="sc-i">売上320億／営業8.0億（2.5%）</div><div class="sc-i">純利益5.8億／EPS 127円／BPS 4,250円</div><div class="sc-i">現金は約100億に増加（2,186円/株）</div><div class="sc-i">PBR0.40倍＝市場が現金すら評価しない状態</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base（確率45%）</div><div class="sc-p bs">3,300円</div><div class="sc-s">+50% ／ 値上げ一部定着・増配</div><div class="sc-i">国内芳香族の構造的タイト化が継続</div><div class="sc-i">営業利益率4.0〜4.5%で安定</div><div class="sc-i">数量横ばい、洗浄・電子用途へシフト</div><div class="sc-i">売上375億／営業16.0億（4.3%）</div><div class="sc-i">純利益11.4億／EPS 250円／BPS 4,430円</div><div class="sc-i">PER13.2倍・PBR0.74倍で評価</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull（確率25%）</div><div class="sc-p bu">5,000円</div><div class="sc-s">+127% ／ 市況＋資本政策の両輪</div><div class="sc-i">供給制約が構造化し価格決定力が定着</div><div class="sc-i">30億円の自社株買い（約100万株＝22%消却）</div><div class="sc-i">配当性向25%→40%へ引き上げ</div><div class="sc-i">売上420億／営業22.0億（5.2%）</div><div class="sc-i">純利益15.5億／消却後EPS 434円／BPS 4,727円</div><div class="sc-i">PER11.5倍・PBR1.06倍で評価</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="h3">確率加重 期待株価</div>
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">3年後株価</th><th class="r">加重寄与</th><th class="r">3年累計配当</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：市況反落・膠着</td><td class="r mn">30%</td><td class="r mn">1,700円</td><td class="r mn">510円</td><td class="r mn">135円</td></tr>
+          <tr><td>Base：値上げ定着・増配</td><td class="r mn">45%</td><td class="r mn">3,300円</td><td class="r mn">1,485円</td><td class="r mn">180円</td></tr>
+          <tr><td>Bull：市況＋資本政策</td><td class="r mn">25%</td><td class="r mn">5,000円</td><td class="r mn">1,250円</td><td class="r mn">300円</td></tr>
+          <tr class="sm"><td>期待値</td><td class="r mn">100%</td><td class="r mn">—</td><td class="r mn hgn">3,245円</td><td class="r mn hgn">196円</td></tr>
+        </tbody>
+      </table>
+      <p class="note">配当込み総期待リターン <strong>+56.4%（年率+16.1%）</strong>。株価2,200円→期待値3,245円＋配当196円＝3,441円。</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div style="text-align:center;padding:14px;background:var(--gn3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--gn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">確率加重期待値</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--gn)">3,245円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">現在比 +47.5%（配当込+56%）</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:var(--rd3);border-radius:var(--r)">
+          <div style="font:600 8px/1 var(--mono);color:var(--rd);margin-bottom:5px;text-transform:uppercase;letter-spacing:.1em">最大下値（Bear）</div>
+          <div style="font:700 26px/1 var(--mono);color:var(--rd)">▲500円</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">1,700円＝現金1,877円の0.91倍</div>
+        </div>
+      </div>
+      <div class="c cf-gn">
+        <div class="h3" style="color:var(--gn)">リスク・リワード比 ≒ 1 : 2.5</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">下値▲500円に対して期待上値＋1,241円（配当込）。<strong>広済堂HDのような1:6の極端な非対称ではないが、下値の質が違う。</strong><br><br>広済堂の下値は「BPSという理論値」だったのに対し、大伸化学の下値は<strong>BSに現物として載っている現金1,877円/株。</strong>市況が悪化しても現金は減らず、むしろ増え続ける（4期連続で増加）。<strong>下値の確実性という点では、こちらの方が硬い。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:18px">
+    <div class="h3">補助シナリオ：MBO／TOBが起きた場合の価格レンジ</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>算定アプローチ</th><th class="r">算定値</th><th class="r">現在比</th><th>コメント</th></tr></thead>
+      <tbody>
+        <tr><td>市場株価法（過去1年平均＋プレミアム40%）</td><td class="r mn ham">約2,600〜2,800円</td><td class="r mn">+18〜+27%</td><td style="font-size:11px">創業家が最も出したい水準。光通信がいるため成立しにくい</td></tr>
+        <tr><td>修正純資産法（修正BPS 4,040円×0.95〜1.05）</td><td class="r mn hgn">3,840〜4,240円</td><td class="r mn hgn">+75〜+93%</td><td style="font-size:11px">現金85.9億円が確定資産である以上、交渉の実質的な下限</td></tr>
+        <tr class="hl"><td><strong>EV/EBITDA法（正常化EBITDA20億×6倍＋現金）</strong></td><td class="r mn hgn"><strong>約4,500円</strong></td><td class="r mn hgn"><strong>+105%</strong></td><td style="font-size:11px">EV120億＋現金85.9億＝205.9億円÷457.5万株</td></tr>
+        <tr class="sm"><td>想定される着地レンジ</td><td class="r mn hor"><strong>3,500〜4,500円</strong></td><td class="r mn hor">+59〜+105%</td><td style="font-size:11px">Bullケース5,000円に近い水準</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">MBOは「起きれば大きい」が時期が読めないため、本レポートの確率加重には織り込まずBullケースの内数として扱っている。<strong>ただしプレミアム30%未満（2,900円未満）の提案が出た場合は、修正BPS対比で不当に低い水準であり、株主として反対すべき局面。</strong></p>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 総合評価 A−（妙味あり・分割エントリー推奨）</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">2,200円は妙味があるか</div>
+        <div class="conc-b"><strong>ある。</strong>PBR0.58倍・PER7.9倍・EV/EBIT0.75倍・株価/NCAV0.81倍が同時に成立し、しかも<strong>1株1,877円が現金で有利子負債ゼロ。</strong>市場が事業に付けている値段は1株323円＝14.8億円で、シンナー国内シェア3割・参入障壁4層のニッチトップ事業がこの値段で買える。定量的な割安性に議論の余地はない。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">ただし買い方には条件がある</div>
+        <div class="conc-b">株価は4月安値1,287円から+71%上昇し、上方修正はすでに一定織り込まれている。<strong>今期営業利益19.6億円は過去レンジ上限の1.6倍で、市況が反転すれば8億円台に戻る。</strong>ピークを一括で掴まないこと。<strong>2,200円台・2,000円割れ・1,800円割れなど価格帯を決めて3〜4回に分割し、市況反落時に買い増せる余力を残す。</strong></div>
+      </div>
+      <div>
+        <div class="conc-lbl">インフレ恩恵という着眼点への回答</div>
+        <div class="conc-b"><strong>着眼点は正しく、しかも1Qで数字が実証している。</strong>数量横ばいのまま単価だけで売上+38%・営業利益+522%。ただし利益の中身は在庫評価益（一過性）とスプレッド拡大（半恒常）の混合。<strong>「値上げが通る会社」であることは確認できたが、「値上げが恒久的に残る会社」かはまだ2〜3四半期の観察が要る。</strong></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">確率加重期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3,245円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">配当込 年率+16.1%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">現金の床</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">1,877円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">現株価比▲14.7%・毎期増加中</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">MBO/TOB想定</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">3,500〜4,500円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">+59〜+105%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">時間軸ルール</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">還元が動かなければ資金移動</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        大伸化学は、<strong style="color:var(--or2)">時価総額の85%が現金という静的バリューと、溶剤インフレによる価格転嫁という動的モメンタムが同時に成立している稀な小型株。</strong>NCAVを下回る株価、EV/EBIT 0.75倍、シンナー国内シェア3割、光通信6.5%と創業家25.4%という出口の両にらみ構造。<strong style="color:var(--or2)">2,200円は妙味あり。ただし利益ピークを掴まぬよう分割で入り、還元方針が3年動かなければ撤退する</strong>──「条件付きで持つ」規律が前提の一手。
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。筆者は投資助言業者ではありません。<br>
+  Data: 大伸化学 有価証券報告書（第73期・第74期） / 2026年3月期決算短信 / 2027年3月期第1四半期決算短信・連結業績予想の修正（2026年8月7日） / 会社IR「株式の状況」（2026年3月31日現在） / EDINET・TDnet / 国土交通省 地価公示（2026年） / IRBANK・キタイシホン・Yahoo!ファイナンス・投資の森 · 2026.09.02時点
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
