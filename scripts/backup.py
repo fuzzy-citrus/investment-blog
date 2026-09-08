@@ -100,13 +100,26 @@ for f in md_files:
 DATA = os.path.join(D_MD, '_サイト設定')
 os.makedirs(DATA, exist_ok=True)
 side = 0
-for rel in ('src/data/contentMap.ts', 'src/data/columnAuthors.ts',
-            'src/components/BookSidebar.astro', 'src/pages/value.astro',
-            'src/pages/margin.astro', 'src/pages/index.astro'):
+for rel in ('src/data/contentMap.ts', 'src/data/columnAuthors.ts', 'src/data/series.ts',
+            'src/components/BookSidebar.astro', 'src/components/AssetSidebar.astro',
+            'src/components/SeriesNav.astro', 'src/layouts/BlogPost.astro',
+            'src/pages/value.astro', 'src/pages/margin.astro', 'src/pages/index.astro',
+            'src/pages/company.astro', 'src/pages/map.astro'):
     src_p = os.path.join(REPO, *rel.split('/'))
     if os.path.exists(src_p):
         shutil.copy2(src_p, os.path.join(DATA, os.path.basename(src_p)))
         side += 1
+# 運用スクリプトもミラーする。記事と設定が戻っても、公開前チェックと株価取得が
+# 無いと同じ品質で回せないため（precheck / price は実際の事故から作ったもの）。
+SCR_DIR = os.path.join(D_MD, '_スクリプト')
+os.makedirs(SCR_DIR, exist_ok=True)
+scr = 0
+for rel in ('scripts/precheck.py', 'scripts/price.py',
+            'scripts/install_dashboard.py', 'scripts/backup.py'):
+    src_p = os.path.join(REPO, *rel.split('/'))
+    if os.path.exists(src_p):
+        shutil.copy2(src_p, os.path.join(SCR_DIR, os.path.basename(src_p)))
+        scr += 1
 md_mb = sum(os.path.getsize(f) for f in md_files) / 1048576
 
 today = datetime.datetime.now().strftime('%Y年%m月%d日 %H:%M')
@@ -215,9 +228,12 @@ INDEX = f"""<!doctype html>
  <div class="note" style="margin-top:10px;border-left-color:#534AB7">
   <code>src/content/blog/*.md</code> をそのままミラーしています。公開 <b>{md_pub}本</b>／下書き <b>{md_draft}本</b>（{md_mb:.1f} MB）。<br>
   <code>03_記事原稿/_サイト設定/</code> には、記事の登録先である
-  <code>contentMap.ts</code>・<code>columnAuthors.ts</code>・<code>BookSidebar.astro</code> と、
-  特設ページ <code>value.astro</code>・<code>margin.astro</code>・<code>index.astro</code> の計{side}本を入れてあります。
-  記事だけ戻しても一覧やテーマ分類が復元できないため、セットで保管しています。
+  <code>contentMap.ts</code>・<code>columnAuthors.ts</code>・<code>series.ts</code> と、
+  レイアウト・サイドバー・特設ページの計{side}本を入れてあります。
+  <code>03_記事原稿/_スクリプト/</code> には運用スクリプト{scr}本
+  （<code>precheck.py</code>・<code>price.py</code>・<code>install_dashboard.py</code>・<code>backup.py</code>）。
+  記事だけ戻しても一覧・テーマ分類・シリーズナビが復元できず、公開前チェックも回せないため、
+  セットで保管しています。
  </div>
 
  <div class="note">
@@ -256,7 +272,7 @@ README = f"""# 沼底バリュー商会｜完全版レポート バックアッ�
 - コピー元：`C:\\Users\\fuzzy\\Documents\\my-investment-blog\\public\\analysis`
 - 総数：**{len(reports)}件**（銘柄レポート {len(stocks)}件／{multi}社、コラム・モデル {len(columns)}件）・合計 **{total_mb:.1f} MB**
 - 照合：レポートは全ファイルMD5一致を確認済み（{verified}/{copied}）
-- 記事原稿：**{len(md_files)}本**（公開 {md_pub}／下書き {md_draft}・{md_mb:.1f} MB）＋サイト設定 {side}本
+- 記事原稿：**{len(md_files)}本**（公開 {md_pub}／下書き {md_draft}・{md_mb:.1f} MB）＋サイト設定 {side}本・運用スクリプト {scr}本
 
 `index.html` をブラウザで開くと、証券コード・銘柄名・評価ランク・掲載記事つきの一覧から各レポートを直接開けます。
 
@@ -270,7 +286,7 @@ numasoko-reports-backup/
 ├── 04_note原稿/        ← note用の原稿（無料・有料）。公開リポジトリには入れない
 ├── 01_銘柄レポート/    ← {len(stocks)}件（{multi}社）
 ├── 02_コラム・モデル/  ← {len(columns)}件
-└── 03_記事原稿/        ← {len(md_files)}本（+ _サイト設定/ {side}本）
+└── 03_記事原稿/        ← {len(md_files)}本（+ _サイト設定/ {side}本・_スクリプト/ {scr}本）
 ```
 
 ## 更新のしかた
@@ -311,7 +327,7 @@ open(os.path.join(DST, 'README.md'), 'w', encoding='utf-8').write(README)
 print(f'コピー {copied}件 / MD5一致 {verified}件' + (f'  !!NG {failed}' if failed else ''))
 print(f'  01_銘柄レポート : {len(stocks)}件（{multi}社）')
 print(f'  02_コラム・モデル: {len(columns)}件')
-print(f'  03_記事原稿      : {len(md_files)}本（公開{md_pub}/下書き{md_draft}）＋設定{side}本')
+print(f'  03_記事原稿      : {len(md_files)}本（公開{md_pub}/下書き{md_draft}）＋設定{side}本・スクリプト{scr}本')
 for r in columns:
     print(f'      - {r["fn"]}')
 print(f'  合計 {total_mb:.1f} MB → {DST}')
