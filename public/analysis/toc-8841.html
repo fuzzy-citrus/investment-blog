@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テーオーシー（8841）投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --mono:'JetBrains Mono',monospace;
+  --head:'Space Grotesk',sans-serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.05 var(--head);letter-spacing:-.022em;color:rgba(246,245,239,.95);margin-bottom:8px}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.4);line-height:1.75}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:8px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.65);line-height:1.8}
+.vt strong{color:rgba(246,245,239,.95)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.24);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.2);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:0;z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.3);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb.on{color:rgba(246,245,239,.95);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.1 var(--head);letter-spacing:-.018em}
+.sb{font:700 9px/1 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.cf-rd{background:var(--rd3);border:.5px solid #eaa0a0}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t tr.wm td{background:var(--am3)}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono)}
+.t td.mn.r{white-space:nowrap}
+.t.sml{font-size:11.5px}
+.t.sml td{padding:6px 8px}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0}
+.sc4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule);background:var(--bg2)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.42;color:rgba(246,245,239,.9);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.25 var(--head);color:rgba(246,245,239,.95);margin-bottom:8px}
+.cb{font:700 34px/1 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:var(--pu2)}
+.cu{font:500 9px/1 var(--mono);color:rgba(246,245,239,.36);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.55);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.88)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.2);color:#90b4ec}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.55}
+.sp{height:16px}
+.bge{display:inline-block;font:700 9px/1 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.warn{background:var(--rd3);border:.5px solid #eaa0a0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.ttl{font-size:11px;font-weight:600;margin-bottom:11px}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.1 var(--head);letter-spacing:-.015em;color:rgba(246,245,239,.95);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.28);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.62)}
+.conc-b strong{color:rgba(246,245,239,.95)}
+
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc4{grid-template-columns:1fr}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:20px;padding-right:20px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 8841 · 東証スタンダード · 2026.09.06</p>
+      <h1 class="ht">株式会社テーオーシー <em>（8841）</em><br>資産バリュー深堀レポート</h1>
+      <p class="hs">賃貸等不動産 含み益 1,299億円（簿価591億 → 時価1,891億・3.20倍）／ 修正NAV 2,202円/株<br>現株価1,003円は修正NAVの45.6%・EV／不動産時価はわずか20%。大谷家グループ支配比率 約52%の非公開化オプション付き</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B+</div>
+      <div class="vt">
+        <strong>投資妙味あり（条件付き）</strong><br>
+        修正PBR0.46倍・下値はネット金融資産653円/株。<br>
+        ただしROE2%台・還元方針なし・流動性薄。<br>
+        <strong>「主力」ではなく「分割・中期」の銘柄。</strong>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価（前提）</div><div class="kn am">1,003円</div><div class="ks">時価総額 885億円／88.22百万株（自己株除）</div></div>
+    <div class="kv"><div class="kl">修正NAV（会社開示時価）</div><div class="kn gn">2,202円</div><div class="ks">ディスカウント ▲54.4%</div></div>
+    <div class="kv"><div class="kl">賃貸等不動産 含み益</div><div class="kn rd">1,299億円</div><div class="ks">1株あたり1,473円（税引前）</div></div>
+    <div class="kv"><div class="kl">PBR / 修正PBR</div><div class="kn bl">0.85 / 0.46倍</div><div class="ks">BPS 1,179.94円（2026年3月期）</div></div>
+    <div class="kv"><div class="kl">ネット金融資産</div><div class="kn gn">653円/株</div><div class="ks">現預金311億＋有価証券274億−負債9億</div></div>
+    <div class="kv"><div class="kl">大谷家グループ支配</div><div class="kn am">約52%</div><div class="ks">MBO・非公開化オプションの源泉</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav">
+  <button class="tb on" onclick="go('p1',this)"><span class="d" style="background:var(--gn2)"></span>投資テーゼ</button>
+  <button class="tb" onclick="go('p2',this)"><span class="d" style="background:var(--am2)"></span>土地含み益</button>
+  <button class="tb" onclick="go('p3',this)"><span class="d" style="background:var(--or2)"></span>NAV・有価証券</button>
+  <button class="tb" onclick="go('p4',this)"><span class="d" style="background:var(--pu2)"></span>事業・ストック性</button>
+  <button class="tb" onclick="go('p5',this)"><span class="d" style="background:var(--bl2)"></span>決算・中計</button>
+  <button class="tb" onclick="go('p6',this)"><span class="d" style="background:var(--gn2)"></span>MBO・資本政策</button>
+  <button class="tb" onclick="go('p7',this)"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" onclick="go('p8',this)"><span class="d" style="background:var(--or2)"></span>3年後シナリオ</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════════════════════ P1 投資テーゼ ══════════════════════════════ -->
+<div class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、テーオーシーなのか</h2><span class="sb bg-gn">5つの論点</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Thesis 01 · 最重要</div>
+      <span class="ci">🏢</span>
+      <div class="ct">EVは不動産時価のわずか20%</div>
+      <div class="cb gn">20.1%</div>
+      <div class="cu">EV 381億円 ÷ 賃貸等不動産時価 1,891億円</div>
+      <div class="cp">時価総額885億円から<strong>ネット金融資産504億円（現預金311億＋投資有価証券274億−有利子負債9億−預り保証金72億）</strong>を差し引くと、事業EVは381億円。この価格で東京都心の1,891億円の不動産を買っている計算。</div>
+      <div class="tgs"><span class="tg tg-gn">実質無借金</span><span class="tg tg-or">自己資本比率85.2%</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Thesis 02 · 最重要</div>
+      <span class="ci">📈</span>
+      <div class="ct">利益が構造的にインフレクション</div>
+      <div class="cb am">×2.8倍</div>
+      <div class="cu">営業利益 24.6億（FY26/3）→ 70億（FY29/3中計）</div>
+      <div class="cp">TOCビルは2024年3月閉館→9月再開。<strong>入居率は全社81.7%・TOCビル単体65.9%と、まだ「戻り切っていない」状態。</strong>2027年3月期Q1は営業利益+139.7%。空室の穴埋めがそのまま利益になる局面。</div>
+      <div class="tgs"><span class="tg tg-am">Q1営業利益+139.7%</span><span class="tg tg-gn">中計を初めて開示</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Thesis 03 · 追い風</div>
+      <span class="ci">🌏</span>
+      <div class="ct">東京オフィス市況が歴史的逼迫</div>
+      <div class="cb or">1.95%</div>
+      <div class="cu">都心5区空室率（2026年7月・三鬼商事）</div>
+      <div class="cp">平均賃料は前年比<strong>+11.4%（23,287円/坪）。</strong>JLLは2028年末まで空室率0%台、2029年賃料44,000円/坪を予想。<strong>「空室を埋めたい会社」にとって最良の需給環境。</strong>浅草の地価はインバウンドで+20%超。</div>
+      <div class="tgs"><span class="tg tg-or">賃料+11.4%</span><span class="tg tg-gn">供給は建築費高騰で減少</span></div>
+    </div>
+    <div class="ca cc-pu">
+      <div class="cn">Thesis 04 · オプション</div>
+      <span class="ci">🔒</span>
+      <div class="ct">大谷家52%支配＝非公開化の器は既にある</div>
+      <div class="cb pu">51.95%</div>
+      <div class="cu">ニュー・オータニ24.08%＋大谷興産16.56%＋オオタニ・ファンド7.85%＋大谷興産TO 3.46%</div>
+      <div class="cp">親会社等は<strong>非上場の（株）ニュー・オータニ（純資産1,134億円・当期純利益206億円）。</strong>2007年には800円でMBOを試みた実績。買い取るべき残り48%＝1,003円で425億円。<strong>資金力・動機・器の三つが揃っている。</strong></div>
+      <div class="tgs"><span class="tg tg-am">2007年MBO未遂</span><span class="tg tg-bl">東証の支配株主開示強化</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3)">Thesis 05 · しかし正直に言うと</div>
+      <span class="ci" style="font-size:22px">⚖️</span>
+      <div class="ct" style="color:var(--ink)">この銘柄の弱点は「安さ」ではなく「換金経路の不在」</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">① ROEが2.2%</strong><br>FY26/3のROEは2.2%、中計を完全達成してもFY29/3で5.1%。修正NAV対比では2.4%。株主資本コストを下回る限り、理論上ディスカウントは正当化されてしまう。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">② 中計に還元策がない</strong><br>2026年5月の中計の資金計画は<strong>「新規事業設備投資280億円＋その他64億円」。</strong>現預金311億円は株主還元ではなく不動産再投資に充てる方針。自社株買い・増配の記載なし。</div>
+        <div style="padding:10px;background:var(--bg3);border-radius:4px"><strong style="color:var(--rd)">③ 少数株主に権限がない</strong><br>大谷家52%の下では株主提案も委任状争奪も通らない。2007年にダヴィンチが1,100円で挑んで失敗した歴史がそれを証明している。<strong>変化のトリガーは常に「向こう側」にある。</strong></div>
+      </div>
+      <p class="note" style="color:var(--ink3)">→ したがって本件は「割安だから上がる」のではなく、<strong>「稼働率回復による利益の3倍化」＋「資産価値の年率成長」＋「非公開化オプション」の3本立て</strong>で持つ銘柄。</p>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.28);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.85);max-width:860px">
+      テーオーシーは、<strong style="color:var(--or2)">東京都心5.8万㎡の土地を昭和期の簿価で抱えたまま、閉館明けのTOCビルの空室を歴史的な賃料上昇局面で埋めにいく「資産＋業績回復」の二段ロケット。</strong>修正NAV2,202円に対し1,003円は▲54%。下値はネット金融資産653円/株と実質無借金のバランスシートに守られる一方、上値の解放は大谷家の意思に依存する ── <strong style="color:var(--or2)">"待てる資金"でのみ報われる案件。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P2 土地含み益 ══════════════════════════════ -->
+<div class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">土地含み益の精査 ── 公示地価ベースの積み上げ</h2><span class="sb bg-am">簿価は昭和のまま</span></div>
+
+  <div class="inf">📌 会社は有報で<strong>賃貸等不動産（土地＋建物）の期末時価を1,891億円（簿価591億円）</strong>と開示している。以下では、それとは独立に「主要な設備の状況」の土地面積・簿価と2026年公示地価から土地だけを積み上げ、開示時価の妥当性を検証する。</div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">保有土地面積（主要物件）</div><div class="mv bl">58,359㎡</div><div class="ms">17,654坪・14物件（都内13）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">土地簿価（借地権含む）</div><div class="mv am">371億円</div><div class="ms">平均 約61万円/㎡</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">公示地価ベース推定（中立）</div><div class="mv gn">1,124億円</div><div class="ms">土地含み益 753億円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">会社開示 賃貸等不動産時価</div><div class="mv or">1,891億円</div><div class="ms">含み益1,299億円・簿価の3.20倍</div></div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="ttl">物件別 土地評価 ── 面積・簿価・公示地価ベース推定時価（単位：百万円）</div>
+    <div class="tw">
+    <table class="t sml">
+      <thead><tr><th>物件</th><th>所在地</th><th class="r">土地面積㎡</th><th class="r">簿価</th><th class="r">簿価単価</th><th class="r">ベア</th><th class="r">ベース</th><th class="r">ブル</th><th>取得・竣工</th></tr></thead>
+      <tbody>
+        <tr class="wm"><td><strong>TOCビル</strong></td><td>品川区西五反田7</td><td class="r mn">21,522</td><td class="r mn">3,507</td><td class="r mn hrd">16.3万円</td><td class="r mn">24,751</td><td class="r mn hgn"><strong>34,436</strong></td><td class="r mn">49,501</td><td>1970年竣工（星製薬工場跡地）</td></tr>
+        <tr class="wm"><td><strong>第2TOCビル</strong></td><td>品川区</td><td class="r mn">1,644</td><td class="r mn hrd">14</td><td class="r mn hrd">0.85万円</td><td class="r mn">1,891</td><td class="r mn hgn"><strong>2,630</strong></td><td class="r mn">3,781</td><td>簿価1,644㎡で14百万円</td></tr>
+        <tr><td>第3TOCビル</td><td>品川区</td><td class="r mn">1,045</td><td class="r mn">447</td><td class="r mn">42.8万円</td><td class="r mn">1,358</td><td class="r mn">1,881</td><td class="r mn">2,612</td><td>—</td></tr>
+        <tr><td>第5TOCビル</td><td>品川区</td><td class="r mn">637</td><td class="r mn">2,860</td><td class="r mn">449万円</td><td class="r mn">1,783</td><td class="r mn">2,229</td><td class="r mn">2,866</td><td>近年取得（含み益小）</td></tr>
+        <tr><td>TOC ANNEX</td><td>品川区</td><td class="r mn">235</td><td class="r mn">977</td><td class="r mn">416万円</td><td class="r mn">939</td><td class="r mn">1,174</td><td class="r mn">1,526</td><td>近年取得</td></tr>
+        <tr><td>TOC両国ビル</td><td>墨田区</td><td class="r mn">307</td><td class="r mn">233</td><td class="r mn">75.9万円</td><td class="r mn">292</td><td class="r mn">368</td><td class="r mn">491</td><td>—</td></tr>
+        <tr class="wm"><td><strong>大崎ニューシティ</strong></td><td>品川区大崎1</td><td class="r mn">6,547</td><td class="r mn">4,003</td><td class="r mn hrd">61.1万円</td><td class="r mn">18,331</td><td class="r mn hgn"><strong>22,914</strong></td><td class="r mn">29,461</td><td>1987年1月竣工（大崎駅東口再開発）</td></tr>
+        <tr class="wm"><td><strong>TOC有明</strong></td><td>江東区有明3</td><td class="r mn">18,088</td><td class="r mn">15,709</td><td class="r mn">86.8万円</td><td class="r mn">18,993</td><td class="r mn hgn"><strong>23,515</strong></td><td class="r mn">30,750</td><td>2006年竣工（担保提供中）</td></tr>
+        <tr><td>赤坂インターシティAIR</td><td>港区赤坂1</td><td class="r mn">203</td><td class="r mn hrd">0</td><td class="r mn hrd">0円</td><td class="r mn">1,013</td><td class="r mn">1,215</td><td class="r mn">1,620</td><td>区分所有・土地簿価ゼロ</td></tr>
+        <tr><td>TOC CONNECT</td><td>品川区</td><td class="r mn">81</td><td class="r mn">240</td><td class="r mn">295万円</td><td class="r mn">228</td><td class="r mn">285</td><td class="r mn">366</td><td>—</td></tr>
+        <tr class="wm"><td><strong>ROXビル</strong></td><td>台東区浅草1</td><td class="r mn">4,239</td><td class="r mn">4,001</td><td class="r mn">94.4万円</td><td class="r mn">9,326</td><td class="r mn hgn"><strong>12,294</strong></td><td class="r mn">16,533</td><td>1986年開業</td></tr>
+        <tr><td>ROX2G</td><td>台東区浅草1</td><td class="r mn">529</td><td class="r mn">405</td><td class="r mn">76.5万円</td><td class="r mn">1,059</td><td class="r mn">1,376</td><td class="r mn">1,852</td><td>—</td></tr>
+        <tr><td>ROX・3G</td><td>台東区浅草1</td><td class="r mn">2,325</td><td class="r mn">2,427</td><td class="r mn">104万円</td><td class="r mn">4,649</td><td class="r mn">6,044</td><td class="r mn">8,136</td><td>—</td></tr>
+        <tr><td>ROXドーム</td><td>台東区浅草1</td><td class="r mn">957</td><td class="r mn">547</td><td class="r mn">57.2万円</td><td class="r mn">1,531</td><td class="r mn">2,010</td><td class="r mn">2,679</td><td>—</td></tr>
+        <tr class="sm"><td colspan="2"><strong>合計</strong></td><td class="r mn"><strong>58,359</strong></td><td class="r mn"><strong>35,370</strong></td><td class="r mn">—</td><td class="r mn ham"><strong>86,143</strong></td><td class="r mn hgn"><strong>112,370</strong></td><td class="r mn hor"><strong>152,176</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">出所：2026年3月期有価証券報告書「第3 設備の状況」の土地面積・帳簿価額。連結BS上の土地は30,037百万円＋借地権7,076百万円＝37,113百万円で、設備表の土地欄は借地権を含むものと推定。含み益は<strong>ベア490億円／ベース753億円／ブル1,151億円</strong>（対37,113百万円）。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="ttl">単価前提の根拠 ── 2026年 公示地価（円/㎡）</div>
+      <div class="tw">
+      <table class="t sml">
+        <thead><tr><th>標準地</th><th>最寄駅・用途</th><th class="r">公示価格</th><th class="r">前年比</th></tr></thead>
+        <tbody>
+          <tr><td>西五反田1-2-3</td><td>五反田100m・商業</td><td class="r mn hrd">793万円</td><td class="r mn hgn">+18.3%</td></tr>
+          <tr><td>西五反田2-29-9</td><td>店舗事務所</td><td class="r mn">393万円</td><td class="r mn hgn">+16.2%</td></tr>
+          <tr><td>西五反田2-9-1</td><td>店舗</td><td class="r mn">319万円</td><td class="r mn hgn">+18.6%</td></tr>
+          <tr><td>大崎1-342-1</td><td>大崎250m・準工業</td><td class="r mn hrd">456万円</td><td class="r mn">—</td></tr>
+          <tr><td>大崎3-296-18</td><td>大崎90m・商業</td><td class="r mn">339万円</td><td class="r mn">—</td></tr>
+          <tr><td>大崎5-16-1</td><td>五反田510m・準工業</td><td class="r mn">163万円</td><td class="r mn">—</td></tr>
+          <tr><td>西五反田4-552-10</td><td>不動前400m・準工業</td><td class="r mn">129万円</td><td class="r mn hgn">+14.2%</td></tr>
+          <tr><td>有明3-1-160</td><td>国際展示場450m</td><td class="r mn">143万円</td><td class="r mn">—</td></tr>
+          <tr><td>浅草1丁目（駅前）</td><td>浅草0m・商業</td><td class="r mn hrd">915万円</td><td class="r mn hgn">大幅上昇</td></tr>
+          <tr><td>西浅草2丁目</td><td>TX浅草160m・商業</td><td class="r mn">323万円</td><td class="r mn">—</td></tr>
+          <tr><td>雷門1丁目</td><td>田原町200m・商業</td><td class="r mn">204万円</td><td class="r mn">—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">西五反田は5地点平均で<strong>前年比+17.2%</strong>。TOCビル（西五反田7丁目・大崎広小路至近）は駅前商業地と準工業地の中間に位置するため、ベース115〜160万円/㎡（大規模地補正後）を採用した。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--am)">評価のポイント ── なぜ簿価がここまで低いのか</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>第2TOCビルの簿価は1㎡あたり8,516円。</strong>1,644㎡の土地が14百万円で計上されている。周辺の公示地価は129〜393万円/㎡。実に<strong>150〜460倍</strong>の乖離。昭和期取得の典型例。</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>TOCビルは1970年竣工。</strong>星製薬の工場跡地に建てられた。取得は1960年代であり、地価は当時比で数十倍。21,522㎡の簿価が35億円（16.3万円/㎡）というのは、実質的に「土地はタダで持っている」状態。</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>換金実績がある。</strong>2017年にTOCみなとみらいを簿価364億円に対し665億円で売却し、約300億円の譲渡益を実現。<strong>「含み益は絵に描いた餅ではない」ことを同社は既に一度証明している。</strong></div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>含み益は毎年積み上がる。</strong>会社開示ベースの含み益は前期1,265億円→当期1,299億円と1年で+34.7億円（+2.7%）。地価上昇局面では「持っているだけ」で1株あたり年+39円（税引前）の価値が増える。</div></div>
+        </div>
+      </div>
+      <div class="c cf-bl">
+        <div class="ttl" style="color:var(--bl)">積み上げ vs 会社開示 ── どちらが保守的か</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">公示地価ベースのベース土地時価 <strong>1,124億円</strong> ＋ 建物簿価212億円 ＋ 建設仮勘定32億円 ＝ <strong>1,367億円</strong>。<br><br>会社開示の賃貸等不動産時価は<strong>1,891億円</strong>で、差の524億円は「収益還元法で評価される建物・稼働価値」と「大規模地・角地等の個別補正」に相当する。<br><br><strong>→ 土地だけを公示地価で置き換えても含み益753億円（1株854円／税引後592円）は説明できる。会社開示の1,299億円は過大とは言えない。</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P3 NAV ══════════════════════════════ -->
+<div class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">有価証券・現金・修正NAV</h2><span class="sb bg-or">修正PBR 0.46倍</span></div>
+
+  <div class="ok">✅ 重要な整理：<strong>投資有価証券の含み益（税引後102億円）はすでにBPS 1,179.94円に反映済み。</strong>BPSに反映されていないのは不動産含み益1,299億円だけ。したがって「BPS＋不動産含み益（税引後）」がそのまま修正NAVになる。二重計上の心配はない。</div>
+
+  <div class="g2" style="margin-bottom:16px">
+    <div class="c">
+      <div class="ttl">連結BSの資産サイド（2026年3月期末・百万円）</div>
+      <div class="tw">
+      <table class="t sml">
+        <thead><tr><th>科目</th><th class="r">前期末</th><th class="r">当期末</th><th class="r">増減</th><th>コメント</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>現金及び預金</strong></td><td class="r mn">29,487</td><td class="r mn"><strong>31,148</strong></td><td class="r mn hgn">+1,661</td><td>総資産の25.5%</td></tr>
+          <tr class="hl"><td><strong>投資有価証券</strong></td><td class="r mn">23,027</td><td class="r mn"><strong>27,361</strong></td><td class="r mn hgn">+4,334</td><td>時価評価済み</td></tr>
+          <tr><td>建物及び構築物（純額）</td><td class="r mn">19,658</td><td class="r mn">21,163</td><td class="r mn">+1,505</td><td>耐震補強で増加</td></tr>
+          <tr><td>土地</td><td class="r mn">30,037</td><td class="r mn">30,037</td><td class="r mn">±0</td><td>昭和期簿価</td></tr>
+          <tr><td>建設仮勘定</td><td class="r mn">3,471</td><td class="r mn">3,162</td><td class="r mn">△309</td><td>新TOCビル関連</td></tr>
+          <tr><td>借地権</td><td class="r mn">7,076</td><td class="r mn">7,076</td><td class="r mn">±0</td><td>—</td></tr>
+          <tr class="sm"><td>総資産</td><td class="r mn">114,896</td><td class="r mn">122,226</td><td class="r mn hgn">+7,330</td><td>—</td></tr>
+          <tr><td>短期借入金＋1年内返済</td><td class="r mn">862</td><td class="r mn hgn">899</td><td class="r mn">+37</td><td><span class="bge be-gn">実質無借金</span></td></tr>
+          <tr><td>長期借入金</td><td class="r mn">260</td><td class="r mn hgn">0</td><td class="r mn hgn">△260</td><td>完済</td></tr>
+          <tr><td>長期預り保証金</td><td class="r mn">5,934</td><td class="r mn">7,218</td><td class="r mn">+1,284</td><td>テナント増＝稼働改善</td></tr>
+          <tr><td>その他有価証券評価差額金</td><td class="r mn">7,802</td><td class="r mn hgn">10,200</td><td class="r mn hgn">+2,398</td><td>税引後</td></tr>
+          <tr class="sm"><td>純資産</td><td class="r mn">100,824</td><td class="r mn">104,719</td><td class="r mn hgn">+3,895</td><td>自己資本比率85.2%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">長期預り保証金が+12.8億円増えているのは、TOCビル再稼働に伴う新規テナント入居の裏付け。稼働率回復の"先行指標"として有効。</p>
+    </div>
+    <div>
+      <div class="c cl-gn" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--gn)">投資有価証券 273.6億円の中身</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          その他有価証券評価差額金は<strong>102.0億円（税引後）</strong>。実効税率30.62%で割り戻すと<strong>税引前含み益は約147億円</strong>、逆算した取得原価は約127億円。<strong>取得原価に対して約2.2倍</strong>の水準。<br><br>
+          注目すべきは<strong>非上場の（株）ニュー・オータニ株式を8.4%保有</strong>している点。同社の純資産は1,134億円なので、簿価純資産ベースの持分だけで約95億円。非上場株は原則取得原価評価のため、<strong>ここにも簿価に出ていない価値が眠っている可能性がある</strong>（時価開示なしのため本レポートのNAVには算入していない）。
+        </div>
+        <p class="note">2023年4月公表の「政策保有株式の縮減方針」は2026年3月末までに目標達成。FY26/3は上場2銘柄の一部と非上場1銘柄を売却し229百万円の特別利益を計上。<strong>売却は継続する見込み＝キャッシュ化の経路は生きている。</strong></p>
+      </div>
+      <div class="c cf-gn">
+        <div class="ttl" style="color:var(--gn)">ネット金融資産で見た「実質の買値」</div>
+        <div class="tw">
+        <table class="t sml">
+          <tbody>
+            <tr><td>時価総額（1,003円 × 88.22百万株）</td><td class="r mn">88,482</td></tr>
+            <tr><td>− 現金及び預金</td><td class="r mn">△31,148</td></tr>
+            <tr><td>− 投資有価証券</td><td class="r mn">△27,361</td></tr>
+            <tr><td>＋ 有利子負債</td><td class="r mn">+899</td></tr>
+            <tr><td>＋ 長期預り保証金</td><td class="r mn">+7,218</td></tr>
+            <tr class="sm"><td><strong>実質EV</strong></td><td class="r mn hor"><strong>38,090</strong></td></tr>
+            <tr class="hl"><td><strong>賃貸等不動産 時価</strong></td><td class="r mn hgn"><strong>189,082</strong></td></tr>
+            <tr class="sm"><td><strong>EV ÷ 不動産時価</strong></td><td class="r mn hgn"><strong>20.1%</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">ネット金融資産だけで<strong>1株653円</strong>（株価の65%）。株価1,003円のうち、不動産事業に払っている値段は実質350円/株にすぎない。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c" style="margin-bottom:14px">
+    <div class="ttl">修正NAV ── サム・オブ・パーツ（単位：百万円、88,217,483株ベース）</div>
+    <div class="tw">
+    <table class="t">
+      <thead><tr><th>項目</th><th class="r">金額</th><th class="r">1株あたり</th><th>算定根拠</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>賃貸等不動産 時価</strong></td><td class="r mn">189,082</td><td class="r mn">2,143円</td><td>有報 賃貸等不動産関係注記（期末時価）</td></tr>
+        <tr><td>現金及び預金</td><td class="r mn">31,148</td><td class="r mn">353円</td><td>連結BS</td></tr>
+        <tr><td>投資有価証券</td><td class="r mn">27,361</td><td class="r mn">310円</td><td>時価評価済み</td></tr>
+        <tr><td>その他資産（棚卸・未収金等）</td><td class="r mn">4,587</td><td class="r mn">52円</td><td>総資産−上記−不動産簿価</td></tr>
+        <tr><td>負債合計</td><td class="r mn hrd">△17,506</td><td class="r mn hrd">△198円</td><td>借入金899・預り保証金7,218 他</td></tr>
+        <tr><td>不動産含み益に係る税効果</td><td class="r mn hrd">△39,791</td><td class="r mn hrd">△451円</td><td>129,952 × 30.62%</td></tr>
+        <tr><td>非支配株主持分</td><td class="r mn hrd">△627</td><td class="r mn hrd">△7円</td><td>連結BS</td></tr>
+        <tr class="sm"><td><strong>修正NAV（税引後）</strong></td><td class="r mn hgn"><strong>194,254</strong></td><td class="r mn hgn"><strong>2,202円</strong></td><td>現株価1,003円＝NAVの45.6%</td></tr>
+        <tr><td>（参考）税効果を控除しない場合</td><td class="r mn">234,044</td><td class="r mn">2,653円</td><td>同37.8%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">検算：自己資本104,092＋不動産含み益（税引後）90,161＝194,253百万円と一致。実効税率は30.62%（2026年4月開始事業年度からの防衛特別法人税により実効税率は0.5〜1.0pt程度上昇するため、税引後NAVは20〜30円程度の下振れ余地がある）。</p>
+  </div>
+
+  <div class="sc">
+    <div class="sc-c"><div class="sc-l br">保守（公示地価×土地のみ）</div><div class="sc-p br">1,772円</div><div class="sc-s">土地含み益753億円のみ算入</div><div class="sc-i">建物は簿価のまま据え置き</div><div class="sc-i">現株価はこの56.6%</div><div class="sc-i">最も硬い下限値</div></div>
+    <div class="sc-c"><div class="sc-l bs">中立（会社開示時価）</div><div class="sc-p bs">2,202円</div><div class="sc-s">含み益1,299億円・推奨ベース</div><div class="sc-i">有報の賃貸等不動産時価を採用</div><div class="sc-i">現株価はこの45.6%</div><div class="sc-i">ディスカウント▲54.4%</div></div>
+    <div class="sc-c"><div class="sc-l bu">強気（地価上昇＋稼働正常化）</div><div class="sc-p bu">2,500円超</div><div class="sc-s">時価2,200億円想定</div><div class="sc-i">都心地価+5%/年の継続</div><div class="sc-i">稼働率92%での収益還元</div><div class="sc-i">ニュー・オータニ株の含みは別途</div></div>
+  </div>
+  <p class="note" style="border:none">※保守ケースの1,772円＝（自己資本104,092＋土地含み益75,257×0.6938）÷88.22百万株。</p>
+</div>
+
+<!-- ══════════════════════════════ P4 事業性 ══════════════════════════════ -->
+<div class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性・ストック性・ニッチトップ性</h2><span class="sb bg-pu">売上の75%が賃貸収入</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">不動産事業 売上構成比</div><div class="mv gn">74.6%</div><div class="ms">113.1億円／151.6億円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">全社入居率（期末）</div><div class="mv am">81.7%</div><div class="ms">前期68.2%から+13.5pt</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">TOCビル入居率</div><div class="mv rd">65.9%</div><div class="ms">臨時使用含む・回復途上</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">保有営業用建物</div><div class="mv bl">12棟</div><div class="ms">五反田・大崎・有明・浅草・両国</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="ttl">セグメント構造（2026年3月期・百万円）</div>
+      <div class="tw">
+      <table class="t">
+        <thead><tr><th>セグメント</th><th class="r">売上高</th><th class="r">前期比</th><th class="r">営業利益</th><th class="r">利益率</th><th>ストック性</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>不動産事業</strong></td><td class="r mn">11,308</td><td class="r mn hgn">+19.6%</td><td class="r mn hgn">2,388</td><td class="r mn hgn">21.1%</td><td><span class="bge be-gn">◎ 賃貸契約</span></td></tr>
+          <tr><td>リネンサプライ・ランドリー</td><td class="r mn">1,813</td><td class="r mn hgn">+4.9%</td><td class="r mn">52</td><td class="r mn">2.9%</td><td><span class="bge be-am">○ ホテル定期契約</span></td></tr>
+          <tr><td>その他（製薬・スポーツ・温浴・ビル管理）</td><td class="r mn">2,033</td><td class="r mn hgn">+3.2%</td><td class="r mn">13</td><td class="r mn">0.6%</td><td><span class="bge be-am">○ 会員制中心</span></td></tr>
+          <tr class="sm"><td>連結</td><td class="r mn">15,155</td><td class="r mn hgn">+15.2%</td><td class="r mn">2,462</td><td class="r mn">16.2%</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">利益は事実上ほぼ全て不動産事業（97%）。リネン・製薬・温浴は「ニューオータニグループとのシナジー」と「浅草ROXの集客装置」としての位置づけで、単体の利益貢献は限定的。</p>
+      <div class="sp"></div>
+      <div class="ttl">ストック性の裏付け</div>
+      <div class="bg"><div class="br2"><span>賃貸収入（賃貸等不動産の営業収益）</span><span class="mn hgn">119.2億円</span></div><div class="bt"><div class="bf" style="width:79%;background:var(--gn2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>長期預り保証金（テナント保証金）</span><span class="mn hbl">72.2億円</span></div><div class="bt"><div class="bf" style="width:48%;background:var(--bl2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>賃貸等不動産の営業利益</span><span class="mn ham">23.9億円</span></div><div class="bt"><div class="bf" style="width:16%;background:var(--am2)"></div></div></div>
+      <p class="note">賃貸収益は解約予告期間付きの長期契約が中心で、景気変動に対する感応度は低い。一方で<strong>賃貸等不動産のNOI利回りは時価1,891億円に対し約2.0%（営業利益23.9億＋減価償却13.2億）と極めて低い。</strong>これは「時価が過大」なのではなく「稼働率が低く収益が出ていない」ことの裏返しであり、稼働正常化の余地を示している。</p>
+    </div>
+    <div>
+      <div class="c cl-pu" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--pu)">ニッチトップ性 ── 一般オフィスビルと戦っていない</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 pu"></div><div class="ttext"><strong>TOCビル＝「東京卸売センター」：</strong>延床174,013㎡・駐車場750台。1967年設立の東京卸売センターを起源とし、<strong>卸売業のショールーム・常設展示・催事という独自アセットクラス</strong>を形成。グランドホール5,236㎡を含む展示ホール・会議室8室を擁し、都内最大級の常設展示・催事拠点。丸の内のAクラスビルとは需要層が重ならない。</div></div>
+          <div class="ti"><div class="td2 bl"></div><div class="ttext"><strong>TOC有明：</strong>18,088㎡の敷地に貸事務所・貸店舗・倉庫の複合。東京ビッグサイト至近で、<strong>展示会・イベント需要と物流需要の両取り</strong>ができる希少立地。ただし2006年竣工の築浅物件で土地簿価も86.8万円/㎡と高く、含み益の源泉ではない。</div></div>
+          <div class="ti"><div class="td2 or"></div><div class="ttext"><strong>浅草ROX（4施設・8,050㎡）：</strong>浅草最大級の商業複合施設。<strong>インバウンド需要の直撃エリア</strong>で、2026年公示地価では浅草の商業地が+20%超の上昇。温浴施設「まつり湯」・フィットネスも自社運営し、集客を内製化。</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大崎ニューシティ：</strong>大崎駅前再開発の中核。ニューオータニイン東京が入居し、<strong>親会社等グループとの垂直統合</strong>が効いている。</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>中計の柱にインバウンド宿泊：</strong>浅草地区中心にアパートメントホテル・ドミトリー・民泊施設を展開する方針。<strong>ROXの集客資産を宿泊に転換する構想</strong>で、これが新規投資280億円の主用途とみられる。</div></div>
+        </div>
+      </div>
+      <div class="c cf-or">
+        <div class="ttl" style="color:var(--or)">市場環境 ── 需給は10年に一度の逼迫</div>
+        <div class="tw">
+        <table class="t sml">
+          <tbody>
+            <tr><td>都心5区 空室率（2026年7月）</td><td class="r mn hgn">1.95%</td></tr>
+            <tr><td>同 前年同月（2025年7月）</td><td class="r mn">3.16%</td></tr>
+            <tr><td>都心5区 平均賃料</td><td class="r mn hgn">23,287円/坪</td></tr>
+            <tr><td>同 前年比</td><td class="r mn hgn">+11.38%</td></tr>
+            <tr><td>JLL予想：空室率</td><td class="r mn">2028年末まで0%台</td></tr>
+            <tr><td>JLL予想：2029年賃料</td><td class="r mn hgn">44,000円/坪</td></tr>
+            <tr><td>2028-29年新規供給（見直し後）</td><td class="r mn">年平均61万㎡</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">建築費高騰と人手不足で再開発が軒並み後ろ倒しになり、需給逼迫が長期化。<strong>「空室を抱えている会社」が最も報われる局面。</strong>ただしテーオーシーの物件は都心5区の一等地オフィスではないため、この賃料上昇率をそのまま享受できるわけではない点は割り引いて考える必要がある。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">⚠️ 事業面の最大の弱点：<strong>会社自身がコーポレート・ガバナンス報告書で「直近5期の簿価ベースROICスプレッドはマイナスで推移」と認めている。</strong>取締役会で毎月ROIC/WACC・ROE/株主資本コストを比較報告しているにもかかわらず、国債金利上昇でWACCが上がりスプレッドはマイナス圏。<strong>資産は素晴らしいが、資本効率は同社最大の課題であり、それが54%のディスカウントの正体でもある。</strong></div>
+</div>
+
+<!-- ══════════════════════════════ P5 決算・中計 ══════════════════════════════ -->
+<div class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">最新決算と初の3ヵ年中期計画</h2><span class="sb bg-bl">営業利益2.8倍計画</span></div>
+
+  <div class="g4" style="margin-bottom:16px">
+    <div class="c mc"><div class="ml">FY26/3 売上高</div><div class="mv am">151.6億円</div><div class="ms">前期比+15.2%</div></div>
+    <div class="c mc"><div class="ml">FY26/3 営業利益</div><div class="mv gn">24.6億円</div><div class="ms">前期比+73.6%</div></div>
+    <div class="c mc"><div class="ml">FY27/3 Q1 営業利益</div><div class="mv gn">10.1億円</div><div class="ms">前年同期比+139.7%</div></div>
+    <div class="c mc"><div class="ml">FY29/3 営業利益目標</div><div class="mv or">70.0億円</div><div class="ms">FY26/3比 ×2.84倍</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="ttl">中期計画（2026年5月12日公表・単位：百万円）</div>
+      <div class="tw">
+      <table class="t">
+        <thead><tr><th>項目</th><th class="r">FY26/3実績</th><th class="r">FY27/3予想</th><th class="r">FY28/3目標</th><th class="r">FY29/3目標</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mn">15,155</td><td class="r mn">17,400</td><td class="r mn">19,300</td><td class="r mn hgn">20,000</td></tr>
+          <tr><td>営業利益</td><td class="r mn">2,462</td><td class="r mn">3,800</td><td class="r mn">5,800</td><td class="r mn hgn"><strong>7,000</strong></td></tr>
+          <tr><td>経常利益</td><td class="r mn">3,204</td><td class="r mn">4,600</td><td class="r mn">6,600</td><td class="r mn hgn">7,800</td></tr>
+          <tr><td>親会社株主帰属純利益</td><td class="r mn">2,321</td><td class="r mn">3,100</td><td class="r mn">4,500</td><td class="r mn hgn">5,300</td></tr>
+          <tr class="sm"><td>EPS換算</td><td class="r mn">26.3円</td><td class="r mn">35.1円</td><td class="r mn">51.0円</td><td class="r mn hgn">60.1円</td></tr>
+          <tr class="sm"><td>ROE（自己資本104,092比）</td><td class="r mn hrd">2.2%</td><td class="r mn hrd">3.0%</td><td class="r mn ham">4.3%</td><td class="r mn ham">5.1%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">耐震補強工事の進捗率は2026年3月末84%→9月末97%→<strong>12月末100%完了予定。</strong>工事完了で安全性評価がⅡからⅢに上がり、テナント誘致のボトルネックが解消する。営業利益の急伸はここに紐づいている。</p>
+      <div class="sp"></div>
+      <div class="ttl">3ヵ年 資金計画（億円）── ここが最大の論点</div>
+      <div class="tw">
+      <table class="t sml">
+        <thead><tr><th>資金の源泉</th><th class="r">金額</th><th>資金の使途</th><th class="r">金額</th></tr></thead>
+        <tbody>
+          <tr><td>期首現預金残高</td><td class="r mn">311</td><td class="hrd"><strong>新規事業設備投資</strong></td><td class="r mn hrd"><strong>280</strong></td></tr>
+          <tr><td>税引後・配当後資金収支</td><td class="r mn">161</td><td>その他設備投資</td><td class="r mn">64</td></tr>
+          <tr><td></td><td class="r"></td><td>借入金返済</td><td class="r mn">8</td></tr>
+          <tr><td></td><td class="r"></td><td>期末現預金残高</td><td class="r mn">120</td></tr>
+          <tr class="sm"><td>合計</td><td class="r mn">472</td><td>合計</td><td class="r mn">472</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note"><strong>自社株買い・特別配当の記載は一切ない。ROE目標も明示されていない。</strong>現預金311億円は3年かけて120億円まで取り崩されるが、行き先は不動産・宿泊事業への再投資。<strong>「株主還元によるバリュー実現」は現時点の会社方針には入っていない</strong>と読むのが正しい。2027年3月期Q1で既に土地が300億→333億へ33億円増えており、投資は始まっている。</p>
+    </div>
+    <div>
+      <div class="c" style="margin-bottom:12px">
+        <div class="ttl">業績推移（5期・百万円）</div>
+        <div class="tw">
+        <table class="t sml">
+          <thead><tr><th>期</th><th class="r">売上高</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">自己資本比率</th></tr></thead>
+          <tbody>
+            <tr><td>2022/3</td><td class="r mn">16,337</td><td class="r mn">6,242</td><td class="r mn">3,106</td><td class="r mn">32.69</td><td class="r mn">83.7%</td></tr>
+            <tr><td>2023/3</td><td class="r mn">15,686</td><td class="r mn">4,643</td><td class="r mn">3,257</td><td class="r mn">34.28</td><td class="r mn">85.8%</td></tr>
+            <tr><td>2024/3</td><td class="r mn">13,715</td><td class="r mn">2,664</td><td class="r mn">5,123</td><td class="r mn">54.60</td><td class="r mn">86.2%</td></tr>
+            <tr class="wm"><td>2025/3<br><span style="font-size:10px;color:var(--ink3)">TOCビル閉館の底</span></td><td class="r mn hrd">13,152</td><td class="r mn hrd">1,918</td><td class="r mn hrd">1,787</td><td class="r mn hrd">19.31</td><td class="r mn">87.2%</td></tr>
+            <tr class="hl"><td>2026/3</td><td class="r mn hgn">15,155</td><td class="r mn hgn">3,204</td><td class="r mn hgn">2,321</td><td class="r mn hgn">26.32</td><td class="r mn">85.2%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">2025年3月期がTOCビル閉館による業績の底。そこから回復基調に転じたところ。2024年3月期の純利益51.2億円は資産売却益によるもので、経常利益との乖離に注意。</p>
+      </div>
+      <div class="c cl-bl" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--bl)">2027年3月期 第1四半期（2026年8月4日発表）</div>
+        <div class="tw">
+        <table class="t sml">
+          <tbody>
+            <tr><td>売上高</td><td class="r mn">4,043百万円</td><td class="r mn hgn">+16.7%</td></tr>
+            <tr class="hl"><td><strong>営業利益</strong></td><td class="r mn"><strong>1,006百万円</strong></td><td class="r mn hgn"><strong>+139.7%</strong></td></tr>
+            <tr><td>経常利益</td><td class="r mn">1,324百万円</td><td class="r mn hgn">+113.9%</td></tr>
+            <tr><td>純利益</td><td class="r mn">892百万円</td><td class="r mn hgn">+115.5%</td></tr>
+            <tr><td>不動産事業 営業利益</td><td class="r mn">997百万円</td><td class="r mn hgn">+137.1%</td></tr>
+            <tr><td>自己資本比率</td><td class="r mn">86.1%</td><td class="r mn">—</td></tr>
+            <tr><td>現金及び預金</td><td class="r mn">27,075百万円</td><td class="r mn hrd">△4,073</td></tr>
+            <tr><td>土地</td><td class="r mn hgn">33,334百万円</td><td class="r mn hgn">+3,297</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">通期予想（営業利益3,800）に対しQ1で1,006＝進捗26.5%。第1四半期は例年下期偏重の同社にとって順当以上。<strong>現預金を土地に振り替える動きが早くも顕在化。</strong></p>
+      </div>
+      <div class="c cf-am">
+        <div class="ttl" style="color:var(--am)">新TOCビル計画 ── 「延期」は評価が割れる</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">当初計画は<strong>地上30階・地下3階・高さ約150m・延床約276,000㎡</strong>の巨大再開発。着工時期は2033年頃 → <strong>2036年以降へ再延期</strong>（2025年9月16日開示）。<br><br>理由は「建築費高騰、ビル賃貸市場の現況、耐震補強工事の投資効果を享受する観点」。<br><br><strong>ネガティブに読めば：</strong>資本効率改善が10年遠のいた。<strong>ポジティブに読めば：</strong>数千億円規模の投資リスクと工事期間中の収益ゼロを回避し、現ビルで賃料を稼ぎながら地価上昇を待てる。<strong>バリュー投資家にとっては、後者の解釈のほうが合理的。</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P6 MBO・資本政策 ══════════════════════════════ -->
+<div class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">MBO・TOBカタリストと支配構造</h2><span class="sb bg-gn">残り48%が買収対象</span></div>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="c">
+      <div class="ttl">大株主の状況（2026年3月31日現在）</div>
+      <div class="tw">
+      <table class="t">
+        <thead><tr><th>順位</th><th>株主名</th><th class="r">持株数（千株）</th><th class="r">比率</th><th>区分</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>1</td><td><strong>株式会社ニュー・オータニ</strong></td><td class="r mn">21,251</td><td class="r mn hgn"><strong>24.08%</strong></td><td><span class="bge be-gn">親会社等・非上場</span></td></tr>
+          <tr class="hl"><td>2</td><td><strong>有限会社大谷興産</strong></td><td class="r mn">14,615</td><td class="r mn hgn"><strong>16.56%</strong></td><td><span class="bge be-gn">大谷家</span></td></tr>
+          <tr class="hl"><td>3</td><td><strong>株式会社オオタニ・ファンド</strong></td><td class="r mn">6,927</td><td class="r mn hgn"><strong>7.85%</strong></td><td><span class="bge be-gn">大谷家</span></td></tr>
+          <tr><td>4</td><td>新菱冷熱工業株式会社</td><td class="r mn">4,466</td><td class="r mn">5.06%</td><td><span class="bge be-am">政策保有</span></td></tr>
+          <tr><td>5</td><td>日本マスタートラスト信託銀行</td><td class="r mn">3,327</td><td class="r mn">3.77%</td><td>信託</td></tr>
+          <tr class="hl"><td>6</td><td><strong>有限会社大谷興産TO</strong></td><td class="r mn">3,059</td><td class="r mn hgn"><strong>3.46%</strong></td><td><span class="bge be-gn">2007年MBO主体の系譜</span></td></tr>
+          <tr><td>7</td><td>日本生命保険相互会社</td><td class="r mn">2,812</td><td class="r mn">3.18%</td><td><span class="bge be-am">政策保有</span></td></tr>
+          <tr><td>8</td><td>株式会社みずほ銀行</td><td class="r mn">2,130</td><td class="r mn">2.41%</td><td><span class="bge be-am">政策保有</span></td></tr>
+          <tr><td>9</td><td>中本有紀</td><td class="r mn">1,646</td><td class="r mn">1.86%</td><td>個人</td></tr>
+          <tr><td>10</td><td>東映株式会社</td><td class="r mn">1,520</td><td class="r mn">1.72%</td><td><span class="bge be-am">政策保有</span></td></tr>
+          <tr class="sm"><td colspan="2"><strong>大谷家グループ計（1・2・3・6）</strong></td><td class="r mn"><strong>45,852</strong></td><td class="r mn hgn"><strong>51.95%</strong></td><td>—</td></tr>
+          <tr class="sm"><td colspan="2">政策保有と推定される事業法人・金融機関</td><td class="r mn">10,928</td><td class="r mn ham">12.39%</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">発行済株式総数93,849,352株（自己株式5,631,869株＝6.00%を含む）。自己株除きで88,217,483株。株主数8,088名。<strong>外国人株式保有比率は10%未満。</strong>「その他の法人」が62.05%を占める、典型的な安定株主構造。</p>
+    </div>
+    <div>
+      <div class="c cl-pu" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--pu)">2007年 ── MBOとTOBの死闘（記憶すべき前例）</div>
+        <div class="tl">
+          <div class="ti"><div class="td2 pu"></div><div class="tdate">2007年5月</div><div class="ttext"><strong>（有）オオタニファンドTOがMBOを開始。買付価格800円、2/3取得目標、総額約431億円。</strong>発表前日の株価は883円。</div></div>
+          <div class="ti"><div class="td2 rd"></div><div class="tdate">2007年4〜7月</div><div class="ttext"><strong>ダヴィンチ・アドバイザーズが対抗TOB。当初1,100円、その後さらに引き上げ（一部報道では最終1,308円）。</strong>「MBO価格が不動産の含み益を反映していない」と主張。</div></div>
+          <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>結果：両方とも不成立。</strong>ダヴィンチは成立条件の45%を集められず、取引金融機関も応募せず。大谷家は買い増しで徹底抗戦。</div></div>
+          <div class="ti"><div class="td2 bl"></div><div class="tdate">2008〜2017年</div><div class="ttext"><strong>エフィッシモ・キャピタルが最大16.74%まで買い進む。</strong>2017年、同社の自己株式取得に応募して3.65%まで縮小し実質撤退。</div></div>
+          <div class="ti"><div class="td2 gn"></div><div class="tdate">2017年</div><div class="ttext"><strong>TOCみなとみらいを簿価364億円に対し665億円で売却。約300億円の譲渡益。</strong>含み益の現金化を一度は実行した。</div></div>
+        </div>
+        <p class="note"><strong>この歴史から読み取るべき2つの結論：</strong>①敵対的TOBは大谷家の壁を越えられない ── 第三者による買収期待は捨てるべき。②一方で<strong>大谷家自身は「800円で全部欲しい」と思った実績がある</strong> ── 非公開化の動機は本物。</p>
+      </div>
+      <div class="c cf-gn">
+        <div class="ttl" style="color:var(--gn)">仮にMBOが実施されたら（試算）</div>
+        <div class="tw">
+        <table class="t sml">
+          <thead><tr><th>TOB価格</th><th class="r">現株価比</th><th class="r">修正NAV比</th><th class="r">取得所要額（残48%＝42.4百万株）</th></tr></thead>
+          <tbody>
+            <tr><td>1,200円</td><td class="r mn">+20%</td><td class="r mn hrd">54%</td><td class="r mn">508億円</td></tr>
+            <tr><td>1,400円</td><td class="r mn">+40%</td><td class="r mn ham">64%</td><td class="r mn">593億円</td></tr>
+            <tr class="hl"><td><strong>1,600円（最頻値想定）</strong></td><td class="r mn hgn"><strong>+60%</strong></td><td class="r mn hgn"><strong>73%</strong></td><td class="r mn">678億円</td></tr>
+            <tr><td>1,800円</td><td class="r mn hgn">+79%</td><td class="r mn hgn">82%</td><td class="r mn">763億円</td></tr>
+            <tr><td>2,202円（NAV満額）</td><td class="r mn hgn">+120%</td><td class="r mn">100%</td><td class="r mn">933億円</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">同社の現預金311億円＋投資有価証券274億円＝585億円と、実質無借金かつ担保余力の大きい1,891億円の不動産を考えれば、<strong>1,600〜1,800円のLBOは財務的にはまったく無理がない。</strong>ニュー・オータニ単体も純資産1,134億円・当期純利益206億円と資金力は十分。<strong>問題は「できるか」ではなく「やる気があるか」。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="c cl-gn">
+      <div class="ttl" style="color:var(--gn)">追い風① 東証の支配株主・関連会社上場への圧力</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8">2026年6月、同社は「支配株主等に関する事項について」を開示。<strong>ニュー・オータニの議決権所有割合24.12%（直接24.11%＋間接0.01%）を明示し、自社が同社の「関連会社」に該当すると認めた。</strong>東証は親子・関連会社上場に対するガバナンス開示を強化しており、この構造の是正圧力は年々高まる方向。是正の選択肢は「独立性強化」か「非公開化」の二択。</div>
+    </div>
+    <div class="c cl-am">
+      <div class="ttl" style="color:var(--am)">追い風② 資本コストを意識した経営の要請</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8">同社は取締役会で毎月ROIC/WACC・ROE/株主資本コストを同業他社と比較報告し、<strong>「直近5期の簿価ベースROICスプレッドはマイナス」と自認している。</strong>PBR0.85倍（修正PBR0.46倍）の是正要請は東証スタンダード市場にも及ぶ。この自認は、いずれ何らかのアクションを取らざるを得ないことの裏返しでもある。</div>
+    </div>
+    <div class="c cl-bl">
+      <div class="ttl" style="color:var(--bl)">追い風③ 政策保有株式の縮減とアクティビスト余地</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.8">2023年4月公表の縮減方針は2026年3月末に目標達成。<strong>逆に、新菱冷熱・日本生命・みずほ・東映など保有側12.4%が「テーオーシー株を売る側」に回る可能性もある。</strong>外国人保有比率10%未満＝アクティビストはまだ入っていない。エフィッシモが16.74%まで買った前例がある以上、再来の余地は残る（ただし52%の壁は変わらない）。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P7 リスク ══════════════════════════════ -->
+<div class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">ダウンサイドリスク</h2><span class="sb bg-rd">正直に向き合う</span></div>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="ttl" style="color:var(--rd)">① バリュートラップ ── 最大のリスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85"><strong>ROEは2.2%、中計を完全達成してもFY29/3で5.1%、修正NAV対比では2.4%。</strong>株主資本コスト（7〜8%）を大幅に下回る状態が続く限り、DCF的には54%のディスカウントは「理論的に正しい」。含み益は税金・売却コスト・代替物件取得の困難さで割り引かれる。<strong>「安いまま20年」というのが最も確率の高いシナリオであることは否定できない。</strong>実際、2007年のダヴィンチTOB価格1,100円を、19年後の今も株価は下回っている。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="ttl" style="color:var(--rd)">② 還元方針の不在</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">中計の資金計画は<strong>現預金311億円を3年で120億円まで取り崩し、344億円を設備投資に投じる</strong>という内容。自社株買い・特別配当の記載はゼロ、ROE目標も未設定。配当は年10円据え置きで<strong>利回り1.0%、修正NAVに対する利回りは0.45%。</strong>「バリューを株主に渡す気があるか」という問いへの現時点の回答は否定的。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="ttl" style="color:var(--am)">③ 金利上昇とキャップレート</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">同社自身が「国債金利上昇に伴うWACC上昇」を課題として挙げている。<strong>日本の長期金利がさらに上昇すれば、不動産の期待利回りが切り上がり時価そのものが下がる。</strong>賃貸等不動産の実質NOI利回りは約2.0%と極めて薄く、金利感応度は高い。地価上昇と金利上昇のどちらが勝つかが含み益の趨勢を決める。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="ttl" style="color:var(--am)">④ TOCビル再稼働の未達リスク</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">TOCビル入居率65.9%。中計の利益2.8倍はこの穴埋めが前提。<strong>ただし同ビルは1970年竣工・延床174,013㎡の巨艦で、卸売・ショールームという需要は構造的に縮小トレンドにある。</strong>耐震補強は2026年12月完了予定だが、埋め戻しに時間がかかれば中計は容易に未達となる。テナント誘致競争力の検証は継続的に必要。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="ttl" style="color:var(--bl)">⑤ 流動性の薄さ</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">直近の出来高は概ね<strong>1日5万〜12万株、金額にして5,000万〜1.2億円程度。</strong>浮動株は実質46%だが、政策保有12.4%を除けば真の浮動株は3割強。<strong>買うのも売るのも時間がかかる。</strong>ポジションサイズは「1〜2週間で降りられる量」に限定すべき。信用取引や短期の損切りルールとは相性が悪い。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="ttl" style="color:var(--pu)">⑥ 株価はすでに5年来高値圏</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">過去5期の株価レンジは552〜924円。<strong>2026年に入って年初来安値795円→高値1,184円（5月7日）と急騰し、現在1,003〜1,030円。</strong>「万年割安株」がようやく動き始めた局面である一方、<strong>1,000円以上での売買実績が乏しく、需給の抵抗帯に入っている。</strong>PERは会社予想EPS35.1円に対し28.5倍と、業績面では割安ではない点に注意。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--bl)">
+      <div class="ttl" style="color:var(--bl)">⑦ 情報セキュリティ</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">2025年12月にネットワークへの不正アクセスが発生し、2026年3月まで続報を開示。業績への重大な影響は開示されていないが、<strong>対処すべき課題に「情報セキュリティ対策強化」が明記された。</strong>再発時のレピュテーション・コストは無視できない。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="ttl" style="color:var(--am)">⑧ 建築費高騰と大型再開発</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">新TOCビル（延床276,000㎡）が将来着工されれば、<strong>数千億円規模の投資と数年間の収益空白</strong>が発生する。2036年以降への延期は当面のリスク後退だが、消えたわけではない。中計の新規事業投資280億円も、宿泊事業という同社にとって新しい領域であり、実行リスクを含む。</div>
+    </div>
+    <div class="c" style="border-top:3px solid var(--rd)">
+      <div class="ttl" style="color:var(--rd)">⑨ 少数株主に打つ手がない</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.85">大谷家グループ52%。株主提案も委任状争奪も算術的に通らない。<strong>2007年にダヴィンチが1,100円を提示しても跳ね返された。</strong>MBOが実施される場合も、価格決定の主導権は買う側にある。<strong>「NAVの100%で買ってもらえる」という前提は置くべきではない。</strong></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="ttl" style="color:var(--gn)">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>四半期ごとの入居率：</strong>TOCビル65.9%→80%超へ。決算説明資料で毎回開示される最重要KPI</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>長期預り保証金の増加：</strong>テナント契約の先行指標。72.2億円からの伸び</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>自社株買い・増配の発表：</strong>中計にない以上、出れば方針転換のシグナル</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告書の提出：</strong>アクティビストや事業会社の参入</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>政策保有株主（新菱冷熱・日生・みずほ・東映）の売却：</strong>浮動株化＝需給変化</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>耐震補強2026年12月完了：</strong>ボトルネック解消の確認</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>賃貸等不動産時価の更新：</strong>毎年6月の有報で含み益の増減を確認</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div class="ttl" style="color:var(--or)">📉 ネガティブ監視リスト（撤退条件）</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>中計の下方修正：</strong>特にFY28/3営業利益58億円の未達方向の修正</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>入居率の再低下：</strong>TOCビルが60%台で頭打ちになる</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>賃貸等不動産時価の減少：</strong>2期連続なら金利・キャップレートの転換点</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>新規投資280億円の内容が不透明なまま実行：</strong>低採算案件への投下</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>長期金利の急上昇：</strong>10年国債が2.5%を超える局面</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>新TOCビル着工の前倒し発表：</strong>収益空白期の到来</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>3年経過して何も起きない：</strong>機会コストを認めて資金移動を検討</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ P8 シナリオ ══════════════════════════════ -->
+<div class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">3年後（2029年3月期）シナリオと最終判断</h2><span class="sb bg-or">2026.09 版</span></div>
+
+  <div class="g4" style="margin-bottom:18px">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">修正NAVディスカウント</div><div class="mv gn">▲54.4%</div><div class="ms">1,003円 vs NAV 2,202円</div></div>
+    <div class="c mc" style="border-top:3px solid var(--or)"><div class="ml">確率加重 期待株価（3年後）</div><div class="mv or">1,298円</div><div class="ms">現在比+29.4%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">トータルリターン（配当込）</div><div class="mv bl">+32.4%</div><div class="ms">年率+9.8%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">リスク・リワード</div><div class="mv am">1 : 3.9</div><div class="ms">下値▲203円 vs 上値+797円</div></div>
+  </div>
+
+  <div class="sc" style="margin-bottom:18px">
+    <div class="sc-c"><div class="sc-l br">Bear ── 確率30%</div><div class="sc-p br">800円</div><div class="sc-s">▲20.2%／中計未達・金利上昇</div><div class="sc-i">FY29純利益 28億円（目標比53%）</div><div class="sc-i">含み益1,220億円で横ばい</div><div class="sc-i">NAV 2,194円／株価はその36%</div><div class="sc-i">BPS 1,235円・PBR0.65倍</div><div class="sc-i">入居率が70%台で停滞</div></div>
+    <div class="sc-c"><div class="sc-l bs">Base ── 確率45%</div><div class="sc-p bs">1,350円</div><div class="sc-s">+34.6%／中計をほぼ達成</div><div class="sc-i">FY29純利益 53億円・EPS60.1円</div><div class="sc-i">含み益1,520億円（地価+4%/年）</div><div class="sc-i">NAV 2,492円／株価はその54%</div><div class="sc-i">BPS 1,296円・PBR1.04倍</div><div class="sc-i">PER22倍＝業績評価に転換</div></div>
+    <div class="sc-c"><div class="sc-l bu">Bull ── 確率25%</div><div class="sc-p bu">1,800円</div><div class="sc-s">+79.5%／非公開化 or 大型還元</div><div class="sc-i">MBO 1,600〜1,900円で提示</div><div class="sc-i">or 自社株買い＋増配で再評価</div><div class="sc-i">含み益1,800億円・NAV 2,728円</div><div class="sc-i">株価はNAVの66%</div><div class="sc-i">アクティビスト参入も同帯</div></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:18px">
+    <div class="c">
+      <div class="ttl">確率加重 期待株価の内訳</div>
+      <div class="tw">
+      <table class="t">
+        <thead><tr><th>シナリオ</th><th class="r">確率</th><th class="r">FY29 NAV/株</th><th class="r">NAV比</th><th class="r">目標株価</th><th class="r">加重寄与</th></tr></thead>
+        <tbody>
+          <tr><td>Bear：中計未達・金利上昇</td><td class="r mn">30%</td><td class="r mn">2,194円</td><td class="r mn">36%</td><td class="r mn hrd">800円</td><td class="r mn">240円</td></tr>
+          <tr class="hl"><td><strong>Base：中計達成・緩やかな再評価</strong></td><td class="r mn">45%</td><td class="r mn">2,492円</td><td class="r mn">54%</td><td class="r mn ham"><strong>1,350円</strong></td><td class="r mn">608円</td></tr>
+          <tr><td>Bull：非公開化・大型還元</td><td class="r mn">25%</td><td class="r mn">2,728円</td><td class="r mn">66%</td><td class="r mn hgn">1,800円</td><td class="r mn">450円</td></tr>
+          <tr class="sm"><td><strong>期待値</strong></td><td class="r mn">100%</td><td class="r mn">2,461円</td><td class="r mn">53%</td><td class="r mn hgn"><strong>1,298円</strong></td><td class="r mn hgn"><strong>+29.4%</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">3年間の配当30円を加えたトータルリターンは+32.4%、年率+9.8%。<strong>Bull確率25%は「3年以内にMBO・大型還元・アクティビスト参入のいずれかが起きる確率」</strong>として置いた。大谷家52%という構造と、中計に還元策がないことを踏まえた保守的な設定。</p>
+    </div>
+    <div>
+      <div class="c cl-am" style="margin-bottom:12px">
+        <div class="ttl" style="color:var(--am)">シナリオ前提の考え方</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          <strong>NAVの積み上げ：</strong>自己資本104,092百万円に3年分の利益を積み、年間配当882百万円を控除。含み益は税引後（30.62%）でNAVに加算。<br><br>
+          <strong>ディスカウント率の設定：</strong>現在はNAVの45.6%。Bearは需給が緩んで36%へ拡大、Baseは業績評価への移行で54%へ縮小、BullはMBO相場水準の66%。<strong>いずれのケースでも「NAV100%への収れん」は想定していない</strong>のがこの銘柄の現実。<br><br>
+          <strong>クロスチェック：</strong>Baseの1,350円はPER22.5倍・PBR1.04倍。業績目標を達成した資産株としては妥当なレンジで、NAVアプローチと矛盾しない。
+        </div>
+      </div>
+      <div class="c cf-bl">
+        <div class="ttl" style="color:var(--bl)">下値の硬さ ── なぜBearでも800円で止まるか</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.85">
+          ① <strong>ネット金融資産653円/株</strong>（現預金311億＋有価証券274億−有利子負債9億）。3年後も投資に回した分は不動産に変わるだけで、資産価値は消えない。<br>
+          ② <strong>自己資本比率85〜86%・実質無借金</strong>。金融危機でも資本毀損リスクは小さい。<br>
+          ③ <strong>公示地価ベースの土地だけで1,124億円</strong>（簿価371億円）。地価が3割下がっても含み益は残る。<br>
+          ④ 過去5期の株価下限は552〜595円だが、<strong>それは業績が底（FY25/3 純利益17.9億円）で、含み益も現在より小さかった局面。</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終投資判断 <span>── 1,003円は「妙味あり、ただし主力にはできない」</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px">
+      <div>
+        <div class="conc-lbl">結論：買える。ただし理由を間違えないこと</div>
+        <div class="conc-b">1,003円は修正NAV2,202円の45.6%、EVは不動産時価の20%。<strong>資産面の割安性は疑いようがなく、公示地価で土地だけを積み上げても含み益753億円が説明できる。</strong>だが、この株が上がる主因は「割安の是正」ではなく、<strong>①TOCビル稼働率65.9%の埋め戻しによる利益2.8倍化、②年+2.7%で積み上がる含み益、③大谷家による非公開化オプション</strong>の3つ。この3つを買っている自覚がないと、待てずに投げることになる。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">最大の弱点はROEと還元方針</div>
+        <div class="conc-b">ROE2.2%、中計達成でも5.1%、修正NAV対比2.4%。会社自身が「ROICスプレッドはマイナス」と認めている。さらに<strong>2026年5月の中計は現預金311億円を株主還元ではなく設備投資344億円に充てる計画で、自社株買い・ROE目標の記載がない。</strong>2007年のダヴィンチのTOB価格1,100円を19年後の今も株価が下回っている事実は、<strong>このディスカウントが「一時的な誤り」ではなく「構造」であること</strong>を示している。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">執行方針 ── サイズと時間軸</div>
+        <div class="conc-b">株価は795円→1,184円→1,003円と、5年来のレンジ（552〜924円）を上抜けた直後。<strong>1,000円前後は需給の抵抗帯であり、900円割れの押し目は十分あり得る。</strong>出来高は日5万〜12万株と薄く、<strong>「1〜2週間で降りられる量」を上限に、900〜1,050円のレンジで3〜4回に分けて建てる。</strong>時間軸は3年。3年経って入居率も還元方針も動かなければ、機会コストを認めて資金を移す。</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px">
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">修正NAV</div>
+        <div style="font:700 24px/1 var(--mono);color:#72cc8e">2,202円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">現株価はその45.6%</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">3年後 期待株価</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">1,298円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">年率+9.8%（配当込）</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">下値の床</div>
+        <div style="font:700 24px/1 var(--mono);color:#90b4ec">653円</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">ネット金融資産／株</div>
+      </div>
+      <div style="text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px">
+        <div style="font:600 8px/1 var(--mono);color:rgba(246,245,239,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">撤退ルール</div>
+        <div style="font:700 24px/1 var(--mono);color:var(--or2)">3年</div>
+        <div style="font-size:10px;color:rgba(246,245,239,.35);margin-top:4px">入居率・還元に動きなければ</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.08);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.26);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.82);max-width:880px">
+        テーオーシーは、<strong style="color:var(--or2)">昭和の簿価で抱えた都心5.8万㎡の土地（含み益1,299億円）の上で、閉館明けTOCビルの空室を歴史的な賃料上昇局面で埋めにいく「資産＋回復」の二段ロケット。</strong>1,003円は修正NAVの45.6%・EVは不動産時価の20%と割安性は本物だが、ROE2.2%・還元方針なし・大谷家52%支配という構造的な蓋が同時に存在する。<strong style="color:var(--or2)">投資判断はB＋ ── 分割建て・3年の時間軸・降りられるサイズを守る限りにおいて、期待値は明確にプラス。</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.2);text-align:center;padding:18px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されており、特定の銘柄の売買を推奨するものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  土地の推定時価および3年後シナリオは筆者による試算であり、実際の価値・株価を保証するものではありません。<br>
+  Data: テーオーシー 2026年3月期 有価証券報告書（2026年6月25日提出）／ 2026年3月期 決算短信・2027年3月期第1四半期決算短信 ／ 中期計画目標設定のお知らせ（2026年5月12日）／ TOCビル再稼働状況および新TOCビル計画に関するお知らせ（2025年9月16日）／ 支配株主等に関する事項について・親会社等の決算に関するお知らせ（2026年6月29日）／ 第60期定時株主総会招集通知 ／ コーポレート・ガバナンスに関する報告書（2026年6月26日）／ 国土交通省 地価公示（2026年）／ 三鬼商事 オフィスマーケット（2026年7月）／ JLL 東京オフィス市場見通し ／ 株価はYahoo!ファイナンス · 2026.09.06 作成
+</footer>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:document.getElementById('nav').offsetTop,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
