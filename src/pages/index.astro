@@ -14,6 +14,25 @@ const posts = allPosts.slice(0, 10);
 // コラムは新着順（pubDate降順）で表示
 const columns = allPosts.filter(p => !p.data.stockCard);
 
+// 📊 保有銘柄と損益ボタンの副題：public/holdings.html から基準日と銘柄数を読む
+// 最新ポートフォリオを作り直せばボタンの日付も自動で追従する（手打ちしない）
+let holdingsAsOf = '';
+let holdingsCount = 0;
+try {
+	const fs = await import('node:fs');
+	const path = await import('node:path');
+	const raw = fs.readFileSync(path.join(process.cwd(), 'public', 'holdings.html'), 'utf-8');
+	const m = raw.match(/asof["']?\s*:\s*["']([\d/\-]+)/);
+	if (m) holdingsAsOf = m[1].replace(/-/g, '/');
+	const codes = raw.match(/"code"\s*:/g);
+	if (codes) holdingsCount = codes.length;
+} catch {
+	// 最新ポートフォリオ未設置でもトップページは壊さない
+}
+const holdingsSub = holdingsAsOf
+	? `${holdingsAsOf} 終値${holdingsCount ? `・${holdingsCount}銘柄` : ''}`
+	: '全ポジションの一覧';
+
 // ヒーローに表示する最新更新日（＝最新公開記事の pubDate）
 const latestUpdate = allPosts[0]?.data.pubDate;
 const latestUpdateLabel = latestUpdate?.toLocaleDateString('ja-JP', {
@@ -85,11 +104,12 @@ const watchlist = allPosts
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
-					<a href="/holdings.html" class="hero-concept-btn">
+					<a href="/holdings" class="hero-concept-btn is-new">
 						<span class="hero-concept-icon">📊</span>
 						<span class="hero-concept-text">
-							<span class="hero-concept-label">保有銘柄と損益</span>
-							<span class="hero-concept-sub">集計 2026年7月27日</span>
+							<span class="hero-concept-new">NEW</span>
+							<span class="hero-concept-label">最新ポートフォリオ</span>
+							<span class="hero-concept-sub">{holdingsSub}</span>
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
@@ -101,10 +121,9 @@ const watchlist = allPosts
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
-					<a href="/value/" class="hero-concept-btn is-new">
+					<a href="/value/" class="hero-concept-btn">
 						<span class="hero-concept-icon">🦦</span>
 						<span class="hero-concept-text">
-							<span class="hero-concept-new">NEW</span>
 							<span class="hero-concept-label">バリュー株の魅力</span>
 							<span class="hero-concept-sub">割安株投資の体系</span>
 						</span>

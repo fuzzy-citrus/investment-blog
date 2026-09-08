@@ -10,10 +10,15 @@ const byId = new Map(posts.map((p) => [p.id, p]));
 
 // テーマに割り当て済みのスラッグ集合
 const mapped = new Set(contentThemes.flatMap((t) => t.slugs));
-// どのテーマにも入っていない公開記事（新着で割り当て忘れの検知用）
+// どのテーマにも入っていない公開記事は「その他」へ新着順で流し込む
 const unclassified = posts
   .filter((p) => !mapped.has(p.id))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((p) => p.id);
+const themes = contentThemes
+  .map((t) => (t.id === 'other' ? { ...t, slugs: [...t.slugs, ...unclassified] } : t))
+  // 「その他」は中身が無ければ出さない
+  .filter((t) => t.id !== 'other' || t.slugs.length > 0);
 
 const isStock = (id: string) => Boolean(byId.get(id)?.data.stockCard);
 const ticker = (id: string) => byId.get(id)?.data.stockCard?.ticker ?? '';
@@ -35,7 +40,7 @@ const colTitle = (id: string) => byId.get(id)?.data.title ?? id;
       </div>
 
       <div class="map-grid">
-        {contentThemes.map((theme) => {
+        {themes.map((theme) => {
           const articles = theme.slugs.filter((s) => byId.has(s));
           return (
             <section id={theme.id} class={`theme-card${articles.length === 0 ? ' is-empty' : ''}`} style="scroll-margin-top:90px">
@@ -65,17 +70,6 @@ const colTitle = (id: string) => byId.get(id)?.data.title ?? id;
         })}
       </div>
 
-      {unclassified.length > 0 && (
-        <section class="unclassified">
-          <h2>未分類の記事</h2>
-          <p class="lead">テーマ未割り当ての記事です（<code>src/data/contentMap.ts</code> に追加してください）。</p>
-          <ul>
-            {unclassified.map((p) => (
-              <li><a href={`/blog/${p.id}/`}>{p.data.title}</a></li>
-            ))}
-          </ul>
-        </section>
-      )}
     </main>
     <Footer />
   </body>
@@ -146,14 +140,4 @@ const colTitle = (id: string) => byId.get(id)?.data.title ?? id;
     border: 1px dashed;
     border-radius: 6px;
   }
-  .unclassified {
-    margin-top: 2em;
-    padding: 1.2em 1.4em;
-    background: #fff8f0;
-    border: 1px solid #f0d8b8;
-    border-radius: 10px;
-  }
-  .unclassified h2 { font-size: 1.1em; color: #8a5a00; margin: 0 0 0.3em; }
-  .unclassified ul { margin: 0.6em 0 0; padding-left: 1.2em; }
-  .unclassified a { color: var(--accent-dark); }
 </style>
