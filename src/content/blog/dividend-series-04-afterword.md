@@ -144,9 +144,4 @@ related: ["dividend-series-03-dividend-as-exit-strategy", "dividend-series-02-lo
 
 ---
 
-*シリーズを最初から読む：*
-- *[配当とは何か？高配当利回りに飛びつく前に見るべき「続く理由」](/blog/dividend-series-01-what-is-dividend/)（配当シリーズ①）*
-- *[低配当性向は「お宝」かもしれない｜還元余地の見抜き方](/blog/dividend-series-02-low-payout-opportunity/)（配当シリーズ②）*
-- *[配当は「入口」ではなく「出口」で使う｜大増配トレンドの落とし穴](/blog/dividend-series-03-dividend-as-exit-strategy/)（配当シリーズ③）*
-
 *本記事はバリュー商会の投資方針・実践経験をもとにした情報提供です。投資判断はご自身の責任でお願いします。*

@@ -6,10 +6,15 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
 import Header from '../components/Header.astro';
+import SeriesNav from '../components/SeriesNav.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage, stockCard, noteUrl, related } = Astro.props;
+
+
+// シリーズナビ用に、URL から自分のスラッグを取り出す（/blog/<slug>/）
+const currentSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 
 const analysisFileMap: Record<string, string> = {
 	'9036': 'tobu-network-9036',
@@ -23,13 +28,30 @@ const analysisFileMap: Record<string, string> = {
 	'4820': 'em-systems-4820',
 	'9755': 'oyo-9755',
 };
-const analysisExists = new Set(['9036','8071','4685','9414','3004','368A','6165','7061','7485','9045','7868','2327','1450','5900','1716','4820','9755']);
+// 完全版分析資料は public/analysis/ を実際に読んで判定する。
+// ファイルを置けば自動でボタンが出る（手打ちの一覧を更新し忘れる事故を無くすため）。
+const analysisFiles: Set<string> = await (async () => {
+	const fs = await import('node:fs');
+	const path = await import('node:path');
+	try {
+		return new Set(
+			fs.readdirSync(path.join(process.cwd(), 'public', 'analysis'))
+				.filter((f: string) => f.endsWith('.html'))
+				.map((f: string) => f.slice(0, -5)),
+		);
+	} catch {
+		return new Set<string>();
+	}
+})();
 // 完全版分析ファイルは noteUrl（…/analysis/<slug>.html）から自動導出。
 // 新規銘柄は noteUrl を書くだけでヒーローの「📊 完全版分析資料」リンクが出る（上のマップは旧記事のフォールバック）
 const analysisFromNote = noteUrl?.match(/\/analysis\/([^/]+)\.html$/)?.[1] ?? null;
+// 優先順位：noteUrl の指定 > 記事スラッグ同名 > ティッカー同名 > 旧マッピング
 const analysisFile = analysisFromNote
-	?? (stockCard && analysisExists.has(stockCard.ticker)
-		? (analysisFileMap[stockCard.ticker] ?? stockCard.ticker)
+	?? (analysisFiles.has(currentSlug) ? currentSlug : null)
+	?? (stockCard && analysisFiles.has(stockCard.ticker) ? stockCard.ticker : null)
+	?? (stockCard && analysisFileMap[stockCard.ticker] && analysisFiles.has(analysisFileMap[stockCard.ticker])
+		? analysisFileMap[stockCard.ticker]
 		: null);
 
 // 株価の基準日＝記事公開日。古い記事の currentPrice を「今の株価」と誤読させないための表示
@@ -42,11 +64,12 @@ const priceAsOf = pubDate.toLocaleDateString('ja-JP', {
 
 const blogAll = (await getCollection('blog')).filter((p) => !p.data.draft);
 // related frontmatter（スラッグ配列）で指定された記事を優先。未指定は最新3件にフォールバック
+// 表示は最大6件（相互リンクを増やしたぶん枠を広げた）
 const relatedPicked = (related ?? [])
 	.map(slug => blogAll.find(p => p.id === slug))
 	.filter((p): p is NonNullable<typeof p> => Boolean(p) && p!.data.title !== title);
 const allPosts = relatedPicked.length > 0
-	? relatedPicked.slice(0, 4)
+	? relatedPicked.slice(0, 6)
 	: blogAll
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.filter(p => p.data.title !== title)
@@ -526,6 +549,8 @@ const articleJsonLd = {
 					</a>
 				</div>
 			</div>
+
+			<SeriesNav slug={currentSlug} />
 
 			{allPosts.length > 0 && (
 				<aside class="related-posts">

@@ -1,0 +1,161 @@
+---
+// シリーズ全話ナビ。src/data/series.ts に登録された記事だけに出る。
+// 下書き（draft: true）の回は本番では自動的に落ちる（dev では見える）。
+import { getCollection } from 'astro:content';
+import { findSeries } from '../data/series';
+
+type Props = { slug: string };
+const { slug } = Astro.props;
+
+const hit = findSeries(slug);
+
+const posts = await getCollection('blog', (p) => import.meta.env.DEV || !p.data.draft);
+const byId = new Map(posts.map((p) => [p.id, p]));
+
+// 登録順のまま、存在する（＝公開済みの）回だけを残す
+const items = hit
+	? hit.series.slugs
+			.map((s, i) => ({ slug: s, label: hit.series.labels?.[i] ?? `第${i + 1}回`, post: byId.get(s) }))
+			.filter((x) => x.post)
+	: [];
+
+// 自分ひとりしか公開されていないシリーズはナビを出さない
+const show = items.length > 1;
+const currentIndex = items.findIndex((x) => x.slug === slug);
+---
+
+{show && hit && (
+	<aside class="series-nav">
+		<div class="series-head">
+			<span class="series-badge">シリーズ</span>
+			<span class="series-name">{hit.series.name}</span>
+			<span class="series-count">全{items.length}回</span>
+		</div>
+		<p class="series-lead">{hit.series.lead}</p>
+		<ol class="series-list">
+			{items.map((x, i) => (
+				<li class={i === currentIndex ? 'is-current' : ''}>
+					{i === currentIndex ? (
+						<span class="series-item">
+							<span class="series-label">{x.label}</span>
+							<span class="series-title">{x.post!.data.title}</span>
+							<span class="series-here">いま読んでいる回</span>
+						</span>
+					) : (
+						<a class="series-item" href={`/blog/${x.slug}/`}>
+							<span class="series-label">{x.label}</span>
+							<span class="series-title">{x.post!.data.title}</span>
+						</a>
+					)}
+				</li>
+			))}
+		</ol>
+	</aside>
+)}
+
+<style>
+	.series-nav {
+		margin: 2.4em 0 1.6em;
+		padding: 18px 20px 16px;
+		border: 1px solid rgba(24, 95, 165, 0.22);
+		border-left: 4px solid #185fa5;
+		border-radius: 10px;
+		background: rgba(24, 95, 165, 0.04);
+	}
+	.series-head {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 6px;
+	}
+	.series-badge {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: #fff;
+		background: #185fa5;
+		border-radius: 999px;
+		padding: 3px 10px;
+	}
+	.series-name {
+		font-size: 1.05em;
+		font-weight: 700;
+		color: #123c68;
+	}
+	.series-count {
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+	}
+	.series-lead {
+		margin: 0 0 12px;
+		font-size: 0.86em;
+		line-height: 1.7;
+		color: rgb(var(--gray-dark));
+	}
+	.series-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		counter-reset: series;
+	}
+	.series-list li {
+		margin: 0;
+		border-top: 1px dashed rgba(24, 95, 165, 0.2);
+	}
+	.series-list li:first-child {
+		border-top: 0;
+	}
+	.series-item {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 4px 10px;
+		padding: 9px 2px;
+		text-decoration: none;
+		color: inherit;
+	}
+	a.series-item:hover .series-title {
+		color: var(--accent-dark);
+		text-decoration: underline;
+	}
+	.series-label {
+		flex: 0 0 auto;
+		font-size: 0.78em;
+		font-weight: 700;
+		color: #185fa5;
+		background: rgba(24, 95, 165, 0.1);
+		border-radius: 4px;
+		padding: 2px 8px;
+		white-space: nowrap;
+	}
+	.series-title {
+		flex: 1 1 240px;
+		font-size: 0.9em;
+		line-height: 1.55;
+		color: rgb(var(--gray-dark));
+	}
+	.series-here {
+		flex: 0 0 auto;
+		font-size: 0.74em;
+		font-weight: 700;
+		color: #b4690e;
+		white-space: nowrap;
+	}
+	.is-current .series-label {
+		color: #fff;
+		background: #185fa5;
+	}
+	.is-current .series-title {
+		font-weight: 700;
+		color: #123c68;
+	}
+	@media (max-width: 600px) {
+		.series-nav {
+			padding: 14px 14px 12px;
+		}
+		.series-title {
+			flex-basis: 100%;
+		}
+	}
+</style>
