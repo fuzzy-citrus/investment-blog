@@ -4,7 +4,6 @@ description: "沼底バリュー商会が2026年5月8日から9月8日までに�
 cardDesc: "<span class='card-highlight'>紹介した45銘柄を、全部答え合わせしました。判定前の5本を除いた40銘柄で平均+2.41%、勝率67.5%。同期間の日経は+0.60%だったので、超過は+1.82ptです。</span>知りたかったのは成績ではなく、A評価がB評価に勝てたのかでした。<span class='card-note'>平均としては機能していました。A系12本が+4.19%、B系28本が+1.65%。最下位のBランク2本は揃って下落し、フロア評価は正しかった。ところが個別では逆です。最上位のA++は日経に負けており、10%以上動いた5本のうち4本は下位ランクから出ました。最大の当たりも最大の外しも、同じB+からです。ランクは平均を説明しますが、値幅は説明していませんでした。投資助言ではありません。</span>"
 pubDate: "2026-09-09T10:00:00+09:00"
 related: ["cigar-butt-special-2026", "holdings-status-05-crash-entry", "core-satellite-onkabu-design", "weekly-2026w36-midlarge-56buys", "value-investor-decision-afterword", "reverse-value-02-short-screening"]
-draft: true
 ---
 
 > 🦎 「課長。<span class="t-blue">ずっと気になってたことがあるんですけど</span>」
