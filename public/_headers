@@ -3,3 +3,7 @@
 
 /sitemap-0.xml
   Content-Type: application/xml; charset=utf-8
+
+/downloads/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: private, max-age=0, must-revalidate

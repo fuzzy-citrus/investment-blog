@@ -13,12 +13,11 @@ const title = (id: string) => byId.get(id)?.data.title ?? id;
 
 const NOTE_URL = 'https://note.com/citrus_fuzzy_25/n/n2b2863b4d9d0';
 const NOTE_HOME = 'https://note.com/citrus_fuzzy_25';
-const SHEET_URL = '/downloads/naibu-fukuri-hanbetsu-sheet.xlsx';
 
 // 有料記事①で数値を出した6社。全社ともブログに無料の分析記事がある＝これが品質保証になる。
 const proofStocks = [
-	{ id: 'nihon-gear-6356', code: '6356', name: '日本ギア工業', verdict: 'A 本物', tone: 'ok', note: '理論10.8%に対して実測<b>14.1%</b>。乖離<b>+3.3pt</b>' },
-	{ id: 'showa-kagaku-4990', code: '4990', name: '昭和化学工業', verdict: 'B 借り物', tone: 'ng', note: '理論3.8%に対して実測<b>13.1%</b>。乖離<b>+9.3pt</b>' },
+	{ id: 'nihon-gear-6356', code: '6356', name: '日本ギア工業', verdict: 'A 本業型', tone: 'ok', note: '理論10.8%に対して実測<b>14.1%</b>。乖離<b>+3.3pt</b>' },
+	{ id: 'showa-kagaku-4990', code: '4990', name: '昭和化学工業', verdict: 'B 資産型', tone: 'ng', note: '理論3.8%に対して実測<b>13.1%</b>。乖離<b>+9.3pt</b>' },
 	{ id: 'hoshiwa-denki-6748', code: '6748', name: '星和電機', verdict: 'B寄り', tone: 'warn', note: '乖離<b>+7.3pt</b>。分解しないと確定しない' },
 	{ id: 'okaya-kouki-7485', code: '7485', name: '岡谷鋼機', verdict: '判定保留', tone: 'warn', note: '株式分割で1株あたりが不連続。<b>6社で唯一確定できない</b>' },
 	{ id: 'daiken-5900-activist-entry', code: '5900', name: 'ダイケン', verdict: 'D 死蔵', tone: 'ng', note: '理論1.6%・実測2.4%。<b>PBRは安いが対象外</b>' },
@@ -94,7 +93,7 @@ const proofLinks = [
 			</section>
 
 			<section class="nt-product">
-				<h2 class="nt-h2">有料記事①｜内部複利は本物か、借り物か</h2>
+				<h2 class="nt-h2">有料記事①｜その純資産は、本業型か資産型か</h2>
 				<div class="nt-card">
 					<div class="nt-card-head">
 						<span class="nt-price">¥500</span>
@@ -121,8 +120,8 @@ const proofLinks = [
 							<h3>有料の側にあるもの</h3>
 							<ul>
 								<li><b>STEP 0〜7の全手順</b>（データの取得先・閾値・除外）</li>
-								<li>乖離の<b>4パターン読み分け</b>（A本物／B借り物／C要調査／D死蔵）</li>
-								<li>「借り物」を確定させる分解と、<b>検算のやり方</b></li>
+								<li>乖離の<b>4パターン読み分け</b>（A本業型／B資産型／C目減り型／D死蔵型）</li>
+								<li>「資産型」を確定させる分解と、<b>検算のやり方</b></li>
 								<li><b>実データ6社の全数値</b>とパターン判定</li>
 								<li>私が実際に踏んだ<b>5つの罠</b></li>
 								<li><b>判別式が効かない会社</b>（5つの除外条件）</li>
@@ -210,7 +209,7 @@ const proofLinks = [
 
 			<section class="nt-foot-links">
 				<a class="nt-foot-btn" href={NOTE_HOME} target="_blank" rel="noopener">📕 noteのクリエイターページ →</a>
-				<a class="nt-foot-btn" href={SHEET_URL}>📗 判別シート（Excel）を直接ダウンロード →</a>
+				<a class="nt-foot-btn" href={NOTE_URL} target="_blank" rel="noopener">📗 判別シートは有料記事の中で配っています →</a>
 			</section>
 
 			<p class="nt-disc">
