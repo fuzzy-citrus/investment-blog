@@ -132,6 +132,7 @@ export const contentThemes: ContentTheme[] = [
     owners: '🧑‍💼 沼田課長（統合・哲学）',
     fill: '#E6F1FB', text: '#042C53', sub: '#185FA5', border: '#B5D4F4',
     slugs: [
+      'note-sell-method-not-stocks',
       'japan-market-distortion-01',
       'net-net-graham-investing',
       'buffett-japan-trading-houses',

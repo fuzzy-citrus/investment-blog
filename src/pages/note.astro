@@ -1,0 +1,393 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+const byId = new Map(posts.map((p) => [p.id, p]));
+// 毎日1本公開するので、記事数は手書きにすると必ず腐る。公開分だけを数える。
+const postCount = posts.length;
+const has = (id: string) => byId.has(id);
+const title = (id: string) => byId.get(id)?.data.title ?? id;
+
+const NOTE_URL = 'https://note.com/citrus_fuzzy_25/n/n2b2863b4d9d0';
+const NOTE_HOME = 'https://note.com/citrus_fuzzy_25';
+const SHEET_URL = '/downloads/naibu-fukuri-hanbetsu-sheet.xlsx';
+
+// 有料記事①で数値を出した6社。全社ともブログに無料の分析記事がある＝これが品質保証になる。
+const proofStocks = [
+	{ id: 'nihon-gear-6356', code: '6356', name: '日本ギア工業', verdict: 'A 本物', tone: 'ok', note: '理論10.8%に対して実測<b>14.1%</b>。乖離<b>+3.3pt</b>' },
+	{ id: 'showa-kagaku-4990', code: '4990', name: '昭和化学工業', verdict: 'B 借り物', tone: 'ng', note: '理論3.8%に対して実測<b>13.1%</b>。乖離<b>+9.3pt</b>' },
+	{ id: 'hoshiwa-denki-6748', code: '6748', name: '星和電機', verdict: 'B寄り', tone: 'warn', note: '乖離<b>+7.3pt</b>。分解しないと確定しない' },
+	{ id: 'okaya-kouki-7485', code: '7485', name: '岡谷鋼機', verdict: '判定保留', tone: 'warn', note: '株式分割で1株あたりが不連続。<b>6社で唯一確定できない</b>' },
+	{ id: 'daiken-5900-activist-entry', code: '5900', name: 'ダイケン', verdict: 'D 死蔵', tone: 'ng', note: '理論1.6%・実測2.4%。<b>PBRは安いが対象外</b>' },
+	{ id: 'tokai-electronics-8071', code: '8071', name: '東海エレクトロニクス', verdict: '対照群', tone: 'flat', note: '性向53.6%・利回り3.9%で<b>PBR0.32倍</b>。安さと還元は別の軸' },
+];
+
+// 無料で確かめられるもの（購入前チェック用の導線）
+const proofLinks = [
+	{ href: '/blog/scorecard-45-stocks-2026q3/', label: '紹介45銘柄の答え合わせ', note: '40銘柄平均<b>+2.41%</b>／日経超過<b>+1.82pt</b>／勝率<b>67.5%</b>。<b>最大の外し−20.8%</b>まで全部' },
+	{ href: '/holdings', label: '最新ポートフォリオ（166銘柄）', note: '保有の全リストと、週ごとの売買記録' },
+	{ href: '/blog/low-payout-internal-compounding/', label: '判別式のもとになったコラム', note: '税の経路と「増幅器」の話。<b>式そのものは無料</b>' },
+	{ href: '/value/', label: 'バリュー株の魅力（体系ガイド）', note: 'STEP 1〜6で読む、割安株投資の全体像' },
+];
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="note｜銘柄ではなく手順を売る場所 | 沼底バリュー商会"
+			description="沼底バリュー商会のnote特設ページ。ブログとnoteの役割分担、有料記事で何を売り何を売らないか、無料でどこまで確かめられるかをまとめている。売らないのは個別銘柄の推奨・目標株価・評価ランクで、これは金融商品取引法の投資助言業の線であり、同時に株価が動けば無効になる商品だからでもある。売るのは判別の手順で、第1弾は理論BPS成長率イコールROEかける1マイナス配当性向という式を実測と突き合わせ、本業が生んだ複利と政策保有株の含み益を区別する手順書である。判別式そのものと4パターンの概要、実例2社はnoteの無料部分で読める。有料側はSTEP 0から7の全手順、実データ6社の全数値、5つの罠、判別式が効かない会社、Excelの列定義と判定式、入力7項目で判定まで出る判別シートで、価格は500円。ブログ側の分析記事100本超・完全版レポート50本・保有166銘柄の全リスト・週ごとの売買記録・紹介銘柄の答え合わせは、すべて無料のまま維持する。投資助言ではありません。"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="nt-hero">
+				<div class="nt-badge">📕 note</div>
+				<h1><span class="nt-hl">銘柄ではなく、手順</span><span class="nt-badge-full">を売る場所</span></h1>
+				<p class="nt-desc">ブログを読んでくれる人が増えてきたので、noteを始めました。<br />ただし<b>売らないものを先に決めて</b>から、何を売るかを考えています。</p>
+			</section>
+
+			<section class="nt-nums">
+				<div class="nt-num t-green">
+					<div class="nt-num-l">ブログの分析記事</div>
+					<div class="nt-num-v">{postCount}<span>本</span></div>
+					<div class="nt-num-d">すべて無料のまま</div>
+				</div>
+				<div class="nt-num t-green">
+					<div class="nt-num-l">完全版レポート</div>
+					<div class="nt-num-v">50<span>本</span></div>
+					<div class="nt-num-d">noteへは1本も移さない</div>
+				</div>
+				<div class="nt-num t-blue">
+					<div class="nt-num-l">保有ポートフォリオ</div>
+					<div class="nt-num-v">166<span>銘柄</span></div>
+					<div class="nt-num-d">全リストと売買記録を公開</div>
+				</div>
+			</section>
+
+			<section class="nt-split">
+				<h2 class="nt-h2">役割分担｜どちらに何を置くか</h2>
+				<div class="nt-scroll">
+					<table class="nt-table">
+						<thead>
+							<tr><th>置くもの</th><th>ブログ（無料）</th><th>note（有料）</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>個別銘柄の分析・評価ランク・目標株価</td><td class="ok"><b>○ 全部ここ</b></td><td class="ng"><b>× 売らない</b></td></tr>
+							<tr><td>完全版レポート（50本）</td><td class="ok"><b>○ 全部ここ</b></td><td class="ng">× 移さない</td></tr>
+							<tr><td>ポートフォリオ・週次の売買記録</td><td class="ok"><b>○ 全部ここ</b></td><td class="ng">×</td></tr>
+							<tr><td>紹介銘柄の答え合わせ（外した分も）</td><td class="ok"><b>○ 全部ここ</b></td><td class="ng">×</td></tr>
+							<tr class="hi"><td><b>判別の手順（再現できる形）</b></td><td class="warn">考え方は無料</td><td class="ok"><b>○ ここ</b></td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="nt-callout">
+					<b>売らないのは、法律の線であると同時に、商品として腐るからです。</b>
+					対価をもらって特定銘柄の売買判断を出せば、金融商品取引法上の投資助言・代理業になります。
+					それ以前に、<b>「いま1,200円で買え」という情報は、株価が1,400円になった瞬間に価値がゼロになります</b>。
+					手順のほうは、株価がいくらになっても効きますし、<b>うちが挙げていない銘柄にも通せます</b>。
+				</div>
+			</section>
+
+			<section class="nt-product">
+				<h2 class="nt-h2">有料記事①｜内部複利は本物か、借り物か</h2>
+				<div class="nt-card">
+					<div class="nt-card-head">
+						<span class="nt-price">¥500</span>
+						<span class="nt-card-title">配当利回り0.72%の株が、1株純資産を年14%増やしていた</span>
+					</div>
+					<div class="nt-formula">理論BPS成長率 ＝ ROE ×（1 − 配当性向）</div>
+					<p class="nt-card-lead">
+						この理論値を<b>実測のBPS成長率と突き合わせる</b>だけで、本業が生んだ複利と、
+						保有している他社株の値上がりが押し上げているだけの数字を、区別できます。
+					</p>
+					<div class="nt-cols">
+						<div class="nt-col nt-col-free">
+							<h3>無料で読める範囲</h3>
+							<ul>
+								<li><b>判別式そのもの</b>（上の1行）</li>
+								<li>低配当性向がなぜ得なのか（税の経路と試算）</li>
+								<li>「増幅器」の話と、いちばん厄介な誤読</li>
+								<li>実例2社の対比（+3.3pt と +9.3pt）</li>
+								<li>信頼性の根拠（成績・売買記録の実数）</li>
+							</ul>
+							<p class="nt-col-note">式が有料の向こう側にある商品なら、買わなくていい——という考えで置いています。</p>
+						</div>
+						<div class="nt-col nt-col-paid">
+							<h3>有料の側にあるもの</h3>
+							<ul>
+								<li><b>STEP 0〜7の全手順</b>（データの取得先・閾値・除外）</li>
+								<li>乖離の<b>4パターン読み分け</b>（A本物／B借り物／C要調査／D死蔵）</li>
+								<li>「借り物」を確定させる分解と、<b>検算のやり方</b></li>
+								<li><b>実データ6社の全数値</b>とパターン判定</li>
+								<li>私が実際に踏んだ<b>5つの罠</b></li>
+								<li><b>判別式が効かない会社</b>（5つの除外条件）</li>
+								<li>Excelの列定義と、<b>判定を出す1行の数式</b></li>
+								<li>印刷して使える手順チェックリスト</li>
+							</ul>
+						</div>
+					</div>
+					<div class="nt-sheet">
+						<span class="nt-sheet-icon">📗</span>
+						<div>
+							<b>判別シート（Excel・記入例つき）が付きます</b>
+							<p>金色の列に<b>7つの数字</b>を入れるだけで、配当性向・ROE・理論値・実測値・乖離・パターン判定まで自動で出ます（40行ぶん）。記入例シートには<b>判定A（日本ギア工業）と判定B（昭和化学工業）が並べて</b>入れてあります。</p>
+							<p class="nt-sheet-warn">⚠ このシートは<b>「割安かどうか」を測るものではありません。</b>測るのは、純資産の伸びが本業から来ているかどうかだけです。</p>
+						</div>
+					</div>
+					<a class="nt-buy" href={NOTE_URL} target="_blank" rel="noopener">
+						noteで読む（無料部分だけでも読めます） →
+					</a>
+				</div>
+			</section>
+
+			<section class="nt-proof">
+				<h2 class="nt-h2">買う前に｜無料で確かめられること</h2>
+				<p class="nt-note">有料記事で数値を出した6社は、<b>全社ともブログに分析記事があります</b>。手法にお金を払う前に、その手法で実際に何をどう評価したのかを確かめられます。</p>
+				<ul class="nt-stocks">
+					{proofStocks.filter((s) => has(s.id)).map((s) => (
+						<li>
+							<a href={`/blog/${s.id}/`}>
+								<span class={`nt-verdict is-${s.tone}`}>{s.verdict}</span>
+								<span class="nt-stock-name">{s.name}<span class="nt-code">（{s.code}）</span></span>
+								<span class="nt-stock-note" set:html={s.note} />
+							</a>
+						</li>
+					))}
+				</ul>
+				<ul class="nt-links">
+					{proofLinks.map((l) => (
+						<li>
+							<a href={l.href}>
+								<span class="nt-link-label">{l.label}</span>
+								<span class="nt-link-note" set:html={l.note} />
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<section class="nt-promise">
+				<h2 class="nt-h2">3つの約束｜無料を痩せさせない</h2>
+				<p class="nt-note">「有料商品を作ると、無料記事の質が落ちる」——これはこの手の話でいちばん正しい批判です。気持ちではなく、構造で答えます。</p>
+				<div class="nt-promise-grid">
+					<div class="nt-promise-item">
+						<span class="nt-promise-no">01</span>
+						<h3>完全版レポートは無料のまま</h3>
+						<p>紹介45銘柄・<b>50本すべて無料</b>。noteへは1本も移しません。</p>
+					</div>
+					<div class="nt-promise-item">
+						<span class="nt-promise-no">02</span>
+						<h3>保有と売買記録は全部出す</h3>
+						<p><b>166銘柄の全リスト</b>と、週ごとの建玉・決済記録を今までどおり公開します。</p>
+					</div>
+					<div class="nt-promise-item">
+						<span class="nt-promise-no">03</span>
+						<h3>答え合わせは無料側に置く</h3>
+						<p>紹介銘柄の検証は<b>外した銘柄も含めて無料</b>。都合の悪い数字を有料側に隠しません。</p>
+					</div>
+				</div>
+				<div class="nt-callout nt-callout-quiet">
+					<b>無料コンテンツそのものが、商品の品質保証になっています。</b>
+					売っているのが手順である以上、<b>その手順で実際に何をどう評価したかが公開されていなければ、買う理由がありません</b>。
+					つまり無料を痩せさせると、有料の側が売れなくなります——実演をやめた実演販売から、誰も買いません。
+				</div>
+			</section>
+
+			{has('note-sell-method-not-stocks') && (
+				<section class="nt-column">
+					<h2 class="nt-h2">この設計の全文</h2>
+					<a class="nt-column-btn" href="/blog/note-sell-method-not-stocks/">
+						📝 {title('note-sell-method-not-stocks')} →
+					</a>
+					<p class="nt-note">なぜ銘柄を売らないのか、線をどこに引いたのか、いちばん痛い批判にどう答えるのか。オルカン教祖の乱入つきで。</p>
+				</section>
+			)}
+
+			<section class="nt-foot-links">
+				<a class="nt-foot-btn" href={NOTE_HOME} target="_blank" rel="noopener">📕 noteのクリエイターページ →</a>
+				<a class="nt-foot-btn" href={SHEET_URL}>📗 判別シート（Excel）を直接ダウンロード →</a>
+			</section>
+
+			<p class="nt-disc">
+				※本ページは投資助言ではありません。当商会は金融商品取引業者ではなく、対価を得て特定銘柄の売買判断を提供することはしません。
+				noteで販売しているのは判別手順であり、個別銘柄の推奨・目標株価・評価ランクは含みません。
+				完全版レポート50本・保有166銘柄は2026年9月9日時点の実測値です。記事本数はこのページの表示が公開分の実数です。
+				掲載の指標は当方が公開情報から算出した概算であり、会社発表値と異なる場合があります。
+				検証成績は2026年9月7日終値時点、配当を含まない株価騰落のみの比較で、実際の建玉サイズは反映していません。
+				投資はご自身の判断と責任でお願いします。
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* global.css の main は width:720px 固定のため、width も上書きしないと
+	   モバイルで横スクロールが出る（box-sizing も明示） */
+	main {
+		width: 100%;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 3vw, 32px) 64px;
+		box-sizing: border-box;
+	}
+
+	.nt-hero { text-align: center; padding: 38px 0 10px; }
+	.nt-badge {
+		display: inline-block; font-size: 0.78rem; letter-spacing: .08em; font-weight: 700;
+		background: linear-gradient(90deg, #E6F1FB, #F1F7FE);
+		color: #042C53; border: 1px solid #B5D4F4;
+		padding: 5px 14px; border-radius: 999px;
+	}
+	.nt-hero h1 {
+		margin: 14px 0 8px; font-size: clamp(1.5rem, 4.6vw, 2.3rem); line-height: 1.35;
+	}
+	.nt-hl {
+		background: linear-gradient(transparent 62%, #FAE3A6 62%);
+		padding: 0 2px;
+	}
+	.nt-badge-full { color: #5A646E; font-size: .72em; margin-left: .2em; }
+	.nt-desc { color: #38424C; font-size: .96rem; line-height: 1.85; margin: 0; }
+	.nt-desc b { color: #042C53; }
+
+	.nt-nums {
+		display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0 8px;
+	}
+	.nt-num {
+		border: 1px solid #E2E7EB; border-radius: 12px; padding: 16px 12px; text-align: center;
+		background: #fff;
+	}
+	.nt-num.t-green { border-color: #9FE1CB; background: #F4FCF9; }
+	.nt-num.t-blue { border-color: #B5D4F4; background: #F5FAFE; }
+	.nt-num-l { font-size: .74rem; color: #5A646E; letter-spacing: .02em; }
+	.nt-num-v { font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 800; line-height: 1.2; margin: 4px 0 2px; color: #22282E; }
+	.nt-num-v span { font-size: .46em; margin-left: 2px; font-weight: 700; }
+	.nt-num.t-green .nt-num-v { color: #0F6E56; }
+	.nt-num.t-blue .nt-num-v { color: #185FA5; }
+	.nt-num-d { font-size: .72rem; color: #7A838C; }
+
+	.nt-h2 {
+		font-size: clamp(1.08rem, 3vw, 1.32rem); margin: 34px 0 10px; padding-left: 12px;
+		border-left: 5px solid #185FA5; line-height: 1.5;
+	}
+	.nt-note { font-size: .84rem; color: #5A646E; line-height: 1.8; margin: 0 0 12px; }
+	.nt-note b { color: #22282E; }
+
+	.nt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+	.nt-table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .86rem; }
+	.nt-table th, .nt-table td { border: 1px solid #E2E7EB; padding: 9px 11px; text-align: left; }
+	.nt-table th { background: #F2F5F8; font-size: .8rem; color: #38424C; white-space: nowrap; }
+	.nt-table tr.hi { background: #FFFCF2; }
+	.nt-table td.ok { color: #0F6E56; }
+	.nt-table td.ng { color: #99311D; }
+	.nt-table td.warn { color: #854F0B; }
+
+	.nt-callout {
+		margin: 14px 0 0; padding: 14px 16px; border-radius: 10px; font-size: .86rem; line-height: 1.9;
+		background: #F5FAFE; border: 1px solid #B5D4F4; color: #22282E;
+	}
+	.nt-callout b { color: #042C53; }
+	.nt-callout-quiet { background: #F7F8FA; border-color: #DDE3E8; }
+
+	.nt-card {
+		border: 1px solid #E2C57A; border-radius: 14px; overflow: hidden; background: #fff;
+	}
+	.nt-card-head {
+		display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+		background: #1E1E1E; color: #F5F5F5; padding: 15px 18px;
+	}
+	.nt-price {
+		background: #E8B84B; color: #1E1E1E; font-weight: 800; font-size: 1rem;
+		padding: 3px 11px; border-radius: 6px; white-space: nowrap;
+	}
+	.nt-card-title { font-weight: 700; font-size: .94rem; line-height: 1.5; }
+	.nt-formula {
+		margin: 0; padding: 16px 18px; text-align: center; font-weight: 800;
+		font-size: clamp(.92rem, 2.9vw, 1.12rem); letter-spacing: .02em;
+		background: #FCF7EA; color: #4A3B12; border-bottom: 1px solid #F0E3C0;
+	}
+	.nt-card-lead { margin: 0; padding: 14px 18px 4px; font-size: .88rem; line-height: 1.9; color: #38424C; }
+	.nt-card-lead b { color: #22282E; }
+
+	.nt-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 18px 4px; }
+	.nt-col { border-radius: 10px; padding: 13px 15px; }
+	.nt-col h3 { margin: 0 0 8px; font-size: .88rem; }
+	.nt-col ul { margin: 0; padding-left: 1.15em; }
+	.nt-col li { font-size: .82rem; line-height: 1.75; margin-bottom: 4px; }
+	.nt-col-free { background: #F4FCF9; border: 1px solid #9FE1CB; }
+	.nt-col-free h3 { color: #0F6E56; }
+	.nt-col-paid { background: #FCF7EA; border: 1px solid #E2C57A; }
+	.nt-col-paid h3 { color: #7A5A0B; }
+	.nt-col-note { font-size: .76rem; color: #5A646E; margin: 9px 0 0; line-height: 1.7; }
+
+	.nt-sheet {
+		display: flex; gap: 12px; align-items: flex-start;
+		margin: 12px 18px; padding: 13px 15px; border-radius: 10px;
+		background: #F2F5F8; border: 1px solid #DDE3E8;
+	}
+	.nt-sheet-icon { font-size: 1.5rem; line-height: 1; }
+	.nt-sheet b { font-size: .87rem; }
+	.nt-sheet p { margin: 6px 0 0; font-size: .81rem; line-height: 1.8; color: #38424C; }
+	.nt-sheet-warn { color: #99311D !important; }
+
+	.nt-buy {
+		display: block; margin: 4px 18px 18px; padding: 14px 18px; border-radius: 10px;
+		background: #1E1E1E; color: #E8B84B; text-align: center; font-weight: 800;
+		text-decoration: none; font-size: .94rem; border: 1px solid #1E1E1E;
+	}
+	.nt-buy:hover { background: #2C2C2C; }
+
+	.nt-stocks, .nt-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+	.nt-stocks { grid-template-columns: repeat(2, 1fr); }
+	.nt-stocks a, .nt-links a {
+		display: block; padding: 11px 14px; border: 1px solid #E2E7EB; border-radius: 10px;
+		text-decoration: none; color: inherit; background: #fff; height: 100%; box-sizing: border-box;
+	}
+	.nt-stocks a:hover, .nt-links a:hover { background: #F7F9FB; border-color: #C9D2DA; }
+	.nt-verdict {
+		display: inline-block; font-size: .7rem; font-weight: 800; padding: 2px 8px;
+		border-radius: 999px; margin-bottom: 6px;
+	}
+	.nt-verdict.is-ok { background: #E1F5EE; color: #0F6E56; }
+	.nt-verdict.is-ng { background: #FAECE7; color: #99311D; }
+	.nt-verdict.is-warn { background: #FAEEDA; color: #854F0B; }
+	.nt-verdict.is-flat { background: #EEF0F2; color: #5A646E; }
+	.nt-stock-name { display: block; font-weight: 700; font-size: .88rem; }
+	.nt-code { font-weight: 500; color: #7A838C; font-size: .84em; }
+	.nt-stock-note { display: block; font-size: .78rem; color: #5A646E; line-height: 1.7; margin-top: 3px; }
+
+	.nt-links { margin-top: 10px; grid-template-columns: repeat(2, 1fr); }
+	.nt-link-label { display: block; font-weight: 700; font-size: .88rem; color: #185FA5; }
+	.nt-link-note { display: block; font-size: .78rem; color: #5A646E; line-height: 1.7; margin-top: 3px; }
+
+	.nt-promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+	.nt-promise-item {
+		border: 1px solid #9FE1CB; background: #F4FCF9; border-radius: 12px; padding: 14px 15px;
+	}
+	.nt-promise-no { font-size: .72rem; font-weight: 800; color: #0F6E56; letter-spacing: .1em; }
+	.nt-promise-item h3 { margin: 4px 0 6px; font-size: .92rem; color: #04342C; line-height: 1.5; }
+	.nt-promise-item p { margin: 0; font-size: .8rem; line-height: 1.8; color: #38424C; }
+
+	.nt-column-btn, .nt-foot-btn {
+		display: block; padding: 13px 16px; border-radius: 10px; text-decoration: none;
+		border: 1px solid #B5D4F4; background: #F5FAFE; color: #042C53;
+		font-weight: 700; font-size: .88rem; line-height: 1.6;
+	}
+	.nt-column-btn:hover, .nt-foot-btn:hover { background: #E6F1FB; }
+	.nt-column { margin-top: 10px; }
+	.nt-column .nt-note { margin-top: 8px; }
+	.nt-foot-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
+
+	.nt-disc { font-size: .74rem; color: #7A838C; line-height: 1.85; margin: 26px 0 0; }
+
+	@media (max-width: 720px) {
+		.nt-nums { grid-template-columns: 1fr; }
+		.nt-cols { grid-template-columns: 1fr; }
+		.nt-stocks, .nt-links, .nt-promise-grid, .nt-foot-links { grid-template-columns: 1fr; }
+	}
+</style>
