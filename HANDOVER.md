@@ -519,6 +519,12 @@ GitHub リポジトリ `fuzzy-citrus/investment-blog` は **PUBLIC**。
 
 ## 17. note 運用（2026-09-09 更新）
 
+> 📕 **note の作業は、先に `numasoko-reports-backup/04_note原稿/00_note運用マニュアル.md` を読む。**
+> 記法ルール・貼り付け手順・踏んだ罠12件・公開前チェックが全部そこにある。
+> 商品の並びは同フォルダの `00_商品パイプライン.md`。
+> 生成スクリプト（md2html / split_note / make_*）は `04_note原稿/_スクリプト/` に置いてある
+> （scratchpad はセッションごとに消えるため、原稿と同じ場所に置く）。
+
 ### アカウントと置き場所
 
 - note ID `citrus_fuzzy_25` ／ クリエイター名「柑橘系」／ https://note.com/citrus_fuzzy_25
