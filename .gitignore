@@ -37,4 +37,11 @@ __pycache__/
 
 # 有料記事の配布物（公開リポジトリなので、ランダムトークン付きURLの意味がなくなる）
 # 実体は numasoko-reports-backup/04_note原稿/_配布物/ にミラーしている
-public/downloads/
+public/downloads/*
+# ただし旧URLの無効化ファイル（中身は注意書き124バイトのみ）は残す。
+# これを消すと、Pages が「そのパスで最後に配信したもの」を返し続けて旧URLが復活する。
+!public/downloads/naibu-fukuri-hanbetsu-sheet.xlsx
+!public/downloads/naibu-fukuri-hanbetsu-sheet-30ef570937d6.xlsx
+!public/downloads/kenri-hanbetsu-sheet-1cdeb9e94ada.xlsx
+!public/downloads/numasoko-score-sheet-1648fe2630ac.xlsx
+!public/downloads/numasoko-score-tool-f5d269a77ece.html
