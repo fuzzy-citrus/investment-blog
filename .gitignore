@@ -34,3 +34,7 @@ _archive/
 
 # Python のキャッシュ
 __pycache__/
+
+# 有料記事の配布物（公開リポジトリなので、ランダムトークン付きURLの意味がなくなる）
+# 実体は numasoko-reports-backup/04_note原稿/_配布物/ にミラーしている
+public/downloads/
