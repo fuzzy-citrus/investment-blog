@@ -716,3 +716,12 @@ $obj.SetData([System.Windows.Forms.DataFormats]::Html, $false, $ms)   # ← $ms 
 文面は `scratchpad/note_プロフィール.md`。**旧プロフィールは「35社・40本・0.96倍・22銘柄」で全部古い。**
 
 ---
+
+### ⚠️ public/downloads/ の扱い（2026-09-10 追加）
+
+- **有料配布物は git に入れない。**リポジトリが公開なので、ランダムトークン付きURLの意味が消える
+  （実際に3ファイル漏れていた。`git filter-branch` で履歴ごと消して force push 済み）
+- 実体のミラーは `numasoko-reports-backup/04_note原稿/_配布物/`
+- **124バイトの「無効化ファイル」5本だけは git に残す。**旧URLを塞ぐためのもので、
+  **消すと Cloudflare Pages が「そのパスで最後に配信したアセット」を返して旧URLが復活する**
+- トークンを振り直したら、note の①②⑥の本文URLも必ず追随させる
