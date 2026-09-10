@@ -579,7 +579,7 @@ GitHub リポジトリ `fuzzy-citrus/investment-blog` は **PUBLIC**。
 
 - 生成：`scratchpad/make_sheet.py` → `public/downloads/naibu-fukuri-hanbetsu-sheet-<token>.xlsx`
 - **ファイル名にランダムトークンを付ける**（URLを推測できないようにする）。
-  2026-09-09 に `-30ef570937d6` を付けて改名し、旧URLは配信されない状態にした
+  2026-09-09 に `-c1bf77e0cadc` を付けて改名し、旧URLは配信されない状態にした
 - `public/_headers` で `/downloads/*` に `X-Robots-Tag: noindex, nofollow` を付与済み
 - URLを変えたら **note 本文の「ダウンロード」行も必ず直す**（購入者のリンクが死ぬ）
 - 3シート構成：**判別シート**（空の様式40行）／**記入例**（日本ギア=A・昭和化学=B が並ぶ）／**読み方**
