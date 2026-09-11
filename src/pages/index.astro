@@ -1,4 +1,4 @@
-﻿---
+---
 import Comments from '../components/Comments.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -98,6 +98,15 @@ const watchlist = allPosts
 					<a class="tag" href="/map#income"><span class="tag-emoji">🐝</span>高配当・増配</a>
 				</div>
 				<div class="hero-concept-wrap">
+					<a href="/start/" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">🧭</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-new">START</span>
+							<span class="hero-concept-label">初めての方へ</span>
+							<span class="hero-concept-sub">まず読む順番を3分で案内</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
 					<a href="/concept/" class="hero-concept-btn">
 						<span class="hero-concept-icon">💎</span>
 						<span class="hero-concept-text">
@@ -144,6 +153,20 @@ const watchlist = allPosts
 				{latestUpdateLabel && (
 					<p class="hero-updated">📅 最終更新：{latestUpdateLabel}</p>
 				)}
+			</section>
+
+			<section class="first-visit-intro" aria-labelledby="first-visit-title">
+				<div class="first-visit-copy">
+					<span class="first-visit-kicker">初めて読む方へ</span>
+					<h2 id="first-visit-title">結論だけでなく、考え方と答え合わせまで公開します</h2>
+					<p>無料ブログでは一次資料から個別株を検証し、紹介後の値動きや訂正も残します。分析を自分で再現したい方向けには、noteで手順・判定基準・チェックリストをまとめています。</p>
+					<a href="/start/" class="first-visit-main">読む順番を3分で見る →</a>
+				</div>
+				<div class="first-visit-steps">
+					<a href="/blog/" class="first-visit-step"><strong>1. 読む</strong><span>無料の分析記事から入る</span></a>
+					<a href="/blog/scorecard-45-stocks-2026q3/" class="first-visit-step"><strong>2. 確かめる</strong><span>通信簿で紹介後を見る</span></a>
+					<a href="/note/" class="first-visit-step"><strong>3. 再現する</strong><span>分析手順とツールを見る</span></a>
+				</div>
 			</section>
 
 			<div class="wl-col-grid">
@@ -335,6 +358,20 @@ const watchlist = allPosts
 		letter-spacing: 0.04em;
 		text-align: center;
 	}
+
+	/* ── First-time visitor intro ── */
+	.first-visit-intro{display:grid;grid-template-columns:1.25fr .75fr;gap:1em;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #d9e4dc;border-left:4px solid var(--accent);border-radius:10px;background:#fbfdfb}
+	.first-visit-kicker{display:inline-block;font-size:.68em;font-weight:800;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:.35em}
+	.first-visit-intro h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
+	.first-visit-intro p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
+	.first-visit-main{font-size:.78em;font-weight:800;color:var(--accent);text-decoration:none}
+	.first-visit-steps{display:grid;gap:.45em}
+	.first-visit-step{display:flex;flex-direction:column;gap:.12em;padding:.55em .7em;border:1px solid #dde8dd;border-radius:7px;background:#fff;text-decoration:none}
+	.first-visit-step strong{font-size:.76em;color:var(--accent-dark)}
+	.first-visit-step span{font-size:.68em;color:rgb(var(--gray))}
+	.first-visit-step:hover{background:#f3f8f4}
+	@media(max-width:640px){.first-visit-intro{grid-template-columns:1fr}.first-visit-steps{grid-template-columns:1fr 1fr 1fr}.first-visit-step{padding:.5em}.first-visit-step span{font-size:.62em}}
+	@media(max-width:420px){.first-visit-steps{grid-template-columns:1fr}}
 
 	/* ── Asset Status ── */
 	.asset-status {
