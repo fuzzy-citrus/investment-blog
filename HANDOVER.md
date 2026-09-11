@@ -725,3 +725,13 @@ $obj.SetData([System.Windows.Forms.DataFormats]::Html, $false, $ms)   # ← $ms 
 - **124バイトの「無効化ファイル」5本だけは git に残す。**旧URLを塞ぐためのもので、
   **消すと Cloudflare Pages が「そのパスで最後に配信したアセット」を返して旧URLが復活する**
 - トークンを振り直したら、note の①②⑥の本文URLも必ず追随させる
+
+---
+
+## 🆕 AI共同運営体制（2026-09-14 実働開始）
+
+ChatGPT を編集長兼マーケティング責任者、Claude を主任アナリスト兼主席ライターとする分業体制に移行する。
+
+- 実務書と引継ぎ票：`numasoko-reports-backup/05_AI共同運営/`
+- **この HANDOVER.md と note運用マニュアルは、実務書より下位ではない。**実務書＝体制と責任の設計、こちらの2文書＝実装の正
+- **ChatGPT から渡された株価・指標は、必ず price.py で取り直す**（突合メモ §3-① 参照）
