@@ -77,4 +77,5 @@ export const columnAuthors: Record<string, ColumnAuthor> = {
   'low-payout-internal-compounding': C.numata,
   'note-sell-method-not-stocks': C.numata,
   'august-september-rights-2026': C.hanaoka,
+  'september-rights-spot-margin-2026': C.nomura,
 };
