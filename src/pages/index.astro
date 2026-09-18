@@ -39,7 +39,10 @@ const holdingsSub = holdingsAsOf
 	: '全ポジションの一覧';
 
 // ヒーローに表示する最終更新日時（siteUpdates の先頭。未登録時は最新記事へフォールバック）
-const latestUpdate = siteUpdates[0] ? new Date(siteUpdates[0].at) : allPosts[0]?.data.pubDate;
+// 記事の公開とサイト改修のうち、新しいほうを最終更新として出す
+const siteAt = siteUpdates[0] ? new Date(siteUpdates[0].at) : undefined;
+const postAt = allPosts[0]?.data.pubDate;
+const latestUpdate = siteAt && postAt ? (siteAt > postAt ? siteAt : postAt) : (siteAt ?? postAt);
 const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 	timeZone: 'Asia/Tokyo',
 	year: 'numeric',

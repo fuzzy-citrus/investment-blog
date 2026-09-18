@@ -169,6 +169,10 @@ blockquote {
 	margin: 0;
 	font-size: 1.333em;
 }
+/* 引用枠の中は原稿の改行をそのまま改行として出す（「・」の箇条が1段落につながらないように） */
+blockquote p {
+	white-space: pre-line;
+}
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
