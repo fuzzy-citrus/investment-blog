@@ -6,6 +6,8 @@ pubDate: "2026-08-31T10:00:00+09:00"
 related: ["toso-5956", "how-to-find-net-net-japan", "ryoyu-systems-4685", "shinyei-3004", "nifty-lifestyle-4262", "daishin-chemical-4629"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["現預金", "ネットキャッシュ"]
   rating: "A-"
   ticker: "7483"
   companyName: "ドウシシャ"

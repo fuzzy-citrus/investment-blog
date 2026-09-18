@@ -6,6 +6,8 @@ cardDesc: "時価総額約43億に対し、<span class='card-highlight'>保有�
 related: ["katakura-3001", "tobu-network-9036", "holdings-status-04-okaya-tokai", "kozosodo-hd-7868"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["有価証券"]
   rating: "B++"
   ticker: "9353"
   companyName: "櫻島埠頭"

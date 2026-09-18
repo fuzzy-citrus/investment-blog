@@ -6,6 +6,8 @@ pubDate: "2026-08-09T10:00:00+09:00"
 related: ["toyo-tec-9686", "security-sector-consolidation", "activist-front-running-02", "daiken-5900-activist-entry"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["ネットキャッシュ"]
   rating: "B++"
   ticker: "4754"
   companyName: "トスネット"

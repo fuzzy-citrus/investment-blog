@@ -17,11 +17,15 @@ const C = {
   yomi:      { emoji: '🦉', name: '夜見', fill: '#E1F5EE', text: '#04342C', accent: '#0F6E56' },
   machibuse: { emoji: '🐊', name: '待伏', fill: '#FAECE7', text: '#4A1B0C', accent: '#993C1D' },
   morita:    { emoji: '🦞', name: '守田', fill: '#FAEEDA', text: '#412402', accent: '#854F0B' },
-  nomura:    { emoji: '🧓', name: '野村創業者', fill: '#FAEEDA', text: '#412402', accent: '#854F0B' },
+  nomura:    { emoji: '🧓', name: '野村創業者', fill: '#F0E7D8', text: '#33240F', accent: '#6E5320' },
+  sumida:    { emoji: '🦑', name: '墨田', fill: '#E0F7FA', text: '#06363D', accent: '#0E6C7A' },
   hanaoka:   { emoji: '🐝', name: '花岡', fill: '#FBEAF0', text: '#4B1528', accent: '#993556' },
 } satisfies Record<string, ColumnAuthor>;
 
 export const columnAuthors: Record<string, ColumnAuthor> = {
+  'scorecard-45-stocks-2026q3': C.sumida,
+  'rerank-45-current-price-audit': C.sumida,
+  'ex-rights-overdrop-check-2026aug': C.sumida,
   'activist-front-running-01': C.machibuse,
   'activist-front-running-02': C.machibuse,
   'activist-front-running-03': C.machibuse,

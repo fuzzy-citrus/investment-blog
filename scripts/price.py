@@ -72,19 +72,20 @@ def metrics(main_html):
     if m:
         x = re.sub(r'<[^>]*>', '|', m.group(1))
         x = re.sub(r'\s+', '', x)
-        vals = re.findall(r'([\d,\.]+)\|*(倍|％|億円)', x)
-        # 銘柄によって信用倍率が無い。位置ではなく単位の並びで振り分ける
+        # 「－」も値として拾う。落とすと欄がずれて、PERの無い銘柄で
+        # PBRをPERとして報告してしまう（2026-09-16に実際に起きた）
+        vals = re.findall(r'((?:[－\-–—]|[\d,\.]+))\|*(倍|％|億円)', x)
         bai = [v for v, u in vals if u == '倍']
         pct = [v for v, u in vals if u == '％']
         oku = [v for v, u in vals if u == '億円']
-        if len(bai) > 0:
-            out['PER'] = bai[0] + '倍'
-        if len(bai) > 1:
-            out['PBR'] = bai[1] + '倍'
-        if pct:
-            out['配当利回り'] = pct[0] + '％'
-        if len(bai) > 2:
-            out['信用倍率'] = bai[2] + '倍'
+        DASH = ('－', '-', '–', '—')
+        def put(key, arr, i, unit):
+            if len(arr) > i:
+                out[key] = '算出不能' if arr[i] in DASH else arr[i] + unit
+        put('PER', bai, 0, '倍')
+        put('PBR', bai, 1, '倍')
+        put('配当利回り', pct, 0, '％')
+        put('信用倍率', bai, 2, '倍')
         # 兆円規模は「6兆1,535億円」と分かれて出る。兆を落とさない
         mc = re.search(r'時価総額\|*(?:([\d,]+)\|*兆\|*)?([\d,\.]+)\|*億円', x)
         if mc:
@@ -93,7 +94,7 @@ def metrics(main_html):
             total = cho * 10000 + oku2
             out['時価総額'] = ('%s兆%s億円' % (mc.group(1), mc.group(2))) if cho else (mc.group(2) + '億円')
             out['_mcap_oku'] = total
-        elif oku:
+        elif oku and oku[0] not in ('－', '-', '–', '—'):
             out['時価総額'] = oku[0] + '億円'
     n = re.search(r'発行済株式数[^0-9]{0,40}([\d,]+)', main_html)
     if n:

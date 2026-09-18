@@ -4,6 +4,8 @@ description: "実態BPS 1,800円に対し株価909円（▲49%割安）。神田
 cardDesc: "実態BPS1,800円に対し<span class='card-highlight'>株価909円＝▲49%</span>。神田駿河台の本社ビルに含み益40〜100億円、ビックカメラが61.35%保有。"
 pubDate: "2026-05-31"
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["土地・不動産"]
   rating: "B+"
   ticker: "9414"
   companyName: "日本BS放送"

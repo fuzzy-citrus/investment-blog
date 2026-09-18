@@ -6,6 +6,7 @@ cardDesc: "独自のブラックライン技術で発熱外来に定着し<span 
 related: ["healthcare-selloff-opportunity", "em-systems-4820", "kitazato-368a", "dividend-series-01-what-is-dividend", "food-tax-cut-1percent-value-stocks"]
 draft: false
 stockCard:
+  investmentType: "インカム型"
   rating: "B+"
   ticker: "197A"
   companyName: "タウンズ"

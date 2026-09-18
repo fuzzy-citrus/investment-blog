@@ -5,6 +5,7 @@ cardDesc: "<span class='card-highlight'>PEファンドが13%を握る資本イ�
 pubDate: "2026-08-03T10:00:00+09:00"
 draft: false
 stockCard:
+  investmentType: "イベント型"
   rating: "B"
   ticker: "6932"
   companyName: "遠藤照明"

@@ -2,7 +2,7 @@
 
 > 新しいスレッド（セッション）でこのファイルを最初に読めば、作業を継続できます。
 > 本番サイト: https://numasoko-value.com/
-> 最終更新: 2026-09-09（**公開108本**・下書き在庫4本。**scripts/precheck.py と scripts/price.py を必ず使うこと**）
+> 最終更新: 2026-09-19（**公開117本**・下書き在庫3本。**scripts/precheck.py と scripts/price.py を必ず使うこと**）
 
 ---
 
@@ -120,7 +120,7 @@ noteUrl: "https://numasoko-value.com/analysis/tanaken-1450.html"
 
 ## 5. 記事・シリーズの現状（2026-09-08 更新）
 
-**記事112本（公開108／下書き4）／完全版資料50本／related 平均4.26本・被リンク0本ゼロ**
+**記事120本（公開117／下書き3）／完全版資料50本／related 平均4.26本・被リンク0本ゼロ**
 **対外的に出す数字は公開分だけ。** 下書きを含めると、読者が数えたときに合わない。
 **ブログ内で記事数を出す面は `getCollection('blog')` の公開分を数えて自動表示にする**（`/note` が実装例）。手書きにすると毎日腐る
 
@@ -134,7 +134,7 @@ noteUrl: "https://numasoko-value.com/analysis/tanaken-1450.html"
 
 | id | シリーズ名 | 話数 | 更新頻度 |
 |---|---|---:|---|
-| `weekly` | 週次運用記録 | 1 | 毎週 |
+| `weekly` | 週次運用記録 | 4 | 毎週 |
 | `reverse-value` | 逆バリュー投資（日向が企画者） | 2 | 不定期 |
 | `census` | シケモク圏の人口調査 | 1 | **毎月** |
 | `scorecard` | 紹介銘柄の通信簿 | 1 | **四半期（次12月）** |
@@ -416,8 +416,8 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 | 買い方金利 | **1.69%** | `AssetSidebar.astro` / `company.astro` / `BookSidebar.astro` |
 | 資産推移（月末） | **4,308万円**・評価損益 **+146万円** | `AssetSidebar.astro` / `company.astro` / `BookSidebar.astro`（著者bio） |
 | 資産推移の画像 | `/images/nomura-asset-chart-202608.png` | 同上（月が変わったら差し替え） |
-| 最新ポートフォリオ | 基準日 **2026/09/04**・172建玉 | `public/holdings.html` |
-| 社内掲示板 | 最新 2026.09.06 | `BookSidebar.astro` の `bulletins`（新しい順・**公開のたびに1件追加**） |
+| 最新ポートフォリオ | 基準日 **2026/09/18**・165建玉（156銘柄・売建1） | `public/holdings.html` |
+| 社内掲示板 | 最新 2026.09.19 | `BookSidebar.astro` の `bulletins`（新しい順・**公開のたびに1件追加**） |
 
 ### 最新ポートフォリオ（`/holdings`）の更新手順
 
@@ -527,7 +527,7 @@ GitHub リポジトリ `fuzzy-citrus/investment-blog` は **PUBLIC**。
 
 ### アカウントと置き場所
 
-- note ID `citrus_fuzzy_25` ／ クリエイター名「柑橘系」／ https://note.com/citrus_fuzzy_25
+- note ID `citrus_fuzzy_25` ／ クリエイター名「沼底バリュー商会」／ https://note.com/citrus_fuzzy_25
 - **パスワードはどこにも記録しない**（パスワードマネージャ管理）。スクショでも受け取らない
 - 設定メモ：`C:\Users\fuzzy\Documents\numasoko-reports-backup\ブログ運用設定.md`
 - 原稿：同バックアップの `04_note原稿/`（00_プロフィール／01_低配当性向スクリーニング／02_無料_はじめまして／03_無料_優待の総合利回り）
@@ -735,3 +735,29 @@ ChatGPT を編集長兼マーケティング責任者、Claude を主任アナ�
 - 実務書と引継ぎ票：`numasoko-reports-backup/05_AI共同運営/`
 - **この HANDOVER.md と note運用マニュアルは、実務書より下位ではない。**実務書＝体制と責任の設計、こちらの2文書＝実装の正
 - **ChatGPT から渡された株価・指標は、必ず price.py で取り直す**（突合メモ §3-① 参照）
+- ChatGPT側のセットアップは **2026-09-11 に完了**。プロジェクト「沼底バリュー商会」
+  （指示1,905字＋情報源5ファイル、推論「高」）。手順と検証結果は `05_AI共同運営/04_ChatGPT側セットアップ.md`
+- **ChatGPTに資料を渡すときは、チャットへの添付ではなく「情報源」タブに登録する。**
+  添付はその会話限りで、会話を変えると読めなくなる
+- **記事を公開したら `py scripts/make_index.py` を回し、出力をChatGPTの情報源に再アップロードする。**
+  ChatGPTは企画とSEOの担当なので、既出テーマの地図が古いと重複企画を出す
+- **ChatGPTはブログ本文を直接読める**（検証済み）。ただしブログには評価ランクと期待株価が載っている。
+  **有料商品の販促コピーにそれらを書かせないこと**（プロジェクト指示に規則として入れてある）
+
+
+---
+
+## 18. AI容量に応じた可変運用（2026-09-11 追加）
+
+固定するのは担当AIではなく、**責任境界と品質ゲート**。ChatGPT／Claude／Codexの容量・接続状況に応じて、代替可能な実装・販促・監査作業は柔軟に振り替える。
+
+詳細ルール：`docs/AI_CAPACITY_ROUTING.md`
+原本：`numasoko-reports-backup/05_AI共同運営/06_AI稼働容量_可変運用ルール.md`
+
+要点：
+- Claude不足時はG3/G4を優先案件に限定し、ChatGPT＋CodexでSEO・UI・CTA・内部リンク・自動化を先行する。
+- ChatGPT不足時は仕様化済み実装をCodexへ寄せ、ChatGPTは優先順位・レビュー・引継ぎに絞る。
+- Codex／Remote Desktop停止時は、ChatGPTが仕様と検証条件まで作り、接続復旧まで本番反映済みと扱わない。
+- 財務・資産分析、反証、シナリオ、分析本文は容量不足でも他AIへ無理に移管しない。Claude復旧待ちキューへ積む。
+- 公開・投資・課金価値の最終判断は常に山本悠希。
+- AI残量は推測しない。ユーザー申告と実際の利用可否で切り替える。

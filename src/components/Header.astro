@@ -7,7 +7,7 @@ import BookSidebar from './BookSidebar.astro';
 
 <header>
 	<nav>
-		<h2><a href="/">🏢 {SITE_TITLE}</a></h2>
+		<h2 class="site-brand"><a href="/">🏢 <span>{SITE_TITLE}</span></a></h2>
 		<button class="hamburger" aria-label="メニュー" aria-expanded="false">
 			<span></span><span></span><span></span>
 		</button>
@@ -50,10 +50,14 @@ import BookSidebar from './BookSidebar.astro';
 		position: relative;
 		z-index: 100;
 	}
-	h2 {
+	.site-brand {
 		margin: 0;
-		font-size: 1em;
+		font-size: clamp(0.76rem, 1.25vw, 0.94rem);
+		flex: 0 1 auto;
+		min-width: 0;
 	}
+	.site-brand a { white-space: nowrap; display: inline-flex; align-items: center; gap: .18em; }
+	.site-brand span { white-space: nowrap; }
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
@@ -182,8 +186,10 @@ import BookSidebar from './BookSidebar.astro';
 	.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 	@media (max-width: 720px) {
-		h2 { font-size: 0.9em; }
-		.hamburger { display: flex; }
+		header { padding: 0 .65em; }
+		.site-brand { font-size: clamp(.72rem, 3.45vw, .9rem); }
+		.site-brand a { padding-left: .15em; padding-right: .2em; }
+		.hamburger { display: flex; flex-shrink: 0; }
 		.internal-links {
 			display: none;
 			position: absolute;

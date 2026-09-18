@@ -6,6 +6,7 @@ pubDate: "2026-09-03T10:00:00+09:00"
 related: ["toso-5956", "ryoyu-systems-4685", "shinyei-3004", "core-satellite-onkabu-design"]
 draft: false
 stockCard:
+  investmentType: "本業型"
   rating: "B+"
   ticker: "1777"
   companyName: "川崎設備工業"

@@ -6,6 +6,8 @@ pubDate: "2026-07-23T10:00:00+09:00"
 related: ["nihon-bs-hoso-9414", "tokai-electronics-8071", "saas-death-japan-it", "sakurajima-futo-9353", "broadcasting-selloff-opportunity"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券"]
   rating: "B+"
   shortName: "テレビ東京HD"
   ticker: "9413"

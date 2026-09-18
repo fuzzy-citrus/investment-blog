@@ -4,6 +4,7 @@ description: "日本製鉄63.4%子会社のITサービス大手。純資産40%�
 cardDesc: "<span class='card-highlight'>純資産の40%（944億円）が親会社口座に年利0.2%で眠る</span>。ROEは同業の3分の1で、是正されれば景色が変わる。"
 pubDate: "2026-06-09"
 stockCard:
+  investmentType: "イベント型"
   rating: "B++"
   ticker: "2327"
   companyName: "日鉄ソリューションズ"

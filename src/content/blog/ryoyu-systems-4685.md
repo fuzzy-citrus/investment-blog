@@ -4,6 +4,7 @@ description: "F-15改修・P-1哨戒機・H3ロケットの基幹ITを独占。�
 cardDesc: "F-15改修・P-1哨戒機・H3ロケットの基幹ITを独占。<span class='card-highlight'>5期連続最高益・ROE20%超でPER10倍</span>。"
 pubDate: "2026-06-03"
 stockCard:
+  investmentType: "複合型"
   rating: "A-"
   ticker: "4685"
   companyName: "菱友システムズ"
@@ -13,7 +14,7 @@ stockCard:
   downside: "▲14%"
   modifiedPBR: "1.50倍"
   category: "三菱重工系の防衛SIer"
-related: ["holdings-status-01-saas", "nssol-2327", "punch-industry-6165", "em-systems-4820"]
+related: ["ryoyu-systems-4685-q1-recheck", "holdings-status-01-saas", "nssol-2327", "punch-industry-6165", "em-systems-4820"]
 ---
 
 > 📈 **現況更新（2026-08-11）**：株価2,620円（紹介時比▲9.5%）。7/31の1Q決算を受け8/3に<strong>▲9.9%の急落・年初来安値2,467円</strong>、その後は2,620〜2,646円で下げ止まり。前提を検証し直した結果、<strong>防衛ITの堀は無傷</strong>だが「会社予想は毎年上振れる」「賃上げは単価転嫁で相殺できる」という2つの前提が崩れた。<strong>ただし株価の下落がその毀損を吸収し</strong>、PER10.0→9.3倍・PBR1.7→1.50倍・利回り3.2→3.82%と割安度はむしろ拡大したため、<strong>現況ランクはA−で据え置き</strong>（10/31の2Qで下方修正が出れば引き下げ）。三分割で買い増し検討中。訂正事項・撤退基準・<strong>損出しをしながら保有を続ける実務</strong>は[1Q決算後の再検証（続報）](/blog/ryoyu-systems-4685-q1-recheck/)へ。※本文の数値は紹介時（2026年6月）のものです。

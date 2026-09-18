@@ -26,9 +26,15 @@ export const seriesList: Series[] = [
 		lead: '1週間の売買を全件開示し、ポートフォリオの現況と維持率まで数字で出すシリーズ。',
 		slugs: [
 			'weekly-2026w36-midlarge-56buys',
+			'weekly-2026w37-cut-and-buy-down',
+			'weekly-2026w38-nihon-gear-round-trip',
+			'weekly-2026w38-week-summary',
 		],
 		labels: [
 			'2026年8月30日〜9月5日',
+			'2026年9月7日〜11日',
+			'2026年9月14日〜16日',
+			'2026年9月14日〜18日（総括）',
 		],
 	},
 	{

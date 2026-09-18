@@ -4,6 +4,8 @@ description: "政策保有株5銘柄の現在時価が時価総額88億円の91.
 cardDesc: "<span class='card-highlight'>政策保有株5銘柄の時価が時価総額の91.2%</span>。修正PBR0.71倍・配当利回り5.21%で、湿度センサーは世界首位。"
 pubDate: "2026-05-24"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["有価証券"]
   rating: "A-"
   ticker: "3004"
   companyName: "神栄"

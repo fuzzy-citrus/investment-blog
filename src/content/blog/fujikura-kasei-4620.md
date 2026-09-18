@@ -6,6 +6,8 @@ pubDate: "2026-08-14T10:00:00+09:00"
 related: ["gunei-chemical-4229", "activist-front-running-real-cases", "activist-front-running-02", "how-to-find-net-net-japan"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "ネットキャッシュ", "有価証券"]
   rating: "A-"
   ticker: "4620"
   companyName: "藤倉化成"

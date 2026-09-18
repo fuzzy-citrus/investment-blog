@@ -6,6 +6,7 @@ cardDesc: "<span class='card-highlight'>シェア42.8%の完全ストック型</
 related: ["healthcare-selloff-opportunity", "saas-death-japan-it", "ryoyu-systems-4685", "nssol-2327", "nifty-lifestyle-4262"]
 draft: false
 stockCard:
+  investmentType: "ニッチトップ型"
   rating: "B+"
   ticker: "4820"
   companyName: "EMシステムズ"

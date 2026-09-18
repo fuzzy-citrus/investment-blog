@@ -6,6 +6,8 @@ pubDate: "2026-09-07T10:00:00+09:00"
 related: ["nanshin-7399", "sanko-6964", "cigar-butt-special-2026", "toso-5956"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["現預金"]
   rating: "A-"
   ticker: "4629"
   companyName: "大伸化学"

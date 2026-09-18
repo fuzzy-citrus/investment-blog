@@ -6,7 +6,8 @@ pubDate: "2026-09-08T10:00:00+09:00"
 related: ["daishin-chemical-4629", "cigar-butt-special-2026", "nanshin-7399", "sanko-6964", "nakayama-steel-5408"]
 draft: false
 stockCard:
-  rating: "A-"
+  investmentType: "本業型"
+  rating: "A+"
   ticker: "4040"
   companyName: "南海化学"
   currentPrice: 3975
@@ -16,6 +17,8 @@ stockCard:
   modifiedPBR: "0.62倍"
   category: "国内2社の寡占を3つ"
 ---
+
+> 🔄 **ランク再評価（2026-09-13）**：2026年9月13日の価格更新点検を行い、管理上の現行ランクを **A−→A+** に更新しました。評価基準を変えたのではなく、定期的な銘柄管理のための再評価です。
 
 > 🧑‍💼 「今日の会社は、<span class="t-blue">日本人がほぼ全員お世話になっているのに、誰も名前を知らない</span>」
 

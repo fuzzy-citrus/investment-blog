@@ -6,6 +6,8 @@ pubDate: "2026-08-04T10:00:00+09:00"
 related: ["gunei-chemical-4229", "hoshiwa-denki-6748", "activist-front-running-01", "daiken-5900-activist-entry"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["ネットキャッシュ", "有価証券"]
   rating: "A-"
   ticker: "6870"
   companyName: "日本フェンオール"

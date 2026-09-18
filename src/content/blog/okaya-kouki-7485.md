@@ -4,6 +4,8 @@ description: "純資産5,177億円に対し時価総額1,830億円（PBR0.35倍�
 cardDesc: "純資産5,177億に対し時価総額1,830億＝<span class='card-highlight'>PBR0.35倍</span>。投資有価証券だけで時価総額を170%超え、優良株をまとめて割引で持てる。"
 pubDate: "2026-05-31"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["有価証券"]
   rating: "A"
   ticker: "7485"
   companyName: "岡谷鋼機"

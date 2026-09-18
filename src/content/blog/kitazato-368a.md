@@ -4,7 +4,8 @@ description: "日本の体外受精（IVF）消耗品市場を独占し110ヵ国
 cardDesc: "体外受精の消耗品市場を国内独占し110ヵ国へ展開。<span class='card-highlight'>PER11.9倍・自己資本比率93.2%</span>で上場来最低圏に放置されている。"
 pubDate: "2026-05-18"
 stockCard:
-  rating: "A"
+  investmentType: "ニッチトップ型"
+  rating: "A-"
   ticker: "368A"
   companyName: "北里コーポレーション"
   currentPrice: 1206
@@ -16,6 +17,8 @@ stockCard:
 related: ["holdings-status-02-kitazato-shinyei", "hidden-policy-stock-kitazato", "nihon-hospice-7061", "ryoyu-systems-4685"]
 noteUrl: "https://numasoko-value.com/analysis/368A.html"
 ---
+
+> 🔄 **ランク再評価（2026-09-13）**：2026年9月13日の価格更新点検を行い、管理上の現行ランクを **A→A−** に更新しました。評価基準を変えたのではなく、定期的な銘柄管理のための再評価です。
 
 > 📈 **現況更新（2026-07-14）**：株価1,350円へ上昇（紹介時比+11.9%）——それでもまだ明確に安いと再評価し、現況ランクを<strong>A−→Aへ引き上げ</strong>。PFバランス調整で1,000株を1,340円で利確し3,400株ホールド中。詳細は[紹介銘柄の現況②（北里・神栄）](/blog/holdings-status-02-kitazato-shinyei/)へ。※本文の数値は紹介時（2026-05-18）のものです。
 

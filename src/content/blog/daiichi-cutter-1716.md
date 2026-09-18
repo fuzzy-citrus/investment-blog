@@ -6,6 +6,8 @@ cardDesc: "<span class='card-highlight'>時価総額の約53%がネットキャ�
 related: ["construction-selloff-opportunity", "tanaken-1450", "oyo-9755", "daiken-5900", "yamau-hd-5284"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["ネットキャッシュ"]
   rating: "B+"
   ticker: "1716"
   companyName: "第一カッター興業"

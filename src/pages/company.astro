@@ -13,7 +13,10 @@ import Footer from '../components/Footer.astro';
 		<Header />
 		<main>
 			<section class="company-hero">
-				<div class="company-badge">🏢 バリュー商会</div>
+				<figure class="company-visual">
+					<img src="/images/brand/company-intro-20260914.jpg" alt="沼底バリュー商会のメンバーが一次資料を囲んで企業価値を調べるイラスト" loading="eager" fetchpriority="high" />
+				</figure>
+				<div class="company-badge">🌱 沼底バリュー商会</div>
 				<h1>会社紹介</h1>
 				<p class="company-desc">バリュー商会の成績です</p>
 			</section>
@@ -108,29 +111,17 @@ import Footer from '../components/Footer.astro';
 </html>
 
 <style>
-	main { max-width: 760px; margin: 0 auto; padding: 1em 1em 4em; }
+	main { width: 100%; max-width: 760px; box-sizing: border-box; margin: 0 auto; padding: 1em 1em 4em; }
 
 	.company-hero {
 		text-align: center;
-		padding: 2.5em 1em 1.8em;
+		padding: 1em 1em 1.8em;
 		border-bottom: 1px solid rgb(var(--gray-light));
 		margin-bottom: 2em;
-		position: relative;
-		overflow: hidden;
+		background: linear-gradient(180deg,#f4fbf7 0%,#fff 100%);
 	}
-	.company-hero::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: url('/images/company-characters.png') center center / cover no-repeat;
-		opacity: 0.22;
-		pointer-events: none;
-		z-index: 0;
-	}
-	.company-hero > * {
-		position: relative;
-		z-index: 1;
-	}
+	.company-visual { margin: 0 auto 1em; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 28px rgba(24,56,45,.12); }
+	.company-visual img { display:block; width:100%; height:auto; }
 	.company-badge {
 		display: inline-block;
 		background: var(--accent-light);
@@ -254,4 +245,21 @@ import Footer from '../components/Footer.astro';
 	}
 	.asset-update-rule { font-size: 0.68em; color: rgba(255,255,255,0.45); margin: 0.3em 0; }
 	.asset-disclaimer { font-size: 0.65em; color: rgba(255,255,255,0.3); margin: 0; }
+
+	@media (max-width: 720px) {
+		main { padding: 0.65em 0.7em 3em; overflow: hidden; }
+		.company-hero { padding: 0.55em 0.45em 1.2em; margin-bottom: 1.2em; }
+		.company-visual { width: 100%; margin-bottom: 0.75em; border-radius: 10px; }
+		.company-badge { font-size: 0.72rem; margin-bottom: 0.5em; padding: 0.22em 0.75em; }
+		.company-hero h1 { font-size: 1.55rem; line-height: 1.2; margin: 0 0 0.35em; }
+		.company-desc { font-size: 0.78rem; }
+		.about-blog { padding: 1em 0.9em; margin-bottom: 1.2em; }
+		.about-item { gap: 0.55em; }
+		.about-text { font-size: 0.78em; line-height: 1.65; }
+		.asset-status { padding: 1em 0.9em; }
+		.asset-amounts { display: grid; grid-template-columns: 1fr; gap: 0.75em; }
+		.asset-amt-arrow { display: none; }
+		.asset-amt-label { white-space: normal; }
+		.asset-amt-val strong { font-size: 1.2em; }
+	}
 </style>

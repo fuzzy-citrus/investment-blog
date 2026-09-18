@@ -6,6 +6,8 @@ pubDate: "2026-07-22T10:00:00+09:00"
 related: ["tobu-network-9036", "kozosodo-hd-7868", "sakurajima-futo-9353", "activist-front-running-01", "toc-8841"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券", "土地・不動産"]
   rating: "B++"
   ticker: "3001"
   companyName: "片倉工業"

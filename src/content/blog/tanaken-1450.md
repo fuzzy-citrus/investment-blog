@@ -6,6 +6,7 @@ cardDesc: "資材を積まず鉄スクラップは売却収入になるため<sp
 related: ["construction-selloff-opportunity", "daiichi-cutter-1716", "nssol-2327", "kozosodo-hd-7868"]
 draft: false
 stockCard:
+  investmentType: "本業型"
   rating: "A-"
   ticker: "1450"
   companyName: "TANAKEN"

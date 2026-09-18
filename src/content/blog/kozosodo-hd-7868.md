@@ -4,6 +4,7 @@ description: "東京都内シェア70%超の火葬場「東京博善」の売却
 cardDesc: "<span class='card-highlight'>都内シェア70%超の火葬場「東京博善」の売却検討を会社が公表</span>。政治圧力を背景に、制度的な決着が近いイベント案件。"
 pubDate: "2026-06-09"
 stockCard:
+  investmentType: "イベント型"
   rating: "A+"
   shortName: "広済堂HD"
   ticker: "7868"

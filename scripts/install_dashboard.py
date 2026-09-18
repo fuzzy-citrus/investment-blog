@@ -68,7 +68,7 @@ def latest_weekly():
 def build_backlink():
     """ダッシュボード上部の戻るリンク。週次記事があれば3つ目のピルを足す。"""
     pills = [
-        '<a href="/" style="%scolor:var(--muted)">&larr; 沤底バリュー商会トップへ</a>' % _PILL,
+        '<a href="/" style="%scolor:var(--muted)">&larr; 沼底バリュー商会トップへ</a>' % _PILL,
         '<a href="/blog/core-satellite-onkabu-design/" style="%scolor:#185FA5;font-weight:600">'
         '📖 この配置の考え方を読む（コラム）</a>' % _PILL,
     ]

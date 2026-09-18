@@ -6,6 +6,8 @@ pubDate: "2026-08-06T12:30:00+09:00"
 related: ["daiichi-cutter-1716", "disaster-recovery-demand-value-stocks", "dividend-series-02-low-payout-opportunity", "sakurajima-futo-9353"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["ネットキャッシュ", "土地・不動産"]
   rating: "B++"
   ticker: "5284"
   companyName: "ヤマウホールディングス"

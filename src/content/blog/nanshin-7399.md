@@ -6,6 +6,8 @@ pubDate: "2026-09-02T10:00:00+09:00"
 related: ["tokai-senko-3577", "chuo-malleable-5607", "toso-5956", "how-to-find-net-net-japan", "kawasaki-setsubi-1777"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "ネットキャッシュ", "土地・不動産"]
   rating: "B+"
   ticker: "7399"
   companyName: "ナンシン"

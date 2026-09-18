@@ -4,6 +4,7 @@ description: "原発バルブアクチュエーター国内シェア90%超で、
 cardDesc: "<span class='card-highlight'>国内シェア90%超の代替不能インフラ</span>。原発回帰はこの会社抜きに成立せず、渋い配当性向がそのまま社内複利に回る。"
 pubDate: "2026-06-17"
 stockCard:
+  investmentType: "ニッチトップ型"
   rating: "A"
   ticker: "6356"
   companyName: "日本ギア工業"

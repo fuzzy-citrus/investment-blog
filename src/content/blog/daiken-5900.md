@@ -5,6 +5,8 @@ pubDate: "2026-07-02T18:00:00+09:00"
 cardDesc: "BPS2,496円に対し<span class='card-highlight'>株価848円＝PBR0.34倍</span>で解散価値の3分の1。淀川区の昭和期取得地に含み益42億円。"
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券", "土地・不動産"]
   rating: "B++"
   ticker: "5900"
   companyName: "ダイケン"

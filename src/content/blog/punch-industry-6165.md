@@ -4,6 +4,8 @@ description: "株価539円の93%が現金・売掛金で裏付けられた調整
 cardDesc: "<span class='card-highlight'>株価539円の93%が現金と売掛金で裏付けられる</span>。PBR0.65倍に、YAOKI月面挑戦という宇宙テーマが乗る。"
 pubDate: "2026-06-01"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "その他資産"]
   rating: "B+"
   ticker: "6165"
   companyName: "パンチ工業"

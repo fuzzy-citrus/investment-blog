@@ -4,6 +4,8 @@ description: "土地含み益5,000〜7,000億円（時価総額の1.4〜2.0倍�
 cardDesc: "<span class='card-highlight'>土地含み益5,000〜7,000億円＝時価総額の1.4〜2.0倍</span>を大阪・京都の都心に集中保有。9月に優待乗車証の権利。"
 pubDate: "2026-05-22"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["土地・不動産"]
   rating: "B"
   ticker: "9045"
   companyName: "京阪ホールディングス"

@@ -4,6 +4,8 @@ description: "時価総額65.9億円に対し現金119億円（純キャッシ�
 cardDesc: "<span class='card-highlight'>純キャッシュだけで1株3,783円と、株価2,800円を上回る</span>。PBR0.34倍の、典型的なネットネット株。"
 pubDate: "2026-06-01"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "ネットキャッシュ"]
   rating: "A+"
   ticker: "8071"
   companyName: "東海エレクトロニクス"

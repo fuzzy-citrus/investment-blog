@@ -6,6 +6,7 @@ pubDate: "2026-07-31T10:00:00+09:00"
 related: ["disaster-recovery-demand-value-stocks", "daiichi-cutter-1716", "oyo-9755", "activist-front-running-01"]
 draft: false
 stockCard:
+  investmentType: "本業型"
   rating: "B++"
   ticker: "9639"
   companyName: "三協フロンテア"

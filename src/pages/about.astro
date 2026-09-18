@@ -7,17 +7,16 @@ import Footer from '../components/Footer.astro';
 <!doctype html>
 <html lang="ja">
 	<head>
-		<BaseHead title="筆者紹介 | バリュー商会" description="沼田堅一 — バリュー商会 プレイングマネージャー" />
+		<BaseHead title="筆者紹介 | 沼底バリュー商会" description="沼田課長 — 沼底バリュー商会 プレイングマネージャー" />
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "ProfilePage",
 			"mainEntity": {
 				"@type": "Person",
-				"name": "沼田 堅一",
-				"alternateName": "ぬまた けんいち",
-				"jobTitle": "個人投資家 ／ バリュー商会 プレイングマネージャー",
+				"name": "沼田課長",
+				"alternateName": "沼底バリュー商会・筆者",
+				"jobTitle": "個人投資家 ／ 沼底バリュー商会 プレイングマネージャー",
 				"description": "投資歴9年の個人投資家。日本の割安個別株とTOB・水準訂正の先回り買いを主戦場とし、上場廃止TOBヒット20件超の実績を持つ。",
-				"email": "citrus.y9k6.bg@gmail.com",
 				"url": "https://numasoko-value.com/about/",
 				"sameAs": ["https://x.com/numasoko_value"],
 				"knowsAbout": ["バリュー株投資", "TOB（株式公開買付け）", "低PBR銘柄", "ネットネット株", "信用取引", "日本の小型株", "割安株スクリーニング"],
@@ -34,11 +33,11 @@ import Footer from '../components/Footer.astro';
 		<main>
 
 			<div class="profile-hero">
-				<div class="profile-avatar">🧑‍💼</div>
+				<img class="profile-avatar-img" src="/images/brand/numata-author-20260914.jpg" alt="沼田課長のイメージイラスト" />
 				<div class="profile-info">
 					<div class="profile-label">筆者</div>
-					<h1>沼田 堅一</h1>
-					<p class="profile-sub">ぬまた けんいち ／ プレイングマネージャー ／ 投資歴9年</p>
+					<h1>沼田課長</h1>
+					<p class="profile-sub">沼底バリュー商会 ／ プレイングマネージャー ／ 投資歴9年</p>
 					<div class="profile-tags">
 						<span class="ptag">割安日本個別株</span>
 						<span class="ptag">ニッチトップ</span>
@@ -194,11 +193,11 @@ import Footer from '../components/Footer.astro';
 				<dl class="owner-dl">
 					<div class="owner-row">
 						<dt>運営者</dt>
-						<dd>沼田 堅一（ペンネーム）／ 沼底バリュー商会</dd>
+						<dd>沼田課長（キャラクター名）／ 沼底バリュー商会</dd>
 					</div>
 					<div class="owner-row">
 						<dt>連絡先</dt>
-						<dd><a href="mailto:citrus.y9k6.bg@gmail.com">citrus.y9k6.bg@gmail.com</a></dd>
+						<dd><a href="https://x.com/numasoko_value" target="_blank" rel="noopener">公式X @numasoko_value</a></dd>
 					</div>
 					<div class="owner-row">
 						<dt>投資歴</dt>
@@ -276,12 +275,12 @@ import Footer from '../components/Footer.astro';
 		margin-bottom: 1.5em;
 		flex-wrap: wrap;
 	}
-	.profile-avatar {
-		font-size: 4em;
-		width: 1.6em; height: 1.6em;
-		background: var(--accent-light);
+	.profile-avatar-img {
+		width: 112px; height: 112px;
+		object-fit: cover;
 		border-radius: 50%;
-		display: flex; align-items: center; justify-content: center;
+		border: 3px solid #fff;
+		box-shadow: 0 8px 24px rgba(24,56,45,.16);
 		flex-shrink: 0;
 	}
 	.profile-label {

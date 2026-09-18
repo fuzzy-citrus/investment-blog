@@ -6,6 +6,8 @@ pubDate: "2026-08-22T10:00:00+09:00"
 related: ["katakura-3001", "keihan-hd-9045", "august-september-rights-2026", "value-investor-decision-unrealized-loss"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["現預金", "土地・不動産"]
   rating: "B++"
   ticker: "8881"
   companyName: "日神グループHD"

@@ -6,6 +6,8 @@ pubDate: "2026-08-15T10:00:00+09:00"
 related: ["low-payout-internal-compounding", "dividend-series-02-low-payout-opportunity", "gunei-chemical-4229", "katakura-3001"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券"]
   rating: "B++"
   ticker: "4990"
   companyName: "昭和化学工業"

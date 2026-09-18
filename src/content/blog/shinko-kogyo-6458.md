@@ -6,6 +6,7 @@ pubDate: "2026-08-17T10:00:00+09:00"
 related: ["good-stock-vs-good-company", "nihon-gear-6356", "tanaken-1450", "em-systems-4820"]
 draft: false
 stockCard:
+  investmentType: "本業型"
   rating: "B++"
   ticker: "6458"
   companyName: "新晃工業"

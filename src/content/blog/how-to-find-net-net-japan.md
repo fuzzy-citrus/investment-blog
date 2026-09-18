@@ -3,7 +3,7 @@ title: "日本のネットネット株の探し方【実践編】｜PBR1倍割�
 description: "グレアムの超割安投資は今も日本で有効。では実際にどう探すのか。PBR1倍割れ・ネットキャッシュ・時価総額＜純資産という基本スクリーニング条件に、オーナーシップ・流動性・本業の競争力という追加チェックを重ねる。安さだけで飛びつくバリュートラップを避け、『安さ×質』で日本のネットネット級銘柄を発掘する実践手順を、バリュー商会が対話形式で解説する教科書シリーズ実践編。"
 cardDesc: "<span class='card-highlight'>日本市場は今も狩り場だ。PBR1倍割れ×ネットキャッシュで網を張り、『安さ』だけでなく『質』で選び抜く。</span>ネットネット級銘柄の実践スクリーニング手順。<span class='card-note'>河内が主役の「バリュー投資の教科書」実践編。</span>"
 pubDate: "2026-06-22T10:00:00+09:00"
-related: ["net-net-graham-investing", "buffett-japan-trading-houses", "oyo-9755", "japan-market-distortion-01"]
+related: ["netcash-ratio-21-deep-value-screening-2026-09", "net-net-graham-investing", "buffett-japan-trading-houses", "oyo-9755", "japan-market-distortion-01"]
 ---
 
 > 🦦 「理屈はもう分かった。じゃあ実際どうやって探すの？——そこを話さなきゃ、ただの読み物で終わっちゃうでしょ」

@@ -6,6 +6,8 @@ pubDate: "2026-08-08T10:00:00+09:00"
 related: ["tosnet-4754", "security-sector-consolidation", "activist-front-running-01", "katakura-3001"]
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["有価証券", "土地・不動産"]
   rating: "B++"
   ticker: "9686"
   companyName: "東洋テック"

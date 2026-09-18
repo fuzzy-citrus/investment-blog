@@ -22,6 +22,9 @@ const blog = defineCollection({
 				shortName: z.string().optional(),
 				// バリュー商会評価ランク。ホームのウォッチリストはここから自動生成（draft除外・ランク順）
 				rating: z.enum(['A++', 'A+', 'A', 'A-', 'B++', 'B+', 'B']).optional(),
+				// 記事に明示された投資テーゼの編集タグ。未設定時は推測しない。
+				investmentType: z.enum(['資産型', '本業型', 'ニッチトップ型', 'インカム型', 'イベント型', '複合型']).optional(),
+				assetTypes: z.array(z.enum(['現預金', '有価証券', '土地・不動産', 'ネットキャッシュ', 'その他資産'])).optional(),
 				currentPrice: z.number(),
 				targetPrice: z.number(),
 				upside: z.string(),

@@ -6,6 +6,8 @@ pubDate: "2026-09-04T10:00:00+09:00"
 related: ["nanshin-7399", "chuo-malleable-5607", "toso-5956", "how-to-find-net-net-japan", "kawasaki-setsubi-1777"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券"]
   rating: "B+"
   ticker: "6964"
   companyName: "サンコー"

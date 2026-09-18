@@ -4,6 +4,8 @@ description: "東部ネットワーク（9036・東証スタンダード）は�
 cardDesc: "<span class='card-highlight'>株価1,203円は修正ネットキャッシュ4,738円の25.4%。修正PBR0.21倍＝帳簿の21%で買える。</span>横浜・海老名の土地含み益は帳簿比+130%、不動産賃貸が年4.1億円の固定収入。<span class='card-note'>ダウン▲16%に対しアップ+167%の非対称。非上場化という出口まで見えているA++。投資助言ではありません。</span>"
 pubDate: "2026-05-08"
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券", "土地・不動産"]
   rating: "A++"
   ticker: "9036"
   companyName: "東部ネットワーク"

@@ -6,6 +6,7 @@ pubDate: "2026-08-23T10:00:00+09:00"
 related: ["saas-death-japan-it", "august-september-rights-2026", "nisshin-group-8881", "em-systems-4820"]
 draft: false
 stockCard:
+  investmentType: "インカム型"
   rating: "B+"
   ticker: "4262"
   companyName: "ニフティライフスタイル"

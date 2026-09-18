@@ -6,6 +6,7 @@ pubDate: "2026-08-19T14:00:00+09:00"
 related: ["construction-selloff-opportunity", "disaster-recovery-demand-value-stocks", "tanaken-1450", "good-stock-vs-good-company"]
 draft: false
 stockCard:
+  investmentType: "本業型"
   rating: "B+"
   ticker: "1893"
   companyName: "五洋建設"

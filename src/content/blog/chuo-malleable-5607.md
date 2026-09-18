@@ -6,6 +6,8 @@ pubDate: "2026-08-21T10:00:00+09:00"
 related: ["net-net-graham-investing", "how-to-find-net-net-japan", "gunei-chemical-4229", "august-september-rights-2026", "nakayama-steel-5408"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券", "ネットキャッシュ", "土地・不動産"]
   rating: "B++"
   ticker: "5607"
   companyName: "中央可鍛工業"

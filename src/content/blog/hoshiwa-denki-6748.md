@@ -5,6 +5,8 @@ cardDesc: "政策保有株が時価総額の45%。<span class='card-highlight'>B
 pubDate: "2026-08-02T10:00:00+09:00"
 draft: false
 stockCard:
+  investmentType: "複合型"
+  assetTypes: ["有価証券"]
   rating: "B+"
   ticker: "6748"
   companyName: "星和電機"

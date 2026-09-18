@@ -6,6 +6,8 @@ pubDate: "2026-08-24T10:00:00+09:00"
 related: ["chuo-malleable-5607", "okaya-kouki-7485", "net-net-graham-investing", "how-to-find-net-net-japan"]
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券", "土地・不動産"]
   rating: "B++"
   ticker: "3577"
   companyName: "東海染工"

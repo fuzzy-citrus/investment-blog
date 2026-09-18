@@ -5,6 +5,8 @@ cardDesc: "半導体フォトレジスト原料で顧客工程にスペックイ
 pubDate: "2026-07-27T10:00:00+09:00"
 draft: false
 stockCard:
+  investmentType: "資産型"
+  assetTypes: ["現預金", "有価証券"]
   rating: "B++"
   ticker: "4229"
   companyName: "群栄化学工業"
