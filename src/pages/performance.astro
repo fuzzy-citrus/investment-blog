@@ -1,0 +1,535 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { weeklyRecords, brokerSnapshot, recordSeriesIds } from '../data/assetHistory';
+import { seriesList } from '../data/series';
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+const byId = new Map(posts.map((p) => [p.id, p]));
+
+// ── 週次の数字（古い順）。最新と前週の差を出す ──
+const rows = [...weeklyRecords].sort((a, b) => a.date.localeCompare(b.date));
+const latest = rows[rows.length - 1];
+const prev = rows.length > 1 ? rows[rows.length - 2] : null;
+const diff = prev ? latest.netAssets - prev.netAssets : null;
+
+const jpDate = (d: string) => {
+	const [y, m, day] = d.split('-');
+	return `${y}年${Number(m)}月${Number(day)}日`;
+};
+const man = (v: number) => {
+	const oku = Math.floor(v / 10000);
+	const rest = v % 10000;
+	return oku > 0 ? `${oku}億${rest.toLocaleString()}万円` : `${v.toLocaleString()}万円`;
+};
+// 記事と同じ書き方に合わせる（マイナスは▲）
+const signed = (v: number) => (v >= 0 ? `+${v.toLocaleString()}` : `▲${Math.abs(v).toLocaleString()}`);
+const pct = (v: number | null) => (v === null ? '—' : `${v.toFixed(1)}%`);
+
+// ── 純資産の折れ線（万円）。点が増えるほど横に伸びる ──
+const W = 720;
+const H = 260;
+const PAD = { t: 28, r: 24, b: 40, l: 64 };
+const vals = rows.map((r) => r.netAssets);
+const lo = Math.floor((Math.min(...vals) - 300) / 100) * 100;
+const hi = Math.ceil((Math.max(...vals) + 300) / 100) * 100;
+const px = (i: number) =>
+	rows.length === 1 ? (PAD.l + W - PAD.r) / 2 : PAD.l + ((W - PAD.l - PAD.r) * i) / (rows.length - 1);
+const py = (v: number) => PAD.t + (H - PAD.t - PAD.b) * (1 - (v - lo) / (hi - lo));
+const pts = rows.map((r, i) => ({ ...r, x: px(i), y: py(r.netAssets) }));
+const line = pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+const area = `${PAD.l},${H - PAD.b} ${line} ${pts[pts.length - 1].x.toFixed(1)},${H - PAD.b}`;
+const gridVals = [lo, lo + (hi - lo) / 2, hi];
+
+// ── 記事一覧（週次運用記録・現況シリーズ） ──
+const recordSeries = recordSeriesIds
+	.map((id) => seriesList.find((s) => s.id === id))
+	.filter((s): s is NonNullable<typeof s> => Boolean(s))
+	.map((s) => ({
+		...s,
+		items: s.slugs
+			.map((slug, i) => ({
+				slug,
+				label: s.labels?.[i] ?? `第${i + 1}回`,
+				title: byId.get(slug)?.data.title ?? slug,
+				pubDate: byId.get(slug)?.data.pubDate,
+			}))
+			.filter((it) => byId.has(it.slug))
+			.reverse(),
+	}));
+
+const updated = jpDate(latest.date);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="当商会の実績報告（資産推移） | バリュー商会"
+			description={`沼底バリュー商会の実績報告。紹介銘柄は実口座で売買しています。${updated}時点の純資産は${man(latest.netAssets)}、信用維持率${pct(latest.maintenance)}、総ポジション${man(latest.totalPosition)}。週次運用記録で開示した数字をそのまま並べ、資産の増減と口座画面を確認できます。投資助言ではありません。`}
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-header">
+				<h1>📈 当商会の実績報告</h1>
+				<p class="lead">
+					沼底バリュー商会は、紹介した銘柄を<strong>実口座で売買</strong>しています。ここには、週次運用記録で公開した数字をそのまま並べています。良い週も悪い週も、同じ物差しで置きます。
+				</p>
+			</div>
+
+			<section class="pf-now">
+				<p class="pf-now-head">直近の数字（{updated}の終値ベース）</p>
+				<div class="pf-cards">
+					<div class="pf-card pf-card-main">
+						<span class="pf-card-label">純資産</span>
+						<span class="pf-card-val">{man(latest.netAssets)}</span>
+						{diff !== null && (
+							<span class={`pf-card-diff ${diff >= 0 ? 'up' : 'down'}`}>
+								前週比 {signed(diff)}万円
+							</span>
+						)}
+					</div>
+					<div class="pf-card">
+						<span class="pf-card-label">含み損益</span>
+						<span class={`pf-card-val ${(latest.unrealized ?? 0) >= 0 ? 'up' : 'down'}`}>
+							{latest.unrealized === null ? '—' : `${signed(latest.unrealized)}万円`}
+						</span>
+					</div>
+					<div class="pf-card">
+						<span class="pf-card-label">信用維持率</span>
+						<span class="pf-card-val">{pct(latest.maintenance)}</span>
+					</div>
+					<div class="pf-card">
+						<span class="pf-card-label">総ポジション</span>
+						<span class="pf-card-val">{man(latest.totalPosition)}</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="pf-block">
+				<h2>週ごとの純資産</h2>
+				<p class="pf-note-line">週次総括を出すたびに、点が1つ増えます。</p>
+				<div class="pf-chart-wrap">
+					<svg viewBox={`0 0 ${W} ${H}`} class="pf-chart" role="img" aria-label="週ごとの純資産の推移">
+						{gridVals.map((v) => (
+							<g>
+								<line x1={PAD.l} y1={py(v)} x2={W - PAD.r} y2={py(v)} class="pf-grid" />
+								<text x={PAD.l - 10} y={py(v) + 4} class="pf-axis" text-anchor="end">
+									{v.toLocaleString()}
+								</text>
+							</g>
+						))}
+						<polygon points={area} class="pf-area" />
+						<polyline points={line} class="pf-line" />
+						{pts.map((p, i) => (
+							<g>
+								<circle cx={p.x} cy={p.y} r="5" class="pf-dot" />
+								{/* 端の点は目盛りの数字とぶつかるので、内側に寄せる */}
+								<text
+									x={i === 0 ? p.x + 8 : i === pts.length - 1 ? p.x - 4 : p.x}
+									y={p.y - 12}
+									class="pf-dot-val"
+									text-anchor={i === 0 ? 'start' : i === pts.length - 1 ? 'end' : 'middle'}
+								>
+									{p.netAssets.toLocaleString()}
+								</text>
+								<text x={p.x} y={H - PAD.b + 20} class="pf-axis" text-anchor="middle">
+									{p.date.slice(5).replace('-', '/')}
+								</text>
+							</g>
+						))}
+						<text x={PAD.l - 10} y={PAD.t - 12} class="pf-axis" text-anchor="end">万円</text>
+					</svg>
+				</div>
+
+				<div class="pf-table-wrap">
+					<table class="pf-table">
+						<thead>
+							<tr>
+								<th>週末</th>
+								<th class="num">純資産</th>
+								<th class="num">前週比</th>
+								<th class="num">含み損益</th>
+								<th class="num">信用維持率</th>
+								<th class="num">総ポジション</th>
+								<th>記録</th>
+							</tr>
+						</thead>
+						<tbody>
+							{[...rows].reverse().map((r, i, arr) => {
+								const before = arr[i + 1];
+								const d = before ? r.netAssets - before.netAssets : null;
+								return (
+									<tr>
+										<td>{jpDate(r.date)}</td>
+										<td class="num strong">{man(r.netAssets)}</td>
+										<td class={`num ${d === null ? '' : d >= 0 ? 'up' : 'down'}`}>
+											{d === null ? '—' : `${signed(d)}万円`}
+										</td>
+										<td class={`num ${r.unrealized === null ? '' : r.unrealized >= 0 ? 'up' : 'down'}`}>
+											{r.unrealized === null ? '—' : `${signed(r.unrealized)}万円`}
+										</td>
+										<td class="num">{pct(r.maintenance)}</td>
+										<td class="num">{man(r.totalPosition)}</td>
+										<td>
+											<a href={`/blog/${r.slug}/`}>記録を読む</a>
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
+				<p class="pf-source">出所：各週の週次運用記録。数字はその週末の終値ベースです。</p>
+			</section>
+
+			<section class="pf-block">
+				<h2>口座画面（月次）</h2>
+				<p class="pf-note-line">
+					{brokerSnapshot.account}の画面そのものです。月初に前月末の成績を反映しています。
+				</p>
+				<div class="pf-broker">
+					<img src={brokerSnapshot.image} alt={brokerSnapshot.imageAlt} class="pf-broker-img" />
+					<div class="pf-broker-side">
+						<p class="pf-broker-asof">{brokerSnapshot.asOf}時点</p>
+						<p class="pf-broker-label">{brokerSnapshot.label}</p>
+						<p class="pf-broker-val">{brokerSnapshot.amount.toLocaleString()}<span>円</span></p>
+						<p class="pf-broker-sub">
+							{brokerSnapshot.unrealizedLabel}
+							<strong class="up">+{brokerSnapshot.unrealized.toLocaleString()}円</strong>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			{recordSeries.map((s) => (
+				<section class="pf-block">
+					<h2>{s.name}</h2>
+					<p class="pf-note-line">{s.lead}</p>
+					<ul class="pf-list">
+						{s.items.map((it) => (
+							<li>
+								<a href={`/blog/${it.slug}/`}>
+									<span class="pf-list-label">{it.label}</span>
+									<span class="pf-list-title">{it.title}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			))}
+
+			<section class="pf-block pf-terms">
+				<h2>数字の読み方</h2>
+				<dl>
+					<dt>純資産</dt>
+					<dd>口座の中身から借りている分を引いた、自分の取り分です。ここが増えたかどうかが成績です。</dd>
+					<dt>総ポジション</dt>
+					<dd>
+						現金と現物と信用建玉を足した、持っている株の大きさです。会社の貸借対照表でいう総資産とは別のものです。
+					</dd>
+					<dt>信用維持率</dt>
+					<dd>
+						建玉に対する自分の取り分の比率です。低いほど張っていて、下げに弱くなります。
+						<a href="/blog/margin-maintenance-rate-balance/">維持率の考え方はこちら</a>。
+					</dd>
+					<dt>含み損益</dt>
+					<dd>まだ売っていない株の、その時点での損益です。売れば確定し、純資産に残ります。</dd>
+				</dl>
+				<p class="pf-disclaimer">
+					※本ページは個人の運用記録であり、投資助言ではありません。特定銘柄の売買を推奨するものではありません。数字は各記事で公開した時点のもので、実際の口座残高は日々変動します。
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 860px;
+		max-width: calc(100% - 2em);
+		margin: auto;
+		padding: 2em 1em 3em;
+	}
+	.page-header {
+		text-align: center;
+		margin-bottom: 1.6em;
+	}
+	.page-header h1 {
+		margin: 0 0 0.3em;
+		font-size: 2em;
+	}
+	.lead {
+		margin: 0 auto;
+		max-width: 46em;
+		color: #444;
+		line-height: 1.8;
+		text-align: left;
+	}
+	.pf-now {
+		background: linear-gradient(170deg, #252525 0%, #1a1a1a 100%);
+		border: 1px solid rgba(232, 184, 75, 0.35);
+		border-radius: 12px;
+		padding: 1.1em 1.1em 1.3em;
+		color: #fff;
+		margin-bottom: 2em;
+	}
+	.pf-now-head {
+		margin: 0 0 0.8em;
+		font-size: 0.9em;
+		color: #e8b84b;
+		letter-spacing: 0.04em;
+	}
+	.pf-cards {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.7em;
+	}
+	.pf-card {
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 8px;
+		padding: 0.7em 0.8em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25em;
+	}
+	.pf-card-main {
+		background: rgba(232, 184, 75, 0.12);
+		border-color: rgba(232, 184, 75, 0.45);
+	}
+	.pf-card-label {
+		font-size: 0.78em;
+		color: #cfc8ba;
+	}
+	.pf-card-val {
+		font-size: 1.22em;
+		font-weight: 700;
+	}
+	.pf-card-main .pf-card-val {
+		font-size: 1.45em;
+		color: #f5d47a;
+	}
+	.pf-card-diff {
+		font-size: 0.82em;
+	}
+	.up {
+		color: #2f9e6b;
+	}
+	.down {
+		color: #c0392b;
+	}
+	.pf-now .up {
+		color: #6fdca7;
+	}
+	.pf-now .down {
+		color: #ff8b7a;
+	}
+	.pf-block {
+		margin: 0 0 2.4em;
+	}
+	.pf-block h2 {
+		font-size: 1.25em;
+		margin: 0 0 0.35em;
+		padding-bottom: 0.3em;
+		border-bottom: 2px solid #e8b84b;
+	}
+	.pf-note-line {
+		margin: 0 0 0.9em;
+		color: #555;
+		font-size: 0.92em;
+	}
+	.pf-chart-wrap {
+		background: #fff;
+		border: 1px solid #e3ded3;
+		border-radius: 10px;
+		padding: 0.6em;
+		margin-bottom: 1em;
+	}
+	.pf-chart {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	.pf-grid {
+		stroke: #e8e3d8;
+		stroke-width: 1;
+	}
+	.pf-axis {
+		fill: #8a8375;
+		font-size: 12px;
+	}
+	.pf-area {
+		fill: rgba(232, 184, 75, 0.18);
+	}
+	.pf-line {
+		fill: none;
+		stroke: #b8860b;
+		stroke-width: 2.5;
+		stroke-linejoin: round;
+	}
+	.pf-dot {
+		fill: #fff;
+		stroke: #b8860b;
+		stroke-width: 2.5;
+	}
+	.pf-dot-val {
+		fill: #3a3020;
+		font-size: 13px;
+		font-weight: 700;
+	}
+	.pf-table-wrap {
+		overflow-x: auto;
+	}
+	.pf-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.92em;
+	}
+	.pf-table th,
+	.pf-table td {
+		border-bottom: 1px solid #e3ded3;
+		padding: 0.55em 0.6em;
+		text-align: left;
+		white-space: nowrap;
+	}
+	.pf-table thead th {
+		background: #f7f4ec;
+		font-size: 0.9em;
+		color: #5b5344;
+	}
+	.pf-table .num {
+		text-align: right;
+	}
+	.pf-table .strong {
+		font-weight: 700;
+	}
+	.pf-source {
+		margin: 0.6em 0 0;
+		font-size: 0.82em;
+		color: #7d7466;
+	}
+	.pf-broker {
+		display: grid;
+		grid-template-columns: 1fr 200px;
+		gap: 1em;
+		align-items: center;
+		background: #fff;
+		border: 1px solid #e3ded3;
+		border-radius: 10px;
+		padding: 0.9em;
+	}
+	.pf-broker-img {
+		width: 100%;
+		height: auto;
+		border-radius: 6px;
+	}
+	.pf-broker-side {
+		text-align: center;
+	}
+	.pf-broker-asof,
+	.pf-broker-label {
+		margin: 0;
+		font-size: 0.82em;
+		color: #7d7466;
+	}
+	.pf-broker-val {
+		margin: 0.15em 0 0.3em;
+		font-size: 1.5em;
+		font-weight: 700;
+		color: #3a3020;
+	}
+	.pf-broker-val span {
+		font-size: 0.6em;
+		margin-left: 0.15em;
+	}
+	.pf-broker-sub {
+		margin: 0;
+		font-size: 0.85em;
+	}
+	.pf-broker-sub strong {
+		margin-left: 0.35em;
+	}
+	.pf-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.pf-list li {
+		border-bottom: 1px dashed #e3ded3;
+	}
+	.pf-list a {
+		display: flex;
+		gap: 0.7em;
+		align-items: baseline;
+		padding: 0.6em 0.2em;
+		text-decoration: none;
+		color: #2b2b2b;
+	}
+	.pf-list a:hover {
+		background: #faf7f0;
+	}
+	.pf-list-label {
+		flex: 0 0 auto;
+		font-size: 0.78em;
+		color: #6e6355;
+		background: #f2ede2;
+		border-radius: 4px;
+		padding: 0.15em 0.5em;
+		white-space: nowrap;
+	}
+	.pf-list-title {
+		font-size: 0.95em;
+		line-height: 1.5;
+	}
+	.pf-terms dl {
+		margin: 0;
+		background: #faf7f0;
+		border: 1px solid #e3ded3;
+		border-radius: 10px;
+		padding: 0.9em 1em;
+	}
+	.pf-terms dt {
+		font-weight: 700;
+		color: #3a3020;
+		margin-top: 0.7em;
+	}
+	.pf-terms dt:first-child {
+		margin-top: 0;
+	}
+	.pf-terms dd {
+		margin: 0.2em 0 0;
+		color: #4a4437;
+		line-height: 1.7;
+		font-size: 0.94em;
+	}
+	.pf-disclaimer {
+		margin: 1em 0 0;
+		font-size: 0.8em;
+		color: #7d7466;
+		line-height: 1.7;
+	}
+	@media (max-width: 700px) {
+		.pf-cards {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		/* 「1億862万円」が途中で折れないように、スマホでは文字を小さくする */
+		.pf-card-val,
+		.pf-card-main .pf-card-val {
+			font-size: 1.02em;
+			white-space: nowrap;
+		}
+		.pf-broker {
+			grid-template-columns: 1fr;
+		}
+		.pf-list a {
+			flex-direction: column;
+			gap: 0.3em;
+		}
+	}
+</style>

@@ -409,6 +409,18 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 
 ---
 
+## 11-B. 実績報告ページ `/performance`（2026-09-20 新設）
+
+ヘッダーの「コンテンツ」→「📈 実績報告（資産推移）」。**週次運用記録で公開した数字だけ**を並べる。
+
+- データは `src/data/assetHistory.ts` の1か所。**週次総括を公開したら `weeklyRecords` に1行足すだけ**（週末日・純資産・総ポジション・含み損益・維持率・出所スラッグ）。純資産の折れ線と表とページ説明文は、そこから自動で作られる
+- 単位は万円。マイナスは ▲、維持率は小数1桁で表示する（記事と同じ書き方）
+- **売買記録そのもの・保有明細は絶対に置かない。**記事で公開済みの集計値だけ
+- 月次は野村証券の口座画面の画像（`public/images/nomura-asset-chart-202608.png`）。月初に撮り直したら `brokerSnapshot`（asOf・amount・unrealized・image）も更新する
+- 記事一覧は `series.ts` の `weekly` と `holdings-status` を自動で引く。新しい回を series.ts に足せばここにも出る
+- 用語は「純資産／総ポジション／信用維持率／含み損益」。**総ポジションを「総資産」と書かない**
+- サイト改修なので、社内掲示板（siteUpdates.ts）には載せない
+
 ## 12. 数字・画像の更新（サイト全体で整合を取る）
 
 **数字を変えたら、必ず全箇所を横断で直す。** 1箇所だけ直して食い違うのが定番の事故。
@@ -416,8 +428,8 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 | 項目 | 現在値 | 出てくる場所 |
 |---|---|---|
 | 買い方金利 | **1.69%** | `AssetSidebar.astro` / `company.astro` / `BookSidebar.astro` |
-| 資産推移（月末） | **4,308万円**・評価損益 **+146万円** | `AssetSidebar.astro` / `company.astro` / `BookSidebar.astro`（著者bio） |
-| 資産推移の画像 | `/images/nomura-asset-chart-202608.png` | 同上（月が変わったら差し替え） |
+| 資産推移（月末） | **4,308万円**・評価損益 **+146万円** | `AssetSidebar.astro` / `company.astro` / `BookSidebar.astro`（著者bio） / `assetHistory.ts` の `brokerSnapshot`（`/performance`） |
+| 資産推移の画像 | `/images/nomura-asset-chart-202608.png` | 同上＋`/performance`（月が変わったら差し替え） |
 | 最新ポートフォリオ | 基準日 **2026/09/18**・165建玉（156銘柄・売建1） | `public/holdings.html` |
 | 社内掲示板 | 最新 2026.09.19 | `BookSidebar.astro` の `manualBulletins`（新しい順・**記事の公開とポートフォリオ更新のときだけ追加**。**1記事につき1件**、本文は1〜2文・60字前後。ポートフォリオ更新は同じ週の運用記録と1件にまとめ、別に立てない。サイト改修・フォント変更などの細かいお知らせは載せない＝siteUpdates は掲示板に出さず、トップの最終更新日時にだけ使う） |
 
