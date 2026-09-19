@@ -3,7 +3,7 @@ title: "SaaSは本当に死んだのか？｜AIで死ぬのは『浅いSaaS』�
 description: "2026年初頭、市場を席巻した『SaaSの死』というナラティブ。だがAIが奪うのはUIレイヤーだけで、データ・業務理解・規制という堀はむしろ深まる。市場がSaaSを一括で売り叩く今こそ、消える『浅いSaaS』と強くなる『深い企業』（ERP・SI・規制IT）を選り分ける好機だ。オービック・NEC・菱友システムズ・日鉄ソリューションズを例に、沼田課長とテック番長が対話形式で読み解くバリュー投資コラム。"
 pubDate: "2026-06-28T12:00:00+09:00"
 cardDesc: "<span class='card-highlight'>AIで死ぬのは『浅いSaaS』だけ。データ・業務理解・規制という堀は、むしろ深まる。</span>市場がSaaSを一括で売り叩く『最大の歪み』を、消える企業と強くなる企業に選り分ける。<span class='card-note'>沼田課長×テック番長が日本IT株の構造優位を読むバリュー投資コラム。</span>"
-related: ["nssol-2327", "ryoyu-systems-4685", "em-systems-4820", "good-stock-vs-good-company"]
+related: ["nssol-2327", "ryoyu-systems-4685", "em-systems-4820", "good-stock-vs-good-company", "ai-slowdown-security-stocks-2026-09"]
 ---
 
 > 🦍 「終わったんですよ、SaaSは。AIが全部やる時代に、月額課金のソフトなんて誰が買うんですか。ソフトウェア株は全部売り。以上、解散」

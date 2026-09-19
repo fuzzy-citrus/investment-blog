@@ -157,6 +157,7 @@ export const contentThemes: ContentTheme[] = [
       'good-stock-vs-good-company',
       'japan-stock-midterm-outlook-2026',
       'saas-death-japan-it',
+      'ai-slowdown-security-stocks-2026-09',
       'construction-selloff-opportunity',
       'healthcare-selloff-opportunity',
       'broadcasting-selloff-opportunity',

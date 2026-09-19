@@ -34,6 +34,7 @@ export const columnAuthors: Record<string, ColumnAuthor> = {
   'tokyo-crematorium-monopoly-discount': C.nomura,
   'nomura-margin-rate-1-69-alchemy': C.nomura,
   'saas-death-japan-it': C.numata,
+  'ai-slowdown-security-stocks-2026-09': C.numata,
   'holdings-status-01-saas': C.numata,
   'holdings-status-02-kitazato-shinyei': C.numata,
   'holdings-status-03-kozosodo-tobu': C.numata,

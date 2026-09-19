@@ -3,7 +3,7 @@ title: "PERをどう考えるか｜低PER×期待ゼロの銘柄が高PER成長�
 description: "PER5倍の株は5年で元本全額回収できる。一方、高PERの成長株は一度も足を踏み外さずサプライズを出し続けなければ株価が保てない。個人投資家が戦うべき場所はどちらか。バリュー商会が考えるPERの使い方。"
 cardDesc: "<span class=\"card-highlight\">「PER5倍なら5年で恩株になる。これ以上わかりやすい投資がどこにある」</span><span class=\"card-prereq\">・高PERはなぜ危険か——NVIDIA・イオン・さくらインターネットを例に<br/>・低PERが放置されるのはなぜか、そしてなぜそこに機会があるか<br/>・日本スタンダード市場に今も残る「歪み」の正体<br/>・「損したければ大衆に従え」格言の意味をバリュー目線で読み解く</span>"
 pubDate: "2026-05-31"
-related: ["value-concept", "nihon-hospice-7061", "ryoyu-systems-4685", "good-stock-vs-good-company"]
+related: ["value-concept", "nihon-hospice-7061", "ryoyu-systems-4685", "good-stock-vs-good-company", "ai-slowdown-security-stocks-2026-09"]
 ---
 
 > 🧑‍💼 「PERが低いから買う——それは半分正解で、半分間違いだ。大事なのは、なぜ低いのかを自分の言葉で説明できるかどうかだ」
