@@ -6,10 +6,10 @@ const months = monthlyRecords
 	.filter((r) => !r.asOf)
 	.sort((a, b) => a.month.localeCompare(b.month))
 	.map((r) => ({ ...r, man: Math.round(r.amount / 10000) }));
-const last = months[months.length - 1];
-const lastLabel = `${last.month.slice(0, 4)}年${Number(last.month.slice(5, 7))}月末`;
+// 下に出している口座画面の数字と食い違わないよう、サイドバーは画像と同じ値・同じ時点を出す
+const shotMan = Math.round(brokerSnapshot.imageAmount / 10000);
 const GOAL = 20000; // 2億円（万円）
-const fill = Math.min(100, (last.man / GOAL) * 100);
+const fill = Math.min(100, (shotMan / GOAL) * 100);
 
 ---
 <!-- 資産推移サイドバー（左側・1100px以上表示） -->
@@ -88,8 +88,8 @@ const fill = Math.min(100, (last.man / GOAL) * 100);
 
   <div class="asset-sb-account">野村証券 実口座</div>
 
-  <div class="asset-sb-now-label">月末の資産<br><span class="asset-sb-asof">{lastLabel}</span></div>
-  <div class="asset-sb-now-val">{last.man.toLocaleString()}<span class="asset-sb-unit">万円</span></div>
+  <div class="asset-sb-now-label">口座の残高<br><span class="asset-sb-asof">{brokerSnapshot.imageAsOf}時点</span></div>
+  <div class="asset-sb-now-val">{shotMan.toLocaleString()}<span class="asset-sb-unit">万円</span></div>
   <div class="asset-sb-bar-wrap">
     <div class="asset-sb-bar">
       <div class="asset-sb-bar-fill" style={`width:${fill.toFixed(1)}%`}>
@@ -107,7 +107,7 @@ const fill = Math.min(100, (last.man / GOAL) * 100);
     <img src={brokerSnapshot.image} alt="資産推移チャート" class="asset-sb-chart" />
   </div>
 
-  <p class="asset-sb-note">📅 月初に前月末成績を反映</p>
+  <p class="asset-sb-note">📅 画面は{brokerSnapshot.imageAsOf}に撮影</p>
   <a class="asset-sb-link" href="/performance">週ごとの推移を見る →</a>
   </div>
 </div>

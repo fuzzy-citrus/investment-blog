@@ -127,10 +127,35 @@ table {
 }
 th, td {
 	border: 1px solid #c8cdd4;
-	padding: 0.55em 0.7em;
+	padding: 0.45em 0.6em;
 	text-align: left;
 	vertical-align: top;       /* 複数行セルは上揃えの方が読みやすい */
-	line-height: 1.55;
+	line-height: 1.5;
+	/* 日本語は文節で折り返す（対応外のブラウザは従来どおり） */
+	word-break: auto-phrase;
+}
+/* 本文の字が大きいので、表だけ小さくする。列が多い表はさらに小さく */
+.prose table {
+	font-size: 0.8em;
+}
+.prose table:has(thead th:nth-child(6)) {
+	font-size: 0.72em;
+}
+.prose table:has(thead th:nth-child(8)) {
+	font-size: 0.68em;
+}
+/* 列が多い表は本文幅からはみ出させず、表の中だけ横スクロールさせる */
+.prose table:has(thead th:nth-child(6)) {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+/* 数字の列（Markdownの右寄せ）は途中で折らない */
+.prose td[align="right"],
+.prose th[align="right"] {
+	white-space: nowrap;
 }
 thead th {
 	background: #eef1f4;
@@ -200,6 +225,12 @@ hr {
 	.prose p { margin-bottom: 1.3em; }
 	/* テーブルはモバイルで詰める＋はみ出し防止 */
 	th, td { padding: 0.4em 0.5em; font-size: 0.9em; }
+	/* 本文の表は、列数で小さくしすぎず13pxで固定（横スクロールで見せる） */
+	.prose table,
+	.prose table:has(thead th:nth-child(6)),
+	.prose table:has(thead th:nth-child(8)) { font-size: 13px; }
+	.prose th, .prose td { font-size: 1em; }
+	.prose table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* 横長テーブルがはみ出す場合のみ横スクロール可能に（2列表は通常どおり折り返す） */
