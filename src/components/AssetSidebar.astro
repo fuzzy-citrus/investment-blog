@@ -1,5 +1,5 @@
 ---
-import { monthlyRecords } from '../data/assetHistory';
+import { monthlyRecords, brokerSnapshot } from '../data/assetHistory';
 
 // 月末で締まっている行だけ（最新月は月途中なので外す）
 const months = monthlyRecords
@@ -11,13 +11,6 @@ const lastLabel = `${last.month.slice(0, 4)}年${Number(last.month.slice(5, 7))}
 const GOAL = 20000; // 2億円（万円）
 const fill = Math.min(100, (last.man / GOAL) * 100);
 
-// 横スクロールする棒グラフ。1か月=16px で右端が最新
-const BW = 10;
-const GAP = 6;
-const CH = 74;
-const CW = months.length * (BW + GAP) + GAP;
-const top = Math.max(...months.map((r) => r.man));
-const barH = (v: number) => Math.max(2, (v / top) * (CH - 22));
 ---
 <!-- 資産推移サイドバー（左側・1100px以上表示） -->
 <div class="asset-sb">
@@ -110,31 +103,11 @@ const barH = (v: number) => Math.max(2, (v / top) * (CH - 22));
     </div>
   </div>
 
-  <div class="asset-sb-chart-wrap" id="assetSbScroll">
-    <svg width={CW} height={CH} viewBox={`0 0 ${CW} ${CH}`} class="asset-sb-chart" role="img" aria-label="月ごとの資産推移">
-      {months.map((r, i) => (
-        <g>
-          <rect
-            x={GAP + i * (BW + GAP)}
-            y={CH - 16 - barH(r.man)}
-            width={BW}
-            height={barH(r.man)}
-            rx="1.5"
-            class={i === months.length - 1 ? 'asset-sb-bar asset-sb-bar-last' : 'asset-sb-bar'}
-          >
-            <title>{`${r.month.slice(0, 4)}年${Number(r.month.slice(5, 7))}月末 ${r.man.toLocaleString()}万円`}</title>
-          </rect>
-          {(i % 3 === 0 || i === months.length - 1) && (
-            <text x={GAP + i * (BW + GAP) + BW / 2} y={CH - 5} class="asset-sb-bar-lab" text-anchor="middle">
-              {`${r.month.slice(2, 4)}/${Number(r.month.slice(5, 7))}`}
-            </text>
-          )}
-        </g>
-      ))}
-    </svg>
+  <div class="asset-sb-chart-wrap">
+    <img src={brokerSnapshot.image} alt="資産推移チャート" class="asset-sb-chart" />
   </div>
 
-  <p class="asset-sb-note">📅 月末ごとに更新（横にスクロール）</p>
+  <p class="asset-sb-note">📅 月初に前月末成績を反映</p>
   <a class="asset-sb-link" href="/performance">週ごとの推移を見る →</a>
   </div>
 </div>
@@ -374,37 +347,17 @@ const barH = (v: number) => Math.max(2, (v / top) * (CH - 22));
   .asset-sb-chart-wrap {
     width: 88%;
     border-radius: 5px;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: hidden;
     border: 1px solid rgba(255,255,255,0.1);
     margin-top: 0.3em;
-    background: rgba(0,0,0,0.25);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(232,184,75,0.5) transparent;
-  }
-  .asset-sb-chart-wrap::-webkit-scrollbar {
-    height: 4px;
-  }
-  .asset-sb-chart-wrap::-webkit-scrollbar-thumb {
-    background: rgba(232,184,75,0.5);
-    border-radius: 2px;
   }
   .asset-sb-chart {
+    width: 100%;
     display: block;
   }
   .asset-sb-asof {
     font-size: 0.85em;
     color: rgba(255,255,255,0.55);
-  }
-  .asset-sb-bar {
-    fill: rgba(232,184,75,0.55);
-  }
-  .asset-sb-bar-last {
-    fill: #f5d47a;
-  }
-  .asset-sb-bar-lab {
-    fill: rgba(255,255,255,0.4);
-    font-size: 7px;
   }
   .asset-sb-link {
     display: block;
@@ -429,8 +382,3 @@ const barH = (v: number) => Math.max(2, (v / top) * (CH - 22));
   }
 </style>
 
-<script>
-  // 開いたときは右端（最新月）を見せる
-  const sb = document.getElementById('assetSbScroll');
-  if (sb) requestAnimationFrame(() => { sb.scrollLeft = sb.scrollWidth; });
-</script>

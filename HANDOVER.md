@@ -418,7 +418,8 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 - **売買記録そのもの・保有明細は絶対に置かない。**記事で公開済みの集計値だけ
 - 月次は `monthlyRecords`（単位：円）。出所は野村證券「ご投資状況／お預り資産評価の推移」のPDF。**PDFには氏名が入っているので、リポジトリにもバックアップにも置かない。数字だけ転記する**
 - 口座画面の画像（`public/images/nomura-asset-chart-202608.png`）は「撮った時点」を明記して証拠として残す。撮り直したら `brokerSnapshot` の image・imageAsOf・imageAmount も更新する
-- **サイドバー（`AssetSidebar.astro`）と会社紹介（`company.astro`）も `assetHistory.ts` を読む。**サイドバーは月末の行だけを横スクロールの棒グラフにして、右端（最新月）を初期表示する
+- **サイドバー（`AssetSidebar.astro`）と会社紹介（`company.astro`）も `assetHistory.ts` を読む。**サイドバーの見出しは「月末の資産＋年月」、金額は月末の行（`asOf` の付いた月途中の行は除く）、2億円までのバーも自動計算
+- **サイドバーのグラフは口座画面の画像のまま。**2026-09-20 に横スクロールの棒グラフへ変えたが、「小さくて分かりにくい。前の画像のほうがいい」との指摘で元に戻した。細かいグラフは `/performance` 側に置く
 - 記事一覧は `series.ts` の `weekly` と `holdings-status` を自動で引く。新しい回を series.ts に足せばここにも出る
 - 用語は「純資産／総ポジション／信用維持率／含み損益」。**総ポジションを「総資産」と書かない**
 - サイト改修なので、社内掲示板（siteUpdates.ts）には載せない
