@@ -24,6 +24,7 @@ export const contentThemes: ContentTheme[] = [
       'toso-5956',
       'cigar-butt-special-2026',
       'netcash-ratio-21-deep-value-screening-2026-09',
+      'inflation-deepvalue-tob-2026-09',
       'nanshin-7399',
       'sanko-6964',
       'kawasaki-setsubi-1777',
@@ -79,6 +80,7 @@ export const contentThemes: ContentTheme[] = [
     owners: '🐊 待伏（TOB担当）',
     fill: '#FAECE7', text: '#4A1B0C', sub: '#993C1D', border: '#F5C4B3',
     slugs: [
+      'minimum-tax-2027-owner-selling',
       'kozosodo-hd-7868',
       'tokyo-crematorium-monopoly-discount',
       'activist-front-running-01',

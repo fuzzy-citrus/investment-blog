@@ -3,7 +3,7 @@ title: "バリュー株×TOB狙いで「どちらに転んでも勝てる」理�
 description: "割安株を先に仕込んでおけば、経営改善による株価訂正かTOB/MBOのプレミアムか——どちらに転んでも利益が出る構造を作れる。東証のガバナンス改革が追い風のいま、バリュー株×TOB狙いの二重の勝ち筋を解説する。"
 cardDesc: "<span class=\"card-highlight\">「どちらに転んでも勝てる構造」を先回り買いで作れるのが、バリュー×TOB戦略の本質だ</span><span class=\"card-prereq\">・TOBされなくても配当増・IR改善で株価は上がる<br/>・東証改革でバリュートラップは許されない時代へ<br/>・沼田課長のTOBヒット実績：21件</span>"
 pubDate: "2026-05-29"
-related: ["kozosodo-hd-7868", "nssol-2327", "nihon-bs-hoso-9414", "efficient-market-hypothesis"]
+related: ["kozosodo-hd-7868", "nssol-2327", "nihon-bs-hoso-9414", "efficient-market-hypothesis", "inflation-deepvalue-tob-2026-09"]
 ---
 
 > 🧑‍💼 「短期はわからない。でも構造を先に作っておけばいい。割安株を安く仕込んでおけば、あとはどちらに転んでも勝ちなんだ」

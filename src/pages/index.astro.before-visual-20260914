@@ -1,0 +1,937 @@
+---
+import Comments from '../components/Comments.astro';
+import StockRankSummary from '../components/StockRankSummary.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import { siteUpdates } from '../data/siteUpdates';
+
+const allPosts = (await getCollection('blog'))
+	.filter(p => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = allPosts.slice(0, 10);
+const latestPost = allPosts[0];
+// コラムは新着順（pubDate降順）で表示
+const columns = allPosts.filter(p => !p.data.stockCard);
+
+// 📊 保有銘柄と損益ボタンの副題：public/holdings.html から基準日と銘柄数を読む
+// 最新ポートフォリオを作り直せばボタンの日付も自動で追従する（手打ちしない）
+let holdingsAsOf = '';
+let holdingsCount = 0;
+try {
+	const fs = await import('node:fs');
+	const path = await import('node:path');
+	const raw = fs.readFileSync(path.join(process.cwd(), 'public', 'holdings.html'), 'utf-8');
+	const m = raw.match(/asof["']?\s*:\s*["']([\d/\-]+)/);
+	if (m) holdingsAsOf = m[1].replace(/-/g, '/');
+	// 同じ銘柄を現物と信用で持つ建玉があるため、コードを重複排除して「銘柄数」を数える。
+	// 出現回数をそのまま数えると positions 172 + noPrice 2 = 174 になり、実体（166銘柄）と食い違う。
+	const codes = raw.match(/"code"\s*:\s*"([^"]+)"/g);
+	if (codes) holdingsCount = new Set(codes).size;
+} catch {
+	// 最新ポートフォリオ未設置でもトップページは壊さない
+}
+const holdingsSub = holdingsAsOf
+	? `${holdingsAsOf} 終値${holdingsCount ? `・${holdingsCount}銘柄` : ''}`
+	: '全ポジションの一覧';
+
+// ヒーローに表示する最終更新日時（siteUpdates の先頭。未登録時は最新記事へフォールバック）
+const latestUpdate = siteUpdates[0] ? new Date(siteUpdates[0].at) : allPosts[0]?.data.pubDate;
+const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
+	timeZone: 'Asia/Tokyo',
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+	hour: '2-digit',
+	minute: '2-digit',
+	hour12: false,
+});
+
+
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<div class="hero-badge">🏢 バリュー商会</div>
+				<h1>沼田課長の投資記録</h1>
+				<p class="hero-desc">〜 低金利 × 中レバレッジ × 高安全域 〜</p>
+				<div class="hero-tags">
+					<a class="tag" href="/map#asset-value"><span class="tag-emoji">🦦</span>資産バリュー</a>
+					<a class="tag" href="/map#moat"><span class="tag-emoji">🦫</span>ニッチ独占</a>
+					<a class="tag" href="/map#tob-event"><span class="tag-emoji">🐊</span>TOB発掘</a>
+					<a class="tag" href="/map#risk-leverage"><span class="tag-emoji">🧓</span>野村流</a>
+					<a class="tag" href="/map#philosophy"><span class="tag-emoji">🧑‍💼</span>投資哲学</a>
+					<a class="tag" href="/map#income"><span class="tag-emoji">🐝</span>高配当・増配</a>
+				</div>
+				<div class="hero-concept-wrap">
+					<a href="/start/" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">🧭</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-new">START</span>
+							<span class="hero-concept-label">初めての方へ</span>
+							<span class="hero-concept-sub">まず読む順番を3分で案内</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/concept/" class="hero-concept-btn">
+						<span class="hero-concept-icon">💎</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">経営コンセプト</span>
+							<span class="hero-concept-sub">投資哲学と買い方</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/holdings" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">📊</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-new">NEW</span>
+							<span class="hero-concept-label">最新ポートフォリオ</span>
+							<span class="hero-concept-sub">{holdingsSub}</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/margin/" class="hero-concept-btn">
+						<span class="hero-concept-icon">🧓</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">野村流信用錬金術</span>
+							<span class="hero-concept-sub">低金利レバレッジ</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/value/" class="hero-concept-btn">
+						<span class="hero-concept-icon">🦦</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-label">バリュー株の魅力</span>
+							<span class="hero-concept-sub">割安株投資の体系</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+					<a href="/note/" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">📕</span>
+						<span class="hero-concept-text">
+							<span class="hero-concept-new">NEW</span>
+							<span class="hero-concept-label">note を始めました</span>
+							<span class="hero-concept-sub">銘柄ではなく手順を売る</span>
+						</span>
+						<span class="hero-concept-arrow">→</span>
+					</a>
+				</div>
+				{latestUpdateLabel && latestPost && (
+					<div class="hero-latest" aria-label="最終更新と最新記事">
+						<span class="hero-latest-update">🗓️ 最終更新 {latestUpdateLabel}</span>
+						<span class="hero-latest-sep" aria-hidden="true">｜</span>
+						<a class="hero-latest-article" href={`/blog/${latestPost.id}/`}>
+							<span class="hero-latest-article-label">最新記事</span>
+							<strong>{latestPost.data.title}</strong>
+							<span class="hero-latest-arrow" aria-hidden="true">→</span>
+						</a>
+					</div>
+				)}
+			</section>
+
+			<section class="first-visit-intro" aria-labelledby="first-visit-title">
+				<div class="first-visit-copy">
+					<span class="first-visit-kicker">初めて読む方へ</span>
+					<h2 id="first-visit-title">結論だけでなく、考え方と答え合わせまで公開します</h2>
+					<p>無料ブログでは一次資料から個別株を検証し、紹介後の値動きや訂正も残します。分析を自分で再現したい方向けには、noteで手順・判定基準・チェックリストをまとめています。</p>
+					<a href="/start/" class="first-visit-main">読む順番を3分で見る →</a>
+				</div>
+				<div class="first-visit-steps">
+					<a href="/blog/" class="first-visit-step"><strong>1. 読む</strong><span>無料の分析記事から入る</span></a>
+					<a href="/blog/scorecard-45-stocks-2026q3/" class="first-visit-step"><strong>2. 確かめる</strong><span>通信簿で紹介後を見る</span></a>
+					<a href="/note/" class="first-visit-step"><strong>3. 再現する</strong><span>分析手順とツールを見る</span></a>
+				</div>
+			</section>
+
+			<div class="wl-col-grid">
+
+				<StockRankSummary posts={allPosts} />
+
+				<section class="columns-section">
+					<div class="columns-header">
+						<span class="columns-title">📝 投資コラム</span>
+						<a href="/blog/?type=column" class="columns-all-link">すべて見る →</a>
+					</div>
+					<div class="columns-rows">
+						{columns.map((post) => (
+							<a href={`/blog/${post.id}/`} class="col-row">
+								<span class="col-icon">📖</span>
+								<span class="col-title">{post.data.title}</span>
+								<span class="col-date"><FormattedDate date={post.data.pubDate} /></span>
+								<span class="col-arrow">→</span>
+							</a>
+						))}
+					</div>
+				</section>
+
+			</div>
+
+			<div class="method-note">
+				<span class="method-icon">🤖</span>
+				<div>
+					<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。<strong>今すぐ株価が収束する想定ではなく、3年程度保有した場合の到達目安</strong>です。参考値であり投資勧誘ではありません。</p>
+					<p>不動産含み益は「有価証券報告書に記載の物件所在地・地積・取得時期」と「国土交通省の公示価格データ」を照合し、AIによるエリア別地価分析で算出しています。<strong>実際の物件情報ベース</strong>なので精度は相応にあるはずです。ブレはあります。</p>
+				</div>
+			</div>
+
+			<section class="posts-section">
+				<h2>最新記事</h2>
+				<ul class="post-list">
+					{posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>
+								<span class="post-title">{post.data.title}</span>
+								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+							</a>
+						</li>
+					))}
+				</ul>
+				<a href="/blog" class="all-posts-link">すべての記事を見る →</a>
+			</section>
+
+			<section class="members-teaser">
+				<h2>メンバー紹介</h2>
+				<p>バリュー商会には個性豊かな分析担当がいます</p>
+				<div class="member-emojis">
+					<a href="/characters#machibuse" class="member-item">
+						<span title="待伏 静江">🐊</span>
+						<span class="member-role">TOB発掘</span>
+					</a>
+					<a href="/characters#kawachi" class="member-item">
+						<span title="河内 拾造">🦦</span>
+						<span class="member-role">割安発掘</span>
+					</a>
+					<a href="/characters#hotta" class="member-item">
+						<span title="堀田 独占">🦫</span>
+						<span class="member-role">競合優位性</span>
+					</a>
+					<a href="/characters#yomi" class="member-item">
+						<span title="夜見 賢三">🦉</span>
+						<span class="member-role">財務分析</span>
+					</a>
+					<a href="/characters#yuda" class="member-item">
+						<span title="優田 雅代">🦩</span>
+						<span class="member-role">株主優待</span>
+					</a>
+					<a href="/characters#hanaoka" class="member-item">
+						<span title="花岡 利次郎">🐝</span>
+						<span class="member-role">高配当</span>
+					</a>
+					<a href="/characters#morita" class="member-item">
+						<span title="守田 退三">🦞</span>
+						<span class="member-role">リスク管理</span>
+					</a>
+					<a href="/characters#sumida" class="member-item">
+						<span title="墨田 検二">🦑</span>
+						<span class="member-role">AIチェック</span>
+					</a>
+				</div>
+				<a href="/org" class="all-posts-link">組織図で見る →</a>
+			</section>
+
+			</main>
+		<Footer />
+
+	</body>
+</html>
+
+<style>
+	/* ── Hero Concept Button ── */
+	.hero-concept-wrap {
+		margin-top: 1.1em;
+		display: flex;
+		gap: 6px;
+		justify-content: center;
+		flex-wrap: wrap;
+		max-width: 940px;
+		margin-inline: auto;
+	}
+	.hero-concept-btn {
+		flex: 1 1 0;
+		box-sizing: border-box;
+		min-width: 0;
+		max-width: 172px;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.22em;
+		background: rgba(255,255,255,0.92);
+		border: 1.5px solid rgba(232,184,75,0.7);
+		border-radius: 8px;
+		padding: 0.28em 0.4em 0.28em 0.38em;
+		text-decoration: none;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		transition: background 0.15s, transform 0.1s;
+		min-height: 76px;
+	}
+	.hero-concept-btn:hover {
+		background: #fff;
+		transform: translateY(-1px);
+		border-color: #e8b84b;
+	}
+	.hero-concept-icon { font-size: 0.82em; flex-shrink: 0; }
+	.hero-concept-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.05em;
+		min-width: 0;
+		flex: 1;
+		overflow: visible;
+	}
+	.hero-concept-label {
+		font-size: 0.58em;
+		white-space: normal;
+		font-weight: 900;
+		color: #1a3a5c;
+		letter-spacing: 0.01em;
+		line-height: 1.28;
+	}
+	.hero-concept-sub {
+		font-size: 0.44em;
+		color: #888;
+		white-space: normal;
+		overflow: visible;
+		text-overflow: clip;
+		line-height: 1.35;
+	}
+	/* 新設ページの目印。ボタンの枠外に出す */
+	.hero-concept-new {
+		position: absolute;
+		top: -9px;
+		right: -7px;
+		background: #e0453a;
+		color: #fff;
+		font-size: 0.5em;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		padding: 2px 7px;
+		border-radius: 999px;
+		box-shadow: 0 2px 6px rgba(224,69,58,0.4);
+		z-index: 2;
+	}
+	.hero-concept-arrow {
+		font-size: 0.58em;
+		flex-shrink: 0;
+		font-weight: 700;
+		color: #b8860b;
+	}
+	@media (max-width: 1180px) {
+		.hero-concept-arrow { display: none; }
+	}
+	.hero-latest { margin: 1em auto 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 10px; font-size: 13px; line-height: 1.7; }
+	.hero-latest-update { color: #70786f; font-size: 11px; }
+	.hero-latest-sep { color: #a0a69f; }
+	.hero-latest-article { display: inline; color: #244f3c; text-decoration: none; overflow-wrap: anywhere; }
+	.hero-latest-article-label { font-weight: 700; color: #805d10; margin-right: 7px; }
+	.hero-latest-article strong { font-weight: 700; }
+	.hero-latest-arrow { margin-left: 5px; }
+	.hero-latest-article:hover { text-decoration: underline; }
+	@media (max-width: 640px) { .hero-latest-sep { display: none; } }
+
+	/* ── First-time visitor intro ── */
+	.first-visit-intro{display:grid;grid-template-columns:1.25fr .75fr;gap:1em;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #d9e4dc;border-left:4px solid var(--accent);border-radius:10px;background:#fbfdfb}
+	.first-visit-kicker{display:inline-block;font-size:.68em;font-weight:800;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:.35em}
+	.first-visit-intro h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
+	.first-visit-intro p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
+	.first-visit-main{font-size:.78em;font-weight:800;color:var(--accent);text-decoration:none}
+	.first-visit-steps{display:grid;gap:.45em}
+	.first-visit-step{display:flex;flex-direction:column;gap:.12em;padding:.55em .7em;border:1px solid #dde8dd;border-radius:7px;background:#fff;text-decoration:none}
+	.first-visit-step strong{font-size:.76em;color:var(--accent-dark)}
+	.first-visit-step span{font-size:.68em;color:rgb(var(--gray))}
+	.first-visit-step:hover{background:#f3f8f4}
+	@media(max-width:640px){.first-visit-intro{grid-template-columns:1fr}.first-visit-steps{grid-template-columns:1fr 1fr 1fr}.first-visit-step{padding:.5em}.first-visit-step span{font-size:.62em}}
+	@media(max-width:420px){.first-visit-steps{grid-template-columns:1fr}}
+
+	/* ── Asset Status ── */
+	.asset-status {
+		background: linear-gradient(135deg, #1a3a1c 0%, #0f2610 100%);
+		border-radius: 12px;
+		padding: 1.4em 1.5em;
+		margin-bottom: 2em;
+		color: #fff;
+		position: relative;
+		overflow: hidden;
+	}
+	.asset-status::before {
+		content: '📈';
+		position: absolute;
+		right: -10px;
+		bottom: -15px;
+		font-size: 7em;
+		opacity: 0.05;
+		line-height: 1;
+		pointer-events: none;
+	}
+	.asset-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.1em;
+		flex-wrap: wrap;
+		gap: 0.4em;
+	}
+	.asset-launch-badge {
+		background: rgba(126,217,87,0.18);
+		border: 1px solid rgba(126,217,87,0.4);
+		color: #a0e870;
+		font-size: 0.72em;
+		font-weight: 700;
+		padding: 0.25em 0.8em;
+		border-radius: 999px;
+		letter-spacing: 0.04em;
+	}
+	.asset-account {
+		font-size: 0.68em;
+		color: rgba(255,255,255,0.4);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+	}
+	.asset-main { margin-bottom: 1.2em; }
+	.asset-amounts {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		margin-bottom: 0.9em;
+	}
+	.asset-amt-block {
+		flex: 1;
+		min-width: 0;
+	}
+	.asset-amt-arrow {
+		flex: 0 0 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 2px;
+	}
+	.asset-amt-label {
+		font-size: 0.6em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.45);
+		margin-bottom: 0.2em;
+		white-space: nowrap;
+	}
+	.asset-amt-val { font-size: 1.05em; color: #fff; }
+	.asset-amt-val strong { font-size: 1.35em; }
+	.val-now strong  { color: #7ed957; }
+	.val-mid strong  { color: #a0c8ff; }
+	.val-goal strong { color: #e8b84b; }
+	.asset-bar-wrap { }
+	.asset-bar {
+		background: rgba(255,255,255,0.1);
+		border-radius: 6px;
+		height: 28px;
+		position: relative;
+		overflow: visible;
+		margin-bottom: 0.35em;
+	}
+	.asset-bar-fill {
+		width: 25%;
+		height: 100%;
+		background: linear-gradient(90deg, #2c7a2e, #7ed957);
+		border-radius: 6px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.asset-bar-now {
+		position: absolute;
+		right: -30px;
+		top: -2px;
+		font-size: 0.5em;
+		font-weight: 700;
+		color: #7ed957;
+		text-align: center;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+	.asset-bar-mid-marker {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		height: 100%;
+		width: 1px;
+		background: rgba(160,200,255,0.45);
+		pointer-events: none;
+	}
+	.asset-bar-mid-label {
+		position: absolute;
+		left: 4px;
+		top: -1px;
+		font-size: 0.48em;
+		font-weight: 700;
+		color: #a0c8ff;
+		text-align: center;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+	.asset-bar-goal {
+		position: absolute;
+		right: 6px;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 0.6em;
+		font-weight: 700;
+		color: rgba(255,255,255,0.4);
+	}
+	.asset-bar-scale {
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.58em;
+		color: rgba(255,255,255,0.3);
+		padding: 0 2px;
+	}
+	.asset-now-sub { font-size: 0.72em; color: rgba(255,255,255,0.5); margin-top: 0.15em; }
+	.asset-now-sub .pos { color: #7ed957; font-weight: 700; }
+	.asset-chart-wrap {
+		margin: 1em 0;
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid rgba(255,255,255,0.1);
+	}
+	.asset-chart-img {
+		width: 100%;
+		display: block;
+		border-radius: 0;
+	}
+	.asset-brand-note {
+		font-size: 0.72em;
+		color: rgba(255,255,255,0.6);
+		margin: 0.8em 0 0.2em;
+		padding-top: 0.7em;
+		border-top: 1px solid rgba(255,255,255,0.1);
+		font-weight: 600;
+	}
+	.asset-update-rule {
+		font-size: 0.68em;
+		color: rgba(255,255,255,0.45);
+		margin: 0.3em 0 0.3em;
+	}
+	.asset-disclaimer {
+		font-size: 0.65em;
+		color: rgba(255,255,255,0.3);
+		margin: 0;
+		line-height: 1.5;
+	}
+	/* ── 2-column grid: watchlist + columns ── */
+	.wl-col-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1em;
+		margin-bottom: 2em;
+		align-items: start;
+	}
+	/* 狭い画面では3列を維持できないので縦積みに戻す */
+	@media (max-width: 1100px) {
+		.hero-concept-wrap { max-width: 900px; gap: 8px; }
+		.hero-concept-btn { flex: 1 1 calc(33.333% - 8px); max-width: 280px; min-height: 66px; padding: .42em .65em; }
+		.hero-concept-text { flex: 1; overflow: visible; }
+		.hero-concept-label { font-size: .68em; white-space: normal; line-height: 1.3; }
+		.hero-concept-sub { font-size: .53em; white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.35; }
+	}
+	@media (max-width: 640px) {
+		.hero-concept-wrap { gap: 8px; }
+		.hero-concept-btn { flex: 1 1 100%; max-width: 340px; padding: .48em .72em; align-items: flex-start; }
+		.hero-concept-text { flex: 1; overflow: visible; }
+		.hero-concept-label { font-size: .76em; white-space: normal; line-height: 1.35; }
+		.hero-concept-sub { font-size: .58em; white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.45; }
+		.hero-concept-icon { font-size: 1.05em; margin-top: .08em; }
+		.hero-concept-arrow { align-self: center; }
+	}
+	@media (max-width: 600px) {
+		.wl-col-grid { grid-template-columns: 1fr; }
+	}
+
+	/* ── Columns Section ── */
+	.columns-section {
+		min-width: 0;		margin-bottom: 0;
+		border: 1px solid #dde3ec;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+	.columns-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.55em 1em;
+		background: #f0f4f8;
+		border-bottom: 1px solid #dde3ec;
+	}
+	.columns-title {
+		font-size: 0.78em;
+		font-weight: 700;
+		color: var(--accent-dark);
+		letter-spacing: 0.04em;
+	}
+	.columns-all-link {
+		font-size: 0.7em;
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.columns-all-link:hover { color: var(--accent-dark); }
+	.columns-rows {
+		display: flex;
+		flex-direction: column;
+		height: 198px;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: #b8c4d0 transparent;
+	}
+	.columns-rows::-webkit-scrollbar { width: 4px; }
+	.columns-rows::-webkit-scrollbar-track { background: transparent; }
+	.columns-rows::-webkit-scrollbar-thumb { background: #c4ccd8; border-radius: 4px; }
+	.col-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.45em;
+		padding: 0.55em 0.8em;
+		text-decoration: none;
+		color: rgb(var(--gray-dark));
+		border-bottom: 1px solid #f0f2f5;
+		transition: background 0.12s;
+		flex-wrap: wrap;
+	}
+	.col-row:last-child { border-bottom: none; }
+	.col-row:hover { background: #f5f8fc; }
+	.col-icon { font-size: 0.8em; flex-shrink: 0; margin-top: 0.15em; }
+	.col-title {
+		font-size: 0.76em;
+		flex: 1;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		min-width: 0;
+	}
+	.col-date { display: none; }
+	.col-arrow {
+		font-size: 0.75em;
+		color: var(--accent);
+		font-weight: 700;
+		flex-shrink: 0;
+		align-self: center;
+	}
+
+	/* ── About Blog ── */
+	.about-blog {
+		margin-bottom: 2.5em;
+		padding: 1.4em 1.2em;
+		background: #f8faf8;
+		border: 1px solid #dde8dd;
+		border-radius: 10px;
+	}
+	.about-blog h2 {
+		font-size: 1.1em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin: 0 0 1em;
+	}
+	.about-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85em;
+		margin-bottom: 0.9em;
+	}
+	.about-item {
+		display: flex;
+		gap: 0.75em;
+		align-items: flex-start;
+	}
+	.about-icon {
+		font-size: 1.3em;
+		flex-shrink: 0;
+		margin-top: 0.05em;
+	}
+	.about-label {
+		font-size: 0.7em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--accent-dark);
+		text-transform: uppercase;
+		margin-bottom: 0.2em;
+	}
+	.about-text {
+		font-size: 0.85em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.65;
+	}
+	.about-note-inline {
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+		display: block;
+		margin-top: 0.4em;
+		line-height: 1.6;
+	}
+	.about-note {
+		font-size: 0.76em;
+		color: rgb(var(--gray));
+		margin: 0;
+		padding-top: 0.8em;
+		border-top: 1px dashed #ccd8cc;
+	}
+	.hero {
+		text-align: center;
+		padding: 3em 1em 2em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 2em;
+		position: relative;
+		overflow: hidden;
+	}
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: url('/images/hero-characters.png') center center / cover no-repeat;
+		opacity: 0.22;
+		pointer-events: none;
+		z-index: 0;
+	}
+	.hero > * {
+		position: relative;
+		z-index: 1;
+	}
+	.hero-badge {
+		display: inline-block;
+		background: var(--accent-light);
+		color: var(--accent-dark);
+		font-weight: bold;
+		font-size: 0.85em;
+		padding: 0.3em 1em;
+		border-radius: 999px;
+		margin-bottom: 1em;
+	}
+	.hero h1 {
+		font-size: 2em;
+		line-height: 1.4;
+		margin-bottom: 0.6em;
+	}
+	.hero-desc {
+		color: rgb(var(--gray));
+		font-size: 0.95em;
+		max-width: 560px;
+		margin: 0 auto 1.5em;
+		line-height: 1.8;
+	}
+	.hero-tags {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.3em;
+		justify-content: center;
+		max-width: 100%;
+	}
+	.tag {
+		background: var(--accent-light);
+		color: var(--accent-dark);
+		font-size: 0.7em;
+		padding: 0.22em 0.55em;
+		border-radius: 4px;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background 0.15s, color 0.15s;
+	}
+	.tag:hover { background: var(--accent); color: #fff; }
+	.tag-emoji { margin-right: 0.25em; font-size: 1em; }
+	@media (max-width: 680px) {
+		.hero-tags { flex-wrap: wrap; }
+	}
+	.method-note {
+		display: flex;
+		gap: 0.6em;
+		align-items: flex-start;
+		background: #f4f6f9;
+		border: 1px solid #dde1e8;
+		border-left: 3px solid var(--accent);
+		border-radius: 6px;
+		padding: 0.65em 0.9em;
+		margin-bottom: 2em;
+		font-size: 0.82em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.6;
+	}
+	.method-icon { font-size: 1.1em; flex-shrink: 0; margin-top: 0.1em; }
+	.method-note p { margin: 0; }
+	.method-note a { color: var(--accent); text-decoration: none; font-weight: 600; }
+	.method-note a:hover { color: var(--accent-dark); }
+
+	.posts-section, .members-teaser {
+		margin-bottom: 3em;
+	}
+	h2 {
+		font-size: 1.3em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin-bottom: 1em;
+	}
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1em;
+		max-height: calc(3 * 5em);
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0,0,0,0.15) transparent;
+		border-radius: 6px;
+	}
+	.post-list::-webkit-scrollbar { width: 4px; }
+	.post-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+	.post-list li {
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.post-list a {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.8em 0.4em;
+		text-decoration: none;
+		color: rgb(var(--gray-dark));
+		gap: 1em;
+	}
+	.post-list a:hover {
+		color: var(--accent-dark);
+	}
+	.post-title {
+		flex: 1;
+	}
+	.post-date {
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+	.all-posts-link {
+		display: inline-block;
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+		font-size: 0.95em;
+	}
+	.all-posts-link:hover {
+		color: var(--accent-dark);
+	}
+	.member-emojis {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		gap: 0.3em;
+		margin: 0.8em 0 1em;
+	}
+	.member-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.4em;
+		flex: 1;
+		min-width: 0;
+		text-decoration: none;
+		color: inherit;
+		border-radius: 8px;
+		padding: 0.3em 0;
+		transition: background 0.15s;
+	}
+	.member-item:hover {
+		background: rgba(29,158,117,0.08);
+	}
+	.member-item span:first-child {
+		font-size: 2em;
+		cursor: default;
+		line-height: 1;
+	}
+	.member-role {
+		font-size: 0.62em;
+		color: rgb(var(--gray));
+		text-align: center;
+		line-height: 1.3;
+		word-break: keep-all;
+	}
+	.home-comments {
+		margin-bottom: 3em;
+	}
+	.home-comments-desc {
+		font-size: 0.88em;
+		color: rgb(var(--gray));
+		margin: -0.4em 0 0;
+	}
+	/* ── Theme Pillars ── */
+	.theme-pillars {
+		display: flex;
+		align-items: stretch;
+		border: 1px solid #dde8dd;
+		border-radius: 10px;
+		background: #f8faf8;
+		margin-bottom: 2em;
+		overflow: hidden;
+	}
+	.tp-item {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 1.1em 0.8em;
+		gap: 0.4em;
+		border-right: 1px solid #dde8dd;
+		text-align: center;
+	}
+	.tp-item:last-child { border-right: none; }
+	.tp-svg {
+		width: 52px;
+		height: 52px;
+		color: var(--accent);
+	}
+	.tp-title {
+		font-size: 0.75em;
+		font-weight: 800;
+		color: var(--accent-dark);
+		letter-spacing: 0.04em;
+	}
+	.tp-desc {
+		font-size: 0.68em;
+		color: rgb(var(--gray));
+		line-height: 1.55;
+	}
+
+	@media (max-width: 720px) {
+		.hero h1 {
+			font-size: 1.5em;
+		}
+		.post-list a {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.2em;
+		}
+		.theme-pillars { flex-direction: column; }
+		.tp-item { border-right: none; border-bottom: 1px solid #dde8dd; flex-direction: row; justify-content: flex-start; gap: 0.8em; text-align: left; }
+		.tp-item:last-child { border-bottom: none; }
+		.tp-svg { width: 36px; height: 36px; flex-shrink: 0; }
+	}
+	/* メンバー8人は狭い画面で横一列に収まらない（役職名が keep-all で縮まない）ため
+	   4人×2段に折り返して横スクロールを防ぐ */
+	@media (max-width: 640px) {
+		.member-emojis {
+			flex-wrap: wrap;
+			justify-content: center;
+			row-gap: 0.9em;
+		}
+		.member-item { flex: 0 0 calc(25% - 0.3em); }
+	}
+</style>
