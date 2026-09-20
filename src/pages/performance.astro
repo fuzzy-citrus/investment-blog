@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { weeklyRecords, brokerSnapshot, recordSeriesIds } from '../data/assetHistory';
+import { weeklyRecords, monthlyRecords, brokerSnapshot, recordSeriesIds } from '../data/assetHistory';
 import { seriesList } from '../data/series';
 
 const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -42,6 +42,26 @@ const pts = rows.map((r, i) => ({ ...r, x: px(i), y: py(r.netAssets) }));
 const line = pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 const area = `${PAD.l},${H - PAD.b} ${line} ${pts[pts.length - 1].x.toFixed(1)},${H - PAD.b}`;
 const gridVals = [lo, lo + (hi - lo) / 2, hi];
+
+// ── 月ごとの口座残高（棒グラフ）。記録を記事にする前の分も入れる ──
+const months = [...monthlyRecords]
+	.sort((a, b) => a.month.localeCompare(b.month))
+	.map((r) => ({ ...r, man: Math.round(r.amount / 10000) }));
+const MW = 720;
+const MH = 260;
+const MPAD = { t: 26, r: 16, b: 38, l: 60 };
+const mHi = Math.ceil(Math.max(...months.map((r) => r.man)) / 1000) * 1000;
+const mStep = (MW - MPAD.l - MPAD.r) / months.length;
+const mx = (i: number) => MPAD.l + mStep * (i + 0.5);
+const barW = Math.min(20, mStep * 0.62);
+const my = (v: number) => MPAD.t + (MH - MPAD.t - MPAD.b) * (1 - v / mHi);
+const mGrid = Array.from({ length: mHi / 1000 + 1 }, (_, i) => i * 1000);
+const monthLabel = (m: string) => `${m.slice(2, 4)}/${Number(m.slice(5, 7))}`;
+const monthFull = (m: string) => `${m.slice(0, 4)}年${Number(m.slice(5, 7))}月末`;
+// 月の途中で締めた行（最新月）は「9月18日時点」と書く
+const monthWhen = (r: { month: string; asOf?: string }) => r.asOf ?? monthFull(r.month);
+const firstMonth = months[0];
+const lastMonth = months[months.length - 1];
 
 // ── 記事一覧（週次運用記録・現況シリーズ） ──
 const recordSeries = recordSeriesIds
@@ -107,7 +127,89 @@ const updated = jpDate(latest.date);
 						<span class="pf-card-label">総ポジション</span>
 						<span class="pf-card-val">{man(latest.totalPosition)}</span>
 					</div>
+					<div class="pf-card pf-card-wide">
+						<span class="pf-card-label">{brokerSnapshot.label}（{brokerSnapshot.asOf}時点）</span>
+						<span class="pf-card-val">{brokerSnapshot.amount.toLocaleString()}円</span>
+						<span class="pf-card-diff up">
+							{brokerSnapshot.unrealizedLabel} +{brokerSnapshot.unrealized.toLocaleString()}円
+						</span>
+					</div>
 				</div>
+			</section>
+
+			<section class="pf-block">
+				<h2>月ごとの資産（{monthFull(firstMonth.month)}から）</h2>
+				<p class="pf-note-line">
+					記録を記事にする前の分も含めて、口座の月末残高を並べました。{monthFull(firstMonth.month)}の{firstMonth.man.toLocaleString()}万円が、{monthWhen(lastMonth)}で{lastMonth.man.toLocaleString()}万円です。
+				</p>
+				<div class="pf-chart-wrap">
+					<svg viewBox={`0 0 ${MW} ${MH}`} class="pf-chart" role="img" aria-label="月ごとの口座残高の推移">
+						{mGrid.map((v) => (
+							<g>
+								<line x1={MPAD.l} y1={my(v)} x2={MW - MPAD.r} y2={my(v)} class="pf-grid" />
+								<text x={MPAD.l - 10} y={my(v) + 4} class="pf-axis" text-anchor="end">
+									{v.toLocaleString()}
+								</text>
+							</g>
+						))}
+						{months.map((r, i) => (
+							<g>
+								<rect
+									x={mx(i) - barW / 2}
+									y={my(r.man)}
+									width={barW}
+									height={my(0) - my(r.man)}
+									class={i === months.length - 1 ? 'pf-bar pf-bar-last' : 'pf-bar'}
+								>
+									<title>{`${monthWhen(r)} ${r.man.toLocaleString()}万円`}</title>
+								</rect>
+								{i === months.length - 1 && (
+									<text x={mx(i)} y={my(r.man) - 8} class="pf-dot-val" text-anchor="middle">
+										{r.man.toLocaleString()}
+									</text>
+								)}
+								{(i % 3 === 0 || i === months.length - 1) && (
+									<text x={mx(i)} y={MH - MPAD.b + 20} class="pf-axis" text-anchor="middle">
+										{monthLabel(r.month)}
+									</text>
+								)}
+							</g>
+						))}
+						<text x={MPAD.l - 10} y={MPAD.t - 10} class="pf-axis" text-anchor="end">万円</text>
+					</svg>
+				</div>
+				<details class="pf-details">
+					<summary>月ごとの数字を表で見る（{months.length}か月）</summary>
+					<div class="pf-table-wrap">
+						<table class="pf-table">
+							<thead>
+								<tr>
+									<th>年月</th>
+									<th class="num">お預り資産</th>
+									<th class="num">前月比</th>
+								</tr>
+							</thead>
+							<tbody>
+								{[...months].reverse().map((r, i, arr) => {
+									const before = arr[i + 1];
+									const d = before ? r.man - before.man : null;
+									return (
+										<tr>
+											<td>{monthWhen(r)}</td>
+											<td class="num strong">{man(r.man)}</td>
+											<td class={`num ${d === null ? '' : d >= 0 ? 'up' : 'down'}`}>
+												{d === null ? '—' : `${signed(d)}万円`}
+											</td>
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+					</div>
+				</details>
+				<p class="pf-source">
+					出所：野村證券「お預り資産評価の推移」（株券等貸借を除く）。最新月は{lastMonth.asOf}の数字です。
+				</p>
 			</section>
 
 			<section class="pf-block">
@@ -190,17 +292,17 @@ const updated = jpDate(latest.date);
 			<section class="pf-block">
 				<h2>口座画面（月次）</h2>
 				<p class="pf-note-line">
-					{brokerSnapshot.account}の画面そのものです。月初に前月末の成績を反映しています。
+					{brokerSnapshot.account}の画面そのものです。<strong>{brokerSnapshot.imageAsOf}に撮ったもの</strong>で、上の表の数字（{brokerSnapshot.asOf}時点）とは時点が違います。
 				</p>
 				<div class="pf-broker">
 					<img src={brokerSnapshot.image} alt={brokerSnapshot.imageAlt} class="pf-broker-img" />
 					<div class="pf-broker-side">
-						<p class="pf-broker-asof">{brokerSnapshot.asOf}時点</p>
-						<p class="pf-broker-label">{brokerSnapshot.label}</p>
-						<p class="pf-broker-val">{brokerSnapshot.amount.toLocaleString()}<span>円</span></p>
+						<p class="pf-broker-asof">画面を撮った時点：{brokerSnapshot.imageAsOf}</p>
+						<p class="pf-broker-label">お預り資産合計</p>
+						<p class="pf-broker-val">{brokerSnapshot.imageAmount.toLocaleString()}<span>円</span></p>
 						<p class="pf-broker-sub">
-							{brokerSnapshot.unrealizedLabel}
-							<strong class="up">+{brokerSnapshot.unrealized.toLocaleString()}円</strong>
+							最新は{brokerSnapshot.asOf}時点で
+							<strong>{brokerSnapshot.amount.toLocaleString()}円</strong>
 						</p>
 					</div>
 				</div>
@@ -382,6 +484,24 @@ const updated = jpDate(latest.date);
 		fill: #3a3020;
 		font-size: 13px;
 		font-weight: 700;
+	}
+	.pf-card-wide {
+		grid-column: 1 / -1;
+	}
+	.pf-bar {
+		fill: #d8a53a;
+	}
+	.pf-bar-last {
+		fill: #b8860b;
+	}
+	.pf-details {
+		margin: 0.2em 0 0.6em;
+	}
+	.pf-details summary {
+		cursor: pointer;
+		font-size: 0.9em;
+		color: #6e6355;
+		padding: 0.4em 0;
 	}
 	.pf-table-wrap {
 		overflow-x: auto;

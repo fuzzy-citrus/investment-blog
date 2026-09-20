@@ -2,6 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { brokerSnapshot } from '../data/assetHistory';
+
+const nowMan = Math.round(brokerSnapshot.amount / 10000);
+const plMan = Math.round(brokerSnapshot.unrealized / 10000);
 ---
 
 <!doctype html>
@@ -64,9 +68,9 @@ import Footer from '../components/Footer.astro';
 				<div class="asset-main">
 					<div class="asset-amounts">
 						<div class="asset-amt-block">
-							<div class="asset-amt-label">現在総資産（2026年8月）</div>
-							<div class="asset-amt-val val-now"><strong>4,308万円</strong></div>
-							<div class="asset-now-sub">評価損益 <span class="pos">+146万円</span></div>
+							<div class="asset-amt-label">お預り資産（{brokerSnapshot.asOf}時点）</div>
+							<div class="asset-amt-val val-now"><strong>{nowMan.toLocaleString()}万円</strong></div>
+							<div class="asset-now-sub">評価損益 <span class="pos">+{plMan.toLocaleString()}万円</span></div>
 						</div>
 						<div class="asset-amt-arrow">
 							<svg viewBox="0 0 48 16" width="48" height="16"><path d="M0 8 L38 8 M30 3 L42 8 L30 13" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
