@@ -16,7 +16,7 @@ stockCard:
   modifiedPBR: "1.06倍"
   category: "火葬場運営・印刷"
   cardTheme: "event"
-related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "nssol-2327", "nihon-bs-hoso-9414", "tokyo-crematorium-monopoly-discount"]
+related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "nssol-2327", "nihon-bs-hoso-9414", "tokyo-crematorium-monopoly-discount", "minimum-tax-2027-owner-selling"]
 noteUrl: "https://numasoko-value.com/analysis/kozosodo-hd-7868.html"
 ---
 

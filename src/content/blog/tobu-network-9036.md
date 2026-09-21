@@ -16,7 +16,7 @@ stockCard:
   modifiedPBR: "0.21倍"
   delistProb: "95%"
   category: "貨物運送・倉庫"
-related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "keihan-hd-9045", "shinyei-3004"]
+related: ["katakura-3001", "holdings-status-03-kozosodo-tobu", "keihan-hd-9045", "shinyei-3004", "minimum-tax-2027-owner-selling"]
 ---
 
 > 📈 **現況更新（2026-07-14）**：株価1,317円へ上昇（紹介時比+9.5%）——走り始めてなお期待株価3,212円比+144%の乖離が残り「安すぎ放置」と判断、現況ランクを<strong>A+→A++へ格上げ</strong>。現物2万7,500株（PF最大ポジション）を売り検討せずホールド継続中。詳細は[紹介銘柄の現況③](/blog/holdings-status-03-kozosodo-tobu/)へ。※本文の数値は紹介時（2026-05-08）のものです。
