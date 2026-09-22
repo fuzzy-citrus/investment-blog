@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>フクビ化学工業 投資分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 7871 東証STD/名証M · 2026.09.23 更新 · 株価 1,012円（9/18終値・9/21〜23は現物市場休業）</p>
+      <h1 class="ht">フクビ化学工業 <em>（7871）</em><br>統合投資分析レポート</h1>
+      <p class="hs">現金・投資有価証券・年金資産（税後）で時価総額の約93%／金融資産床801円／株探PBR0.48倍<br>成長エンジン＝フェノール断熱材「フェノバボード」×省エネ義務化 ／ 持ち合い解消を自社株買いで吸収する資本政策へ</p>
+    </div>
+    <div class="vb">
+      <div class="vs">A−<small>当商会の採点</small></div>
+      <div class="vt">
+        <strong>当商会の検証済み上値基準 1,258円 / 下値基準 649円</strong><br>
+        非対称比0.68（幅・小）×確度14点（高）＝A−。<br>
+        株探PBR0.48倍。ただしROE4%台＝低評価には理由がある。<br>
+        原資料の3年シナリオは未検証のため、ランク計算には使わない。
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,012円</div><div class="ks">時価総額 193.7億円（自己株控除19,141,242株）</div></div>
+    <div class="kv"><div class="kl">自社株取得反映後BPS 2,063円</div><div class="kn bl">修正BPS比 0.49倍</div><div class="ks">6月末・8月自社株買い反映後</div></div>
+    <div class="kv"><div class="kl">現金+証券+年金（税後）</div><div class="kn gn">937円/株</div><div class="ks">株価の約93%をカバー</div></div>
+    <div class="kv"><div class="kl">金融資産床</div><div class="kn gn">801円/株</div><div class="ks">現金−有利子負債＋有価証券75%</div></div>
+    <div class="kv"><div class="kl">EV/EBITDA</div><div class="kn gn">1.2倍</div><div class="ks">証券は税後控除・27/3期予想EBITDA37億</div></div>
+    <div class="kv"><div class="kl">当商会ランク</div><div class="kn am">A−</div><div class="ks">6軸14点・非対称比0.68</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <button class="tb on" data-p="p1"><span class="d" style="background:var(--gn2)"></span>カタリスト</button>
+  <button class="tb" data-p="p2"><span class="d" style="background:var(--am2)"></span>NAV・割安性</button>
+  <button class="tb" data-p="p3"><span class="d" style="background:var(--or2)"></span>土地含み益</button>
+  <button class="tb" data-p="p4"><span class="d" style="background:var(--bl2)"></span>事業・ニッチ</button>
+  <button class="tb" data-p="p5"><span class="d" style="background:var(--pu2)"></span>業績・中計</button>
+  <button class="tb" data-p="p6"><span class="d" style="background:#72cc8e"></span>株主・MBO/TOB</button>
+  <button class="tb" data-p="p7"><span class="d" style="background:var(--or2)"></span>検証済みレンジ</button>
+  <button class="tb" data-p="p8"><span class="d" style="background:var(--rd)"></span>リスク</button>
+  <button class="tb" data-p="p9"><span class="d" style="background:var(--am2)"></span>最終評価</button>
+</nav>
+
+<main class="bd">
+
+<!-- ══════════════ P1 カタリスト ══════════════ -->
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、フクビ化学なのか</h2><span class="sb bg-gn">5つのカタリスト</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">Catalyst 01 · 最重要</div>
+      <span class="ci">🔄</span>
+      <div class="ct">持ち合い解消の「受け皿」は自社株買い</div>
+      <div class="cb gn">8.97→6.12%</div>
+      <div class="cu">三井化学 変更報告書（義務発生日 2026/8/10）</div>
+      <div class="cp">8/10にToSTNeT-3で<strong>65万株（3.27%）を993円で取得</strong>。同日に三井化学（退職給付信託）の保有割合が2.85pt低下＝約59万株。<strong>政策保有株の売りを市場に出さず自社で吸収する前例ができた。</strong>残る長瀬産業11.91%・三井化学6.12%・三井物産プラスチック4.75%も確認対象。比率は会社開示・大量保有報告書の公表ベースで表記。</div>
+      <div class="tgs"><span class="tg tg-gn">需給の重し解消</span><span class="tg tg-or">EPS+3.4%</span></div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">Catalyst 02 · 成長エンジン</div>
+      <span class="ci">🧱</span>
+      <div class="ct">フェノバボード × 省エネ義務化 × 競合の受注停止</div>
+      <div class="cb or">+26.7%</div>
+      <div class="cu">27/3期1Q フェノバボード売上 前年同期比</div>
+      <div class="cp">2025年4月の<strong>省エネ基準適合義務化</strong>、2027年GX ZEH、2030年ZEH水準義務化で高性能断熱材の需要が構造的に増加。ナフサショック下で旭化成建材がネオマフォームの<strong>受注を一時全面停止（4/20〜）</strong>し、需要がフェノバに流入。第2工場（投資36.5億・補助金上限9億）は2027年10月完了予定。</div>
+      <div class="tgs"><span class="tg tg-or">国内2社体制（推定）</span><span class="tg tg-am">補助金採択</span></div>
+    </div>
+    <div class="ca cc-am">
+      <div class="cn">Catalyst 03 · 資産</div>
+      <span class="ci">🏦</span>
+      <div class="ct">本業が実質タダ ── EV/EBITDA 1.2倍</div>
+      <div class="cb am">92%</div>
+      <div class="cu">ネットキャッシュ+証券+年金資産（税後）÷時価総額</div>
+      <div class="cp">ネットキャッシュ95.9億＋投資有価証券（税後）60.8億＋年金資産（税後）22.7億＝<strong>179億円 vs 時価総額194億円</strong>。土地含み益（税後17億）まで足すと時価総額を上回る。<strong>売上428億・EBITDA37億の事業が値段ゼロで付いてくる計算。</strong></div>
+      <div class="tgs"><span class="tg tg-am">NCAV≒株価</span><span class="tg tg-gn">自己資本比率72.5%</span></div>
+    </div>
+    <div class="ca cc-bl" style="background:var(--bg2);border:.5px solid var(--bg3)">
+      <div class="cn" style="color:var(--ink3);opacity:1">Catalyst 04 · モメンタム</div>
+      <span class="ci" style="font-size:22px">📈</span>
+      <div class="ct" style="color:var(--ink)">通期営業益+30%予想・1Qは+44%</div>
+      <div style="font:600 26px/1 var(--mono);color:var(--bl);margin:6px 0 2px">OP 22.5億円</div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">27/3期会社予想（前期17.3億）・EPS 98.6円</div>
+      <div class="cp" style="color:var(--ink2)">迅速な価格転嫁と生産性改善で1Q営業益5.5億（+43.8%）。精密（車載メーターカバー・HUD）が売上2.2倍。<strong>PER10.3倍・配当利回り3.1%・累進配当。</strong></div>
+    </div>
+    <div class="ca cc-pu" style="background:var(--bg2);border:.5px solid var(--bg3);grid-column:span 2">
+      <div class="cn" style="color:var(--ink3);opacity:1">Catalyst 05 · オプション</div>
+      <span class="ci" style="font-size:22px">🗝️</span>
+      <div class="ct" style="color:var(--ink)">MBO・TOBの「条件」が揃いつつある</div>
+      <div class="in3">
+        <div><strong style="color:var(--pu)">① 支配構造</strong><br>創業家（資産管理会社 八木熊13.4%＋創業家個人（会長）4.3%）17.7%。上位10株主で約59%、安定株主が厚く<strong>公開買付けの成立ハードルが低い</strong>。</div>
+        <div><strong style="color:var(--pu)">② 資金面</strong><br>1,600円（PBR0.76倍）でのMBOでも必要資金254億円。<strong>余剰現金＋証券売却＋EBITDA3倍のLBOで約240億円</strong>を賄える。会社の資産で買える典型形。</div>
+        <div><strong style="color:var(--pu)">③ 外部圧力</strong><br>会社自身が「PBR1倍割れ・ROE<資本コスト9%」を認め改善を宣言（企業価値向上2030）。<strong>東証要請・持ち合い解消の進行</strong>で、非公開化が合理的な選択肢になり得る。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">2025〜2026年 主要イベント</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 bl"></div><div class="tdate">2025.03.25</div><div class="ttext"><strong>「企業価値向上2030」</strong>公表。PBR1倍割れ・ROE<株主資本コスト（9%前後）を明記、ROE8%以上を2030年目標に。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2025.05</div><div class="ttext"><strong>累進配当を導入</strong>（配当性向30%以上＋機動的自己株取得）。</div></div>
+        <div class="ti"><div class="td2 or"></div><div class="tdate">2025.10 / 2026.01</div><div class="ttext">フクビ岡山が<strong>大規模成長投資補助金</strong>に採択→交付決定。フェノバ第2生産拠点を福井県内に建設（投資規模36.5億円）。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">2026.04</div><div class="ttext">ナフサショック。当社は全製品で供給制限・納期調整。旭化成建材がネオマフォーム受注を停止（4/20）→<strong>株価は上場来高値1,347円（4/22）</strong>。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">2026.05.14</div><div class="ttext">26/3期決算。通期予想は中東情勢を理由に「未定」→株価は6/11に年初来安値846円。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">2026.08.07〜10</div><div class="ttext">1Q好決算と<strong>通期予想（OP+29.9%）公表</strong>、同時にToSTNeT-3で65万株取得。三井化学が8.97%→6.12%へ。</div></div>
+      </div>
+    </div>
+    <div class="c cf-am">
+      <div class="h3" style="color:var(--am)">現株価1,012円の位置づけ</div>
+      <div class="bg"><div class="br2"><span>ネットキャッシュ＋証券（税後）</span><span class="mn">818円</span></div><div class="bt"><div class="bf" style="width:44%;background:var(--bl)"></div></div></div>
+      <div class="bg"><div class="br2"><span>＋年金資産（税後）</span><span class="mn">937円</span></div><div class="bt"><div class="bf" style="width:51%;background:var(--bl2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>金融資産床</span><span class="mn">801円</span></div><div class="bt"><div class="bf" style="width:54%;background:var(--am2)"></div></div></div>
+      <div class="bg"><div class="br2"><strong>現在株価</strong><strong class="mn">1,012円</strong></div><div class="bt"><div class="bf" style="width:55%;background:var(--ink)"></div></div></div>
+      <div class="bg"><div class="br2"><span>当商会上値基準</span><span class="mn">1,258円</span></div><div class="bt"><div class="bf" style="width:73%;background:var(--am)"></div></div></div>
+      <div class="bg"><div class="br2"><span>SOTP理論値（中央）</span><span class="mn">1,531円</span></div><div class="bt"><div class="bf" style="width:85%;background:var(--gn2)"></div></div></div>
+      <div class="bg" style="margin-bottom:0"><div class="br2"><span>BPS（自社株取得反映後）</span><span class="mn">2,063円</span></div><div class="bt"><div class="bf" style="width:100%;background:var(--gn)"></div></div></div>
+      <p class="note">バー長は自社株取得反映後BPS2,063円=100%。株価はその約49%。SOTPは参考推計で、当商会のA−判定には使用していません。</p>
+    </div>
+  </div>
+
+  <div class="cdk">
+    <div style="font:500 9px/1 var(--mono);letter-spacing:.16em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:11px">一文投資テーゼ</div>
+    <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.88);max-width:860px">
+      フクビ化学は、<strong style="color:var(--or2)">現金・有価証券・年金資産だけで時価総額の9割を賄う「実質EVゼロ」の樹脂建材メーカー。</strong>省エネ義務化で伸びるフェノール断熱材という成長エンジンと、持ち合い解消を自社株買いで吸収する資本政策の変化が重なり、低ROEゆえの株探PBR0.48倍には理由がある。ただし上値を開けるのは「ROE改善」か「資本イベント」であり、時間を味方につける前提の銘柄。
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P2 NAV・割安性 ══════════════ -->
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">NAV分析 ── 時価総額194億円の中身</h2><span class="sb bg-am">本業は実質ゼロ評価</span></div>
+
+  <div class="g4 mb">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">現金及び預金</div><div class="mv gn">105.5億円</div><div class="ms">6月末111.9億−自社株買い6.45億（推定）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">投資有価証券</div><div class="mv am">76.4億円</div><div class="ms">上場株 含み益51.1億（取得原価の3.2倍）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">退職給付に係る資産</div><div class="mv bl">32.8億円</div><div class="ms">年金の積立超過（前期比+11.3億）</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">有利子負債（リース含む）</div><div class="mv rd">9.6億円</div><div class="ms">借入1.2億＋リース8.5億・実質無借金</div></div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">時価総額 vs 非事業資産の積み上げ（億円・税後）</div>
+      <div class="chb"><canvas id="chNav" aria-label="時価総額と非事業資産の比較チャート" role="img"></canvas></div>
+      <p class="note">税率30.6%で含み益・年金資産を税後換算。土地含み益はBaseケース（P3参照）。</p>
+    </div>
+    <div class="c">
+      <div class="h3">資産ブリッジ ── 1株あたり（発行済−自己株＝1,914万株）</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>項目</th><th class="r">金額</th><th class="r">1株</th><th class="r">対株価</th></tr></thead>
+        <tbody>
+          <tr><td>ネットキャッシュ（現預金−借入−リース）</td><td class="r mn">95.9億</td><td class="r mn">501円</td><td class="r mn">50%</td></tr>
+          <tr><td>投資有価証券（含み益に税効果控除）</td><td class="r mn">60.8億</td><td class="r mn">318円</td><td class="r mn">31%</td></tr>
+          <tr class="sm"><td>小計：キャッシュ＋証券</td><td class="r mn">156.6億</td><td class="r mn">818円</td><td class="r mn">81%</td></tr>
+          <tr><td>年金資産（税後）</td><td class="r mn">22.7億</td><td class="r mn">119円</td><td class="r mn">12%</td></tr>
+          <tr class="sm"><td>小計：＋年金資産</td><td class="r mn">179.4億</td><td class="r mn">937円</td><td class="r mn">93%</td></tr>
+          <tr><td>土地含み益（税後・Base）</td><td class="r mn">17.0億</td><td class="r mn">89円</td><td class="r mn">9%</td></tr>
+          <tr class="hl"><td><strong>非事業資産 合計</strong></td><td class="r mn hgn"><strong>196.4億</strong></td><td class="r mn hgn"><strong>1,026円</strong></td><td class="r mn hgn"><strong>101%</strong></td></tr>
+          <tr><td>時価総額（1,012円）</td><td class="r mn">193.7億</td><td class="r mn">1,012円</td><td class="r mn">100%</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">残りの運転資本（売上債権・棚卸資産−仕入債務）・工場設備・ブランド・顧客基盤は0円で付いてくる勘定。</p>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">バリュエーション指標</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>指標</th><th class="r">値</th><th>コメント</th></tr></thead>
+        <tbody>
+          <tr><td>PER（27/3期予想EPS 98.6円）</td><td class="r mn">10.3倍</td><td class="sm2">ネットキャッシュ控除後の実質PERは約5倍</td></tr>
+          <tr><td>株探PBR</td><td class="r mn hbl">0.48倍</td><td class="sm2">9/18確定終値。自社株取得反映後BPS2,063円で株価/BPSは0.49倍</td></tr>
+          <tr><td>修正PBR（土地含み益Base加算）</td><td class="r mn hbl">0.47倍</td><td class="sm2">修正BPS 2,152円</td></tr>
+          <tr><td>金融資産床</td><td class="r mn hgn">801円</td><td class="sm2">現金−有利子負債＋有価証券75%（当商会の検証値）</td></tr>
+          <tr><td>EV/EBITDA（証券税後控除）</td><td class="r mn hgn">1.2倍</td><td class="sm2">証券を税前で控除すると0.8倍</td></tr>
+          <tr><td>配当利回り（年31円）</td><td class="r mn">3.06%</td><td class="sm2">累進配当・配当性向31%</td></tr>
+          <tr><td>正規化FCF利回り</td><td class="r mn">約7%</td><td class="sm2">EBITDA約30億−法人税約6億−設備投資約10億</td></tr>
+          <tr><td>ROE（27/3期予想）</td><td class="r mn hrd">4.8%</td><td class="sm2">会社認識の資本コスト9%を大きく下回る</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="c">
+      <div class="h3">SOTP（事業価値＋非事業資産）── 1株あたり理論値</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>事業価値の置き方</th><th class="r">事業価値</th><th class="r">株式価値</th><th class="r">1株</th></tr></thead>
+        <tbody>
+          <tr><td>NOPAT 15.6億 × 8倍</td><td class="r mn">125億</td><td class="r mn">261億</td><td class="r mn">1,364円</td></tr>
+          <tr class="hl"><td><strong>NOPAT 15.6億 × 10倍</strong></td><td class="r mn">156億</td><td class="r mn">293億</td><td class="r mn hgn"><strong>1,531円</strong></td></tr>
+          <tr><td>NOPAT 15.6億 × 12倍</td><td class="r mn">187億</td><td class="r mn">324億</td><td class="r mn">1,693円</td></tr>
+          <tr class="hl"><td><strong>EBITDA 35億 × 5倍</strong></td><td class="r mn">175億</td><td class="r mn">312億</td><td class="r mn hgn"><strong>1,630円</strong></td></tr>
+          <tr><td>EBITDA 35億 × 4倍</td><td class="r mn">140億</td><td class="r mn">277億</td><td class="r mn">1,447円</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">非事業資産＝余剰現金（現預金−月商1ヶ月分36億）＋証券（税後）＋年金資産（税後）−有利子負債−非支配持分。土地は事業用のため二重計上を避け除外。中央値≒1,531円。</p>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c cl-am">
+      <div class="h3" style="color:var(--am)">有価証券の中身と「縮減」の進捗</div>
+      <div class="tx">
+        <strong>その他有価証券（上場）：取得原価23.4億円 → 時価74.5億円、含み益51.1億円（含み損は0.04億のみ）。</strong>非上場株1.97億、地方債0.2億。<br><br>
+        政策保有株式は<strong>18銘柄・純資産比19.4%</strong>（CG報告書、2026年3月末）。中計では2027年度までに<strong>累計20億円の縮減</strong>を掲げ、24年度573百万・25年度479百万（売却益217百万）を売却済み。長瀬産業とは相互保有（当社は長瀬の議決権0.2%、長瀬は当社の12.8%）。<br><br>
+        <strong>含み益の主役は土地ではなく有価証券。</strong>ただし時価でBSに載っているため「隠れ資産」ではなく、既にBPSに反映済み。売却すれば現金化＝還元・成長投資の原資になる。
+      </div>
+      <p class="note">銘柄別明細は有価証券報告書「株式の保有状況」に記載。本稿は連結注記の取得原価・時価総額ベースで評価。</p>
+    </div>
+    <div class="c cl-bl">
+      <div class="h3" style="color:var(--bl)">市場が"正しく"付けている価格 ── 残余利益モデル</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>前提 ROE</th><th class="r">資本コスト8%</th><th class="r">資本コスト9%</th></tr></thead>
+        <tbody>
+          <tr><td>4.4%（26/3期実績）</td><td class="r mn">0.49倍 / 1,003円</td><td class="r mn">0.43倍 / 876円</td></tr>
+          <tr class="hl"><td><strong>4.8%（27/3期予想）</strong></td><td class="r mn">0.54倍 / 1,120円</td><td class="r mn"><strong>0.48倍 / 980円</strong></td></tr>
+          <tr><td>6.0%（中計28/3期目標）</td><td class="r mn hgn">0.71倍 / 1,472円</td><td class="r mn">0.63倍 / 1,289円</td></tr>
+          <tr><td>8.0%（2030年目標）</td><td class="r mn hgn">1.00倍 / 2,063円</td><td class="r mn">0.88倍 / 1,804円</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">適正PBR＝1＋(ROE−CoE)/(CoE−g)、g=1%。<strong>現株価は「ROE4.8%が続き、資本コスト9%」という現状維持シナリオとほぼ一致。</strong>資産の厚さだけでは上がらず、ROE6%への道筋か資本イベントが株価を動かす。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P3 土地含み益 ══════════════ -->
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">土地含み益 ── 取得時期×公示地価で拠点別に推計</h2><span class="sb bg-or">Base 税前24.9億 / 税後17.0億</span></div>
+
+  <div class="inf">📌 連結の土地簿価は<strong>19.1億円（約29万㎡、平均6,600円/㎡）</strong>。福井の本社工場は昭和37年取得で簿価1,290円/㎡と極小だが、郊外の大規模工場用地のため単価が伸びず、含み益は「厚いが巨大ではない」。広済堂型の"都心一等地の眠れる資産"ではなく、<strong>資産価値の主役はキャッシュと有価証券</strong>である点に注意。</div>
+
+  <div class="g4 mb">
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">Bear（保守）</div><div class="mv rd">11.4億円</div><div class="ms">税後7.8億 · 41円/株</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">Base（中立）</div><div class="mv am">24.9億円</div><div class="ms">税後17.0億 · 88円/株</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">Bull（強気）</div><div class="mv gn">39.4億円</div><div class="ms">税後26.8億 · 139円/株</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">土地簿価（連結）</div><div class="mv bl">19.1億円</div><div class="ms">Base時価 約44億（簿価の2.3倍）</div></div>
+  </div>
+
+  <div class="c mb">
+    <div class="h3">拠点別 土地評価（有価証券報告書 主要な設備の状況 × 2026年地価公示・基準地価）</div>
+    <div class="tw"><table class="t" style="min-width:880px">
+      <thead><tr><th>拠点（所在地）</th><th>取得時期</th><th class="r">面積</th><th class="r">簿価</th><th>参照地点（2026年・円/㎡）</th><th class="r">評価単価 Bear/Base/Bull</th><th class="r">含み益 Bear/Base/Bull</th></tr></thead>
+      <tbody>
+        <tr><td><strong>本社・本社工場</strong><br><span class="sm2">福井市三十八社町33-66</span></td><td class="nw">1962〜63年<br><span class="sm2">昭和37〜38</span></td><td class="r mn">79,716㎡</td><td class="r mn">3.70億<br><span class="sm2">4,640円/㎡</span></td><td class="sm2">福井09-1 上森田（工業地域・大規模工場）17,100／09-5 若栄町 22,500／09-6 重立町 23,300</td><td class="r mn nw">1.3 / 1.8 / 2.3万</td><td class="r mn hgn nw">6.7 / 10.6 / 14.6億</td></tr>
+        <tr><td><strong>坂井工場</strong><br><span class="sm2">坂井市坂井町定旨1-1</span></td><td class="nw">1983年<br><span class="sm2">昭和58</span></td><td class="r mn">92,857㎡</td><td class="r mn">3.84億<br><span class="sm2">4,135円/㎡</span></td><td class="sm2">坂井05-4 上新庄（丸岡駅前商業）29,000／坂井00-7 住宅地 30,500 → 郊外工場地として40%水準</td><td class="r mn nw">0.8 / 1.2 / 1.6万</td><td class="r mn hgn nw">3.6 / 7.3 / 11.0億</td></tr>
+        <tr><td><strong>三方工場</strong><br><span class="sm2">若狭町三方</span></td><td class="nw">1970年頃<br><span class="sm2">旧フクビミカタ</span></td><td class="r mn">14,139㎡</td><td class="r mn">0.29億<br><span class="sm2">2,050円/㎡</span></td><td class="sm2">若狭00-1 三方駅前（路線商業）17,900（−1.6%）</td><td class="r mn nw">0.5 / 0.8 / 1.1万</td><td class="r mn nw">0.4 / 0.8 / 1.3億</td></tr>
+        <tr><td><strong>東京支店 フクビビル</strong><br><span class="sm2">品川区大井1-23-3</span></td><td class="nw">1993年竣工<br><span class="sm2">平成5</span></td><td class="r mn">約450㎡<br><span class="sm2">推定</span></td><td class="r mn" rowspan="3" style="vertical-align:middle">8.78億<br><span class="sm2">3拠点計<br>3,144㎡</span></td><td class="sm2">品川05-20 大井1-10-4（大井町駅180m）3,220,000（+19.3%）／品川05-2 大井3丁目 1,440,000</td><td class="r mn nw">130 / 180 / 240万</td><td class="r mn nw" rowspan="3" style="vertical-align:middle">0.3 / 3.6 / 7.9億</td></tr>
+        <tr><td><strong>大阪支店 フクビビル</strong><br><span class="sm2">吹田市江の木町17-12</span></td><td class="nw">1995年竣工<br><span class="sm2">平成7</span></td><td class="r mn">約800㎡<br><span class="sm2">推定</span></td><td class="sm2">旧吹田7-4 江の木町（準工）158,000（2010年）／吹田05-7 江坂町1丁目 1,930,000（+12.2%）</td><td class="r mn nw">28 / 35 / 45万</td></tr>
+        <tr><td><strong>その他営業拠点</strong><br><span class="sm2">名古屋は賃借</span></td><td>—</td><td class="r mn">約1,894㎡<br><span class="sm2">推定</span></td><td class="sm2">地方都市の業務地を想定</td><td class="r mn nw">5 / 8 / 12万</td></tr>
+        <tr><td><strong>フクビハウジング</strong>（71%）<br><span class="sm2">岩手県紫波町片寄</span></td><td class="nw">1991年<br><span class="sm2">バブル期</span></td><td class="r mn">12,469㎡</td><td class="r mn">1.33億<br><span class="sm2">10,670円/㎡</span></td><td class="sm2">紫波05-1 日詰（商業）31,100／紫波00-2 住宅 32,800</td><td class="r mn nw">0.7 / 1.0 / 1.3万</td><td class="r mn hrd nw">−0.5 / −0.1 / +0.3億</td></tr>
+        <tr><td><strong>アリス化学</strong><br><span class="sm2">あわら市東田中6-1</span></td><td class="nw">2016年<br><span class="sm2">連結時に時価取込</span></td><td class="r mn">12,562㎡</td><td class="r mn">0.68億<br><span class="sm2">5,410円/㎡</span></td><td class="sm2">あわら00-3 市姫（住宅）22,800／00-1 15,800</td><td class="r mn nw">0.5 / 0.8 / 1.1万</td><td class="r mn nw">−0.1 / +0.3 / +0.7億</td></tr>
+        <tr><td><strong>FUKUVI USA</strong>（75.9%）<br><span class="sm2">Huber Heights, Ohio</span></td><td class="nw">1996年〜</td><td class="r mn">74,150㎡<br><span class="sm2">18.3エーカー</span></td><td class="r mn">0.48億</td><td class="sm2">オハイオ州工業用地（1エーカー当たり）$55k / $85k / $120k想定、1ドル147円</td><td class="r mn nw">—</td><td class="r mn nw">1.0 / 1.8 / 2.8億</td></tr>
+        <tr><td><strong>FUKUVI VIETNAM</strong>（86.7%）<br><span class="sm2">Amata工業団地（ドンナイ）</span></td><td class="nw">2019年</td><td class="r mn">15,774㎡</td><td class="r mn">1.78億<br><span class="sm2">長期前払費用</span></td><td class="sm2">土地使用権。取得から7年、工業団地賃料上昇を反映</td><td class="r mn nw">±0 / +25 / +50%</td><td class="r mn nw">0 / 0.4 / 0.9億</td></tr>
+        <tr class="sm"><td>合計</td><td></td><td class="r mn">約30.5万㎡</td><td class="r mn">20.9億</td><td></td><td></td><td class="r mn hgn">11.4 / 24.9 / 39.4億</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">出所：有価証券報告書（第91期・第92期）主要な設備の状況、国土交通省 地価公示（2026年1月1日）・都道府県地価調査（2026年7月1日）。工場用地は大規模画地・郊外立地のため近隣の商業地/住宅地の35〜60%で補正。東京・大阪・その他の面積配分は有報の合計値（3,144㎡・簿価8.78億）から当方推定。税率30.6%、子会社は持分比率で按分。千葉工場・岐阜加工センター・あわらバイオマス・名古屋支店・フクビ岡山（岡山）は賃借。</p>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">拠点別 含み益（税前・億円）</div>
+      <div class="chb"><canvas id="chLand" aria-label="拠点別土地含み益チャート" role="img"></canvas></div>
+    </div>
+    <div class="c cl-am">
+      <div class="h3" style="color:var(--am)">取得時期から読む「含み」の濃淡</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">昭和37〜38年（1962〜63）</div><div class="ttext"><strong>本社工場・本社：</strong>高度成長期の取得で簿価1,290円/㎡（本社工場部分）。福井市工業地の平均は1996年の約16万円/㎡から3万円/㎡へ下落したが、取得価格が極小のため<strong>含み益は約11億と最大</strong>。</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="tdate">昭和58年（1983）</div><div class="ttext"><strong>坂井工場：</strong>簿価4,135円/㎡。9.3万㎡と面積最大で、第2の含み益源。</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="tdate">平成5・7年（1993・95）</div><div class="ttext"><strong>東京・大阪のフクビビル：</strong>バブル崩壊直後の竣工で簿価は高め（平均27.9万円/㎡）。ただし大井町は再開発で2026年+19%、江坂は+12%と上昇が続き、<strong>含み益に転じつつある唯一の成長資産</strong>。八木熊など関係会社がテナント入居。</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="tdate">平成3年（1991）</div><div class="ttext"><strong>紫波町（フクビハウジング）：</strong>バブル期取得で簿価1.07万円/㎡、地方の地価下落で含み益ほぼゼロ〜微損。</div></div>
+      </div>
+      <p class="note">賃貸等不動産は「重要性が乏しい」として時価開示なし＝会社自身も大きな含みとは見ていない。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P4 事業・ニッチ ══════════════ -->
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業性 ── 樹脂の異形押出70年と断熱材の寡占</h2><span class="sb bg-bl">ニッチトップ性 B / ストック性 C+</span></div>
+
+  <div class="g4 mb">
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">建材事業</div><div class="mv bl">254.4億</div><div class="ms">営業益37.4億（14.7%）· 売上の61%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">CSE事業</div><div class="mv am">101.6億</div><div class="ms">営業益5.0億（4.9%）· 住設OEM・車両</div></div>
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">精密事業</div><div class="mv gn">20.7億</div><div class="ms">営業益3.5億（16.8%）· 前期比+30%</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">グローバル事業</div><div class="mv rd">37.9億</div><div class="ms">営業損0.3億 · 米国・ASEAN</div></div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">セグメント別 売上・利益（26/3期、億円）</div>
+      <div class="chb"><canvas id="chSeg" aria-label="セグメント別売上高と営業利益" role="img"></canvas></div>
+      <p class="note">セグメント利益は全社費用（24.9億）配賦前。主要顧客は伊藤忠建材（68.7億・売上の16.9%）。</p>
+    </div>
+    <div class="c">
+      <div class="h3">27/3期 1Q セグメント動向（前年同期比）</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>セグメント</th><th class="r">売上</th><th class="r">営業益</th><th>ドライバー</th></tr></thead>
+        <tbody>
+          <tr><td>建材</td><td class="r mn">64.7億 <span class="hgn">+5.9%</span></td><td class="r mn">10.1億 <span class="hgn">+17.2%</span></td><td class="sm2">駆け込み需要・価格転嫁、フェノバ+26.7%、防水部材・内装建材</td></tr>
+          <tr><td>CSE</td><td class="r mn">27.6億 <span class="hgn">+8.5%</span></td><td class="r mn">1.2億 <span class="hrd">−18.5%</span></td><td class="sm2">床材+12.7%・浴室OEM増も値上げが原料高に追いつかず</td></tr>
+          <tr><td>精密</td><td class="r mn">7.9億 <span class="hgn">+122%</span></td><td class="r mn">1.6億 <span class="hgn">+338%</span></td><td class="sm2">車載メーターカバー・HUD、カメラレンズカバー</td></tr>
+          <tr><td>グローバル</td><td class="r mn">9.0億 <span class="hgn">+5.2%</span></td><td class="r mn">−0.1億 <span class="hgn">改善</span></td><td class="sm2">ASEAN・米国の建材、円安</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="c mb">
+    <div class="h3">ニッチトップ性・ストック性の評価（製品別）</div>
+    <div class="tw"><table class="t" style="min-width:760px">
+      <thead><tr><th>製品・分野</th><th>ポジション</th><th>ストック要素</th><th>成長ドライバー</th><th class="r">評価</th></tr></thead>
+      <tbody>
+        <tr><td><strong>フェノバボード</strong><br><span class="sm2">フェノールフォーム断熱材（フクビ岡山）</span></td><td class="sm2">2019年に積水化学から事業承継。住宅用フェノールフォームボードは<strong>旭化成建材「ネオマフォーム」との実質2社体制（当方推定）</strong>。熱伝導率が板状断熱材で最高水準、不燃性・平滑性</td><td class="sm2">ハウスメーカー・工務店の断熱仕様に採用されると継続受注</td><td class="sm2">省エネ義務化（2025）→GX ZEH（2027）→ZEH水準義務化（2030）で付加断熱が標準化</td><td class="r"><span class="bge be-gn">A−</span></td></tr>
+        <tr><td><strong>樹脂製内装部材</strong><br><span class="sm2">見切・廻縁・巾木・目地・下地材</span></td><td class="sm2">創業来の異形押出成形。品揃えの幅でプロ向け建材流通の定番（シェア開示なし）</td><td class="sm2">新築・リフォームの"消耗部材"。伊藤忠建材など流通経由で指名買い</td><td class="sm2">着工減で汎用品は逆風、非住宅・リフォームで補完</td><td class="r"><span class="bge be-bl">B</span></td></tr>
+        <tr><td><strong>外装・防水・通気部材</strong><br><span class="sm2">瓦桟・水切り・床下/屋根通気</span></td><td class="sm2">坂井工場で生産。ナフサショック時に他社の供給制限で需要が集中</td><td class="sm2">工法（通気工法）に組み込まれるスペックイン型</td><td class="sm2">耐久性・省エネ性能要求の上昇</td><td class="r"><span class="bge be-bl">B</span></td></tr>
+        <tr><td><strong>非住宅：OAフロア・PLANTOOL</strong><br><span class="sm2">フリーフロア、フォークガード等</span></td><td class="sm2">オフィス・工場・倉庫の安全/床システム。PLANTOOLは+14.1%</td><td class="sm2">物流施設・工場の新設/改修で継続需要</td><td class="sm2">物流倉庫・工場投資、ZEB化</td><td class="r"><span class="bge be-bl">B</span></td></tr>
+        <tr><td><strong>再生木「プラスッド」</strong></td><td class="sm2">業界初「エコリーフ」取得、隈研吾事務所監修品。+22.7%</td><td class="sm2">公共・商業施設のデッキ・ルーバー</td><td class="sm2">環境配慮・県産材活用</td><td class="r"><span class="bge be-am">B−</span></td></tr>
+        <tr><td><strong>CSE：浴室パネル・床材・車両ダクト</strong></td><td class="sm2">2008年に松下電工の乾式浴室内装事業を承継。バス等大型車両ダクト、光ガイディングバー</td><td class="sm2"><strong>住設メーカーへのOEM＝長期供給契約型</strong></td><td class="sm2">住設の値上げ・リフォーム</td><td class="r"><span class="bge be-am">C+</span></td></tr>
+        <tr><td><strong>精密：AR（反射防止）成形品</strong></td><td class="sm2">車載メーターカバー・HUD・カメラレンズカバー</td><td class="sm2">車種ライフ（4〜6年）の量産受注</td><td class="sm2">車載ディスプレイ大型化</td><td class="r"><span class="bge be-gn">B+</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">会社はシェア・No.1を公式に開示していない。「2社体制」は国内の住宅用フェノールフォームボード製造者の状況からの当方推定。フクビ岡山は「フェノバボード国内唯一の生産拠点」（会社開示）。</p>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c cl-gn">
+      <div class="h3" style="color:var(--gn)">市場環境 ── 「戸数は減るが、1戸あたり断熱は増える」</div>
+      <div class="tx">
+        <strong>新設住宅着工：</strong>2025年度71.1万戸（−12.9%）と62年ぶりの低水準。建設経済研究所は2026年度77.7万戸（+7.6%）と反動増を見込むが、野村総研は2040年度61万戸まで減少と予測。<br><br>
+        <strong>一方で規制は断熱材に追い風：</strong>2025年4月に全新築で省エネ基準適合義務化、2027年4月にGX ZEH基準、2030年までにZEH水準へ引き上げ。野村総研は2050年目標達成に<strong>年120万戸規模の省エネ改修</strong>が必要と試算。リフォーム市場は2024年8.3兆円→2040年9.2兆円。<br><br>
+        <strong>→ 汎用内装材は"戸数"に連動して縮むが、高性能断熱材は"性能×改修"で伸びる二極化。</strong>会社も成長牽引分野の売上を約140億→FY27 240億→FY30 294億へ倍増させる計画。
+      </div>
+    </div>
+    <div class="c cl-or">
+      <div class="h3" style="color:var(--or)">ストック性の実像（評価 C+）</div>
+      <div class="tx">
+        <strong>準ストック要素：</strong>①工法・仕様への組み込み（スペックイン）で一度採用されると継続、②住設メーカーへのOEM供給、③リフォーム・非住宅は新築より景気感応度が低い、④車載部品は車種ライフで数年単位の受注。<br><br>
+        <strong>弱点：</strong>売上の6割が住宅関連で、汎用品は着工戸数と価格競争に晒される。過去7期の売上は356〜413億円、営業益8〜18億円とブレは小さいが、<strong>利益率は4%前後で頭打ち</strong>。サブスク・保守型の収益はない。<br><br>
+        <strong>ナフサショック時の示唆：</strong>供給制約下で「モノを持っている会社」に需要が集中し価格転嫁が通った（建材OP+17%）。一方CSEはOEM顧客への転嫁が遅れ減益＝<strong>交渉力は製品ごとに差がある</strong>。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P5 業績・中計 ══════════════ -->
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">業績・中期経営計画 ── 回復の初動と未達の中計</h2><span class="sb bg-pu">27/3期 OP+29.9%予想</span></div>
+
+  <div class="g4 mb">
+    <div class="c mc"><div class="ml">1Q 売上高</div><div class="mv am">107.8億</div><div class="ms">前年同期比+11.9%</div></div>
+    <div class="c mc"><div class="ml">1Q 営業利益</div><div class="mv gn">5.52億</div><div class="ms">+43.8%・期初1Q予想を38%上回る</div></div>
+    <div class="c mc"><div class="ml">27/3期 営業利益予想</div><div class="mv gn">22.5億</div><div class="ms">+29.9%・1Q進捗24.5%</div></div>
+    <div class="c mc"><div class="ml">27/3期 EPS / 配当</div><div class="mv bl">98.6円 / 31円</div><div class="ms">累進配当・2期連続増配</div></div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">売上高（左軸）と営業利益（右軸）の推移（億円）</div>
+      <div class="chb tall"><canvas id="chPL" aria-label="売上高と営業利益の推移" role="img"></canvas></div>
+      <p class="note">27/3期は会社予想、28/3期は中計目標。営業利益率は2.3%（21/3）→4.3%（26/3）→5.3%（27/3予）→6.2%（中計）。EBITDAは26/3期31.4億（マージン7.7%）。</p>
+    </div>
+    <div class="c">
+      <div class="h3">第7次中計（2023〜2027年度）の目標と進捗</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>指標</th><th class="r">26/3実績</th><th class="r">27/3予想</th><th class="r">28/3目標</th><th class="r">判定</th></tr></thead>
+        <tbody>
+          <tr><td>売上高</td><td class="r mn">405.9億</td><td class="r mn">428億</td><td class="r mn">450億</td><td class="r"><span class="bge be-am">要+5%</span></td></tr>
+          <tr><td>営業利益</td><td class="r mn">17.3億</td><td class="r mn">22.5億</td><td class="r mn">28.0億</td><td class="r"><span class="bge be-rd">要+24%</span></td></tr>
+          <tr><td>営業利益率</td><td class="r mn">4.3%</td><td class="r mn">5.3%</td><td class="r mn">6.2%</td><td class="r"><span class="bge be-am">途上</span></td></tr>
+          <tr><td>当期純利益</td><td class="r mn">16.8億</td><td class="r mn">19.0億</td><td class="r mn">21.6億</td><td class="r"><span class="bge be-am">要+14%</span></td></tr>
+          <tr><td>ROE</td><td class="r mn">4.4%</td><td class="r mn">約4.8%</td><td class="r mn">6.0%以上</td><td class="r"><span class="bge be-rd">未達濃厚</span></td></tr>
+          <tr><td>ROIC</td><td class="r mn">3.4%</td><td class="r mn">—</td><td class="r mn">5.9%</td><td class="r"><span class="bge be-rd">未達濃厚</span></td></tr>
+          <tr><td>自己資本比率</td><td class="r mn">72.6%</td><td class="r mn">72.5%</td><td class="r mn">65%</td><td class="r"><span class="bge be-bl">資本過剰</span></td></tr>
+          <tr><td>D/Eレシオ</td><td class="r mn">0.027</td><td class="r mn">0.024</td><td class="r mn">0.4倍以下</td><td class="r"><span class="bge be-bl">レバ未活用</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">2030年展望：売上500億・営業益35億・ROE8%以上・ROIC7%以上。会社は25年度を「成長率が想定に届かず計画未達」と自己評価。</p>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">PBRとROEの推移 ── 「ROEが上がった年だけPBRも上がる」</div>
+      <div class="chb"><canvas id="chPBR" aria-label="PBRとROEの推移" role="img"></canvas></div>
+      <p class="note">会社開示（決算説明資料・中計進捗）。現在の株探PBRは0.48倍、ROEは4%台。残余利益モデルは参考推計です。</p>
+    </div>
+    <div class="c cl-pu">
+      <div class="h3" style="color:var(--pu)">キャピタルアロケーション（2023〜27年度累計・会社計画）</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>原資</th><th class="r">億円</th><th>使途</th><th class="r">億円</th></tr></thead>
+        <tbody>
+          <tr><td>営業CF</td><td class="r mn">132</td><td>成長投資</td><td class="r mn">105</td></tr>
+          <tr><td>負債活用</td><td class="r mn">50</td><td class="sm2">└ 新たな住まい（断熱等）</td><td class="r mn">45</td></tr>
+          <tr><td>CCC適正化</td><td class="r mn">15</td><td class="sm2">└ M&amp;A / モビリティ</td><td class="r mn">10 / 5</td></tr>
+          <tr><td>政策保有株式縮減</td><td class="r mn">20</td><td class="sm2">└ R&amp;D・人的資本・DX</td><td class="r mn">45</td></tr>
+          <tr><td></td><td></td><td>更新投資</td><td class="r mn">32</td></tr>
+          <tr><td></td><td></td><td>株主還元（配当35＋自己株10）</td><td class="r mn">45</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">自己株取得は計画10億に対し24年度2.58億＋26年度（8月）6.45億で9.0億まで消化。フクビ岡山は20億円のシンジケートローン（北陸銀行アレンジャー）を締結し、初めて本格的に負債を活用。</p>
+    </div>
+  </div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">株主還元の推移</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>決算期</th><th class="r">年間配当</th><th class="r">配当性向</th><th class="r">総還元性向</th><th>自己株取得</th></tr></thead>
+        <tbody>
+          <tr><td>23/3期</td><td class="r mn">22円</td><td class="r mn">30.0%</td><td class="r mn">53.6%</td><td class="sm2">3.51億（62.7万株）</td></tr>
+          <tr><td>24/3期</td><td class="r mn">31円</td><td class="r mn">36.2%</td><td class="r mn">36.2%</td><td class="sm2">—</td></tr>
+          <tr><td>25/3期</td><td class="r mn hrd">26円</td><td class="r mn">35.2%</td><td class="r mn">52.8%</td><td class="sm2">2.58億（35万株）</td></tr>
+          <tr><td>26/3期</td><td class="r mn">29円</td><td class="r mn">34.1%</td><td class="r mn">34.1%</td><td class="sm2">—</td></tr>
+          <tr class="hl"><td><strong>27/3期予</strong></td><td class="r mn hgn">31円</td><td class="r mn">31.4%</td><td class="r mn hgn">約65%</td><td class="sm2"><strong>6.45億（65万株・ToSTNeT-3）</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">25/3期は業績連動で減配（31→26円）。その反省から25年5月に累進配当を導入し、以後は減配しない方針。</p>
+    </div>
+    <div class="c">
+      <div class="h3">株価の10年レンジ（年間高値・安値・終値、円）</div>
+      <div class="chb"><canvas id="chPx" aria-label="株価の年間レンジ" role="img"></canvas></div>
+      <p class="note">2026年は上場来高値1,347円（4/22）、安値846円（6/11）。信用買残9.4万株・売残0（9/11）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P6 株主・MBO/TOB ══════════════ -->
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">株主構成とMBO・TOBの仮説</h2><span class="sb bg-gn">確率は置かない</span></div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">大株主（2026年3月末名簿を8月の自社株買い・三井化学の売却で補正）</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>株主</th><th class="r">株数</th><th class="r">比率</th><th>性格</th></tr></thead>
+        <tbody>
+          <tr><td>㈱八木熊</td><td class="r mn">2,574,140</td><td class="r mn">13.45%</td><td><span class="bge be-pu">創業家</span></td></tr>
+          <tr><td>長瀬産業㈱</td><td class="r mn">2,464,308</td><td class="r mn">12.87%</td><td><span class="bge be-am">持ち合い</span></td></tr>
+          <tr><td>三井化学（退職給付信託）</td><td class="r mn">約1,266,000</td><td class="r mn">6.12%*</td><td><span class="bge be-rd">売却進行中</span></td></tr>
+          <tr><td>三井物産プラスチック㈱</td><td class="r mn">983,220</td><td class="r mn">5.14%</td><td><span class="bge be-am">取引先</span></td></tr>
+          <tr><td>創業家個人（会長CEO）</td><td class="r mn">829,703</td><td class="r mn">4.33%</td><td><span class="bge be-pu">創業家</span></td></tr>
+          <tr><td>㈱福井銀行</td><td class="r mn">710,300</td><td class="r mn">3.71%</td><td><span class="bge be-bl">地銀</span></td></tr>
+          <tr><td>昭和興産㈱</td><td class="r mn">669,573</td><td class="r mn">3.50%</td><td><span class="bge be-am">取引先</span></td></tr>
+          <tr><td>㈱北陸銀行</td><td class="r mn">624,900</td><td class="r mn">3.26%</td><td><span class="bge be-bl">地銀</span></td></tr>
+          <tr><td>従業員持株会</td><td class="r mn">600,808</td><td class="r mn">3.14%</td><td><span class="bge be-gn">安定</span></td></tr>
+          <tr><td>蝶理㈱</td><td class="r mn">600,382</td><td class="r mn">3.14%</td><td><span class="bge be-am">取引先</span></td></tr>
+          <tr class="sm"><td>上位10名 合計</td><td class="r mn">11,323,334</td><td class="r mn">59.2%</td><td></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">比率は原則として8月の自己株取得後の自己株控除19,141,242株を分母に再計算。三井化学のみ変更報告書の公式比率6.12%（発行済ベース）をそのまま表示しているため、分母が異なります。会社開示の3月末比率では長瀬産業11.91%、三井物産プラスチック4.75%。株主数3,872名、外国人10%未満。八木熊は役員及びその近親者が議決権の過半数を持つ会社（関連当事者）。</p>
+    </div>
+    <div class="c">
+      <div class="h3">株主属性</div>
+      <div class="chb"><canvas id="chHold" aria-label="株主属性の構成" role="img"></canvas></div>
+      <div class="c cf-am" style="margin-top:12px;padding:12px 16px">
+        <div class="tx"><strong>大量保有報告の履歴：</strong>2007年に三井化学→長瀬産業へ約3.3%のブロック移動、三井化学は9.68%→8.97%（2020）→<strong>6.12%（2026/8）</strong>。三井物産は6.74%（2020年時点、現在は三井物産プラスチック名義）。<strong>アクティビストの保有報告は見当たらない。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3 mb">
+    <div class="c" style="border-top:3px solid var(--pu)">
+      <div class="h3" style="color:var(--pu)">MBOの試算</div>
+      <div class="tw"><table class="t" style="font-size:11.5px">
+        <thead><tr><th>価格</th><th class="r">プレミアム</th><th class="r">PBR</th><th class="r">必要資金</th></tr></thead>
+        <tbody>
+          <tr><td class="mn">1,400円</td><td class="r mn">+38%</td><td class="r mn">0.66倍</td><td class="r mn">222億</td></tr>
+          <tr class="hl"><td class="mn"><strong>1,600円</strong></td><td class="r mn">+58%</td><td class="r mn">0.76倍</td><td class="r mn">254億</td></tr>
+          <tr><td class="mn">1,700円</td><td class="r mn">+68%</td><td class="r mn">0.80倍</td><td class="r mn">270億</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">必要資金＝創業家17.7%以外の買付総額。PBRは27/3期末BPS予想2,114円基準。</p>
+    </div>
+    <div class="c" style="border-top:3px solid var(--gn)">
+      <div class="h3" style="color:var(--gn)">資金の手当て（1,600円ケース）</div>
+      <div class="bg"><div class="br2"><span>余剰現金（月商1ヶ月分控除）</span><span class="mn">約70億</span></div><div class="bt"><div class="bf" style="width:28%;background:var(--gn)"></div></div></div>
+      <div class="bg"><div class="br2"><span>政策保有株の売却（税後）</span><span class="mn">約61億</span></div><div class="bt"><div class="bf" style="width:24%;background:var(--gn2)"></div></div></div>
+      <div class="bg"><div class="br2"><span>LBOローン（EBITDA37億×3倍）</span><span class="mn">約110億</span></div><div class="bt"><div class="bf" style="width:44%;background:var(--bl)"></div></div></div>
+      <div class="bg" style="margin-bottom:0"><div class="br2"><strong>合計</strong><strong class="mn">約241億（必要額の95%）</strong></div><div class="bt"><div class="bf" style="width:95%;background:var(--ink)"></div></div></div>
+      <p class="note">長瀬産業など安定株主の再出資（ロールオーバー）があれば資金は十分。</p>
+    </div>
+    <div class="c" style="border-top:3px solid var(--am)">
+      <div class="h3" style="color:var(--am)">資本イベントの仮説（確率は置かない）</div>
+      <div class="tx">
+        <strong>MBO（創業家＋ファンド）：仮説</strong><br>資金・支配構造は揃う。一方で会長は福井商工会議所会頭で地元経済界の顔、上場維持の意義を重視する可能性。<br><br>
+        <strong>事業会社・ファンドのTOB：仮説</strong><br>長瀬産業は自身も持ち合い縮減の立場で買い手より売り手寄り。断熱材強化を狙う化学・建材大手やPEが候補（旭化成は寡占上困難）。<br><br>
+        <strong>現実的な本線：</strong>持ち合い株の売りを自社株買いで吸収し続ける<strong>「じわじわ型の資本効率改善」</strong>。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P7 検証済みレンジ ══════════════ -->
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">検証済みレンジ ── A−判定に使った上値と下値</h2><span class="sb bg-or">上値1,258円 / 下値649円</span></div>
+  <div class="inf">📌 当商会のランク計算に使ったのは、現在値1,012円、資産基準の上値1,258円、PER下限による下値649円です。原資料にあった3年後Bear/Base/Bullや確率加重期待株価は当商会では未検証のため、本公開版では判定材料から外しました。</div>
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">現在値・上値基準・下値基準</div>
+      <div class="chb"><canvas id="chScn" aria-label="現在値と検証済み上値下値" role="img"></canvas></div>
+    </div>
+    <div class="c">
+      <div class="h3">ランク計算の3点</div>
+      <div class="tw"><table class="t"><tbody>
+        <tr><td>現在値</td><td class="r mn">1,012円</td><td class="sm2">2026年9月18日確定終値。9/21〜23は現物市場休業</td></tr>
+        <tr><td>上値基準</td><td class="r mn hgn">1,258円</td><td class="sm2">自社株取得反映後BPS2,063円 × PBRレンジ上限0.61倍</td></tr>
+        <tr><td>下値基準</td><td class="r mn hrd">649円</td><td class="sm2">PER長期下限6.56倍 × 会社予想EPS98.9円</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+  <div class="g4 mb">
+    <div class="c mc" style="border-top:3px solid var(--gn)"><div class="ml">上値</div><div class="mv gn">+24%</div><div class="ms">資産基準</div></div>
+    <div class="c mc" style="border-top:3px solid var(--rd)"><div class="ml">下値</div><div class="mv rd">▲36%</div><div class="ms">PER下限</div></div>
+    <div class="c mc" style="border-top:3px solid var(--bl)"><div class="ml">非対称比</div><div class="mv bl">0.68</div><div class="ms">幅・小</div></div>
+    <div class="c mc" style="border-top:3px solid var(--am)"><div class="ml">確度</div><div class="mv am">14 / 18</div><div class="ms">高 → A−</div></div>
+  </div>
+</section>
+
+<!-- ══════════════ P8 リスク ══════════════ -->
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">リスク分析</h2><span class="sb bg-rd">低評価には理由がある</span></div>
+
+  <div class="g3 mb">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">① 新築着工の構造減</div><div class="tx">2025年度71.1万戸は62年ぶりの低水準。売上の約6割が住宅関連で、見切・巾木など汎用品は戸数に連動。野村総研は2040年度61万戸を予測。<strong>フェノバが伸びても汎用品の縮小を埋め切れないリスク。</strong></div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">② ナフサショックと反動減</div><div class="tx">2026年4月から全製品で供給制限・納期調整。1Qの好業績は<strong>駆け込み需要と他社の供給停止</strong>による部分がある。原料が正常化すると反動減と値下げ圧力が同時に来る可能性。CSEは値上げが原料高に追いつかず減益。</div></div>
+    <div class="c" style="border-top:3px solid var(--am)"><div class="h3" style="color:var(--am)">③ 低ROEの固定化</div><div class="tx">ROE4.4%・ROIC3.4%に対し会社認識の資本コストは9%。自己資本比率72%の資本過剰体質が続く限り、<strong>PBRは0.5倍前後に張り付く</strong>（残余利益モデルと一致）。中計の営業益28億は未達濃厚。</div></div>
+    <div class="c" style="border-top:3px solid var(--am)"><div class="h3" style="color:var(--am)">④ ガバナンス・関連当事者</div><div class="tx">2006年に当社および八木熊での<strong>架空取引が発覚し監理ポスト入り</strong>（その後解除）。現在も創業家の八木熊から年32億円を仕入。関連当事者取引の条件と、創業家支配下での少数株主保護が論点。</div></div>
+    <div class="c" style="border-top:3px solid var(--pu)"><div class="h3" style="color:var(--pu)">⑤ 大型投資の実行リスク</div><div class="tx">フェノバ第2工場は投資規模36.5億円（補助金上限9億）、2027年10月完了予定。需要が一巡すれば償却負担で利益率を下げる。補助金は完了検査で減額の可能性。シンジケートローンには純資産・営業損失の財務制限条項。</div></div>
+    <div class="c" style="border-top:3px solid var(--bl)"><div class="h3" style="color:var(--bl)">⑥ 流動性・需給</div><div class="tx">9月の出来高は1〜18日で6.4万株（1日平均5千株前後）。<strong>売買代金は1日500万円程度</strong>で、まとまった売買は株価を動かす。長瀬産業11.91%・三井化学6.12%などの大口保有が市場で売却されれば上値が重くなる。顧客集中（伊藤忠建材16.9%）も留意。</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="c cf-gn">
+      <div class="h3" style="color:var(--gn)">📈 ポジティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>追加の自社株買い／ToSTNeT-3：</strong>長瀬産業・三井化学・三井物産プラの保有減少と同時なら確度高い</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>フェノバボードの伸び率：</strong>四半期ごとの開示（1Q+26.7%）が2桁成長を維持するか</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>上方修正：</strong>1Q進捗24.5%、2Q累計予想10.6億の達成度</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>第8次中計（2028年春）：</strong>ROE8%・DOEや総還元性向の数値目標の有無</div></div>
+        <div class="ti"><div class="td2 gn"></div><div class="ttext"><strong>大量保有報告：</strong>アクティビスト・ファンドの新規5%超</div></div>
+      </div>
+    </div>
+    <div class="c cf-or">
+      <div class="h3" style="color:var(--or)">📉 ネガティブ監視リスト</div>
+      <div class="tl">
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>下方修正：</strong>駆け込みの反動・原料再高騰で建材の営業減益</div></div>
+        <div class="ti"><div class="td2 rd"></div><div class="ttext"><strong>累進配当の撤回：</strong>還元姿勢後退のシグナル</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>持ち合い株の市場放出：</strong>自社株買いの受け皿なしで売られるケース</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>第2工場の延期・投資額増額：</strong>補助金減額や資材高</div></div>
+        <div class="ti"><div class="td2 am"></div><div class="ttext"><strong>関連当事者取引の拡大：</strong>八木熊との取引条件の変化</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ P9 最終評価 ══════════════ -->
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">最終評価</h2><span class="sb bg-or">2026.09 総合評価 A−（当商会の6軸×非対称比）</span></div><div class="card" style="border:2px solid #b8860b;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffaf0"><div class="h3" style="margin-top:0">当商会の採点（6軸×非対称比）── 総合 A−</div><p class="note">原資料は独自の11項目で「総合B+」としていました。当商会のランクは<strong>幅（上値÷下値）×確度（6軸・18点）</strong>のマトリクスで決まります。収益性は上値の置き方に、流動性はリスク軸に入れ、二重には引きません。<strong>ランクは下がりにくさの指標</strong>です。</p><table><thead><tr><th>軸</th><th>点</th><th>根拠</th></tr></thead><tbody><tr><td>🦦安さ</td><td class="r"><strong>2</strong></td><td class="sm2">PBR0.48倍で0.5倍以下。ただし中身は現金5割・有価証券4割の混合で「預金型」ではない。修正NCRは112%</td></tr><tr><td>🦉財務</td><td class="r"><strong>3</strong></td><td class="sm2">自己資本比率72.5%、借入0.97億円・リース8.47億円に対し現預金105億円（取得後）でネットキャッシュ</td></tr><tr><td>🦫モート</td><td class="r"><strong>2</strong></td><td class="sm2">福井県が「乾式の断熱パネルでは国内シェアナンバーワン」と紹介。付加断熱工法への採用拡大＝工法に組み込まれる。ただしROIC3.4%は資本コスト9%に届かず、堀が数字に出ていない</td></tr><tr><td>🐊触媒</td><td class="r"><strong>3</strong></td><td class="sm2">三井化学の変更報告書（8.97%→6.12%、義務発生日2026/8/10）と同日のToSTNeT-3で65万株（3.27%）取得。持ち合い解消が「すでに動いている」</td></tr><tr><td>🐝インカム</td><td class="r"><strong>3</strong></td><td class="sm2">利回り3.06%（年31円）に加え、累進配当と配当性向30%以上を原則とする方針（会社資料）。配当性向31%、利益率は改善中で減配フラグなし</td></tr><tr><td>🦞リスク</td><td class="r"><strong>1</strong></td><td class="sm2">1日平均約5,000株（約500万円）で流動性が薄い。支配株主はいない（創業家系で約16%）</td></tr></tbody></table><p class="note">上値：資産基準（1株実質純資産 2,063円 × PBR 0.61倍）＝1,258円、<strong>+24%</strong>。下値：株価より下の候補（52週安値 846円／床（1株あたり金融資産） 801円／PER下限×会社予想EPS 649円）のうち最も深いもの＝649円、<strong>▲36%</strong>。非対称比 0.68（幅・小）× 確度 14点（高）→ <strong>A−</strong>。1銘柄の上限はポートフォリオの4%。到達PBRを0.5倍（決算期末の上限）〜0.67倍（2026年4月の高値）に振っても、下値を床（801円）に替えても A− のままです。</p></div><div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0"><div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年9月22日）</div><ul class="note"><li>株価1,012円（9/18終値）・PBR・配当31円・27/3期予想（営業益22.5億円）は株探で一致。1Q（売上107.8億円・営業益5.52億円）は決算短信で一致</li><li>現預金111.9億円・投資有価証券76.4億円・借入1.15億円・自己資本比率72.5%（6月末）は決算短信で一致</li><li>ToSTNeT-3：2026/8/10に650,000株を総額6億4,545万円（1株993円）で取得、自己株を除く発行済の3.27%（同社開示）</li><li>三井化学：変更報告書で8.97%→6.12%（義務発生日2026/8/10）</li><li>累進配当・配当性向30%以上：同社の個人投資家向け説明資料（2025年8月）。ROE目標（FY27 6%以上）・株主資本コスト9%前後：「企業価値向上2030」（2025年3月）</li><li><strong>補足</strong>：旭化成建材は2026年7月下旬にネオマフォームの受注再開を発表しています。1Qの追い風の一部は一時的です</li><li><strong>訂正反映済み</strong>：流通株式は6月末の自己株897,183株＋8月取得650,000株を除く<strong>19,141,242株（1,914万株）</strong>で統一し、BPS・資産の1株値・時価総額を再計算しました</li><li>土地含み益の拠点別推計・SOTP・MBO仮説は原資料由来の参考推計です。当商会のA−判定には使用していません。未検証だった3年確率シナリオは公開版から外しました</li></ul></div>
+
+  <div class="g2 mb">
+    <div class="c">
+      <div class="h3">項目別スコア</div>
+      <div class="tw"><table class="t">
+        <thead><tr><th>評価軸</th><th class="r">評価</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr><td>割安性</td><td class="r"><span class="grd a">A</span></td><td class="sm2">株探PBR0.48倍・金融資産床801円・EV/EBITDA1.2倍</td></tr>
+          <tr><td>財務健全性</td><td class="r"><span class="grd a">A+</span></td><td class="sm2">自己資本比率72.5%・借入1.2億のみ</td></tr>
+          <tr><td>資産の含み</td><td class="r"><span class="grd a">A−</span></td><td class="sm2">証券含み益51億＋年金資産33億＋土地25億（税前）</td></tr>
+          <tr><td>収益性</td><td class="r"><span class="grd c">C</span></td><td class="sm2">ROE4.4%・営業利益率4.3%・ROIC3.4%</td></tr>
+          <tr><td>ニッチトップ性</td><td class="r"><span class="grd b">B</span></td><td class="sm2">フェノール断熱材の寡占・異形押出の老舗（シェア非開示）</td></tr>
+          <tr><td>ストック性</td><td class="r"><span class="grd c">C+</span></td><td class="sm2">スペックイン・OEM型の準ストック、新築依存</td></tr>
+          <tr><td>成長性</td><td class="r"><span class="grd b">B</span></td><td class="sm2">省エネ義務化・ZEH・精密倍増／汎用品は縮小</td></tr>
+          <tr><td>株主還元</td><td class="r"><span class="grd b">B</span></td><td class="sm2">累進配当・ToSTNeT-3、配当性向は31%と控えめ</td></tr>
+          <tr><td>カタリスト</td><td class="r"><span class="grd b">B</span></td><td class="sm2">持ち合い解消の吸収・MBO余地、時期は読めない</td></tr>
+          <tr><td>ガバナンス</td><td class="r"><span class="grd c">C</span></td><td class="sm2">2006年の架空取引歴・創業家関連取引</td></tr>
+          <tr><td>流動性</td><td class="r"><span class="grd d">D</span></td><td class="sm2">1日売買代金 約500万円</td></tr>
+          <tr class="hl"><td><strong>総合（当商会基準）</strong></td><td class="r"><span class="grd a">A−</span></td><td class="sm2"><strong>持ち込み時B+から修正。当商会の6軸×非対称比ではA−。資産の厚さ×成長エンジン×資本政策の変化を評価し、低ROEと流動性はリスク軸等へ反映</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div>
+      <div class="c cl-gn mb">
+        <div class="h3" style="color:var(--gn)">観察プラン（価格帯ごとの確認ポイント）</div>
+        <div class="tw"><table class="t" style="font-size:12px">
+          <thead><tr><th>価格帯</th><th class="r">配分</th><th>考え方</th></tr></thead>
+          <tbody>
+            <tr><td class="mn">1,000円前後</td><td class="r mn">1/3</td><td class="sm2">現値。ToSTNeT-3価格993円近辺</td></tr>
+            <tr><td class="mn">900〜930円</td><td class="r mn">1/3</td><td class="sm2">現金+証券+年金（937円）割れ</td></tr>
+            <tr><td class="mn">850円以下</td><td class="r mn">1/3</td><td class="sm2">26年安値・キャッシュ+証券（818円）接近</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">流動性が低いため指値で時間分散。2Q決算（11月）で建材の反動減の有無を確認してから2回目を入れるのも有効。</p>
+      </div>
+      <div class="c cl-rd">
+        <div class="h3" style="color:var(--rd)">利確・撤退ルール</div>
+        <div class="tx">
+          <strong>再評価目安：</strong>PBR0.65倍（約1,350円）に近づいたら、資産評価とROE改善が追いついているかを再確認。<br>
+          <strong>見直し：</strong>①通期下方修正で建材が営業減益 ②累進配当撤回 ③第2工場の延期 ④持ち合い株が市場で大量に売られ、自社株買いが伴わない。<br>
+          <strong>時間軸：</strong>3年でROE5%に届かず、自社株買いも止まれば資金を移す。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conc">
+    <div class="conc-h">最終評価 <span>── 「本業タダ」×「成長エンジン」×「持ち合い解消」</span></div>
+    <div class="cg3">
+      <div>
+        <div class="conc-lbl">1,012円を当商会の基準でどう見るか</div>
+        <div class="conc-b">株探PBR0.48倍、清原式ネットキャッシュ比率1.18倍、累進配当、持ち合い縮減を吸収する自社株買いを確認。一方でROE4%台と薄い流動性がある。<strong>6軸14点×非対称比0.68でA−</strong>と評価する。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">なぜ安いのか（割り引くべき点）</div>
+        <div class="conc-b">ROE4%台で資本コストを下回り、残余利益モデルでは<strong>現株価は現状維持シナリオの適正値</strong>。土地含み益は25億程度で決定打ではない。ガバナンス歴と流動性の低さも機関投資家を遠ざける。<strong>資産だけでは上がらない</strong>ことを前提に持つ。</div>
+      </div>
+      <div>
+        <div class="conc-lbl">何が株価を動かすか</div>
+        <div class="conc-b">①フェノバボード増産と省エネ規制でROE6%（中計）へ近づくこと、②持ち合い株の売りを自社株買いで吸収し続けること（EPS・ROEを押し上げる）、③PBR0.5倍・資産で買える構造が招くMBO/TOB。<strong>①②が本線、③はおまけのコールオプション。</strong></div>
+      </div>
+    </div>
+
+    <div class="cg4">
+      <div class="cbox"><div class="l">当商会上値基準</div><div class="v" style="color:var(--gn2)">1,258円</div><div class="s">現値比 +24%</div></div>
+      <div class="cbox"><div class="l">当商会下値基準</div><div class="v" style="color:#90b4ec">649円</div><div class="s">現値比 ▲36%</div></div>
+      <div class="cbox"><div class="l">確度</div><div class="v" style="color:var(--or2)">14 / 18</div><div class="s">高</div></div>
+      <div class="cbox"><div class="l">総合ランク</div><div class="v" style="color:#e08ad0">A−</div><div class="s">幅・小 × 確度・高</div></div>
+    </div>
+
+    <div style="border-top:1px solid rgba(246,245,239,.1);padding-top:18px">
+      <div style="font:500 9px/1 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:10px">一文要約</div>
+      <div style="font-size:15px;line-height:1.85;color:rgba(246,245,239,.86);max-width:860px">
+        フクビ化学は、<strong style="color:var(--or2)">現金・証券・年金資産で時価総額の9割を持つ"本業タダ"の樹脂建材メーカーに、省エネ義務化で伸びるフェノール断熱材が乗った銘柄。</strong>低ROEという値札の理由は残るが、持ち合い解消を自社株買いで吸収し始めた点は変化だが、当商会の検証済みレンジは上値1,258円・下値649円。3年シナリオは判定から外し、A−は6軸×非対称比だけで付けている。
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資判断はご自身の責任においてお願いいたします。土地時価・SOTP・MBO仮説は公開情報を使った参考推計で、当商会のA−判定には使用していません。<br>
+  Data: フクビ化学工業 有価証券報告書（第91・92期）/ 決算短信（2026年3月期・2027年3月期1Q）/ 第7次中計進捗・企業価値向上2030 / CG報告書 / 大量保有報告書（三井化学 2026.8.14）/ 国土交通省 地価公示2026・地価調査2026 / 国交省 住宅着工統計 / 野村総合研究所 / Yahoo!ファイナンス · 2026.09
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  var C={ink:'#111217',ink3:'#636470',rule:'rgba(17,18,23,.1)',gn:'#1a6640',gn2:'#239052',am:'#8a5510',am2:'#bc7a18',rd:'#b42c2c',bl:'#153480',bl2:'#1e48b8',or:'#c46814',or2:'#e68020',pu:'#7a1a6a',pu2:'#a83090',bg3:'#dedad0'};
+  var built={};
+  function base(){
+    if(!window.Chart) return false;
+    Chart.defaults.font.family="'JetBrains Mono','Noto Sans JP',monospace";
+    Chart.defaults.font.size=10.5;
+    Chart.defaults.color=C.ink3;
+    Chart.defaults.borderColor=C.rule;
+    Chart.defaults.plugins.legend.labels.boxWidth=10;
+    Chart.defaults.plugins.legend.labels.boxHeight=10;
+    Chart.defaults.maintainAspectRatio=false;
+    return true;
+  }
+  function yen(v){return v.toLocaleString('ja-JP');}
+  var makers={
+    p2:function(){
+      new Chart(document.getElementById('chNav'),{type:'bar',
+        data:{labels:['時価総額','非事業資産'],
+          datasets:[
+            {label:'時価総額',data:[194.4,0],backgroundColor:C.ink,stack:'s'},
+            {label:'ネットキャッシュ',data:[0,95.9],backgroundColor:C.bl,stack:'s'},
+            {label:'有価証券（税後）',data:[0,60.8],backgroundColor:C.am2,stack:'s'},
+            {label:'年金資産（税後）',data:[0,22.7],backgroundColor:C.bl2,stack:'s'},
+            {label:'土地含み益（税後）',data:[0,17.0],backgroundColor:C.gn2,stack:'s'}]},
+        options:{indexAxis:'y',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:function(c){return c.dataset.label+'：'+c.raw+'億円';}}}},
+          scales:{x:{stacked:true,max:210,ticks:{callback:function(v){return v+'億';}},grid:{color:C.rule}},y:{stacked:true,grid:{display:false}}}}});
+    },
+    p3:function(){
+      new Chart(document.getElementById('chLand'),{type:'bar',
+        data:{labels:['本社・本社工場','坂井工場','支店3拠点','USA','三方','その他'],
+          datasets:[
+            {label:'Bear',data:[6.7,3.6,0.3,1.0,0.4,-0.5],backgroundColor:C.rd},
+            {label:'Base',data:[10.6,7.3,3.6,1.8,0.8,0.7],backgroundColor:C.am2},
+            {label:'Bull',data:[14.6,11.0,7.9,2.8,1.3,1.9],backgroundColor:C.gn2}]},
+        options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:function(c){return c.dataset.label+'：'+c.raw+'億円';}}}},
+          scales:{y:{ticks:{callback:function(v){return v+'億';}},grid:{color:C.rule}},x:{grid:{display:false}}}}});
+    },
+    p4:function(){
+      new Chart(document.getElementById('chSeg'),{type:'bar',
+        data:{labels:['建材','CSE','精密','グローバル'],
+          datasets:[
+            {label:'売上高（億円）',data:[254.4,101.6,20.7,37.9],backgroundColor:[C.bl,C.am2,C.gn2,C.rd],yAxisID:'y'},
+            {label:'セグメント利益（億円）',data:[37.4,5.0,3.5,-0.3],type:'line',borderColor:C.ink,backgroundColor:C.ink,pointRadius:4,yAxisID:'y1'}]},
+        options:{plugins:{legend:{position:'bottom'}},
+          scales:{y:{position:'left',ticks:{callback:function(v){return v+'億';}},grid:{color:C.rule}},
+                  y1:{position:'right',grid:{display:false},ticks:{callback:function(v){return v+'億';}}},x:{grid:{display:false}}}}});
+    },
+    p5:function(){
+      new Chart(document.getElementById('chPL'),{type:'bar',
+        data:{labels:['20/3','21/3','22/3','23/3','24/3','25/3','26/3','27/3予','28/3中計'],
+          datasets:[
+            {label:'売上高',data:[412.7,356.4,367.4,395.7,397.4,399.7,405.9,428.0,450.0],backgroundColor:[C.bg3,C.bg3,C.bg3,C.bg3,C.bg3,C.bg3,C.bg3,C.am2,'rgba(188,122,24,.35)'],yAxisID:'y'},
+            {label:'営業利益',data:[11.7,8.3,12.7,15.5,17.5,15.5,17.3,22.5,28.0],type:'line',borderColor:C.gn,backgroundColor:C.gn,pointRadius:3.5,yAxisID:'y1',tension:.2}
+          ]},
+        options:{plugins:{legend:{position:'bottom'}},
+          scales:{y:{position:'left',min:0,max:500,ticks:{callback:function(v){return v+'億';}},grid:{color:C.rule}},
+                  y1:{position:'right',min:0,max:35,grid:{display:false},ticks:{callback:function(v){return v+'億';}}},
+                  x:{grid:{display:false}}}}});
+      new Chart(document.getElementById('chPBR'),{type:'line',
+        data:{labels:['20/3','21/3','22/3','23/3','24/3','25/3','26/3','現在'],
+          datasets:[
+            {label:'PBR（倍）',data:[0.27,0.34,0.38,0.34,0.50,0.45,0.44,0.48],borderColor:C.bl,backgroundColor:'rgba(21,52,128,.08)',fill:true,pointRadius:3.5,yAxisID:'y',tension:.25},
+            {label:'ROE（%）',data:[3.1,3.0,3.5,4.5,4.9,4.0,4.4,4.8],borderColor:C.or2,backgroundColor:C.or2,pointRadius:3.5,yAxisID:'y1',tension:.25}]},
+        options:{plugins:{legend:{position:'bottom'}},
+          scales:{y:{position:'left',min:0,max:0.6,ticks:{callback:function(v){return v.toFixed(1)+'倍';}},grid:{color:C.rule}},
+                  y1:{position:'right',min:0,max:6,grid:{display:false},ticks:{callback:function(v){return v+'%';}}},x:{grid:{display:false}}}}});
+      var yrs=['16','17','18','19','20','21','22','23','24','25','26'];
+      var hi=[563,746,894,623,571,716,676,820,938,981,1347],lo=[453,529,517,498,352,481,554,557,660,688,846],cl=[531,722,537,560,507,676,571,820,741,935,1012];
+      new Chart(document.getElementById('chPx'),{type:'bar',
+        data:{labels:yrs.map(function(y){return '20'+y;}),
+          datasets:[
+            {label:'安値〜高値',data:hi.map(function(h,i){return [lo[i],h];}),backgroundColor:'rgba(30,72,184,.22)',borderColor:C.bl2,borderWidth:1,borderSkipped:false},
+            {label:'終値（2026年は9/18）',data:cl,type:'line',borderColor:C.ink,backgroundColor:C.ink,pointRadius:3,tension:.15}]},
+        options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:function(c){var r=c.raw;return Array.isArray(r)?('レンジ '+yen(r[0])+'〜'+yen(r[1])+'円'):('終値 '+yen(r)+'円');}}}},
+          scales:{y:{min:300,max:1400,ticks:{callback:function(v){return yen(v)+'円';}},grid:{color:C.rule}},x:{grid:{display:false}}}}});
+    },
+    p6:function(){
+      new Chart(document.getElementById('chHold'),{type:'doughnut',
+        data:{labels:['創業家（八木熊・八木会長）','事業会社（長瀬・三井化学・三井物産プラ・蝶理・昭和興産）','地銀2行','従業員持株会','その他（個人・機関等）'],
+          datasets:[{data:[17.7,31.2,7.0,3.1,41.0],backgroundColor:[C.pu2,C.am2,C.bl,C.gn2,C.bg3],borderColor:'#eceae1',borderWidth:2}]},
+        options:{cutout:'58%',plugins:{legend:{position:'bottom',labels:{font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.label+'：'+c.raw+'%';}}}}}});
+    },
+    p7:function(){
+      new Chart(document.getElementById('chScn'),{type:'bar',
+        data:{labels:['現在','上値基準','下値基準'],
+          datasets:[{label:'株価（円）',data:[1012,1258,649],backgroundColor:[C.ink,C.gn2,C.rd]}]},
+        options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return yen(c.raw)+'円';}}}},
+          scales:{y:{min:0,max:1400,ticks:{callback:function(v){return yen(v)+'円';}},grid:{color:C.rule}},x:{grid:{display:false}}}}});
+    }
+  };
+  function build(id){
+    if(built[id]||!makers[id]) return;
+    if(!base()) return;
+    built[id]=true;
+    try{makers[id]();}catch(e){console.log(e);}
+  }
+  var nav=document.getElementById('nav');
+  nav.addEventListener('click',function(ev){
+    var b=ev.target.closest('.tb'); if(!b) return;
+    var id=b.getAttribute('data-p');
+    document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on');});
+    document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    document.getElementById(id).classList.add('on');
+    b.classList.add('on');b.setAttribute('aria-selected','true');
+    build(id);
+    var top=nav.getBoundingClientRect().top+window.pageYOffset;
+    if(window.pageYOffset>top) window.scrollTo({top:top,behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
