@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { freeNotes, freeNotesCheckedAt } from '../data/freeNotes';
 
 const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
 const byId = new Map(posts.map((p) => [p.id, p]));
@@ -59,8 +60,8 @@ const proofLinks = [
 <html lang="ja">
 	<head>
 		<BaseHead
-			title="note｜銘柄ではなく手順を売る場所 | 沼底バリュー商会"
-			description={`沼底バリュー商会のnote特設ページ。無料ブログでは個別銘柄の分析・答え合わせを公開し、noteでは再現できる分析手順・判定基準・チェックリスト・ツールを販売しています。公開中は「割安株スクリーニング完全版」と「内部複利の判別」の2本。公開順ではなく、候補を絞る→中身を深掘るという実務の読む順で案内します。購入前に無料記事で考え方と検証記録を確認できます。個別銘柄の推奨・目標株価・評価ランクは有料商品に含めません。有料特典への直接リンクはブログ側に置かず、購入後のnote有料エリアから利用する設計です。`}
+				title="無料noteの読み物と分析手順 | 沼底バリュー商会"
+			description="沼底バリュー商会の無料noteを一覧で紹介。半額弁当や財布のたとえ話、資産の見方、決算・大量保有報告書の読み方、紹介銘柄の答え合わせから、バリュー投資の考え方を学べます。ブログの実例と、再現できる分析手順・道具をまとめた有料noteも案内します。"
 		/>
 	</head>
 	<body>
@@ -68,8 +69,24 @@ const proofLinks = [
 		<main>
 			<section class="nt-hero">
 				<div class="nt-badge">📕 note</div>
-				<h1><span class="nt-hl">銘柄ではなく、手順</span><span class="nt-badge-full">を売る場所</span></h1>
-				<p class="nt-desc">ブログを読んでくれる人が増えてきたので、noteを始めました。<br />ただし<b>売らないものを先に決めて</b>から、何を売るかを考えています。</p>
+				<h1><span class="nt-hl">たとえ話で、投資を読む。</span><span class="nt-badge-full">自分で確かめる手順へ。</span></h1>
+				<p class="nt-desc">無料noteでは、身近なたとえや資料の読み方から、バリュー投資の考え方をじっくり伝えます。<br />ブログで実例を確かめ、再現する道具が必要になったら有料の手順書へ。</p>
+			</section>
+
+			<section id="free-notes" class="nt-free-library" aria-labelledby="free-notes-title">
+				<h2 id="free-notes-title" class="nt-h2">まずは無料で｜たとえ話と資料の読み方</h2>
+				<p class="nt-note">どの記事も無料で最後まで読めます。初めてなら「半額弁当」「財布」のたとえ話からどうぞ。</p>
+				<div class="nt-free-grid">
+					{freeNotes.map((note) => (
+						<a class="nt-free-card" href={`${NOTE_HOME}/n/${note.key}`} target="_blank" rel="noopener">
+							<span class="nt-free-meta">無料 · {note.kind} · <time datetime={note.date}>{note.date.replaceAll('-', '/')}</time></span>
+							<h3>{note.title}</h3>
+							<p>{note.description}</p>
+							<span class="nt-free-read">noteで読む →</span>
+						</a>
+					))}
+				</div>
+				<p class="nt-note">{freeNotesCheckedAt}確認：公開済み無料note {freeNotes.length}本。<a href={NOTE_HOME} target="_blank" rel="noopener">noteの最新一覧を見る →</a></p>
 			</section>
 
 			<section class="nt-nums">
@@ -317,6 +334,16 @@ const proofLinks = [
 </html>
 
 <style>
+	.nt-free-library { margin: 28px 0 36px; }
+	.nt-free-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+	.nt-free-card { display: flex; flex-direction: column; gap: 10px; padding: 22px; border: 1px solid #d7e3d9; border-radius: 12px; background: #f8fbf5; color: #25352d; text-decoration: none; }
+	.nt-free-card:hover { border-color: #52765c; background: #f0f6eb; }
+	.nt-free-card:focus-visible { outline: 3px solid #326549; outline-offset: 3px; }
+	.nt-free-card h3 { font-size: 1.02rem; line-height: 1.65; margin: 0; overflow-wrap: anywhere; }
+	.nt-free-card p { font-size: .88rem; line-height: 1.8; margin: 0; }
+	.nt-free-meta { font-size: .74rem; color: #4c6554; }
+	.nt-free-read { margin-top: auto; font-size: .84rem; font-weight: 700; color: #246344; }
+	@media (max-width: 640px) { .nt-free-grid { grid-template-columns: 1fr; } .nt-free-card { padding: 18px; } }
 	/* global.css の main は width:720px 固定のため、width も上書きしないと
 	   モバイルで横スクロールが出る（box-sizing も明示） */
 	main {
