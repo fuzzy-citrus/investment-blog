@@ -25,6 +25,7 @@ export const contentThemes: ContentTheme[] = [
       'cigar-butt-special-2026',
       'netcash-ratio-21-deep-value-screening-2026-09',
       'inflation-deepvalue-tob-2026-09',
+      'fukubi-chemical-7871',
       'nanshin-7399',
       'sanko-6964',
       'kawasaki-setsubi-1777',
