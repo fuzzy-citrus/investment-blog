@@ -17,6 +17,7 @@ stockCard:
   downside: "▲18%"
   modifiedPBR: "0.33倍"
   category: "婦人フォーマル専業×フリージア16.72%×清原式1.57倍"
+noteUrl: "https://numasoko-value.com/analysis/tokyo-soir-8040.html"
 draft: false
 ---
 
@@ -317,6 +318,13 @@ draft: false
 🧑‍💼<strong>沼田</strong>「<span class="t-amber">ただし、サイズは先に決めろ</span>」
 
 ---
+
+<details>
+<summary>📊 詳細分析レポート（完全版）</summary>
+
+[東京ソワール（8040）完全版レポート](https://numasoko-value.com/analysis/tokyo-soir-8040.html)——8回の届出の記録、防衛策と検査役の年表、上場維持基準の適合過程、フリージア系10社の地図、6軸の採点と検算メモまで。
+
+</details>
 
 *関連：[ネットキャッシュ比率が高い21社を清原式で測り直した](/blog/netcash-ratio-21-deep-value-screening-2026-09/)／[アクティビストの先回り①](/blog/activist-front-running-01/)／[シケモク株特集](/blog/cigar-butt-special-2026/)*
 

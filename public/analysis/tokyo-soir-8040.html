@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>東京ソワール（8040）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 8040 東証スタンダード · 2026.09.24 · 株価 1,041円（9/18終値・9/21〜23は現物市場休業）</p>
+      <h1 class="ht">東京ソワール <em>（8040）</em><br>統合投資分析レポート</h1>
+      <p class="hs">1株あたりの金融資産1,818円に対し株価1,041円／清原式ネットキャッシュ比率1.57倍・PBR0.33倍<br>フリージア・マクロス16.72%に対し、買収防衛策は5年連続で継続。増配のもう一つの理由は上場維持基準だった</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>当商会の採点</small></div>
+      <div class="vt">
+        <strong>当商会の検証済み上値基準 1,560円 / 下値基準 852円</strong><br>
+        非対称比2.75（幅・中）×確度12点（中）＝B++。<br>
+        リスク軸0点（1日の売買代金78万円）のため、調整ルールでB++が上限。<br>
+        1銘柄の上限は1%（約400株）。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,041円</div><div class="ks">時価総額 40.2億円（自己株控除では36.2億円）</div></div>
+    <div class="kv"><div class="kl">1株あたり純資産 3,120円</div><div class="kn bl">PBR 0.33倍</div><div class="ks">2026年6月末の自己資本108.5億円</div></div>
+    <div class="kv"><div class="kl">清原式ネットキャッシュ</div><div class="kn gn">1,818円/株</div><div class="ks">比率1.57倍。株価の1.7倍の金融資産</div></div>
+    <div class="kv"><div class="kl">金融資産床</div><div class="kn gn">852円/株</div><div class="ks">現金−借入金等＋有価証券75%</div></div>
+    <div class="kv"><div class="kl">配当＋優待</div><div class="kn gn">5.28%</div><div class="ks">45円＋e-GIFT1,000円（100株）</div></div>
+    <div class="kv"><div class="kl">当商会ランク</div><div class="kn am">B++</div><div class="ks">6軸12点・非対称比2.75・上限1%</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <button class="tb on" data-p="p1"><span class="d" style="background:var(--gn2)"></span>なぜ今</button>
+  <button class="tb" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札とNAV</button>
+  <button class="tb" data-p="p3"><span class="d" style="background:var(--or2)"></span>買い上がり</button>
+  <button class="tb" data-p="p4"><span class="d" style="background:var(--bl2)"></span>会社の応戦</button>
+  <button class="tb" data-p="p5"><span class="d" style="background:var(--pu2)"></span>上場維持基準</button>
+  <button class="tb" data-p="p6"><span class="d" style="background:#72cc8e"></span>還元と優待</button>
+  <button class="tb" data-p="p7"><span class="d" style="background:var(--or2)"></span>フリージア系10社</button>
+  <button class="tb" data-p="p8"><span class="d" style="background:var(--am2)"></span>レンジとランク</button>
+  <button class="tb" data-p="p9"><span class="d" style="background:var(--rd)"></span>リスクと検算</button>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、東京ソワールなのか</h2><span class="sb bg-gn">3つの見どころ</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">見どころ 01 · 値札</div><span class="ci">🏷️</span>
+      <div class="ct">1株あたりの金融資産1,818円に対し、株価1,041円</div>
+      <div class="tx">流動資産82.1億円＋投資有価証券20.9億円×0.7−負債33.6億円＝<strong>63.2億円</strong>。自己株を除く347.8万株で割ると<strong>1株1,818円</strong>。時価総額40.2億円に対する清原式ネットキャッシュ比率は<strong>1.57倍</strong>。PBRは0.33倍で、本業はおまけの値段になっている。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">見どころ 02 · 続いている対立</div><span class="ci">🛡️</span>
+      <div class="ct">買収防衛策は5年連続で継続、総会検査役は4年連続</div>
+      <div class="tx">フリージア・マクロスが2021年5〜6月に0→16.72%。会社は同年6月16日に防衛策を導入し、<strong>2026年2月13日まで毎年「継続」を開示</strong>。株主総会検査役の選任申立ては2023年から4年連続で、2024年には株主提案も出ている。5年前の出来事ではなく、現在進行形の攻防。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">見どころ 03 · もう一つの動機</div><span class="ci">🏛️</span>
+      <div class="ct">増配と優待拡充には、上場維持基準という期限つきの理由があった</div>
+      <div class="tx">2024年12月末の流通株式時価総額は<strong>9.92億円</strong>で基準10億円に不足。2025年3月に適合計画（配当性向40%以上・優待の拡充）、10月に優待拡充、株主数は1,578人→2,391人。<strong>2026年1月23日に全項目適合</strong>。動機の片方は、すでに消えている。</div>
+    </div>
+  </div>
+  <div class="inf">📌 当商会のランクは<strong>B++</strong>。上値1,560円（+50%）・下値852円（▲18%）・非対称比2.75倍・確度12点。ただし<strong>リスク軸が0点</strong>（1日の売買代金78万円）のため、調整ルールによりB++より上には付かない。1銘柄の上限は1%。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札とNAV ── 時価総額40億円の中身</h2><span class="sb bg-am">清原式1.57倍</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>株価（2026/9/18 終値）</td><td class="r mn">1,041円</td><td class="sm2">9/21〜23は現物市場が休業。公開日時点の直近確定値</td></tr>
+      <tr><td>時価総額</td><td class="r mn">40.2億円</td><td class="sm2">発行済3,860,000株。自己株381,568株を除くと36.2億円</td></tr>
+      <tr><td>PBR</td><td class="r mn">0.33倍</td><td class="sm2">1株あたり純資産3,120円（2026年6月末の自己資本108.5億円÷347.8万株）</td></tr>
+      <tr><td>PER（会社予想）</td><td class="r mn">10.3倍</td><td class="sm2">2026年12月期 予想EPS100.6円</td></tr>
+      <tr><td>配当利回り</td><td class="r mn">4.32%</td><td class="sm2">年45円。優待を含めた実質は5.28%</td></tr>
+      <tr class="hl"><td><strong>清原式ネットキャッシュ比率</strong></td><td class="r mn"><strong>1.57倍</strong></td><td class="sm2">流動資産82.1億＋投資有価証券20.9億×0.7−負債33.6億＝63.2億円</td></tr>
+      <tr><td>1株あたりの金融資産（床）</td><td class="r mn">852円</td><td class="sm2">現預金19.6億−借入金等5.65億＋投資有価証券20.9億×0.75</td></tr>
+      <tr><td>52週</td><td class="r mn">908〜1,303円</td><td class="sm2">安値2025/9/26・高値2025/10/17。現在は下から33%の位置</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">貸借対照表の中身（2026年6月末・中間決算短信）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>科目</th><th class="r">金額</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>総資産</td><td class="r mn">142.1億円</td><td class="sm2">前期末から2.75億円増</td></tr>
+      <tr><td>うち現金及び預金</td><td class="r mn">19.6億円</td><td class="sm2">前期末から1億円減</td></tr>
+      <tr><td>うち投資有価証券</td><td class="r mn">20.9億円</td><td class="sm2">前期末から4.23億円増</td></tr>
+      <tr><td>負債合計</td><td class="r mn">33.6億円</td><td class="sm2">うち借入金等5.65億円</td></tr>
+      <tr class="hl"><td><strong>純資産</strong></td><td class="r mn"><strong>108.5億円</strong></td><td class="sm2">自己資本比率76.4%（前期末75.3%）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 時価総額40.2億円に対し、純資産は108.5億円、金融資産だけで63.2億円。<strong>本業の価値をゼロと置いても、株価は金融資産の6割以下</strong>。ただし換金の道筋（投資有価証券の売却や資本政策）は会社から示されていない。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">1か月で0→16.72% ── 買い上がりの記録</h2><span class="sb bg-or">8回の届出</span></div>
+
+  <div class="tx">フリージア・マクロスは2021年5月27日から6月24日までの<strong>1か月間に8回の変更報告書</strong>を出し、0から16.72%まで買い上がった。届出はすべて大量保有報告書・変更報告書による。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>義務発生日</th><th class="r">保有比率</th><th class="r">株数</th><th class="r">増分</th></tr></thead>
+    <tbody>
+      <tr><td>2021/5/27</td><td class="r mn">5.95%</td><td class="r mn">229,800株</td><td class="r mn">+5.95pt</td></tr>
+      <tr><td>2021/6/1</td><td class="r mn">7.75%</td><td class="r mn">299,300株</td><td class="r mn">+1.80pt</td></tr>
+      <tr><td>2021/6/3</td><td class="r mn">10.27%</td><td class="r mn">396,300株</td><td class="r mn">+2.52pt</td></tr>
+      <tr><td>2021/6/8</td><td class="r mn">11.76%</td><td class="r mn">454,000株</td><td class="r mn">+1.49pt</td></tr>
+      <tr><td>2021/6/15</td><td class="r mn">12.98%</td><td class="r mn">500,900株</td><td class="r mn">+1.22pt</td></tr>
+      <tr><td>2021/6/18</td><td class="r mn">14.22%</td><td class="r mn">549,000株</td><td class="r mn">+1.24pt</td></tr>
+      <tr><td>2021/6/23</td><td class="r mn">15.48%</td><td class="r mn">597,600株</td><td class="r mn">+1.26pt</td></tr>
+      <tr class="hl"><td><strong>2021/6/24</strong></td><td class="r mn"><strong>16.72%</strong></td><td class="r mn"><strong>645,300株</strong></td><td class="r mn">+1.24pt</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">保有報告に出ている主体（IRBANK・直近提出値）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>主体</th><th class="r">比率</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>フリージア・マクロス</td><td class="r mn">16.72%</td><td class="sm2">2021年6月24日以降、変更報告書は出ていない</td></tr>
+      <tr><td>個人株主2名</td><td class="r mn">6.25%／3.12%</td><td class="sm2">合計9.37%。個人名は当商会の方針により記載しない</td></tr>
+      <tr><td>三菱UFJ銀行</td><td class="r mn">4.25%</td><td class="sm2">2024年1月に0→4.25%、7月に横ばいの報告</td></tr>
+      <tr><td>みずほ銀行</td><td class="r mn">2.95%</td><td class="sm2">2021年11月に3.9%→2.95%へ減少</td></tr>
+      <tr><td>みずほ信託銀行</td><td class="r mn">1.29%</td><td class="sm2">同上</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 フリージアの比率は<strong>2021年6月24日から5年以上動いていない</strong>。買い増しも売却も届け出られていない。同じ型の日邦産業（9913）でも比率は2021年6月から不動で、その間に還元だけが伸びた。</div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">会社の応戦 ── 防衛策5年、検査役4年</h2><span class="sb bg-bl">適時開示の年表</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>日付</th><th>会社が出した開示</th><th>読み</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2021/6/11</td><td>主要株主である筆頭株主の異動</td><td class="sm2">買い上がりの途中で筆頭株主が入れ替わった</td></tr>
+      <tr><td class="mn">2021/6/15</td><td>臨時株主総会招集のための基準日設定</td><td class="sm2">臨時総会の準備に入る</td></tr>
+      <tr class="hl"><td class="mn"><strong>2021/6/16</strong></td><td><strong>大規模買付行為等の対応策（買収防衛策）の導入</strong></td><td class="sm2">フリージア・マクロス及びその関係者を名指しした表題</td></tr>
+      <tr><td class="mn">2021/6/30〜7/29</td><td>臨時株主総会の開催／付議議案の決定／一部取下げ</td><td class="sm2">議案の一部を取り下げている</td></tr>
+      <tr><td class="mn">2021/10/14</td><td>希望退職者募集</td><td class="sm2">同年はコロナ禍で無配。守りの局面だった</td></tr>
+      <tr><td class="mn">2023/2/14</td><td>買収防衛策の継続</td><td class="sm2">ここから毎年の「継続」が始まる</td></tr>
+      <tr><td class="mn">2023/3/2</td><td>株主総会検査役の選任申立て</td><td class="sm2">総会の手続に裁判所が選ぶ第三者の目を入れる</td></tr>
+      <tr><td class="mn">2024/2/14</td><td>買収防衛策の継続／<strong>株主提案に対する当社取締役会意見</strong></td><td class="sm2">株主提案が出された事実が会社側の開示で残っている</td></tr>
+      <tr><td class="mn">2024/3/5・3/21</td><td>検査役の選任申立て／選任</td><td class="sm2">2年連続</td></tr>
+      <tr><td class="mn">2025/2/14</td><td>買収防衛策の継続／中期経営計画の策定</td><td class="sm2">2027年度を最終年度とする中計</td></tr>
+      <tr><td class="mn">2025/3/4・3/17</td><td>検査役の選任申立て／選任</td><td class="sm2">3年連続</td></tr>
+      <tr class="hl"><td class="mn"><strong>2026/2/13</strong></td><td><strong>買収防衛策の継続（直近）</strong></td><td class="sm2">導入から5年、いまも外していない</td></tr>
+      <tr><td class="mn">2026/3/4・3/19</td><td>検査役の選任申立て／選任</td><td class="sm2">4年連続</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 防衛策の継続は取締役会決議で足りるが、<strong>検査役の選任申立てを4年続けている</strong>会社は多くない。総会の議事進行そのものが争われうると会社側が見ている状態が、いまも解けていない。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">上場維持基準 ── 増配のもう一つの理由</h2><span class="sb bg-pu">2026年1月に適合</span></div>
+
+  <div class="tx">2025年3月31日「上場維持基準への適合に向けた計画について」と、2026年1月23日「上場維持基準への適合に関するお知らせ」から。<strong>増配と優待拡充には、防衛反応とは別の、期限つきの動機があった。</strong></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">2024年12月末</th><th class="r">2025年12月末</th><th class="r">上場維持基準</th></tr></thead>
+    <tbody>
+      <tr><td>株主数</td><td class="r mn">1,578人</td><td class="r mn"><strong>2,391人</strong></td><td class="r mn">400人</td></tr>
+      <tr><td>流通株式数</td><td class="r mn">12,859単位</td><td class="r mn">12,768単位</td><td class="r mn">2,000単位</td></tr>
+      <tr class="hl"><td><strong>流通株式時価総額</strong></td><td class="r mn"><strong>9.92億円</strong></td><td class="r mn"><strong>13.70億円</strong></td><td class="r mn">10億円</td></tr>
+      <tr><td>流通株式比率</td><td class="r mn">33.3%</td><td class="r mn">33.0%</td><td class="r mn">25%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cbox">
+    <div class="h3">会社が計画に書いたこと（2025年3月31日）</div>
+    <div class="tx">「2024年12月期の期末配当については、1株につき45円、2025年12月期の期末配当予想についても45円を計画しており、<strong>配当性向40％以上を目安とし、株主優待の拡充も含めて株主還元の充実及び資本効率の向上を意識した経営を実施してまいります</strong>」</div>
+    <div class="note">不足していたのは流通株式時価総額だけで、株主数400人の基準はもともと満たしていた。会社は「情報発信が十分でなかったことにより、市場における認知度や期待度が低迷している」ことを不足の理由に挙げている。</div>
+  </div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>日付</th><th>打った手</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2025/3/31</td><td>適合に向けた計画を開示（計画期間は2026年12月末まで）</td></tr>
+      <tr><td class="mn">2025/10/14</td><td><strong>株主優待制度の拡充</strong></td></tr>
+      <tr class="hl"><td class="mn"><strong>2026/1/23</strong></td><td><strong>上場維持基準のすべての項目に適合したと開示</strong></td></tr>
+      <tr><td class="mn">2026/2/13</td><td>2026年12月期の配当予想は45円で据え置き（適合の3週間後）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>理由が2つある話は、片方が消えたときが問題になる。</strong>適合直後の予想が45円据え置きだったのは事実だが、答えが出るのは次の期の予想が出るとき。当商会はここを最大の監視点に置く。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">還元と優待 ── 無配から45円へ</h2><span class="sb bg-gn">実質5.28%</span></div>
+
+  <div class="h3">配当と純資産配当率（DOE）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">1株配当</th><th class="r">EPS</th><th class="r">配当性向</th><th class="r">DOE</th></tr></thead>
+    <tbody>
+      <tr><td>2020年12月期</td><td class="r mn">無配</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">—</td></tr>
+      <tr><td>2021年12月期</td><td class="r mn">無配</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">—</td></tr>
+      <tr><td>2022年12月期</td><td class="r mn">20円</td><td class="r mn">152.6円</td><td class="r mn">13.1%</td><td class="r mn">0.8%</td></tr>
+      <tr><td>2023年12月期</td><td class="r mn">30円</td><td class="r mn">233.4円</td><td class="r mn">12.9%</td><td class="r mn">1.1%</td></tr>
+      <tr><td>2024年12月期</td><td class="r mn">45円</td><td class="r mn">145.4円</td><td class="r mn">31.0%</td><td class="r mn">1.5%</td></tr>
+      <tr><td>2025年12月期</td><td class="r mn">45円</td><td class="r mn">68.5円</td><td class="r mn">65.7%</td><td class="r mn">1.5%</td></tr>
+      <tr class="hl"><td><strong>2026年12月期（予）</strong></td><td class="r mn"><strong>45円</strong></td><td class="r mn">100.6円</td><td class="r mn">44.7%</td><td class="r mn">1.4%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">2025年12月期は2026年1月30日に経常を26.25%下方修正し、実績は経常2億9,557万円（前期比14.97%減）。配当は45円を維持したため、配当性向は65.7%まで上がった。会社の目安は「40%以上」なので、方針としては満たしている。</div>
+
+  <div class="h3">株主優待（100株以上・年2回）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>内容</th><th>中身</th><th class="r">現金換算</th></tr></thead>
+    <tbody>
+      <tr><td>選べるe-GIFT</td><td class="sm2">100株以上は500円相当、1,000株以上は1,000円相当。6月末・12月末の年2回</td><td class="r mn">年1,000円</td></tr>
+      <tr><td>オンライン20%割引</td><td class="sm2">公式オンラインストア・formforma・kuros'・キャナルジーン・レンタルドレス。期間中3回まで、1回30万円まで</td><td class="r mn">算入せず</td></tr>
+      <tr><td>直営店の割引券</td><td class="sm2">20%割引券3枚</td><td class="r mn">算入せず</td></tr>
+      <tr class="hl"><td><strong>100株の受取合計</strong></td><td class="sm2">配当4,500円＋e-GIFT1,000円。投資額10万4,100円に対して</td><td class="r mn"><strong>5.28%</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 割引券は使わなければ価値がゼロなので、当商会は<strong>現金同等のe-GIFTだけ</strong>を利回りに算入している。1名義では100株がいちばん効率が良い設計で、これは株主数を増やす設計でもある（上場維持基準の株主数・流通株式時価総額に効く）。</div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">フリージア系10社の地図（参考）</h2><span class="sb bg-or">未再検証</span></div>
+
+  <div class="tx">当商会の特集レポート「フリージア銘柄の還元地図」（2026年9月17日作成）の整理。<strong>この表は10社すべてを一次資料で再検証したものではない</strong>ため、参考として置く。東京ソワールの数字は本レポートで取り直した値に差し替えている。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>コード</th><th>銘柄</th><th class="r">PBR</th><th class="r">DOE</th><th class="r">フリージア系の保有</th><th>区分</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">9913</td><td>日邦産業</td><td class="r mn">1.91</td><td class="r mn">8.1%</td><td class="r mn">19.68%</td><td class="sm2">非支配</td></tr>
+      <tr><td class="mn">6958</td><td>日本シイエムケイ</td><td class="r mn">0.66</td><td class="r mn">1.8%</td><td class="r mn">5%未満</td><td class="sm2">非支配</td></tr>
+      <tr class="hl"><td class="mn"><strong>8040</strong></td><td><strong>東京ソワール</strong></td><td class="r mn"><strong>0.33</strong></td><td class="r mn"><strong>1.5%</strong></td><td class="r mn"><strong>16.72%</strong></td><td class="sm2">非支配・防衛中</td></tr>
+      <tr><td class="mn">9767</td><td>日建工学</td><td class="r mn">0.59</td><td class="r mn">1.2%</td><td class="r mn">2.77%（縮小）</td><td class="sm2">保有縮小</td></tr>
+      <tr><td class="mn">8025</td><td>ツカモト</td><td class="r mn">0.30</td><td class="r mn">0.7%</td><td class="r mn">17.33%</td><td class="sm2">非支配</td></tr>
+      <tr><td class="mn">9867</td><td>ソレキア</td><td class="r mn">0.71</td><td class="r mn">0.5%</td><td class="r mn">30.02%</td><td class="sm2">実質支配</td></tr>
+      <tr><td class="mn">9647</td><td>協和コンサルタンツ</td><td class="r mn">0.80</td><td class="r mn">0.4%</td><td class="r mn">48.10%</td><td class="sm2">実質支配</td></tr>
+      <tr><td class="mn">1443</td><td>技研ホールディングス</td><td class="r mn">0.34</td><td class="r mn">0.1%</td><td class="r mn">27.25%</td><td class="sm2">実質支配</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cbox">
+    <div class="h3">読み取れること（と、読み取れないこと）</div>
+    <div class="tx">保有が25%を超えた3社のDOEは0.1〜0.5%で、配当が円単位で固定されている例が目立つ。25%未満の会社は0.7〜8.1%と幅がある。<strong>ただし「買われたから増配した」という因果は証明されていない。</strong>コロナ後の復配、業績の回復、そして東京ソワールの場合は上場維持基準という別の動機も同時に存在する。</div>
+    <div class="note">日邦産業のDOE8.1%は、1株配当154円を出した期の数字。1株配当の並びは33円→74円→76円→154円で、2027年3月期の会社予想は79円。跳ね上がった年を基準に読まないこと（株探で確認）。</div>
+  </div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+
+  <div class="card" style="border:2px solid #b8860b;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffaf0">
+    <div class="h3" style="margin-top:0">当商会の採点（6軸×非対称比）── 総合 B++</div>
+    <p class="note">ランクは<strong>幅（上値÷下値）×確度（6軸・18点）</strong>のマトリクスで決まる。<strong>ランクは下がりにくさの指標</strong>であって、上がりやすさの順位ではない。</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+      <tbody>
+      <tr><td>🦦安さ</td><td class="r"><strong>3</strong></td><td class="sm2">PBR0.33倍。清原式ネットキャッシュ比率1.57倍で、1株あたりの金融資産1,818円に対し株価1,041円。中身は現金19.6億円と投資有価証券21.0億円</td></tr>
+      <tr><td>🦉財務</td><td class="r"><strong>3</strong></td><td class="sm2">自己資本比率76.4%（2026年6月末）。借入金等5.65億円に対し現預金19.6億円。総資産142.1億円に対し負債33.6億円</td></tr>
+      <tr><td>🦫モート</td><td class="r"><strong>1</strong></td><td class="sm2">婦人フォーマル専業。百貨店チャネルが主戦場で市場は縮小傾向。国内シェアの一次資料は確認できず、ニッチトップの裏付けは取れていない</td></tr>
+      <tr><td>🐊触媒</td><td class="r"><strong>3</strong></td><td class="sm2">フリージア・マクロスが16.72%。買収防衛策は2021年6月の導入から毎年継続（直近2026年2月13日）、株主総会検査役の選任申立ては2023年から4年連続、2024年には株主提案も出ている</td></tr>
+      <tr><td>🐝インカム</td><td class="r"><strong>2</strong></td><td class="sm2">配当利回り4.32%＋優待（年1,000円のe-GIFTと20%割引）で合計5.28%。配当性向40%以上を目安とする方針を開示。ただし2020・2021年は無配で、減配の実績がある</td></tr>
+      <tr><td>🦞リスク</td><td class="r"><strong>0</strong></td><td class="sm2">直近10営業日の平均出来高750株＝約78万円。流通株式時価総額13.7億円。想定した数量では売買が成立しない</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">上値：資産基準（1株あたり純資産3,120円 × 到達を見込むPBR0.50倍）＝<strong>1,560円・+50%</strong>。0.50倍は過去5年の年末PBRの上限で、フリージアが買い上がった2021年末に実際に付いた水準（IRBANK）。同業中央値は未確認のため使っていない。<br>
+    下値：株価より下の候補のうち深いほう。<strong>床（1株あたり金融資産）852円・▲18%</strong>。52週安値908円（▲13%）より深い。<br>
+    非対称比 2.75（幅・中）× 確度 12点（中）→ マトリクスは<strong>B++</strong>。</p>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">PER下限を下値に採らなかった理由</div>
+    <div class="tx">この会社の年末PERの下限は3.51倍（2023年末）だが、これは固定資産の売却益などでEPSが膨らんだ年の裏返しで、株価が安かったことを示す倍率ではない。通常のEPSに当てると二重に割り引くことになる。<strong>仮に採って下値を▲66%としても、幅が「小」に落ちるだけで確度12点（中）との組み合わせはB++のまま</strong>で、結論は動かない。</div>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">調整ルールと建てられる量</div>
+    <div class="tx"><strong>リスク軸が0点の銘柄は、幅と確度が何点であってもB++より上には付けない</strong>——当商会の調整ルール①に当たる。今回はマトリクスの下書きが既にB++なので、天井には当たっていない。裏を返せば、この銘柄はどう転んでもB++より上には行かない。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>項目</th><th class="r">数字</th><th>根拠</th></tr></thead>
+      <tbody>
+        <tr><td>1銘柄の上限</td><td class="r mn"><strong>1%</strong></td><td class="sm2">リスク軸0点はランクに関係なく1%に切り替わる</td></tr>
+        <tr><td>金額</td><td class="r mn">約45万円</td><td class="sm2">純資産4,547万円（2026/9/18）に対して</td></tr>
+        <tr><td>株数</td><td class="r mn">約400株</td><td class="sm2">1,041円で計算</td></tr>
+        <tr><td>売り切り日数</td><td class="r mn">約3日</td><td class="sm2">直近10営業日の平均出来高750株の2割を毎日取れたとして</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">6つのリスク</span></div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">① 流動性</div><div class="tx">直近10営業日の平均出来高は<strong>750株（約78万円）</strong>、20営業日でも1,130株（約118万円）。1日200株しか出来ない日もある。流通株式時価総額13.7億円。<strong>想定した価格・数量で売買が成立しない前提で建てる</strong>。当商会がリスク軸を0点にした理由。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">② 動機が消えた後の還元</div><div class="tx">上場維持基準に2026年1月23日で適合した。<strong>増配と優待拡充の動機の片方は消えている</strong>。適合直後の予想は45円据え置きだったが、次の期の予想が答え合わせになる。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">③ 本業の縮小と利益の振れ</div><div class="tx">婦人フォーマルは市場そのものが縮んでいる。営業利益は2023年12月期5.2億→2024年2.4億→2025年1.7億と落ち、2026年予想3.5億は倍増の戻しを前提にする。中間の1株利益は58.56円（前年同期117.49円）。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">④ 支配が完成する側のリスク</div><div class="tx">フリージア系の保有が25%を超えた会社では、配当が円単位で固定された例が並ぶ。<strong>支配が完成すると、この物語は逆回転する</strong>。変更報告書の提出が合図になる。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">⑤ 低PBRでの非公開化</div><div class="tx">完全子会社化やMBOが起きた場合、少数株主が受け取る価格は低いPBR水準に張り付くことがある。<strong>PBR0.33倍は、そのときに必ずしも武器にならない</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑥ 因果の不確かさ</div><div class="tx">「買われたから増配した」は証明されていない。コロナ後の復配、業績回復、上場維持基準——説明は複数ある。当商会が言えるのは相関まで。</div></div>
+  </div>
+
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年9月24日）</div>
+    <ul class="note">
+      <li>株価1,041円・PBR0.33倍・PER10.3倍・配当利回り4.32%・時価総額40.2億円は株探の2026年9月18日確定値で一致。9月21〜23日は現物市場が休業</li>
+      <li>総資産142.1億円・純資産108.5億円・自己資本比率76.4%・現預金19.6億円・投資有価証券20.9億円・負債33.6億円は2026年12月期中間決算短信（6月末）で一致</li>
+      <li>1株あたり純資産3,120円＝自己資本108.5億円 ÷（発行済3,860,000株−自己株381,568株）。株探のPBR0.33倍と整合</li>
+      <li>フリージア・マクロスの8回の届出（2021/5/27〜6/24・16.72%・645,300株）はIRBANKの大量保有一覧で一致</li>
+      <li>買収防衛策の継続（直近2026/2/13）、検査役の選任申立て（2023〜2026の4年連続）、株主提案に対する取締役会意見（2024/2/14）は、いずれも会社の適時開示のタイトルで確認</li>
+      <li>流通株式時価総額9.92億円→13.70億円、株主数1,578人→2,391人は「上場維持基準への適合に関するお知らせ」（2026/1/23）の表で一致</li>
+      <li>配当性向40%以上を目安とする方針は「上場維持基準への適合に向けた計画について」（2025/3/31）の記載</li>
+      <li>優待の内容と5.28%は株探の優待ページ（2026/6/30更新）で確認。割引券は利回りに算入していない</li>
+      <li>年末PBR（2021年0.50倍〜2025年0.34倍）と年末PER（2023年3.51倍）はIRBANK</li>
+      <li>出来高は株探の時系列（直近10営業日平均750株、20営業日平均1,130株）</li>
+      <li><strong>参考扱い</strong>：フリージア系10社の一覧は当商会の特集レポート（2026/9/17）の整理で、10社すべてを一次資料で再検証したものではない</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではありません。投資判断はご自身の責任においてお願いいたします。フリージア系10社の一覧は当商会の特集レポートの整理で、10社すべてを一次資料で再検証したものではありません。<br>
+  Data: 東京ソワール 決算短信（2026年12月期中間・2025年12月期）／適時開示（買収防衛策の継続 2026.2.13、株主総会検査役 2023〜2026、株主提案に対する取締役会意見 2024.2.14、上場維持基準への適合に向けた計画 2025.3.31、同 適合のお知らせ 2026.1.23、株主優待制度の拡充 2025.10.14）／大量保有報告書・変更報告書／株探（2026.9.18 確定値・業績・優待・時系列）／IRBANK（大量保有一覧・年末PER/PBR） · 2026.09
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  nav.addEventListener('click',function(ev){
+    var b=ev.target.closest('.tb'); if(!b) return;
+    var id=b.getAttribute('data-p');
+    document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on');});
+    document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    document.getElementById(id).classList.add('on');
+    b.classList.add('on');b.setAttribute('aria-selected','true');
+    var top=nav.getBoundingClientRect().top+window.pageYOffset;
+    if(window.pageYOffset>top) window.scrollTo({top:top,behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
