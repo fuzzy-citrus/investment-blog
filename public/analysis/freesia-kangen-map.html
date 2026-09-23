@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>フリージア銘柄の還元地図｜沼底バリュー商会</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="フリージア・マクロスと佐々木ベジ氏が大量保有する上場企業10社を純資産配当率で並べ直し、支配の有無と株主還元の関係を検証したレポート。">
+<style>html{color-scheme:light}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div style="background:#fef3e0;border-bottom:2px solid #bc7a18;color:#5a3a08;padding:12px 18px;font:500 13px/1.8 'Noto Sans JP',sans-serif">
+<strong>当商会の特集レポート（2026年9月17日作成）です。</strong>公開情報の整理であり、<strong>10社すべてを一次資料で再検証したものではありません</strong>。
+東京ソワール（8040）については、2026年9月24日に一次資料で取り直した<a href="/analysis/tokyo-soir-8040.html" style="color:#8a5510;font-weight:700">完全版レポート</a>と<a href="/blog/tokyo-soir-8040/" style="color:#8a5510;font-weight:700">銘柄記事</a>があります。そちらの数字が最新です。
+なお日邦産業のDOE8.1%は1株配当154円を出した期の数字で、2027年3月期の会社予想は79円です。投資助言ではありません。
+</div>
+
+<title>フリージア銘柄の還元地図</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#f3f4f1;
+  --surface:#fbfbf9;
+  --surface-2:#eef0ec;
+  --ink:#12181a;
+  --ink-2:#4e5754;
+  --muted:#858d89;
+  --rule:#e2e3dc;
+  --rule-strong:#c9cbc2;
+  --hero-bg:#101917;
+  --hero-ink:#f1f3ef;
+  --hero-ink-2:#9daaa4;
+  --brass:#b98a3e;
+  --brass-soft:rgba(185,138,62,.14);
+  --s-free:#1baf7a;
+  --s-held:#4a3aa7;
+  --s-core:#eb6834;
+  --s-blue:#2a78d6;
+  --chip-free-bg:rgba(27,175,122,.12);
+  --chip-held-bg:rgba(74,58,167,.12);
+  --good:#0ca30c;
+  --warn:#fab219;
+  --crit:#d03b3b;
+  --shadow:0 1px 2px rgba(18,24,26,.05), 0 8px 24px -16px rgba(18,24,26,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --ground:#0c0f0e;
+    --surface:#14181a;
+    --surface-2:#1c2120;
+    --ink:#f1f3ef;
+    --ink-2:#bcc2bd;
+    --muted:#858d89;
+    --rule:#272b2a;
+    --rule-strong:#3a403e;
+    --hero-bg:#0a100f;
+    --hero-ink:#f1f3ef;
+    --hero-ink-2:#9daaa4;
+    --brass:#d1a35a;
+    --brass-soft:rgba(209,163,90,.16);
+    --s-free:#199e70;
+    --s-held:#9085e9;
+    --s-core:#d95926;
+    --s-blue:#3987e5;
+    --chip-free-bg:rgba(25,158,112,.18);
+    --chip-held-bg:rgba(144,133,233,.18);
+    --good:#0ca30c;
+    --warn:#fab219;
+    --crit:#e05f5f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#0c0f0e;
+  --surface:#14181a;
+  --surface-2:#1c2120;
+  --ink:#f1f3ef;
+  --ink-2:#bcc2bd;
+  --muted:#858d89;
+  --rule:#272b2a;
+  --rule-strong:#3a403e;
+  --hero-bg:#0a100f;
+  --hero-ink:#f1f3ef;
+  --hero-ink-2:#9daaa4;
+  --brass:#d1a35a;
+  --brass-soft:rgba(209,163,90,.16);
+  --s-free:#199e70;
+  --s-held:#9085e9;
+  --s-core:#d95926;
+  --s-blue:#3987e5;
+  --chip-free-bg:rgba(25,158,112,.18);
+  --chip-held-bg:rgba(144,133,233,.18);
+  --good:#0ca30c;
+  --warn:#fab219;
+  --crit:#e05f5f;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Noto Sans JP",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;font-variant-numeric:tabular-nums}
+.mincho{font-family:"Shippori Mincho B1","Noto Serif JP",serif}
+
+/* ---------- hero ---------- */
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding-block:clamp(40px,7vw,68px) clamp(28px,4vw,40px);border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:700;margin:0 0 18px}
+.hero h1{
+  font-family:"Shippori Mincho B1","Noto Serif JP",serif;
+  font-weight:700;
+  font-size:clamp(30px,6vw,52px);
+  line-height:1.24;
+  letter-spacing:.01em;
+  margin:0 0 20px;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:normal;color:var(--brass)}
+.lede{max-width:62ch;color:var(--hero-ink-2);font-size:clamp(14px,1.6vw,16px);margin:0 0 30px}
+.lede strong{color:var(--hero-ink);font-weight:500}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:var(--hero-ink-2);border-top:1px solid rgba(255,255,255,.12);padding-top:18px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);margin-bottom:30px}
+.kpi{background:var(--hero-bg);padding:16px 18px}
+.kpi dt{font-size:11px;letter-spacing:.06em;color:var(--hero-ink-2);margin:0 0 6px}
+.kpi dd{margin:0;font-size:clamp(22px,3.4vw,28px);font-weight:600;line-height:1.1;font-family:"IBM Plex Mono",ui-monospace,monospace}
+.kpi dd span{font-size:13px;font-weight:400;color:var(--hero-ink-2);margin-left:3px}
+.kpi .free{color:var(--s-free)}
+.kpi .held{color:var(--s-held)}
+.kpi .brass{color:var(--brass)}
+
+/* ---------- tabs ---------- */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--rule);box-shadow:var(--shadow)}
+.tablist{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;max-width:1000px;margin:0 auto;padding-inline:20px}
+.tablist::-webkit-scrollbar{display:none}
+.tab{
+  appearance:none;background:none;border:0;border-bottom:2px solid transparent;
+  padding:14px 16px;font:inherit;font-size:13px;font-weight:500;color:var(--ink-2);
+  white-space:nowrap;cursor:pointer;transition:color .15s,border-color .15s;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brass);font-weight:700}
+.tab:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
+.tab .num{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);margin-right:6px}
+
+main{padding-block:38px 72px}
+.panel[hidden]{display:none!important}
+
+/* ---------- typography ---------- */
+h2.sec{
+  font-family:"Shippori Mincho B1",serif;font-weight:600;
+  font-size:clamp(21px,3vw,27px);line-height:1.4;margin:0 0 6px;text-wrap:balance;
+}
+.sec-note{color:var(--muted);font-size:12.5px;margin:0 0 26px}
+h3{font-size:16px;font-weight:700;margin:38px 0 12px;letter-spacing:.01em}
+h3:first-child{margin-top:0}
+h4{font-size:13.5px;font-weight:700;margin:22px 0 8px}
+p{margin:0 0 15px;max-width:68ch}
+ul{margin:0 0 15px;padding-left:1.15em;max-width:68ch}
+li{margin-bottom:7px}
+a{color:var(--ink);text-underline-offset:2px}
+
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:22px 24px;margin-bottom:20px}
+.callout{border-left:3px solid var(--brass);background:var(--brass-soft);padding:16px 20px;margin:0 0 24px;border-radius:0 3px 3px 0}
+.callout p:last-child{margin-bottom:0}
+.callout .lbl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:2px;line-height:1.7;white-space:nowrap}
+.chip .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.chip.free{background:var(--chip-free-bg);color:var(--ink)}
+.chip.free .dot{background:var(--s-free)}
+.chip.held{background:var(--chip-held-bg);color:var(--ink)}
+.chip.held .dot{background:var(--s-held)}
+.chip.core{background:rgba(235,104,52,.13);color:var(--ink)}
+.chip.core .dot{background:var(--s-core)}
+
+/* ---------- tables ---------- */
+.tscroll{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface);margin-bottom:8px}
+table{border-collapse:collapse;width:100%;min-width:660px;font-size:12.5px}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font-weight:700;font-size:11px;letter-spacing:.04em;color:var(--ink-2);background:var(--surface-2);position:sticky;top:0}
+th:first-child,td:first-child{text-align:left}
+th:nth-child(2),td:nth-child(2){text-align:left}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+tr.is-core td{background:rgba(235,104,52,.06)}
+.tnote{font-size:11.5px;color:var(--muted);margin:0 0 26px}
+
+/* ---------- charts ---------- */
+figure{margin:0 0 30px;background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:20px 18px 16px}
+figcaption{font-size:12.5px;color:var(--ink-2);margin-bottom:14px;font-weight:500}
+figcaption b{color:var(--ink)}
+.chartbox{overflow-x:auto}
+svg{display:block;max-width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:11.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:2px;display:inline-block;flex:none}
+.ax{font-size:10.5px;font-family:"IBM Plex Mono",monospace;fill:var(--muted)}
+.axname{font-size:10.5px;fill:var(--muted);letter-spacing:.04em}
+.lbl-in{font-size:11px;fill:var(--ink);font-family:"Noto Sans JP",sans-serif}
+.val{font-size:11px;font-family:"IBM Plex Mono",monospace;fill:var(--ink);font-weight:600}
+.grid{stroke:var(--rule);stroke-width:1}
+.base{stroke:var(--rule-strong);stroke-width:1}
+
+/* ---------- grade ---------- */
+.gradecard{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:18px 20px;display:flex;gap:18px;align-items:flex-start}
+.gradegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-bottom:26px}
+.grade{
+  flex:none;width:56px;height:56px;border-radius:3px;display:grid;place-items:center;
+  font-family:"Shippori Mincho B1",serif;font-size:27px;font-weight:700;line-height:1;
+  border:1.5px solid currentColor;
+}
+.g-a{color:var(--good)}
+.g-b{color:var(--s-free)}
+.g-c{color:var(--warn)}
+.g-d{color:var(--s-core)}
+.g-e{color:var(--crit)}
+.gradecard .body{min-width:0;flex:1}
+.gradecard h4{margin:0 0 3px;font-size:14.5px}
+.gradecard .code{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-right:7px}
+.gradecard p{font-size:12.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.65}
+.gradecard .stats{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:8px;font-size:11px;font-family:"IBM Plex Mono",monospace;color:var(--muted)}
+.gradecard .stats b{color:var(--ink);font-weight:600}
+
+/* ---------- misc ---------- */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 20px}
+.steps li{counter-increment:s;position:relative;padding-left:34px;margin-bottom:14px}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;
+  background:var(--brass-soft);color:var(--brass);font-family:"IBM Plex Mono",monospace;
+  font-size:11px;font-weight:600;display:grid;place-items:center;
+}
+.foot{border-top:1px solid var(--rule);margin-top:44px;padding-top:20px;font-size:11.5px;color:var(--muted)}
+.foot ol{padding-left:1.3em;margin:8px 0 0}
+.foot li{margin-bottom:4px}
+.disclaim{background:var(--surface-2);border:1px solid var(--rule);border-radius:3px;padding:14px 18px;font-size:11.5px;color:var(--ink-2);margin-top:22px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">沼底バリュー商会 / 特集レポート</p>
+    <h1>支配された会社は<br>還元しない。<br><em>支配される前の会社</em>が還元する。</h1>
+    <p class="lede">フリージア・マクロス（6343）と佐々木ベジ氏が大量保有する上場企業10社を、<strong>純資産配当率（DOE）</strong>という一本の物差しで並べ直した。出てきたのは、持株比率ではなく<strong>「経営権を取られたかどうか」</strong>で還元がきれいに二分される構図だった。</p>
+
+    <dl class="kpis">
+      <div class="kpi"><dt>支配済み5社のDOE中央値</dt><dd class="held">0.4<span>%</span></dd></div>
+      <div class="kpi"><dt>非支配4社のDOE中央値</dt><dd class="free">1.5<span>%</span></dd></div>
+      <div class="kpi"><dt>協和コンサルの配当据置</dt><dd>9<span>期連続</span></dd></div>
+      <div class="kpi"><dt>日邦産業のDOE（5年）</dt><dd class="brass">1.0→8.1<span>%</span></dd></div>
+    </dl>
+
+    <div class="hero-meta">
+      <span>作成 2026年9月17日</span>
+      <span>データ基準 2026年9月14〜17日</span>
+      <span>出所 各社有価証券報告書・決算短信・大量保有報告書</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="tablist" role="tablist" aria-label="レポートの章">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="num">01</span>結論</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="num">02</span>還元の実態</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="num">03</span>支配前後の検証</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="num">04</span>銘柄別カルテ</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span class="num">05</span>買う側（6343）</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false"><span class="num">06</span>投資の型</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ 01 結論 ============ -->
+<section class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+  <h2 class="sec">「一生還元されないのか」への答え</h2>
+  <p class="sec-note">仮説：佐々木ベジ氏が関与する銘柄は超低配当性向ぞろい。ならば永久に還元されないのでは？</p>
+
+  <div class="callout">
+    <span class="lbl">結論</span>
+    <p><b>半分は正しく、半分は逆だった。</b>経営権を握られた会社では、還元は10年単位で名目額に凍結される。だが<b>まだ握られていない会社では、むしろ佐々木氏の存在そのものが増配の引き金を引いている。</b>還元を生むのは彼の意思ではなく、彼に対する防衛反応だ。</p>
+  </div>
+
+  <h3>DOEで並べると、境界線は25%にある</h3>
+  <p>配当性向は利益の振れで動くので比較に向かない。株主資本に対していくら払っているかを見る<b>純資産配当率（DOE）</b>で並べると、10社が二つの塊に割れた。</p>
+
+  <ul>
+    <li><b>フリージア系の保有が25%を超えた会社</b>（協和コンサルタンツ48.1%、ソレキア30.02%、技研HD 27.25%）— DOEは<span class="mono">0.1〜0.5%</span>。配当は円単位で固定され、利益が伸びても1円も増えない。</li>
+    <li><b>25%未満にとどまっている会社</b>（日邦産業19.68%、ツカモト17.33%、東京ソワール16.72%、日建工学12.43%）— DOEは<span class="mono">0.7〜8.1%</span>。日邦産業と東京ソワールは無配から大幅増配に転じた。</li>
+  </ul>
+
+  <p>25%は定款変更の拒否権ラインであり、実務上は取締役会を動かせるかどうかの分水嶺でもある。<b>「握られる前」と「握られた後」で、還元の世界がまるごと入れ替わっている。</b></p>
+
+  <h3>3社の判定</h3>
+  <div class="gradegrid">
+    <div class="gradecard">
+      <div class="grade g-b">B+</div>
+      <div class="body">
+        <h4><span class="code">8040</span>東京ソワール</h4>
+        <span class="chip free"><span class="dot"></span>非支配・防衛中</span>
+        <p>無配（2020-21年）から20→30→45円へ3期連続増配。買収防衛策を継続し、株主総会検査役まで選任して抵抗している最中。<b>抵抗が続く限り還元も続く</b>構図で、グループ内で最も投資妙味が明確。</p>
+        <div class="stats"><span>PBR <b>0.33</b></span><span>利回り <b>4.34%</b></span><span>DOE <b>1.5%</b></span></div>
+      </div>
+    </div>
+    <div class="gradecard">
+      <div class="grade g-d">D</div>
+      <div class="body">
+        <h4><span class="code">9647</span>協和コンサルタンツ</h4>
+        <span class="chip held"><span class="dot"></span>実質支配（48.1%）</span>
+        <p>配当総額<span class="mono">1,754万円</span>が13年間ほぼ1円も動いていない。利益は伸びたので配当性向だけが69.6%→2.9%へ一直線に低下。<b>還元凍結の完成形</b>。PBR0.8で資産面の割安感も薄い。</p>
+        <div class="stats"><span>PBR <b>0.80</b></span><span>利回り <b>0.45%</b></span><span>DOE <b>0.4%</b></span></div>
+      </div>
+    </div>
+    <div class="gradecard">
+      <div class="grade g-c">C</div>
+      <div class="body">
+        <h4><span class="code">8025</span>ツカモトコーポレーション</h4>
+        <span class="chip free"><span class="dot"></span>非支配（17.33%）</span>
+        <p>PBR0.30はグループ最安値。だが配当30円が13期不変で、フリージアが5年かけて5%→17.33%まで買い上がっても動いていない。<b>問題は還元姿勢よりROE 0.86%</b>。支配到達か資産再評価待ちの塩漬け。</p>
+        <div class="stats"><span>PBR <b>0.30</b></span><span>利回り <b>2.29%</b></span><span>DOE <b>0.7%</b></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>「動きはじめれば全部面白い」は、半分当たっている</h3>
+  <p>すでに一度<b>完全に動いた実例がある</b>。日邦産業（9913）だ。フリージアが19.68%を握った2021年前後から、無配 → 10円 → 22円 → 33円 → 74円 → 76円 → <b>154円</b>と増配が続き、DOEは1.0%から8.1%へ。株価はPBR0.19倍の水準から<b>1.91倍</b>まで買われ、時価総額329億円とグループ最大になった。</p>
+  <p>ただし注意すべきは、その日邦産業でフリージアの持株比率は<b>2021年6月から一度も動いていない</b>という点だ。彼らは支配しなかった。だから増配が起きた。裏返せば、<b>支配が完成した瞬間にこの物語は終わる</b>。</p>
+
+  <div class="disclaim">本レポートは公開情報の整理であり、投資助言ではありません。筆者は金融商品取引業者ではなく、特定銘柄の売買を推奨するものではありません。数値は各社の開示に基づきますが、投資判断の前に必ず一次資料（有価証券報告書・決算短信・大量保有報告書）をご確認ください。</div>
+</section>
+
+<!-- ============ 02 還元の実態 ============ -->
+<section class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+  <h2 class="sec">還元の実態 ― DOEで測る</h2>
+  <p class="sec-note">純資産配当率（DOE）＝ 年間配当総額 ÷ 株主資本。利益の振れに左右されないので、還元姿勢そのものを比較できる。</p>
+
+  <figure>
+    <figcaption><b>純資産配当率（DOE）ランキング</b>　直近実績期・10社。支配された会社が下位を独占する。</figcaption>
+    <div class="chartbox">
+    <svg viewBox="0 0 720 400" role="img" aria-label="10社のDOEランキング横棒グラフ。日邦産業8.1%が突出し、技研HD0.1%、ラピーヌ0%が最下位。">
+      <line class="base" x1="200" y1="28" x2="200" y2="378"/>
+      <g class="ax" text-anchor="middle">
+        <line class="grid" x1="200" y1="28" x2="200" y2="378"/>
+        <line class="grid" x1="298" y1="28" x2="298" y2="378"/>
+        <line class="grid" x1="396" y1="28" x2="396" y2="378"/>
+        <line class="grid" x1="494" y1="28" x2="494" y2="378"/>
+        <line class="grid" x1="592" y1="28" x2="592" y2="378"/>
+        <text x="200" y="20">0%</text>
+        <text x="298" y="20">2%</text>
+        <text x="396" y="20">4%</text>
+        <text x="494" y="20">6%</text>
+        <text x="592" y="20">8%</text>
+      </g>
+
+      <!-- rows: y start 40, step 34 -->
+      <g>
+        <text class="lbl-in" x="190" y="49" text-anchor="end">日邦産業 <tspan class="ax">9913</tspan></text>
+        <rect x="200" y="38" width="397" height="15" rx="3" fill="#1baf7a"/>
+        <text class="val" x="605" y="49">8.1</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="83" text-anchor="end">日本シイエムケイ <tspan class="ax">6958</tspan></text>
+        <rect x="200" y="72" width="88" height="15" rx="3" fill="#1baf7a"/>
+        <text class="val" x="296" y="83">1.8</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="117" text-anchor="end">東京ソワール <tspan class="ax">8040</tspan></text>
+        <rect x="200" y="106" width="74" height="15" rx="3" fill="#1baf7a"/>
+        <text class="val" x="282" y="117">1.5</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="151" text-anchor="end">日建工学 <tspan class="ax">9767</tspan></text>
+        <rect x="200" y="140" width="59" height="15" rx="3" fill="#1baf7a"/>
+        <text class="val" x="267" y="151">1.2</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="185" text-anchor="end">ツカモト <tspan class="ax">8025</tspan></text>
+        <rect x="200" y="174" width="34" height="15" rx="3" fill="#1baf7a"/>
+        <text class="val" x="242" y="185">0.7</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="219" text-anchor="end">ソレキア <tspan class="ax">9867</tspan></text>
+        <rect x="200" y="208" width="25" height="15" rx="3" fill="#4a3aa7"/>
+        <text class="val" x="233" y="219">0.5</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="253" text-anchor="end">協和コンサルタンツ <tspan class="ax">9647</tspan></text>
+        <rect x="200" y="242" width="20" height="15" rx="3" fill="#4a3aa7"/>
+        <text class="val" x="228" y="253">0.4</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="287" text-anchor="end">フリージア・マクロス <tspan class="ax">6343</tspan></text>
+        <rect x="200" y="276" width="8" height="15" rx="3" fill="#eb6834"/>
+        <text class="val" x="216" y="287">0.16</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="321" text-anchor="end">技研ホールディングス <tspan class="ax">1443</tspan></text>
+        <rect x="200" y="310" width="5" height="15" rx="2" fill="#4a3aa7"/>
+        <text class="val" x="213" y="321">0.1</text>
+      </g>
+      <g>
+        <text class="lbl-in" x="190" y="355" text-anchor="end">ラピーヌ <tspan class="ax">8143</tspan></text>
+        <rect x="200" y="344" width="2" height="15" fill="#4a3aa7"/>
+        <text class="val" x="210" y="355">0（7期無配）</text>
+      </g>
+      <text class="axname" x="200" y="394">純資産配当率（DOE, %）</text>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i style="background:#1baf7a"></i>非支配（保有25%未満）</span>
+      <span><i style="background:#4a3aa7"></i>実質支配（25%超／社長就任）</span>
+      <span><i style="background:#eb6834"></i>買う側の本体</span>
+    </div>
+  </figure>
+
+  <h3>持株比率とDOEの関係</h3>
+  <p>同じデータを散布図にすると、25%の壁がそのまま見える。右側（支配ゾーン）に入った3社は例外なく床に貼りついている。</p>
+
+  <figure>
+    <figcaption><b>フリージア系のピーク保有比率 × DOE</b>　保有25%超のゾーンでは、DOEが0.5%を超えた例がない。</figcaption>
+    <div class="chartbox">
+    <svg viewBox="0 0 720 360" role="img" aria-label="保有比率とDOEの散布図。25%超のゾーンにある技研HD、ソレキア、協和コンサルタンツはすべてDOE0.5%以下。">
+      <rect x="333" y="40" width="327" height="260" fill="#4a3aa7" opacity="0.07"/>
+      <line x1="333" y1="40" x2="333" y2="300" stroke="#4a3aa7" stroke-width="1" stroke-dasharray="4 3"/>
+      <text class="axname" x="340" y="54" fill="#4a3aa7">実質支配ゾーン（25%超）</text>
+
+      <g class="ax" text-anchor="end">
+        <line class="grid" x1="60" y1="300" x2="660" y2="300"/>
+        <line class="grid" x1="60" y1="242" x2="660" y2="242"/>
+        <line class="grid" x1="60" y1="184" x2="660" y2="184"/>
+        <line class="grid" x1="60" y1="127" x2="660" y2="127"/>
+        <line class="grid" x1="60" y1="69" x2="660" y2="69"/>
+        <text x="54" y="304">0</text>
+        <text x="54" y="246">2</text>
+        <text x="54" y="188">4</text>
+        <text x="54" y="131">6</text>
+        <text x="54" y="73">8</text>
+      </g>
+      <line class="base" x1="60" y1="300" x2="660" y2="300"/>
+      <g class="ax" text-anchor="middle">
+        <text x="60" y="318">0%</text>
+        <text x="169" y="318">10%</text>
+        <text x="278" y="318">20%</text>
+        <text x="387" y="318">30%</text>
+        <text x="496" y="318">40%</text>
+        <text x="605" y="318">50%</text>
+      </g>
+      <text class="axname" x="360" y="340" text-anchor="middle">フリージア系のピーク保有比率</text>
+      <text class="axname" x="60" y="28">DOE（%）</text>
+
+      <circle cx="275" cy="66" r="7" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="288" y="70">日邦産業 8.1</text>
+
+      <circle cx="242" cy="257" r="7" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="242" y="245" text-anchor="middle">東京ソワール 1.5</text>
+
+      <circle cx="196" cy="265" r="7" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="186" y="269" text-anchor="end">日建工学 1.2</text>
+
+      <circle cx="249" cy="280" r="7" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="238" y="294" text-anchor="end">ツカモト 0.7</text>
+
+      <circle cx="357" cy="297" r="7" fill="#4a3aa7" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="352" y="285" text-anchor="middle">技研HD 0.1</text>
+
+      <circle cx="388" cy="286" r="7" fill="#4a3aa7" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="400" y="276">ソレキア 0.5</text>
+
+      <circle cx="585" cy="288" r="7" fill="#4a3aa7" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="585" y="276" text-anchor="middle">協和コンサル 0.4</text>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i style="background:#1baf7a"></i>非支配</span>
+      <span><i style="background:#4a3aa7"></i>実質支配</span>
+      <span style="color:var(--muted)">日本シイエムケイは保有比率が5%未満のため除外。ラピーヌは2026年に保有が2.42%へ移動したため除外（佐々木氏が社長に就任）。</span>
+    </div>
+  </figure>
+
+  <h3>一覧表</h3>
+  <div class="tscroll">
+    <table>
+      <thead>
+        <tr><th>コード</th><th>銘柄</th><th>時価総額</th><th>PBR</th><th>PER(予)</th><th>利回り(予)</th><th>配当性向</th><th>DOE</th><th>保有比率</th><th>区分</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">9913</td><td>日邦産業</td><td class="num">329億</td><td class="num">1.91</td><td class="num">23.2</td><td class="num">2.19%</td><td class="num">96.7%</td><td class="num">8.1%</td><td class="num">19.68%</td><td>非支配</td></tr>
+        <tr><td class="num">6958</td><td>日本シイエムケイ</td><td class="num">543億</td><td class="num">0.66</td><td class="num">18.1</td><td class="num">3.67%</td><td class="num">35.4%</td><td class="num">1.8%</td><td class="num">―</td><td>非支配</td></tr>
+        <tr><td class="num">8040</td><td>東京ソワール</td><td class="num">40億</td><td class="num">0.33</td><td class="num">10.3</td><td class="num">4.34%</td><td class="num">65.7%</td><td class="num">1.5%</td><td class="num">16.72%</td><td>非支配</td></tr>
+        <tr><td class="num">9767</td><td>日建工学</td><td class="num">30億</td><td class="num">0.59</td><td class="num">8.5</td><td class="num">1.84%</td><td class="num">19.9%</td><td class="num">1.2%</td><td class="num">2.77%</td><td>縮小</td></tr>
+        <tr><td class="num">8025</td><td>ツカモト</td><td class="num">53億</td><td class="num">0.30</td><td class="num">35.2</td><td class="num">2.29%</td><td class="num">68.4%</td><td class="num">0.7%</td><td class="num">17.33%</td><td>非支配</td></tr>
+        <tr><td class="num">9867</td><td>ソレキア</td><td class="num">92億</td><td class="num">0.71</td><td class="num">6.6</td><td class="num">0.65%</td><td class="num">3.6%</td><td class="num">0.5%</td><td class="num">30.02%</td><td>支配</td></tr>
+        <tr><td class="num">9647</td><td>協和コンサルタンツ</td><td class="num">39億</td><td class="num">0.80</td><td class="num">5.9</td><td class="num">0.45%</td><td class="num">2.9%</td><td class="num">0.4%</td><td class="num">48.10%</td><td>支配</td></tr>
+        <tr class="is-core"><td class="num">6343</td><td>フリージア・マクロス</td><td class="num">66億</td><td class="num">0.39</td><td class="num">4.1</td><td class="num">0.41%</td><td class="num">1.6%</td><td class="num">0.16%</td><td class="num">FHD 57.66%</td><td>本体</td></tr>
+        <tr><td class="num">1443</td><td>技研ホールディングス</td><td class="num">44億</td><td class="num">0.34</td><td class="num">7.0</td><td class="num">0.40%</td><td class="num">2.9%</td><td class="num">0.1%</td><td class="num">27.25%</td><td>支配</td></tr>
+        <tr><td class="num">8143</td><td>ラピーヌ</td><td class="num">4億</td><td class="num">0.55</td><td class="num">―</td><td class="num">0%</td><td class="num">―</td><td class="num">0%</td><td class="num">2.42%</td><td>支配</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tnote">株価・時価総額・PBR・PERは2026年9月14〜17日時点。配当性向・DOEは各社の直近実績決算期。保有比率は大量保有報告書（変更報告書）の直近提出値で、フリージア・マクロス名義分。日本シイエムケイは5%未満のため比率の開示なし。</p>
+</section>
+
+<!-- ============ 03 支配前後の検証 ============ -->
+<section class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+  <h2 class="sec">支配前後の検証 ― 8年分の配当を追う</h2>
+  <p class="sec-note">横並びの比較だけでは因果が分からない。同じ会社の時系列で、支配の前後に何が起きたかを見る。</p>
+
+  <figure>
+    <figcaption><b>DOEの推移（2018〜2026年度）</b>　非支配の2社だけが上を向いている。</figcaption>
+    <div class="chartbox">
+    <svg viewBox="0 0 720 340" role="img" aria-label="4社のDOE推移。日邦産業が2020年の0.9%から2026年8.1%へ急上昇、他3社は1%前後で横ばいか低下。">
+      <g class="ax" text-anchor="end">
+        <line class="grid" x1="52" y1="280" x2="660" y2="280"/>
+        <line class="grid" x1="52" y1="224" x2="660" y2="224"/>
+        <line class="grid" x1="52" y1="169" x2="660" y2="169"/>
+        <line class="grid" x1="52" y1="113" x2="660" y2="113"/>
+        <line class="grid" x1="52" y1="58" x2="660" y2="58"/>
+        <text x="46" y="284">0</text>
+        <text x="46" y="228">2</text>
+        <text x="46" y="173">4</text>
+        <text x="46" y="117">6</text>
+        <text x="46" y="62">8</text>
+      </g>
+      <line class="base" x1="52" y1="280" x2="660" y2="280"/>
+      <g class="ax" text-anchor="middle">
+        <text x="52" y="298">2018</text>
+        <text x="128" y="298">2019</text>
+        <text x="204" y="298">2020</text>
+        <text x="280" y="298">2021</text>
+        <text x="356" y="298">2022</text>
+        <text x="432" y="298">2023</text>
+        <text x="508" y="298">2024</text>
+        <text x="584" y="298">2025</text>
+        <text x="660" y="298">2026</text>
+      </g>
+      <text class="axname" x="52" y="26">DOE（%）</text>
+      <text class="axname" x="356" y="320" text-anchor="middle">決算年度（3月期・11月期・12月期が混在）</text>
+
+      <polyline fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" points="52,272 128,280 204,255 280,252 356,222 432,208 508,147 584,158 660,55"/>
+      <circle cx="660" cy="55" r="5" fill="#2a78d6" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="650" y="46" text-anchor="end" fill="#2a78d6">日邦産業 8.1</text>
+
+      <polyline fill="none" stroke="#1baf7a" stroke-width="2" stroke-linejoin="round" points="52,252 128,252 204,280 280,280 356,258 432,249 508,238 584,238"/>
+      <circle cx="584" cy="238" r="5" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="592" y="230">東京ソワール 1.5</text>
+
+      <polyline fill="none" stroke="#eb6834" stroke-width="2" stroke-linejoin="round" points="52,255 128,255 204,258 280,258 356,261 432,263 508,266 584,269"/>
+      <circle cx="584" cy="269" r="5" fill="#eb6834" stroke="var(--surface)" stroke-width="2"/>
+
+      <polyline fill="none" stroke="#4a3aa7" stroke-width="2" stroke-linejoin="round" points="52,274 128,274 204,274 280,274 356,274 432,274 508,274 584,274 660,277"/>
+      <circle cx="660" cy="277" r="5" fill="#4a3aa7" stroke="var(--surface)" stroke-width="2"/>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i style="background:#2a78d6"></i>日邦産業（非支配 19.68%）</span>
+      <span><i style="background:#1baf7a"></i>東京ソワール（非支配 16.72%）</span>
+      <span><i style="background:#eb6834"></i>協和コンサルタンツ（支配 48.1%）</span>
+      <span><i style="background:#4a3aa7"></i>技研HD（支配 27.25%）</span>
+    </div>
+  </figure>
+
+  <figure>
+    <figcaption><b>拡大図：日邦産業を除く3社</b>　同じデータをDOE 0〜2%の目盛りで見る。非支配の東京ソワールは上昇、支配下の2社は低下と横ばい。</figcaption>
+    <div class="chartbox">
+    <svg viewBox="0 0 720 340" role="img" aria-label="拡大図。東京ソワールは2022年0.8%から2025年1.5%へ上昇。協和コンサルタンツは0.9%から0.4%へ低下。技研HDは0.2%で横ばい。">
+      <g class="ax" text-anchor="end">
+        <line class="grid" x1="52" y1="280" x2="660" y2="280"/>
+        <line class="grid" x1="52" y1="217.5" x2="660" y2="217.5"/>
+        <line class="grid" x1="52" y1="155" x2="660" y2="155"/>
+        <line class="grid" x1="52" y1="92.5" x2="660" y2="92.5"/>
+        <line class="grid" x1="52" y1="30" x2="660" y2="30"/>
+        <text x="46" y="284">0</text>
+        <text x="46" y="221.5">0.5</text>
+        <text x="46" y="159">1.0</text>
+        <text x="46" y="96.5">1.5</text>
+        <text x="46" y="34">2.0</text>
+      </g>
+      <line class="base" x1="52" y1="280" x2="660" y2="280"/>
+      <g class="ax" text-anchor="middle">
+        <text x="52" y="298">2018</text>
+        <text x="128" y="298">2019</text>
+        <text x="204" y="298">2020</text>
+        <text x="280" y="298">2021</text>
+        <text x="356" y="298">2022</text>
+        <text x="432" y="298">2023</text>
+        <text x="508" y="298">2024</text>
+        <text x="584" y="298">2025</text>
+        <text x="660" y="298">2026</text>
+      </g>
+      <text class="axname" x="52" y="20">DOE（%）</text>
+
+      <polyline fill="none" stroke="#1baf7a" stroke-width="2" stroke-linejoin="round" points="52,155 128,155 204,280 280,280 356,180 432,142 508,92 584,92"/>
+      <circle cx="584" cy="92" r="5" fill="#1baf7a" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="592" y="86">東京ソワール 1.5</text>
+      <text class="ax" x="242" y="272" text-anchor="middle">無配（コロナ）</text>
+
+      <polyline fill="none" stroke="#eb6834" stroke-width="2" stroke-linejoin="round" points="52,167 128,167 204,180 280,180 356,192 432,205 508,217 584,230"/>
+      <circle cx="584" cy="230" r="5" fill="#eb6834" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="592" y="234">協和 0.4</text>
+
+      <polyline fill="none" stroke="#4a3aa7" stroke-width="2" stroke-linejoin="round" points="52,255 128,255 204,255 280,255 356,255 432,255 508,255 584,255 660,267"/>
+      <circle cx="660" cy="267" r="5" fill="#4a3aa7" stroke="var(--surface)" stroke-width="2"/>
+      <text class="val" x="500" y="248" text-anchor="end">技研HD 0.1</text>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i style="background:#1baf7a"></i>東京ソワール（非支配）</span>
+      <span><i style="background:#eb6834"></i>協和コンサルタンツ（支配）</span>
+      <span><i style="background:#4a3aa7"></i>技研HD（支配）</span>
+    </div>
+  </figure>
+
+  <h3>「名目額の凍結」という手口</h3>
+  <p>支配下の会社に共通するのは、配当を1株あたりの円単位で固定し、その後どれだけ利益が伸びても動かさないことだ。配当総額を見ると異様さがはっきりする。</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>銘柄</th><th>1株配当</th><th>据置年数</th><th>配当総額</th><th>配当性向の推移</th></tr></thead>
+      <tbody>
+        <tr><td>協和コンサルタンツ <span class="mono">9647</span></td><td class="num">30円</td><td class="num">9期</td><td class="num">1,754万円（13年不変）</td><td class="num">69.6%(2016) → 2.9%(2025)</td></tr>
+        <tr><td>技研ホールディングス <span class="mono">1443</span></td><td class="num">1.10円</td><td class="num">8期</td><td class="num">1,623万円（8年不変）</td><td class="num">6.4%(2018) → 2.9%(2026)</td></tr>
+        <tr><td>ソレキア <span class="mono">9867</span></td><td class="num">70円</td><td class="num">―</td><td class="num">4,322万→5,616万円</td><td class="num">30.7%(2017) → 3.6%(2026)</td></tr>
+        <tr><td>ツカモト <span class="mono">8025</span></td><td class="num">30円</td><td class="num">13期</td><td class="num">1億2,105万円（12年不変）</td><td class="num">利益が小さく性向は68.4%</td></tr>
+        <tr><td>ラピーヌ <span class="mono">8143</span></td><td class="num">0円</td><td class="num">7期</td><td class="num">―</td><td class="num">2020年2月期から無配継続</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tnote">協和コンサルタンツは2016年11月期に株式併合を実施しており、1株配当3円→30円は分割調整後で同額。配当総額ベースで見ると1,754万円が2013年以降ほぼ完全に固定されている。</p>
+
+  <div class="callout">
+    <span class="lbl">読み取れること</span>
+    <p>配当性向が下がっているのは「還元を減らした」からではなく、<b>金額を一切動かさないまま利益だけが伸びた</b>結果だ。意図的に据え置かれている以上、TSEのPBR是正要請やアクティビストの登場では動かない。動かすには支配株主自身の方針転換が要る。</p>
+  </div>
+
+  <h3>反証にあたるケース ― 日建工学と日本シイエムケイ</h3>
+  <p>フリージアが12.43%を保有していた日建工学（9767）は、2019〜20年の無配から2021年に30円へ復配し、その後6期据え置いている。配当性向19.9%、DOE 1.2%と、支配下グループより明らかに高い。フリージアは2026年2月に保有を2.77%へ落としている。</p>
+  <p>日本シイエムケイ（6958）はグループ最大の時価総額543億円。配当は2025年3月期20円、2027年3月期は28円へ増額修正。配当性向35.4%、DOE 1.8%。<b>いずれもフリージアが支配に届かなかった会社</b>で、還元の水準が段違いに高い。</p>
+</section>
+
+<!-- ============ 04 銘柄別カルテ ============ -->
+<section class="panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+  <h2 class="sec">銘柄別カルテ</h2>
+  <p class="sec-note">判定は「還元が動く経路があるか」を基準にした。資産の割安さだけでは点がつかない。</p>
+
+  <div class="gradegrid">
+    <div class="gradecard">
+      <div class="grade g-b">B+</div>
+      <div class="body">
+        <h4><span class="code">8040</span>東京ソワール</h4>
+        <span class="chip free"><span class="dot"></span>非支配 16.72%</span>
+        <p>フォーマルウェア専業。2021年5〜6月にフリージアが0→16.72%まで一気に買い上がり、会社側は買収防衛策を継続、2025年3月には株主総会検査役の選任まで決定した。<b>攻防のさなかで無配から45円へ増配</b>。PBR0.33倍・利回り4.34%・総還元性向65.9%。抵抗が続く限り還元も続くが、防衛策が解けて支配が完成すれば逆回転する。</p>
+        <div class="stats"><span>時価 <b>40億</b></span><span>PBR <b>0.33</b></span><span>PER <b>10.3</b></span><span>利回り <b>4.34%</b></span><span>DOE <b>1.5%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-b">B−</div>
+      <div class="body">
+        <h4><span class="code">6958</span>日本シイエムケイ</h4>
+        <span class="chip free"><span class="dot"></span>非支配（5%未満）</span>
+        <p>プリント基板大手。グループ最大の時価総額543億円で、フリージア色は最も薄い。PBR0.66倍・利回り3.67%・配当性向35.4%と、還元は素直に効いている。2027年3月期は20円→28円へ増額修正。<b>フリージア絡みというより単体のバリュー株として見るべき</b>銘柄。</p>
+        <div class="stats"><span>時価 <b>543億</b></span><span>PBR <b>0.66</b></span><span>PER <b>18.1</b></span><span>利回り <b>3.67%</b></span><span>DOE <b>1.8%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-c">C</div>
+      <div class="body">
+        <h4><span class="code">8025</span>ツカモトコーポレーション</h4>
+        <span class="chip free"><span class="dot"></span>非支配 17.33%</span>
+        <p>老舗繊維商社。PBR0.30倍はグループ最安。フリージアは2020年9月の5.02%から5年かけて17.33%まで買い増しを続けているが、<b>配当30円は13期まったく動いていない</b>。配当性向68.4%は高いが、これはROE0.86%で利益が小さいため。資産バリューは厚い一方、収益が生む還元は期待しにくい。支配ライン到達か資産売却が引き金。</p>
+        <div class="stats"><span>時価 <b>53億</b></span><span>PBR <b>0.30</b></span><span>PER <b>35.2</b></span><span>ROE <b>0.86%</b></span><span>DOE <b>0.7%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-c">C</div>
+      <div class="body">
+        <h4><span class="code">9767</span>日建工学</h4>
+        <span class="chip free"><span class="dot"></span>保有縮小 12.43%→2.77%</span>
+        <p>消波ブロック・河川構造物。2020〜25年はフリージアが12.43%を保有し、その間に無配→30円の復配が起きた。<b>2026年2月に保有を2.77%へ縮小</b>。フリージア要因が抜けた今は普通の小型バリュー株で、PBR0.59倍・配当性向19.9%。中立。</p>
+        <div class="stats"><span>時価 <b>30億</b></span><span>PBR <b>0.59</b></span><span>PER <b>8.5</b></span><span>利回り <b>1.84%</b></span><span>DOE <b>1.2%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-c">C−</div>
+      <div class="body">
+        <h4><span class="code">9913</span>日邦産業</h4>
+        <span class="chip free"><span class="dot"></span>非支配 19.68%</span>
+        <p>樹脂・金属部品。<b>この構図の成功事例そのもの</b>。無配→154円、DOE 1.0%→8.1%、配当性向96.7%。ただし株価はすでにPBR1.91倍・PER23.2倍まで買われ、時価総額329億円。<b>妙味はもう残っていない</b>。今から買う対象ではなく、「東京ソワールがこうなるか」を測るための定規として見るべき銘柄。</p>
+        <div class="stats"><span>時価 <b>329億</b></span><span>PBR <b>1.91</b></span><span>PER <b>23.2</b></span><span>利回り <b>2.19%</b></span><span>DOE <b>8.1%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-d">D+</div>
+      <div class="body">
+        <h4><span class="code">9867</span>ソレキア</h4>
+        <span class="chip held"><span class="dot"></span>実質支配 30.02%</span>
+        <p>2017年に富士通とのTOB価格引き上げ合戦の末、フリージアが取得。以後30.02%。PER6.6倍・PBR0.71倍と数字は安いが、<b>配当性向3.6%・DOE 0.5%</b>で還元経路がない。会社予想は毎年50円で据え置き、実績がわずかに上振れするパターンを繰り返す。指標の安さだけで買うとバリュートラップ。</p>
+        <div class="stats"><span>時価 <b>92億</b></span><span>PBR <b>0.71</b></span><span>PER <b>6.6</b></span><span>利回り <b>0.65%</b></span><span>DOE <b>0.5%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-d">D</div>
+      <div class="body">
+        <h4><span class="code">9647</span>協和コンサルタンツ</h4>
+        <span class="chip held"><span class="dot"></span>実質支配 48.1%</span>
+        <p>建設コンサルタント。フリージアは2021年の36.53%から2026年2月の48.1%まで買い増しを継続中で、<b>単独可決ラインが目前</b>。ROE13.67%と収益性は高いのに、配当総額1,754万円が13年間動かず、配当性向は2.9%。PBR0.8倍で資産面の割安感も薄い。<b>還元凍結の完成形</b>。</p>
+        <div class="stats"><span>時価 <b>39億</b></span><span>PBR <b>0.80</b></span><span>PER <b>5.9</b></span><span>ROE <b>13.67%</b></span><span>DOE <b>0.4%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-e">E</div>
+      <div class="body">
+        <h4><span class="code">1443</span>技研ホールディングス</h4>
+        <span class="chip held"><span class="dot"></span>佐々木氏が設立・支配 27.25%</span>
+        <p>2018年1月に佐々木氏が設立し、技研興業を子会社化して上場させた持株会社。<b>上場以来8年、配当は1円のまま</b>（2025年に1.10円）。配当総額1,623万円が完全固定、DOE 0.1%はグループ最低。PBR0.34倍は安いが、この構造で安さが解消される経路は見当たらない。</p>
+        <div class="stats"><span>時価 <b>44億</b></span><span>PBR <b>0.34</b></span><span>PER <b>7.0</b></span><span>利回り <b>0.40%</b></span><span>DOE <b>0.1%</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-e">E</div>
+      <div class="body">
+        <h4><span class="code">8143</span>ラピーヌ</h4>
+        <span class="chip held"><span class="dot"></span>佐々木氏が代表取締役社長</span>
+        <p>婦人服。フリージアが32.57%を保有していたが、2026年3月に2.42%へ減少（グループ内移管の可能性）。一方で<b>佐々木ベジ氏自身が代表取締役社長に就任</b>している。2020年2月期から7期連続無配、時価総額は4億円まで縮小。再生が進んでいない。</p>
+        <div class="stats"><span>時価 <b>4億</b></span><span>PBR <b>0.55</b></span><span>PER <b>―</b></span><span>配当 <b>0円</b></span><span>無配 <b>7期</b></span></div>
+      </div>
+    </div>
+
+    <div class="gradecard">
+      <div class="grade g-d">D</div>
+      <div class="body">
+        <h4><span class="code">6343</span>フリージア・マクロス</h4>
+        <span class="chip core"><span class="dot"></span>買う側の本体</span>
+        <p>この構図の頂点。PER4.1倍・PBR0.39倍は表面上グループ最安だが、配当性向1.6%・DOE 0.16%で<b>還元は全社中もっとも薄い</b>。フリージアHD 57.66%を含むグループ支配は62%超。詳細は次タブ。</p>
+        <div class="stats"><span>時価 <b>66億</b></span><span>PBR <b>0.39</b></span><span>PER <b>4.1</b></span><span>利回り <b>0.41%</b></span><span>DOE <b>0.16%</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 6343 ============ -->
+<section class="panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+  <h2 class="sec">買う側の本体 ― フリージア・マクロス（6343）</h2>
+  <p class="sec-note">保有先に還元を求めない会社が、自分自身にはもっと厳しい。</p>
+
+  <h3>指標は最安、還元は最低</h3>
+  <p>株価147円、時価総額66.3億円、PER4.1倍、PBR0.39倍。だが配当は0.6円、配当性向1.6%、DOE 0.16%で、<b>グループ10社のなかで最も株主に払っていない</b>。</p>
+
+  <h3>利益がキャッシュを生んでいない</h3>
+  <p>2026年3月期は営業利益12.8億円に対して経常利益22.3億円。差の約9.4億円は主に持分法による投資利益で、現金を伴わない。実際の営業キャッシュフローは純利益を大きく下回る。</p>
+
+  <figure>
+    <figcaption><b>純利益と営業キャッシュフロー</b>　単位:百万円。会計上の利益と入ってくる現金が乖離している。</figcaption>
+    <div class="chartbox">
+    <svg viewBox="0 0 720 320" role="img" aria-label="2024年3月期から2026年3月期の純利益と営業CFの比較棒グラフ。純利益658対営業CF190、907対176、1724対696。">
+      <g class="ax" text-anchor="end">
+        <line class="grid" x1="70" y1="260" x2="660" y2="260"/>
+        <line class="grid" x1="70" y1="200" x2="660" y2="200"/>
+        <line class="grid" x1="70" y1="140" x2="660" y2="140"/>
+        <line class="grid" x1="70" y1="80" x2="660" y2="80"/>
+        <line class="grid" x1="70" y1="20" x2="660" y2="20"/>
+        <text x="64" y="264">0</text>
+        <text x="64" y="204">500</text>
+        <text x="64" y="144">1,000</text>
+        <text x="64" y="84">1,500</text>
+        <text x="64" y="24">2,000</text>
+      </g>
+      <line class="base" x1="70" y1="260" x2="660" y2="260"/>
+
+      <!-- 2024.03 : center 180 -->
+      <rect x="126" y="181" width="48" height="79" rx="4" fill="#eb6834"/>
+      <text class="val" x="150" y="174" text-anchor="middle">658</text>
+      <rect x="178" y="237" width="48" height="23" rx="4" fill="#2a78d6"/>
+      <text class="val" x="202" y="230" text-anchor="middle">190</text>
+      <text class="ax" x="176" y="280" text-anchor="middle">2024年3月期</text>
+
+      <!-- 2025.03 : center 365 -->
+      <rect x="311" y="151" width="48" height="109" rx="4" fill="#eb6834"/>
+      <text class="val" x="335" y="144" text-anchor="middle">907</text>
+      <rect x="363" y="239" width="48" height="21" rx="4" fill="#2a78d6"/>
+      <text class="val" x="387" y="232" text-anchor="middle">176</text>
+      <text class="ax" x="361" y="280" text-anchor="middle">2025年3月期</text>
+
+      <!-- 2026.03 : center 550 -->
+      <rect x="496" y="53" width="48" height="207" rx="4" fill="#eb6834"/>
+      <text class="val" x="520" y="46" text-anchor="middle">1,724</text>
+      <rect x="548" y="177" width="48" height="83" rx="4" fill="#2a78d6"/>
+      <text class="val" x="572" y="170" text-anchor="middle">696</text>
+      <text class="ax" x="546" y="280" text-anchor="middle">2026年3月期</text>
+
+      <text class="axname" x="70" y="304">単位：百万円</text>
+    </svg>
+    </div>
+    <div class="legend">
+      <span><i style="background:#eb6834"></i>親会社株主に帰属する当期純利益</span>
+      <span><i style="background:#2a78d6"></i>営業キャッシュフロー</span>
+    </div>
+  </figure>
+
+  <p>しかも投資CFは毎年マイナス（他社株の買い増し）、財務CFはプラス（借入）。<b>借金で上場株を買い、持分法で利益を立て、現金は外に出ない</b>という循環になっている。配当総額は年2,700万円ほどで、純利益17.2億円に対して1.6%にすぎない。</p>
+
+  <h3>PBR0.39倍はレバレッジが作った見かけの安さ</h3>
+  <ul>
+    <li>純資産245.7億円のうち、自己資本は169.1億円、非支配株主持分が76.6億円。</li>
+    <li>有利子負債106.7億円、現金18.0億円。時価総額66.3億円にネットデット88.7億円を足すとEVは約155億円で、営業利益12.8億円に対して<b>EV/EBIT約12倍</b>。事業そのものは割安ではない。</li>
+    <li>自己資本169.1億円のうち株主資本は119.5億円。差額の約50億円は保有上場株の含み益（その他の包括利益累計額）。<b>含み益を除いた実質PBRは0.55倍</b>で、BPSは日本株相場に連動する。</li>
+  </ul>
+  <p>2027年3月期1Qの包括利益は0.9億円まで急減しており、相場が崩れればBPSも戻る。</p>
+
+  <h3>ガバナンスの履歴</h3>
+  <ul>
+    <li><b>2020年9月</b>　金融庁が課徴金1,200万円の納付命令。平成29年3月期・平成30年3月期の有価証券報告書で、会社と役員との重要な取引を関連当事者情報に注記していなかった。証券取引等監視委員会の勧告を会社側は争わず認めている。</li>
+    <li><b>2022年5月〜7月</b>　令和4年3月期の決算発表を延期（5/27発表）、6/8に短信訂正、7/14に「財務報告に係る内部統制の開示すべき重要な不備」を開示。</li>
+    <li>会長・佐々木ベジ氏と社長・奥山一寸法師氏は実の兄弟（長男と三男）。監査法人はふじみ監査法人。</li>
+  </ul>
+
+  <h3>流動性と需給</h3>
+  <p>2026年9月17日の出来高は48,000株、売買代金700万円。信用買い残107万株・信用倍率62.4倍で、「割安だから」と買った個人の買い残が上値の重石になっている。数十万円規模を超えるポジションは現実的に建てにくい。</p>
+</section>
+
+<!-- ============ 06 投資の型 ============ -->
+<section class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+  <h2 class="sec">投資の型 ― どこに窓があるか</h2>
+  <p class="sec-note">この構図から導かれる、再現性のある入り方と降り方。</p>
+
+  <h3>窓は「支配が完成する前」にしか開かない</h3>
+  <ol class="steps">
+    <li><b>フリージア系が5%を超えて登場する。</b>大量保有報告書の提出で公開される。ここが観測の起点。</li>
+    <li><b>買い増しが続き、経営陣が防衛に動く。</b>買収防衛策の導入・継続、株主総会検査役の選任、そして<b>増配</b>。東京ソワールが今ここにいる。</li>
+    <li><b>還元が出て株価が見直される。</b>日邦産業はDOE 1.0%→8.1%、PBR0.19倍→1.91倍。ここが果実の取りどころ。</li>
+    <li><b>保有比率が25%を超え、経営権が移る。</b>配当が名目額で固定され、DOEは0.5%以下に落ちる。<b>ここが降りる場所</b>。協和コンサルタンツ、ソレキア、技研HDはすでにこの先にいる。</li>
+  </ol>
+
+  <div class="callout">
+    <span class="lbl">売りのシグナル</span>
+    <p>フリージア系の保有比率が<b>25%を超えた変更報告書</b>、または<b>取締役の派遣・買収防衛策の廃止</b>。この時点で還元ストーリーは終わったと見るのが、過去10社の実績に照らして妥当。</p>
+  </div>
+
+  <h3>いま観測するなら</h3>
+  <div class="two">
+    <div class="card">
+      <h4>東京ソワール（8040）</h4>
+      <p style="font-size:13px;color:var(--ink-2)">ステップ2〜3の途中。監視すべきは、①フリージアの保有比率（2021年6月の16.72%から更新があるか）、②買収防衛策の継続可否、③2026年12月期の配当（45円を維持・増額できるか）。時価総額40億円で流動性も薄いので、サイズは絞る。</p>
+    </div>
+    <div class="card">
+      <h4>ツカモト（8025）</h4>
+      <p style="font-size:13px;color:var(--ink-2)">PBR0.30倍と最安だが、5年間の買い増しに対して還元は無反応。ROE0.86%が本質的な問題で、還元が出るには資産（不動産・投資有価証券）の再評価か売却が要る。<b>買い増しペースが加速するか</b>が観測点。</p>
+    </div>
+  </div>
+
+  <h3>この型のリスク</h3>
+  <ul>
+    <li><b>支配が先に完成する。</b>増配が出る前に25%を超えられると、そのまま数年〜十数年の凍結に入る。協和コンサルタンツは36.53%（2021年）から48.1%（2026年）まで静かに買い進められた。</li>
+    <li><b>安値での締め出し。</b>完全子会社化やMBOが起きた場合、少数株主が受け取るのは低いPBR水準での価格になりうる。ウライ（2658）は2016年以降データが途絶えており、非公開化されている。</li>
+    <li><b>流動性。</b>対象の多くが時価総額30〜90億円で、東京ソワールの売買代金は日によって数百万円台。降りたいときに降りられない。</li>
+    <li><b>グループ内移管で構図が変わる。</b>ラピーヌは32.57%→2.42%、日建工学は12.43%→2.77%と、2026年に入って保有主体が動いている。フリージア・マクロス名義の比率だけを追っていると実態を見誤る。</li>
+  </ul>
+
+  <h3>結局、6343そのものは</h3>
+  <p>この10社を眺めたあとでは、フリージア・マクロス本体（6343）を買う理由はいっそう薄く見える。PER4.1倍・PBR0.39倍は本物だが、その安さを解消する経路は<b>62%を握る支配株主によって塞がれている</b>。そして本体自身のDOEは0.16%で、保有先に対する姿勢とまったく同じものが自社にも向けられている。</p>
+  <p>買うべきは<b>買う側ではなく、買われている側</b>。それも、まだ買い切られていない側。</p>
+
+  <div class="foot">
+    <p><b>主な出所</b></p>
+    <ol>
+      <li>各社 有価証券報告書・決算短信（2026年9月時点の最新版）</li>
+      <li>フリージア・マクロス 大量保有報告書・変更報告書（IRBANK 投資先一覧 / E01620）</li>
+      <li>株探（kabutan.jp）各社 基本情報・決算・大株主ページ ― 株価・時価総額・PER・PBR（2026年9月14〜17日時点）</li>
+      <li>IRBANK 各社 配当金の推移ページ ― 1株配当・配当性向・配当総額・純資産配当率</li>
+      <li>金融庁「フリージア・マクロス（株）における有価証券報告書の不記載に対する課徴金納付命令の決定について」（2020年9月11日）</li>
+      <li>東京ソワール 適時開示「フリージア・マクロス株式会社及びその関係者による大規模買付行為等の対応方針（買収防衛策）の継続に関するお知らせ」（2025年2月14日）ほか</li>
+    </ol>
+    <p style="margin-top:14px">沼底バリュー商会 / 2026年9月17日作成</p>
+  </div>
+
+  <div class="disclaim">本レポートは公開情報の整理であり、投資助言ではありません。筆者は金融商品取引業者ではなく、特定銘柄の売買を推奨するものではありません。レターグレードは筆者の主観的な整理であり、将来の株価を示唆するものではありません。投資判断はご自身の責任でお願いします。</div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = tabs.map(function(t){ return document.getElementById(t.getAttribute('aria-controls')); });
+
+  function select(i){
+    tabs.forEach(function(t, j){
+      t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+      panels[j].hidden = (j !== i);
+    });
+    try { localStorage.setItem('freesia-tab', String(i)); } catch(e) {}
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){
+      select(i);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  n = (i - 1 + tabs.length) % tabs.length;
+      if (n !== null) { e.preventDefault(); tabs[n].focus(); select(n); }
+    });
+  });
+
+  try {
+    var saved = parseInt(localStorage.getItem('freesia-tab'), 10);
+    if (!isNaN(saved) && saved >= 0 && saved < tabs.length) select(saved);
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>

@@ -324,6 +324,8 @@ draft: false
 
 [東京ソワール（8040）完全版レポート](https://numasoko-value.com/analysis/tokyo-soir-8040.html)——8回の届出の記録、防衛策と検査役の年表、上場維持基準の適合過程、フリージア系10社の地図、6軸の採点と検算メモまで。
 
+あわせて、第6章のもとになった特集レポートも置いています——[フリージア銘柄の還元地図（2026年9月17日）](https://numasoko-value.com/analysis/freesia-kangen-map.html)。**10社すべてを一次資料で再検証したものではない**ので、参考として読んでください。
+
 </details>
 
 *関連：[ネットキャッシュ比率が高い21社を清原式で測り直した](/blog/netcash-ratio-21-deep-value-screening-2026-09/)／[アクティビストの先回り①](/blog/activist-front-running-01/)／[シケモク株特集](/blog/cigar-butt-special-2026/)*
