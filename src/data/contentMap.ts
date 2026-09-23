@@ -87,6 +87,7 @@ export const contentThemes: ContentTheme[] = [
       'activist-front-running-01',
       'activist-front-running-02',
       'activist-front-running-03',
+      'tokyo-soir-8040',
       'nssol-2327',
       'nihon-bs-hoso-9414',
       'value-tob-strategy-2026',
