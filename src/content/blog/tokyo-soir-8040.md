@@ -180,6 +180,10 @@ draft: false
 
 🦑<strong>墨田</strong>「<span class="t-amber">この3社のDOEは、当商会がIRBANKの配当推移ページで直接確認しました。</span>ただし<strong>フリージア系10社の全体像は、社内で作成した特集レポートの整理であって、10社すべてを一次資料で検証したわけではありません</strong>」
 
+> 📎 **その特集レポートを、そのまま置いておきます**
+> [フリージア銘柄の還元地図（2026年9月17日作成）](https://numasoko-value.com/analysis/freesia-kangen-map.html)
+> 10社のDOE・保有比率・カルテを1枚にまとめたものです。**10社すべてを一次資料で再検証したものではない**ので、参考として読んでください。東京ソワールの数字は、[完全版レポート](https://numasoko-value.com/analysis/tokyo-soir-8040.html)で取り直した値が最新です。
+
 🦑<strong>墨田</strong>「そしてもう一つ。<strong>『買われたから増配した』という因果は、証明されていません。</strong>同じ時期に業績が戻った影響も、コロナ後の復配という説明もつきます。<span class="t-red">当商会が言えるのは『握られた会社では還元が伸びていない』という相関までです</span>」
 
 🦦<strong>河内</strong>「<strong>それでも、見るところが1つ増えたのは確かです</strong>。<span class="t-blue">安さに加えて、誰がどれだけ持っているかを見る</span>」
