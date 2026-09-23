@@ -8,3 +8,8 @@ export const SITE_DESCRIPTION = '野村の錬金術　〜低金利×レバレッ
 // 空のあいだは広告タグを一切出力しない。審査を申し込んで発行者IDが出たらここに入れる。
 // 同じIDで public/ads.txt も更新すること（Google の管理画面が出す1行をそのまま貼る）。
 export const ADSENSE_CLIENT = 'ca-pub-9105380194418431';
+
+// 広告ユニットの枠ID（AdSenseの管理画面で作ると出る数字だけの値）。
+// 審査が通ってから入れる。空のあいだは AdUnit が何も描画しない。
+export const ADSENSE_SIDEBAR_SLOT = '';
+export const ADSENSE_ARTICLE_SLOT = '';

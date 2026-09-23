@@ -1,0 +1,62 @@
+---
+// Google AdSense の広告ユニット。
+// consts.ts の ADSENSE_CLIENT と、渡された slot の両方がそろったときだけ出力する。
+// 審査中や枠IDが未設定のあいだは何も描画しないので、空の箱が残らない。
+import { ADSENSE_CLIENT } from '../consts';
+
+interface Props {
+	slot: string;
+	layout?: 'sidebar' | 'article';
+	label?: string;
+}
+
+const { slot, layout = 'article', label = '広告' } = Astro.props;
+const active = Boolean(ADSENSE_CLIENT && slot);
+---
+
+{active && (
+	<div class:list={['ad-unit', `ad-${layout}`]}>
+		<span class="ad-label">{label}</span>
+		<ins
+			class="adsbygoogle"
+			style="display:block"
+			data-ad-client={ADSENSE_CLIENT}
+			data-ad-slot={slot}
+			data-ad-format="auto"
+			data-full-width-responsive="true"
+		></ins>
+		<script is:inline>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+)}
+
+<style>
+	.ad-unit {
+		display: block;
+		margin: 0;
+	}
+	.ad-label {
+		display: block;
+		font-size: 0.55em;
+		letter-spacing: 0.08em;
+		opacity: 0.55;
+		margin-bottom: 0.3em;
+	}
+	/* 広告が返らなかったときは枠ごと消す（空白の箱を残さない） */
+	.ad-unit:has(ins[data-ad-status='unfilled']) {
+		display: none;
+	}
+	.ad-article {
+		margin: 2.5em auto;
+		max-width: 720px;
+		text-align: center;
+	}
+	.ad-article .ad-label {
+		font-size: 0.7em;
+		color: rgb(var(--gray));
+	}
+	.ad-sidebar ins {
+		min-height: 250px;
+	}
+</style>
