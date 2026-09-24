@@ -38,10 +38,94 @@ const customPages = [
 	`${SITE}/holdings`, // 保有総括ページ（public/holdings.html）
 ];
 
+
+// ── 会話行にキャラの顔アイコンを差し込む ─────────────────────────
+// 記事本文は書き換えず、ビルド時に「絵文字＋<strong>名前</strong>「…」」の段落を
+// <img class="speaker-icon"> 付きに変換する。画像のない脇役（野村・教祖・小猿など）は
+// 絵文字のまま残す。名前の表記ゆれ（日向（見習い）など）もここで吸収する。
+const SPEAKER_ICONS = {
+	沼田: 'numata',
+	夜見: 'yomi',
+	守田: 'morita',
+	日向: 'hinata',
+	'日向（見習い）': 'hinata',
+	河内: 'kawachi',
+	待伏: 'machibuse',
+	堀田: 'hotta',
+	墨田: 'sumida',
+	花岡: 'hanaoka',
+	優田: 'yuda',
+	鸚鵡: 'oumu',
+	オルカン鸚鵡: 'oumu',
+};
+
+// 絵文字だけの短い文字列か（日本語・英数字・鉤括弧を含まない）
+const EMOJI_ONLY = /^[^぀-ヿ一-鿿A-Za-z0-9「」]+$/;
+
+function decorateSpeaker(node) {
+	const kids = node.children;
+	if (!kids || kids.length < 2) return;
+	const lead = kids[0];
+	if (lead.type !== 'text' || !lead.value.trim() || !EMOJI_ONLY.test(lead.value.trim())) return;
+	// ① **名前** と書かれた記事 … <strong>要素として届く
+	// ② <strong>名前</strong> と直接書かれた記事 … raw ノードとして届く
+	//   （太字の事故対策でHTMLに置き換えた記事があるため、両方拾う）
+	let name = null;
+	const strong = kids[1];
+	if (strong && strong.type === 'element' && strong.tagName === 'strong') {
+		name = strong.children?.[0]?.value?.trim();
+	} else if (strong && strong.type === 'raw' && strong.value.startsWith('<strong>')) {
+		const inline = strong.value.slice('<strong>'.length);
+		name = (inline || kids[2]?.value || '').replace('</strong>', '').trim();
+	}
+	const id = SPEAKER_ICONS[name];
+	if (!id) return;
+	const body = {
+		type: 'element',
+		tagName: 'span',
+		properties: { className: ['say-body'] },
+		children: kids.slice(1),
+	};
+	node.children = [
+		{
+			type: 'element',
+			tagName: 'img',
+			properties: {
+				src: `/images/chars/${id}.webp`,
+				alt: name,
+				width: 64,
+				height: 64,
+				loading: 'lazy',
+				decoding: 'async',
+				className: ['speaker-icon'],
+			},
+			children: [],
+		},
+		body,
+	];
+	node.properties = node.properties || {};
+	const cls = node.properties.className || [];
+	node.properties.className = [...(Array.isArray(cls) ? cls : [cls]), 'say', `say-${id}`];
+}
+
+function rehypeSpeakerIcons() {
+	return (tree) => {
+		const walk = (node) => {
+			if (!node.children) return;
+			for (const child of node.children) {
+				if (child.type === 'element' && child.tagName === 'p') decorateSpeaker(child);
+				walk(child);
+			}
+		};
+		walk(tree);
+	};
+}
+
 // https://astro.build/config
 export default defineConfig({
 	site: SITE,
 	integrations: [mdx(), sitemap({ customPages })],
+	markdown: { rehypePlugins: [rehypeSpeakerIcons] },
 	fonts: [
 		{
 			provider: fontProviders.local(),

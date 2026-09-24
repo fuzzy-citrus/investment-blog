@@ -261,3 +261,33 @@ hr {
 .t-green { color: #276749; font-weight: 700; }   /* 好材料・お宝・結論ポジティブ */
 .t-amber { color: #9a6700; font-weight: 700; }   /* 注意・条件付き */
 .t-blue  { color: #1c5d99; font-weight: 700; }   /* 中立の重要ポイント */
+
+/* ── 会話行のキャラアイコン（astro.config.mjs の rehypeSpeakerIcons が付与） ── */
+.prose p.say {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.55em;
+	margin-block: 0.9em;
+}
+.prose p.say .speaker-icon {
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	flex: 0 0 auto;
+	margin: -0.15em 0 0 0;
+	background: rgba(0, 0, 0, 0.035);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.prose p.say .say-body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+@media (max-width: 600px) {
+	.prose p.say {
+		gap: 0.45em;
+	}
+	.prose p.say .speaker-icon {
+		width: 2.1em;
+		height: 2.1em;
+	}
+}
