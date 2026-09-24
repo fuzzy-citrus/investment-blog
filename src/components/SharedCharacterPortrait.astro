@@ -1,0 +1,24 @@
+---
+import assets from '../data/sharedCastAssets.json';
+interface Props { id: string; name: string; compact?: boolean; }
+const { id, name, compact = false } = Astro.props;
+const preferred: Record<string, string> = {
+  numata: 'numata-facing-right-v1', nomura: 'nomura-facing-right-v1',
+  hinata: 'hinata-facing-right-v1', kawachi: 'kawachi-facing-right-v1',
+  yomi: 'yomi-facing-right-v1', morita: 'morita-facing-right-v1',
+  machibuse: 'machibuse-facing-right-v1', hotta: 'hotta-present-v1',
+  hanaoka: 'hanaoka-facing-right-v1', yuda: 'yuda-facing-right-v1',
+  sumida: 'sumida-facing-right-v1',
+};
+const art = assets.find(asset => asset.id === preferred[id]);
+---
+{art && <div class:list={['shared-portrait', { compact }]}>
+  <img src={art.src} alt={`${name}の全身イラスト`} width={art.width} height={art.height} loading="lazy" decoding="async" />
+</div>}
+<style>
+  .shared-portrait { flex: 0 0 170px; width: 170px; height: 230px; display: flex; align-items: center; justify-content: center; }
+  .shared-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .shared-portrait.compact { width: 64px; height: 64px; flex-basis: auto; overflow: hidden; border-radius: 50%; margin: 0 auto; align-items: flex-start; }
+  .shared-portrait.compact img { width: 100px; height: 150px; max-width: none; flex-shrink: 0; object-fit: contain; }
+  @media (max-width: 600px) { .shared-portrait { width: 150px; height: 190px; flex-basis: auto; align-self: center; } }
+</style>

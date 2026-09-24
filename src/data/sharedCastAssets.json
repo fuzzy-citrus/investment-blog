@@ -1,0 +1,557 @@
+[
+  {
+    "id": "hanaoka-explain-v1",
+    "src": "/images/shared-cast-20260925/hanaoka-explain-v1.webp",
+    "name": "花岡 利次郎",
+    "purpose": "配当の説明",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "hanaoka"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "hanaoka-facing-right-v1",
+    "src": "/images/shared-cast-20260925/hanaoka-facing-right-v1.webp",
+    "name": "花岡 利次郎",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "hanaoka"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "hinata-delighted-v1",
+    "src": "/images/shared-cast-20260925/hinata-delighted-v1.webp",
+    "name": "日向 昇",
+    "purpose": "納得・発見",
+    "width": 1205,
+    "height": 1305,
+    "characterIds": [
+      "hinata"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "hinata-facing-right-v1",
+    "src": "/images/shared-cast-20260925/hinata-facing-right-v1.webp",
+    "name": "日向 昇",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1145,
+    "height": 1374,
+    "characterIds": [
+      "hinata"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "hinata-puzzled-v1",
+    "src": "/images/shared-cast-20260925/hinata-puzzled-v1.webp",
+    "name": "日向 昇",
+    "purpose": "疑問・考え中",
+    "width": 1176,
+    "height": 1337,
+    "characterIds": [
+      "hinata"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "hinata-question-v1",
+    "src": "/images/shared-cast-20260925/hinata-question-v1.webp",
+    "name": "日向 昇",
+    "purpose": "問いかけ・発言",
+    "width": 1145,
+    "height": 1374,
+    "characterIds": [
+      "hinata"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "hotta-facing-left-v1",
+    "src": "/images/shared-cast-20260925/hotta-facing-left-v1.webp",
+    "name": "堀田 独占",
+    "purpose": "左向き（画面右に配置）",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "hotta"
+    ],
+    "kind": "立ち絵",
+    "facing": "left",
+    "status": "ready"
+  },
+  {
+    "id": "hotta-present-v1",
+    "src": "/images/shared-cast-20260925/hotta-present-v1.webp",
+    "name": "堀田 独占",
+    "purpose": "事業と競合優位性の説明",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "hotta"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "kawachi-discover-v1",
+    "src": "/images/shared-cast-20260925/kawachi-discover-v1.webp",
+    "name": "河内 拾造",
+    "purpose": "割安発掘・提案",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "kawachi"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "kawachi-facing-right-v1",
+    "src": "/images/shared-cast-20260925/kawachi-facing-right-v1.webp",
+    "name": "河内 拾造",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "kawachi"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "machibuse-facing-right-v1",
+    "src": "/images/shared-cast-20260925/machibuse-facing-right-v1.webp",
+    "name": "待伏 静江",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "machibuse"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "machibuse-think-v1",
+    "src": "/images/shared-cast-20260925/machibuse-think-v1.webp",
+    "name": "待伏 静江",
+    "purpose": "考察・待機",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "machibuse"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "meeting-opening-v1",
+    "src": "/images/shared-cast-20260925/meeting-opening-v1.webp",
+    "name": "会議風景",
+    "purpose": "導入の別カット・試作",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [],
+    "kind": "背景",
+    "facing": "original",
+    "status": "prototype"
+  },
+  {
+    "id": "meeting-room-v1",
+    "src": "/images/shared-cast-20260925/meeting-room-v1.webp",
+    "name": "背景",
+    "purpose": "通常の会議・字幕合成",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [],
+    "kind": "背景",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "morita-approve-v1",
+    "src": "/images/shared-cast-20260925/morita-approve-v1.webp",
+    "name": "守田 退三",
+    "purpose": "了承・穏やかな結論",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "morita"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "morita-check-v1",
+    "src": "/images/shared-cast-20260925/morita-check-v1.webp",
+    "name": "守田 退三",
+    "purpose": "確認・指摘",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "morita"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "morita-facing-right-v1",
+    "src": "/images/shared-cast-20260925/morita-facing-right-v1.webp",
+    "name": "守田 退三",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "morita"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "nomura-facing-left-v1",
+    "src": "/images/shared-cast-20260925/nomura-facing-left-v1.webp",
+    "name": "野村 沼之助",
+    "purpose": "左向き（画面右に配置）",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "nomura"
+    ],
+    "kind": "立ち絵",
+    "facing": "left",
+    "status": "design-proposal"
+  },
+  {
+    "id": "nomura-facing-right-v1",
+    "src": "/images/shared-cast-20260925/nomura-facing-right-v1.webp",
+    "name": "野村 沼之助",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "nomura"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "design-proposal"
+  },
+  {
+    "id": "numata-explain-v1",
+    "src": "/images/shared-cast-20260925/numata-explain-v1.webp",
+    "name": "沼田 堅一",
+    "purpose": "説明・全体の整理",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "numata"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "numata-facing-left-v1",
+    "src": "/images/shared-cast-20260925/numata-facing-left-v1.webp",
+    "name": "沼田 堅一",
+    "purpose": "左向き（画面右に配置）",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "numata"
+    ],
+    "kind": "立ち絵",
+    "facing": "left",
+    "status": "ready"
+  },
+  {
+    "id": "numata-facing-right-v1",
+    "src": "/images/shared-cast-20260925/numata-facing-right-v1.webp",
+    "name": "沼田 堅一",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1024,
+    "height": 1536,
+    "characterIds": [
+      "numata"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "office-endcard-v1",
+    "src": "/images/shared-cast-20260925/office-endcard-v1.webp",
+    "name": "背景",
+    "purpose": "ブログ誘導・エンディング",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [],
+    "kind": "背景",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "research-board-v1",
+    "src": "/images/shared-cast-20260925/research-board-v1.webp",
+    "name": "背景",
+    "purpose": "図表・タイトル・用語解説",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [],
+    "kind": "背景",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-asset-discovery-v1",
+    "src": "/images/shared-cast-20260925/scene-asset-discovery-v1.webp",
+    "name": "河内 拾造",
+    "purpose": "資産を発掘する",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "kawachi"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-business-moat-v1",
+    "src": "/images/shared-cast-20260925/scene-business-moat-v1.webp",
+    "name": "堀田 独占",
+    "purpose": "事業の強みを考える",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "hotta"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-dividend-care-v1",
+    "src": "/images/shared-cast-20260925/scene-dividend-care-v1.webp",
+    "name": "花岡 利次郎",
+    "purpose": "配当の持続性を育てる",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "hanaoka"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-financial-review-v1",
+    "src": "/images/shared-cast-20260925/scene-financial-review-v1.webp",
+    "name": "夜見 賢三",
+    "purpose": "決算資料を読み比べる",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "yomi"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-patient-research-v1",
+    "src": "/images/shared-cast-20260925/scene-patient-research-v1.webp",
+    "name": "待伏 静江",
+    "purpose": "待ちながら検証する",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "machibuse"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "scene-risk-discussion-v1",
+    "src": "/images/shared-cast-20260925/scene-risk-discussion-v1.webp",
+    "name": "守田 退三・日向 昇",
+    "purpose": "リスクを話し合う",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "morita",
+      "hinata"
+    ],
+    "kind": "場面",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "sumida-facing-right-v1",
+    "src": "/images/shared-cast-20260925/sumida-facing-right-v1.webp",
+    "name": "墨田 検二",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "sumida"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "sumida-verify-v1",
+    "src": "/images/shared-cast-20260925/sumida-verify-v1.webp",
+    "name": "墨田 検二",
+    "purpose": "一次資料の確認",
+    "width": 1254,
+    "height": 1254,
+    "characterIds": [
+      "sumida"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "thumbnail-meeting-intro-v1",
+    "src": "/images/shared-cast-20260925/thumbnail-meeting-intro-v1.webp",
+    "name": "日向 昇・守田 退三",
+    "purpose": "買う前に、会議です。",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "hinata",
+      "morita"
+    ],
+    "kind": "サムネイル",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "thumbnail-value-question-v1",
+    "src": "/images/shared-cast-20260925/thumbnail-value-question-v1.webp",
+    "name": "日向 昇・守田 退三",
+    "purpose": "その株、本当に安い？",
+    "width": 1672,
+    "height": 941,
+    "characterIds": [
+      "hinata",
+      "morita"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "yomi-explain-v1",
+    "src": "/images/shared-cast-20260925/yomi-explain-v1.webp",
+    "name": "夜見 賢三",
+    "purpose": "財務の説明",
+    "width": 1223,
+    "height": 1286,
+    "characterIds": [
+      "yomi"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "yomi-facing-left-v1",
+    "src": "/images/shared-cast-20260925/yomi-facing-left-v1.webp",
+    "name": "夜見 賢三",
+    "purpose": "左向き（画面右に配置）",
+    "width": 1223,
+    "height": 1286,
+    "characterIds": [
+      "yomi"
+    ],
+    "kind": "立ち絵",
+    "facing": "left",
+    "status": "ready"
+  },
+  {
+    "id": "yomi-facing-right-v1",
+    "src": "/images/shared-cast-20260925/yomi-facing-right-v1.webp",
+    "name": "夜見 賢三",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1223,
+    "height": 1286,
+    "characterIds": [
+      "yomi"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  },
+  {
+    "id": "yomi-scrutinize-v1",
+    "src": "/images/shared-cast-20260925/yomi-scrutinize-v1.webp",
+    "name": "夜見 賢三",
+    "purpose": "資料の精査",
+    "width": 1240,
+    "height": 1268,
+    "characterIds": [
+      "yomi"
+    ],
+    "kind": "表情",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "yuda-check-v1",
+    "src": "/images/shared-cast-20260925/yuda-check-v1.webp",
+    "name": "優田 雅代",
+    "purpose": "優待条件の確認",
+    "width": 1145,
+    "height": 1374,
+    "characterIds": [
+      "yuda"
+    ],
+    "kind": "立ち絵",
+    "facing": "original",
+    "status": "ready"
+  },
+  {
+    "id": "yuda-facing-right-v1",
+    "src": "/images/shared-cast-20260925/yuda-facing-right-v1.webp",
+    "name": "優田 雅代",
+    "purpose": "右向き（画面左に配置）",
+    "width": 1145,
+    "height": 1374,
+    "characterIds": [
+      "yuda"
+    ],
+    "kind": "立ち絵",
+    "facing": "right",
+    "status": "ready"
+  }
+]
