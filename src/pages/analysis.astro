@@ -1,0 +1,171 @@
+---
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// 完全版レポートは public/analysis/*.html（Astroのページではない静的HTML）。
+// 公開記事から参照されているものだけを一覧に出す（下書きの在庫・孤立HTMLは出さない）。
+const ANALYSIS_DIR = './public/analysis';
+const files = readdirSync(ANALYSIS_DIR).filter((f) => f.endsWith('.html'));
+
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+const referencedBy = new Map();
+for (const post of posts) {
+	const body = post.body ?? '';
+	const hay = `${body} ${post.data.noteUrl ?? ''}`;
+	for (const m of hay.matchAll(/\/analysis\/([A-Za-z0-9-]+)/g)) {
+		if (!referencedBy.has(m[1])) referencedBy.set(m[1], post);
+	}
+}
+
+const reports = files
+	.map((f) => {
+		const slug = f.replace(/\.html$/, '');
+		const html = readFileSync(join(ANALYSIS_DIR, f), 'utf8').slice(0, 6000);
+		const title = (html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? slug)
+			.replace(/｜沼底バリュー商会/g, '')
+			.trim();
+		const post = referencedBy.get(slug);
+		return {
+			slug,
+			title,
+			post,
+			updated: statSync(join(ANALYSIS_DIR, f)).mtime,
+			size: Math.round(statSync(join(ANALYSIS_DIR, f)).size / 1024),
+		};
+	})
+	.filter((r) => r.post)
+	.sort((a, b) => b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf());
+
+const fmt = (d) => new Date(d).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title="完全版レポート一覧 | 沼底バリュー商会"
+			description={`銘柄記事の裏側にある完全版の分析レポート${reports.length}本を一覧にしました。NAV・含み益・借入構造・6軸の採点・検算メモまで、記事に載せきれなかった検証をそのまま置いています。`}
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>完全版レポート</h1>
+			<p class="lead">
+				銘柄記事の裏側にある分析レポートです。記事に載せきれなかったNAVの内訳、含み益の推計、借入構造、6軸の採点、検算メモまでを1枚のページにまとめています。全{reports.length}本、すべて無料で読めます。
+			</p>
+
+			<ul class="report-list">
+				{reports.map((r) => (
+					<li class="report">
+						<a class="report-main" href={`/analysis/${r.slug}`}>
+							<span class="report-title">{r.title}</span>
+							<span class="report-meta">{fmt(r.post.data.pubDate)}公開 ／ {r.size}KB</span>
+						</a>
+						<a class="report-article" href={`/blog/${r.post.id}/`}>
+							📝 記事を読む
+						</a>
+					</li>
+				))}
+			</ul>
+
+			<p class="note">
+				※ 数値は各レポートに記載した基準日時点のものです。投資助言ではありません。最新の株価・指標は必ずご自身でご確認ください。
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 2em 1em 3.5em;
+		line-height: 1.8;
+	}
+	h1 {
+		font-size: 1.7em;
+		margin-bottom: 0.3em;
+	}
+	.lead {
+		color: rgb(var(--gray));
+		font-size: 0.95em;
+		margin-bottom: 2em;
+	}
+	.report-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.6em;
+	}
+	.report {
+		display: flex;
+		align-items: stretch;
+		gap: 0.6em;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: 8px;
+		background: white;
+		overflow: hidden;
+		transition: box-shadow 0.15s, transform 0.15s;
+	}
+	.report:hover {
+		box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+		transform: translateY(-1px);
+	}
+	.report-main {
+		flex: 1 1 auto;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.15em;
+		padding: 0.85em 1em;
+		text-decoration: none;
+		color: inherit;
+	}
+	.report-title {
+		font-weight: 700;
+		font-size: 0.97em;
+		line-height: 1.5;
+	}
+	.report-meta {
+		font-size: 0.78em;
+		color: rgb(var(--gray));
+	}
+	.report-article {
+		flex: 0 0 auto;
+		display: flex;
+		align-items: center;
+		padding: 0 1em;
+		font-size: 0.8em;
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--accent-dark, #1a6640);
+		background: rgba(0, 0, 0, 0.03);
+		border-left: 1px solid rgba(0, 0, 0, 0.07);
+		white-space: nowrap;
+	}
+	.report-article:hover {
+		background: rgba(0, 0, 0, 0.06);
+	}
+	.note {
+		margin-top: 2.5em;
+		font-size: 0.82em;
+		color: rgb(var(--gray));
+	}
+	@media (max-width: 600px) {
+		.report {
+			flex-direction: column;
+		}
+		.report-article {
+			border-left: none;
+			border-top: 1px solid rgba(0, 0, 0, 0.07);
+			padding: 0.5em 1em;
+		}
+	}
+</style>

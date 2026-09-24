@@ -10,6 +10,8 @@ const trainee = characters.find(c => c.team === 'trainee')!;
 const teamA   = characters.filter(c => c.team === 'teamA');
 const teamB   = characters.filter(c => c.team === 'teamB');
 const cross   = characters.filter(c => c.team === 'cross');
+const ART = new Set(['numata','hinata','kawachi','yomi','hotta','machibuse','hanaoka','yuda','morita','sumida']);
+
 ---
 
 <!doctype html>
@@ -34,7 +36,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           <div class="side-row">
             <a href={`/characters#${founder.id}`} class="card-link main-card-link">
             <div class="card card-founder">
-              <div class="avatar" style={`background:${founder.avatarColor}`}>{founder.emoji}</div>
+              <div class={`avatar ${ART.has(founder.id) ? "has-art" : ""}`} style={`background:${founder.avatarColor}`}>{ART.has(founder.id) ? <img src={`/images/chars/${founder.id}.webp`} alt={founder.name} width="160" height="160" loading="lazy" decoding="async" /> : founder.emoji}</div>
               <div class="body">
                 <div class="name-row"><strong>{founder.name}</strong><span class="species">{founder.species}</span></div>
                 <p class="catch">{founder.catchphrase}</p>
@@ -68,7 +70,7 @@ const cross   = characters.filter(c => c.team === 'cross');
           <div class="side-row">
             <a href={`/characters#${manager.id}`} class="card-link main-card-link">
             <div class="card card-manager">
-              <div class="avatar" style={`background:${manager.avatarColor}`}>{manager.emoji}</div>
+              <div class={`avatar ${ART.has(manager.id) ? "has-art" : ""}`} style={`background:${manager.avatarColor}`}>{ART.has(manager.id) ? <img src={`/images/chars/${manager.id}.webp`} alt={manager.name} width="160" height="160" loading="lazy" decoding="async" /> : manager.emoji}</div>
               <div class="body">
                 <div class="name-row"><strong>{manager.name}</strong><span class="species">{manager.species}</span></div>
                 <p class="catch">{manager.catchphrase}</p>
@@ -83,7 +85,7 @@ const cross   = characters.filter(c => c.team === 'cross');
               <div class="side-scroll">
                 <a href={`/characters#${trainee.id}`} class="card-link">
                 <div class="card card-sm card-trainee">
-                  <div class="avatar sm" style={`background:${trainee.avatarColor}`}>{trainee.emoji}</div>
+                  <div class={`avatar sm ${ART.has(trainee.id) ? "has-art" : ""}`} style={`background:${trainee.avatarColor}`}>{ART.has(trainee.id) ? <img src={`/images/chars/${trainee.id}.webp`} alt={trainee.name} width="160" height="160" loading="lazy" decoding="async" /> : trainee.emoji}</div>
                   <div class="body">
                     <div class="name-row"><strong class="sm">{trainee.name}</strong><span class="species">{trainee.species}</span></div>
                     <p class="catch sm">{trainee.catchphrase}</p>
@@ -107,7 +109,7 @@ const cross   = characters.filter(c => c.team === 'cross');
             {teamA.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
-                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -133,7 +135,7 @@ const cross   = characters.filter(c => c.team === 'cross');
             {teamB.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
-                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -146,7 +148,7 @@ const cross   = characters.filter(c => c.team === 'cross');
             {cross.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm card-cross">
-                <div class="avatar sm" style={`background:${c.avatarColor}`}>{c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -365,6 +367,8 @@ const cross   = characters.filter(c => c.team === 'cross');
   .card-rival   { border: 1.5px dashed #ccc; background: #fafafa; }
 
   /* アバター */
+  .avatar.has-art { position: relative; overflow: hidden; padding: 0; }
+  .avatar.has-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .avatar {
     font-size: 1.6em;
     width: 2em; height: 2em;

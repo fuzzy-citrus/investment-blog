@@ -4,6 +4,7 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../../public/images/brand/numasoko-research-room-20260914.png';
+import { existsSync } from 'node:fs';
 import { SITE_TITLE, ADSENSE_CLIENT } from '../consts';
 import { Font } from 'astro:assets';
 
@@ -15,6 +16,11 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// 記事ごとのOGP画像（public/images/og/<slug>.jpg）があればそれを使う。
+// 画像は _ツール/make_og_images.py で生成（記事でいちばん話しているキャラを立たせる）。
+const slug = Astro.url.pathname.match(/^\/blog\/([^/]+)\/?$/)?.[1];
+const ogFile = slug && existsSync(`./public/images/og/${slug}.jpg`) ? `/images/og/${slug}.jpg` : null;
 
 const { title, description, image = FallbackImage, ogType = 'website' } = Astro.props;
 ---
@@ -69,7 +75,7 @@ const { title, description, image = FallbackImage, ogType = 'website' } = Astro.
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image" content={new URL(ogFile ?? image.src, Astro.url)} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content="ja_JP" />
 
@@ -80,7 +86,7 @@ const { title, description, image = FallbackImage, ogType = 'website' } = Astro.
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+<meta property="twitter:image" content={new URL(ogFile ?? image.src, Astro.url)} />
 
 <!-- JSON-LD: Organization -->
 <script type="application/ld+json" set:html={JSON.stringify({

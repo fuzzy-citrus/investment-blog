@@ -39,6 +39,8 @@ const idleAnim: Record<string, string> = {
 const opCast = [
   ...founder, ...manager, ...trainee, ...teamA, ...teamB, ...cross,
 ].map(c => ({ emoji: c.emoji, id: c.id }));
+const ART = new Set(['numata','hinata','kawachi','yomi','hotta','machibuse','hanaoka','yuda','morita','sumida','oumu']);
+
 ---
 
 <!doctype html>
@@ -82,8 +84,13 @@ const opCast = [
 
               {/* ── ヘッダー行 ── */}
               <div class="char-header">
-                <div class={`char-avatar ${idleAnim[c.id] ?? 'anim-bob'}`} style={`background: ${c.avatarColor}`}>
-                  {c.emoji}
+                <div class={`char-avatar ${idleAnim[c.id] ?? 'anim-bob'} ${ART.has(c.id) ? 'has-art' : ''}`} style={`background: ${c.avatarColor}`}>
+                  {ART.has(c.id) ? (
+                    <>
+                      <img class="face face-idle" src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" />
+                      <img class="face face-talk" src={`/images/chars/${c.id}_talk.webp`} alt="" aria-hidden="true" width="160" height="160" loading="lazy" decoding="async" />
+                    </>
+                  ) : c.emoji}
                 </div>
                 <div class="char-info">
                   <div class="char-role">{c.title}</div>
@@ -280,10 +287,22 @@ const opCast = [
     background: var(--card-color, #f5fdf8);
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
+  .char-avatar.has-art { position: relative; overflow: hidden; }
+  .char-avatar .face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.18s ease;
+  }
+  .char-avatar .face-talk { opacity: 0; }
+  .char-card:hover .char-avatar .face-idle { opacity: 0; }
+  .char-card:hover .char-avatar .face-talk { opacity: 1; }
   .char-avatar {
     font-size: 2.2em;
-    width: 2em;
-    height: 2em;
+    width: 2.6em;
+    height: 2.6em;
     display: flex;
     align-items: center;
     justify-content: center;
