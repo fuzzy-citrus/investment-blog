@@ -153,7 +153,9 @@ def check_frontmatter(fm, add):
 
 def check_price_date(fm, body, add):
     """本文の「YYYY年M月D日終値」を拾い、pubDate との乖離と currentPrice との整合を見る"""
-    pub = re.search(r'^pubDate:\s*"?(\d{4})-(\d{2})-(\d{2})', fm, re.M)
+    # 値札を更新した記事は updatedDate が基準。無ければ pubDate を使う。
+    pub = (re.search(r'^updatedDate:\s*"?(\d{4})-(\d{2})-(\d{2})', fm, re.M)
+           or re.search(r'^pubDate:\s*"?(\d{4})-(\d{2})-(\d{2})', fm, re.M))
     hits = re.findall(r'(\d{4})年(\d{1,2})月(\d{1,2})日終値\s*([\d,]+)?', body)
     if not hits:
         return

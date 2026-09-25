@@ -181,7 +181,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
                 <div class="rival-chips">
                   {org.members.map(m => (
                     <span class="rival-chip">
-                      {m.emoji} {m.name}
+                      <CastIcon id={m.id} name={m.name} /> {m.name}
                     </span>
                   ))}
                 </div>
@@ -425,6 +425,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
   }
   .rival-chips { display: flex; gap: 0.3em; flex-wrap: wrap; margin-top: 0.2em; }
   .rival-chip {
+    --cast-size: 32px; display: inline-flex; align-items: center; gap: 6px;
     font-size: 0.68em; color: rgb(var(--gray-dark));
     background: #ececec; padding: 0.1em 0.5em; border-radius: 3px;
   }

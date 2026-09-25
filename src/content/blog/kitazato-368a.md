@@ -3,22 +3,26 @@ title: "銘柄紹介｜北里コーポレーション（368A）— 生殖医療�
 description: "日本の体外受精（IVF）消耗品市場を独占し110ヵ国に展開。PER11.9倍・FCFイールド7.5%・自己資本比率93.2%・現金134億で上場来最低圏に放置。少子化対策39.1兆円の直接受益株。"
 cardDesc: "体外受精の消耗品市場を国内独占し110ヵ国へ展開。<span class='card-highlight'>PER11.9倍・自己資本比率93.2%</span>で上場来最低圏に放置されている。"
 pubDate: "2026-05-18"
+updatedDate: "2026-09-25T10:00:00+09:00"
 stockCard:
   investmentType: "ニッチトップ型"
   rating: "A-"
   ticker: "368A"
   companyName: "北里コーポレーション"
-  currentPrice: 1206
+  currentPrice: 1428
   targetPrice: 1700
-  upside: "+41〜+120%"
-  downside: "▲25%"
+  upside: "+19〜+86%"
+  downside: "▲37%"
   modifiedPBR: "2.35倍"
   category: "生殖医療（IVF）消耗品"
 related: ["holdings-status-02-kitazato-shinyei", "hidden-policy-stock-kitazato", "nihon-hospice-7061", "ryoyu-systems-4685"]
 noteUrl: "https://numasoko-value.com/analysis/368A.html"
 ---
 
-> 🔄 **ランク再評価（2026-09-13）**：2026年9月13日の価格更新点検を行い、管理上の現行ランクを **A→A−** に更新しました。評価基準を変えたのではなく、定期的な銘柄管理のための再評価です。
+> 🔄 **2026年9月25日の更新**
+> ・株価を**2026年9月24日終値 1,428円**に入れ替えました（公開時 1,206円、**+18.4%**）
+> ・上値は+41〜+120%→**+19〜+86%**、下値は▲25%→**▲37%**へ動いています。**目標株価と下値の「円」は変えていません**
+> ・**本文の分析と数字の置き方は、公開日（2026年5月18日）時点のままです**
 
 > 📈 **現況更新（2026-07-14）**：株価1,350円へ上昇（紹介時比+11.9%）——それでもまだ明確に安いと再評価し、現況ランクを<strong>A−→Aへ引き上げ</strong>。PFバランス調整で1,000株を1,340円で利確し3,400株ホールド中。詳細は[紹介銘柄の現況②（北里・神栄）](/blog/holdings-status-02-kitazato-shinyei/)へ。※本文の数値は紹介時（2026-05-18）のものです。
 
