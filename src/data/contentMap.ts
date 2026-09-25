@@ -187,6 +187,7 @@ export const contentThemes: ContentTheme[] = [
       'low-payout-internal-compounding',
       'august-september-rights-2026',
       'september-rights-spot-margin-2026',
+      'ex-rights-watchlist-2026sep',
       'towns-197a',
       'toyo-tec-9686',
       'yamau-hd-5284',

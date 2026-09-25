@@ -55,6 +55,58 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 });
 
 
+// メンバー紹介の設定を、トップページ向けの一言に要約。
+const memberHints = [
+  {
+    "id": "machibuse",
+    "name": "待伏 静江",
+    "role": "TOB発掘",
+    "reason": "ワニは、じっと待ち伏せ。狙った銘柄を見守り、TOBなどの変化の兆しを待ちます。"
+  },
+  {
+    "id": "kawachi",
+    "name": "河内 拾造",
+    "role": "割安発掘",
+    "reason": "カワウソの宝探し係。石の下をのぞくように、決算書に隠れた資産や含み益を探します。"
+  },
+  {
+    "id": "hotta",
+    "name": "堀田 独占",
+    "role": "競合優位性",
+    "reason": "ビーバーは自分でダムを作るから、モート（参入障壁）を重視。「競合がまねできない強み」を見抜きます。"
+  },
+  {
+    "id": "yomi",
+    "name": "夜見 賢三",
+    "role": "財務分析",
+    "reason": "フクロウは暗闇でも目が利く。目立たない決算書の注記まで読み込み、数字の裏側を確かめます。"
+  },
+  {
+    "id": "yuda",
+    "name": "優田 雅代",
+    "role": "株主優待",
+    "reason": "フラミンゴのように、バランスが大事。配当だけでなく優待も合わせて、お得さを見極めます。"
+  },
+  {
+    "id": "hanaoka",
+    "name": "花岡 利次郎",
+    "role": "高配当",
+    "reason": "ミツバチが蜜を集めるように、配当をこつこつ。「この配当は続く？」まで確かめる担当です。"
+  },
+  {
+    "id": "morita",
+    "name": "守田 退三",
+    "role": "リスク管理",
+    "reason": "ザリガニは後退が得意。買う前から「下がったらどうする？」を考える、商会のブレーキ役です。"
+  },
+  {
+    "id": "sumida",
+    "name": "墨田 検二",
+    "role": "AIチェック",
+    "reason": "イカの10本の腕で情報を照合するイメージ。AIの答えをうのみにせず、元の開示資料まで確かめます。"
+  }
+];
+
 ---
 
 <!doctype html>
@@ -212,39 +264,21 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 			<section class="members-teaser">
 				<h2>メンバー紹介</h2>
 				<p>バリュー商会には個性豊かな分析担当がいます</p>
+				<p class="member-hint-guide">キャラにカーソルを合わせるか、タップすると担当の由来が読めます。</p>
 				<div class="member-emojis">
-					<a href="/characters#machibuse" class="member-item">
-						<CastIcon id="machibuse" name="待伏 静江" />
-						<span class="member-role">TOB発掘</span>
-					</a>
-					<a href="/characters#kawachi" class="member-item">
-						<CastIcon id="kawachi" name="河内 拾造" />
-						<span class="member-role">割安発掘</span>
-					</a>
-					<a href="/characters#hotta" class="member-item">
-						<CastIcon id="hotta" name="堀田 独占" />
-						<span class="member-role">競合優位性</span>
-					</a>
-					<a href="/characters#yomi" class="member-item">
-						<CastIcon id="yomi" name="夜見 賢三" />
-						<span class="member-role">財務分析</span>
-					</a>
-					<a href="/characters#yuda" class="member-item">
-						<CastIcon id="yuda" name="優田 雅代" />
-						<span class="member-role">株主優待</span>
-					</a>
-					<a href="/characters#hanaoka" class="member-item">
-						<CastIcon id="hanaoka" name="花岡 利次郎" />
-						<span class="member-role">高配当</span>
-					</a>
-					<a href="/characters#morita" class="member-item">
-						<CastIcon id="morita" name="守田 退三" />
-						<span class="member-role">リスク管理</span>
-					</a>
-					<a href="/characters#sumida" class="member-item">
-						<CastIcon id="sumida" name="墨田 検二" />
-						<span class="member-role">AIチェック</span>
-					</a>
+					{memberHints.map(c => (
+						<details class="member-item">
+							<summary aria-label={`${c.name}：${c.role}を担当する理由`}>
+								<CastIcon id={c.id} name={c.name} />
+								<span class="member-role">{c.role}</span>
+							</summary>
+							<div class="member-note">
+								<strong>{c.name}</strong>
+								<p>{c.reason}</p>
+								<a href={`/characters#${c.id}`}>詳しい紹介を見る →</a>
+							</div>
+						</details>
+					))}
 				</div>
 				<a href="/org" class="all-posts-link">組織図で見る →</a>
 			</section>
@@ -859,38 +893,18 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 	.all-posts-link:hover {
 		color: var(--accent-dark);
 	}
-	.member-emojis {
-		display: flex;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		gap: 0.3em;
-		margin: 0.8em 0 1em;
-	}
-	.member-item {
-        --cast-size: 56px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.4em;
-		flex: 1;
-		min-width: 0;
-		text-decoration: none;
-		color: inherit;
-		border-radius: 8px;
-		padding: 0.3em 0;
-		transition: background 0.15s;
-	}
-	.member-item:hover {
-		background: rgba(29,158,117,0.08);
-	}
-
-	.member-role {
-		font-size: 0.62em;
-		color: rgb(var(--gray));
-		text-align: center;
-		line-height: 1.3;
-		word-break: keep-all;
-	}
+	.member-hint-guide { font-size: 0.7em; color: #57665e; margin: -0.4em 0 1em; }
+	.member-emojis { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.3em; margin: 0.8em 0 1em; }
+	.member-item { --cast-size: 56px; min-width: 0; }
+	.member-item summary { display: flex; flex-direction: column; align-items: center; gap: 0.4em; list-style: none; cursor: pointer; border-radius: 8px; padding: 0.3em 0; }
+	.member-item summary::-webkit-details-marker { display: none; }
+	.member-item summary:hover, .member-item[open] summary { background: #dfefe3; }
+	.member-item summary:focus-visible { outline: 2px solid #276749; outline-offset: 3px; }
+	.member-role { font-size: 0.62em; color: rgb(var(--gray)); text-align: center; line-height: 1.3; word-break: keep-all; }
+	.member-note { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; background: #fffdf5; border: 1px solid #dfc985; border-radius: 12px; box-shadow: 0 6px 20px #203f2520; padding: 0.85em 1em; font-size: 0.78em; line-height: 1.7; }
+	.member-note strong { color: #276749; }
+	.member-note p { margin: 0.3em 0; }
+	.member-note a { color: #76571c; font-size: 0.9em; text-decoration: underline; }
 	.home-comments {
 		margin-bottom: 3em;
 	}
@@ -964,15 +978,30 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 		.tp-item:last-child { border-bottom: none; }
 		.tp-svg { width: 36px; height: 36px; flex-shrink: 0; }
 	}
-	/* メンバー8人は狭い画面で横一列に収まらない（役職名が keep-all で縮まない）ため
-	   4人×2段に折り返して横スクロールを防ぐ */
 	@media (max-width: 640px) {
-		.member-emojis {
-			flex-wrap: wrap;
-			justify-content: center;
-			row-gap: 0.9em;
-		}
-		.member-item { flex: 0 0 calc(25% - 0.3em); }
+		.member-emojis { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 0.8em; }
 	}
 
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.member-emojis').forEach(group => {
+    const cards = [...group.querySelectorAll<HTMLDetailsElement>('.member-item')];
+    const close = (card: HTMLDetailsElement) => { card.open = false; delete card.dataset.pinned; };
+    const show = (card: HTMLDetailsElement) => { cards.filter(c => c !== card).forEach(close); card.open = true; };
+    cards.forEach(card => {
+      const summary = card.querySelector('summary')!;
+      summary.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') show(card); });
+      summary.addEventListener('focus', () => show(card));
+      summary.addEventListener('click', event => {
+        event.preventDefault();
+        if (card.dataset.pinned) close(card);
+        else { show(card); card.dataset.pinned = 'true'; }
+      });
+    });
+    group.addEventListener('pointerleave', () => cards.filter(c => !c.dataset.pinned && !c.contains(document.activeElement)).forEach(close));
+    group.addEventListener('focusout', event => { if (!group.contains(event.relatedTarget as Node)) cards.forEach(close); });
+    group.addEventListener('keydown', event => { if (event.key === 'Escape') { cards.forEach(close); } });
+    document.addEventListener('pointerdown', event => { if (!group.contains(event.target as Node)) cards.forEach(close); });
+  });
+</script>

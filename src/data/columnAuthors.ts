@@ -26,6 +26,7 @@ export const columnAuthors: Record<string, ColumnAuthor> = {
   'scorecard-45-stocks-2026q3': C.sumida,
   'rerank-45-current-price-audit': C.sumida,
   'ex-rights-overdrop-check-2026aug': C.sumida,
+  'ex-rights-watchlist-2026sep': C.sumida,
   'activist-front-running-01': C.machibuse,
   'activist-front-running-02': C.machibuse,
   'activist-front-running-03': C.machibuse,

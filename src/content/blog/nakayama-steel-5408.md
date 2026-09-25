@@ -17,6 +17,7 @@ stockCard:
   downside: "▲21.8%"
   modifiedPBR: "0.27倍"
   category: "電炉ホットコイル国内2社"
+noteUrl: "https://numasoko-value.com/analysis/nakayama-steel-5408.html"
 ---
 
 > 🧑‍💼 「今日の会社は、<span class="t-red">値札の付き方がおかしい</span>」
@@ -387,6 +388,13 @@ stockCard:
 🧑‍💼**沼田**「<span class="t-green">物語が良い銘柄ほど、金額で歯止めをかける</span>」
 
 ---
+
+<details>
+<summary>📊 詳細分析レポート（完全版）</summary>
+
+[中山製鋼所（5408）完全版レポート](https://numasoko-value.com/analysis/nakayama-steel-5408.html)——事業価値の算出・資産の中身・借入の構造まで。
+
+</details>
 
 *関連：[シケモク株選手権2026](/blog/cigar-butt-special-2026/)／[南海化学（4040）含み益の数え方](/blog/nankai-chemical-4040/)／[中央可鍛工業（5607）](/blog/chuo-malleable-5607/)／[片倉工業（3001）](/blog/katakura-3001/)*
 

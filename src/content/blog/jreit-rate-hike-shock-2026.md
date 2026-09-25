@@ -3,7 +3,7 @@ title: "J-REITは買い場か｜利上げで下げた5銘柄を、鑑定NAVと�
 description: "日銀が無担保コールレートを1.25%程度へ引き上げた2026年9月18日、大和ハウスリート・積水ハウス・リート・アドバンス・レジデンス・SOSiLA物流リート・GLP投資法人の5銘柄はそろって下落した。ただし下落率は▲0.97%から▲3.85%までばらついている。表面分配金利回りのランキングはやらない。鑑定NAV、売却益と利益超過分配を除いた巡航分配金、賃料改定力、借入構造、資本政策という5つの条件を一次資料で揃えて比べる。積水ハウス・リートの次期予想は当期比▲44%、GLPの2026年8月期予想3,630円には売却益約919円が乗っている。5本とも表面の分配金には一時的な要因が入っていた。J-REITシリーズ第1弾。"
 cardDesc: "<span class='card-highlight'>日銀の利上げで5銘柄がそろって下落。ただし下落率は▲0.97%から▲3.85%までばらついた。</span>表面利回りのランキングはやらない。鑑定NAV・巡航分配金・賃料改定力・借入構造・資本政策の5条件で並べ直す。<span class='card-note'>積水ハウス・リートは次期予想が当期比▲44%。GLPの今期予想3,630円には売却益が約919円。5本とも表面の分配金に一時要因が入っていた。当商会は大和ハウスリートとSOSiLAを打診で買った。シリーズ第1弾。</span>"
 pubDate: "2026-09-25T10:00:00+09:00"
-related: ["nomura-margin-rate-1-69-alchemy", "construction-selloff-opportunity", "cheap-stock-census-2026-09", "per-value-investing"]
+related: ["nomura-margin-rate-1-69-alchemy", "construction-selloff-opportunity", "netcash-ratio-21-deep-value-screening-2026-09", "per-value-investing"]
 draft: false
 ---
 

@@ -2,7 +2,7 @@
 title: "45銘柄を現在株価で再評価｜ランク変更は2社。定期点検で見えたスコア管理の強み"
 description: "有料note作成時点の45銘柄を2026年9月11日の株価を基準に価格更新点検。管理上43社を据え置き、2社をランク変更。銘柄を同じ物差しで定期点検する実務と結果一覧を公開します。"
 cardDesc: "<span class='card-highlight'>有料note作成時点の45銘柄を、現在株価ベースで一斉点検。</span>管理上43社は据え置き、2社はランク変更。<span class='card-note'>ランクは売買の答えではなく、銘柄群を同じ物差しで管理し直すための道具として使っています。</span>"
-related: ["note-sell-method-not-stocks", "scorecard-45-stocks-2026q3", "rank-change-reading-guide", "kitazato-368a", "nankai-chemical-4040"]
+related: ["note-sell-method-not-stocks", "scorecard-45-stocks-2026q3", "kitazato-368a", "nankai-chemical-4040"]
 pubDate: 2026-09-13T20:07:00+09:00
 draft: false
 ---

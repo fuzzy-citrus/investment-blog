@@ -16,6 +16,7 @@ stockCard:
   downside: "▲20.8%"
   modifiedPBR: "0.62倍"
   category: "国内2社の寡占を3つ"
+noteUrl: "https://numasoko-value.com/analysis/nankai-chemical-4040.html"
 ---
 
 > 🔄 **ランク再評価（2026-09-13）**：2026年9月13日の価格更新点検を行い、管理上の現行ランクを **A−→A+** に更新しました。評価基準を変えたのではなく、定期的な銘柄管理のための再評価です。
@@ -391,6 +392,13 @@ stockCard:
 🐑**積立ひつじ**「めえ（<span class="t-amber">……ぼくは、全世界に分散しています</span>）」
 
 ---
+
+<details>
+<summary>📊 詳細分析レポート（完全版）</summary>
+
+[南海化学（4040）完全版レポート](https://numasoko-value.com/analysis/nankai-chemical-4040.html)——寡占3品目の中身・NAV・リスクの棚卸しまで。
+
+</details>
 
 <div class="disclaimer">
 

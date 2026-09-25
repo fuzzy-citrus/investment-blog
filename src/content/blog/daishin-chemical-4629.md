@@ -17,6 +17,7 @@ stockCard:
   downside: "▲26.1%"
   modifiedPBR: "0.57倍"
   category: "シンナー国内シェア3割"
+noteUrl: "https://numasoko-value.com/analysis/daishin-chemical-4629.html"
 ---
 
 > 🧑‍💼 「今日は<span class="t-blue">シンナーの会社</span>だ。<strong>塗料を薄める、あのシンナー。国内シェアは約3割で、専業では首位だ</strong>」
@@ -324,6 +325,13 @@ stockCard:
 🐑**積立ひつじ**「めえ（<span class="t-amber">……時計、1つでいいです</span>）」
 
 ---
+
+<details>
+<summary>📊 詳細分析レポート（完全版）</summary>
+
+[大伸化学（4629）完全版レポート](https://numasoko-value.com/analysis/daishin-chemical-4629.html)——NAV・シンナーのシェアと在庫・6軸の採点まで。
+
+</details>
 
 <div class="disclaimer">
 
