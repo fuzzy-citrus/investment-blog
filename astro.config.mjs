@@ -57,8 +57,8 @@ const SPEAKER_ICONS = {
 	墨田: 'sumida',
 	花岡: 'hanaoka',
 	優田: 'yuda',
-	鸚鵡: 'oumu',
-	オルカン鸚鵡: 'oumu',
+	鸚鵡: 'orukan-oumu',
+	オルカン鸚鵡: 'orukan-oumu',
 };
 
 // 絵文字だけの短い文字列か（日本語・英数字・鉤括弧を含まない）
