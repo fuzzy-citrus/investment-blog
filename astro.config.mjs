@@ -1,4 +1,12 @@
 import { castPortraits } from './src/data/castPortraits.mjs';
+import {
+	sceneArt,
+	SCENE_WIDTH,
+	SCENE_HEIGHT,
+	SCENE_MAX_PER_POST,
+	SCENE_MIN_GAP,
+	SCENE_MIN_HEADINGS,
+} from './src/data/sceneArt.mjs';
 // @ts-check
 
 import { readdirSync, readFileSync } from 'node:fs';
@@ -59,12 +67,58 @@ const SPEAKER_ICONS = {
 	優田: 'yuda',
 	鸚鵡: 'orukan-oumu',
 	オルカン鸚鵡: 'orukan-oumu',
+	テック番長: 'tech-bancho',
+	番長: 'tech-bancho',
+	レバナス小猿: 'rebanas-kozaru',
+	小猿: 'rebanas-kozaru',
+	オルカン教祖: 'zensekai-bouzu',
+	教祖: 'zensekai-bouzu',
+	全世界坊主: 'zensekai-bouzu',
+	ドル建て鷹: 'dollar-taka',
+	鷹: 'dollar-taka',
+	積立ひつじ: 'tsumitate-hitsuji',
+	ひつじ: 'tsumitate-hitsuji',
 };
+
+// 名前を書かずに「絵文字＋鉤括弧」だけで話す行が1000行以上ある。
+// 絵文字は1人に1つなので、ここから引ければ名前の表記ゆれ（野村（電話越し）など）も拾える。
+const EMOJI_SPEAKERS = {
+	'🧑‍💼': 'numata', '🧓': 'nomura', '🦉': 'yomi', '🦞': 'morita', '🦎': 'hinata',
+	'🦦': 'kawachi', '🐊': 'machibuse', '🦫': 'hotta', '🦑': 'sumida', '🐝': 'hanaoka',
+	'🦩': 'yuda', '🦍': 'tech-bancho', '🐒': 'rebanas-kozaru', '🧘': 'zensekai-bouzu',
+	'🦜': 'orukan-oumu', '🦅': 'dollar-taka', '🐑': 'tsumitate-hitsuji',
+};
+// 長いもの（🧑‍💼のようなZWJ連結）から先に照合する
+const EMOJI_KEYS = Object.keys(EMOJI_SPEAKERS).sort((a, b) => b.length - a.length);
+const RIVALS = new Set(['tech-bancho', 'rebanas-kozaru', 'zensekai-bouzu', 'orukan-oumu', 'dollar-taka', 'tsumitate-hitsuji']);
+
+// 先頭の絵文字から話者を引く（異体字セレクタは落とす）
+function speakerByEmoji(lead) {
+	const s = lead.replace(/[︎️]/g, '').trim();
+	for (const k of EMOJI_KEYS) {
+		if (s.startsWith(k.replace(/[︎️]/g, ''))) return EMOJI_SPEAKERS[k];
+	}
+	return null;
+}
 
 // 絵文字だけの短い文字列か（日本語・英数字・鉤括弧を含まない）
 const EMOJI_ONLY = /^[^぀-ヿ一-鿿A-Za-z0-9「」]+$/;
 
+// 名前のない行（🦎「……」）を、絵文字と本文に切り分けてから通常の処理に渡す
+function splitNamelessSay(node) {
+	const kids = node.children;
+	if (!kids || kids.length === 0) return;
+	const lead = kids[0];
+	if (lead.type !== 'text') return;
+	const m = lead.value.match(/^(\s*)([^「\s]{1,6}?)(?=「)/);
+	if (!m || !EMOJI_ONLY.test(m[2])) return;
+	if (!speakerByEmoji(m[2])) return;
+	kids[0] = { type: 'text', value: lead.value.slice(m[0].length) };
+	kids.unshift({ type: 'text', value: m[2] });
+}
+
 function decorateSpeaker(node) {
+	splitNamelessSay(node);
 	const kids = node.children;
 	if (!kids || kids.length < 2) return;
 	const lead = kids[0];
@@ -80,7 +134,8 @@ function decorateSpeaker(node) {
 		const inline = strong.value.slice('<strong>'.length);
 		name = (inline || kids[2]?.value || '').replace('</strong>', '').trim();
 	}
-	const id = SPEAKER_ICONS[name];
+	// 名前が引けないとき（名前なしの行・野村（電話越し）のような表記ゆれ）は絵文字で引く
+	const id = (name && SPEAKER_ICONS[name]) || speakerByEmoji(lead.value);
 	if (!id) return;
 	const art = castPortraits[id];
 	if (!art) return;
@@ -104,7 +159,10 @@ function decorateSpeaker(node) {
 
 	node.properties = node.properties || {};
 	const cls = node.properties.className || [];
-	node.properties.className = [...(Array.isArray(cls) ? cls : [cls]), 'say', `say-${id}`];
+	node.properties.className = [
+		...(Array.isArray(cls) ? cls : [cls]), 'say', `say-${id}`,
+		...(RIVALS.has(id) ? ['say-rival'] : []),
+	];
 }
 
 function rehypeSpeakerIcons() {
@@ -120,11 +178,71 @@ function rehypeSpeakerIcons() {
 	};
 }
 
+// ── 章と章のあいだに場面イラストを差し込む ───────────────────────
+// 見出し（h2）の文言に合う絵だけを、記事の前から順に最大3枚。
+// 記事のMarkdownは触らない。合う絵がない章には何も入らない。
+function nodeText(node) {
+	if (node.type === 'text') return node.value;
+	if (node.type === 'raw') return node.value.replace(/<[^>]*>/g, '');
+	return (node.children || []).map(nodeText).join('');
+}
+
+function sceneFigure(scene) {
+	return {
+		type: 'element', tagName: 'figure',
+		properties: { className: ['scene-eyecatch'] },
+		children: [
+			{
+				type: 'element', tagName: 'img',
+				properties: {
+					src: scene.src, alt: scene.alt,
+					width: SCENE_WIDTH, height: SCENE_HEIGHT,
+					loading: 'lazy', decoding: 'async',
+				},
+				children: [],
+			},
+			{
+				type: 'element', tagName: 'figcaption', properties: {},
+				children: [{ type: 'text', value: scene.caption }],
+			},
+		],
+	};
+}
+
+function rehypeSceneEyecatch() {
+	return (tree) => {
+		const kids = tree.children;
+		const heads = [];
+		kids.forEach((n, i) => {
+			if (n.type === 'element' && n.tagName === 'h2') heads.push(i);
+		});
+		if (heads.length < SCENE_MIN_HEADINGS) return;
+
+		const used = new Set();
+		const picks = [];
+		let last = -99;
+		// 最初の見出し（「一言でいうと」など）の前は値札カードが出るので飛ばす
+		for (let h = 1; h < heads.length && picks.length < SCENE_MAX_PER_POST; h++) {
+			if (h - last <= SCENE_MIN_GAP) continue;
+			const text = nodeText(kids[heads[h]]);
+			const scene = sceneArt.find((s) => !used.has(s.id) && s.match.test(text));
+			if (!scene) continue;
+			used.add(scene.id);
+			picks.push([heads[h], scene]);
+			last = h;
+		}
+		// 後ろから入れないと位置がずれる
+		for (let i = picks.length - 1; i >= 0; i--) {
+			kids.splice(picks[i][0], 0, sceneFigure(picks[i][1]));
+		}
+	};
+}
+
 // https://astro.build/config
 export default defineConfig({
 	site: SITE,
 	integrations: [mdx(), sitemap({ customPages })],
-	markdown: { rehypePlugins: [rehypeSpeakerIcons] },
+	markdown: { rehypePlugins: [rehypeSpeakerIcons, rehypeSceneEyecatch] },
 	fonts: [
 		{
 			provider: fontProviders.local(),

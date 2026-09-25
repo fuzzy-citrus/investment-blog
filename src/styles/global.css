@@ -307,3 +307,49 @@ hr {
 		height: 48px;
 	}
 }
+
+/* ── ライバル陣営の発言（画面右側に立つ絵に合わせて右寄せ） ── */
+.prose p.say-rival {
+	flex-direction: row-reverse;
+}
+.prose p.say-rival .cast-icon {
+	background: #fffaf2;
+	box-shadow: 0 0 0 1px #e6cfa8;
+}
+
+/* ── 章あいだの場面イラスト（astro.config.mjs の rehypeSceneEyecatch が挿入） ── */
+.prose figure.scene-eyecatch {
+	margin: 2.2em 0 1.6em;
+	padding: 0;
+	border-radius: 14px;
+	overflow: hidden;
+	background: #fffdf7;
+	box-shadow: 0 1px 3px rgba(60, 60, 40, 0.12), 0 0 0 1px #e6e6dc;
+}
+.prose figure.scene-eyecatch img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	border-radius: 0;
+	margin: 0;
+}
+.prose figure.scene-eyecatch figcaption {
+	margin: 0;
+	padding: 0.55em 0.9em 0.6em;
+	font-size: 0.86em;
+	line-height: 1.5;
+	color: #6b6b5c;
+	background: #fbf8ee;
+	border-top: 1px solid #eceadd;
+}
+@media (max-width: 600px) {
+	.prose figure.scene-eyecatch {
+		margin: 1.6em 0 1.2em;
+		border-radius: 10px;
+	}
+	.prose figure.scene-eyecatch figcaption {
+		font-size: 0.82em;
+		padding: 0.5em 0.7em 0.55em;
+	}
+}
