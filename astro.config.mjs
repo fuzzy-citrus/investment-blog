@@ -1,3 +1,4 @@
+import { castPortraits } from './src/data/castPortraits.mjs';
 // @ts-check
 
 import { readdirSync, readFileSync } from 'node:fs';
@@ -45,6 +46,7 @@ const customPages = [
 // 絵文字のまま残す。名前の表記ゆれ（日向（見習い）など）もここで吸収する。
 const SPEAKER_ICONS = {
 	沼田: 'numata',
+	野村: 'nomura',
 	夜見: 'yomi',
 	守田: 'morita',
 	日向: 'hinata',
@@ -80,6 +82,8 @@ function decorateSpeaker(node) {
 	}
 	const id = SPEAKER_ICONS[name];
 	if (!id) return;
+	const art = castPortraits[id];
+	if (!art) return;
 	const body = {
 		type: 'element',
 		tagName: 'span',
@@ -88,21 +92,16 @@ function decorateSpeaker(node) {
 	};
 	node.children = [
 		{
-			type: 'element',
-			tagName: 'img',
-			properties: {
-				src: `/images/chars/${id}.webp`,
-				alt: name,
-				width: 64,
-				height: 64,
-				loading: 'lazy',
-				decoding: 'async',
-				className: ['speaker-icon'],
-			},
-			children: [],
-		},
-		body,
+			type: 'element', tagName: 'span',
+			properties: { className: ['cast-icon', 'speaker-icon'], style: art.cropStyle, ariaHidden: 'true' },
+			children: [{
+				type: 'element', tagName: 'img',
+				properties: { src: art.src, alt: '', width: art.width, height: art.height, loading: 'lazy', decoding: 'async' },
+				children: [],
+			}],
+		}, body,
 	];
+
 	node.properties = node.properties || {};
 	const cls = node.properties.className || [];
 	node.properties.className = [...(Array.isArray(cls) ? cls : [cls]), 'say', `say-${id}`];

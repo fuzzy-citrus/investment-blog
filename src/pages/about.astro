@@ -1,4 +1,5 @@
 ﻿---
+import CastIcon from '../components/CastIcon.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -33,7 +34,7 @@ import Footer from '../components/Footer.astro';
 		<main>
 
 			<div class="profile-hero">
-				<img class="profile-avatar-img" src="/images/brand/numata-author-20260914.jpg" alt="沼田課長のイメージイラスト" />
+				<div class="profile-avatar-img"><CastIcon id="numata" name="沼田課長のイメージイラスト" /></div>
 				<div class="profile-info">
 					<div class="profile-label">筆者</div>
 					<h1>沼田課長</h1>
@@ -229,7 +230,7 @@ import Footer from '../components/Footer.astro';
 
 <style>
 	main {
-		max-width: 720px;
+		width: min(720px, 100%); max-width: 100%; box-sizing: border-box;
 		margin: 0 auto;
 		padding: 2.5em 1em 4em;
 	}
@@ -276,9 +277,9 @@ import Footer from '../components/Footer.astro';
 		flex-wrap: wrap;
 	}
 	.profile-avatar-img {
+        --cast-size: 100%;
 		width: 112px; height: 112px;
-		object-fit: cover;
-		border-radius: 50%;
+		border-radius: 12px;
 		border: 3px solid #fff;
 		box-shadow: 0 8px 24px rgba(24,56,45,.16);
 		flex-shrink: 0;

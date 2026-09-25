@@ -269,15 +269,31 @@ hr {
 	gap: 0.55em;
 	margin-block: 0.9em;
 }
-.prose p.say .speaker-icon {
-	width: 2.5em;
-	height: 2.5em;
-	border-radius: 50%;
+.cast-icon {
+	display: inline-block;
+	position: relative;
+	width: var(--cast-size, 52px);
+	height: var(--cast-size, 52px);
 	flex: 0 0 auto;
-	margin: -0.15em 0 0 0;
-	background: rgba(0, 0, 0, 0.035);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+	overflow: hidden;
+	vertical-align: middle;
+	border-radius: 10px;
+	background: #fffdf7;
+	box-shadow: 0 0 0 1px #e2e5da;
 }
+.cast-icon > img {
+	position: absolute;
+	width: var(--cast-width);
+	max-width: none;
+	height: auto;
+	left: var(--cast-left);
+	top: var(--cast-top);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+}
+.prose p.say .speaker-icon { width: 52px; height: 52px; margin: 0; }
 .prose p.say .say-body {
 	flex: 1 1 auto;
 	min-width: 0;
@@ -287,7 +303,7 @@ hr {
 		gap: 0.45em;
 	}
 	.prose p.say .speaker-icon {
-		width: 2.1em;
-		height: 2.1em;
+		width: 48px;
+		height: 48px;
 	}
 }

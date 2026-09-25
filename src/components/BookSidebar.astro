@@ -1,4 +1,5 @@
 ---
+import CastIcon from './CastIcon.astro';
 import { getCollection } from 'astro:content';
 import AdUnit from './AdUnit.astro';
 import { ADSENSE_CLIENT, ADSENSE_SIDEBAR_SLOT } from '../consts';
@@ -30,7 +31,7 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     <div class="info-sb-author">
       <div class="info-sb-author-top">
         <div class="info-sb-author-name">沼田課長</div>
-        <div class="info-sb-avatar" role="img" aria-label="沼田課長"></div>
+        <div class="info-sb-avatar"><CastIcon id="numata" name="沼田課長" /></div>
       </div>
       <div class="info-sb-author-title">課長・プレイングマネージャー</div>
       <div class="info-sb-author-bio">野村信用を活用したバリュー株×TOB待ち伏せ戦略。TOBヒット20件超。<span class="info-sb-goal">【目標】4,308万円 → 2億円（2030年）</span></div>
@@ -152,12 +153,13 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     align-items: flex-start;
   }
   .info-sb-avatar {
+    --cast-size: 40px;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 10px;
     flex-shrink: 0;
     border: 1px solid rgba(232,184,75,0.4);
-    background: url('/images/brand/numata-author-20260914.jpg') center / cover no-repeat;
+    background: #fffdf7;
     margin-top: -8px;
     margin-right: 12px;
   }

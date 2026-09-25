@@ -1,4 +1,5 @@
 ---
+import CastIcon from '../components/CastIcon.astro';
 import Comments from '../components/Comments.astro';
 import StockRankSummary from '../components/StockRankSummary.astro';
 import BaseHead from '../components/BaseHead.astro';
@@ -147,28 +148,6 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 				)}
 			</section>
 
-			<a class="member-strip" href="/characters" aria-label="商会のメンバー紹介へ">
-				<div class="member-strip-faces">
-					{[
-						['numata', '沼田'],
-						['kawachi', '河内'],
-						['yomi', '夜見'],
-						['hotta', '堀田'],
-						['machibuse', '待伏'],
-						['hanaoka', '花岡'],
-						['yuda', '優田'],
-						['morita', '守田'],
-						['sumida', '墨田'],
-						['hinata', '日向'],
-					].map(([id, name]) => (
-						<figure class="member-strip-item">
-							<img src={`/images/chars/${id}.webp`} alt={name} width="160" height="160" loading="lazy" decoding="async" />
-							<figcaption>{name}</figcaption>
-						</figure>
-					))}
-				</div>
-				<span class="member-strip-cta">11人の担当と、なぜその動物なのか →</span>
-			</a>
 
 			<section class="first-visit-intro" aria-labelledby="first-visit-title">
 				<div class="first-visit-copy">
@@ -235,35 +214,35 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 				<p>バリュー商会には個性豊かな分析担当がいます</p>
 				<div class="member-emojis">
 					<a href="/characters#machibuse" class="member-item">
-						<span title="待伏 静江">🐊</span>
+						<CastIcon id="machibuse" name="待伏 静江" />
 						<span class="member-role">TOB発掘</span>
 					</a>
 					<a href="/characters#kawachi" class="member-item">
-						<span title="河内 拾造">🦦</span>
+						<CastIcon id="kawachi" name="河内 拾造" />
 						<span class="member-role">割安発掘</span>
 					</a>
 					<a href="/characters#hotta" class="member-item">
-						<span title="堀田 独占">🦫</span>
+						<CastIcon id="hotta" name="堀田 独占" />
 						<span class="member-role">競合優位性</span>
 					</a>
 					<a href="/characters#yomi" class="member-item">
-						<span title="夜見 賢三">🦉</span>
+						<CastIcon id="yomi" name="夜見 賢三" />
 						<span class="member-role">財務分析</span>
 					</a>
 					<a href="/characters#yuda" class="member-item">
-						<span title="優田 雅代">🦩</span>
+						<CastIcon id="yuda" name="優田 雅代" />
 						<span class="member-role">株主優待</span>
 					</a>
 					<a href="/characters#hanaoka" class="member-item">
-						<span title="花岡 利次郎">🐝</span>
+						<CastIcon id="hanaoka" name="花岡 利次郎" />
 						<span class="member-role">高配当</span>
 					</a>
 					<a href="/characters#morita" class="member-item">
-						<span title="守田 退三">🦞</span>
+						<CastIcon id="morita" name="守田 退三" />
 						<span class="member-role">リスク管理</span>
 					</a>
 					<a href="/characters#sumida" class="member-item">
-						<span title="墨田 検二">🦑</span>
+						<CastIcon id="sumida" name="墨田 検二" />
 						<span class="member-role">AIチェック</span>
 					</a>
 				</div>
@@ -888,6 +867,7 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 		margin: 0.8em 0 1em;
 	}
 	.member-item {
+        --cast-size: 56px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -903,11 +883,7 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 	.member-item:hover {
 		background: rgba(29,158,117,0.08);
 	}
-	.member-item span:first-child {
-		font-size: 2em;
-		cursor: default;
-		line-height: 1;
-	}
+
 	.member-role {
 		font-size: 0.62em;
 		color: rgb(var(--gray));
@@ -999,57 +975,4 @@ const latestUpdateLabel = latestUpdate?.toLocaleString('ja-JP', {
 		.member-item { flex: 0 0 calc(25% - 0.3em); }
 	}
 
-	/* ── メンバーの帯（顔アイコン → /characters） ── */
-	.member-strip {
-		display: block;
-		margin: 1.6em auto 0;
-		padding: 1em 0.6em 0.9em;
-		max-width: 940px;
-		border: 1px solid rgba(0, 0, 0, 0.07);
-		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.72);
-		text-decoration: none;
-		color: inherit;
-		transition: box-shadow 0.15s, transform 0.15s;
-	}
-	.member-strip:hover {
-		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-		transform: translateY(-1px);
-	}
-	.member-strip-faces {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: 0.7em 0.9em;
-	}
-	.member-strip-item {
-		margin: 0;
-		width: 62px;
-		text-align: center;
-	}
-	.member-strip-item img {
-		width: 54px;
-		height: 54px;
-		border-radius: 50%;
-		background: rgba(0, 0, 0, 0.04);
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-	}
-	.member-strip-item figcaption {
-		margin-top: 0.25em;
-		font-size: 0.68rem;
-		font-weight: 700;
-		color: rgb(var(--gray));
-	}
-	.member-strip-cta {
-		display: block;
-		margin-top: 0.7em;
-		text-align: center;
-		font-size: 0.8rem;
-		font-weight: 700;
-		color: var(--accent-dark, #1a6640);
-	}
-	@media (max-width: 600px) {
-		.member-strip-item { width: 52px; }
-		.member-strip-item img { width: 44px; height: 44px; }
-	}
 </style>

@@ -1,0 +1,9 @@
+---
+import { castPortraits } from '../data/castPortraits.mjs';
+interface Props { id: string; name: string; }
+const { id, name } = Astro.props;
+const art = castPortraits[id];
+---
+{art && <span class="cast-icon" style={art.cropStyle}>
+  <img src={art.src} alt={name} width={art.width} height={art.height} loading="lazy" decoding="async" />
+</span>}

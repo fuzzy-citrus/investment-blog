@@ -1,4 +1,5 @@
 ---
+import { castPortraits } from '../data/castPortraits.mjs';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -21,25 +22,10 @@ const sections = [
   { key: 'cross',   icon: '🔍', label: teamLabels['cross'],   members: cross  },
 ];
 
-// キャラごとの idle アニメ（動物の性質に合わせて動かす）
-const idleAnim: Record<string, string> = {
-  nomura: 'anim-bob', numata: 'anim-bob',
-  hinata: 'anim-wiggle',     // トカゲ：尻尾ゆらし
-  machibuse: 'anim-lurk',    // ワニ：じっと待つ
-  kawachi: 'anim-bob',       // カワウソ
-  hotta: 'anim-shake',       // ビーバー
-  yomi: 'anim-blink',        // フクロウ
-  yuda: 'anim-sway',         // フラミンゴ
-  hanaoka: 'anim-fly',       // ミツバチ：羽音で飛ぶ
-  morita: 'anim-step',       // ザリガニ：後ずさり
-  sumida: 'anim-float',      // イカ：ふわり
-};
-
 // OPシーケンス用：全メンバーの絵文字（登場順）
 const opCast = [
   ...founder, ...manager, ...trainee, ...teamA, ...teamB, ...cross,
 ].map(c => ({ emoji: c.emoji, id: c.id }));
-const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machibuse','hanaoka','yuda','morita','sumida','oumu']);
 
 ---
 
@@ -80,17 +66,12 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
           </h2>
 
           {sec.members.map(c => (
-            <div class="char-card reveal" id={c.id} style={`--card-color: ${c.avatarColor}`}>
+            <div class="char-card" id={c.id} style={`--card-color: ${c.avatarColor}`}>
 
               {/* ── ヘッダー行 ── */}
               <div class="char-header">
-                <div class={`char-avatar ${idleAnim[c.id] ?? 'anim-bob'} ${ART.has(c.id) ? 'has-art' : ''}`} style={`background: ${c.avatarColor}`}>
-                  {ART.has(c.id) ? (
-                    <>
-                      <img class="face face-idle" src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" />
-                      <img class="face face-talk" src={`/images/chars/${c.id}_talk.webp`} alt="" aria-hidden="true" width="160" height="160" loading="lazy" decoding="async" />
-                    </>
-                  ) : c.emoji}
+                <div class="char-portrait">
+                  <img src={castPortraits[c.id].src} alt={`${c.name}の全身イラスト`} width={castPortraits[c.id].width} height={castPortraits[c.id].height} loading="lazy" decoding="async" />
                 </div>
                 <div class="char-info">
                   <div class="char-role">{c.title}</div>
@@ -223,7 +204,9 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
 
 <style>
   main {
-    max-width: 800px;
+    width: min(800px, 100%);
+    max-width: 100%;
+    box-sizing: border-box;
     margin: 0 auto;
     padding: 2.5em 1em 4em;
   }
@@ -287,30 +270,19 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
     background: var(--card-color, #f5fdf8);
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
-  .char-avatar.has-art { position: relative; overflow: hidden; }
-  .char-avatar .face {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.18s ease;
+  .char-portrait {
+    flex: 0 0 164px;
+    width: 164px;
+    height: 224px;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 18px;
   }
-  .char-avatar .face-talk { opacity: 0; }
-  .char-card:hover .char-avatar .face-idle { opacity: 0; }
-  .char-card:hover .char-avatar .face-talk { opacity: 1; }
-  .char-avatar {
-    font-size: 2.2em;
-    width: 2.6em;
-    height: 2.6em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 1px 4px rgba(0,0,0,12%);
-    flex-shrink: 0;
-  }
+  .char-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
   .char-info { flex: 1; min-width: 0; }
   .char-role {
     font-size: 0.68em;
@@ -612,7 +584,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
   @media (max-width: 600px) {
     main { padding: 1.5em 0.8em 3em; }
     .char-header { flex-direction: column; gap: 0.8em; }
-    .char-avatar { font-size: 1.9em; }
+    .char-portrait { flex-basis: auto; align-self: center; width: 160px; height: 210px; }
     .frames-grid { grid-template-columns: 1fr; }
     /* ライバル陣営：3列→1列に積む（旧 .rival-grid は存在しないクラスで未適用だった） */
     .rival-members-grid { grid-template-columns: 1fr; }
@@ -696,31 +668,6 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
     opacity: 1; transform: none;
     transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.2,.7,.2,1);
   }
-
-  /* ══════════════════════════════════════════
-     キャラ idle アニメ（アバター）
-     ══════════════════════════════════════════ */
-  .char-avatar { will-change: transform; }
-  .anim-fly    { animation: a-fly 1.1s ease-in-out infinite; }
-  .anim-wiggle { animation: a-wiggle 0.9s ease-in-out infinite; transform-origin: 50% 80%; }
-  .anim-lurk   { animation: a-lurk 2.4s ease-in-out infinite; }
-  .anim-bob    { animation: a-bob 1.5s ease-in-out infinite; }
-  .anim-shake  { animation: a-shake 2s ease-in-out infinite; }
-  .anim-blink  { animation: a-blink 2.6s ease-in-out infinite; }
-  .anim-sway   { animation: a-sway 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
-  .anim-step   { animation: a-step 2.2s cubic-bezier(.5,0,.1,1) infinite; }
-  .anim-float  { animation: a-float 1.8s ease-in-out infinite; }
-
-  @keyframes a-fly    { 0%,100%{transform:translateY(0) rotate(-10deg);} 50%{transform:translateY(-9px) rotate(10deg);} }
-  @keyframes a-wiggle { 0%,100%{transform:rotate(-15deg);} 50%{transform:rotate(15deg);} }
-  @keyframes a-lurk   { 0%,72%,100%{transform:scale(1);} 82%{transform:scale(1.18) translateY(-2px);} 90%{transform:scale(0.97);} }
-  @keyframes a-bob    { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
-  @keyframes a-shake  { 0%,78%,100%{transform:rotate(0);} 84%{transform:rotate(-8deg);} 90%{transform:rotate(8deg);} 95%{transform:rotate(-4deg);} }
-  @keyframes a-blink  { 0%,88%,100%{transform:scaleY(1);} 93%{transform:scaleY(0.5);} }
-  @keyframes a-sway   { 0%,100%{transform:rotate(-11deg);} 50%{transform:rotate(11deg);} }
-  /* ザリガニ＝後退のプロ：サッと後ずさりして、すっと戻る */
-  @keyframes a-step   { 0%,45%,100%{transform:translateX(0) scale(1);} 58%{transform:translateX(-14px) scale(0.93);} 64%{transform:translateX(-14px) scale(0.93);} 82%{transform:translateX(0) scale(1);} }
-  @keyframes a-float  { 0%,100%{transform:translateY(0) rotate(0);} 50%{transform:translateY(-9px) rotate(7deg);} }
 
   /* アクセシビリティ：モーション軽減設定では全アニメを無効化 */
   @media (prefers-reduced-motion: reduce) {

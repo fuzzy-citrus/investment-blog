@@ -1,4 +1,5 @@
 ﻿---
+import CastIcon from '../components/CastIcon.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -36,7 +37,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
           <div class="side-row">
             <a href={`/characters#${founder.id}`} class="card-link main-card-link">
             <div class="card card-founder">
-              <div class={`avatar ${ART.has(founder.id) ? "has-art" : ""}`} style={`background:${founder.avatarColor}`}>{ART.has(founder.id) ? <img src={`/images/chars/${founder.id}.webp`} alt={founder.name} width="160" height="160" loading="lazy" decoding="async" /> : founder.emoji}</div>
+              <div class={`avatar ${ART.has(founder.id) ? "has-art" : ""}`} style={`background:${founder.avatarColor}`}>{ART.has(founder.id) ? <CastIcon id={founder.id} name={founder.name} /> : founder.emoji}</div>
               <div class="body">
                 <div class="name-row"><strong>{founder.name}</strong><span class="species">{founder.species}</span></div>
                 <p class="catch">{founder.catchphrase}</p>
@@ -70,7 +71,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
           <div class="side-row">
             <a href={`/characters#${manager.id}`} class="card-link main-card-link">
             <div class="card card-manager">
-              <div class={`avatar ${ART.has(manager.id) ? "has-art" : ""}`} style={`background:${manager.avatarColor}`}>{ART.has(manager.id) ? <img src={`/images/chars/${manager.id}.webp`} alt={manager.name} width="160" height="160" loading="lazy" decoding="async" /> : manager.emoji}</div>
+              <div class={`avatar ${ART.has(manager.id) ? "has-art" : ""}`} style={`background:${manager.avatarColor}`}>{ART.has(manager.id) ? <CastIcon id={manager.id} name={manager.name} /> : manager.emoji}</div>
               <div class="body">
                 <div class="name-row"><strong>{manager.name}</strong><span class="species">{manager.species}</span></div>
                 <p class="catch">{manager.catchphrase}</p>
@@ -85,7 +86,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
               <div class="side-scroll">
                 <a href={`/characters#${trainee.id}`} class="card-link">
                 <div class="card card-sm card-trainee">
-                  <div class={`avatar sm ${ART.has(trainee.id) ? "has-art" : ""}`} style={`background:${trainee.avatarColor}`}>{ART.has(trainee.id) ? <img src={`/images/chars/${trainee.id}.webp`} alt={trainee.name} width="160" height="160" loading="lazy" decoding="async" /> : trainee.emoji}</div>
+                  <div class={`avatar sm ${ART.has(trainee.id) ? "has-art" : ""}`} style={`background:${trainee.avatarColor}`}>{ART.has(trainee.id) ? <CastIcon id={trainee.id} name={trainee.name} /> : trainee.emoji}</div>
                   <div class="body">
                     <div class="name-row"><strong class="sm">{trainee.name}</strong><span class="species">{trainee.species}</span></div>
                     <p class="catch sm">{trainee.catchphrase}</p>
@@ -109,7 +110,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
             {teamA.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
-                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <CastIcon id={c.id} name={c.name} /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -135,7 +136,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
             {teamB.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm">
-                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <CastIcon id={c.id} name={c.name} /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -148,7 +149,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
             {cross.map(c => (
               <a href={`/characters#${c.id}`} class="card-link">
               <div class="card card-sm card-cross">
-                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <img src={`/images/chars/${c.id}.webp`} alt={c.name} width="160" height="160" loading="lazy" decoding="async" /> : c.emoji}</div>
+                <div class={`avatar sm ${ART.has(c.id) ? "has-art" : ""}`} style={`background:${c.avatarColor}`}>{ART.has(c.id) ? <CastIcon id={c.id} name={c.name} /> : c.emoji}</div>
                 <div class="body">
                   <div class="name-row"><strong class="sm">{c.name}</strong><span class="species">{c.title}</span></div>
                   <p class="catch sm">{c.catchphrase}</p>
@@ -198,7 +199,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
 
 <style>
   main {
-    max-width: 960px;
+    width: min(960px, 100%); max-width: 100%; box-sizing: border-box;
     margin: 0 auto;
     padding: 2em 1em 4em;
     font-size: 14px;
@@ -367,8 +368,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
   .card-rival   { border: 1.5px dashed #ccc; background: #fafafa; }
 
   /* アバター */
-  .avatar.has-art { position: relative; overflow: hidden; padding: 0; }
-  .avatar.has-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .avatar.has-art { --cast-size: 100%; padding: 0; background: transparent !important; }
   .avatar {
     font-size: 1.6em;
     width: 2em; height: 2em;
