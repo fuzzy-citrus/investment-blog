@@ -51,8 +51,8 @@ export const weeklyRecords: WeeklyRecord[] = [
 	{
 		date: '2026-09-25',
 		netAssets: 4518,
-		combinedAssets: 4600,
-		cashReserve: 82,
+		combinedAssets: 4550,
+		cashReserve: 32,
 		totalPosition: 8487,
 		unrealized: 217,
 		maintenance: 90.9,
@@ -60,9 +60,9 @@ export const weeklyRecords: WeeklyRecord[] = [
 	},
 ];
 
-/** 各月の最終確認残高。口座間移動は運用利益に数えない。月末前は確認日を表示する。 */
+/** 各月の最終確認残高（2026年9月分から数える）。口座間移動は運用利益に数えない。月末前は確認日を表示する。 */
 export const cashReserveRecords = [
-	{ date: '2026-09-25', balance: 820000, slug: 'weekly-2026w39-week-summary' },
+	{ date: '2026-09-25', balance: 320000, slug: 'weekly-2026w39-week-summary' },
 ];
 
 /** 月ごとのお預り資産評価額（株券等貸借を除く／単位：円） */

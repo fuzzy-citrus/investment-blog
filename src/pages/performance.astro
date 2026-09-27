@@ -144,7 +144,7 @@ const updated = jpDate(latest.date);
 
 			<section class="pf-block">
 				<h2><CastIcon id="morita" name="守田" /> 別口座の現金待機枠</h2>
-				<p class="pf-note-line">総資産には「証券口座内純資産＋現金待機枠」を表示します。待機枠は別口座にあるため、信用維持率と証券口座内の総ポジションには含めません。9月25日から残高を公開し、各月の最終確認額を記録します。</p>
+				<p class="pf-note-line">総資産には「証券口座内純資産＋現金待機枠」を表示します。待機枠は生活費ではなく投資用の資金で、実物資産（ハードアセット）を買う、野村口座へ戻して現物の買付余力にする、NISA口座でインデックスを積み立てる——のいずれかに充てる想定です（いずれも決定ではありません）。置き場所が決まっていなくても投資用資金であることは変わらないため総資産には数えますが、証券口座の外にある現金は追証の日に間に合わないため、信用維持率と証券口座内の総ポジションには含めません。2026年9月分から数え、各月の最終確認額を記録します。</p>
 				<div class="pf-table-wrap"><table class="pf-table">
 					<thead><tr><th>確認日</th><th class="num">現金待機枠</th><th>記録</th></tr></thead>
 					<tbody>{[...cashReserveRecords].reverse().map((r) => <tr><td>{jpDate(r.date)}</td><td class="num strong">{r.balance.toLocaleString()}円</td><td><a href={`/blog/${r.slug}/`}>運用記録を読む</a></td></tr>)}</tbody>
