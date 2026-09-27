@@ -190,13 +190,13 @@ function nodeText(node) {
 function sceneFigure(scene) {
 	return {
 		type: 'element', tagName: 'figure',
-		properties: { className: ['scene-eyecatch'] },
+		properties: { className: ['scene-eyecatch', ...(scene.portrait ? ['scene-portrait'] : [])] },
 		children: [
 			{
 				type: 'element', tagName: 'img',
 				properties: {
 					src: scene.src, alt: scene.alt,
-					width: SCENE_WIDTH, height: SCENE_HEIGHT,
+					width: scene.width ?? SCENE_WIDTH, height: scene.height ?? SCENE_HEIGHT,
 					loading: 'lazy', decoding: 'async',
 				},
 				children: [],
@@ -223,9 +223,13 @@ function rehypeSceneEyecatch() {
 		let last = -99;
 		// 最初の見出し（「一言でいうと」など）の前は値札カードが出るので飛ばす
 		for (let h = 1; h < heads.length && picks.length < SCENE_MAX_PER_POST; h++) {
-			if (h - last <= SCENE_MIN_GAP) continue;
 			const text = nodeText(kids[heads[h]]);
-			const scene = sceneArt.find((s) => !used.has(s.id) && s.match.test(text));
+			const section = kids.slice(heads[h], heads[h + 1] ?? kids.length).map(nodeText).join('');
+			const isRivalSection = /乱入|ライバル|反論/.test(text);
+			if (h - last <= SCENE_MIN_GAP && !isRivalSection) continue;
+			const scene = sceneArt.find((s) => !used.has(s.id) && (
+				s.portrait ? isRivalSection && s.match.test(section) : s.match.test(text)
+			));
 			if (!scene) continue;
 			used.add(scene.id);
 			picks.push([heads[h], scene]);

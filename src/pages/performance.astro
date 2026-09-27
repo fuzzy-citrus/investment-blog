@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { weeklyRecords, monthlyRecords, brokerSnapshot, recordSeriesIds } from '../data/assetHistory';
+import { weeklyRecords, monthlyRecords, brokerSnapshot, recordSeriesIds, cashReserveRecords } from '../data/assetHistory';
+import CastIcon from '../components/CastIcon.astro';
 import { seriesList } from '../data/series';
 
 const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -13,7 +14,11 @@ const byId = new Map(posts.map((p) => [p.id, p]));
 const rows = [...weeklyRecords].sort((a, b) => a.date.localeCompare(b.date));
 const latest = rows[rows.length - 1];
 const prev = rows.length > 1 ? rows[rows.length - 2] : null;
-const diff = prev ? latest.netAssets - prev.netAssets : null;
+const diff = latest.combinedAssets !== undefined
+	? (prev?.combinedAssets !== undefined ? latest.combinedAssets - prev.combinedAssets : null)
+	: (prev ? latest.netAssets - prev.netAssets : null);
+const headlineAssets = latest.combinedAssets ?? latest.netAssets;
+const headlineLabel = latest.combinedAssets !== undefined ? '総資産（別口座を含む合算）' : '証券口座内純資産';
 
 const jpDate = (d: string) => {
 	const [y, m, day] = d.split('-');
@@ -88,7 +93,7 @@ const updated = jpDate(latest.date);
 	<head>
 		<BaseHead
 			title="当商会の実績報告（資産推移） | バリュー商会"
-			description={`沼底バリュー商会の実績報告。紹介銘柄は実口座で売買しています。${updated}時点の純資産は${man(latest.netAssets)}、信用維持率${pct(latest.maintenance)}、総ポジション${man(latest.totalPosition)}。週次運用記録で開示した数字をそのまま並べ、資産の増減と口座画面を確認できます。投資助言ではありません。`}
+			description={`沼底バリュー商会の実績報告。紹介銘柄は実口座で売買しています。${updated}時点の${headlineLabel}は${man(headlineAssets)}、信用維持率${pct(latest.maintenance)}、総ポジション${man(latest.totalPosition)}。週次運用記録で開示した数字をそのまま並べ、資産の増減と口座画面を確認できます。投資助言ではありません。`}
 		/>
 	</head>
 	<body>
@@ -102,11 +107,11 @@ const updated = jpDate(latest.date);
 			</div>
 
 			<section class="pf-now">
-				<p class="pf-now-head">直近の数字（{updated}の終値ベース）</p>
+				<p class="pf-now-head">直近の数字（{updated}時点）</p>
 				<div class="pf-cards">
 					<div class="pf-card pf-card-main">
-						<span class="pf-card-label">純資産</span>
-						<span class="pf-card-val">{man(latest.netAssets)}</span>
+						<span class="pf-card-label">{headlineLabel}</span>
+						<span class="pf-card-val">{man(headlineAssets)}</span>
 						{diff !== null && (
 							<span class={`pf-card-diff ${diff >= 0 ? 'up' : 'down'}`}>
 								前週比 {signed(diff)}万円
@@ -120,7 +125,7 @@ const updated = jpDate(latest.date);
 						</span>
 					</div>
 					<div class="pf-card">
-						<span class="pf-card-label">信用維持率</span>
+						<span class="pf-card-label">信用維持率（簡易推計）</span>
 						<span class="pf-card-val">{pct(latest.maintenance)}</span>
 					</div>
 					<div class="pf-card">
@@ -135,6 +140,16 @@ const updated = jpDate(latest.date);
 						</span>
 					</div>
 				</div>
+			</section>
+
+			<section class="pf-block">
+				<h2><CastIcon id="morita" name="守田" /> 別口座の現金待機枠</h2>
+				<p class="pf-note-line">総資産には「証券口座内純資産＋現金待機枠」を表示します。待機枠は別口座にあるため、信用維持率と証券口座内の総ポジションには含めません。9月25日から残高を公開し、各月の最終確認額を記録します。</p>
+				<div class="pf-table-wrap"><table class="pf-table">
+					<thead><tr><th>確認日</th><th class="num">現金待機枠</th><th>記録</th></tr></thead>
+					<tbody>{[...cashReserveRecords].reverse().map((r) => <tr><td>{jpDate(r.date)}</td><td class="num strong">{r.balance.toLocaleString()}円</td><td><a href={`/blog/${r.slug}/`}>運用記録を読む</a></td></tr>)}</tbody>
+				</table></div>
+				<p class="pf-source">月末前はその時点の残高です。口座間の移動は、合算総資産を増やす利益としては数えません。</p>
 			</section>
 
 			<section class="pf-block">
@@ -213,8 +228,8 @@ const updated = jpDate(latest.date);
 			</section>
 
 			<section class="pf-block">
-				<h2>週ごとの純資産</h2>
-				<p class="pf-note-line">週次総括を出すたびに、点が1つ増えます。</p>
+				<h2>週ごとの証券口座内純資産</h2>
+				<p class="pf-note-line">こちらの推移は証券口座内だけの数字です。別口座への資金移動でも増減するため、差額そのものが運用損益ではありません。</p>
 				<div class="pf-chart-wrap">
 					<svg viewBox={`0 0 ${W} ${H}`} class="pf-chart" role="img" aria-label="週ごとの純資産の推移">
 						{gridVals.map((v) => (

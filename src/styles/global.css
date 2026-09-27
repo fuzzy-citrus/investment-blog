@@ -334,6 +334,14 @@ hr {
 	border-radius: 0;
 	margin: 0;
 }
+.prose figure.scene-eyecatch.scene-portrait img {
+	height: 280px;
+	width: 100%;
+	object-fit: contain;
+	padding: 16px;
+	box-sizing: border-box;
+	background: #f5f2e8;
+}
 .prose figure.scene-eyecatch figcaption {
 	margin: 0;
 	padding: 0.55em 0.9em 0.6em;

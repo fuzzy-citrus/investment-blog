@@ -29,12 +29,14 @@ export const seriesList: Series[] = [
 			'weekly-2026w37-cut-and-buy-down',
 			'weekly-2026w38-nihon-gear-round-trip',
 			'weekly-2026w38-week-summary',
+			'weekly-2026w39-week-summary',
 		],
 		labels: [
 			'2026年8月30日〜9月5日',
 			'2026年9月7日〜11日',
 			'2026年9月14日〜16日',
 			'2026年9月14日〜18日（総括）',
+			'2026年9月21日〜25日（総括）',
 		],
 	},
 	{

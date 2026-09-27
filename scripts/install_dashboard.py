@@ -84,6 +84,33 @@ def build_backlink():
         % (BACKLINK_ID, ''.join(pills))
     )
 
+
+def add_character_guide(html):
+    """承認済みキャラクターが保有・リスク・週間報告の入口を案内する。"""
+    if 'id="cast-reading-guide"' in html:
+        return html
+    wk = latest_weekly()
+    weekly_url = '/blog/%s/' % wk[0] if wk else '/performance/'
+    cards = [
+        ('hinata-facing-right-v1', '日向', '#pos', '何を持っている？', '銘柄名で検索して、保有一覧へ。'),
+        ('morita-facing-right-v1', '守田', '#stress', '下がったときも確認', '一律下落の試算で、余力を確認。'),
+        ('rebanas-kozaru-facing-left-v1', 'レバナス小猿', weekly_url, '今週は何を変えた？', '売買の記録を、会議の席で読む。'),
+    ]
+    content = '<nav id="cast-reading-guide" aria-label="キャラクターと読むポートフォリオ">'
+    for image, name, href, title, sub in cards:
+        content += ('<a class="cast-guide-card" href="%s"><img src="/images/cast-web/%s.webp" '
+                    'alt="%s" width="90" height="110"><span><strong>%s</strong><small>%s</small></span></a>') % (href, image, name, title, sub)
+    content += '</nav>'
+    css = '''<style>
+#cast-reading-guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.cast-guide-card{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:12px;color:var(--ink);text-decoration:none;min-width:0}
+.cast-guide-card img{width:76px;height:104px;object-fit:contain;flex:none}
+.cast-guide-card span{min-width:0}.cast-guide-card strong{display:block;font-size:15px}.cast-guide-card small{display:block;margin-top:5px;color:var(--muted);line-height:1.6}
+.cast-guide-card:hover,.cast-guide-card:focus-visible{border-color:var(--green);outline:2px solid var(--green);outline-offset:2px}
+@media(max-width:680px){#cast-reading-guide{grid-template-columns:1fr;gap:8px}.cast-guide-card{padding:8px 14px}.cast-guide-card img{width:65px;height:82px}}
+</style>'''
+    return html.replace('</head>', css + '</head>', 1).replace('</header>', '</header>' + content, 1)
+
 # 生成側の呼称変更が反映されていない古いHTML向けの後処理
 RENAMES = [
     ('<title>ポートフォリオ ダッシュボード</title>', '<title>最新ポートフォリオ</title>'),
@@ -179,10 +206,13 @@ def move_stress(html):
 def pick_source(argv):
     if len(argv) > 1:
         return argv[1]
-    for p in DEFAULT_SOURCES:
-        if os.path.exists(p):
-            return p
-    return None
+    # 候補のうち「いちばん新しいファイル」を選ぶ。
+    # Downloads に古いエクスポートが残っていると、先に見つかった古い方で
+    # public/holdings.html を上書きしてしまう事故が起きる（2026-09-28に実際に起きた）。
+    found = [p for p in DEFAULT_SOURCES if os.path.exists(p)]
+    if not found:
+        return None
+    return max(found, key=os.path.getmtime)
 
 
 def main():
@@ -206,6 +236,7 @@ def main():
             html = html.replace(_a, _b)
             renamed += 1
 
+    html = add_character_guide(html)
     html, cal_msg = rebuild_calendar(html)
     html, mv_msg = move_stress(html)
 

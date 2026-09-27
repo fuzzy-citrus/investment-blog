@@ -9,6 +9,10 @@ export type WeeklyRecord = {
 	date: string;
 	/** 純資産（万円） */
 	netAssets: number;
+	/** 別口座待機枠を含む合算総資産（万円）。2026/9/25から公開 */
+	combinedAssets?: number;
+	/** 別口座の現金待機枠（万円）。信用維持率には含めない */
+	cashReserve?: number;
 	/** 総ポジション＝現金＋現物＋信用建玉（万円）。会社の貸借対照表でいう総資産とは別物 */
 	totalPosition: number;
 	/** 含み損益（万円）。記事に出していない週は null */
@@ -44,6 +48,21 @@ export const weeklyRecords: WeeklyRecord[] = [
 		maintenance: 56.7,
 		slug: 'weekly-2026w38-week-summary',
 	},
+	{
+		date: '2026-09-25',
+		netAssets: 4518,
+		combinedAssets: 4600,
+		cashReserve: 82,
+		totalPosition: 8487,
+		unrealized: 217,
+		maintenance: 90.9,
+		slug: 'weekly-2026w39-week-summary',
+	},
+];
+
+/** 各月の最終確認残高。口座間移動は運用利益に数えない。月末前は確認日を表示する。 */
+export const cashReserveRecords = [
+	{ date: '2026-09-25', balance: 820000, slug: 'weekly-2026w39-week-summary' },
 ];
 
 /** 月ごとのお預り資産評価額（株券等貸借を除く／単位：円） */

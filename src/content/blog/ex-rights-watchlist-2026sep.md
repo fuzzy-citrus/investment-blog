@@ -7,6 +7,8 @@ related: ["ex-rights-overdrop-check-2026aug", "september-rights-spot-margin-2026
 draft: false
 ---
 
+*※追記（2026年9月28日）：本稿の判定にそって、9月25日に<strong>ユー・エス・エス300株を現引き</strong>し、9月優待の権利がある信用建玉はゼロになった。9月に配当の権利がある建玉は30銘柄・4万1,390円から<strong>20銘柄・2万9,004円</strong>まで減り、委託保証金維持率は68.1%から90.9%へ上がっている。その週の売買は[運用記録（9月21日〜25日）](/blog/weekly-2026w39-week-summary/)にまとめた。*
+
 > 🧑‍💼 「<span class="t-blue">9月28日（月）が権利付最終日、29日（火）が権利落ち日、30日（水）が権利確定日だ</span>。<strong>8月は落ちたあとに測った。今回は落ちる前に、自分の持ち物を数える</strong>」
 
 🧑‍💼**沼田**「前回の[8月権利落ちで落ちすぎた117銘柄の仕分け](/blog/ex-rights-overdrop-check-2026aug/)は事後検証だった。<span class="t-amber">読者から見れば、終わった話でもある</span>」

@@ -6,6 +6,18 @@
 // match は見出し（h2）の文言に当てる。当たらない章には何も入れない＝
 // 記事ごとに手で貼らなくても、内容に合った絵だけが出る。
 export const sceneArt = [
+	...[
+		['rebanas-kozaru', 'レバナス小猿', /レバナス小猿|小猿/],
+		['tech-bancho', 'テック番長', /テック番長/],
+		['zensekai-bouzu', '全世界坊主', /全世界坊主|オルカン教祖/],
+		['orukan-oumu', 'オルカン鸚鵡', /オルカン鸚鵡|鸚鵡/],
+		['tsumitate-hitsuji', '積立ひつじ', /積立ひつじ/],
+		['dollar-taka', 'ドル建て鷹', /ドル建て鷹/],
+	].map(([id, name, match]) => ({
+		id: `portrait-${id}`, src: `/images/cast-web/${id}-facing-left-v1.webp`,
+		alt: `${name}の全身イラスト`, caption: `${name}、会議に参加。`,
+		match, portrait: true, width: 640, height: 768,
+	})),
 	{
 		id: 'rival-roundtable',
 		src: '/images/scenes/scene-rival-roundtable-v1.webp',
