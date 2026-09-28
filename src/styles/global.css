@@ -294,10 +294,33 @@ hr {
 	border-radius: 0;
 }
 .prose p.say .speaker-icon { width: 52px; height: 52px; margin: 0; }
+/* 会話は吹き出しで囲む。中の文章は常に左揃え。
+   右揃えにすると、記事中の <br> と重なって行頭がばらつき、かえって読みにくかった。
+   話し手の向きは、吹き出しの位置（左／右）としっぽで伝える。 */
 .prose p.say .say-body {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 	min-width: 0;
+	position: relative;
+	padding: 0.6em 0.9em;
+	border-radius: 12px;
+	border: 1px solid #e2e0d1;
+	background: #ffffff;
+	box-shadow: 0 1px 2px rgba(60, 60, 40, 0.05);
+	text-align: left;
+	line-height: 1.85;
 }
+/* しっぽ（枠線の三角の上に、中身の色の三角を重ねる） */
+.prose p.say .say-body::before,
+.prose p.say .say-body::after {
+	content: '';
+	position: absolute;
+	top: 15px;
+	width: 0;
+	height: 0;
+	border: 7px solid transparent;
+}
+.prose p.say .say-body::before { left: -14px; border-right-color: #e2e0d1; }
+.prose p.say .say-body::after  { left: -13px; border-right-color: #ffffff; }
 @media (max-width: 600px) {
 	.prose p.say {
 		gap: 0.45em;
@@ -306,15 +329,29 @@ hr {
 		width: 48px;
 		height: 48px;
 	}
+	.prose p.say .say-body { padding: 0.5em 0.72em; border-radius: 10px; }
 }
 
 /* ── ライバル陣営の発言（画面右側に立つ絵に合わせて右寄せ） ── */
 .prose p.say-rival {
 	flex-direction: row-reverse;
 }
-/* アイコンが右にあるので、文章も右揃えにして視線の向きをそろえる */
+/* ライバルは枠ごと右に寄る。色を少し変えて陣営が一目で分かるようにする */
 .prose p.say-rival .say-body {
-	text-align: right;
+	background: #fffaf0;
+	border-color: #e8d7b4;
+}
+.prose p.say-rival .say-body::before {
+	left: auto;
+	right: -14px;
+	border-right-color: transparent;
+	border-left-color: #e8d7b4;
+}
+.prose p.say-rival .say-body::after {
+	left: auto;
+	right: -13px;
+	border-right-color: transparent;
+	border-left-color: #fffaf0;
 }
 .prose p.say-rival .cast-icon {
 	background: #fffaf2;
@@ -338,13 +375,35 @@ hr {
 	border-radius: 0;
 	margin: 0;
 }
+/* ライバルの立ち絵は縦長。横幅いっぱいの帯にすると中身がスカスカになるので、
+   絵と一言を横に並べた小さな札にする（切り落とさず、縮小のみ）。 */
+.prose figure.scene-eyecatch.scene-portrait {
+	display: flex;
+	align-items: center;
+	gap: 0.9em;
+	padding: 0.7em 1em;
+	background: #fffaf0;
+	box-shadow: 0 1px 3px rgba(60, 60, 40, 0.1), 0 0 0 1px #e8d7b4;
+}
 .prose figure.scene-eyecatch.scene-portrait img {
-	height: 280px;
-	width: 100%;
+	flex: 0 0 auto;
+	height: 150px;
+	width: auto;
 	object-fit: contain;
-	padding: 16px;
-	box-sizing: border-box;
-	background: #f5f2e8;
+	border-radius: 8px;
+}
+.prose figure.scene-eyecatch.scene-portrait figcaption {
+	padding: 0;
+	background: none;
+	border: 0;
+	text-align: left;
+	font-size: 0.95em;
+	font-weight: 700;
+	color: #6b5a2e;
+}
+@media (max-width: 600px) {
+	.prose figure.scene-eyecatch.scene-portrait img { height: 112px; }
+	.prose figure.scene-eyecatch.scene-portrait figcaption { font-size: 0.88em; }
 }
 .prose figure.scene-eyecatch figcaption {
 	margin: 0;
