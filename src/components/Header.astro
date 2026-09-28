@@ -12,27 +12,27 @@ import BookSidebar from './BookSidebar.astro';
 			<span></span><span></span><span></span>
 		</button>
 		<div class="internal-links">
-			<HeaderLink href="/">ホーム</HeaderLink>
-			<HeaderLink href="/start">初めての方へ</HeaderLink>
-			<HeaderLink href="/performance">📈 資産推移</HeaderLink>
+			<HeaderLink href="/"><span class="mi">🏠</span>ホーム</HeaderLink>
+			<HeaderLink href="/start"><span class="mi">🔰</span>初めての方へ</HeaderLink>
+			<HeaderLink href="/performance"><span class="mi">📈</span>資産推移</HeaderLink>
 			<div class="dropdown-wrap">
 				<span class="dropdown-label">コンテンツ <span class="arrow">▾</span></span>
 				<div class="dropdown-menu" role="menu">
-					<a href="/blog/?type=stock" role="menuitem">銘柄紹介</a>
-					<a href="/blog/?type=column" role="menuitem">投資コラム</a>
-					<a href="/comics/" role="menuitem">🐊 四コマで学ぶ</a>
-					<a href="/map" role="menuitem">コンテンツマップ</a>
-					<a href="/analysis" role="menuitem">📊 完全版レポート一覧</a>
-					<a href="/note" role="menuitem">📕 note（有料記事）</a>
+					<a href="/blog/?type=stock" role="menuitem"><span class="mi">🏷️</span>銘柄紹介</a>
+					<a href="/blog/?type=column" role="menuitem"><span class="mi">✍️</span>投資コラム</a>
+					<a href="/comics/" role="menuitem"><span class="mi">🐊</span>四コマで学ぶ</a>
+					<a href="/map" role="menuitem"><span class="mi">🗺️</span>コンテンツマップ</a>
+					<a href="/analysis" role="menuitem"><span class="mi">📊</span>完全版レポート一覧</a>
+					<a href="/note" role="menuitem"><span class="mi">📕</span>note（有料記事）</a>
 				</div>
 			</div>
 			<div class="dropdown-wrap">
 				<span class="dropdown-label">各種紹介 <span class="arrow">▾</span></span>
 				<div class="dropdown-menu" role="menu">
-					<a href="/company" role="menuitem">会社紹介</a>
-					<a href="/about" role="menuitem">筆者紹介</a>
-					<a href="/org" role="menuitem">会社組織図・勢力図</a>
-					<a href="/characters" role="menuitem">部下の紹介</a>
+					<a href="/company" role="menuitem"><span class="mi">🏢</span>会社紹介</a>
+					<a href="/about" role="menuitem"><span class="mi">🧑‍💼</span>筆者紹介</a>
+					<a href="/org" role="menuitem"><span class="mi">🗂️</span>会社組織図・勢力図</a>
+					<a href="/characters" role="menuitem"><span class="mi">🐾</span>部下の紹介</a>
 				</div>
 			</div>
 			<HeaderLink href="/search">🔍</HeaderLink>
@@ -157,6 +157,16 @@ import BookSidebar from './BookSidebar.astro';
 		font-size: 0.78em;
 		white-space: nowrap;
 	}
+	/* メニューのアイコン。幅をそろえて、文字の頭を縦に並べる */
+	.mi {
+		display: inline-block;
+		width: 1.45em;
+		margin-right: .12em;
+		text-align: center;
+		font-size: .95em;
+		font-style: normal;
+		line-height: 1;
+	}
 	.dropdown-menu a:last-child {
 		border-bottom: none;
 	}
@@ -188,7 +198,7 @@ import BookSidebar from './BookSidebar.astro';
 	.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 	.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-	@media (max-width: 900px) {
+	@media (max-width: 960px) {
 		header { padding: 0 .65em; }
 		.site-brand { font-size: clamp(.72rem, 3.45vw, .9rem); }
 		.site-brand a { padding-left: .15em; padding-right: .2em; }
@@ -223,7 +233,7 @@ import BookSidebar from './BookSidebar.astro';
 	}
 
 	/* タッチデバイス：open クラスで表示（デスクトップも対応） */
-	@media (min-width: 901px) {
+	@media (min-width: 961px) {
 		.dropdown-wrap.open .dropdown-menu { display: block; }
 		.dropdown-wrap.open .arrow { transform: rotate(180deg); }
 	}
