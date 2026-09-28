@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>IDOM（7599）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 7599 東証プライム · 2026.09.24 · 株価 1,194円（9/18終値）</p>
+      <h1 class="ht">IDOM <em>（7599）</em><br>統合投資分析レポート</h1>
+      <p class="hs">会社予想PER8.44倍・PBR1.32倍・配当利回り3.55%／優待込みの額面利回りは1,000株・条件充足で8.58%<br>ガリバーの中古車小売は伸びている。重いのは在庫1,073億円・売掛金400億円・有利子負債1,010億円のほう</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>当商会の採点</small></div>
+      <div class="vt">
+        <strong>当商会の検証済み上値基準 1,825円 / 下値基準 847円</strong><br>
+        非対称比1.82（幅・中）×確度12点（中）＝B++。<br>
+        上値下値とも、過去5年の年末PERの帯（5.99〜12.91倍）で置いた。<br>
+        1銘柄の上限は2.5%＝933株。1,000株の優待枠には届かない。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">現在株価</div><div class="kn am">1,194円</div><div class="ks">時価総額 1,264億円（発行済106,888,000株）</div></div>
+    <div class="kv"><div class="kl">会社予想EPS 141.4円</div><div class="kn bl">PER 8.44倍</div><div class="ks">同業ネクステージは12.9倍</div></div>
+    <div class="kv"><div class="kl">配当だけの利回り</div><div class="kn gn">3.55%</div><div class="ks">1株42.43円・純利益の30%方針</div></div>
+    <div class="kv"><div class="kl">優待込み（1,000株・条件充足）</div><div class="kn gn">8.58%</div><div class="ks">優待は年6万円。対象は3回連続保有から</div></div>
+    <div class="kv"><div class="kl">自己資本比率</div><div class="kn am">33%</div><div class="ks">有利子負債1,010億円・売掛金400億円</div></div>
+    <div class="kv"><div class="kl">当商会ランク</div><div class="kn am">B++</div><div class="ks">6軸12点・非対称比1.82・上限2.5%</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <button class="tb on" data-p="p1"><span class="d" style="background:var(--gn2)"></span>なぜ今</button>
+  <button class="tb" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札</button>
+  <button class="tb" data-p="p3"><span class="d" style="background:var(--or2)"></span>稼ぐ形</button>
+  <button class="tb" data-p="p4"><span class="d" style="background:var(--bl2)"></span>1Q決算</button>
+  <button class="tb" data-p="p5"><span class="d" style="background:var(--pu2)"></span>シェアと中計</button>
+  <button class="tb" data-p="p6"><span class="d" style="background:#72cc8e"></span>優待と配当</button>
+  <button class="tb" data-p="p7"><span class="d" style="background:var(--or2)"></span>なぜ安いか</button>
+  <button class="tb" data-p="p8"><span class="d" style="background:var(--am2)"></span>レンジとランク</button>
+  <button class="tb" data-p="p9"><span class="d" style="background:var(--rd)"></span>リスクと検算</button>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">なぜ今、IDOMなのか</h2><span class="sb bg-gn">3つの見どころ</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">見どころ 01 · 値札</div><span class="ci">🏷️</span>
+      <div class="ct">会社予想PER8.44倍。利益が2割下振れしても10.6倍</div>
+      <div class="tx">2027年2月期の会社予想はEPS141.4円・営業利益240億円。株価1,194円に対しPER<strong>8.44倍</strong>。同業ネクステージは12.9倍で、指標だけなら明確に安い。ただしPBRは1.32倍で、<strong>資産の裏付けで買う銘柄ではない</strong>。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">見どころ 02 · 受け取る側</div><span class="ci">🎁</span>
+      <div class="ct">優待込み8.58%は「1,000株・3回連続・年2回」の条件つき</div>
+      <div class="tx">2026年2月に新設された優待は、1,000株以上で1回3万円・年6万円。配当42.43円（3.55%）と足すと額面で<strong>8.58%</strong>になる。ただし継続保有は<strong>同一株主番号で3回以上連続</strong>が条件で、いま買って対象になるのは2028年2月末から。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">見どころ 03 · 重いところ</div><span class="ci">⚖️</span>
+      <div class="ct">自己資本比率33%、有利子負債1,010億円、売掛金400億円</div>
+      <div class="tx">在庫と割賦債権を借入で回す事業。第1四半期は在庫を7%圧縮した一方、<strong>売掛金が78億円増えて400億円</strong>。会社は第2四半期に流動化を予定している。中期計画の営業利益300億円に対し、会社予想は240億円。</div>
+    </div>
+  </div>
+  <div class="inf">📌 当商会のランクは<strong>B++</strong>。上値1,825円（+53%）・下値847円（▲29%）・非対称比1.82・確度12点。1銘柄の上限は2.5%＝<strong>933株</strong>で、1,000株の優待枠には67株届かない。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札 ── PER8.44倍の中身</h2><span class="sb bg-am">同業比較つき</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>株価（2026/9/18 終値）</td><td class="r mn">1,194円</td><td class="sm2">株探の確定値</td></tr>
+      <tr><td>時価総額</td><td class="r mn">1,264億円</td><td class="sm2">発行済106,888,000株</td></tr>
+      <tr class="hl"><td><strong>予想PER</strong></td><td class="r mn"><strong>8.44倍</strong></td><td class="sm2">2027年2月期 会社予想EPS141.4円</td></tr>
+      <tr><td>PBR</td><td class="r mn">1.32倍</td><td class="sm2">資産の裏付けは薄い。中身は在庫と割賦債権</td></tr>
+      <tr><td>予想配当</td><td class="r mn">42.43円</td><td class="sm2">利回り3.55%。方針は連結当期純利益の30%</td></tr>
+      <tr><td>52週</td><td class="r mn">981〜1,567円</td><td class="sm2">安値2025/10/3・高値2026/2/6</td></tr>
+      <tr><td>出来高（20営業日平均）</td><td class="r mn">101万株</td><td class="sm2">約12億円／日。流動性は十分</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">同業と並べる（同じ2026年9月28日終値）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">IDOM（7599）</th><th class="r">ネクステージ（3186）</th></tr></thead>
+    <tbody>
+      <tr><td>株価</td><td class="r mn">1,194円</td><td class="r mn">2,823円</td></tr>
+      <tr><td>時価総額</td><td class="r mn">1,264億円</td><td class="r mn">2,283億円</td></tr>
+      <tr class="hl"><td><strong>予想PER</strong></td><td class="r mn"><strong>8.44倍</strong></td><td class="r mn">12.9倍</td></tr>
+      <tr><td>PBR</td><td class="r mn">1.32倍</td><td class="r mn">2.61倍</td></tr>
+      <tr><td>予想配当利回り</td><td class="r mn">3.55%</td><td class="r mn">1.77%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 指標は明確に安い。ただし<strong>事業の中身を同じ定義で並べたわけではない</strong>（決算期も異なる）。台数・1台粗利・既存店・在庫回転・割賦債権・有利子負債まで揃えるまで、「ネクステージより割安」とは書かない。</div>
+
+  <div class="h3">業績の推移（株探）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">EPS</th><th class="r">1株配当</th></tr></thead>
+    <tbody>
+      <tr><td>2023年2月期</td><td class="r mn">4,165億円</td><td class="r mn">186.8億円</td><td class="r mn">141.5円</td><td class="r mn">42.5円</td></tr>
+      <tr><td>2024年2月期</td><td class="r mn">4,198億円</td><td class="r mn">161.2億円</td><td class="r mn">114.0円</td><td class="r mn">34.19円</td></tr>
+      <tr><td>2025年2月期</td><td class="r mn">4,966億円</td><td class="r mn">198.9億円</td><td class="r mn">133.9円</td><td class="r mn">40.18円</td></tr>
+      <tr><td>2026年2月期</td><td class="r mn">5,627億円</td><td class="r mn">202.1億円</td><td class="r mn">118.7円</td><td class="r mn">35.6円</td></tr>
+      <tr class="hl"><td><strong>2027年2月期（会社予想）</strong></td><td class="r mn"><strong>6,290億円</strong></td><td class="r mn"><strong>240億円</strong></td><td class="r mn">141.4円</td><td class="r mn">42.43円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">売上は4期で4,165億円→5,627億円へ伸びたが、営業利益は186.8億円→202.1億円で、伸び方が違う。台数と単価が増えても、出店・人件費・在庫の費用が先に乗る構造がここに出ている。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">中古車屋は何で儲けているのか</h2><span class="sb bg-or">4つの物差し</span></div>
+
+  <div class="tx">IDOMは買取・卸売・小売を自前で回し、ローン・保証・車検・整備といった付帯事業を持つ。投資家向けに単純化すると、利益はこう分解できる。</div>
+  <div class="cbox">
+    <div class="h3">営業利益 ≒ 小売台数 × 1台あたりの粗利 ＋ 卸売などの粗利 − 人件費・家賃・広告費</div>
+    <div class="note">付帯商品の利益が1台粗利に含まれる場合は、別に足すと二重計上になる。会社の定義を確認したうえで使う。</div>
+  </div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>見るところ</th><th>確かめること</th></tr></thead>
+    <tbody>
+      <tr><td>小売台数</td><td class="sm2">新規出店に頼らず伸びているか。既存店の動きと分けて見る</td></tr>
+      <tr><td>1台あたり粗利</td><td class="sm2">値上げなのか、付帯商品なのか、仕入れの巧さなのか</td></tr>
+      <tr><td>在庫回転</td><td class="sm2">売れるまで、仕入れた金は車の形で寝ている。相場が下がれば評価も下がる</td></tr>
+      <tr><td>代金の回収</td><td class="sm2">割賦販売が増えると、売上の計上と現金の回収に時間差が出る</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 中古車株は、台数と粗利だけでは足りない。<strong>在庫回転と代金回収を足した4点</strong>で見ると、売上の勢いだけに引っ張られにくくなる。IDOMの第1四半期は、まさにこの4点が別々の方向に動いた四半期だった（次のタブ）。</div>
+
+  <div class="h3">災害需要をどう扱うか</div>
+  <div class="tx">2025年8月6〜12日の大雨について、日本損害保険協会は車両保険の支払台数・件数17,779、支払保険金約264.7億円と公表している（2026年3月末時点の集計、販売店の商品車と見込みを含む）。</div>
+  <div class="note">この件数を、そのまま買い替え台数に置き換えることはできない。修理、新車への乗り換え、販売店自身の被害が混ざる。修理より買い替えを選ぶ人が増えれば在庫を持つ販売店には追い風だが、将来の買い替えを前倒しする面もある。<strong>当商会は災害需要を利益予想に足していない。</strong></div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">第1四半期 ── 良いところと重いところ</h2><span class="sb bg-bl">営業益+15%</span></div>
+
+  <div class="tx">2027年2月期 第1四半期（2026年3〜5月）。会社の決算説明資料（2026年7月14日）から。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>会社の説明</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>連結営業利益</strong></td><td class="r mn"><strong>44億円</strong></td><td class="sm2">前年同期比+15%。ただし上期予想119億円に対しては「やや出遅れ」</td></tr>
+      <tr><td>小売台数</td><td class="r mn">45,558台</td><td class="sm2">前年同期比+4%</td></tr>
+      <tr><td>小売1台あたり粗利</td><td class="r mn">指数110</td><td class="sm2">前年同期比+10%</td></tr>
+      <tr><td>在庫</td><td class="r mn">2月末比 −7%</td><td class="sm2">期待する粗利を取りにくい車両をオークションで売却。卸の台粗利が一時的に低下し、利益の押し下げ要因に</td></tr>
+      <tr><td>総資産</td><td class="r mn">2,721億円</td><td class="sm2">前期末比+113億円</td></tr>
+      <tr class="hl"><td><strong>売掛金</strong></td><td class="r mn"><strong>400億円</strong></td><td class="sm2">割賦販売等により+78億円。<strong>第2四半期に流動化を予定</strong></td></tr>
+      <tr><td>有利子負債</td><td class="r mn">1,010億円</td><td class="sm2">+56億円</td></tr>
+      <tr><td>純資産／自己資本比率</td><td class="r mn">916億円／33%</td><td class="sm2">+13億円</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">キャッシュフローの中身（ここが第1四半期の肝）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">金額</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>在庫・売掛金の増減前のキャッシュイン</td><td class="r mn">+63億円</td><td class="sm2">本業が生んだ現金</td></tr>
+      <tr><td>在庫の減少</td><td class="r mn">+118億円</td><td class="sm2">在庫を7%圧縮した効果</td></tr>
+      <tr><td>売上債権の増加</td><td class="r mn">−128億円</td><td class="sm2">割賦債権などの増加</td></tr>
+      <tr><td>営業キャッシュフロー</td><td class="r mn">+53億円</td><td class="sm2">上の3つの合計</td></tr>
+      <tr><td>投資キャッシュフロー</td><td class="r mn">−19億円</td><td class="sm2">大型店・整備工場・IT投資</td></tr>
+      <tr class="hl"><td><strong>フリーキャッシュフロー</strong></td><td class="r mn"><strong>+35億円</strong></td><td class="sm2">プラスだが、在庫圧縮という一度きりの効果を含む</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>冷蔵庫の中身を売って作った現金が、そのままローンの立て替えに出ていった四半期</strong>。在庫圧縮は毎期は打てない手なので、フリーキャッシュフローのプラスだけで資金効率の改善が定着したとは読まない。答え合わせは、売掛金の流動化が実行されたかどうか（2026年10月14日の上期決算）。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">シェアと中期計画</h2><span class="sb bg-pu">6.5%とA社7%</span></div>
+
+  <div class="h3">国内シェアは約6.5%。ただし同じ図にA社7%が載っている</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>出所と読み</th></tr></thead>
+    <tbody>
+      <tr><td>国内中古車小売市場</td><td class="r mn">250万台</td><td class="sm2">矢野経済研究所調べ（2024年）</td></tr>
+      <tr class="hl"><td><strong>IDOMのシェア</strong></td><td class="r mn"><strong>約6.5%</strong></td><td class="sm2">2012年2月期の約1%から14年で上昇</td></tr>
+      <tr><td>A社</td><td class="r mn">7%</td><td class="sm2">会社資料が同じ図に併記。IDOMより大きい</td></tr>
+      <tr><td>その他</td><td class="r mn">210万台以上</td><td class="sm2">約2万社。<strong>寡占ではない市場</strong></td></tr>
+      <tr><td>直営店舗数</td><td class="r mn">444店</td><td class="sm2">2026年2月期</td></tr>
+      <tr><td>Gulliverブランド認知率</td><td class="r mn">94.9%</td><td class="sm2">会社資料</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">会社資料の見出しは「国内中古車市場トップシェア」だが、同じページにA社7%が並ぶ。当商会は<strong>「非寡占市場での6.5%」</strong>と読み、モート（堀）の点は2点に置いた。大型店と整備工場で買った後の付き合いを長くする戦略は、堀を作る方向ではある。</div>
+
+  <div class="h3">中期経営計画の最終年度に、60億円足りない</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>2027年2月期</th><th class="r">数字</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>中期計画の目標（営業利益）</strong></td><td class="r mn"><strong>300億円</strong></td><td class="sm2">210億円から上方修正した新目標</td></tr>
+      <tr><td>会社予想（営業利益）</td><td class="r mn">240億円</td><td class="sm2">2026年4月13日発表</td></tr>
+      <tr><td>前期実績（2026年2月期）</td><td class="r mn">202億円</td><td class="sm2">—</td></tr>
+      <tr><td>中計の小売台数目標</td><td class="r mn">17〜19万台</td><td class="sm2">1台粗利は44〜41万円</td></tr>
+      <tr><td>中計のROIC目標</td><td class="r mn">8%以上</td><td class="sm2">前期実績6.8%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 目標と予想の差は、そのままPER8倍台の理由の一部と見る。<strong>計画を信じて買うのではなく、会社予想の240億円が出るかを見て買う</strong>——これが当商会の置き方。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">優待と配当 ── 8.58%の条件</h2><span class="sb bg-gn">3回連続</span></div>
+
+  <div class="h3">株主優待（2026年2月新設）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>保有株数</th><th class="r">1回あたり</th><th class="r">年間（2月末・8月末）</th><th class="r">投資額</th><th class="r">配当＋優待の額面利回り</th></tr></thead>
+    <tbody>
+      <tr><td>100〜500株未満</td><td class="r mn">2,500円</td><td class="r mn">5,000円</td><td class="r mn">121,900円</td><td class="r mn">7.58%</td></tr>
+      <tr><td>500〜1,000株未満</td><td class="r mn">13,500円</td><td class="r mn">27,000円</td><td class="r mn">609,500円</td><td class="r mn">7.91%</td></tr>
+      <tr class="hl"><td><strong>1,000株以上</strong></td><td class="r mn"><strong>30,000円</strong></td><td class="r mn"><strong>60,000円</strong></td><td class="r mn">1,194,000円</td><td class="r mn"><strong>8.58%</strong></td></tr>
+      <tr><td>2,000株</td><td class="r mn">30,000円</td><td class="r mn">60,000円</td><td class="r mn">2,438,000円</td><td class="r mn">5.94%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">税引前の配当と優待額面を投資額で割った単純計算。税金・手数料・株価の変動は含まない。優待は年6万円で頭打ちなので、株数を増やすほど利回りが上がる制度ではない。</div>
+
+  <div class="cbox">
+    <div class="h3">継続保有条件——いま買うと、対象は2028年2月末から</div>
+    <div class="tx">条件は「同一株主番号で、2月末または8月末の株主名簿に100株以上の保有記録が<strong>3回以上連続</strong>」。初回の2026年2月末・8月末のみ期間制限がなかった。2026年9月に新規で買う場合、名簿に載るのは2027年2月末・2027年8月末・2028年2月末で、<strong>3回目の2028年2月末がはじめての対象基準日</strong>になる。</div>
+    <div class="note">買い増しにも条件がかかる。株数要件と期間要件は別々に判定されるため、500株へ買い増しても、期間要件を100株分でしか満たしていなければ優待額は100株分（2,500円）のままになる。会社の株主還元ページに買い増しの例が図で載っている。</div>
+  </div>
+
+  <div class="h3">優待が変わったときの値札（1,000株）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>仮定</th><th class="r">年間の配当＋優待</th><th class="r">取得額121.9万円に対する利回り</th></tr></thead>
+    <tbody>
+      <tr><td>会社予想どおり維持</td><td class="r mn">102,430円</td><td class="r mn">8.58%</td></tr>
+      <tr><td>配当維持・優待半減</td><td class="r mn">72,430円</td><td class="r mn">5.94%</td></tr>
+      <tr><td>配当維持・優待廃止</td><td class="r mn">42,430円</td><td class="r mn">3.55%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 配当方針は<strong>連結当期純利益の30%</strong>という業績連動。利益が落ちれば配当も落ちる。優待の負担はこの30%の外側にあり、<strong>対象者数も会社の費用計上額も開示されていない</strong>ので、継続性は「負担が読めない」ところまでしか言えない。制度が変わるときは株価も動くため、上の表は利回りの下限を示すものではない。</div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">なぜ安いのか</h2><span class="sb bg-or">候補は6つ</span></div>
+
+  <div class="tx">「優待の継続性が疑われているから安い」という仮説から入った。一次資料で追える範囲では、<strong>それを主因だと特定できる資料はない</strong>。安い理由の候補を並べておく。</div>
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--or2)"><div class="h3" style="color:var(--or2)">① 中計との60億円</div><div class="tx">最終年度の目標300億円に対し、会社予想240億円。前期202億円からの伸びは見込むが、計画には届かない。</div></div>
+    <div class="c" style="border-top:3px solid var(--or2)"><div class="h3" style="color:var(--or2)">② 資金効率</div><div class="tx">ROIC6.8%（目標8%以上）。在庫1,073億円・売掛金400億円・有利子負債1,010億円を回す事業で、自己資本比率33%。</div></div>
+    <div class="c" style="border-top:3px solid var(--or2)"><div class="h3" style="color:var(--or2)">③ 利益の振れ</div><div class="tx">EPSは141.5→114.0→133.9→118.7円と上下してきた。会社予想141.4円が2割下振れすれば113.1円で、株価が同じならPERは10.6倍になる。</div></div>
+    <div class="c" style="border-top:3px solid var(--or2)"><div class="h3" style="color:var(--or2)">④ 業界の評判リスク</div><div class="tx">中古車販売は、業界全体として販売手法や保険・付帯商品の扱いが問われた経緯がある。内部管理は継続的な確認項目。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑤ 優待への不安</div><div class="tx">仮説としては残る。ただし<strong>証拠はない</strong>。新設から日が浅く、対象者数も費用も開示されていない。</div></div>
+    <div class="c" style="border-top:3px solid var(--gn2)"><div class="h3" style="color:var(--gn2)">⑥ 見直される条件</div><div class="tx">台数と1台粗利がそろって伸び、在庫と売掛金が現金に戻り、上期予想119億円に届くこと。資金効率が改善すれば、8倍台の値札は動く余地がある。</div></div>
+  </div>
+
+  <div class="h3">年末PERの推移（IRBANK）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>年</th><th class="r">2022</th><th class="r">2023</th><th class="r">2024</th><th class="r">2025</th><th class="r">2026</th></tr></thead>
+    <tbody>
+      <tr><td>PER</td><td class="r mn">6.11倍</td><td class="r mn">5.99倍</td><td class="r mn">7.95倍</td><td class="r mn">8.26倍</td><td class="r mn">12.91倍</td></tr>
+      <tr><td>PBR</td><td class="r mn">1.22倍</td><td class="r mn">1.37倍</td><td class="r mn">1.32倍</td><td class="r mn">1.40倍</td><td class="r mn">1.75倍</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">この5年、IDOMはおおむねPER6〜13倍の帯で取引されてきた。いまの8.44倍は帯の下半分。当商会はこの帯の上限と下限を、そのまま上値と下値の置き方に使っている（次のタブ）。</div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+
+  <div class="card" style="border:2px solid #b8860b;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffaf0">
+    <div class="h3" style="margin-top:0">当商会の採点（6軸×非対称比）── 総合 B++</div>
+    <p class="note">ランクは<strong>幅（上値÷下値）×確度（6軸・18点）</strong>のマトリクスで決まる。<strong>ランクは下がりにくさの指標</strong>であって、上がりやすさの順位ではない。</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+      <tbody>
+      <tr><td>🦦安さ</td><td class="r"><strong>2</strong></td><td class="sm2">会社予想PER8.44倍は市場平均より低い。ただしPBR1.32倍で資産の裏付けは薄く、在庫1,073億円と割賦売掛金400億円が資産の中身。資産バリューではなく収益バリュー</td></tr>
+      <tr><td>🦉財務</td><td class="r"><strong>1</strong></td><td class="sm2">自己資本比率33%（2026年5月末）。有利子負債1,010億円に対し純資産916億円。在庫と割賦債権を借入で回している構造で、金利と在庫評価の影響を受ける</td></tr>
+      <tr><td>🦫モート</td><td class="r"><strong>2</strong></td><td class="sm2">Gulliverブランドの国内認知率94.9%、直営444店舗、国内小売シェア約6.5%。ただし会社資料は同じページにA社7%を併記しており、市場は約2万社・210万台が残る非寡占。ROIC6.8%</td></tr>
+      <tr><td>🐊触媒</td><td class="r"><strong>1</strong></td><td class="sm2">2026年2月に株主優待を新設。中期計画は2027年2月期の営業利益300億円を掲げるが会社予想は240億円。売掛金の流動化を第2四半期に予定。明確な一発のイベントはない</td></tr>
+      <tr><td>🐝インカム</td><td class="r"><strong>3</strong></td><td class="sm2">会社予想配当42.43円で利回り3.55%。方針は連結当期純利益の30%（業績連動）。1,000株・継続保有条件を満たせば優待6万円が乗り、額面ベースの総合利回りは8.58%</td></tr>
+      <tr><td>🦞リスク</td><td class="r"><strong>3</strong></td><td class="sm2">直近20営業日の平均出来高101万株＝約12億円。時価総額1,264億円。想定した価格・数量で売買が成立する</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">上値：収益基準（会社予想EPS141.4円 × 到達を見込むPER12.91倍）＝<strong>1,825円・+53%</strong>。12.91倍は過去5年の年末PERの上限で、同業ネクステージの12.9倍より低いので低いほうを採った。<br>
+    下値：過去5年の年末PERの下限5.99倍 × 同じEPS＝<strong>847円・▲29%</strong>。52週安値981円（▲19%）より深い。<br>
+    非対称比 1.82（幅・中）× 確度 12点（中）→ <strong>B++</strong>。リスク軸は3点なので、流動性による天井（調整ルール①）には当たらない。</p>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">建てられる量と、1,000株の優待枠</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>項目</th><th class="r">数字</th><th>根拠</th></tr></thead>
+      <tbody>
+        <tr><td>1銘柄の上限</td><td class="r mn">2.5%</td><td class="sm2">B++の設計値</td></tr>
+        <tr><td>金額</td><td class="r mn">約114万円</td><td class="sm2">純資産4,547万円（2026/9/18）に対して</td></tr>
+        <tr class="hl"><td><strong>株数</strong></td><td class="r mn"><strong>933株</strong></td><td class="sm2">1,194円で計算。<strong>1,000株の優待枠に67株届かない</strong></td></tr>
+        <tr><td>売り切り日数</td><td class="r mn">1日未満</td><td class="sm2">20営業日平均出来高101万株の2割で計算</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tx"><strong>優待の枠に合わせて上限を超えるのは、順番が逆になる。</strong>枠が先、優待は後。1,000株を建てたいなら、ランクが上がる材料（資金効率の改善、中計との差の解消）を先に確認することになる。10月14日の上期決算で在庫と売掛金が現金に戻り始めていれば、財務と触媒の点は動く。</div>
+  </div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">6つのリスク</span></div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">① 在庫と相場</div><div class="tx">在庫は売れるまで現金に戻らず、中古車相場が下がれば評価も下がる。第1四半期は選別処分で卸の台粗利が一時的に低下した。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">② 割賦債権と金利</div><div class="tx">売掛金400億円（+78億円）。有利子負債1,010億円で自己資本比率33%。金利が上がれば資金コストが増える。流動化の実行が確認点。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">③ 出店の固定費</div><div class="tx">大型店と整備工場は先に費用が立つ。人員は平均355人増、単価も上昇。売場の拡大が利益に届くかは別問題。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">④ 優待の継続性</div><div class="tx">対象者数も費用も未開示。配当方針（純利益の30%）の外側にある負担で、制度変更時は株価も動く。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑤ 災害需要の扱い</div><div class="tx">上振れ要因になりうるが、台数も利益寄与も定量化できていない。当商会は予想に足していない。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑥ 海外事業</div><div class="tx">米国のGulliver USA、豪州のマッチング事業がある。過去に売却した豪州の新車ディーラー事業と混同しない。利益貢献は未検証。</div></div>
+  </div>
+
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年9月24日）</div>
+    <ul class="note">
+      <li>株価1,194円・PBR1.32倍・時価総額1,264億円・発行済106,888,000株は株探の2026年9月28日確定値。PER8.44倍と利回り3.55%は同日終値と会社予想（EPS141.4円・配当42.43円）から算出</li>
+      <li>52週高値1,567円（2026/2/6）・安値981円（2025/10/3）、20営業日平均出来高1,013,395株は株探の時系列</li>
+      <li>第1四半期（営業利益44億円・+15%、小売45,558台・+4%、台粗利指数110、在庫2月末比7%圧縮、売掛金400億円・+78億円、有利子負債1,010億円、自己資本比率33%、営業CF+53億円、FCF+35億円、売掛金の流動化予定）はIDOM「2027年2月期第1四半期決算説明資料」（2026年7月14日）で一致</li>
+      <li>シェア約6.5%・A社7%・その他210万台（約2万社）・市場250万台（矢野経済研究所2024年）・店舗444・認知率94.9%・ROIC6.8%・中計目標（営業利益300億円、小売17〜19万台、台粗利44〜41万円、ROIC8%以上）はIDOM「新規投資家向け資料」（2026年4月27日）</li>
+      <li>優待の金額（1回2,500円／13,500円／30,000円）と継続保有条件（同一株主番号で3回以上連続、初回のみ制限なし、買い増しは株数要件と期間要件を別々に判定）、配当方針（連結当期純利益の30%）はIDOMの株主還元ページ</li>
+      <li>年末PER（2022年6.11倍〜2026年12.91倍）と年末PBRはIRBANK</li>
+      <li>ネクステージ（3186）の株価2,823円・時価総額2,283億円・PER12.9倍・PBR2.61倍・利回り1.77%は株探の同日値</li>
+      <li>車両保険の支払（17,779件・約264.7億円）は日本損害保険協会の公表資料（2025年8月6〜12日の大雨、2026年3月末時点の集計）</li>
+      <li><strong>未検証</strong>：A社の特定、水害による販売・利益の寄与、優待の対象者数と費用、海外事業の利益貢献、ネクステージとの事業指標の同一定義での比較</li>
+      <li><strong>公開前にやること</strong>：公開日の確定終値で株価・PER・利回り・上値下値・上限株数を取り直す。2026年10月14日の上期決算が出ていれば、第1四半期の数字を入れ替える</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではありません。投資判断はご自身の責任においてお願いいたします。総合利回りは税引前の配当と優待額面を投資額で割った単純計算で、投資の総収益率ではありません。株主優待は継続保有条件を満たした場合の金額であり、制度の継続を保証するものではありません。<br>
+  Data: IDOM 2027年2月期第1四半期決算説明資料（2026.7.14）／新規投資家向け資料（2026.4.27）／株主還元ページ（配当方針・優待条件）／株探（2026.9.18 確定値・業績・52週・出来高）／IRBANK（年末PER・PBR・大量保有）／日本損害保険協会 公表資料 · 2026.09
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  nav.addEventListener('click',function(ev){
+    var b=ev.target.closest('.tb'); if(!b) return;
+    var id=b.getAttribute('data-p');
+    document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on');});
+    document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    document.getElementById(id).classList.add('on');
+    b.classList.add('on');b.setAttribute('aria-selected','true');
+    var top=nav.getBoundingClientRect().top+window.pageYOffset;
+    if(window.pageYOffset>top) window.scrollTo({top:top,behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>

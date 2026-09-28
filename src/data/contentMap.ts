@@ -189,6 +189,7 @@ export const contentThemes: ContentTheme[] = [
       'august-september-rights-2026',
       'september-rights-spot-margin-2026',
       'ex-rights-watchlist-2026sep',
+      'idom-7599',
       'towns-197a',
       'toyo-tec-9686',
       'yamau-hd-5284',
