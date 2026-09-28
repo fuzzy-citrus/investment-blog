@@ -14,14 +14,15 @@ import BookSidebar from './BookSidebar.astro';
 		<div class="internal-links">
 			<HeaderLink href="/">ホーム</HeaderLink>
 			<HeaderLink href="/start">初めての方へ</HeaderLink>
+			<HeaderLink href="/performance">📈 資産推移</HeaderLink>
 			<div class="dropdown-wrap">
 				<span class="dropdown-label">コンテンツ <span class="arrow">▾</span></span>
 				<div class="dropdown-menu" role="menu">
 					<a href="/blog/?type=stock" role="menuitem">銘柄紹介</a>
 					<a href="/blog/?type=column" role="menuitem">投資コラム</a>
+					<a href="/comics/" role="menuitem">🐊 四コマで学ぶ</a>
 					<a href="/map" role="menuitem">コンテンツマップ</a>
 					<a href="/analysis" role="menuitem">📊 完全版レポート一覧</a>
-					<a href="/performance" role="menuitem">📈 実績報告（資産推移）</a>
 					<a href="/note" role="menuitem">📕 note（有料記事）</a>
 				</div>
 			</div>
@@ -187,7 +188,7 @@ import BookSidebar from './BookSidebar.astro';
 	.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 	.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-	@media (max-width: 720px) {
+	@media (max-width: 900px) {
 		header { padding: 0 .65em; }
 		.site-brand { font-size: clamp(.72rem, 3.45vw, .9rem); }
 		.site-brand a { padding-left: .15em; padding-right: .2em; }
@@ -222,7 +223,7 @@ import BookSidebar from './BookSidebar.astro';
 	}
 
 	/* タッチデバイス：open クラスで表示（デスクトップも対応） */
-	@media (min-width: 721px) {
+	@media (min-width: 901px) {
 		.dropdown-wrap.open .dropdown-menu { display: block; }
 		.dropdown-wrap.open .arrow { transform: rotate(180deg); }
 	}
