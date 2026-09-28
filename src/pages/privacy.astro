@@ -84,11 +84,15 @@ const updated = '2026年9月23日';
 </html>
 
 <style>
+	/* global.css の main は width:720px 固定。width と box-sizing も上書きしないと
+	   iPad縦（768px）で横スクロールが出る */
 	main {
+		width: 100%;
 		max-width: 720px;
 		margin: 0 auto;
 		padding: 2em 1em 3em;
 		line-height: 1.8;
+		box-sizing: border-box;
 	}
 	h1 {
 		font-size: 1.6em;

@@ -17,10 +17,14 @@ const posts = (await getCollection('blog'))
 	<head>
 		<BaseHead title="ブログ | バリュー商会" description="バリュー商会の投資記録" />
 		<style>
+			/* global.css の main は width:720px 固定。width と box-sizing も上書きしないと
+			   720px＋左右paddingで幅を超え、iPad縦（768px）で横スクロールが出る */
 			main {
+				width: 100%;
 				max-width: 860px;
 				margin: 0 auto;
 				padding: 2.5em 1em 4em;
+				box-sizing: border-box;
 			}
 			h1 {
 				font-size: 1.4em;

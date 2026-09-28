@@ -82,11 +82,15 @@ const fmt = (d) => new Date(d).toLocaleDateString('ja-JP', { year: 'numeric', mo
 </html>
 
 <style>
+	/* global.css の main は width:720px 固定。width と box-sizing も上書きしないと
+	   iPad縦（768px）で横スクロールが出る */
 	main {
+		width: 100%;
 		max-width: 860px;
 		margin: 0 auto;
 		padding: 2em 1em 3.5em;
 		line-height: 1.8;
+		box-sizing: border-box;
 	}
 	h1 {
 		font-size: 1.7em;

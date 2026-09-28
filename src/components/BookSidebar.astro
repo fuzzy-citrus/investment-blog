@@ -117,7 +117,9 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     color: #fff;
   }
   .info-sb::-webkit-scrollbar { display: none; }
-  @media (min-width: 1100px) {
+  /* 1100pxから出すと、本文が最大980pxあるページ（note・value・margin・map・実績報告）で
+     左右のサイドバーが本文に重なる。両側161px＋余白が確保できる1340pxから出す */
+  @media (min-width: 1340px) {
     .info-sb { display: flex; }
   }
   .info-sb-section {
