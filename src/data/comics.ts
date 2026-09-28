@@ -6,6 +6,8 @@ import patience1 from '../assets/comics/patience-part1.png';
 import patience2 from '../assets/comics/patience-part2.png';
 import dividend1 from '../assets/comics/dividend-part1.png';
 import dividend2 from '../assets/comics/dividend-part2.png';
+import wallet1 from '../assets/comics/wallet-part1.png';
+import wallet2 from '../assets/comics/wallet-part2.png';
 
 export interface ComicLine {
   speaker: string;
@@ -42,6 +44,95 @@ export interface ComicSeries {
 }
 
 export const comics: ComicSeries[] = [
+  {
+    slug: 'wallet',
+    title: '80万円の財布',
+    lead: '「1株100円だから安い」は、どこが違うのか。河内が、値札と中身の見分け方を見せます。',
+    takeaways: [
+      '株価の絶対額ではなく、換金できる中身と値札の差を見る',
+      '帳簿の資産額と実際に売れる額は違う。昭和の簿価で止まった土地がある',
+      '中身の変化はゆっくり、値札は毎日動く。その差が開いたときに買う',
+    ],
+    cast: ['日向', '河内'],
+    source: { slug: 'value-concept', label: '資産性バリューと収益性バリューの違い' },
+    parts: [
+      {
+        label: '前編',
+        subtitle: '勘違い',
+        image: wallet1,
+        alt: '四コマ漫画「80万円の財布」前編。1株100円の薄い財布を安いと喜ぶ日向に、河内が中身は13円だと示す。安そうな財布を抱え込んで山に埋もれた日向の横で、河内は中身100万円の財布を80万円の値札で1つだけ手に取る。',
+        panels: [
+          {
+            scene: '財布の並ぶ市。日向が「1株100円」の値札が付いた薄い財布を掲げている。河内は隣で虫眼鏡を構え、別の財布を覗き込んでいる。',
+            lines: [
+              { speaker: '日向', text: '100円！ 安そうっす！' },
+              { speaker: '河内', text: '中は、見ましたか' },
+            ],
+          },
+          {
+            scene: '河内が財布を逆さに振り、レシートと小銭が数枚だけ落ちている。日向は口を開けたまま固まっている。',
+            lines: [
+              { speaker: '河内', text: '100円の値札に、中身は13円です' },
+              { speaker: '河内', text: '安いのではなく、妥当な値段です' },
+            ],
+          },
+          {
+            scene: '日向が「1株50円」「1株20円」の札が立つ台から財布を抱え込んでいる。河内が手を上げて止める。',
+            lines: [
+              { speaker: '日向', text: 'じゃあもっと安そうなものを全部っす' },
+              { speaker: '河内', text: '数を増やしても、中身は増えません' },
+            ],
+          },
+          {
+            scene: '財布の山に日向が埋もれ、レシートが舞っている。河内は「80万」の値札が付いた分厚い財布を1つだけ持ち、口から札束がのぞく。立て札「値札ではなく、中身を見る」。',
+            lines: [
+              { speaker: '日向', text: '……中身軽いっす' },
+              { speaker: '河内', text: '私はこれを1つ。中身、100万です' },
+            ],
+          },
+        ],
+        moral: '安い株ではなく、中身より安い株を買う。',
+      },
+      {
+        label: '後編',
+        subtitle: 'あるべき姿',
+        image: wallet2,
+        alt: '四コマ漫画「80万円の財布」後編。河内が財布の中身を現金・土地・投資有価証券の順に並べ、帳簿の額と売れる額は違うと示す。日向が見つけた「毎年10万」の芽は稼ぐ力で、80万の値札の財布に100万の中身と+10万の実が実る。',
+        panels: [
+          {
+            scene: '台の上に「現金」の札束、「土地」の登記済権利証、「投資有価証券」の株券が並べられている。日向はメモ帳を構えている。',
+            lines: [
+              { speaker: '日向', text: '全部おカネに見えるっす' },
+              { speaker: '河内', text: '財布の中身を換金できる順に並べます' },
+            ],
+          },
+          {
+            scene: '河内が「簿価 昭和45年」の判が押された不動産登記権利証を電灯にかざしている。背後の壁には右肩上がりの地価のグラフ。',
+            lines: [
+              { speaker: '河内', text: '帳簿の額と、売れる額は違います' },
+              { speaker: '河内', text: '土地は、買った年で止まっています' },
+            ],
+          },
+          {
+            scene: '日向が開いた財布から芽が伸び、「毎年10万」の札が下がった金色の実をつけている。',
+            lines: [
+              { speaker: '日向', text: 'この芽、なんすか' },
+              { speaker: '河内', text: '稼ぐ力です。中身は毎年育ちます' },
+            ],
+          },
+          {
+            scene: '「80万」の値札が付いた財布に「100万」の札束が詰まり、そこから伸びた芽が「+10万」の実をつけている。河内は虫眼鏡を手に次を探している。立て札「100万の中身が、80万で売られている時に買う」。',
+            lines: [
+              { speaker: '日向', text: '……これ、値札の方が間違えてるっす' },
+              { speaker: '河内', text: '中身の変化はゆっくりですが、値札は毎日変わります' },
+              { speaker: '河内', text: 'そういうお宝を探すのですよ' },
+            ],
+          },
+        ],
+        moral: '100万の中身が、80万で売られている時に買う。',
+      },
+    ],
+  },
   {
     slug: 'patience',
     title: '待ち伏せと放置',
