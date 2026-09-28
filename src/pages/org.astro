@@ -448,4 +448,10 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
   @media (max-width: 480px) {
     .row-4 { grid-template-columns: 1fr; }
   }
+
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。
+	   本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		main { width: min(960px, calc(100vw - 380px)); }
+	}
 </style>

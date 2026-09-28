@@ -359,7 +359,13 @@ const posts = (await getCollection('blog'))
 				.stock-card-header { flex-direction: column; gap: 0.5em; }
 				.stock-card-verdict { text-align: left; }
 			}
-		</style>
+		
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。
+	   本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		main { max-width: min(860px, calc(100vw - 380px)); }
+	}
+</style>
 	</head>
 	<body>
 		<Header />

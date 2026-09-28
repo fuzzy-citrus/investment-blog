@@ -541,4 +541,10 @@ const proofLinks = [
 		.nt-cols { grid-template-columns: 1fr; }
 		.nt-stocks, .nt-links, .nt-promise-grid, .nt-foot-links, .nt-foot-links-3 { grid-template-columns: 1fr; }
 	}
+
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。
+	   本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		main { max-width: min(980px, calc(100vw - 380px)); }
+	}
 </style>

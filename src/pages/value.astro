@@ -450,4 +450,10 @@ const columnCount = sections.reduce(
 		.vl-step-head h3 { font-size: 0.98rem; }
 		.vl-step-count { margin-left: 0; }
 	}
+
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。
+	   本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		main { max-width: min(980px, calc(100vw - 380px)); }
+	}
 </style>

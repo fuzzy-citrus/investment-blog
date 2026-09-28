@@ -152,4 +152,10 @@ import { comics } from '../../data/comics';
 		.series-body h2 { font-size: 1.3em; }
 		.series-actions a { flex: 1 1 100%; text-align: center; }
 	}
+
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。
+	   本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		.comics-main { width: min(860px, calc(100vw - 380px)); }
+	}
 </style>
