@@ -1,0 +1,155 @@
+---
+import { Picture } from 'astro:assets';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { comics } from '../../data/comics';
+---
+<!doctype html>
+<html lang="ja">
+<head>
+	<BaseHead title="四コマで学ぶ投資のキホン｜沼底バリュー商会" description="沼底バリュー商会の四コマ漫画コーナー。見習いの日向が勘違いする前編と、あるべき姿を知る後編のセットで、長期保有や配当の考え方を学べます。元の解説記事にもすぐ進めます。" />
+</head>
+<body>
+	<Header />
+	<main class="comics-main">
+		<section class="comics-hero">
+			<span class="eyebrow">四コマ会議</span>
+			<h1>四コマで学ぶ投資のキホン</h1>
+			<p class="lead">見習いの日向（ひなた）が、ちょっとズレた勘違いをする<strong>前編</strong>と、先輩たちと正しい考え方にたどり着く<strong>後編</strong>のセットです。読み終わったら、くわしい解説記事へ進めます。</p>
+			<ol class="how-to" aria-label="読み方">
+				<li><b>1</b>前編で勘違いを笑う</li>
+				<li><b>2</b>後編で考え方をつかむ</li>
+				<li><b>3</b>元の記事でくわしく読む</li>
+			</ol>
+		</section>
+
+		<ul class="series-list">
+			{comics.map((c, i) => (
+				<li class="series-card">
+					<a href={`/comics/${c.slug}/`} class="series-thumb" aria-hidden="true" tabindex="-1">
+						<Picture
+							src={c.parts[0].image}
+							alt=""
+							formats={['avif', 'webp']}
+							widths={[240, 360, 480]}
+							sizes="(max-width: 640px) 40vw, 220px"
+							loading={i === 0 ? 'eager' : 'lazy'}
+							decoding="async"
+						/>
+					</a>
+					<div class="series-body">
+						<span class="series-no">第{i + 1}話・前後編</span>
+						<h2><a href={`/comics/${c.slug}/`}>{c.title}</a></h2>
+						<p class="series-cast">登場：{c.cast.join('・')}</p>
+						<p class="series-lead">{c.lead}</p>
+						<ul class="takeaways">
+							{c.takeaways.map((t) => <li>{t}</li>)}
+						</ul>
+						<div class="series-actions">
+							<a class="primary" href={`/comics/${c.slug}/`}>前編から読む →</a>
+							<a href={`/blog/${c.source.slug}/`}>元記事：{c.source.label}</a>
+						</div>
+					</div>
+				</li>
+			))}
+		</ul>
+
+		<p class="comics-disclaimer">漫画は考え方を伝えるためのたとえです。特定の銘柄の売買をすすめるものではありません。</p>
+	</main>
+	<Footer />
+</body>
+</html>
+
+<style>
+	.comics-main { width: 860px; }
+	.comics-hero { margin-bottom: 2em; }
+	.eyebrow {
+		display: inline-block;
+		background: var(--accent-light);
+		color: #6b4a00;
+		font-weight: 700;
+		font-size: .85em;
+		padding: .2em .8em;
+		border-radius: 999px;
+	}
+	.comics-hero h1 { margin: .3em 0 .4em; line-height: 1.3; }
+	.lead { font-size: 1.05em; line-height: 1.8; }
+	.how-to {
+		list-style: none;
+		padding: 0;
+		margin: 1.2em 0 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: .6em;
+	}
+	.how-to li {
+		background: #f7f4e9;
+		border: 1px solid #e3dcc4;
+		border-radius: 10px;
+		padding: .7em .8em;
+		font-size: .92em;
+		line-height: 1.5;
+	}
+	.how-to b {
+		display: inline-grid;
+		place-items: center;
+		width: 1.6em;
+		height: 1.6em;
+		margin-right: .4em;
+		border-radius: 50%;
+		background: #293c30;
+		color: #fff;
+		font-size: .85em;
+	}
+	.series-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.6em; }
+	.series-card {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 1.4em;
+		padding: 1.2em;
+		border: 1px solid #e3dcc4;
+		border-radius: 14px;
+		background: #fffdf6;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+	}
+	.series-thumb { display: block; align-self: start; }
+	.series-thumb :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		border-radius: 8px;
+		border: 1px solid #e3dcc4;
+	}
+	.series-no { font-size: .82em; color: #6b5a2e; font-weight: 700; }
+	.series-body h2 { margin: .15em 0 .2em; font-size: 1.5em; line-height: 1.35; }
+	.series-body h2 a { color: inherit; text-decoration: none; }
+	.series-body h2 a:hover, .series-body h2 a:focus-visible { text-decoration: underline; }
+	.series-cast { margin: 0 0 .6em; font-size: .88em; color: rgb(var(--gray)); }
+	.series-lead { margin: 0 0 .6em; line-height: 1.75; }
+	.takeaways { margin: 0 0 1em; padding-left: 1.2em; line-height: 1.7; font-size: .95em; }
+	.series-actions { display: flex; flex-wrap: wrap; gap: .6em; }
+	.series-actions a {
+		display: inline-block;
+		padding: .6em 1em;
+		border-radius: 8px;
+		border: 1px solid #293c30;
+		color: #293c30;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: .92em;
+		line-height: 1.4;
+	}
+	.series-actions a.primary { background: #293c30; color: #fff; }
+	.series-actions a:hover, .series-actions a:focus-visible { opacity: .85; text-decoration: underline; }
+	.comics-disclaimer { margin-top: 2.4em; font-size: .85em; color: rgb(var(--gray)); }
+
+	@media (max-width: 640px) {
+		.how-to { grid-template-columns: 1fr; }
+		.series-card { grid-template-columns: 1fr; padding: 1em; }
+		.series-thumb { max-width: 260px; margin: 0 auto; }
+		.series-body h2 { font-size: 1.3em; }
+		.series-actions a { flex: 1 1 100%; text-align: center; }
+	}
+</style>

@@ -7,6 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Comments from '../components/Comments.astro';
 import Header from '../components/Header.astro';
 import SeriesNav from '../components/SeriesNav.astro';
+import { comicBySourceSlug } from '../data/comics';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -15,6 +16,8 @@ const { title, description, pubDate, updatedDate, heroImage, stockCard, noteUrl,
 
 // シリーズナビ用に、URL から自分のスラッグを取り出す（/blog/<slug>/）
 const currentSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
+// この記事を元にした四コマがあれば、記事末尾に案内を出す
+const comic = comicBySourceSlug(currentSlug);
 
 const analysisFileMap: Record<string, string> = {
 	'9036': 'tobu-network-9036',
@@ -454,6 +457,20 @@ const articleJsonLd = {
 			.share-btn:hover { opacity: 0.8; }
 			.hatena-btn { background: #00a4de; color: white; }
 			.x-btn { background: #000; color: white; }
+			.comic-callout {
+				max-width: 720px;
+				margin: 1.5em auto;
+				padding: 1em 1.2em;
+				border: 1px solid #e3dcc4;
+				border-left: 4px solid #2f6b45;
+				border-radius: 10px;
+				background: #fffdf6;
+			}
+			.comic-callout-kicker { display: block; font-size: .8em; font-weight: 700; color: #6b5a2e; margin-bottom: .3em; }
+			.comic-callout a { display: flex; flex-direction: column; gap: .2em; text-decoration: none; color: #1e1e1e; line-height: 1.6; }
+			.comic-callout a span { font-size: .9em; color: #2f6b45; }
+			.comic-callout a:hover strong, .comic-callout a:focus-visible strong { text-decoration: underline; }
+			@media (max-width: 760px) { .comic-callout { margin: 1.5em 1em; } }
 		</style>
 	</head>
 
@@ -549,6 +566,16 @@ const articleJsonLd = {
 					</a>
 				</div>
 			</div>
+
+			{comic && (
+				<aside class="comic-callout" aria-label="この記事の四コマ版">
+					<span class="comic-callout-kicker">🐊 四コマ版もあります</span>
+					<a href={`/comics/${comic.slug}/`}>
+						<strong>四コマ「{comic.title}」前編・後編</strong>
+						<span>この記事の考え方を、日向の勘違いから漫画でおさらい →</span>
+					</a>
+				</aside>
+			)}
 
 			<SeriesNav slug={currentSlug} />
 

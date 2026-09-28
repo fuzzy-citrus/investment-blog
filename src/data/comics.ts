@@ -1,0 +1,222 @@
+// 四コマ漫画コーナー（/comics）のデータ。
+// 画像は Codex 制作・承認済みの4枚だけ（src/assets/comics/）。差し替え・追加は Codex の承認素材に限る。
+// 台詞は画像内の文字をそのまま書き起こしたもの（読み上げ・検索・拡大できない環境向けのテキスト版）。
+import type { ImageMetadata } from 'astro';
+import patience1 from '../assets/comics/patience-part1.png';
+import patience2 from '../assets/comics/patience-part2.png';
+import dividend1 from '../assets/comics/dividend-part1.png';
+import dividend2 from '../assets/comics/dividend-part2.png';
+
+export interface ComicLine {
+  speaker: string;
+  text: string;
+}
+
+export interface ComicPanel {
+  /** 絵の説明（台詞以外で意味を持つもの） */
+  scene: string;
+  caption?: string;
+  lines: ComicLine[];
+}
+
+export interface ComicPart {
+  label: '前編' | '後編';
+  subtitle: string;
+  image: ImageMetadata;
+  alt: string;
+  panels: ComicPanel[];
+  /** 画像下部の締めの一文 */
+  moral: string;
+  note?: string;
+}
+
+export interface ComicSeries {
+  slug: string;
+  title: string;
+  lead: string;
+  /** 漫画で学べること（一覧カードと本文冒頭で使う） */
+  takeaways: string[];
+  cast: string[];
+  source: { slug: string; label: string };
+  parts: [ComicPart, ComicPart];
+}
+
+export const comics: ComicSeries[] = [
+  {
+    slug: 'patience',
+    title: '待ち伏せと放置',
+    lead: '「買って寝て待つ」は長期投資なのか。待伏が、待つことと放っておくことの違いを確かめます。',
+    takeaways: [
+      '待っている間も、決算で「持つ理由」が残っているかを見る',
+      '全部を精読しなくていい。強み・稼ぎ方・育つ力の3つから',
+      '理由が崩れたら、ほかの候補と価格・リスクを比べ直す',
+    ],
+    cast: ['日向', '待伏'],
+    source: { slug: 'value-tob-strategy-2026', label: 'バリュー株×TOB狙いの戦略' },
+    parts: [
+      {
+        label: '前編',
+        subtitle: '勘違い',
+        image: patience1,
+        alt: '四コマ漫画「待ち伏せと放置」前編。ハンモックで寝ている日向に待伏が何を待っているのか尋ね、3年間決算を読まずに苔に覆われた日向へ「それは放置です」と告げる。',
+        panels: [
+          {
+            scene: '夕方の沼。日向がアイマスクをしてハンモックで寝ている。待伏は水面から顔を出している。',
+            lines: [
+              { speaker: '日向', text: '買って寝て待つっす！' },
+              { speaker: '待伏', text: '何を待っていますか？' },
+            ],
+          },
+          {
+            scene: '待伏が水中から決算報告書を取り出し、赤ペンを持っている。横に「財務・事業・競争環境・経営戦略・リスク」の資料の束。',
+            lines: [
+              { speaker: '待伏', text: '決算が出たら読みます' },
+              { speaker: '待伏', text: '待つ理由があるか確認です' },
+            ],
+          },
+          {
+            scene: 'ハンモックに苔が生え、蜘蛛の巣が張り始めている。日向は冷や汗をかいている。',
+            lines: [
+              { speaker: '日向', text: '僕も3年待ってるっす' },
+              { speaker: '待伏', text: '最後に決算を読んだのは？' },
+            ],
+          },
+          {
+            scene: '苔まみれの日向の頭に鳥が巣を作り、足元には未開封の株主通信やIR資料が山になっている。待伏の横には付箋だらけの資料が高く積まれている。立て札「待つのは監視することであり 忘れることではない」。',
+            lines: [
+              { speaker: '日向', text: '……買った日っす' },
+              { speaker: '待伏', text: 'それは放置です' },
+            ],
+          },
+        ],
+        moral: '待つ間も、会社の変化を確認。',
+      },
+      {
+        label: '後編',
+        subtitle: 'あるべき姿',
+        image: patience2,
+        alt: '四コマ漫画「待ち伏せと放置」後編。分厚い決算報告書に怯える日向に、待伏が強み・稼ぎ方・育つ力の3点を示し、理由が崩れたらA社とB社を比べ直すと説明する。最後はハンモックを背負って歩き出す日向に待伏がつっこむ。',
+        panels: [
+          {
+            scene: '机の上に分厚い決算報告書。待伏は「強み・稼ぎ方・育つ力」にチェックを入れたクリップボードを持っている。',
+            lines: [
+              { speaker: '日向', text: '決算書を全部、精読っすか？' },
+              { speaker: '待伏', text: 'まずは強みと稼ぎ方、育つ力です' },
+            ],
+          },
+          {
+            scene: '根を張った大きな木。立て札「よい会社は時間で育つ」。待伏が木を指し、日向がメモを取っている。',
+            lines: [
+              { speaker: '待伏', text: '強みは崩れていない？' },
+              { speaker: '待伏', text: '自力で育つ仕組みは続いている？' },
+            ],
+          },
+          {
+            scene: '「A社（今の会社）」と「B社（候補）」の比較表。持つ理由・価格・リスクの欄があり、下に「より良い候補がある時も比較」。',
+            lines: [
+              { speaker: '待伏', text: '理由が残れば、じっくり待つ' },
+              { speaker: '待伏', text: '崩れたら、ほかの候補と比べ直す' },
+            ],
+          },
+          {
+            scene: '日向がハンモックごと背負い、「比較メモ」を持って楽しそうに歩き出す。待伏もリュックを背負って続く。',
+            lines: [
+              { speaker: '日向', text: '待つ時間も、より良い会社と過ごしたいっす！' },
+              { speaker: '待伏', text: '寝床まで背負うんですか' },
+            ],
+          },
+        ],
+        moral: '長期保有でも、持つ理由はときどき見直す。',
+      },
+    ],
+  },
+  {
+    slug: 'dividend',
+    title: '配当は魔法じゃない',
+    lead: '利回りの高さに目を輝かせる日向。花岡が、その配当がどこから出ているのかを一緒にたどります。',
+    takeaways: [
+      '配当は魔法ではなく、会社が本業で稼いだお金から出る',
+      '稼ぎ以上の配当は、会社の根っこを削っているかもしれない',
+      '稼ぐ力が育ち、再投資と備えが残れば、配当の余力も育つ',
+    ],
+    cast: ['日向', '花岡'],
+    source: { slug: 'dividend-series-01-what-is-dividend', label: '配当とは何か？【配当シリーズ①】' },
+    parts: [
+      {
+        label: '前編',
+        subtitle: '勘違い',
+        image: dividend1,
+        alt: '四コマ漫画「配当は魔法じゃない」前編。魔法使いの帽子をかぶった日向が杖で配当を呼ぼうとし、花岡が稼ぐ力を示す。蜜があふれる鉢の根は、実は「利益以上の配当」の管で絞られていた。',
+        panels: [
+          {
+            scene: '魔法使いの帽子をかぶった日向が、鉢植えの花に杖を振っている。',
+            lines: [
+              { speaker: '日向', text: '配当よ、湧いてこい！' },
+              { speaker: '花岡', text: '魔法では出ませんよ' },
+            ],
+          },
+          {
+            scene: '根がしっかり張った元気な鉢植えと、はちみつの瓶。花岡が鉢を指している。',
+            lines: [{ speaker: '花岡', text: 'まず、会社の稼ぐ力です' }],
+          },
+          {
+            scene: 'しおれた鉢植えから、はちみつが瓶にあふれるほど流れ出ている。',
+            lines: [
+              { speaker: '日向', text: 'こっちは大量に出てるっす！' },
+              { speaker: '花岡', text: 'その原資はどこから？' },
+            ],
+          },
+          {
+            scene: '鉢の断面。「利益以上の配当」と書かれた蛇口が根に直結し、根と土が干からびている。帽子のしおれた日向が机に伏せている。',
+            lines: [
+              { speaker: '日向', text: '自分の根っこを絞ってたっす' },
+              { speaker: '花岡', text: '稼ぐ力と原資を見ましょう' },
+            ],
+          },
+        ],
+        moral: '利回りの高さだけでなく、続く理由を確認。',
+      },
+      {
+        label: '後編',
+        subtitle: 'あるべき姿',
+        image: dividend2,
+        alt: '四コマ漫画「配当は魔法じゃない」後編。「稼ぐ力」の管から「備え」の水槽に水が入り、「再投資」で会社が育ち、配当の蛇口も少し大きくなる。最後は日向が巨大なカップを用意し、花岡が「育てすぎです」とつっこむ。',
+        panels: [
+          {
+            scene: '「良い会社」の工場から「稼ぐ力」の管が「備え」の水槽につながり、小さな「配当」の蛇口から水がカップに落ちている。',
+            lines: [
+              { speaker: '日向', text: '蛇口だけ大きくするのはダメっすね' },
+              { speaker: '花岡', text: '育てたいのは、会社の稼ぐ力です' },
+            ],
+          },
+          {
+            scene: '「再投資」の管が工場へつながり、工場が大きくなり始めている。',
+            lines: [
+              { speaker: '花岡', text: '事業に投資して、稼ぐ力を育てる' },
+              { speaker: '花岡', text: '備えを残して、配当も無理なく' },
+            ],
+          },
+          {
+            caption: '数年後、事業が順調に育てば',
+            scene: '工場も水槽も大きくなり、配当の蛇口も少し大きくなっている。',
+            lines: [
+              { speaker: '日向', text: '持ち続ける楽しみっすね！' },
+              { speaker: '花岡', text: '稼ぎと蓄えが育てば、配当の余力も育ちます' },
+            ],
+          },
+          {
+            scene: '日向が自分より大きな花柄のカップを用意して得意げ。花岡はカップの縁で呆れている。',
+            lines: [
+              { speaker: '日向', text: '受け皿も育てておいたっす！' },
+              { speaker: '花岡', text: '……それは育てすぎです' },
+            ],
+          },
+        ],
+        moral: '稼ぐ力の成長を、配当の育ちにつなげる。',
+        note: '事業が育つ場合のイメージです。増配を約束するものではありません。',
+      },
+    ],
+  },
+];
+
+export const comicBySourceSlug = (slug: string) => comics.find((c) => c.source.slug === slug);

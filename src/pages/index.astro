@@ -9,6 +9,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import { siteUpdates } from '../data/siteUpdates';
+import { Picture } from 'astro:assets';
+import { comics } from '../data/comics';
 
 const allPosts = (await getCollection('blog'))
 	.filter(p => !p.data.draft)
@@ -215,6 +217,25 @@ const memberHints = [
 				</div>
 			</section>
 
+			<section class="comics-teaser" aria-labelledby="comics-teaser-title">
+				<div class="comics-teaser-copy">
+					<span class="first-visit-kicker">初心者向け・四コマ漫画</span>
+					<h2 id="comics-teaser-title">四コマで学ぶ投資のキホン</h2>
+					<p>見習いの日向が勘違いする前編と、正しい考え方にたどり着く後編のセット。読み終えたら解説記事へ進めます。</p>
+					<a href="/comics/" class="first-visit-main">四コマ一覧を見る →</a>
+				</div>
+				<ul class="comics-teaser-list">
+					{comics.map((c) => (
+						<li>
+							<a href={`/comics/${c.slug}/`}>
+								<Picture src={c.parts[0].image} alt="" formats={['avif', 'webp']} widths={[120, 240]} sizes="120px" loading="lazy" decoding="async" />
+								<span>{c.title}<small>前編・後編</small></span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+
 			<div class="wl-col-grid">
 
 				<StockRankSummary posts={allPosts} />
@@ -409,6 +430,18 @@ const memberHints = [
 	.first-visit-step:hover{background:#f3f8f4}
 	@media(max-width:640px){.first-visit-intro{grid-template-columns:1fr}.first-visit-steps{grid-template-columns:1fr 1fr 1fr}.first-visit-step{padding:.5em}.first-visit-step span{font-size:.62em}}
 	@media(max-width:420px){.first-visit-steps{grid-template-columns:1fr}}
+
+	/* ── 四コマコーナーへの入口 ── */
+	.comics-teaser{display:grid;grid-template-columns:1fr auto;gap:1em;align-items:center;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #e3dcc4;border-left:4px solid #2f6b45;border-radius:10px;background:#fffdf6}
+	.comics-teaser h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
+	.comics-teaser p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
+	.comics-teaser-list{list-style:none;margin:0;padding:0;display:flex;gap:.7em}
+	.comics-teaser-list a{display:flex;flex-direction:column;align-items:center;gap:.3em;width:120px;text-decoration:none;color:var(--accent-dark)}
+	.comics-teaser-list :global(img){display:block;width:100%;height:auto;object-fit:contain;border:1px solid #e3dcc4;border-radius:6px;background:#fff}
+	.comics-teaser-list span{font-size:.72em;font-weight:800;text-align:center;line-height:1.4}
+	.comics-teaser-list small{display:block;font-weight:400;color:rgb(var(--gray))}
+	.comics-teaser-list a:hover span,.comics-teaser-list a:focus-visible span{text-decoration:underline}
+	@media(max-width:640px){.comics-teaser{grid-template-columns:1fr}.comics-teaser-list{justify-content:center}.comics-teaser-list a{width:110px}}
 
 	/* ── Asset Status ── */
 	.asset-status {

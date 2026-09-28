@@ -312,6 +312,10 @@ hr {
 .prose p.say-rival {
 	flex-direction: row-reverse;
 }
+/* アイコンが右にあるので、文章も右揃えにして視線の向きをそろえる */
+.prose p.say-rival .say-body {
+	text-align: right;
+}
 .prose p.say-rival .cast-icon {
 	background: #fffaf2;
 	box-shadow: 0 0 0 1px #e6cfa8;

@@ -1,0 +1,412 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { comics, type ComicSeries } from '../../data/comics';
+
+export function getStaticPaths() {
+	return comics.map((comic, index) => ({ params: { slug: comic.slug }, props: { comic, index } }));
+}
+
+interface Props {
+	comic: ComicSeries;
+	index: number;
+}
+
+const { comic, index } = Astro.props;
+
+// 元記事が無い・下書きのままならビルドを止める（リンク切れを本番に出さない）
+const blog = await getCollection('blog');
+const source = blog.find((p) => p.id === comic.source.slug && !p.data.draft);
+if (!source) throw new Error(`[comics] 元記事が見つからないか下書きです: ${comic.source.slug}`);
+
+// 「原寸で見る」用。1024px幅のWebPを1枚作る
+const fullViews = await Promise.all(
+	comic.parts.map((p) => getImage({ src: p.image, format: 'webp', width: p.image.width })),
+);
+
+const others = comics.filter((c) => c.slug !== comic.slug);
+const description = `四コマ漫画「${comic.title}」前編・後編。${comic.lead}`;
+---
+<!doctype html>
+<html lang="ja">
+<head>
+	<BaseHead title={`四コマ「${comic.title}」前編・後編｜沼底バリュー商会`} description={description} />
+</head>
+<body>
+	<Header />
+	<main class="comic-main" data-pagefind-body>
+		<nav class="crumbs" aria-label="パンくずリスト">
+			<a href="/">ホーム</a> <span aria-hidden="true">›</span> <a href="/comics/">四コマで学ぶ</a> <span aria-hidden="true">›</span> <span aria-current="page">{comic.title}</span>
+		</nav>
+
+		<header class="comic-head">
+			<span class="eyebrow">四コマ会議 第{index + 1}話・前後編</span>
+			<h1>{comic.title}</h1>
+			<p class="lead">{comic.lead}</p>
+			<nav class="part-jump" aria-label="この話の目次">
+				{comic.parts.map((p, i) => <a href={`#part${i + 1}`}>{p.label}：{p.subtitle}</a>)}
+				<a href="#learn">まとめと元記事</a>
+			</nav>
+		</header>
+
+		{comic.parts.map((part, i) => (
+			<section class="comic-part" id={`part${i + 1}`} aria-labelledby={`part${i + 1}-title`}>
+				<h2 id={`part${i + 1}-title`}>
+					<span class={`part-badge part-badge-${i + 1}`}>{part.label}</span>
+					{part.subtitle}
+				</h2>
+				<figure class="comic-figure">
+					<a
+						href={fullViews[i].src}
+						class="comic-zoom"
+						data-full={fullViews[i].src}
+						data-alt={part.alt}
+						data-title={`${comic.title}｜${part.label}「${part.subtitle}」`}
+					>
+						<Picture
+							src={part.image}
+							alt={part.alt}
+							formats={['avif', 'webp']}
+							widths={[360, 480, 720, 960, 1024]}
+							sizes="min(100vw - 2em, 480px)"
+							loading={i === 0 ? 'eager' : 'lazy'}
+							decoding="async"
+						/>
+						<span class="zoom-badge" aria-hidden="true">🔍 大きく見る</span>
+					</a>
+					<figcaption>押すと画面いっぱいに開きます</figcaption>
+				</figure>
+
+				<div class="comic-side">
+				<p class="comic-moral"><strong>{part.moral}</strong></p>
+				{part.note && <p class="comic-note">※{part.note}</p>}
+
+				<details class="transcript">
+					<summary>{part.label}の台詞をテキストで読む</summary>
+					<ol class="panels">
+						{part.panels.map((panel, n) => (
+							<li>
+								<h3>{n + 1}コマ目</h3>
+								{panel.caption && <p class="panel-caption">（{panel.caption}）</p>}
+								<p class="panel-scene">{panel.scene}</p>
+								<dl>
+									{panel.lines.map((line) => (
+										<div class="line">
+											<dt>{line.speaker}</dt>
+											<dd>「{line.text}」</dd>
+										</div>
+									))}
+								</dl>
+							</li>
+						))}
+					</ol>
+					<p class="panel-moral">締めの一文：{part.moral}</p>
+				</details>
+
+				{i === 0 && (
+					<p class="to-next"><a href="#part2">後編「{comic.parts[1].subtitle}」へ進む ↓</a></p>
+				)}
+				</div>
+			</section>
+		))}
+
+		<section class="learn" id="learn" aria-labelledby="learn-title">
+			<h2 id="learn-title">この話で学べること</h2>
+			<ul>
+				{comic.takeaways.map((t) => <li>{t}</li>)}
+			</ul>
+			<div class="source-cta">
+				<p class="source-kicker">もっとくわしく読むなら</p>
+				<a href={`/blog/${source.id}/`} class="source-link">
+					<span class="source-label">元記事</span>
+					<span class="source-title">{source.data.title}</span>
+					<span class="source-arrow" aria-hidden="true">→</span>
+				</a>
+			</div>
+		</section>
+
+		<nav class="more" aria-label="ほかの四コマ">
+			{others.length > 0 && (
+				<>
+					<h2>ほかの四コマ</h2>
+					<ul>
+						{others.map((c) => (
+							<li><a href={`/comics/${c.slug}/`}>{c.title}（前後編）→</a></li>
+						))}
+					</ul>
+				</>
+			)}
+			<p><a href="/comics/">四コマ一覧へ戻る</a></p>
+		</nav>
+
+		<p class="comics-disclaimer">漫画は考え方を伝えるためのたとえです。特定の銘柄の売買をすすめるものではありません。</p>
+	</main>
+
+	<dialog class="comic-lightbox" aria-label="四コマの拡大表示">
+		<form method="dialog"><button class="lightbox-close" aria-label="閉じる">✕</button></form>
+		<img alt="" />
+		<p class="lightbox-foot">
+			<span class="lightbox-title"></span>
+			<a class="lightbox-raw" href="#" target="_blank" rel="noopener">画像だけを別のタブで開く ↗</a>
+		</p>
+	</dialog>
+	<Footer />
+</body>
+</html>
+
+<style>
+	.comic-main { width: 720px; }
+	.crumbs { font-size: .85em; color: rgb(var(--gray)); margin-bottom: 1em; }
+	.crumbs a { color: inherit; }
+	.eyebrow {
+		display: inline-block;
+		background: var(--accent-light);
+		color: #6b4a00;
+		font-weight: 700;
+		font-size: .85em;
+		padding: .2em .8em;
+		border-radius: 999px;
+	}
+	.comic-head h1 { margin: .3em 0 .3em; line-height: 1.3; }
+	.lead { line-height: 1.8; }
+	.part-jump { display: flex; flex-wrap: wrap; gap: .5em; margin: 1em 0 2em; }
+	.part-jump a {
+		padding: .45em .9em;
+		border: 1px solid #c9bf9f;
+		border-radius: 999px;
+		color: #293c30;
+		text-decoration: none;
+		font-size: .9em;
+		background: #fffdf6;
+	}
+	.part-jump a:hover, .part-jump a:focus-visible { background: #f2ecd6; text-decoration: underline; }
+
+	.comic-part {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		justify-items: center;
+		gap: 1.1em;
+		margin: 0 0 2.8em;
+		scroll-margin-top: 1em;
+	}
+	.comic-part > h2 { justify-self: start; }
+	.comic-side { min-width: 0; width: 100%; }
+	.comic-part h2 { display: flex; align-items: center; gap: .5em; font-size: 1.4em; margin: 0 0 .6em; }
+	.part-badge {
+		display: inline-block;
+		padding: .15em .7em;
+		border-radius: 6px;
+		font-size: .8em;
+		color: #fff;
+		background: #8a5a1c;
+	}
+	.part-badge-2 { background: #2f6b45; }
+
+	.comic-figure { margin: 0; }
+	/* 原画は1024px幅。480pxで出せば2倍の画面でも等倍以上になり、吹き出しの字がボケない。
+	   大きく読みたいときは押して拡大（.comic-lightbox）。 */
+	.comic-zoom { display: block; position: relative; width: 100%; max-width: 480px; margin: 0 auto; }
+	.comic-figure :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		border-radius: 10px;
+		border: 1px solid #e3dcc4;
+		background: #fffdf6;
+	}
+	.zoom-badge {
+		position: absolute;
+		right: .55em;
+		bottom: .55em;
+		padding: .3em .7em;
+		border-radius: 999px;
+		background: rgba(30, 38, 32, .82);
+		color: #fff;
+		font-size: .78em;
+		font-weight: 700;
+		letter-spacing: .02em;
+		pointer-events: none;
+	}
+	.comic-zoom:hover .zoom-badge, .comic-zoom:focus-visible .zoom-badge { background: #2f6b45; }
+	.comic-zoom:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
+	.comic-figure figcaption {
+		margin-top: .5em;
+		text-align: center;
+		font-size: .8em;
+		color: rgb(var(--gray));
+	}
+	.comic-moral { margin: 0 0 .4em; line-height: 1.7; }
+	.comic-note { margin: 0 0 .8em; font-size: .85em; color: rgb(var(--gray-dark)); }
+
+	/* ── 拡大表示 ── */
+	.comic-lightbox {
+		border: 0;
+		padding: 0;
+		background: transparent;
+		max-width: 96vw;
+		max-height: 96vh;
+		overflow: visible;
+	}
+	.comic-lightbox::backdrop { background: rgba(18, 24, 20, .84); }
+	.comic-lightbox img {
+		display: block;
+		width: auto;
+		height: auto;
+		max-width: 94vw;
+		max-height: 84vh;
+		margin: 0 auto;
+		border-radius: 10px;
+		background: #fffdf6;
+	}
+	.comic-lightbox form { margin: 0; text-align: right; }
+	.lightbox-close {
+		border: 0;
+		margin: 0 0 .4em;
+		padding: .35em .8em;
+		border-radius: 999px;
+		background: #fffdf6;
+		color: #1e1e1e;
+		font-size: 1em;
+		font-weight: 700;
+		cursor: pointer;
+	}
+	.lightbox-close:hover, .lightbox-close:focus-visible { background: #fff; }
+	.lightbox-foot {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: .4em 1em;
+		margin: .5em 0 0;
+		color: #f4f1e6;
+		font-size: .85em;
+	}
+	.lightbox-raw { color: #ffe08a; }
+
+	.transcript {
+		margin-top: 0;
+		border: 1px solid #e3dcc4;
+		border-radius: 10px;
+		background: #fffdf6;
+		padding: .2em 1em;
+	}
+	.transcript summary { cursor: pointer; font-weight: 700; padding: .6em 0; color: #293c30; }
+	.transcript summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+	.panels { list-style: none; padding: 0; margin: 0 0 .6em; }
+	.panels li { border-top: 1px dashed #e3dcc4; padding: .6em 0; }
+	.panels h3 { font-size: 1em; margin: 0 0 .2em; }
+	.panel-caption { margin: 0; font-size: .9em; font-weight: 700; }
+	.panel-scene { margin: 0 0 .3em; font-size: .88em; color: rgb(var(--gray-dark)); line-height: 1.6; }
+	.panels dl { margin: 0; }
+	.line { display: flex; gap: .6em; line-height: 1.7; }
+	.line dt { flex: 0 0 3em; font-weight: 700; }
+	.line dd { margin: 0; }
+	.panel-moral { font-size: .9em; font-weight: 700; margin: 0 0 .6em; }
+
+	.to-next { text-align: center; margin: 1.2em 0 0; }
+	.to-next a {
+		display: inline-block;
+		padding: .7em 1.4em;
+		border-radius: 999px;
+		background: #293c30;
+		color: #fff;
+		text-decoration: none;
+		font-weight: 700;
+	}
+	.to-next a:hover, .to-next a:focus-visible { opacity: .88; text-decoration: underline; }
+
+	.learn {
+		scroll-margin-top: 1em;
+		background: #f7f4e9;
+		border: 1px solid #e3dcc4;
+		border-radius: 14px;
+		padding: 1.2em 1.4em;
+	}
+	.learn h2 { font-size: 1.3em; margin: 0 0 .5em; }
+	.learn ul { margin: 0 0 1.2em; padding-left: 1.2em; line-height: 1.8; }
+	.source-kicker { margin: 0 0 .4em; font-size: .88em; font-weight: 700; color: #6b5a2e; }
+	.source-link {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: .8em;
+		padding: .9em 1em;
+		border-radius: 10px;
+		background: #fff;
+		border: 2px solid #293c30;
+		color: #1e1e1e;
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	.source-link:hover, .source-link:focus-visible { background: #fffbea; }
+	.source-link:hover .source-title, .source-link:focus-visible .source-title { text-decoration: underline; }
+	.source-label {
+		background: #293c30;
+		color: #fff;
+		font-size: .78em;
+		font-weight: 700;
+		padding: .2em .6em;
+		border-radius: 4px;
+		white-space: nowrap;
+	}
+	.source-title { font-weight: 700; font-size: .95em; }
+	.source-arrow { font-size: 1.3em; color: #293c30; }
+
+	.more { margin-top: 2em; }
+	.more h2 { font-size: 1.15em; margin: 0 0 .4em; }
+	.more ul { margin: 0 0 .6em; padding-left: 1.2em; line-height: 1.9; }
+	.comics-disclaimer { margin-top: 2em; font-size: .85em; color: rgb(var(--gray)); }
+
+	/* 画面が広いときだけ、絵と台詞を横に並べる。
+	   1100px以上は左右に固定サイドバー（各161px）が出るので、
+	   その下に潜らない幅（1460px以上）になってから2列にする。 */
+	@media (min-width: 1460px) {
+		.comic-main { width: 1040px; }
+		.comic-part {
+			grid-template-columns: 480px minmax(0, 1fr);
+			justify-items: stretch;
+			align-items: start;
+			gap: 0 1.8em;
+		}
+		.comic-part > h2 { grid-column: 1 / -1; }
+	}
+
+	@media (max-width: 640px) {
+		.comic-part h2 { font-size: 1.2em; }
+		.comic-zoom { max-width: 420px; }
+		.learn { padding: 1em; }
+		.source-link { grid-template-columns: 1fr auto; }
+		.source-label { grid-column: 1 / -1; justify-self: start; }
+	}
+</style>
+
+<script>
+	// 四コマは小さく出しておき、押したときだけ画面いっぱいに開く。
+	// dialog が使えない環境では、そのまま画像へのリンクとして動く（何もしない）。
+	const dlg = document.querySelector('.comic-lightbox') as HTMLDialogElement | null;
+	const img = dlg?.querySelector('img') as HTMLImageElement | null;
+	const raw = dlg?.querySelector('.lightbox-raw') as HTMLAnchorElement | null;
+	const title = dlg?.querySelector('.lightbox-title') as HTMLElement | null;
+
+	if (dlg && img && raw && title && typeof dlg.showModal === 'function') {
+		document.querySelectorAll<HTMLAnchorElement>('.comic-zoom').forEach((link) => {
+			link.addEventListener('click', (e) => {
+				const full = link.dataset.full;
+				if (!full) return;
+				e.preventDefault();
+				img.src = full;
+				img.alt = link.dataset.alt ?? '';
+				title.textContent = link.dataset.title ?? '';
+				raw.href = full;
+				dlg.showModal();
+			});
+		});
+		// 背景を押しても閉じる
+		dlg.addEventListener('click', (e) => {
+			if (e.target === dlg) dlg.close();
+		});
+	}
+</script>
