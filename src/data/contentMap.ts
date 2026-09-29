@@ -204,6 +204,7 @@ export const contentThemes: ContentTheme[] = [
       'scorecard-45-stocks-2026q3',
       'rerank-45-current-price-audit',
       'ex-rights-overdrop-check-2026aug',
+      'ex-rights-overdrop-check-2026sep',
     ],
     note: '過去の判断を、同じ物差しで測り直した記事。テーマを横断する',
   },
