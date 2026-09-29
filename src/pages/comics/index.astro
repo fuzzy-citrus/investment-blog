@@ -4,6 +4,9 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { comics } from '../../data/comics';
+
+// 一覧は新しい順。話数（episode）は公開順の通し番号なので、並べ替えても番号は動かない
+const series = [...comics].sort((a, b) => b.episode - a.episode);
 ---
 <!doctype html>
 <html lang="ja">
@@ -25,7 +28,7 @@ import { comics } from '../../data/comics';
 		</section>
 
 		<ul class="series-list">
-			{comics.map((c, i) => (
+			{series.map((c, i) => (
 				<li class="series-card">
 					<a href={`/comics/${c.slug}/`} class="series-thumb" aria-hidden="true" tabindex="-1">
 						<Picture
@@ -39,7 +42,7 @@ import { comics } from '../../data/comics';
 						/>
 					</a>
 					<div class="series-body">
-						<span class="series-no">第{i + 1}話・前後編</span>
+						<span class="series-no">第{c.episode}話・前後編</span>
 						<h2><a href={`/comics/${c.slug}/`}>{c.title}</a></h2>
 						<p class="series-cast">登場：{c.cast.join('・')}</p>
 						<p class="series-lead">{c.lead}</p>

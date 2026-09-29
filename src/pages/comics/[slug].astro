@@ -7,15 +7,14 @@ import Footer from '../../components/Footer.astro';
 import { comics, type ComicSeries } from '../../data/comics';
 
 export function getStaticPaths() {
-	return comics.map((comic, index) => ({ params: { slug: comic.slug }, props: { comic, index } }));
+	return comics.map((comic) => ({ params: { slug: comic.slug }, props: { comic } }));
 }
 
 interface Props {
 	comic: ComicSeries;
-	index: number;
 }
 
-const { comic, index } = Astro.props;
+const { comic } = Astro.props;
 
 // 元記事が無い・下書きのままならビルドを止める（リンク切れを本番に出さない）
 const blog = await getCollection('blog');
@@ -27,7 +26,8 @@ const fullViews = await Promise.all(
 	comic.parts.map((p) => getImage({ src: p.image, format: 'webp', width: p.image.width })),
 );
 
-const others = comics.filter((c) => c.slug !== comic.slug);
+// 「ほかの回」は新しい順（episodeの降順）
+const others = comics.filter((c) => c.slug !== comic.slug).sort((a, b) => b.episode - a.episode);
 const description = `四コマ漫画「${comic.title}」前編・後編。${comic.lead}`;
 ---
 <!doctype html>
@@ -43,7 +43,7 @@ const description = `四コマ漫画「${comic.title}」前編・後編。${comi
 		</nav>
 
 		<header class="comic-head">
-			<span class="eyebrow">四コマ会議 第{index + 1}話・前後編</span>
+			<span class="eyebrow">四コマ会議 第{comic.episode}話・前後編</span>
 			<h1>{comic.title}</h1>
 			<p class="lead">{comic.lead}</p>
 			<nav class="part-jump" aria-label="この話の目次">
