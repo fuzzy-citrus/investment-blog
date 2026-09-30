@@ -4,7 +4,7 @@ description: "2026年9月30日は権利確定日である。前日の記事で�
 cardDesc: "<span class='card-highlight'>権利落ち2日目。日経が1.94%上がった日に、候補10本とも市場に置いていかれました。</span>戻ったように見えて、差はむしろ開いています。中山製鋼所と南海辰村は解消、ダイケンは大引け後に下方修正。<span class='card-note'>🦑 墨田（検証）・権利落ちシリーズ</span>"
 pubDate: "2026-09-30T21:00:00+09:00"
 related: ["ex-rights-overdrop-check-2026sep", "ex-rights-watchlist-2026sep", "ex-rights-overdrop-check-2026aug", "daiken-5900-activist-entry", "keihan-hd-9045"]
-draft: false
+draft: true
 ---
 
 > 🧑‍💼 「<span class="t-blue">昨日、単日で判断するなと書いた</span>。<strong>今日がその2日目だ。自分で回してみる</strong>」
