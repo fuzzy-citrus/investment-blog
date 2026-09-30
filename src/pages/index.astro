@@ -16,6 +16,13 @@ const allPosts = (await getCollection('blog'))
 	.filter(p => !p.data.draft)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const posts = allPosts.slice(0, 10);
+// 四コマは新しい順。横スクロールで2話ぶんずつ見せる
+const comicStrip = [...comics].sort((a, b) => b.episode - a.episode);
+const latestComic = comicStrip[0];
+const comicDate = (() => {
+	const [y, m, d] = latestComic.pubDate.split('-').map(Number);
+	return `${y}年${m}月${d}日`;
+})();
 const latestPost = allPosts[0];
 // コラムは新着順（pubDate降順）で表示
 const columns = allPosts.filter(p => !p.data.stockCard);
@@ -106,6 +113,13 @@ const memberHints = [
     "name": "墨田 検二",
     "role": "AIチェック",
     "reason": "イカの10本の腕で情報を照合するイメージ。AIの答えをうのみにせず、元の開示資料まで確かめます。"
+  },
+  {
+    "id": "hinata",
+    "name": "日向 昇",
+    "role": "見習い",
+    "trainee": true,
+    "reason": "トカゲは外の気温で体温が変わる。上がっている株を見ると熱くなる見習いで、担当たちのツッコミを引き出す係です。"
   }
 ];
 
@@ -224,16 +238,22 @@ const memberHints = [
 					<p>見習いの日向が勘違いする前編と、正しい考え方にたどり着く後編のセット。読み終えたら解説記事へ進めます。</p>
 					<a href="/comics/" class="first-visit-main">四コマ一覧を見る →</a>
 				</div>
-				<ul class="comics-teaser-list">
-					{comics.map((c) => (
-						<li>
-							<a href={`/comics/${c.slug}/`}>
-								<Picture src={c.parts[0].image} alt="" formats={['avif', 'webp']} widths={[120, 240]} sizes="120px" loading="lazy" decoding="async" />
-								<span>{c.title}<small>前編・後編</small></span>
-							</a>
-						</li>
-					))}
-				</ul>
+				<div class="comics-teaser-strip">
+					<ul class="comics-teaser-list">
+						{comicStrip.map((c) => (
+							<li>
+								<a href={`/comics/${c.slug}/`} aria-label={`四コマ 第${c.episode}話「${c.title}」前編・後編を読む`}>
+									<Picture src={c.parts[0].image} alt="" formats={['avif', 'webp']} widths={[140, 280]} sizes="140px" loading="lazy" decoding="async" />
+								</a>
+							</li>
+						))}
+					</ul>
+					<p class="comics-teaser-latest">
+						<span class="comics-teaser-label">最新話</span>
+						<a href={`/comics/${latestComic.slug}/`}>第{latestComic.episode}話「{latestComic.title}」</a>
+						<span class="comics-teaser-date">{comicDate} 更新</span>
+					</p>
+				</div>
 			</section>
 
 			<div class="wl-col-grid">
@@ -259,13 +279,27 @@ const memberHints = [
 
 			</div>
 
-			<div class="method-note">
-				<span class="method-icon">🤖</span>
-				<div>
-					<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。<strong>今すぐ株価が収束する想定ではなく、3年程度保有した場合の到達目安</strong>です。参考値であり投資勧誘ではありません。</p>
-					<p>不動産含み益は「有価証券報告書に記載の物件所在地・地積・取得時期」と「国土交通省の公示価格データ」を照合し、AIによるエリア別地価分析で算出しています。<strong>実際の物件情報ベース</strong>なので精度は相応にあるはずです。ブレはあります。</p>
+			<section class="members-teaser">
+				<h2>メンバー紹介</h2>
+				<p>バリュー商会には8人の分析担当と、見習いが1人います</p>
+				<p class="member-hint-guide">キャラにカーソルを合わせるか、タップすると担当の由来が読めます。</p>
+				<div class="member-emojis">
+					{memberHints.map(c => (
+						<details class:list={['member-item', { 'is-trainee': c.trainee }]}>
+							<summary aria-label={c.trainee ? `${c.name}：見習いとして商会にいる理由` : `${c.name}：${c.role}を担当する理由`}>
+								<CastIcon id={c.id} name={c.name} />
+								<span class="member-role">{c.role}</span>
+							</summary>
+							<div class="member-note">
+								<strong>{c.name}</strong>
+								<p>{c.reason}</p>
+								<a href={`/characters#${c.id}`}>詳しい紹介を見る →</a>
+							</div>
+						</details>
+					))}
 				</div>
-			</div>
+				<a href="/org" class="all-posts-link">組織図で見る →</a>
+			</section>
 
 			<section class="posts-section">
 				<h2>最新記事</h2>
@@ -282,27 +316,13 @@ const memberHints = [
 				<a href="/blog" class="all-posts-link">すべての記事を見る →</a>
 			</section>
 
-			<section class="members-teaser">
-				<h2>メンバー紹介</h2>
-				<p>バリュー商会には個性豊かな分析担当がいます</p>
-				<p class="member-hint-guide">キャラにカーソルを合わせるか、タップすると担当の由来が読めます。</p>
-				<div class="member-emojis">
-					{memberHints.map(c => (
-						<details class="member-item">
-							<summary aria-label={`${c.name}：${c.role}を担当する理由`}>
-								<CastIcon id={c.id} name={c.name} />
-								<span class="member-role">{c.role}</span>
-							</summary>
-							<div class="member-note">
-								<strong>{c.name}</strong>
-								<p>{c.reason}</p>
-								<a href={`/characters#${c.id}`}>詳しい紹介を見る →</a>
-							</div>
-						</details>
-					))}
+			<div class="method-note">
+				<span class="method-icon">🤖</span>
+				<div>
+					<p>掲載している「期待株価」は、複数AIによるベア・ベース・ブル3ケースの確率加重平均です。<strong>今すぐ株価が収束する想定ではなく、3年程度保有した場合の到達目安</strong>です。参考値であり投資勧誘ではありません。</p>
+					<p>不動産含み益は「有価証券報告書に記載の物件所在地・地積・取得時期」と「国土交通省の公示価格データ」を照合し、AIによるエリア別地価分析で算出しています。<strong>実際の物件情報ベース</strong>なので精度は相応にあるはずです。ブレはあります。</p>
 				</div>
-				<a href="/org" class="all-posts-link">組織図で見る →</a>
-			</section>
+			</div>
 
 			</main>
 		<Footer />
@@ -435,13 +455,19 @@ const memberHints = [
 	.comics-teaser{display:grid;grid-template-columns:1fr auto;gap:1em;align-items:center;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #e3dcc4;border-left:4px solid #2f6b45;border-radius:10px;background:#fffdf6}
 	.comics-teaser h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
 	.comics-teaser p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
-	.comics-teaser-list{list-style:none;margin:0;padding:0;display:flex;gap:.7em}
-	.comics-teaser-list a{display:flex;flex-direction:column;align-items:center;gap:.3em;width:120px;text-decoration:none;color:var(--accent-dark)}
+	/* 絵は2話ぶんだけ見えて、右へスクロールすると過去の回が出てくる */
+	.comics-teaser-strip{width:calc(140px * 2 + .7em)}
+	.comics-teaser-list{list-style:none;margin:0 0 .5em;padding:0 0 .4em;display:flex;gap:.7em;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+	.comics-teaser-list li{flex:0 0 140px;scroll-snap-align:start}
+	.comics-teaser-list a{display:block;border-radius:6px;text-decoration:none}
+	.comics-teaser-list a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 	.comics-teaser-list :global(img){display:block;width:100%;height:auto;object-fit:contain;border:1px solid #e3dcc4;border-radius:6px;background:#fff}
-	.comics-teaser-list span{font-size:.72em;font-weight:800;text-align:center;line-height:1.4}
-	.comics-teaser-list small{display:block;font-weight:400;color:rgb(var(--gray))}
-	.comics-teaser-list a:hover span,.comics-teaser-list a:focus-visible span{text-decoration:underline}
-	@media(max-width:640px){.comics-teaser{grid-template-columns:1fr}.comics-teaser-list{justify-content:center}.comics-teaser-list a{width:110px}}
+	.comics-teaser p.comics-teaser-latest{margin:0;font-size:.74em;line-height:1.6;color:rgb(var(--gray-dark))}
+	.comics-teaser-label{display:inline-block;margin-right:.4em;padding:.05em .45em;border-radius:4px;background:#2f6b45;color:#fff;font-size:.9em;font-weight:800}
+	.comics-teaser-latest a{color:var(--accent-dark);font-weight:800;text-decoration:none}
+	.comics-teaser-latest a:hover,.comics-teaser-latest a:focus-visible{text-decoration:underline}
+	.comics-teaser-date{display:block;color:rgb(var(--gray));font-weight:400}
+	@media(max-width:640px){.comics-teaser{grid-template-columns:1fr}.comics-teaser-strip{width:100%}.comics-teaser-list li{flex:0 0 46%}}
 
 	/* ── Asset Status ── */
 	.asset-status {
@@ -927,13 +953,15 @@ const memberHints = [
 		color: var(--accent-dark);
 	}
 	.member-hint-guide { font-size: 0.7em; color: #57665e; margin: -0.4em 0 1em; }
-	.member-emojis { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.3em; margin: 0.8em 0 1em; }
+	.member-emojis { position: relative; display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 0.3em; margin: 0.8em 0 1em; }
 	.member-item { --cast-size: 56px; min-width: 0; }
 	.member-item summary { display: flex; flex-direction: column; align-items: center; gap: 0.4em; list-style: none; cursor: pointer; border-radius: 8px; padding: 0.3em 0; }
 	.member-item summary::-webkit-details-marker { display: none; }
 	.member-item summary:hover, .member-item[open] summary { background: #dfefe3; }
 	.member-item summary:focus-visible { outline: 2px solid #276749; outline-offset: 3px; }
 	.member-role { font-size: 0.62em; color: rgb(var(--gray)); text-align: center; line-height: 1.3; word-break: keep-all; }
+	/* 日向は一人前の担当ではないので、見習いと分かるようにする */
+	.member-item.is-trainee .member-role { padding: .1em .5em; border-radius: 999px; background: #2f6b45; color: #fff; font-weight: 800; }
 	.member-note { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; background: #fffdf5; border: 1px solid #dfc985; border-radius: 12px; box-shadow: 0 6px 20px #203f2520; padding: 0.85em 1em; font-size: 0.78em; line-height: 1.7; }
 	.member-note strong { color: #276749; }
 	.member-note p { margin: 0.3em 0; }
@@ -1012,7 +1040,7 @@ const memberHints = [
 		.tp-svg { width: 36px; height: 36px; flex-shrink: 0; }
 	}
 	@media (max-width: 640px) {
-		.member-emojis { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 0.8em; }
+		.member-emojis { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 0.8em; }
 	}
 
 </style>

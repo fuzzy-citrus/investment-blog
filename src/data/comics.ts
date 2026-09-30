@@ -41,6 +41,8 @@ export interface ComicPart {
 export interface ComicSeries {
   /** 公開順の通し番号（第N話）。公開したら「既存の最大+1」を入れる。あとから並べ替えても番号は動かさない */
   episode: number;
+  /** 公開日 YYYY-MM-DD。ホームの「最新話」表示に使う */
+  pubDate: string;
   slug: string;
   title: string;
   lead: string;
@@ -54,6 +56,7 @@ export interface ComicSeries {
 export const comics: ComicSeries[] = [
   {
     episode: 1,
+    pubDate: '2026-09-28',
     slug: 'patience',
     title: '待ち伏せと放置',
     lead: '「買って寝て待つ」は長期投資なのか。待伏が、待つことと放っておくことの違いを確かめます。',
@@ -143,6 +146,7 @@ export const comics: ComicSeries[] = [
   },
   {
     episode: 2,
+    pubDate: '2026-09-28',
     slug: 'dividend',
     title: '配当は魔法じゃない',
     lead: '利回りの高さに目を輝かせる日向。花岡が、その配当がどこから出ているのかを一緒にたどります。',
@@ -231,6 +235,7 @@ export const comics: ComicSeries[] = [
   },
   {
     episode: 3,
+    pubDate: '2026-09-29',
     slug: 'wallet',
     title: '80万円の財布',
     lead: '「1株100円だから安い」は、どこが違うのか。河内が、値札と中身の見分け方を見せます。',
@@ -321,6 +326,7 @@ export const comics: ComicSeries[] = [
   },
   {
     episode: 4,
+    pubDate: '2026-09-30',
     slug: 'moat',
     title: 'タダになった木',
     lead: '「PER3倍だから3年で元が取れる」は、どこが違うのか。堀田が、回収を邪魔するものを見せます。',
