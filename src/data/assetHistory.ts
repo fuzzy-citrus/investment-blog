@@ -76,7 +76,7 @@ export type MonthlyRecord = {
 };
 
 /**
- * 出所：野村證券「ご投資状況／お預り資産評価の推移」（2026年9月20日出力・2026年9月18日基準）。
+ * 出所：野村證券「ご投資状況／お預り資産評価の推移」（2026年10月2日出力・2026年9月末基準）。
  * 数字は口座の明細そのままで、推計ではない。毎月、最新の明細が出たら1行足す。
  * ※元のPDFは氏名が入っているので、リポジトリにも公開物にも置かない（数字だけここに転記する）。
  */
@@ -95,22 +95,22 @@ export const monthlyRecords: MonthlyRecord[] = [
 	{ month: '2026-06', amount: 41392661 },
 	{ month: '2026-07', amount: 44379757 },
 	{ month: '2026-08', amount: 43588193 },
-	{ month: '2026-09', amount: 45102836, asOf: '2026年9月18日時点' },
+	{ month: '2026-09', amount: 44228449 },
 ];
 
 /** 証券口座の画面そのもの（月次）。月初に前月末の成績を反映する */
 export const brokerSnapshot = {
 	account: '野村證券 実口座',
-	asOf: '2026年9月18日',
+	asOf: '2026年9月末',
 	label: 'お預り資産合計（株券等貸借除く）',
-	amount: 45102836,
+	amount: 44228449,
 	unrealizedLabel: '評価損益合計',
-	unrealized: 2506926,
-	/** 2026年8月に撮った口座画面。数字はその時点のもの */
-	image: '/images/nomura-asset-chart-202608.png',
-	imageAlt: '野村證券の口座画面。2025年7月から2026年8月までの資産推移',
-	imageAsOf: '2026年8月',
-	imageAmount: 43075651,
+	unrealized: 794382,
+	/** 2026年10月初に撮った口座画面。反映されているのは2026年9月末の成績 */
+	image: '/images/nomura-asset-chart-202609.png',
+	imageAlt: '野村證券の口座画面。2025年8月から2026年9月までの資産推移',
+	imageAsOf: '2026年9月末',
+	imageAmount: 44228449,
 };
 
 /** 「実績報告」に並べる記事シリーズ（series.ts の id） */

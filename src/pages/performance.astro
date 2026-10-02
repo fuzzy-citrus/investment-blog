@@ -223,7 +223,7 @@ const updated = jpDate(latest.date);
 					</div>
 				</details>
 				<p class="pf-source">
-					出所：野村證券「お預り資産評価の推移」（株券等貸借を除く）。最新月は{lastMonth.asOf}の数字です。
+					出所：野村證券「お預り資産評価の推移」（株券等貸借を除く）。最新月は{monthWhen(lastMonth)}の数字です。
 				</p>
 			</section>
 
@@ -307,7 +307,7 @@ const updated = jpDate(latest.date);
 			<section class="pf-block">
 				<h2>口座画面（月次）</h2>
 				<p class="pf-note-line">
-					{brokerSnapshot.account}の画面そのものです。<strong>{brokerSnapshot.imageAsOf}に撮ったもの</strong>で、上の表の数字（{brokerSnapshot.asOf}時点）とは時点が違います。
+					{brokerSnapshot.account}の画面そのものです。<strong>{brokerSnapshot.imageAsOf}の成績が反映された画面</strong>で、上の表の最新月と同じ時点の数字です。
 				</p>
 				<div class="pf-broker">
 					<img src={brokerSnapshot.image} alt={brokerSnapshot.imageAlt} class="pf-broker-img" />
@@ -316,8 +316,7 @@ const updated = jpDate(latest.date);
 						<p class="pf-broker-label">お預り資産合計</p>
 						<p class="pf-broker-val">{brokerSnapshot.imageAmount.toLocaleString()}<span>円</span></p>
 						<p class="pf-broker-sub">
-							最新は{brokerSnapshot.asOf}時点で
-							<strong>{brokerSnapshot.amount.toLocaleString()}円</strong>
+							{brokerSnapshot.unrealizedLabel} <strong>+{brokerSnapshot.unrealized.toLocaleString()}円</strong>
 						</p>
 					</div>
 				</div>
