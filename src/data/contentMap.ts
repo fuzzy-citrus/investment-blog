@@ -112,6 +112,7 @@ export const contentThemes: ContentTheme[] = [
       'weekly-2026w38-nihon-gear-round-trip',
       'weekly-2026w38-week-summary',
       'weekly-2026w39-week-summary',
+      'weekly-2026w40-week-summary',
       'core-satellite-onkabu-design',
       'crash-day-satellite-nichetop-2026aug',
       'small-short-overvaluation-2026',

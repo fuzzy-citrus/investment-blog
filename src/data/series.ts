@@ -30,6 +30,7 @@ export const seriesList: Series[] = [
 			'weekly-2026w38-nihon-gear-round-trip',
 			'weekly-2026w38-week-summary',
 			'weekly-2026w39-week-summary',
+			'weekly-2026w40-week-summary',
 		],
 		labels: [
 			'2026年8月30日〜9月5日',
