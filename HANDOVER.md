@@ -380,6 +380,7 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 
 | 公開予定 | slug | 内容 | 公開前にやること |
 |---|---|---|---|
+| ~~10/7~~ | ~~`kanefusa-5984`~~ | 兼房 B++ | **2026-10-07 公開済み**（10/6終値780円）。記事は生成物：直すのは `numasoko-reports-backup/06_銘柄調査/kanefusa-5984/article_template.md` → `py build_article.py --publish 2026-10-07T07:50` → 完全版HTMLを `public/analysis/` へコピー |
 | ~~10/6~~ | ~~`cbc-9402`~~ | 中部日本放送 B++ | **2026-10-06 公開済み**（10/5終値1,264円）。記事は生成物：直すのは `numasoko-reports-backup/06_銘柄調査/cbc-9402/article_template.md` → `py build_article.py --publish <元のpubDate>` → 完全版HTMLを `public/analysis/` へコピー |
 
 **銘柄発掘の道具**（2026-10-05 新設）：`numasoko-reports-backup/06_銘柄調査/hakkutsu/`。

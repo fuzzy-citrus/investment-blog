@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>兼房（5984）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+<style id="tab-fallback">
+.pn{display:block;scroll-margin-top:56px}
+html.js .pn{display:none}
+html.js .pn.on{display:block}
+a.tb{text-decoration:none}
+.tn{flex-wrap:wrap}
+.tn .tb{padding:11px 14px}
+html:not(.js) .pn{margin-bottom:34px}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 5984 東証スタンダード／名証メイン · 2026.10.06 · 株価 780円（10/6終値）</p>
+      <h1 class="ht">兼房 <em>（5984）</em><br>統合投資分析レポート</h1>
+      <p class="hs">工業用機械刃物で国内シェア35.6%・世界4位。清原式ネットキャッシュ比率1.34倍、PBR0.34倍<br>ネットキャッシュを6段に分解し、シェアを会社資料3期分でたどり、土地と3年後まで数えた</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>当商会の採点</small></div>
+      <div class="vt">
+        <strong>当商会の検証済み上値基準 1,137円 / 下値基準 380円</strong><br>
+        非対称比0.89（幅・小）×確度11点（中）＝B++。<br>
+        3年後：ベア637円／ベース819円／ブル1,161円。<br>
+        1銘柄の上限は2.5%（約1,400株）。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価（10/6終値）</div><div class="kn am">780円</div><div class="ks">時価総額 112億円</div></div>
+    <div class="kv"><div class="kl">1株あたり純資産 2,284円</div><div class="kn bl">PBR 0.34倍</div><div class="ks">直近5年のレンジ0.28〜0.47倍</div></div>
+    <div class="kv"><div class="kl">清原式ネットキャッシュ比率</div><div class="kn gn">1.34倍</div><div class="ks">現預金−借入金だけなら0.44倍</div></div>
+    <div class="kv"><div class="kl">国内シェア</div><div class="kn gn">35.6%</div><div class="ks">工業会21社・2025年度。世界は売上4位</div></div>
+    <div class="kv"><div class="kl">配当利回り</div><div class="kn gn">2.95%</div><div class="ks">配当性向35%めど・下限15円</div></div>
+    <div class="kv"><div class="kl">3年後（確率で均した値）</div><div class="kn am">859円</div><div class="ks">配当込み+19%。ベア▲18%／ブル+49%</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <a class="tb on" href="#p1" data-p="p1"><span class="d" style="background:var(--gn2)"></span>結論</a>
+  <a class="tb" href="#p2" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札とBS</a>
+  <a class="tb" href="#p3" data-p="p3"><span class="d" style="background:var(--pu2)"></span>ネットキャッシュを分解</a>
+  <a class="tb" href="#p4" data-p="p4"><span class="d" style="background:var(--bl2)"></span>シェアとニッチトップ</a>
+  <a class="tb" href="#p5" data-p="p5"><span class="d" style="background:var(--or2)"></span>稼ぐ力</a>
+  <a class="tb" href="#p6" data-p="p6"><span class="d" style="background:#72cc8e"></span>配当と資本政策</a>
+  <a class="tb" href="#p7" data-p="p7"><span class="d" style="background:var(--bl2)"></span>土地</a>
+  <a class="tb" href="#p8" data-p="p8"><span class="d" style="background:var(--pu2)"></span>株主と触媒</a>
+  <a class="tb" href="#p9" data-p="p9"><span class="d" style="background:var(--gn2)"></span>3年後の3ケース</a>
+  <a class="tb" href="#p10" data-p="p10"><span class="d" style="background:var(--am2)"></span>レンジとランク</a>
+  <a class="tb" href="#p11" data-p="p11"><span class="d" style="background:var(--rd)"></span>リスクと検算</a>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 首位の刃物メーカー。安さの中身は現金より在庫</h2><span class="sb bg-gn">B++</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">結論 01 · 安さ</div><span class="ci">🏷️</span>
+      <div class="ct">清原式1.34倍。ただし中身の4割は在庫</div>
+      <div class="tx">流動資産211億円から負債71億円を全部引いた140億円が、時価総額108億円の1.29倍。数字は強い。ただし<strong>流動資産の41%は棚卸資産（刃物の在庫と材料）</strong>で、現預金から借入金を引いた純粋なネットキャッシュは47.5億円、時価総額の44%。「現金で1倍超」の会社ではない。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">結論 02 · 堀</div><span class="ci">🪚</span>
+      <div class="ct">国内シェア35.6%で首位。ベニヤナイフは9割超</div>
+      <div class="tx">会社のIR資料による（日本機械鋸・刃物工業会21社の単独売上ベース、2025年度）。4年前の28.2%から上がっている。世界では売上4位で、上の3社はすべてドイツ勢。<strong>刃物は消耗品で、再研磨と入れ替えが続く</strong>。ただし営業利益率は5%、ROEは3%台で、シェアの強さが利益の数字に出きっていない。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">結論 03 · 還元と出口</div><span class="ci">🏠</span>
+      <div class="ct">配当性向35%・利回り2.95%。大株主8名で過半</div>
+      <div class="tx">2024年5月に配当性向の目安を30%→35%へ上げ、年15円を下限にしている。自己資本比率82%、借入金31億円に現預金78億円。<strong>自社株買いの実績はなく、大口興産と個人7名（代表取締役の一人と取締役を含む）で発行済の52%</strong>。外から安さを直す力は働きにくく、還元の速さは会社の裁量で決まる。</div>
+    </div>
+  </div>
+  <div class="inf">📌 <strong>株価780円（2026年10月6日終値）での当商会の採点はB++</strong>。上値1,137円（+46%）・下値380円（▲51%）・非対称比0.89（幅・小）・確度11点（中）。下値は規則どおり「株価より下の候補でいちばん深いもの」＝1株あたり金融資産を採った。52週安値664円で置けばA−になるが、それは在庫を現金と同じに数えるのに近い。3年後はベア637円／ベース819円／ブル1,161円。</div>
+  <div class="note">株価は2026年10月6日の終値（株探の確定値）、貸借対照表と株数は2026年6月末（第1四半期決算短信）。本資料は特定の売買を勧めるものではなく、投資判断は読む人自身のもの。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札と貸借対照表 ── 時価総額112億円の中身</h2><span class="sb bg-am">清原式1.34倍</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>株価（2026年10月6日終値）</td><td class="r mn">780円</td><td class="sm2">東証スタンダード・名証メイン</td></tr>
+      <tr><td>時価総額</td><td class="r mn">112億円</td><td class="sm2">発行済14,310,000株。自己株410,082株を除くと108億円</td></tr>
+      <tr><td>PBR</td><td class="r mn">0.34倍</td><td class="sm2">1株あたり純資産2,284円（2026年6月末）</td></tr>
+      <tr><td>PER（会社予想）</td><td class="r mn">12.0倍</td><td class="sm2">2027年3月期 予想EPS64.75円</td></tr>
+      <tr><td>配当利回り</td><td class="r mn">2.95%</td><td class="sm2">年23円の予想（前期26円）。配当性向36%</td></tr>
+      <tr class="hl"><td><strong>清原式ネットキャッシュ比率</strong></td><td class="r mn"><strong>1.34倍</strong></td><td class="sm2">流動資産211.0億＋投資有価証券7.1億×0.7−負債71.1億＝144.8億円</td></tr>
+      <tr><td>現預金−借入金</td><td class="r mn">47.5億円</td><td class="sm2">現預金78.4億−借入金30.8億。時価総額の44%</td></tr>
+      <tr><td>企業価値（EV）÷（営業利益＋減価償却）</td><td class="r mn">1.9倍</td><td class="sm2">EV53.9億円（時価総額−ネットキャッシュ−投資有価証券）÷28.5億円</td></tr>
+      <tr><td>52週</td><td class="r mn">664〜940円</td><td class="sm2">安値2025年10月・高値2026年2月（週足）</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">貸借対照表の中身（2026年6月末・第1四半期決算短信）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>科目</th><th class="r">6月末</th><th class="r">3月末</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>現金及び預金</td><td class="r mn">78.4億円</td><td class="r mn">78.9億円</td><td class="sm2"></td></tr>
+      <tr><td>売上債権</td><td class="r mn">42.0億円</td><td class="r mn">39.3億円</td><td class="sm2">受取手形・売掛金・電子記録債権</td></tr>
+      <tr class="hl"><td><strong>棚卸資産</strong></td><td class="r mn"><strong>86.1億円</strong></td><td class="r mn">82.4億円</td><td class="sm2">製品39.0億・仕掛品13.6億・原材料33.5億。年間売上原価147億円の約7か月分</td></tr>
+      <tr><td>流動資産 計</td><td class="r mn">211.0億円</td><td class="r mn">206.3億円</td><td class="sm2"></td></tr>
+      <tr><td>有形固定資産</td><td class="r mn">151.7億円</td><td class="r mn">152.2億円</td><td class="sm2">うちベトナム工場48億円、日本83億円</td></tr>
+      <tr><td>投資その他の資産</td><td class="r mn">16.6億円</td><td class="r mn">16.2億円</td><td class="sm2">上場株10銘柄6.8億円（マキタ5.1億円ほか）</td></tr>
+      <tr><td>負債合計</td><td class="r mn">71.1億円</td><td class="r mn">70.6億円</td><td class="sm2">うち借入金30.8億円（2025年3月期に20億円を長期で借りた）</td></tr>
+      <tr class="hl"><td><strong>純資産</strong></td><td class="r mn"><strong>317.5億円</strong></td><td class="r mn">313.4億円</td><td class="sm2">自己資本比率81.7%。うち為替換算調整勘定36.1億円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 純資産317億円のうち36億円は<strong>為替換算調整勘定</strong>（海外子会社の資産を円に直したときの差額）で、円安で膨らんだ分。円高になれば縮む。保有株は7億円と小さく、<strong>この会社の資産は「現金・在庫・工場」</strong>でできている。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">ネットキャッシュを6段で分解する</h2><span class="sb bg-pu">現金だけなら0.44倍</span></div>
+
+  <div class="tx">「ネットキャッシュ比率が1倍を超える」と言うとき、何を現金に数えたかで意味がまったく変わる。兼房を、硬い順に6段で数え直す。倍率はすべて自己株を除いた時価総額108億円に対するもの。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>数え方</th><th class="r">金額</th><th class="r">1株あたり</th><th class="r">時価総額比</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>① 現預金 − 借入金</td><td class="r mn">47.5億円</td><td class="r mn">342円</td><td class="r mn"><strong>0.44倍</strong></td></tr>
+      <tr><td>② ①＋投資有価証券×70%</td><td class="r mn">52.5億円</td><td class="r mn">377円</td><td class="r mn"><strong>0.48倍</strong></td></tr>
+      <tr><td>③ 現預金＋売上債権 − 負債合計</td><td class="r mn">49.2億円</td><td class="r mn">354円</td><td class="r mn"><strong>0.45倍</strong></td></tr>
+      <tr><td>④ ③＋棚卸資産の半分</td><td class="r mn">92.2億円</td><td class="r mn">664円</td><td class="r mn"><strong>0.85倍</strong></td></tr>
+      <tr><td>⑤ 流動資産 − 負債合計（NCAV）</td><td class="r mn">139.9億円</td><td class="r mn">1,006円</td><td class="r mn"><strong>1.29倍</strong></td></tr>
+      <tr class="hl"><td>⑥ 清原式：流動資産＋投資有価証券×70% − 負債合計</td><td class="r mn">144.8億円</td><td class="r mn">1,042円</td><td class="r mn"><strong>1.34倍</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 ①の純粋なネットキャッシュは時価総額の0.44倍。そこから⑤の1.29倍まで押し上げているのは、<strong>売上債権42億円と棚卸資産86億円</strong>。在庫を半分に見た④で0.85倍。<strong>「清原式1.34倍」は正しいが、その6割は在庫と売掛金でできている</strong>。</div>
+
+  <div class="cbox">
+    <div class="h3">在庫は現金と同じに数えてよいか</div>
+    <div class="tx">兼房の在庫は刃物の製品と、超硬合金・鋼材などの材料。<strong>消耗品なので流行で陳腐化する在庫ではない</strong>し、会社は滞留分を規則的に評価減している（有報）。一方で、原価の約7か月分という量は軽くない。2026年に入ってタングステンの輸入価格が高騰しており（有報「事業等のリスク」）、材料在庫には含み益と調達リスクの両方がある。当商会は床の計算に在庫を入れていない。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>当商会の床（下値の候補）</th><th class="r">1株あたり</th><th>中身</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>1株あたり金融資産</td><td class="r mn"><strong>380円</strong></td><td class="sm2">現預金−借入金＋投資有価証券×75%。株価の49%</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="note">投資有価証券は2026年3月末の7.05億円（6月末の内訳は短信に出ていない）。同業で上場している天龍製鋸（5945）はPBR0.51倍・時価総額253億円。</div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">シェアとニッチトップ ── 国内首位、世界4位</h2><span class="sb bg-bl">国内35.6%</span></div>
+
+  <div class="h3">国内 ── 工業会ベースで35.6%、首位</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>時点</th><th class="r">兼房のシェア</th><th class="r">工業会の総売上高</th><th>出どころ</th></tr></thead>
+    <tbody>
+      <tr><td>2020年度</td><td class="r mn">28.2%</td><td class="r mn">456億円</td><td class="sm2">名証IRセミナー資料（2022年3月）。日本機械鋸・刃物工業会22社の単独売上ベース</td></tr>
+      <tr><td>2024年度</td><td class="r mn">29.9%</td><td class="r mn">529億円</td><td class="sm2">アナリスト向け説明資料（2025年6月）。同22社</td></tr>
+      <tr class="hl"><td><strong>2025年度</strong></td><td class="r mn"><strong>35.6%</strong></td><td class="r mn">464億円</td><td class="sm2">アナリスト向け説明資料（2026年6月）。同21社</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">加盟企業だけの集計で、単独売上高どうしを比べたもの。2025年度は加盟社が1社減り総売上高も65億円減っているので、<strong>29.9%→35.6%の上昇には分母が小さくなった分が含まれる</strong>。上場している同業は天龍製鋸だけで、2社の連結売上は兼房209億円（60.9%）・天龍製鋸134億円（39.1%）。</div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--gn2)"><div class="h3">品目で見ると</div><div class="tx">会社資料は<strong>ベニヤナイフ（合板を薄く剥く刃）を「国内シェア90%以上」</strong>としている。平刃・精密刃具・丸鋸の3種類をすべて作っているのは世界で兼房だけ、とも書いている（採用ページ）。中計では合板・紙工の平刃を「競合の少ない」製品に位置づけている。</div></div>
+    <div class="c" style="border-top:3px solid var(--bl2)"><div class="h3">なぜ入れ替わりにくいか</div><div class="tx">工業用の刃物は消耗品で、切れなくなれば研ぎ直し、やがて買い替える。<strong>機械と加工条件に合わせて刃を決めるので、刃だけ他社に替えるには試し切りと調整が要る</strong>。兼房は米国・ブラジルに再研磨の拠点を持ち、売ったあとも顧客の現場に残る。主要顧客への依存もない（売上の10%を超える顧客なし）。</div></div>
+  </div>
+
+  <div class="h3">世界 ── 売上4位。上の3社はドイツ</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>売上高の順位</th><th class="r">2019年度ベース</th><th class="r">2024年度ベース</th></tr></thead>
+    <tbody>
+      <tr><td>ライツ（独）</td><td class="r mn">1位・301億円</td><td class="r mn">1位・465億円</td></tr>
+      <tr><td>ロイコ（独）</td><td class="r mn">3位・175億円</td><td class="r mn">2位・230億円</td></tr>
+      <tr><td>TKM（独）</td><td class="r mn">4位・163億円</td><td class="r mn">3位・223億円</td></tr>
+      <tr class="hl"><td><strong>兼房</strong></td><td class="r mn"><strong>2位・190億円</strong></td><td class="r mn"><strong>4位・209億円</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 5年前は世界2位、いまは4位。<strong>兼房の売上は190億→209億円（+10%）、ドイツ3社は円換算で3〜5割増えた</strong>。会社資料は2024年度を1ユーロ164.92円で換算しており、ユーロ高の分が大きいが、それを引いても差を詰められてはいない。2〜4位は20億円の幅に並んでいて、順位そのものは入れ替わりやすい。</div>
+  <div class="cbox">
+    <div class="h3">国の選定 ── 経済産業省「2020年版グローバルニッチトップ企業100選」</div>
+    <div class="tx">兼房は2020年版の113社に入っている。選ばれた製品は<strong>鉄鋼切断用の超硬コールドソー「Ferro Max」</strong>。経産省の選定資料は次のように書いている。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>項目</th><th>経産省の選定資料の記載</th></tr></thead>
+      <tbody>
+        <tr><td>何を作ったか</td><td class="sm2">1985年に、業界初の「使い切りタイプ」の鉄鋼切断用超硬コールドソーを開発。再研磨が要らず、切断速度を従来の5〜10倍に上げた</td></tr>
+        <tr class="hl"><td><strong>どう広めたか</strong></td><td class="sm2">専用の切断機も社内で開発し、<strong>機械メーカーと提携して切断機と鋸を同時に普及させた。現在も大半の機械メーカーに採用されている</strong></td></tr>
+        <tr><td>どこで使われるか</td><td class="sm2">自動車部品などの素材切断で広く採用。立会い試験など技術提案型の営業</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">刃が機械とセットで入っているので、刃だけ他社に替えにくい。当商会がモートの条件のうち「顧客の切替コストが高い」を満たすと見た根拠。売上の内訳でも、金属関連（43.3%）は住宅関連（40.9%）を上回っている。</div>
+  </div>
+  <div class="note">国内シェアは工業会加盟社だけの集計で、非加盟の企業や輸入品を含む市場全体の数字ではない。世界シェア（何%か）を示す資料は確認できていない。売上高の順位だけが分かっている。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">稼ぐ力 ── 赤字はないが、利益率は振れる</h2><span class="sb bg-or">ROE3%台</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">利益率</th><th class="r">純利益</th><th class="r">ROE</th><th class="r">海外比率</th></tr></thead>
+    <tbody>
+      <tr><td>2021年3月期</td><td class="r mn">160.3億円</td><td class="r mn">4.6億円</td><td class="r mn">2.9%</td><td class="r mn">4.4億円</td><td class="r mn">1.9%</td><td class="r mn">43.3%</td></tr>
+      <tr><td>2022年3月期</td><td class="r mn">196.6億円</td><td class="r mn">17.7億円</td><td class="r mn">9.0%</td><td class="r mn">13.4億円</td><td class="r mn">5.5%</td><td class="r mn">47.9%</td></tr>
+      <tr><td>2023年3月期</td><td class="r mn">211.1億円</td><td class="r mn">14.4億円</td><td class="r mn">6.8%</td><td class="r mn">12.7億円</td><td class="r mn">4.8%</td><td class="r mn">50.4%</td></tr>
+      <tr><td>2024年3月期</td><td class="r mn">200.8億円</td><td class="r mn">10.5億円</td><td class="r mn">5.3%</td><td class="r mn">8.8億円</td><td class="r mn">3.2%</td><td class="r mn">51.1%</td></tr>
+      <tr><td>2025年3月期</td><td class="r mn">202.3億円</td><td class="r mn">7.4億円</td><td class="r mn">3.7%</td><td class="r mn">9.8億円</td><td class="r mn">3.3%</td><td class="r mn">52.4%</td></tr>
+      <tr><td>2026年3月期</td><td class="r mn">209.4億円</td><td class="r mn">10.9億円</td><td class="r mn">5.2%</td><td class="r mn">10.3億円</td><td class="r mn">3.3%</td><td class="r mn">53.7%</td></tr>
+      <tr class="hl"><td><strong>2027年3月期（予）</strong></td><td class="r mn">220.0億円</td><td class="r mn">11.0億円</td><td class="r mn">5.0%</td><td class="r mn">9.0億円</td><td class="r mn">—</td><td class="r mn">—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>営業赤字の年はないが、利益率は2.9%から9.0%まで振れる</strong>。住宅と自動車の生産に連動するため。足元の第1四半期（4〜6月）は売上57.2億円（前年同期比+17.1%）、営業利益3.99億円（同2.2倍）で、通期予想11億円に対する進み具合は36%。会社は予想を据え置いている。</div>
+
+  <div class="h3">どこで、何を売っているか（2026年3月期）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>切り口</th><th>内訳</th></tr></thead>
+    <tbody>
+      <tr><td>使われる業種</td><td class="sm2">金属関連（鉄鋼・自動車など）43.3%、住宅関連（建材・合板・家具・電動工具など）40.9%、製紙・製本12.3%、その他3.5%</td></tr>
+      <tr><td>地域</td><td class="sm2">国内46.3%、アジア22.5%、アメリカ18.4%、ヨーロッパ12.3%、その他0.5%</td></tr>
+      <tr><td>製品</td><td class="sm2">丸鋸類97.4億円、平刃類70.5億円、精密刃具類37.7億円、商品3.9億円</td></tr>
+      <tr><td>拠点別の利益</td><td class="sm2">日本4.8億円、インドネシア3.3億円、米国1.6億円、ベトナム1.1億円、ブラジル0.6億円、欧州0.3億円、<strong>中国▲3.1億円</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">中国は再研磨拠点を閉じて人員を減らしている途中（中計の振り返り）。原価率は70.6%→70.1%。研究開発費は年2.6〜2.7億円。会社は中計で「売上重視から利益重視へ」を掲げ、営業利益率5%以上を目標にしている。<strong>5%は、過去6期の平均（5.5%）とほぼ同じ水準</strong>で、高い目標ではない。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">配当と資本政策 ── 性向35%、現金は設備へ</h2><span class="sb bg-gn">利回り2.95%</span></div>
+
+  <div class="h3">配当 ── 性向35%めど、下限15円</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">1株配当</th><th class="r">EPS</th><th class="r">配当性向</th></tr></thead>
+    <tbody>
+      <tr><td>2021年3月期</td><td class="r mn">12円</td><td class="r mn">32.3円</td><td class="r mn">37%</td></tr>
+      <tr><td>2022年3月期</td><td class="r mn">29円</td><td class="r mn">96.9円</td><td class="r mn">30%</td></tr>
+      <tr><td>2023年3月期</td><td class="r mn">28円</td><td class="r mn">91.8円</td><td class="r mn">30%</td></tr>
+      <tr><td>2024年3月期</td><td class="r mn">22.5円</td><td class="r mn">63.8円</td><td class="r mn">35%</td></tr>
+      <tr><td>2025年3月期</td><td class="r mn">25円</td><td class="r mn">70.8円</td><td class="r mn">35%</td></tr>
+      <tr><td>2026年3月期</td><td class="r mn">26円</td><td class="r mn">74.2円</td><td class="r mn">35%</td></tr>
+      <tr class="hl"><td><strong>2027年3月期（予）</strong></td><td class="r mn"><strong>23円</strong></td><td class="r mn">64.75円</td><td class="r mn">36%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 配当は利益に素直に連動する。2024年5月に目安を30%→35%へ上げた（「資本コストや株価を意識した経営」への対応として会社が挙げている）。<strong>利回り2.95%、純資産に対する配当の比率（DOE）は1.15%</strong>。自己資本比率82%の会社としては、純資産の厚さに対して返している額は小さい。</div>
+
+  <div class="h3">現金はどこへ行ったか（5期分・億円）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">営業CF</th><th class="r">投資CF</th><th class="r">差し引き</th><th class="r">期末の現金</th></tr></thead>
+    <tbody>
+      <tr><td>2022年3月期</td><td class="r mn">19.1</td><td class="r mn">▲7.6</td><td class="r mn">+11.4</td><td class="r mn">71.6</td></tr>
+      <tr><td>2023年3月期</td><td class="r mn">22.2</td><td class="r mn">▲22.8</td><td class="r mn">▲0.6</td><td class="r mn">68.4</td></tr>
+      <tr><td>2024年3月期</td><td class="r mn">14.3</td><td class="r mn">▲24.6</td><td class="r mn">▲10.3</td><td class="r mn">55.4</td></tr>
+      <tr><td>2025年3月期</td><td class="r mn">26.4</td><td class="r mn">▲17.5</td><td class="r mn">+8.9</td><td class="r mn">80.6</td></tr>
+      <tr><td>2026年3月期</td><td class="r mn">10.9</td><td class="r mn">▲9.4</td><td class="r mn">+1.6</td><td class="r mn">78.9</td></tr>
+      <tr class="hl"><td><strong>5期計</strong></td><td class="r mn"><strong>92.9</strong></td><td class="r mn"><strong>▲81.9</strong></td><td class="r mn"><strong>+11.0</strong></td><td class="sm2">この間の配当は約18億円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">稼いだ現金の9割近くが設備に回っている。大きいのはベトナム工場の3・4期工事と本社物流センター（前中計の3年間で設備投資59億円）。2025年3月期の現金増は長期借入20億円による。今期の設備投資計画は18.2億円（自動化・省人化8.5億円、更新5.9億円ほか）。<strong>配当は営業CFの範囲に収まっているが、設備投資のあとに残る現金では足りていない期間が続いた</strong>。</div>
+
+  <div class="cbox">
+    <div class="h3">中期経営計画（2026〜2028年度）と資本政策</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>項目</th><th>内容（2026年5月12日の開示）</th></tr></thead>
+      <tbody>
+        <tr><td>数値目標</td><td class="sm2">売上高の3年平均成長率5%以上、営業利益率5%以上。2026年度は売上220億円・営業利益11億円。<strong>2027年度以降の数値は、超硬合金など原材料の高騰と中東情勢を理由に見直し中で未公表</strong></td></tr>
+        <tr><td>重点</td><td class="sm2">自動車・住宅向けの金属切断用／木工用丸鋸、合板・紙工向けの平刃、EV・半導体向けの高精度刃具。重点市場は北中南米とインド</td></tr>
+        <tr><td>資本政策</td><td class="sm2">「創出されたキャッシュは成長分野への再投資を優先しつつ、財務健全性と株主価値の向上に資する形で活用」。ROEは主なKPIに挙げているが、数値目標は出していない</td></tr>
+        <tr><td>前中計の結果</td><td class="sm2">2025年度の目標（修正後）売上200億円・営業利益10億円・ROE2.3%以上に対し、209.4億円・10.9億円・3.3%。福岡営業所とスラバヤ拠点を売却、政策保有株は2022年度5銘柄・2023年度1銘柄・2025年度1銘柄を売却</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">土地 ── 60年前に買った8ヘクタール</h2><span class="sb bg-bl">当商会の推定</span></div>
+
+  <div class="tx">兼房の有報には賃貸等不動産の注記がない（貸している不動産に重要性がない）。土地の時価は開示されないので、「主要な設備の状況」の面積と簿価を公示価格と見比べる。</div>
+  <div class="h3">本社工場（愛知県丹羽郡大口町）── 81,592㎡、簿価9.9億円</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>置き方</th><th class="r">単価</th><th class="r">推定時価</th><th class="r">含み益（税引前）</th><th class="r">1株あたり（税引後）</th></tr></thead>
+    <tbody>
+      <tr><td>大規模な工業用地として近隣住宅地の半値以下</td><td class="r mn">3.0万円/㎡</td><td class="r mn">24.5億円</td><td class="r mn"><strong>14.5億円</strong></td><td class="r mn">+73円</td></tr>
+      <tr class="hl"><td>近隣の公示・基準地価（6.7〜7.2万円/㎡）の約3分の2</td><td class="r mn">4.5万円/㎡</td><td class="r mn">36.7億円</td><td class="r mn"><strong>26.8億円</strong></td><td class="r mn">+135円</td></tr>
+      <tr><td>大口町中小口2丁目の公示地価（住宅地）</td><td class="r mn">6.7万円/㎡</td><td class="r mn">55.0億円</td><td class="r mn"><strong>45.0億円</strong></td><td class="r mn">+227円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">公示・基準地価（2026年）：大口町中小口2丁目180番（住宅地）6.74万円/㎡、同2丁目368番（商業地）7.20万円/㎡。大口町の平均は6.9万円/㎡。本社は中小口1丁目1番地。8ヘクタールの工場用地を住宅地の単価でそのまま測ると甘くなるので、中心は約3分の2に落とした。</div>
+  <div class="cbox">
+    <div class="h3">取得時期を簿価から読む</div>
+    <div class="tx">簿価を面積で割ると<strong>1㎡あたり1.2万円</strong>。大口町の地価平均は、記録のある1983年でも6.5万円/㎡だった。沿革によれば、名古屋市熱田区の工場を<strong>1964年に大口町へ移し、1965年に全製品の生産拠点にした</strong>。60年前に買った土地が、ほぼ当時の値段のまま帳簿に載っている。面積は2014年3月期の80,431㎡から少しずつ買い足して81,592㎡になった。</div>
+  </div>
+  <div class="h3">そのほかの土地（簿価のまま。試算には入れていない）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>拠点</th><th class="r">面積</th><th class="r">土地簿価</th><th class="r">簿価/㎡</th></tr></thead>
+    <tbody>
+      <tr><td>中部支社（名古屋市熱田区）</td><td class="r mn">1,422㎡</td><td class="r mn">3.90億円</td><td class="r mn">27.5万円</td></tr>
+      <tr><td>関東支社（さいたま市北区）</td><td class="r mn">705㎡</td><td class="r mn">2.57億円</td><td class="r mn">36.5万円</td></tr>
+      <tr><td>福岡営業所（福岡市南区）</td><td class="r mn">423㎡</td><td class="r mn">2.33億円</td><td class="r mn">55.0万円</td></tr>
+      <tr><td>広島営業所（広島市中区）</td><td class="r mn">213㎡</td><td class="r mn">0.77億円</td><td class="r mn">36.1万円</td></tr>
+      <tr><td>札幌営業所（札幌市白石区）</td><td class="r mn">357㎡</td><td class="r mn">0.60億円</td><td class="r mn">16.8万円</td></tr>
+      <tr><td>関西支社（大阪市浪速区）</td><td class="r mn">345㎡</td><td class="r mn">0.37億円</td><td class="r mn">10.6万円</td></tr>
+      <tr><td>高松営業所（高松市）</td><td class="r mn">479㎡</td><td class="r mn">0.28億円</td><td class="r mn">6.0万円</td></tr>
+      <tr><td>仙台営業所（仙台市若林区）</td><td class="r mn">321㎡</td><td class="r mn">0.20億円</td><td class="r mn">6.2万円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 土地の含み益を足しても、1株あたり純資産は2,284円から2,419円へ6%増えるだけ。修正PBRは0.31〜0.33倍。<strong>兼房は土地の含み益で買う会社ではない</strong>。しかも本社工場は全製品の生産拠点で、売れる土地ではない。評価の中心は、現金と在庫と、シェアが生む利益のほうにある。</div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">株主と触媒 ── 大株主8名で過半、自社株買いはまだ</h2><span class="sb bg-pu">8名で52%</span></div>
+
+  <div class="h3">大株主（2026年3月末）── 大口興産と個人7名で52%</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>株主</th><th class="r">比率</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>大口興産</strong></td><td class="r mn"><strong>16.55%</strong></td><td class="sm2">名古屋市昭和区。大量保有報告の提出者</td></tr>
+      <tr><td>渡邉裕子／渡邉久修／渡邉將人／渡邉美奈子</td><td class="r mn">9.83%／4.62%／2.88%／1.68%</td><td class="sm2">個人。2022〜2024年に相続・贈与とみられる異動の報告</td></tr>
+      <tr><td>太田万佐子／太田正志</td><td class="r mn">9.55%／2.91%</td><td class="sm2">個人</td></tr>
+      <tr><td>信太万希子</td><td class="r mn">4.27%</td><td class="sm2">個人</td></tr>
+      <tr><td>兼房従業員持株会</td><td class="r mn">5.41%</td><td class="sm2"></td></tr>
+      <tr><td>海外の信託口（BNYM）</td><td class="r mn">1.72%</td><td class="sm2">外国人の保有比率は10%未満</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">上位10名のうち大口興産と個人7名（渡邉姓4名・太田姓2名・信太姓1名）の合計は52.29%。渡邉將人氏は代表取締役、渡邉久修氏は取締役（有報の役員欄）。ガバナンス報告書は「支配株主なし・親会社なし」としているが、<strong>経営陣を含む少数の株主で過半を持つ</strong>（大口興産と各個人の関係は開示資料からは確認していない）。買収防衛策は導入していない。</div>
+
+  <div class="h3">会社がすでに動いたこと・動いていないこと</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>事実</th></tr></thead>
+    <tbody>
+      <tr><td>配当方針</td><td class="sm2">2024年5月10日、連結配当性向の目安を30%→35%へ（ガバナンス報告書）</td></tr>
+      <tr><td>資本コストの開示</td><td class="sm2">「資本コストや株価を意識した経営の実現に向けた対応」を開示し、2026年5月12日に更新。2026年6月10日に機関投資家・アナリスト向け説明会</td></tr>
+      <tr><td>政策保有株</td><td class="sm2">2022年度5銘柄、2023年度1銘柄、2025年度1銘柄を売却。残りは上場10銘柄・6.8億円</td></tr>
+      <tr><td>資産の整理</td><td class="sm2">福岡営業所とスラバヤ拠点を売却、中国の再研磨拠点を閉鎖、不採算製品を廃止</td></tr>
+      <tr class="hl"><td><strong>自社株買い</strong></td><td class="sm2"><strong>取締役会決議による取得は、直近の有報では「該当事項なし」</strong>。自己株は41万株（2.9%）のまま動いていない</td></tr>
+      <tr><td>ROE・PBRの数値目標</td><td class="sm2">出していない。新中計の2027年度以降の数値も未公表</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 配当性向の引き上げと資本コストの開示で、会社は一歩は動いた。<strong>ただし安さを直すいちばん直接の手段である自社株買いは使っておらず、経営陣を含む大株主8名が過半を持つので外から求める力も働きにくい</strong>。触媒の軸を1点（条件は一部ある）にした理由。逆に、経営陣に近い株主が過半を持つ会社は非公開化（MBO）を選べる立場にもあるが、その動きを示す事実は何も確認していないので点数には入れていない。</div>
+  <div class="note">業界の上場会社は、2022年3月の会社資料では兼房・天龍製鋸・東洋刃物の3社、2025年以降の資料では2社になっている。東洋刃物が上場をやめた経緯は今回確認していない。</div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">3年後の3ケース ── ベア・ベース・ブル</h2><span class="sb bg-gn">2029年</span></div>
+
+  <div class="tx">3年後（2029年秋ごろ）の株価を、<strong>1株あたり純資産 × PBR</strong>で3通りに分ける。起点は6月末の2,284円。動かすのは「毎年の利益」「為替」「市場が付けるPBR」。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">ベア</th><th class="r">ベース</th><th class="r">ブル</th></tr></thead>
+    <tbody>
+      <tr><td>1株利益（年）</td><td class="r mn">36円</td><td class="r mn">65円</td><td class="r mn">95円</td></tr>
+      <tr><td>配当（年）</td><td class="r mn">15円</td><td class="r mn">23円</td><td class="r mn">33円</td></tr>
+      <tr><td>3年分の内部留保</td><td class="r mn">+63円</td><td class="r mn">+126円</td><td class="r mn">+186円</td></tr>
+      <tr><td>為替換算調整勘定</td><td class="r mn">▲72円（10億円縮小）</td><td class="r mn">変わらず</td><td class="r mn">変わらず</td></tr>
+      <tr><td>3年後の1株あたり純資産</td><td class="r mn">2,275円</td><td class="r mn">2,410円</td><td class="r mn">2,470円</td></tr>
+      <tr><td>PBR</td><td class="r mn">0.28倍</td><td class="r mn">0.34倍</td><td class="r mn">0.47倍</td></tr>
+      <tr class="hl"><td><strong>3年後の株価</strong></td><td class="r mn"><strong>637円</strong></td><td class="r mn"><strong>819円</strong></td><td class="r mn"><strong>1,161円</strong></td></tr>
+      <tr><td>780円からの騰落</td><td class="r mn">▲18%</td><td class="r mn">+5%</td><td class="r mn">+49%</td></tr>
+      <tr><td>3年分の配当を足した場合</td><td class="r mn">▲13%</td><td class="r mn">+14%</td><td class="r mn">+62%</td></tr>
+      <tr><td>当商会が付けた確率</td><td class="r mn">25%</td><td class="r mn">50%</td><td class="r mn">25%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">ベア ── 不況と円高が重なる</div><div class="tx">住宅と自動車が同時に落ち、営業利益率が2〜3%（2021年3月期・2025年3月期の水準）に戻る。配当は下限の15円。円高で海外子会社の純資産が円換算で縮む。PBRは直近5年の下限0.28倍。<strong>2025年4月に実際に624円を付けている</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">ベース ── 今期予想の利益が3年続く</div><div class="tx">純利益9億円、配当23円、PBRは今の0.34倍。純資産が年2%弱ずつ積み上がる分だけ株価が上がる。自社株買いは入れていない。</div></div>
+    <div class="c" style="border-top:3px solid var(--gn2)"><div class="h3" style="color:var(--gn2)">ブル ── 利益率が2022年の水準に戻る</div><div class="tx">営業利益が17億円台（利益率8〜9%）へ戻り、配当は33円。PBRは直近5年の上限0.47倍（2022年11月に925円で付けた水準）。足元の第1四半期は営業利益が前年の2.2倍で、この方向の兆しはある。</div></div>
+  </div>
+  <div class="inf">📌 確率で均した3年後の株価は<strong>859円（+10%）、配当込みで+19%</strong>。ベアの下げ幅（▲18%）よりブルの上げ幅（+49%）のほうが大きい。<strong>現実に起きそうな範囲で見れば、上と下の形は悪くない</strong>。当商会の採点がB++にとどまるのは、下値を「起きそうな水準」ではなく「そこまで行っても説明がつく水準」＝1株あたり金融資産380円で置いているため（次章）。確率は当商会の主観。</div>
+
+</section>
+<section class="pn" id="p10">
+  <div class="sh"><span class="sn">10</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+
+  <div class="card" style="border:2px solid #b8860b;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffaf0">
+    <div class="h3" style="margin-top:0">当商会の採点（6軸×非対称比）── 総合 B++</div>
+    <p class="note">ランクは<strong>幅（上値÷下値）×確度（6軸・18点）</strong>のマトリクスで決まる。<strong>ランクは下がりにくさの指標</strong>であって、上がりやすさの順位ではない。</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+      <tbody>
+      <tr><td>🦦安さ</td><td class="r"><strong>2</strong></td><td class="sm2">PBR0.34倍、土地を足した修正PBR0.32倍。清原式は1.34倍だが、流動資産の4割が棚卸資産で預金型ではない</td></tr>
+      <tr><td>🦉財務</td><td class="r"><strong>3</strong></td><td class="sm2">自己資本比率81.7%。現預金78億円に対し借入金31億円でネットキャッシュ。営業赤字の年はない</td></tr>
+      <tr><td>🦫モート</td><td class="r"><strong>2</strong></td><td class="sm2">国内シェア35.6%で首位（工業会21社・2025年度）、ベニヤナイフは国内9割超。鉄鋼切断用コールドソーは経産省の2020年版グローバルニッチトップ100選で、切断機メーカーの大半に採用されている。ただし営業利益率5%・ROE3%台で、堀が利益の数字に出きっていない</td></tr>
+      <tr><td>🐊触媒</td><td class="r"><strong>1</strong></td><td class="sm2">2024年5月に配当性向の目安を30%→35%へ。資本コストを意識した経営の開示あり。ただし自社株買いの実績はなく、大口興産と個人7名（代表取締役の一人を含む）で52%を持つので外圧は効きにくい</td></tr>
+      <tr><td>🐝インカム</td><td class="r"><strong>2</strong></td><td class="sm2">利回り2.95%。年15円を下限に配当性向35%めど。今期は減益予想に合わせて26円→23円</td></tr>
+      <tr><td>🦞リスク</td><td class="r"><strong>1</strong></td><td class="sm2">1日の売買代金は約493万円（出来高の中央値4,200株）。大株主8名で過半。海外売上54%で、純資産のうち36億円が為替換算調整勘定</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">上値：資産基準。土地の含み益を足した実質純資産2,419円 × 直近5年のPBR上限0.47倍＝<strong>1,137円・+46%</strong>（同業の天龍製鋸は0.51倍。低いほうを採る）。<br>
+    下値：株価より下にある候補のうち最も深い<strong>1株あたり金融資産380円・▲51%</strong>。<br>
+    非対称比 0.89（幅・小）× 確度 11点（中）→ マトリクスは<strong>B++</strong>。1銘柄の上限は2.5%。</p>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">下値の置き方で、ランクはここまで変わる</div>
+    <div class="tx">この銘柄は、下値をどこに置くかで採点がいちばん動く。候補を浅い順に並べた。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>下値の候補</th><th class="r">株価</th><th class="r">下値</th><th class="r">比</th><th class="r">幅</th><th class="r">ランク</th></tr></thead>
+      <tbody>
+        <tr><td>52週安値</td><td class="r mn">664円</td><td class="r mn">▲15%</td><td class="r mn">3.08</td><td class="r">大</td><td class="r mn"><strong>A−</strong></td></tr>
+        <tr><td>PBR下限0.28倍×BPS</td><td class="r mn">640円</td><td class="r mn">▲18%</td><td class="r mn">2.54</td><td class="r">中</td><td class="r mn"><strong>B++</strong></td></tr>
+        <tr><td>PER下限6.19倍×予想EPS</td><td class="r mn">401円</td><td class="r mn">▲49%</td><td class="r mn">0.94</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td></tr>
+        <tr class="hl"><td>床（1株あたり金融資産）（採用）</td><td class="r mn">380円</td><td class="r mn">▲51%</td><td class="r mn">0.89</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="inf">📌 52週安値で置けばA−、金融資産で置けばB++。当商会の規則は「たぶんここで止まる」ではなく<strong>「ここまで行っても説明がつく」水準を採る</strong>ので、後者になる。ただし兼房には、金融資産の上に在庫86億円と売掛金42億円がある。<strong>在庫を半分だけ数えた1株664円は、52週安値と同じ水準</strong>で、実際の値動きもその近くで止まってきた。規則どおりならB++、在庫の硬さを認めるならA−寄り、というのが正直なところ。</div>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">株価が下がると、採点はどこで変わるか</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>株価</th><th class="r">上値</th><th class="r">下値</th><th class="r">幅</th><th class="r">ランク</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>780円（2026年10月6日）</td><td class="r mn">+46%</td><td class="r mn">▲51%</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td></tr>
+        <tr><td>682円以下</td><td class="r mn">+67%以上</td><td class="r mn">▲44%以内</td><td class="r">中</td><td class="r mn"><strong>B++</strong></td></tr>
+        <tr><td>569円以下</td><td class="r mn">+100%以上</td><td class="r mn">▲33%以内</td><td class="r">大</td><td class="r mn"><strong>A−</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">上値1,137円と下値380円を固定した機械的な計算で、その株価まで下がるという予想ではない。1銘柄の上限はB++の2.5%で、口座内純資産4,402万円に対し約110万円・1,400株。平均出来高6,430株の2割を取れるとして約1.1日で売り切れる量。</div>
+  </div>
+
+</section>
+<section class="pn" id="p11">
+  <div class="sh"><span class="sn">11</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">6つのリスク</span></div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">① 「ネットキャッシュ」の中身は在庫</div><div class="tx">清原式1.34倍の6割は売掛金と棚卸資産。純粋な現金は時価総額の44%。<strong>在庫が現金に変わるのは事業が回っている間だけ</strong>で、清算価値として数えるなら大きく割り引く必要がある。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">② 利益率が景気で振れる</div><div class="tx">営業利益率は6期で2.9%〜9.0%。住宅着工と自動車生産に連動する。今期は純利益▲13%・配当26円→23円の予想。中国は3.1億円の赤字が続いている。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">③ 原材料と為替</div><div class="tx">刃先に使う超硬合金の主原料タングステンは、中国の輸出規制で2026年に入って輸入価格が高騰した（有報）。会社は新中計の2027年度以降の数値を出せていない。海外売上54%、純資産のうち36億円が為替換算調整勘定で、<strong>円高は利益と純資産の両方を削る</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">④ 大株主が固まっている・自社株買いなし</div><div class="tx">大口興産と個人7名で52%。配当性向は上げたが、自社株買いの実績はない。<strong>安さが直るかどうかは会社の判断しだい</strong>で、外から求める手段は限られる。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">⑤ 流動性</div><div class="tx">直近40営業日の売買代金は1日平均約490万円、出来高の中央値は4,200株。まとまった金額は一度に売り買いできない。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑥ シェアの数字の範囲</div><div class="tx">国内35.6%は工業会加盟21社だけの集計で、輸入品や非加盟企業は入っていない。世界の順位は5年で2位から4位に下がった。世界シェアを%で示す資料は確認できていない。</div></div>
+  </div>
+
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年10月）</div>
+    <ul class="note">
+      <li>株価780円は2026年10月6日の終値（株探の確定値）。PBR0.34倍・PER12.0倍・配当利回り2.95%・時価総額112億円（発行済株式ベース）</li>
+      <li>貸借対照表と株数は2027年3月期第1四半期決算短信（2026年6月末）。純資産317.50億円÷（14,310,000株−自己株410,082株）＝1株2,284円</li>
+      <li>投資有価証券7.05億円は2026年3月期の決算短信・有報の値（6月末の内訳は未開示）。棚卸資産は製品38.99億＋仕掛品13.61億＋原材料及び貯蔵品33.50億円</li>
+      <li>国内シェア35.6%・ベニヤナイフ90%以上・世界4位・業種別と地域別の売上構成・設備投資計画は、会社のアナリスト向け説明資料（2026年6月）。29.9%は同2025年6月、28.2%と2019年度ベースの世界2位は名証IRセミナー資料（2022年3月）</li>
+      <li>グローバルニッチトップ企業100選は、経済産業省「2020年版 選定企業 詳細資料」の兼房のページ（製品名 Ferro Max コールドソー）で確認</li>
+      <li>配当方針（年15円下限・連結配当性向35%めど）は「業績予想の修正及び配当予想の修正に関するお知らせ」（2026年5月8日）と有報。30%→35%の引き上げ日（2024年5月10日）と政策保有株の売却実績はガバナンス報告書（2026年6月26日）</li>
+      <li>中期経営計画は「2035年のありたい姿と中期経営計画（2026年度〜2028年度）について」（2026年5月12日）</li>
+      <li>土地の面積・簿価、セグメント利益、製品別売上、大株主、キャッシュフロー、自己株式の取得状況は有価証券報告書（2026年3月期・S100YEZU）。土地は2014年3月期以降の13本で推移を確認</li>
+      <li>公示地価（2026年）：大口町中小口2丁目180番 6.74万円/㎡（住宅地）。基準地価：同2丁目368番 7.20万円/㎡（商業地）。地価平均の推移は土地代データ</li>
+      <li>PBR・PERの直近5期のレンジ（PBR0.28〜0.47倍、PER下限6.19倍）と大量保有はIRBANK。52週高安は株探の週足、出来高は日足（直近40営業日）</li>
+      <li><strong>推定扱い</strong>：大口町の土地の時価、取得時期の読み、大株主8名の合計52%（大口興産と個人7名を足したもの。相互の関係は未確認）、3年後の3ケースと確率、6軸の点数</li>
+      <li><strong>未確認</strong>：世界シェアの数値、国内シェアの集計に入っていない企業・輸入品の規模、6月末の投資有価証券の内訳、東洋刃物が上場をやめた経緯、新中計の2027年度以降の数値</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではありません。投資判断はご自身の責任においてお願いいたします。土地の時価、大株主の保有比率の合算、3年後の3ケースとその確率は、当商会の推定です。<br>
+  Data: 兼房 有価証券報告書（2014年3月期〜2026年3月期・金融庁EDINET）／2027年3月期第1四半期決算短信／適時開示（業績予想及び配当予想の修正 2026.5.8、2035年のありたい姿と中期経営計画 2026.5.12）／コーポレート・ガバナンス報告書 2026.6.26／アナリスト向け説明資料（2026年6月・2025年6月）・名証IRセミナー資料（2022年3月）／株探（確定値・業績・時系列）／IRBANK（PBR・PERレンジ、大量保有一覧）／国土交通省 地価公示・都道府県地価調査（2026年）／土地代データ · 2026.10
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#nav .tb'));
+  var pans=[].slice.call(document.querySelectorAll('.pn'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    pans.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    tabs.forEach(function(x){var on=x.getAttribute('data-p')===id;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      show(b.getAttribute('data-p'));
+      var nav=document.getElementById('nav');
+      var top=nav.getBoundingClientRect().top+window.pageYOffset;
+      if(window.pageYOffset>top) window.scrollTo(0,top);
+    });
+  });
+  if(location.hash) show(location.hash.slice(1));
+})();
+</script>
+
+</body>
+</html>
