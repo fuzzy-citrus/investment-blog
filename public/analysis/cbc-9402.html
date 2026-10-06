@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>中部日本放送（9402）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+<style id="tab-fallback">
+.pn{display:block;scroll-margin-top:56px}
+html.js .pn{display:none}
+html.js .pn.on{display:block}
+a.tb{text-decoration:none}
+.tn{flex-wrap:wrap}
+.tn .tb{padding:11px 14px}
+html:not(.js) .pn{margin-bottom:34px}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 9402 名証プレミア · 2026.10.05 · 株価 1,264円（10/5終値）</p>
+      <h1 class="ht">中部日本放送 <em>（9402）</em><br>統合投資分析レポート</h1>
+      <p class="hs">金融資産548億円・賃貸不動産の鑑定時価263億円に対し、時価総額334億円。修正PBR0.36倍<br>有価証券報告書13期分で土地と株の取得時期を追い、公示価格で含み益を数えた。2026年5月の自社株買い50万株まで反映</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>当商会の採点</small></div>
+      <div class="vt">
+        <strong>当商会の検証済み上値基準 1,492円 / 下値基準 774円</strong><br>
+        非対称比0.46（幅・小）×確度10点（中）＝B++。<br>
+        3年後：ベア728円／ベース1,298円／ブル1,767円。<br>
+        1銘柄の上限は2.5%（約800株）。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価（10/5終値）</div><div class="kn am">1,264円</div><div class="ks">時価総額 334億円・名証プレミア</div></div>
+    <div class="kv"><div class="kl">1株あたり純資産 3,103円</div><div class="kn bl">PBR 0.41倍</div><div class="ks">自社レンジ0.19〜0.51倍</div></div>
+    <div class="kv"><div class="kl">修正後の1株純資産</div><div class="kn gn">3,552円</div><div class="ks">修正PBR 0.36倍（保守でも0.37倍）</div></div>
+    <div class="kv"><div class="kl">上場株の含み益</div><div class="kn gn">247億円</div><div class="ks">取得原価62億円→309億円（3月末）</div></div>
+    <div class="kv"><div class="kl">賃貸不動産の含み益</div><div class="kn gn">124.7億円</div><div class="ks">簿価138億円→鑑定時価263億円</div></div>
+    <div class="kv"><div class="kl">3年後（確率で均した値）</div><div class="kn am">1,221円</div><div class="ks">配当込み+2%。ベア▲42%／ブル+40%</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <a class="tb on" href="#p1" data-p="p1"><span class="d" style="background:var(--gn2)"></span>結論</a>
+  <a class="tb" href="#p2" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札とBS</a>
+  <a class="tb" href="#p3" data-p="p3"><span class="d" style="background:var(--pu2)"></span>現金と証券</a>
+  <a class="tb" href="#p4" data-p="p4"><span class="d" style="background:var(--or2)"></span>賃貸不動産</a>
+  <a class="tb" href="#p5" data-p="p5"><span class="d" style="background:var(--bl2)"></span>土地を1件ずつ</a>
+  <a class="tb" href="#p6" data-p="p6"><span class="d" style="background:#72cc8e"></span>NAVの積み上げ</a>
+  <a class="tb" href="#p7" data-p="p7"><span class="d" style="background:var(--or2)"></span>事業とストック性</a>
+  <a class="tb" href="#p8" data-p="p8"><span class="d" style="background:var(--bl2)"></span>市場と中計</a>
+  <a class="tb" href="#p9" data-p="p9"><span class="d" style="background:var(--pu2)"></span>カタリスト</a>
+  <a class="tb" href="#p10" data-p="p10"><span class="d" style="background:var(--gn2)"></span>3年後の3ケース</a>
+  <a class="tb" href="#p11" data-p="p11"><span class="d" style="background:var(--am2)"></span>レンジとランク</a>
+  <a class="tb" href="#p12" data-p="p12"><span class="d" style="background:var(--rd)"></span>リスクと検算</a>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 資産は一級。値段は中途半端、出口は会社しだい</h2><span class="sb bg-gn">B++</span></div>
+
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">結論 01 · 資産</div><span class="ci">🏦</span>
+      <div class="ct">資産は本物。金融資産548億円に対し時価総額334億円</div>
+      <div class="tx">6月末の現預金115億円、投資有価証券413億円。上場株は取得原価62億円のものが3月末で309億円になっていた。借入金はゼロ。<strong>金融資産を全部引いた企業価値はマイナス222億円</strong>。賃貸不動産は簿価138億円に対し鑑定時価263億円。修正PBRは<strong>0.36倍</strong>。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">結論 02 · 稼ぎ</div><span class="ci">🏢</span>
+      <div class="ct">稼ぎの芯は不動産。9期続けて営業利益9〜11億円</div>
+      <div class="tx">不動産セグメントの営業利益は2018年3月期から8.7億〜11.5億円の幅でほぼ動かない。放送は同じ期間に16.4億円から▲5.4億円まで振れた。<strong>ストック収益は年11億円、放送はその上に乗る変動分</strong>という構造。ROEは2%台で、資産に利益が追いついていない。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">結論 03 · 出口</div><span class="ci">🚪</span>
+      <div class="ct">買収は制度上ほぼ起きない。会社は動き始めたが、まだ小さい</div>
+      <div class="tx">放送法で<strong>1人の株主が持てる議決権は原則3分の1まで</strong>。完全買収が成り立たない。一方で会社は2025年5月に配当性向の目安を30%→40%へ上げ、<strong>2026年5月には資本効率の改善を理由に自社株50万株（5.84億円）を買った</strong>。ただし金融資産548億円に対しては1%の規模で、TBS株は買い増している。</div>
+    </div>
+  </div>
+  <div class="inf">📌 <strong>株価1,264円（2026年10月5日終値）での当商会の採点はB++</strong>。上値1,492円（+18%）・下値774円（▲39%）・非対称比0.46（幅・小）・確度10点（中）。3年後の3ケースはベア728円／ベース1,298円／ブル1,767円で、当商会の置いた確率で均すと1,221円（配当込み+2%）。<strong>中身は一級だが、この値段では上と下が釣り合わない</strong>。採点表のうえでは953円以下でA−、917円以下でAに切り替わる。</div>
+  <div class="note">株価は2026年10月5日の終値（株探の確定値）、貸借対照表は2026年6月末（第1四半期決算短信）。賃貸不動産の時価や保有株の明細など年1回しか開示されないものは2026年3月末（有価証券報告書）。本資料は特定の売買を勧めるものではなく、投資判断は読む人自身のもの。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札と貸借対照表 ── 時価総額334億円の中身</h2><span class="sb bg-am">清原式0.93倍</span></div>
+
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>株価（2026年10月5日終値）</td><td class="r mn">1,264円</td><td class="sm2">名証プレミア。東証には上場していない</td></tr>
+      <tr><td>時価総額</td><td class="r mn">334億円</td><td class="sm2">発行済26,400,000株。自己株571,797株を除くと326億円</td></tr>
+      <tr><td>PBR</td><td class="r mn">0.41倍</td><td class="sm2">1株あたり純資産3,103円（2026年6月末・自己株控除後25,828,203株）</td></tr>
+      <tr><td>PER（会社予想）</td><td class="r mn">21.2倍</td><td class="sm2">2027年3月期 予想EPS59.6円</td></tr>
+      <tr><td>配当利回り</td><td class="r mn">1.98%</td><td class="sm2">年25円の予想（前期28円）</td></tr>
+      <tr class="hl"><td><strong>清原式ネットキャッシュ比率</strong></td><td class="r mn"><strong>0.93倍</strong></td><td class="sm2">流動資産224.1億＋投資有価証券412.8億×0.7−負債209.1億＝303.9億円（6月末）÷ 自己株を除く時価総額</td></tr>
+      <tr><td>1株あたりの金融資産（床）</td><td class="r mn">1,712円</td><td class="sm2">現預金＋有価証券＋投資有価証券×75%。借入金なし。<strong>株価より上にある</strong></td></tr>
+      <tr><td>企業価値（EV）</td><td class="r mn">▲222億円</td><td class="sm2">自己株を除く時価総額−金融資産548億円（保有株は10/5終値で再評価・税引前）。前期の営業利益＋減価償却は37.6億円</td></tr>
+      <tr><td>52週</td><td class="r mn">774〜1,314円</td><td class="sm2">安値2025年10月・高値2026年7月（週足）</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="h3">貸借対照表の中身（2026年6月末・第1四半期決算短信）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>科目</th><th class="r">6月末</th><th class="r">3月末</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>総資産</td><td class="r mn">1,024.3億円</td><td class="r mn">1,015.5億円</td><td class="sm2">1年前（2025年3月末）は887.8億円。増加の大半は保有株の値上がり</td></tr>
+      <tr><td>うち現金及び預金</td><td class="r mn">114.7億円</td><td class="r mn">141.5億円</td><td class="sm2">自社株買い5.84億円、配当、未払費用の支払いで減少。ほかに有価証券（社債）9億円</td></tr>
+      <tr><td>うち投資有価証券</td><td class="r mn">412.8億円</td><td class="r mn">370.5億円</td><td class="sm2">3月末の株式は取得原価62.0億円→計上額309.3億円</td></tr>
+      <tr><td>うち有形固定資産</td><td class="r mn">330.5億円</td><td class="r mn">332.2億円</td><td class="sm2">土地161.8億円</td></tr>
+      <tr><td>負債合計</td><td class="r mn">209.1億円</td><td class="r mn">217.2億円</td><td class="sm2">繰延税金負債101.4億円、長期預り保証金39.7億円。<strong>借入金・社債なし</strong></td></tr>
+      <tr class="hl"><td><strong>純資産</strong></td><td class="r mn"><strong>815.2億円</strong></td><td class="r mn">798.3億円</td><td class="sm2">自己資本801.4億円（自己資本比率78.2%）。その他有価証券評価差額金203.3億円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 その他有価証券評価差額金203億円は、保有株の含み益を税引後で純資産に入れたもの。<strong>株の含み益はすでにPBRの分母に入っている</strong>。PBRにまだ入っていないのは不動産の含み益と、7月以降の保有株の値動きだけ。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">現金と証券 ── いつ買って、いくらになったか</h2><span class="sb bg-pu">含み益247億円</span></div>
+
+  <div class="h3">① 現金 ── 13年間、100〜157億円のあいだ</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目（2026年3月期）</th><th class="r">金額</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>現金及び預金</td><td class="r mn">141.5億円</td><td class="sm2">担保に入っているのは0.07億円だけ</td></tr>
+      <tr><td>現金及び現金同等物（CF計算書）</td><td class="r mn">153.4億円</td><td class="sm2">前期末から13.3億円増</td></tr>
+      <tr><td>満期保有の社債</td><td class="r mn">21.1億円</td><td class="sm2">1年内7億円（有価証券）＋1年超14.1億円（投資有価証券の内数）</td></tr>
+      <tr><td>営業キャッシュフロー</td><td class="r mn">+36.0億円</td><td class="sm2">税引前利益29.7億円＋減価償却17.2億円−法人税9.1億円ほか</td></tr>
+      <tr><td>設備投資（有形・無形）</td><td class="r mn">▲13.1億円</td><td class="sm2">放送設備の更新が中心。ほかに投資有価証券の取得12.7億円</td></tr>
+      <tr><td>配当金の支払い</td><td class="r mn">▲6.1億円</td><td class="sm2">自社株買い0.58億円</td></tr>
+      <tr><td>長期預り保証金（負債）</td><td class="r mn">40.0億円</td><td class="sm2">テナントからの預り金。現金の一部はこれの裏付け</td></tr>
+      <tr class="hl"><td><strong>2026年6月末の現金及び預金</strong></td><td class="r mn"><strong>114.7億円</strong></td><td class="sm2">4〜6月に26.8億円減。自社株買い5.84億円、期末配当約6億円、未払費用の支払いなど</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">現金及び預金の期末残高：2014年3月157.0億 → 2018年3月103.0億 → 2020年3月151.8億 → 2023年3月103.3億 → 2026年3月141.5億円。名駅（2017年3月期）と栄（2022年3月期）の土地を買ったあとに減り、数年で元に戻っている。<strong>営業CF−設備投資−配当で年15億円前後が残る</strong>体質で、借入れなしに30億円級の不動産を数年おきに買える。</div>
+
+  <div class="h3">② 上場株 ── 取得原価62億円が309億円になっている</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>期末</th><th class="r">取得原価</th><th class="r">貸借対照表の計上額</th><th class="r">含み益</th><th class="r">倍率</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2013/3</td><td class="r mn">50.9億円</td><td class="r mn">75.0億円</td><td class="r mn"><strong>24.2億円</strong></td><td class="r mn">1.5倍</td></tr>
+      <tr><td class="mn">2015/3</td><td class="r mn">53.6億円</td><td class="r mn">102.3億円</td><td class="r mn"><strong>48.7億円</strong></td><td class="r mn">1.9倍</td></tr>
+      <tr><td class="mn">2017/3</td><td class="r mn">55.6億円</td><td class="r mn">128.0億円</td><td class="r mn"><strong>72.4億円</strong></td><td class="r mn">2.3倍</td></tr>
+      <tr><td class="mn">2019/3</td><td class="r mn">55.3億円</td><td class="r mn">125.0億円</td><td class="r mn"><strong>69.7億円</strong></td><td class="r mn">2.3倍</td></tr>
+      <tr><td class="mn">2020/3</td><td class="r mn">40.5億円</td><td class="r mn">77.4億円</td><td class="r mn"><strong>36.9億円</strong></td><td class="r mn">1.9倍</td></tr>
+      <tr><td class="mn">2022/3</td><td class="r mn">55.5億円</td><td class="r mn">113.7億円</td><td class="r mn"><strong>58.1億円</strong></td><td class="r mn">2.0倍</td></tr>
+      <tr><td class="mn">2023/3</td><td class="r mn">55.9億円</td><td class="r mn">122.6億円</td><td class="r mn"><strong>66.7億円</strong></td><td class="r mn">2.2倍</td></tr>
+      <tr><td class="mn">2024/3</td><td class="r mn">56.0億円</td><td class="r mn">215.6億円</td><td class="r mn"><strong>159.6億円</strong></td><td class="r mn">3.9倍</td></tr>
+      <tr><td class="mn">2025/3</td><td class="r mn">56.0億円</td><td class="r mn">224.2億円</td><td class="r mn"><strong>168.2億円</strong></td><td class="r mn">4.0倍</td></tr>
+      <tr class="hl"><td class="mn">2026/3</td><td class="r mn">62.0億円</td><td class="r mn">309.3億円</td><td class="r mn"><strong>247.3億円</strong></td><td class="r mn">5.0倍</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">連結の「その他有価証券」注記のうち、計上額が取得原価を上回る株式。各年の有価証券報告書に載る当期・前期の表から。<strong>取得原価は13年間ほぼ50〜62億円で動いておらず、含み益の増減はほとんど株価によるもの</strong>。2020年3月はコロナ急落時。</div>
+
+  <div class="h3">③ いつ買った株か ── 特定投資株式の株数を13年分追う</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>銘柄</th><th>株数の動き</th><th>読み</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>TBSホールディングス</strong></td><td class="sm2">2014年3月 130.0万株 → <strong>2017年3月 238.8万株</strong>（+108.8万株）→ 2026年3月 248.8万株（+10万株・5.78億円）</td><td class="sm2">2017年3月期に持ち株をほぼ倍にした。同期末の株価は1,744円。当期の買い増しは1株5,780円。<strong>減らす方向ではない</strong>。6月末の株価は6,225円、10/5は5,801円</td></tr>
+      <tr><td>三菱UFJ FG</td><td class="sm2">190.8万株のまま13年間変わらず</td><td class="sm2">2014年3月の計上額10.6億円 → 2026年3月49.6億円 → 10/5で67.6億円</td></tr>
+      <tr><td>三井住友トラストG</td><td class="sm2">347.9万株 → 併合で34.8万株 → 分割で69.6万株 → 分割で278.3万株</td><td class="sm2">売買はなく、併合と分割だけ</td></tr>
+      <tr><td>名古屋銀行</td><td class="sm2">147.4万株 → 併合で14.7万株 → 分割で44.2万株</td><td class="sm2">同上</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>上位4銘柄</th><th class="r">株数</th><th class="r">2026年3月末</th><th class="r">10/5終値</th><th class="r">10/5時点</th><th class="r">3月末からの差</th></tr></thead>
+    <tbody>
+      <tr><td>TBSホールディングス</td><td class="r mn">2,488,000株</td><td class="r mn">139.1億円</td><td class="r mn">5,906円</td><td class="r mn">146.9億円</td><td class="r mn">+7.8億円</td></tr>
+      <tr><td>三菱UFJ FG</td><td class="r mn">1,908,320株</td><td class="r mn">49.6億円</td><td class="r mn">3,615円</td><td class="r mn">69.0億円</td><td class="r mn">+19.4億円</td></tr>
+      <tr><td>三井住友トラストG</td><td class="r mn">2,783,320株</td><td class="r mn">34.1億円</td><td class="r mn">1,755円</td><td class="r mn">48.9億円</td><td class="r mn">+14.8億円</td></tr>
+      <tr><td>名古屋銀行</td><td class="r mn">442,200株</td><td class="r mn">24.9億円</td><td class="r mn">7,130円</td><td class="r mn">31.5億円</td><td class="r mn">+6.6億円</td></tr>
+      <tr class="hl"><td><strong>計</strong></td><td></td><td class="r mn"><strong>247.7億円</strong></td><td></td><td class="r mn"><strong>296.3億円</strong></td><td class="r mn"><strong>+48.6億円</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">提出会社の上場株は20銘柄・291.4億円（2026年3月末）、非上場株は51銘柄・15.4億円。5位以下は中部電力3.5億円、電通グループ2.7億円、御園座2.5億円、RKB毎日HD2.3億円など。当期に減らした上場株は1銘柄・0.33億円（ワシントンホテル）。会社は「保有する投資株式はすべて純投資目的以外」と書いている。上位4銘柄の6月末から10/5までの値動きは合計+12億円（TBSが下げ、銀行3社が上げた）。</div>
+  <div class="inf">📌 TBS株だけで147億円、自己株を除く時価総額326億円の45%。<strong>中部日本放送の値札の4割強は、TBS株の値段で説明がつく</strong>。逆に言えば、TBSと銀行株が下がれば純資産がそのまま減る。2026年3月期の包括利益86.7億円のうち、本業の純利益は18.4億円だった。</div>
+
+  <div class="cbox">
+    <div class="h3">④ 財布の財布 ── TBSの中に東京エレクトロンが入っている</div>
+    <div class="tx">TBSホールディングスの有価証券報告書（2026年3月期）によると、TBSは東京エレクトロン株を持ち続けている。東京エレクトロンは1963年に東京放送（現TBS）の子会社として設立された会社で、TBSはこの株を「成長戦略資本」と位置づけている。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>段</th><th>中身</th><th class="r">金額（10/5終値）</th></tr></thead>
+      <tbody>
+        <tr><td>TBSが持つ東京エレクトロン</td><td class="sm2">7,556万株（3月末15,112,049株を、その後の株式分割後の株数に換算）× 12,765円</td><td class="r mn">9,645億円</td></tr>
+        <tr><td>TBS自身の時価総額</td><td class="sm2">自己株を除く約1億5,680万株 × 5,906円</td><td class="r mn">9,260億円</td></tr>
+        <tr><td>中部日本放送が持つTBS</td><td class="sm2">248.8万株（TBSの1.59%）</td><td class="r mn">147億円</td></tr>
+        <tr class="hl"><td><strong>中部日本放送が間接的に持つ東京エレクトロン</strong></td><td class="sm2">9,645億円 × 1.59%（税引前）</td><td class="r mn"><strong>153億円</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">TBSが持つ東京エレクトロン株は、税引前でTBSの時価総額の104%、売却益への税を30%引いても73%に当たる。中部日本放送の1株あたりでは約593円で、<strong>株価1,264円の47%が、孫にあたる東京エレクトロンで裏付けられている</strong>計算になる。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>2025年4月末 → 10/5</th><th class="r">東京エレクトロン</th><th class="r">TBS</th><th class="r">中部日本放送</th></tr></thead>
+      <tbody>
+        <tr><td>株価の変化</td><td class="r mn">3.0倍</td><td class="r mn">+24%</td><td class="r mn">+88%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="inf">📌 中身は伸びているが、財布の値段にはあまり伝わっていない。この間にTBSの東京エレクトロン持ち分は6,438億円増えたのに、TBSの時価総額が増えたのは1,780億円で、<strong>伝わったのは28%</strong>。TBSは株数を減らしておらず、売れば3割の税がかかり、TBSも認定放送持株会社で買収の値段が付きにくい。<strong>中部日本放送は、その割り引かれたTBSをさらに割り引いて持っている</strong>。安さの源であり、同時に解消されにくさの源でもある。</div>
+    <div class="note">東京エレクトロンの株数は、3月末の計上額5,626億円÷3月末の株価7,446円（分割調整後）が7,556万株になることからの換算。4月以降にTBSが売っていれば変わる。TBSの株数は3月末の自己資本÷1株純資産からの逆算。</div>
+  </div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">賃貸不動産 ── 有報が開示している含み益125億円</h2><span class="sb bg-or">鑑定時価</span></div>
+
+  <div class="tx">有価証券報告書の「賃貸等不動産関係」の注記には、<strong>賃貸に出している不動産の簿価と期末の時価</strong>が並ぶ。中部日本放送は、主要物件の時価を社外の不動産鑑定士の鑑定評価で載せている。推測ではなく、会社が開示している数字である。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>区分（2026年3月末）</th><th class="r">簿価</th><th class="r">時価</th><th class="r">含み益</th><th class="r">賃貸収益</th><th class="r">賃貸費用</th><th class="r">差額</th></tr></thead>
+    <tbody>
+      <tr><td>① 賃貸等不動産</td><td class="r mn">134.2億円</td><td class="r mn">206.9億円</td><td class="r mn">72.8億円</td><td class="r mn">13.4億円</td><td class="r mn">4.7億円</td><td class="r mn">8.7億円</td></tr>
+      <tr><td>② 賃貸等不動産として使用される部分を含む不動産</td><td class="r mn">4.3億円</td><td class="r mn">56.2億円</td><td class="r mn">51.9億円</td><td class="r mn">6.5億円</td><td class="r mn">4.1億円</td><td class="r mn">2.3億円</td></tr>
+      <tr class="hl"><td><strong>合計</strong></td><td class="r mn"><strong>138.4億円</strong></td><td class="r mn"><strong>263.1億円</strong></td><td class="r mn"><strong>124.7億円</strong></td><td class="r mn">19.9億円</td><td class="r mn">8.9億円</td><td class="r mn"><strong>11.0億円</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">②は「賃貸オフィスビルの一部を子会社が使っている」物件。簿価4.3億円は、千代田会館の建物4.06億円と、当社が千代田区に持つ土地0.24億円（2014年3月期の有報に記載）の合計にほぼ一致するので、<strong>当商会は東京・九段南の千代田会館とみている（推定）</strong>。</div>
+
+  <div class="h3">13期分の推移（各年の有価証券報告書から・億円）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>期末</th><th class="r">簿価①</th><th class="r">時価①</th><th class="r">簿価②</th><th class="r">時価②</th><th class="r">含み益計</th><th class="r">賃貸の差額</th><th>その年に起きたこと</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2014/3</td><td class="r mn">82.9</td><td class="r mn">119.6</td><td class="r mn">9.0</td><td class="r mn">35.8</td><td class="r mn"><strong>63.5</strong></td><td class="r mn">8.5</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2015/3</td><td class="r mn">81.6</td><td class="r mn">120.3</td><td class="r mn">8.4</td><td class="r mn">36.0</td><td class="r mn"><strong>66.3</strong></td><td class="r mn">6.3</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2016/3</td><td class="r mn">80.3</td><td class="r mn">120.4</td><td class="r mn">7.8</td><td class="r mn">36.0</td><td class="r mn"><strong>68.2</strong></td><td class="r mn">8.8</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2017/3</td><td class="r mn">111.5</td><td class="r mn">149.5</td><td class="r mn">7.2</td><td class="r mn">35.9</td><td class="r mn"><strong>66.8</strong></td><td class="r mn">9.8</td><td class="sm2">名駅賃貸ビル土地28億円を新規計上</td></tr>
+      <tr><td class="mn">2018/3</td><td class="r mn">109.9</td><td class="r mn">166.9</td><td class="r mn">6.8</td><td class="r mn">49.2</td><td class="r mn"><strong>99.4</strong></td><td class="r mn">10.6</td><td class="sm2">②の時価が35.9億→49.2億円</td></tr>
+      <tr><td class="mn">2019/3</td><td class="r mn">109.4</td><td class="r mn">174.5</td><td class="r mn">6.3</td><td class="r mn">49.7</td><td class="r mn"><strong>108.5</strong></td><td class="r mn">10.6</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2020/3</td><td class="r mn">108.0</td><td class="r mn">175.6</td><td class="r mn">5.8</td><td class="r mn">49.6</td><td class="r mn"><strong>111.4</strong></td><td class="r mn">10.5</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2021/3</td><td class="r mn">105.6</td><td class="r mn">172.5</td><td class="r mn">5.3</td><td class="r mn">49.5</td><td class="r mn"><strong>111.0</strong></td><td class="r mn">10.5</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2022/3</td><td class="r mn">137.2</td><td class="r mn">203.3</td><td class="r mn">4.9</td><td class="r mn">56.2</td><td class="r mn"><strong>117.5</strong></td><td class="r mn">9.9</td><td class="sm2">栄の賃貸ビル・土地を新規計上（土地29.9億円）</td></tr>
+      <tr><td class="mn">2023/3</td><td class="r mn">136.2</td><td class="r mn">203.5</td><td class="r mn">4.8</td><td class="r mn">57.1</td><td class="r mn"><strong>119.7</strong></td><td class="r mn">10.9</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2024/3</td><td class="r mn">135.0</td><td class="r mn">204.7</td><td class="r mn">4.5</td><td class="r mn">56.5</td><td class="r mn"><strong>121.7</strong></td><td class="r mn">10.6</td><td class="sm2"></td></tr>
+      <tr><td class="mn">2025/3</td><td class="r mn">134.0</td><td class="r mn">206.5</td><td class="r mn">4.3</td><td class="r mn">57.0</td><td class="r mn"><strong>125.2</strong></td><td class="r mn">10.6</td><td class="sm2"></td></tr>
+      <tr class="hl"><td class="mn">2026/3</td><td class="r mn">134.2</td><td class="r mn">206.9</td><td class="r mn">4.3</td><td class="r mn">56.2</td><td class="r mn"><strong>124.7</strong></td><td class="r mn">11.0</td><td class="sm2"></td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 含み益は2014年3月期の63.5億円から124.7億円へ。賃貸の差額も8.5億円から11.0億円へ増えた。<strong>時価263億円に対する利回りは4.2%、時価総額326億円（自己株を除く）に対しては3.4%</strong>。放送とは別に、毎年11億円が家賃で入ってくる。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">土地を1件ずつ ── 簿価・取得時期・公示価格</h2><span class="sb bg-bl">当商会の推定</span></div>
+
+  <div class="tx">賃貸に出していない土地は、時価が開示されない。そこで<strong>「主要な設備の状況」に載っている面積と簿価を、近くの公示価格と見比べる</strong>。有報を2014年3月期までさかのぼると、どの土地がいつ帳簿に載ったかも分かる。</div>
+
+  <div class="h3">① 本社のある新栄の土地（時価の開示なし → 公示価格で推定）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>物件（名古屋市中区新栄）</th><th class="r">面積</th><th class="r">土地簿価</th><th class="r">簿価/㎡</th><th class="r">低：47.6万円/㎡</th><th class="r">中：67.0万円/㎡</th><th class="r">高：90.2万円/㎡</th></tr></thead>
+    <tbody>
+      <tr><td>放送センター</td><td class="r mn">3,600㎡</td><td class="r mn">15.05億円</td><td class="r mn">41.8万円</td><td class="r mn">17.1億円</td><td class="r mn"><strong>24.1億円</strong></td><td class="r mn">32.5億円</td></tr>
+      <tr><td>CBC会館</td><td class="r mn">3,400㎡</td><td class="r mn">4.40億円</td><td class="r mn">12.9万円</td><td class="r mn">16.2億円</td><td class="r mn"><strong>22.8億円</strong></td><td class="r mn">30.7億円</td></tr>
+      <tr><td>CBCアネックス</td><td class="r mn">300㎡</td><td class="r mn">0.20億円</td><td class="r mn">6.7万円</td><td class="r mn">1.4億円</td><td class="r mn"><strong>2.0億円</strong></td><td class="r mn">2.7億円</td></tr>
+      <tr class="hl"><td><strong>合計</strong></td><td class="r mn">7,300㎡</td><td class="r mn">19.65億円</td><td class="r mn">26.9万円</td><td class="r mn">34.7億円</td><td class="r mn"><strong>48.9億円</strong></td><td class="r mn">65.8億円</td></tr>
+      <tr><td>含み益（税引前）</td><td></td><td></td><td></td><td class="r mn">15.1億円</td><td class="r mn"><strong>29.3億円</strong></td><td class="r mn">46.2億円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">公示地価（2026年）の3地点：低＝新栄1-13-30（商業地域・容積率400%・前面8m市道）、中＝新栄1-28-23（同500%・前面50m市道）、高＝新栄1-6-15（新栄1丁目の最高価格地点・前年比+3.68%）。本社の住所は新栄1-2-8。面積は有報の千㎡単位（小数1桁）なので±50㎡の丸めがある。<strong>放送局の建物が建っている土地で、売る予定も示されていない。値段がつくとすればこの幅、という目安</strong>。</div>
+
+  <div class="cbox">
+    <div class="h3">取得時期を簿価から読む</div>
+    <div class="tx"><strong>CBC会館</strong>の土地は1㎡あたり12.9万円で載っている。新栄の地価平均は、データのある1988年以降でいちばん安かった2005年でも24.9万円/㎡、1991年は205万円/㎡。どの年より安いので、<strong>1988年より前、おそらくテレビ本放送を始めた1956年前後からの本社敷地</strong>と読める。<br>
+    <strong>放送センター</strong>は1998年4月の竣工。土地簿価は2014年3月期の10.73億円から2015年3月期に15.05億円へ4.32億円増えた（認定放送持株会社へ移行した年）。1㎡あたり41.8万円で、1998年の新栄平均50.3万円/㎡、2014年の30.3万円/㎡の間にある。<br>
+    CBC会館の建物簿価は2021年3月期の4.7億円から2023年3月期の38.2億円へ増えており、<strong>30億円超をかけて改修したばかり</strong>。当面ここを売って出ていく会社ではない。</div>
+  </div>
+
+  <div class="h3">② 賃貸物件を同じ物差しで測り直す（鑑定時価との突き合わせ）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>物件</th><th>帳簿に載った時期</th><th class="r">土地簿価</th><th class="r">推定時価</th><th class="r">含み益</th><th>推定の方法</th></tr></thead>
+    <tbody>
+      <tr><td>グランパルク（長久手市）</td><td class="sm2">2000年11月に賃貸開始</td><td class="r mn">46.8億円</td><td class="r mn">61.7億円</td><td class="r mn">14.9億円</td><td class="sm2">基準地価 長久手市戸田谷1024番外（商業地）21.0万円/㎡ × 面積</td></tr>
+      <tr><td>名駅賃貸ビル土地（中村区）</td><td class="sm2">2017年3月期に初めて計上</td><td class="r mn">28.0億円</td><td class="r mn">56.4億円</td><td class="r mn">28.4億円</td><td class="sm2">取得額 × 名駅の地価平均の上昇率（2016年356.7万→2026年717.8万円/㎡＝2.01倍）</td></tr>
+      <tr><td>CBCアネックス栄（中区）</td><td class="sm2">2022年3月期に初めて計上</td><td class="r mn">29.9億円</td><td class="r mn">35.4億円</td><td class="r mn">5.5億円</td><td class="sm2">取得額 × 栄の地価平均の上昇率（2021年419.9万→2026年497.2万円/㎡＝1.18倍）</td></tr>
+      <tr><td>千代田会館（千代田区九段南）</td><td class="sm2">子会社設立1964年・ビル竣工1967年</td><td class="r mn">0.24億円</td><td class="r mn">33.8億円</td><td class="r mn">33.6億円</td><td class="sm2">基準地価 九段南3-2-15（商業地）338万円/㎡ × 所有地約1千㎡（2014年3月期有報の面積）</td></tr>
+      <tr><td>長島太陽光発電所（桑名市）</td><td class="sm2">旧ラジオ送信所の用地</td><td class="r mn">2.8億円</td><td class="r mn">2.8億円</td><td class="r mn">0.0億円</td><td class="sm2">簿価のまま</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 この方法で出した土地の推定に建物簿価を足すと<strong>219億円</strong>。会社が開示している鑑定時価の合計は<strong>263億円</strong>で、当商会の公示価格ベースの推定はその<strong>83%</strong>にとどまった。<strong>公示価格で測ると鑑定より控えめに出る</strong>ので、同じ物差しを当てた新栄の推定（中心48.9億円）も、甘い数字にはなっていないと考えている。</div>
+  <div class="note">グランパルクの土地簿価は1㎡あたり15.9万円。長久手市戸田谷の地価平均は賃貸を始めた2000年が23.9万円/㎡、2026年が21.7万円/㎡で、簿価はそれより安い。名駅と栄は正確な所在地が有報に書かれていないため、地点の公示価格ではなく「取得額×エリア平均の上昇率」で出した。エリア平均は調査地点の入れ替わりで動くので、誤差は大きい。千代田会館は当社所有地（約1千㎡）のほかに外部からの借地約1千㎡がある。南山カントリークラブ（豊田市・115.6万㎡・土地簿価30.5億円）は含み益をゼロとして扱い、どの試算にも入れていない。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">NAVの積み上げ ── 修正PBRは0.36倍</h2><span class="sb bg-gn">3通り</span></div>
+
+  <div class="tx">6月末の1株あたり純資産に、まだ入っていないものを税引後（税率30%）で足していく。株数は5月の自社株買い後の25,828,203株。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">保守</th><th class="r">中心</th><th class="r">強気</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr><td>1株あたり純資産（開示）</td><td class="r mn">3,103円</td><td class="r mn">3,103円</td><td class="r mn">3,103円</td><td class="sm2">2026年6月末。保有株の含み益（6月末まで）は算入済み</td></tr>
+      <tr><td>＋賃貸不動産の含み益</td><td class="r mn">+291円</td><td class="r mn">+338円</td><td class="r mn">+338円</td><td class="sm2">鑑定時価−簿価＝124.7億円（3月末）。保守は千代田会館分に非支配持分33.4%を見る</td></tr>
+      <tr><td>＋新栄の本社一帯</td><td class="r mn">+41円</td><td class="r mn">+79円</td><td class="r mn">+125円</td><td class="sm2">公示価格47.6万／67.0万／90.2万円/㎡</td></tr>
+      <tr><td>＋保有株の7月以降の値動き</td><td class="r mn">—</td><td class="r mn">+32円</td><td class="r mn">+32円</td><td class="sm2">上位4銘柄、6月末→10/5で+12億円</td></tr>
+      <tr class="hl"><td><strong>修正後の1株あたり純資産</strong></td><td class="r mn"><strong>3,435円</strong></td><td class="r mn"><strong>3,552円</strong></td><td class="r mn"><strong>3,598円</strong></td><td class="sm2"></td></tr>
+      <tr><td>株価1,264円 ÷ 上の数字</td><td class="r mn">0.37倍</td><td class="r mn"><strong>0.36倍</strong></td><td class="r mn">0.35倍</td><td class="sm2">修正PBR</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 どの置き方でも修正PBRは<strong>0.35〜0.37倍</strong>に収まる。不動産の含み益125億円は大きく見えるが、自己資本801億円に対しては税引後で1割強。<strong>この会社の資産の主役は株（6月末413億円）で、不動産はそれに次ぐ</strong>。新栄の土地を公示最高値の2倍（180万円/㎡）で見ても、修正PBRは0.34倍までしか下がらない。</div>
+  <div class="cbox">
+    <div class="h3">資産別に見た「時価総額326億円（自己株を除く）」の内訳</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>積み上げ</th><th class="r">金額</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>金融資産（現預金・社債・株。株は10/5再評価）</td><td class="r mn">548億円</td><td class="sm2">6月末の現預金114.7＋有価証券9.0＋投資有価証券412.8、7月以降の値動き+12億円</td></tr>
+        <tr><td>−負債合計ほか</td><td class="r mn">▲213億円</td><td class="sm2">負債209.1億円（繰延税金負債101.4億円を含む）と、7月以降の値上がりにかかる税</td></tr>
+        <tr><td>＝正味の金融資産</td><td class="r mn">336億円</td><td class="sm2">時価総額の103%</td></tr>
+        <tr><td>＋賃貸不動産（鑑定時価−含み益への税）</td><td class="r mn">226億円</td><td class="sm2">263.1億円−124.7億円×30%</td></tr>
+        <tr class="hl"><td><strong>合計</strong></td><td class="r mn"><strong>561億円</strong></td><td class="sm2">時価総額の1.72倍</td></tr>
+        <tr><td>放送事業・新栄の本社・ゴルフ場に付いている値段</td><td class="r mn">▲235億円</td><td class="sm2">時価総額−上の合計</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">土地・建物と有価証券を時価に直した1株あたり修正ネットキャッシュは約3,331円で、株価はその38%。当商会が「最優先で見る」とする30%以下になるのは999円以下。</div>
+  </div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">事業とストック性 ── 利益の芯は不動産</h2><span class="sb bg-or">ROE2%台</span></div>
+
+  <div class="h3">セグメント別の営業利益・9期分（億円）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">メディアコンテンツ</th><th class="r">不動産</th><th class="r">その他</th><th class="r">3セグメント計</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2018/3</td><td class="r mn">16.4</td><td class="r mn"><strong>10.7</strong></td><td class="r mn">0.9</td><td class="r mn">28.0</td></tr>
+      <tr><td class="mn">2019/3</td><td class="r mn">12.3</td><td class="r mn"><strong>10.8</strong></td><td class="r mn">1.1</td><td class="r mn">24.2</td></tr>
+      <tr><td class="mn">2020/3</td><td class="r mn">4.3</td><td class="r mn"><strong>10.5</strong></td><td class="r mn">1.0</td><td class="r mn">15.8</td></tr>
+      <tr><td class="mn">2021/3</td><td class="r mn">▲5.4</td><td class="r mn"><strong>10.6</strong></td><td class="r mn">▲0.8</td><td class="r mn">4.3</td></tr>
+      <tr><td class="mn">2022/3</td><td class="r mn">8.9</td><td class="r mn"><strong>8.7</strong></td><td class="r mn">0.5</td><td class="r mn">18.1</td></tr>
+      <tr><td class="mn">2023/3</td><td class="r mn">0.9</td><td class="r mn"><strong>11.1</strong></td><td class="r mn">0.8</td><td class="r mn">12.9</td></tr>
+      <tr><td class="mn">2024/3</td><td class="r mn">2.0</td><td class="r mn"><strong>10.8</strong></td><td class="r mn">1.1</td><td class="r mn">14.0</td></tr>
+      <tr><td class="mn">2025/3</td><td class="r mn">3.6</td><td class="r mn"><strong>10.8</strong></td><td class="r mn">1.1</td><td class="r mn">15.4</td></tr>
+      <tr class="hl"><td class="mn">2026/3</td><td class="r mn">7.6</td><td class="r mn"><strong>11.5</strong></td><td class="r mn">1.4</td><td class="r mn">20.4</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 9期の振れ幅は、メディアが▲5.4億〜16.4億円、不動産が8.7億〜11.5億円。<strong>不動産の利益は、コロナの年も広告不況の年も10億円前後から動かなかった</strong>。この会社のストック性は放送ではなく不動産にある。</div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--gn2)"><div class="h3">不動産（ストック）</div><div class="tx">売上19.1億円・営業利益11.5億円（利益率60%）。アピタ長久手店（ユニーへ賃貸）、名駅と栄の賃貸ビル・底地、九段南の千代田会館、長島の太陽光発電。<strong>会社は「高度利用を見据えた再開発を積極的に検討」と書いている</strong>（有報・対処すべき課題）。テナントが少数に偏る点は弱み。</div></div>
+    <div class="c" style="border-top:3px solid var(--or2)"><div class="h3">放送（フロー）</div><div class="tx">売上320.6億円・営業利益7.6億円（利益率2.4%）。CBCテレビはTBS系列で、ゴールデン・プライム帯の多くはTBSテレビの制作・編成。<strong>自分で動かせるのは自社制作の時間帯だけ</strong>で、視聴率と広告市況に利益が振られる。固定費が重く、売上が落ちた2021年3月期は赤字になった。</div></div>
+    <div class="c" style="border-top:3px solid var(--bl2)"><div class="h3">ニッチトップと言えるもの</div><div class="tx">1951年に日本で最初に放送を始めた民間放送局。自社制作の『ゴゴスマ』は全国25局・40都道府県で放送され、<strong>名古屋地区の個人視聴率で3期連続・同時間帯1位</strong>、関東でも2期連続1位。『花咲かタイムズ』は18年連続で同時間帯1位（いずれも有報）。地方局が全国へ番組を出す側に回っている例は多くない。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3">言えないもの</div><div class="tx">局全体の年間視聴率は個人全体・全日帯で2.7%（有報）。<strong>東海地区での局別順位は有報に書かれておらず、「地域首位」とは確認できない</strong>。番組単位の強さが、局全体の利益率（2%台）にはまだ表れていない。モートの軸を1点にとどめた理由。</div></div>
+  </div>
+
+  <div class="h3">連結業績</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">経常利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">配当</th></tr></thead>
+    <tbody>
+      <tr><td>2023年3月期</td><td class="r mn">327.1億円</td><td class="r mn">12.3億円</td><td class="r mn">17.7億円</td><td class="r mn">10.7億円</td><td class="r mn">40.4円</td><td class="r mn">15円</td></tr>
+      <tr><td>2024年3月期</td><td class="r mn">326.3億円</td><td class="r mn">13.8億円</td><td class="r mn">20.6億円</td><td class="r mn">11.9億円</td><td class="r mn">45.0円</td><td class="r mn">15円</td></tr>
+      <tr><td>2025年3月期</td><td class="r mn">333.0億円</td><td class="r mn">15.5億円</td><td class="r mn">21.2億円</td><td class="r mn">13.3億円</td><td class="r mn">50.4円</td><td class="r mn">23円</td></tr>
+      <tr><td>2026年3月期</td><td class="r mn">349.4億円</td><td class="r mn">20.4億円</td><td class="r mn">28.3億円</td><td class="r mn">18.4億円</td><td class="r mn">69.6円</td><td class="r mn">28円</td></tr>
+      <tr class="hl"><td><strong>2027年3月期（予）</strong></td><td class="r mn">358.1億円</td><td class="r mn">17.9億円</td><td class="r mn">26.5億円</td><td class="r mn">15.4億円</td><td class="r mn">59.6円</td><td class="r mn"><strong>25円</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">2027年3月期の第1四半期（4〜6月）は売上高85.8億円（前年同期比▲3.6%）、営業利益2.3億円（同▲41.9%）、純利益5.4億円（同▲13.9%）。経常利益が営業利益より8億円ほど多いのは、主に保有株からの受取配当による。純利益18.4億円÷自己資本783億円でROEは2%台。</div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">市場と中計 ── テレビ広告は横ばい、資本政策の目標は未公表</h2><span class="sb bg-bl">中計は今期まで</span></div>
+
+  <div class="h3">市場 ── 広告費は過去最高、テレビは横ばい</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>2025年 日本の広告費（電通）</th><th class="r">金額</th><th class="r">前年比</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>総広告費</td><td class="r mn">8兆623億円</td><td class="r mn">105.1%</td><td class="sm2">4年連続で過去最高</td></tr>
+      <tr><td>インターネット広告費</td><td class="r mn">4兆459億円</td><td class="r mn">110.8%</td><td class="sm2">構成比50.2%。初めて過半</td></tr>
+      <tr class="hl"><td><strong>地上波テレビ広告費</strong></td><td class="r mn"><strong>1兆6,333億円</strong></td><td class="r mn"><strong>99.9%</strong></td><td class="sm2">構成比20.3%</td></tr>
+      <tr><td>マスコミ四媒体計</td><td class="r mn">2兆2,980億円</td><td class="r mn">98.4%</td><td class="sm2"></td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 広告の市場は伸びているが、伸びた分はネットが取っている。<strong>地上波テレビは急に縮んではいないが、成長市場ではない</strong>。会社自身も有報に「放送は絶対的に優位なメディアではなくなっている」「テレビの総個人視聴率（PUT）は減少傾向が続いている」と書いている。そのなかで中部日本放送のメディア売上は2025年3月期304.9億→2026年3月期320.6億円（+5.2%）と、市場より良かった。</div>
+
+  <div class="h3">中期経営計画2024-2026（今期が最終年度）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>内容（有価証券報告書の記載）</th></tr></thead>
+    <tbody>
+      <tr><td>標語</td><td class="sm2">フェアな姿勢でデジタル化社会に「信頼」を。キーワードは「地域」「コンテンツ」「人財」</td></tr>
+      <tr><td>放送</td><td class="sm2">「従来の放送ビジネス」の再価値化で視聴率の向上と広告価格の適正化を目指す。アニメ・ドラマ・配信など「新たな収益の柱」をつくる</td></tr>
+      <tr><td>不動産</td><td class="sm2">保有資産の「選択と集中」で新たなポートフォリオを構築済み。高度利用を見据えた再開発を積極的に検討</td></tr>
+      <tr><td>進み具合</td><td class="sm2">2期目の2026年3月期は2期連続の増収、連結営業利益は3期連続の増益（13.8億→15.5億→20.4億円）。最終年度の会社予想は17.9億円で減益</td></tr>
+      <tr><td>今期の大型案件</td><td class="sm2">愛知・名古屋で開かれるアジア・アジアパラ競技大会への取り組み</td></tr>
+      <tr><td>政策保有株（ガバナンス報告書 2026年6月）</td><td class="sm2">毎年、取締役会で保有株式ごとに資本コストに見合うかを検証し、「保有の必要性が認められないものについては縮減の方向で検討」。買収への対応方針（買収防衛策）は導入していない</td></tr>
+      <tr class="hl"><td><strong>書かれていないこと</strong></td><td class="sm2"><strong>ROEやPBRの数値目標、政策保有株の縮減の金額目標、純資産を基準にした還元方針（DOEなど）は、有報・ガバナンス報告書・決算説明資料のどれにも見当たらない</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">中計の数値目標そのもの（売上・利益の計画値）は有報本文に載っていない。ガバナンス報告書には「中期経営計画をホームページおよびTDnetに掲載」とあるが、その資料は今回確認できていない。現中計が2027年3月期で終わるので、<strong>次の中計が出るときに資本政策へ触れるかどうかが最大の確認点</strong>になる（公表時期は未確認）。</div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">カタリスト ── 会社が動いた2件と、放送法の壁</h2><span class="sb bg-pu">自社株50万株</span></div>
+
+  <div class="h3">会社がすでに動いたこと（適時開示で確認）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>日付</th><th>開示</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">2025/3/12</td><td>創立75周年記念配当</td><td class="sm2">期末に記念配当3円</td></tr>
+      <tr class="hl"><td class="mn"><strong>2025/5/12</strong></td><td><strong>利益配分に関する基本方針の変更</strong></td><td class="sm2">配当性向の目安を<strong>30%→40%</strong>へ引き上げ（2025年3月期から適用）。年間配当は15円→23円（うち記念3円）→28円</td></tr>
+      <tr><td class="mn">2025/11/13</td><td>自己株式の取得（N-NET3）</td><td class="sm2">7万株・5,768万円。役員向け譲渡制限付株式報酬に充てるためで、還元目的ではない</td></tr>
+      <tr class="hl"><td class="mn"><strong>2026/5/15</strong></td><td><strong>自己株式の取得（N-NET3）</strong></td><td class="sm2"><strong>50万株・5億8,400万円（1株1,168円）</strong>。発行済の1.9%。理由は「資本効率の改善を通じた企業価値の向上及び株主還元の充実」</td></tr>
+      <tr><td class="mn">2026/6/26</td><td>コーポレート・ガバナンス報告書</td><td class="sm2">政策保有株は「必要性が認められないものは縮減の方向で検討」。買収防衛策は導入していない</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 配当方針の引き上げと、資本効率を理由にした自社株買い。<strong>会社は1年半のあいだに2回、資本政策で動いている</strong>。当商会が触媒の軸を2点（動く条件が揃っている）にした根拠。3点（すでに動いている）にしなかったのは、<strong>買い入れた5.84億円が金融資産548億円の1%にとどまり、政策保有株は逆にTBS株を5.78億円買い増している</strong>ため。立会外取引なので、誰かがまとめて売った株を会社が引き取った形だが、売り手は開示されていない。</div>
+
+  <div class="h3">TOB・MBOは起きるか ── 放送法の壁</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>規制</th><th>中身</th><th>この会社への意味</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>議決権の保有上限</strong></td><td class="sm2">認定放送持株会社の議決権を一の者が持てるのは原則<strong>3分の1まで</strong>（放送法164条・総務省令）</td><td class="sm2">株を過半数集めても支配できない。<strong>完全買収を前提にしたTOB・MBOは成り立ちにくい</strong></td></tr>
+      <tr><td>放送対象地域が重なる場合</td><td class="sm2">同じ地域で地上波放送にかかわる者は<strong>10分の1まで</strong></td><td class="sm2">筆頭株主の中日新聞社は9.88%。10%の手前で止まっているのは、この上限と整合する（当商会の読み）</td></tr>
+      <tr><td>外資規制</td><td class="sm2">外国人等の議決権は5分の1未満</td><td class="sm2">海外ファンドがまとまって買う余地も限られる。現状の外国法人等は3.5%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">資産バリュー株の出口でいちばん大きい「買われて終わる」筋書きは、認定放送持株会社である限りほぼ使えない。安さを直す力は、会社自身の資本政策からしか出てこない。会社が買収防衛策を置いていないのは、法律がその役目を果たしているからとも読める。</div>
+
+  <div class="h3">大株主（2026年3月末・上位10名で44.13%）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>株主</th><th class="r">比率</th><th>性格</th></tr></thead>
+    <tbody>
+      <tr><td>中日新聞社</td><td class="r mn">9.88%</td><td class="sm2">地元紙。10%上限の手前</td></tr>
+      <tr><td>竹田本社</td><td class="r mn">6.45%</td><td class="sm2">地元の法人株主</td></tr>
+      <tr><td>三菱UFJ銀行</td><td class="r mn">4.94%</td><td class="sm2">取引銀行。大量保有報告の提出者</td></tr>
+      <tr><td>三井住友信託銀行</td><td class="r mn">4.43%</td><td class="sm2">取引銀行</td></tr>
+      <tr><td>ナゴヤドーム／中部電力／名古屋銀行／名古屋鉄道</td><td class="r mn">3.95〜3.12%</td><td class="sm2">地元企業</td></tr>
+      <tr><td>岐阜県／日本電気</td><td class="r mn">2.47%／2.38%</td><td class="sm2">自治体・取引先</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">所有者別：その他の法人42.3%、個人25.9%、金融機関21.5%、政府・地方公共団体5.5%、外国法人等3.5%。シュローダーは2019年に5.4%→2.2%へ減らして以降、報告がない。<strong>物言う株主は見当たらない</strong>。</div>
+
+  <div class="h3">この先のきっかけ（当商会の見立て）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>きっかけ</th><th>根拠になる事実</th><th class="r">起きやすさ</th></tr></thead>
+    <tbody>
+      <tr><td>自社株買いの継続・増額</td><td class="sm2">2026年5月に資本効率を理由として初めて実施。銀行2行で9.4%を持ち、引き取る相手はいる</td><td class="r">中〜高</td></tr>
+      <tr><td>次の中計で資本政策が出る</td><td class="sm2">現中計は今期が最終年度。ROE・PBR・縮減額の目標はまだ出ていない</td><td class="r">中</td></tr>
+      <tr><td>配当の引き上げ</td><td class="sm2">配当性向40%目安の業績連動。今期予想は減益に合わせて28円→25円</td><td class="r">利益しだい</td></tr>
+      <tr><td>不動産の再開発・入れ替え</td><td class="sm2">「高度利用を見据えた再開発を積極的に検討」。過去10年で名駅と栄の土地に計58億円を投じた実績</td><td class="r">中（時間はかかる）</td></tr>
+      <tr><td>政策保有株の売却と大型還元</td><td class="sm2">方針は「必要性がなければ縮減」。実際は当期にTBS株を5.78億円買い増し、売却は0.33億円</td><td class="r">低</td></tr>
+      <tr><td>TOB・MBO・完全子会社化</td><td class="sm2">放送法の3分の1上限。親会社もいない</td><td class="r">ほぼなし</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">「起きやすさ」は当商会の主観。株価が1年半で2.2倍になった理由は特定できていない（配当方針の変更や保有株の値上がりと時期は重なるが、因果は確認していない）。</div>
+
+</section>
+<section class="pn" id="p10">
+  <div class="sh"><span class="sn">10</span><h2 class="st">3年後の3ケース ── ベア・ベース・ブル</h2><span class="sb bg-gn">2029年</span></div>
+
+  <div class="tx">3年後（2029年秋ごろ）の株価を、<strong>1株あたり純資産 × PBR</strong>で3通り置く。起点は6月末の3,103円に保有株の7月以降の値動きを足した<strong>3,135円</strong>。動かすのは「保有株の値段」「毎年の利益」「市場が付けるPBR」の3つ。不動産の含み益は帳簿の純資産には入らないので、PBRの水準を支える材料として扱う。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">ベア</th><th class="r">ベース</th><th class="r">ブル</th></tr></thead>
+    <tbody>
+      <tr><td>保有株（TBS・銀行ほか345億円）</td><td class="r mn">▲30%</td><td class="r mn">横ばい</td><td class="r mn">+20%</td></tr>
+      <tr><td>純利益（年）</td><td class="r mn">10億円</td><td class="r mn">16億円</td><td class="r mn">20億円</td></tr>
+      <tr><td>配当（年）</td><td class="r mn">20円</td><td class="r mn">25円</td><td class="r mn">30円</td></tr>
+      <tr><td>1株純資産への影響：保有株</td><td class="r mn">▲281円</td><td class="r mn">0円</td><td class="r mn">+187円</td></tr>
+      <tr><td>1株純資産への影響：3年分の内部留保</td><td class="r mn">+56円</td><td class="r mn">+111円</td><td class="r mn">+142円</td></tr>
+      <tr><td>3年後の1株あたり純資産</td><td class="r mn">2,910円</td><td class="r mn">3,246円</td><td class="r mn">3,464円</td></tr>
+      <tr><td>PBR</td><td class="r mn">0.25倍</td><td class="r mn">0.40倍</td><td class="r mn">0.51倍</td></tr>
+      <tr class="hl"><td><strong>3年後の株価</strong></td><td class="r mn"><strong>728円</strong></td><td class="r mn"><strong>1,298円</strong></td><td class="r mn"><strong>1,767円</strong></td></tr>
+      <tr><td>1,264円からの騰落</td><td class="r mn">▲42%</td><td class="r mn">+3%</td><td class="r mn">+40%</td></tr>
+      <tr><td>3年分の配当を足した場合</td><td class="r mn">▲38%</td><td class="r mn">+9%</td><td class="r mn">+47%</td></tr>
+      <tr><td>当商会が置いた確率</td><td class="r mn">30%</td><td class="r mn">50%</td><td class="r mn">20%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">ベア ── 元の放置に戻る</div><div class="tx">株式市場が崩れてTBSと銀行株が3割下がり、広告不況で利益が10億円に落ちる。PBRは2021〜2025年の期末水準（0.24〜0.28倍）へ。<strong>2025年3月末は実際に0.25倍だった</strong>ので、絵空事ではない。株価は52週安値774円も割る。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">ベース ── 何も起きない</div><div class="tx">保有株は横ばい、利益は今期予想並みの16億円、PBRは今の0.40倍。自社株買いは織り込んでいない。純資産が内部留保で年1%強ずつ増える分だけ株価が上がる。<strong>配当を足して3年で1割前後</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--gn2)"><div class="h3" style="color:var(--gn2)">ブル ── 株高が続き、レンジ上限まで買われる</div><div class="tx">保有株がさらに2割上がり、利益20億円、PBRは2010年以降の上限0.51倍。<strong>次の中計で還元や縮減の方針が出て、同業中央値の0.6倍まで評価されれば2,078円</strong>だが、これは触媒が実際に出た場合の話で、確率の表には入れていない。</div></div>
+  </div>
+  <div class="inf">📌 確率で均した3年後の株価は<strong>1,221円（▲3%）、配当込みで+2%</strong>。上（ブル+40%）より下（ベア▲42%）のほうがやや大きく、ベースは小幅なプラス。<strong>この値段では、3年待つ見返りが資産の厚さほどには大きくない</strong>というのが試算の示すところ。確率は当商会の主観で、置き方を変えれば結果も変わる。</div>
+  <div class="note">税率30%。ベアでも不動産の含み益125億円と賃貸利益11億円は残るので、純資産そのものが大きく壊れる筋書きは置いていない。壊れるのは「市場が付ける倍率」のほう。</div>
+
+</section>
+<section class="pn" id="p11">
+  <div class="sh"><span class="sn">11</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+
+  <div class="card" style="border:2px solid #b8860b;border-radius:10px;padding:14px 16px;margin:14px 0;background:#fffaf0">
+    <div class="h3" style="margin-top:0">当商会の採点（6軸×非対称比）── 総合 B++</div>
+    <p class="note">ランクは<strong>幅（上値÷下値）×確度（6軸・18点）</strong>のマトリクスで決まる。<strong>ランクは下がりにくさの指標</strong>であって、上がりやすさの順位ではない。</p>
+    <div class="tw"><table class="t">
+      <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+      <tbody>
+      <tr><td>🦦安さ</td><td class="r"><strong>2</strong></td><td class="sm2">修正PBR0.36倍。ただし資産の中身が有価証券と土地で、預金型ではない（基準で3点は預金型のみ）。清原式は0.93倍</td></tr>
+      <tr><td>🦉財務</td><td class="r"><strong>3</strong></td><td class="sm2">借入金・社債なし。自己資本比率78%。金融資産が時価総額を上回る</td></tr>
+      <tr><td>🦫モート</td><td class="r"><strong>1</strong></td><td class="sm2">放送免許は参入障壁に当たるが、放送の営業利益率は2%台でROEも2%台。数字に出ていない堀は数えない</td></tr>
+      <tr><td>🐊触媒</td><td class="r"><strong>2</strong></td><td class="sm2">2025年5月に配当性向の目安を30%→40%へ引き上げ、2026年5月に資本効率の改善を理由に自社株50万株（5.84億円・発行済の1.9%）を取得。動き出してはいるが規模は小さく、政策保有株は買い増し、買収の外圧は放送法で効かない</td></tr>
+      <tr><td>🐝インカム</td><td class="r"><strong>1</strong></td><td class="sm2">利回り2%弱。配当性向40%目安の業績連動で、今期は28円→25円の減配予想</td></tr>
+      <tr><td>🦞リスク</td><td class="r"><strong>1</strong></td><td class="sm2">名証の単独上場。直近40営業日の売買代金は1日平均約1,150万円（出来高の中央値6,800株）</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">上値：資産基準。含み益込みの実質純資産3,552円 × 直近5年のPBR上限0.42倍＝<strong>1,492円・+18%</strong>（同業8社の中央値0.60倍より低いので、規則どおり低いほうを採る）。開示の純資産×2010年以降の上限0.51倍なら1,582円・+25%。採点には下限を使う。<br>
+    下値：<strong>52週安値774円・▲39%</strong>。1株あたり金融資産1,712円は株価より上にあるので下値の候補にならない。<br>
+    非対称比 0.46（幅・小）× 確度 10点（中）→ マトリクスは<strong>B++</strong>。1銘柄の上限は2.5%。</p>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">「これだけ安いのに、なぜB++どまりか」を点検する</div>
+    <div class="tx">割安なのは事実で、修正PBR0.36倍は当商会の紹介銘柄のなかでも安い側に入る。それでもランクが上がらないのは、<strong>ランクが安さではなく「上値÷下値」で決まる</strong>ため。上値の置き方を甘いほうへ順に変え、確度も辛め（8点）から甘め（13点）まで動かして確かめた。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>上値の置き方</th><th class="r">上値</th><th class="r">率</th><th class="r">幅</th><th class="r">ランク</th><th class="r">確度を8〜13点に動かすと</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>採用：実質純資産×直近5年の上限0.42倍</td><td class="r mn">1,492円</td><td class="r mn">+18%</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td><td class="r mn">B+〜A−</td></tr>
+        <tr><td>開示の純資産×2010年以降の上限0.51倍</td><td class="r mn">1,582円</td><td class="r mn">+25%</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td><td class="r mn">B+〜A−</td></tr>
+        <tr><td>開示の純資産×同業8社の中央値0.60倍</td><td class="r mn">1,877円</td><td class="r mn">+49%</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td><td class="r mn">B+〜A−</td></tr>
+        <tr><td>実質純資産×同業8社の中央値0.60倍</td><td class="r mn">2,149円</td><td class="r mn">+70%</td><td class="r">中</td><td class="r mn"><strong>B++</strong></td><td class="r mn">B++〜A−</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">同業8社のPBR（10/5終値）：RKB毎日HD0.31、朝日放送グループHD0.41、TBS HD0.56、BSNメディアHD0.58、テレビ朝日HD0.63、日本テレビHD0.65、テレビ東京HD0.82、フジ・メディアHD1.04。中部日本放送の0.41倍は、地方局の並び（0.31〜0.58倍）のなかでは特別に安いわけではない。<strong>確度を甘く付ければA−まではあり得るが、幅が「大」になってA以上に入るには上値が2,734円（実質純資産の77%）まで要る</strong>。放送株でそこまで評価されている会社は同業に少ない。当商会は「迷ったら下に付ける」のでB++。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>同じ採点を別の時点で</th><th class="r">株価</th><th class="r">上値</th><th class="r">下値</th><th class="r">比</th><th class="r">ランク</th></tr></thead>
+      <tbody>
+        <tr><td>2025年3月末（1年半前。配当方針の変更と自社株買いの前なので確度8点で計算）</td><td class="r mn">約666円</td><td class="r mn">+104%</td><td class="r mn">▲18%</td><td class="r mn">5.7</td><td class="r mn"><strong>A</strong></td></tr>
+        <tr class="hl"><td>2026年10月5日</td><td class="r mn">1,264円</td><td class="r mn">+18%</td><td class="r mn">▲39%</td><td class="r mn">0.46</td><td class="r mn"><strong>B++</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="inf">📌 この1年半で<strong>1株あたり純資産は+16%、株価は+90%</strong>。上昇の大半は、PBRが0.25倍から0.4倍へ切り上がった分。<strong>同じ会社が666円ならA、1,264円だからB++</strong>。ランクが低いのは資産が弱いからではなく、安さの一部がすでに株価に取り込まれ、上に残った距離より下に空いた距離のほうが長くなったから。</div>
+    <div class="note">2025年3月末の株価は期末PBR0.25倍（IRBANK）×1株純資産2,664円からの逆算、上値は開示の純資産×0.51倍、下値は当時の52週安値544円。</div>
+  </div>
+
+  <div class="cbox">
+    <div class="h3">株価が下がると、採点はどこで変わるか</div>
+    <div class="tx">上値1,492円と下値774円を固定して、幅（上値÷下値）が切り替わる株価を逆算した。確度10点（中）はそのまま。</div>
+    <div class="tw"><table class="t">
+      <thead><tr><th>株価</th><th class="r">上値</th><th class="r">下値</th><th class="r">幅</th><th class="r">ランク</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>1,264円（2026年10月5日）</td><td class="r mn">+18%</td><td class="r mn">▲39%</td><td class="r">小</td><td class="r mn"><strong>B++</strong></td></tr>
+        <tr><td>953円以下</td><td class="r mn">+56%以上</td><td class="r mn">▲19%以内</td><td class="r">大</td><td class="r mn"><strong>A−</strong></td></tr>
+        <tr><td>917円以下</td><td class="r mn">+63%以上</td><td class="r mn">▲16%以内</td><td class="r">大（比4倍超）</td><td class="r mn"><strong>A</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">これは採点表の機械的な計算で、その株価まで下がるという予想ではない。下げた理由が業績の悪化や保有株（TBS・銀行）の値下がりなら、純資産も上値も一緒に下がるので、表は引き直しになる。下値をPBR下限0.19倍（590円。2025年4月に実際に566円）で置くと幅はさらに小さくなるが、ランクは変わらない。</div>
+  </div>
+
+  <div class="h3">東部ネットワーク（9036）と並べる</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目（10/5終値）</th><th class="r">中部日本放送（9402）</th><th class="r">東部ネットワーク（9036）</th></tr></thead>
+    <tbody>
+      <tr><td>市場</td><td class="r">名証プレミア（単独）</td><td class="r">東証スタンダード</td></tr>
+      <tr><td>時価総額</td><td class="r mn">334億円</td><td class="r mn">68.8億円</td></tr>
+      <tr><td>PBR／PER／利回り</td><td class="r mn">0.41倍／21.2倍／1.98%</td><td class="r mn">0.31倍／25.2倍／1.67%</td></tr>
+      <tr class="hl"><td><strong>1日の売買代金（直近40営業日の平均）</strong></td><td class="r mn"><strong>約1,150万円</strong></td><td class="r mn"><strong>約440万円</strong></td></tr>
+      <tr><td>含み益の出どころ</td><td class="r">鑑定時価（有報で開示）＋上場株</td><td class="r">当商会の推定が中心</td></tr>
+      <tr><td>買収の可能性</td><td class="r">放送法で3分の1上限</td><td class="r">放送法のような上限はない</td></tr>
+      <tr><td>当商会ランク</td><td class="r mn">B++</td><td class="r mn">A++</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 名証の単独上場という先入観に反して、<strong>売買代金は中部日本放送のほうが約2.6倍ある</strong>。差が付くのは安さと、出口の有無。1銘柄の上限はB++の2.5%で、口座内純資産4,402万円に対し約110万円・800株。平均出来高9,250株の2割を取れるとして約0.5日で売り切れる量。</div>
+
+</section>
+<section class="pn" id="p12">
+  <div class="sh"><span class="sn">12</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">6つのリスク</span></div>
+
+  <div class="cg">
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">① 資産が株主に渡る道筋がまだ細い</div><div class="tx">配当性向の引き上げと自社株買い50万株で会社は動き始めたが、買い入れ額5.84億円は金融資産の1%。政策保有株は減らしておらず、当期はTBS株を買い増した。物言う株主はいない。<strong>外からの圧力がかからない以上、還元の速さは会社の裁量で決まる</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">② 買収で値段が付かない制度</div><div class="tx">認定放送持株会社の議決権は、一の者が原則3分の1までしか持てない（放送法164条）。<strong>完全買収を前提にしたTOB・MBOが成り立ちにくい</strong>。資産が厚くても「買われて終わる」筋書きは描きにくい。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">③ 保有株と一緒に動く</div><div class="tx">投資有価証券413億円（6月末）は時価総額を超える。TBSと銀行3社が下がれば純資産がそのまま減る。<strong>2026年3月期の純資産の増加80億円のうち、55億円は保有株の値上がり</strong>だった。TBS株は6月末の6,225円から10/5の5,801円へ下げている。逆も同じ大きさで起きる。2019年3月から2020年3月の1年で、含み益は70億円から37億円へ減っている。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">④ 本業の利益が薄く、振れる</div><div class="tx">メディア事業の営業利益は9期で▲5.4億〜16.4億円。今期は営業利益▲12%・純利益▲16%の予想で、第1四半期の営業利益は前年同期比▲42%。地上波テレビ広告は市場として伸びていない。</div></div>
+    <div class="c" style="border-top:3px solid var(--rd)"><div class="h3" style="color:var(--rd)">⑤ すでに上がっている</div><div class="tx">2025年4月の566円から1年半で2.2倍。期末PBRは0.25倍（2025年3月）→0.39倍（2026年3月）。<strong>安いのは確かだが、この会社の歴史のなかでは高いところにいる</strong>。</div></div>
+    <div class="c" style="border-top:3px solid var(--am2)"><div class="h3" style="color:var(--am2)">⑥ 推定と予想の粗さ</div><div class="tx">新栄の土地は面積が千㎡単位、単価は近くの公示地点。名駅と栄は所在地が分からず、エリア平均の上昇率を掛けただけ。3年後の3ケースと確率は当商会の主観。<strong>確かなのは有報の数字までで、その先は目安</strong>。</div></div>
+  </div>
+
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年10月）</div>
+    <ul class="note">
+      <li>株価1,264円は2026年10月5日の終値（株探の確定値）。PBR0.41倍・PER21.2倍・配当利回り1.98%・時価総額334億円（発行済株式ベース）</li>
+      <li>6月末の貸借対照表・株数（発行済26,400,000株−自己株571,797株）・自己資本801.41億円は2027年3月期第1四半期決算短信。1株あたり純資産3,103円はここから計算</li>
+      <li>配当性向の目安の引き上げ（2025年5月12日）、自己株式の取得2件（2025年11月13日・2026年5月15日、いずれも名証の立会外買付N-NET3）、ガバナンス報告書（2026年6月26日）は会社の開示原文で確認</li>
+      <li>貸借対照表、キャッシュフロー、賃貸等不動産の注記、主要な設備の状況、有価証券関係の注記、特定投資株式、大株主、所有者別状況、配当政策、自己株式の取得、経営方針は、有価証券報告書（2026年3月期・書類管理番号S100YJ8A・金融庁EDINET）の本文から</li>
+      <li>賃貸等不動産の13期分、土地簿価の推移、名駅（2017年3月期）・栄（2022年3月期）の新規計上、保有株の取得原価と株数の推移、セグメント利益は、2014年3月期〜2026年3月期の有報13本を並べて確認。有価証券の注記は各有報に前期・当期の2表が載るため、期のずれがないよう突き合わせた</li>
+      <li>公示地価（2026年）：新栄1-6-15 90.2万円、新栄1-28-23 67.0万円、新栄1-13-30 47.6万円（いずれも商業地・円/㎡）。基準地価：長久手市戸田谷1024番外 21.0万円、千代田区九段南3-2-15 338万円</li>
+      <li>エリア平均の推移（新栄・名駅・栄・九段南・戸田谷）は土地代データ（tochidai.info）の集計値。地点の入れ替わりを含むため、上昇率は参考</li>
+      <li>保有株の再評価：上位4銘柄の10/5終値×株数。3月末の株価×株数が有報の計上額と一致することを月足で確認。6月末の評価額は6月末の月足終値×株数で、4銘柄の合計は3月末比+36.8億円（連結の投資有価証券の増加は42.3億円）</li>
+      <li>放送法の議決権保有上限（原則3分の1、放送対象地域が重なる場合は10分の1）は総務省の公表資料で確認。外資規制の5分の1は一般的な理解による</li>
+      <li>広告費は電通「2025年 日本の広告費」。PBRレンジ0.19〜0.51倍・期末PBR・大量保有はIRBANK。出来高は株探の時系列（直近40営業日）。業績・予想・四半期は株探の決算ページ</li>
+      <li><strong>推定扱い</strong>：「②の賃貸不動産＝千代田会館」という対応づけ、新栄・名駅・栄・九段南の土地の時価、取得時期の読み、中日新聞社の比率と10%上限の関係、きっかけの起きやすさ、3年後の3ケースと確率、6軸の点数</li>
+      <li><strong>未確認</strong>：名駅賃貸ビルとCBCアネックス栄の正確な所在地、TBS株108.8万株（2017年3月期）の取得単価、放送センター土地の2015年3月期の増加理由、中計の数値目標と次期中計の時期、2026年5月の自社株買いの売り手、非上場株51銘柄（簿価15億円）の含み益、同業各社の含み益、東海地区での局別視聴率順位</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではありません。投資判断はご自身の責任においてお願いいたします。土地の時価のうち有価証券報告書の賃貸等不動産注記以外の数字、3年後の3ケースとその確率は、当商会の推定です。<br>
+  Data: 中部日本放送 有価証券報告書（2014年3月期〜2026年3月期・金融庁EDINET）／2027年3月期第1四半期決算短信・決算説明資料／適時開示（利益配分に関する基本方針の変更 2025.5.12、自己株式の取得 2025.11.13・2026.5.15）／コーポレート・ガバナンス報告書 2026.6.26／株探（確定値・業績・時系列）／IRBANK（PBR・PERレンジ、大量保有一覧）／国土交通省 地価公示・都道府県地価調査（2026年）／土地代データ（エリア平均の推移）／電通「2025年 日本の広告費」／総務省（放送法・認定放送持株会社制度） · 2026.10
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#nav .tb'));
+  var pans=[].slice.call(document.querySelectorAll('.pn'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    pans.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    tabs.forEach(function(x){var on=x.getAttribute('data-p')===id;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      show(b.getAttribute('data-p'));
+      var nav=document.getElementById('nav');
+      var top=nav.getBoundingClientRect().top+window.pageYOffset;
+      if(window.pageYOffset>top) window.scrollTo(0,top);
+    });
+  });
+  if(location.hash) show(location.hash.slice(1));
+})();
+</script>
+
+</body>
+</html>
