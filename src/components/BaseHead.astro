@@ -13,6 +13,8 @@ interface Props {
 	description: string;
 	image?: ImageMetadata;
 	ogType?: string;
+	/** 検索結果に出したくないページ（サイト内検索・404など）で true にする */
+	noindex?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -22,7 +24,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const slug = Astro.url.pathname.match(/^\/blog\/([^/]+)\/?$/)?.[1];
 const ogFile = slug && existsSync(`./public/images/og/${slug}.jpg`) ? `/images/og/${slug}.jpg` : null;
 
-const { title, description, image = FallbackImage, ogType = 'website' } = Astro.props;
+const { title, description, image = FallbackImage, ogType = 'website', noindex = false } = Astro.props;
 ---
 
 <!-- Google tag (gtag.js) -->
@@ -57,7 +59,7 @@ const { title, description, image = FallbackImage, ogType = 'website' } = Astro.
 />
 <meta name="generator" content={Astro.generator} />
 <meta name="google-site-verification" content="Yi2hpVRcqujeM_cJ5d1r8-0j6tzSNB7OR1b0IXw51Ck" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 <meta name="language" content="Japanese" />
 
 <Font cssVariable="--font-atkinson" preload />

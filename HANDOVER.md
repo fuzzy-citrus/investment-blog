@@ -380,6 +380,7 @@ print('L%d: %d箇所を修正'%(lineno,fixed))
 
 | 公開予定 | slug | 内容 | 公開前にやること |
 |---|---|---|---|
+| 未定（公開の指示待ち） | `reverse-value-03-okamoto-glass` | 逆バリュー③ 岡本硝子（ノーベル賞で買われた株を売る側から点検。急騰33回のその後） | 記事は生成物。直すのは `numasoko-reports-backup/06_銘柄調査/okamoto-glass-7746/article_template.md`。**公開日に確定終値と日足を取り直す（ノーベル賞翌日の値動きで統計が変わる）**。空売り記事の注記5点（§15）は入れてある。series.ts・contentMap 登録済み |
 | ~~10/7~~ | ~~`kanefusa-5984`~~ | 兼房 B++ | **2026-10-07 公開済み**（10/6終値780円）。記事は生成物：直すのは `numasoko-reports-backup/06_銘柄調査/kanefusa-5984/article_template.md` → `py build_article.py --publish 2026-10-07T07:50` → 完全版HTMLを `public/analysis/` へコピー |
 | ~~10/6~~ | ~~`cbc-9402`~~ | 中部日本放送 B++ | **2026-10-06 公開済み**（10/5終値1,264円）。記事は生成物：直すのは `numasoko-reports-backup/06_銘柄調査/cbc-9402/article_template.md` → `py build_article.py --publish <元のpubDate>` → 完全版HTMLを `public/analysis/` へコピー |
 
@@ -860,3 +861,16 @@ ChatGPT を編集長兼マーケティング責任者、Claude を主任アナ�
 PER/PBR/時価総額/移動平均乖離は9/24時点のまま（記事で基準日を分けて明記済み）。次回の週次更新でまとめて取り直す。
 
 注意：`load_csv.py` は `csv_in` をDownloadsより優先する。狭い期間のCSVで通常更新を回すと過去履歴を失う。次回のExcel更新は最新保有CSVと過去履歴の結合を先に確認すること。
+
+## 2026-10-07｜AdSense「有用性の低いコンテンツ」対策（Claude）
+
+AdSense の審査で「ポリシー違反：有用性の低いコンテンツ」。サイト側で直せる3点とリンクの転送を直して本番反映済み。**再審査の申請はユーザーが行う**（再クロールを数日待ってからが無難）。
+
+- **404ページ**：`src/pages/404.astro` を新設。これが無いと Cloudflare Pages は未知のURLにトップページを 200 で返す。今は 404 を返す
+- **完全版レポートの孤立解消**：`scripts/postbuild-analysis.mjs`（`npm run build` の postbuild で pagefind の前に走る）。`dist/analysis/*.html` に canonical・meta description（元記事の description）・上下のサイト内リンク帯を差し込む。`public/analysis/` の元ファイルは触らない。どの公開記事からも参照されないレポートは noindex になる。`index.html`（一覧ページ）は対象外
+- **中身の薄いページを検索対象から外す**：`BaseHead.astro` に `noindex` プロップ。`/search/` と 404 に付与。`/holdings` は `public/_headers` の `X-Robots-Tag`。3つともサイトマップから除外（`astro.config.mjs` の `SITEMAP_EXCLUDE`）
+- **サイト内リンクの転送をなくす**：同じ postbuild で dist 全HTMLの `href` を転送後の形に揃える（`/about`→`/about/`、`/analysis/x.html`→`/analysis/x`）。Search Console の「ページにリダイレクトがあります」41件の原因だった。**ソース側のリンクは今までどおり書いてよい**（ビルドで直る）
+
+罠
+- 差し込むHTMLの `style="…"` の中で `"` を使わない（フォント名を `"` で囲んで属性が途中で切れ、帯の背景が消えた）
+- `npx astro build` だと postbuild が走らず、完全版の帯も検索も入らない。必ず `npm run build`

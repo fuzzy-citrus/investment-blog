@@ -42,10 +42,12 @@ for (const file of readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'))) {
 		if (existingReports.has(m[1])) analysisSlugs.add(m[1]);
 	}
 }
-const customPages = [
-	...[...analysisSlugs].sort().map((s) => `${SITE}/analysis/${s}`),
-	`${SITE}/holdings`, // 保有総括ページ（public/holdings.html）
-];
+// 保有総括ページ（public/holdings.html）は本文がほぼスクリプトで、検索結果に出す中身がないため載せない
+// （public/_headers で noindex も付けている。2026-10-07、AdSenseの「有用性の低いコンテンツ」対策）
+const customPages = [...analysisSlugs].sort().map((s) => `${SITE}/analysis/${s}`);
+
+// サイトマップに載せないページ（サイト内検索・404）
+const SITEMAP_EXCLUDE = [/\/search\/?$/, /\/404\/?$/];
 
 
 // ── 会話行にキャラの顔アイコンを差し込む ─────────────────────────
@@ -245,7 +247,7 @@ function rehypeSceneEyecatch() {
 // https://astro.build/config
 export default defineConfig({
 	site: SITE,
-	integrations: [mdx(), sitemap({ customPages })],
+	integrations: [mdx(), sitemap({ customPages, filter: (page) => !SITEMAP_EXCLUDE.some((re) => re.test(page)) })],
 	markdown: { rehypePlugins: [rehypeSpeakerIcons, rehypeSceneEyecatch] },
 	fonts: [
 		{

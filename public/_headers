@@ -7,3 +7,9 @@
 /downloads/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: private, max-age=0, must-revalidate
+
+/holdings
+  X-Robots-Tag: noindex, follow
+
+/holdings.html
+  X-Robots-Tag: noindex, follow
