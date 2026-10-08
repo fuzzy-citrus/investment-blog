@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TOPIX新規採用35銘柄 一覧｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+<style id="tab-fallback">
+.pn{display:block;scroll-margin-top:56px}
+html.js .pn{display:none}
+html.js .pn.on{display:block}
+a.tb{text-decoration:none}
+.tn{flex-wrap:wrap}
+.tn .tb{padding:11px 14px}
+html:not(.js) .pn{margin-bottom:34px}
+.tg{display:inline-block;padding:1px 7px;border-radius:9px;font:700 11px/1.6 var(--mono);white-space:nowrap}
+.tg-a{background:#1f6f43;color:#fff}.tg-b{background:#8a6a12;color:#fff}.tg-c{background:#6b6f76;color:#fff}.tg-r{background:#a33a2c;color:#fff}.tg-s{background:#2f5d9e;color:#fff}
+.t td.nw{white-space:nowrap}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Index Event · TOPIX 初回定期入替 · 2026.10.07 · 公表 10/7 ／ 実施 10/30</p>
+      <h1 class="ht">TOPIX新規採用 <em>35銘柄</em><br>需給と値札の一覧</h1>
+      <p class="hs">指数連動の買いが売買代金の何日分かと、PBR・PERを、同じ表に別々の列で並べた<br>需給の大きい側の6社（日本精機・フクダ電子・ナカニシ・テクノ菱和・西川ゴム工業・ヨネックス）は一次資料で採点した。売買の推奨ではない</p>
+    </div>
+    <div class="vb">
+      <div class="vs" style="font-size:30px">一覧<small>採点は6社</small></div>
+      <div class="vt">
+        <strong>需給・大は16銘柄、PBR1倍割れは2銘柄</strong><br>
+        基準日から10%以上の先行高は10銘柄。<br>
+        採点した6社はすべて幅・小（B++が5、B+が1）。<br>
+        需要の日数は値上がりの幅ではない。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">新規追加</div><div class="kn am">35銘柄</div><div class="ks">スタンダード23・グロース12</div></div>
+    <div class="kv"><div class="kl">実施日</div><div class="kn bl">10月30日</div><div class="ks">公表は10月7日</div></div>
+    <div class="kv"><div class="kl">買い需要（35銘柄の合計）</div><div class="kn bl">約11,579億円</div><div class="ks">浮動株時価総額×20.6%（概算）</div></div>
+    <div class="kv"><div class="kl">需給・大（20日分以上）</div><div class="kn gn">16銘柄</div><div class="ks">最大はサン電子の50日分</div></div>
+    <div class="kv"><div class="kl">PBR1倍割れ</div><div class="kn am">2銘柄</div><div class="ks">日本精機・Ｊトラスト</div></div>
+    <div class="kv"><div class="kl">採点した6社</div><div class="kn am">幅・小</div><div class="ks">B++が5社、B+が1社</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="資料の目次">
+  <a class="tb on" href="#p1" data-p="p1"><span class="d" style="background:var(--gn2)"></span>結論</a>
+  <a class="tb" href="#p2" data-p="p2"><span class="d" style="background:var(--am2)"></span>35銘柄の一覧</a>
+  <a class="tb" href="#p3" data-p="p3"><span class="d" style="background:var(--bl2)"></span>需給×値札の表</a>
+  <a class="tb" href="#p4" data-p="p4"><span class="d" style="background:var(--or2)"></span>先に上がった銘柄・動いていない銘柄</a>
+  <a class="tb" href="#p5" data-p="p5"><span class="d" style="background:var(--pu2)"></span>採点した6社</a>
+  <a class="tb" href="#p6" data-p="p6"><span class="d" style="background:var(--bl2)"></span>ルールと日程</a>
+  <a class="tb" href="#p7" data-p="p7"><span class="d" style="background:var(--rd)"></span>注記と検算</a>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 指数が買うことと、値札が安いことは別</h2><span class="sb bg-rd">売買の推奨ではない</span></div>
+
+  <div class="cg">
+    <div class="ca cc-bl">
+      <div class="cn">結論 01 · 需給</div><span class="ci">📥</span>
+      <div class="ct">指数の買いが売買代金の20日分を超えるのは16銘柄</div>
+      <div class="tx">買い需要は、いちばん小さい銘柄でも約126億円（追加基準の下限から）。<strong>浮動株の時価総額が大きく、ふだんの売買が少ない銘柄ほど、この買いが重くなる</strong>。いちばん大きいのはサン電子（50日分）。逆に、売買が活発なグロース株では1〜5日分にとどまる。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">結論 02 · 値札</div><span class="ci">🏷️</span>
+      <div class="ct">PBR1倍割れは2銘柄だけ。35銘柄の多くはすでに高い</div>
+      <div class="tx">流動性と時価総額で選ぶ指数なので、入ってくるのは買われてきた会社が多い。<strong>8月末の基準日から10%以上先に上がった銘柄が10</strong>あり、その大半は売買の多い半導体・バイオ関連だった。</div>
+    </div>
+    <div class="ca cc-gn">
+      <div class="cn">結論 03 · 採点</div><span class="ci">🧮</span>
+      <div class="ct">需給が大きい側から6社を開いたら、6社とも幅は「小」</div>
+      <div class="tx">日本精機・フクダ電子・ナカニシ・テクノ菱和・西川ゴム工業・ヨネックスを一次資料で採点した。5社がB++、ヨネックスがB+。<strong>6社とも会社の中身は良いが、値札が過去のレンジか同業の水準の上にいて、当商会の物差しでは上値を数えられなかった</strong>。幅が出る株価は5章に並べた。</div>
+    </div>
+  </div>
+  <div class="inf">📌 この資料は、<strong>「指数が買う」ことと「値札が安い」ことを別々の列に置く</strong>ためのものである。需給の列だけを見れば買い材料に見える銘柄が、値札の列では高い位置にいる。両方がそろう銘柄は、35のうちごくわずかだった。売買を勧めるものではない。</div>
+  <div class="note">株価は2026年10月7日の終値（株探の確定値）。PER・PBR・利回り・時価総額は株探の表示で、会社予想ベース。固定株主の比率は株探の大株主から当商会が置いた。採点した6社は当商会が計算し直した数字を5章に載せている。需要の日数は当商会の概算で、値上がりの幅ではない。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">35銘柄の一覧 ── 買い需要の大きい順</h2><span class="sb bg-am">35銘柄</span></div>
+  <div class="tx">新規追加の35銘柄を、<strong>買い需要が1日の売買代金の何日分か</strong>の大きい順に並べた。買い需要は「時価総額×（1−固定株主の比率）×20.6%」。固定株主は、株探の大株主上位10者のうち事業会社・銀行・保険・個人・持株会・財団・自己株式を足したもので、信託口や海外の保管銀行は浮動とみなした。浮動株の時価総額が追加基準の下限（約610億円）を下回る計算になった銘柄は、下限に置き直している。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>コード</th><th>銘柄</th><th>市場</th><th class="r">終値</th><th class="r">PER</th><th class="r">PBR</th><th class="r">利回り</th><th class="r">時価総額</th><th class="r">固定株主</th><th class="r">買い需要</th><th class="r">売買代金/日</th><th class="r">需要の日数</th><th class="r">8月末比</th><th>需給</th><th>値札</th><th>当商会の見方</th></tr></thead>
+    <tbody>
+      <tr><td class="nw">6736</td><td class="sm2">サン電子</td><td class="sm2">スタンダード</td><td class="r mn">9,810円</td><td class="r mn">27.8倍</td><td class="r mn">4.29倍</td><td class="r mn">—</td><td class="r mn">2,355億円</td><td class="r mn">52%</td><td class="r mn">235億円</td><td class="r mn">4.7億円</td><td class="r mn">50日</td><td class="r mn">+15.8%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr class="hl"><td class="nw">7287</td><td class="sm2"><strong>日本精機</strong></td><td class="sm2">スタンダード</td><td class="r mn">2,825円</td><td class="r mn">15.2倍</td><td class="r mn">0.65倍</td><td class="r mn">3.19%</td><td class="r mn">1,652億円</td><td class="r mn">25%</td><td class="r mn">255億円</td><td class="r mn">5.2億円</td><td class="r mn">49日</td><td class="r mn">+3.1%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-a">1倍割れ</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,743円で「中」）</td></tr>
+      <tr class="hl"><td class="nw">6960</td><td class="sm2"><strong>フクダ電子</strong></td><td class="sm2">スタンダード</td><td class="r mn">11,820円</td><td class="r mn">18.0倍</td><td class="r mn">1.66倍</td><td class="r mn">1.95%</td><td class="r mn">4,462億円</td><td class="r mn">61%</td><td class="r mn">361億円</td><td class="r mn">7.5億円</td><td class="r mn">48日</td><td class="r mn">▲3.3%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（6,170円で「中」）</td></tr>
+      <tr><td class="nw">9436</td><td class="sm2">沖縄セルラー電話</td><td class="sm2">スタンダード</td><td class="r mn">4,095円</td><td class="r mn">28.2倍</td><td class="r mn">3.78倍</td><td class="r mn">1.71%</td><td class="r mn">3,780億円</td><td class="r mn">60%</td><td class="r mn">312億円</td><td class="r mn">6.5億円</td><td class="r mn">48日</td><td class="r mn">▲1.6%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="nw">7716</td><td class="sm2"><strong>ナカニシ</strong></td><td class="sm2">スタンダード</td><td class="r mn">1,511円</td><td class="r mn">18.3倍</td><td class="r mn">2.03倍</td><td class="r mn">1.99%</td><td class="r mn">2,787億円</td><td class="r mn">33%</td><td class="r mn">386億円</td><td class="r mn">9.2億円</td><td class="r mn">42日</td><td class="r mn">▲3.3%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（635円で「中」）</td></tr>
+      <tr><td class="nw">2805</td><td class="sm2">ヱスビー食品</td><td class="sm2">スタンダード</td><td class="r mn">6,810円</td><td class="r mn">20.3倍</td><td class="r mn">1.67倍</td><td class="r mn">0.88%</td><td class="r mn">1,855億円</td><td class="r mn">40%</td><td class="r mn">230億円</td><td class="r mn">5.9億円</td><td class="r mn">39日</td><td class="r mn">▲0.7%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="nw">1965</td><td class="sm2"><strong>テクノ菱和</strong></td><td class="sm2">スタンダード</td><td class="r mn">2,374円</td><td class="r mn">12.4倍</td><td class="r mn">2.16倍</td><td class="r mn">2.50%</td><td class="r mn">1,512億円</td><td class="r mn">45%</td><td class="r mn">172億円</td><td class="r mn">4.8億円</td><td class="r mn">36日</td><td class="r mn">+2.6%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（949円で「中」）</td></tr>
+      <tr class="hl"><td class="nw">5161</td><td class="sm2"><strong>西川ゴム工業</strong></td><td class="sm2">スタンダード</td><td class="r mn">3,440円</td><td class="r mn">19.2倍</td><td class="r mn">1.43倍</td><td class="r mn">5.35%</td><td class="r mn">1,273億円</td><td class="r mn">38%</td><td class="r mn">162億円</td><td class="r mn">4.6億円</td><td class="r mn">35日</td><td class="r mn">▲8.3%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,412円で「中」）</td></tr>
+      <tr><td class="nw">4966</td><td class="sm2">上村工業</td><td class="sm2">スタンダード</td><td class="r mn">22,140円</td><td class="r mn">24.3倍</td><td class="r mn">3.08倍</td><td class="r mn">1.31%</td><td class="r mn">4,007億円</td><td class="r mn">45%</td><td class="r mn">456億円</td><td class="r mn">13.6億円</td><td class="r mn">34日</td><td class="r mn">+10.8%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">4816</td><td class="sm2">東映アニメーション</td><td class="sm2">スタンダード</td><td class="r mn">2,923円</td><td class="r mn">33.0倍</td><td class="r mn">3.55倍</td><td class="r mn">1.51%</td><td class="r mn">6,138億円</td><td class="r mn">67%</td><td class="r mn">422億円</td><td class="r mn">12.7億円</td><td class="r mn">33日</td><td class="r mn">▲4.2%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">1723</td><td class="sm2">日本電技</td><td class="sm2">スタンダード</td><td class="r mn">2,351円</td><td class="r mn">17.2倍</td><td class="r mn">3.18倍</td><td class="r mn">2.38%</td><td class="r mn">1,542億円</td><td class="r mn">36%</td><td class="r mn">205億円</td><td class="r mn">6.7億円</td><td class="r mn">31日</td><td class="r mn">▲0.5%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">2702</td><td class="sm2">日本マクドナルドHD</td><td class="sm2">スタンダード</td><td class="r mn">7,690円</td><td class="r mn">29.2倍</td><td class="r mn">3.49倍</td><td class="r mn">0.83%</td><td class="r mn">10,225億円</td><td class="r mn">36%</td><td class="r mn">1,355億円</td><td class="r mn">48.4億円</td><td class="r mn">28日</td><td class="r mn">▲4.8%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">2782</td><td class="sm2">セリア</td><td class="sm2">スタンダード</td><td class="r mn">4,275円</td><td class="r mn">17.4倍</td><td class="r mn">2.83倍</td><td class="r mn">1.87%</td><td class="r mn">3,242億円</td><td class="r mn">35%</td><td class="r mn">432億円</td><td class="r mn">15.7億円</td><td class="r mn">28日</td><td class="r mn">▲3.4%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">7806</td><td class="sm2">ＭＴＧ</td><td class="sm2">グロース</td><td class="r mn">9,350円</td><td class="r mn">33.5倍</td><td class="r mn">6.10倍</td><td class="r mn">0.40%</td><td class="r mn">3,765億円</td><td class="r mn">47%</td><td class="r mn">413億円</td><td class="r mn">15.4億円</td><td class="r mn">27日</td><td class="r mn">+1.4%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">8117</td><td class="sm2">中央自動車工業</td><td class="sm2">スタンダード</td><td class="r mn">2,120円</td><td class="r mn">12.3倍</td><td class="r mn">1.85倍</td><td class="r mn">2.97%</td><td class="r mn">1,273億円</td><td class="r mn">33%</td><td class="r mn">177億円</td><td class="r mn">8.2億円</td><td class="r mn">21日</td><td class="r mn">▲3.9%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="nw">7906</td><td class="sm2"><strong>ヨネックス</strong></td><td class="sm2">スタンダード</td><td class="r mn">2,390円</td><td class="r mn">14.4倍</td><td class="r mn">2.39倍</td><td class="r mn">1.17%</td><td class="r mn">2,220億円</td><td class="r mn">39%</td><td class="r mn">279億円</td><td class="r mn">13.7億円</td><td class="r mn">20日</td><td class="r mn">▲14.0%</td><td class="sm2"><span class="tg tg-a">大</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B+</span> 幅・小（941円で「中」）</td></tr>
+      <tr><td class="nw">6366</td><td class="sm2">千代田化工建設</td><td class="sm2">スタンダード</td><td class="r mn">673円</td><td class="r mn">25.2倍</td><td class="r mn">5.24倍</td><td class="r mn">—</td><td class="r mn">1,752億円</td><td class="r mn">41%</td><td class="r mn">213億円</td><td class="r mn">12.6億円</td><td class="r mn">17日</td><td class="r mn">▲6.3%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">4107</td><td class="sm2">伊勢化学工業</td><td class="sm2">スタンダード</td><td class="r mn">3,925円</td><td class="r mn">37.0倍</td><td class="r mn">4.77倍</td><td class="r mn">1.02%</td><td class="r mn">2,016億円</td><td class="r mn">65%</td><td class="r mn">147億円</td><td class="r mn">9.2億円</td><td class="r mn">16日</td><td class="r mn">▲9.9%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">141A</td><td class="sm2">トライアルHD</td><td class="sm2">グロース</td><td class="r mn">3,930円</td><td class="r mn">45.1倍</td><td class="r mn">3.69倍</td><td class="r mn">0.43%</td><td class="r mn">4,829億円</td><td class="r mn">65%</td><td class="r mn">351億円</td><td class="r mn">26.6億円</td><td class="r mn">13日</td><td class="r mn">▲2.2%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">290A</td><td class="sm2">Synspective</td><td class="sm2">グロース</td><td class="r mn">1,500円</td><td class="r mn">76.8倍</td><td class="r mn">5.51倍</td><td class="r mn">—</td><td class="r mn">2,016億円</td><td class="r mn">49%</td><td class="r mn">213億円</td><td class="r mn">17.6億円</td><td class="r mn">12日</td><td class="r mn">+0.1%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">6890</td><td class="sm2">フェローテック</td><td class="sm2">スタンダード</td><td class="r mn">12,170円</td><td class="r mn">13.7倍</td><td class="r mn">2.03倍</td><td class="r mn">2.19%</td><td class="r mn">6,580億円</td><td class="r mn">3%</td><td class="r mn">1,322億円</td><td class="r mn">112.2億円</td><td class="r mn">12日</td><td class="r mn">+30.7%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">4478</td><td class="sm2">フリー</td><td class="sm2">グロース</td><td class="r mn">3,510円</td><td class="r mn">—</td><td class="r mn">9.87倍</td><td class="r mn">—</td><td class="r mn">2,099億円</td><td class="r mn">36%</td><td class="r mn">280億円</td><td class="r mn">23.9億円</td><td class="r mn">12日</td><td class="r mn">▲19.5%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">2160</td><td class="sm2">ジーエヌアイグループ</td><td class="sm2">グロース</td><td class="r mn">3,455円</td><td class="r mn">—</td><td class="r mn">5.62倍</td><td class="r mn">—</td><td class="r mn">2,275億円</td><td class="r mn">11%</td><td class="r mn">419億円</td><td class="r mn">36.8億円</td><td class="r mn">11日</td><td class="r mn">+22.8%</td><td class="sm2"><span class="tg tg-b">中</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">6777</td><td class="sm2">santec HD</td><td class="sm2">スタンダード</td><td class="r mn">25,300円</td><td class="r mn">33.8倍</td><td class="r mn">10.32倍</td><td class="r mn">0.91%</td><td class="r mn">3,026億円</td><td class="r mn">58%</td><td class="r mn">263億円</td><td class="r mn">26.9億円</td><td class="r mn">10日</td><td class="r mn">+29.3%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">8508</td><td class="sm2">Ｊトラスト</td><td class="sm2">スタンダード</td><td class="r mn">788円</td><td class="r mn">12.6倍</td><td class="r mn">0.63倍</td><td class="r mn">2.16%</td><td class="r mn">1,052億円</td><td class="r mn">41%</td><td class="r mn">129億円</td><td class="r mn">13.2億円</td><td class="r mn">10日</td><td class="r mn">+12.3%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-a">1倍割れ</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">7564</td><td class="sm2">ワークマン</td><td class="sm2">スタンダード</td><td class="r mn">5,250円</td><td class="r mn">19.2倍</td><td class="r mn">2.78倍</td><td class="r mn">1.70%</td><td class="r mn">4,297億円</td><td class="r mn">75%</td><td class="r mn">218億円</td><td class="r mn">26.2億円</td><td class="r mn">8日</td><td class="r mn">▲15.7%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">6834</td><td class="sm2">精工技研</td><td class="sm2">スタンダード</td><td class="r mn">7,270円</td><td class="r mn">35.3倍</td><td class="r mn">9.13倍</td><td class="r mn">0.41%</td><td class="r mn">3,393億円</td><td class="r mn">40%</td><td class="r mn">420億円</td><td class="r mn">61.0億円</td><td class="r mn">7日</td><td class="r mn">+25.1%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">215A</td><td class="sm2">タイミー</td><td class="sm2">グロース</td><td class="r mn">1,435円</td><td class="r mn">22.1倍</td><td class="r mn">8.41倍</td><td class="r mn">—</td><td class="r mn">1,446億円</td><td class="r mn">34%</td><td class="r mn">196億円</td><td class="r mn">29.9億円</td><td class="r mn">7日</td><td class="r mn">▲19.2%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">186A</td><td class="sm2">アストロスケールHD</td><td class="sm2">グロース</td><td class="r mn">1,211円</td><td class="r mn">—</td><td class="r mn">13.39倍</td><td class="r mn">—</td><td class="r mn">1,721億円</td><td class="r mn">27%</td><td class="r mn">261億円</td><td class="r mn">48.9億円</td><td class="r mn">5日</td><td class="r mn">+6.9%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">4588</td><td class="sm2">オンコリスバイオファーマ</td><td class="sm2">グロース</td><td class="r mn">6,350円</td><td class="r mn">—</td><td class="r mn">57.63倍</td><td class="r mn">—</td><td class="r mn">1,874億円</td><td class="r mn">9%</td><td class="r mn">351億円</td><td class="r mn">92.5億円</td><td class="r mn">4日</td><td class="r mn">+36.6%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">6613</td><td class="sm2">ＱＤレーザ</td><td class="sm2">グロース</td><td class="r mn">2,254円</td><td class="r mn">215.0倍</td><td class="r mn">19.40倍</td><td class="r mn">—</td><td class="r mn">950億円</td><td class="r mn">3%</td><td class="r mn">190億円</td><td class="r mn">59.0億円</td><td class="r mn">3日</td><td class="r mn">+8.0%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">6227</td><td class="sm2">ＡＩメカテック</td><td class="sm2">スタンダード</td><td class="r mn">8,590円</td><td class="r mn">32.6倍</td><td class="r mn">11.15倍</td><td class="r mn">0.26%</td><td class="r mn">1,619億円</td><td class="r mn">42%</td><td class="r mn">193億円</td><td class="r mn">71.5億円</td><td class="r mn">3日</td><td class="r mn">+35.9%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">485A</td><td class="sm2">パワーエックス</td><td class="sm2">グロース</td><td class="r mn">2,168円</td><td class="r mn">202.0倍</td><td class="r mn">39.13倍</td><td class="r mn">—</td><td class="r mn">2,527億円</td><td class="r mn">40%</td><td class="r mn">311億円</td><td class="r mn">142.4億円</td><td class="r mn">2日</td><td class="r mn">+18.9%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">581A</td><td class="sm2">ＧＯ</td><td class="sm2">グロース</td><td class="r mn">3,730円</td><td class="r mn">27.3倍</td><td class="r mn">12.26倍</td><td class="r mn">—</td><td class="r mn">3,057億円</td><td class="r mn">93%</td><td class="r mn">126億円</td><td class="r mn">99.8億円</td><td class="r mn">1日</td><td class="r mn">▲14.0%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">593A</td><td class="sm2">ティアフォー</td><td class="sm2">グロース</td><td class="r mn">2,135円</td><td class="r mn">—</td><td class="r mn">13.85倍</td><td class="r mn">—</td><td class="r mn">1,356億円</td><td class="r mn">78%</td><td class="r mn">126億円</td><td class="r mn">444.4億円</td><td class="r mn">0日</td><td class="r mn">▲11.0%</td><td class="sm2"><span class="tg tg-c">小</span></td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">需給：需要の日数が20日以上＝大、10〜19日＝中、10日未満＝小。値札：PBR1倍未満＝1倍割れ、PBR2倍以下かつPER20倍以下＝2倍以下、PBR3.5倍以下かつPER25倍以下＝中間、それ以外（赤字・PERなしを含む）＝高い。どちらも当商会がこの資料のために引いた線で、採点の規則とは別のもの。売買代金は直近40営業日の平均。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">需給×値札の表</h2><span class="sb bg-bl">当商会の仕分け</span></div>
+  <div class="tx">2つの列を掛け合わせると、35銘柄は次のように分かれる。<strong>左上に近いほど「指数の買いが重く、値札も低い」</strong>。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>需給＼値札</th><th>1倍割れ</th><th>2倍以下</th><th>中間</th><th>高い</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="nw"><strong>需給・大</strong><br>20日分以上</td><td class="sm2">日本精機（7287）</td><td class="sm2">フクダ電子（6960）、西川ゴム工業（5161）、中央自動車工業（8117）</td><td class="sm2">ナカニシ（7716）、ヱスビー食品（2805）、テクノ菱和（1965）、上村工業（4966）、日本電技（1723）、セリア（2782）、ヨネックス（7906）</td><td class="sm2">サン電子（6736）、沖縄セルラー電話（9436）、東映アニメーション（4816）、日本マクドナルドHD（2702）、ＭＴＧ（7806）</td></tr>
+      <tr><td class="nw"><strong>需給・中</strong><br>10〜19日分</td><td class="sm2">該当なし</td><td class="sm2">該当なし</td><td class="sm2">フェローテック（6890）</td><td class="sm2">千代田化工建設（6366）、伊勢化学工業（4107）、トライアルHD（141A）、Synspective（290A）、フリー（4478）、ジーエヌアイグループ（2160）</td></tr>
+      <tr><td class="nw"><strong>需給・小</strong><br>10日分未満</td><td class="sm2">Ｊトラスト（8508）</td><td class="sm2">該当なし</td><td class="sm2">ワークマン（7564）</td><td class="sm2">santec HD（6777）、精工技研（6834）、タイミー（215A）、アストロスケールHD（186A）、オンコリスバイオファーマ（4588）、ＱＤレーザ（6613）、ＡＩメカテック（6227）、パワーエックス（485A）、ＧＯ（581A）、ティアフォー（593A）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 左上の「需給・大×1倍割れ」に入るのは日本精機（7287）。「需給・大×2倍以下」はフクダ電子（6960）、西川ゴム工業（5161）、中央自動車工業（8117）。<strong>需給が大きい16銘柄のうち、値札が「高い」に入らないものは11</strong>。ただしこの表は株探の指標による粗い仕分けで、PBRが低い理由（利益率の低さや借入）までは見ていない。開いて確かめたのは次の5章の6社だけである。</div>
+  <div class="h3">需給と値札を足した順位（需給・大の16銘柄）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th class="r">順位</th><th>銘柄</th><th class="r">指数の買い</th><th class="r">需給の順位</th><th class="r">PBR</th><th class="r">PER</th><th class="r">値札の順位</th><th class="r">利回り</th><th class="r">8月末比</th><th>当商会の見方</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="r mn">1</td><td class="sm2"><strong>日本精機</strong>（7287）</td><td class="r mn">49日分</td><td class="r mn">2位</td><td class="r mn">0.65倍</td><td class="r mn">15.2倍</td><td class="r mn">2.5</td><td class="r mn">3.19%</td><td class="r mn">+3.1%</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,743円で「中」）</td></tr>
+      <tr class="hl"><td class="r mn">2</td><td class="sm2"><strong>フクダ電子</strong>（6960）</td><td class="r mn">48日分</td><td class="r mn">3位</td><td class="r mn">1.66倍</td><td class="r mn">18.0倍</td><td class="r mn">5.0</td><td class="r mn">1.95%</td><td class="r mn">▲3.3%</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（6,170円で「中」）</td></tr>
+      <tr class="hl"><td class="r mn">3</td><td class="sm2"><strong>テクノ菱和</strong>（1965）</td><td class="r mn">36日分</td><td class="r mn">7位</td><td class="r mn">2.16倍</td><td class="r mn">12.4倍</td><td class="r mn">4.5</td><td class="r mn">2.50%</td><td class="r mn">+2.6%</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（949円で「中」）</td></tr>
+      <tr class="hl"><td class="r mn">4</td><td class="sm2"><strong>ナカニシ</strong>（7716）</td><td class="r mn">42日分</td><td class="r mn">5位</td><td class="r mn">2.03倍</td><td class="r mn">18.3倍</td><td class="r mn">7.0</td><td class="r mn">1.99%</td><td class="r mn">▲3.3%</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（635円で「中」）</td></tr>
+      <tr><td class="r mn">5</td><td class="sm2">ヱスビー食品（2805）</td><td class="r mn">39日分</td><td class="r mn">6位</td><td class="r mn">1.67倍</td><td class="r mn">20.3倍</td><td class="r mn">7.0</td><td class="r mn">0.88%</td><td class="r mn">▲0.7%</td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="r mn">6</td><td class="sm2"><strong>西川ゴム工業</strong>（5161）</td><td class="r mn">35日分</td><td class="r mn">8位</td><td class="r mn">1.43倍</td><td class="r mn">19.2倍</td><td class="r mn">5.5</td><td class="r mn">5.35%</td><td class="r mn">▲8.3%</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,412円で「中」）</td></tr>
+      <tr><td class="r mn">7</td><td class="sm2">サン電子（6736）</td><td class="r mn">50日分</td><td class="r mn">1位</td><td class="r mn">4.29倍</td><td class="r mn">27.8倍</td><td class="r mn">13.5</td><td class="r mn">—</td><td class="r mn">+15.8%</td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="r mn">8</td><td class="sm2">沖縄セルラー電話（9436）</td><td class="r mn">48日分</td><td class="r mn">4位</td><td class="r mn">3.78倍</td><td class="r mn">28.2倍</td><td class="r mn">13.5</td><td class="r mn">1.71%</td><td class="r mn">▲1.6%</td><td class="sm2">未採点</td></tr>
+      <tr><td class="r mn">9</td><td class="sm2">中央自動車工業（8117）</td><td class="r mn">21日分</td><td class="r mn">15位</td><td class="r mn">1.85倍</td><td class="r mn">12.3倍</td><td class="r mn">3.0</td><td class="r mn">2.97%</td><td class="r mn">▲3.9%</td><td class="sm2">未採点</td></tr>
+      <tr><td class="r mn">10</td><td class="sm2">日本電技（1723）</td><td class="r mn">31日分</td><td class="r mn">11位</td><td class="r mn">3.18倍</td><td class="r mn">17.2倍</td><td class="r mn">8.0</td><td class="r mn">2.38%</td><td class="r mn">▲0.5%</td><td class="sm2">未採点</td></tr>
+      <tr><td class="r mn">11</td><td class="sm2">上村工業（4966）</td><td class="r mn">34日分</td><td class="r mn">9位</td><td class="r mn">3.08倍</td><td class="r mn">24.3倍</td><td class="r mn">10.5</td><td class="r mn">1.31%</td><td class="r mn">+10.8%</td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="r mn">12</td><td class="sm2">セリア（2782）</td><td class="r mn">28日分</td><td class="r mn">13位</td><td class="r mn">2.83倍</td><td class="r mn">17.4倍</td><td class="r mn">7.5</td><td class="r mn">1.87%</td><td class="r mn">▲3.4%</td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="r mn">13</td><td class="sm2"><strong>ヨネックス</strong>（7906）</td><td class="r mn">20日分</td><td class="r mn">16位</td><td class="r mn">2.39倍</td><td class="r mn">14.4倍</td><td class="r mn">5.5</td><td class="r mn">1.17%</td><td class="r mn">▲14.0%</td><td class="sm2"><span class="tg tg-s">B+</span> 幅・小（941円で「中」）</td></tr>
+      <tr><td class="r mn">14</td><td class="sm2">東映アニメーション（4816）</td><td class="r mn">33日分</td><td class="r mn">10位</td><td class="r mn">3.55倍</td><td class="r mn">33.0倍</td><td class="r mn">14.0</td><td class="r mn">1.51%</td><td class="r mn">▲4.2%</td><td class="sm2">未採点</td></tr>
+      <tr><td class="r mn">15</td><td class="sm2">日本マクドナルドHD（2702）</td><td class="r mn">28日分</td><td class="r mn">12位</td><td class="r mn">3.49倍</td><td class="r mn">29.2倍</td><td class="r mn">13.0</td><td class="r mn">0.83%</td><td class="r mn">▲4.8%</td><td class="sm2">未採点</td></tr>
+      <tr><td class="r mn">16</td><td class="sm2">ＭＴＧ（7806）</td><td class="r mn">27日分</td><td class="r mn">14位</td><td class="r mn">6.10倍</td><td class="r mn">33.5倍</td><td class="r mn">16.0</td><td class="r mn">0.40%</td><td class="r mn">+1.4%</td><td class="sm2">未採点</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">需給の順位（買い需要の日数が多い順）と、値札の順位（PBRの低い順とPERの低い順の平均）を足して、小さい順に並べた。指標を機械的に足しただけの順位で、当商会の採点とは別のもの。採点した6社は、順位にかかわらず6社とも幅が「小」だった。</div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">先に上がった銘柄・動いていない銘柄</h2><span class="sb bg-or">8月末比</span></div>
+  <div class="h3">基準日（8月31日）から10%以上、先に上がった銘柄</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>銘柄</th><th class="r">8月末比</th><th class="r">PBR</th><th class="r">売買代金/日</th><th class="r">需要の日数</th></tr></thead>
+    <tbody>
+      <tr><td class="nw">オンコリスバイオファーマ（4588）</td><td class="r mn">+36.6%</td><td class="r mn">57.63倍</td><td class="r mn">92.5億円</td><td class="r mn">4日</td></tr>
+      <tr><td class="nw">ＡＩメカテック（6227）</td><td class="r mn">+35.9%</td><td class="r mn">11.15倍</td><td class="r mn">71.5億円</td><td class="r mn">3日</td></tr>
+      <tr><td class="nw">フェローテック（6890）</td><td class="r mn">+30.7%</td><td class="r mn">2.03倍</td><td class="r mn">112.2億円</td><td class="r mn">12日</td></tr>
+      <tr><td class="nw">santec HD（6777）</td><td class="r mn">+29.3%</td><td class="r mn">10.32倍</td><td class="r mn">26.9億円</td><td class="r mn">10日</td></tr>
+      <tr><td class="nw">精工技研（6834）</td><td class="r mn">+25.1%</td><td class="r mn">9.13倍</td><td class="r mn">61.0億円</td><td class="r mn">7日</td></tr>
+      <tr><td class="nw">ジーエヌアイグループ（2160）</td><td class="r mn">+22.8%</td><td class="r mn">5.62倍</td><td class="r mn">36.8億円</td><td class="r mn">11日</td></tr>
+      <tr><td class="nw">パワーエックス（485A）</td><td class="r mn">+18.9%</td><td class="r mn">39.13倍</td><td class="r mn">142.4億円</td><td class="r mn">2日</td></tr>
+      <tr><td class="nw">サン電子（6736）</td><td class="r mn">+15.8%</td><td class="r mn">4.29倍</td><td class="r mn">4.7億円</td><td class="r mn">50日</td></tr>
+      <tr><td class="nw">Ｊトラスト（8508）</td><td class="r mn">+12.3%</td><td class="r mn">0.63倍</td><td class="r mn">13.2億円</td><td class="r mn">10日</td></tr>
+      <tr><td class="nw">上村工業（4966）</td><td class="r mn">+10.8%</td><td class="r mn">3.08倍</td><td class="r mn">13.6億円</td><td class="r mn">34日</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">選定のルールは2024年9月に公表されており、基準日の数字から採用を予想できた。先に上がった銘柄は売買代金が大きく、指数の買いは1〜5日分にとどまるものが多い。材料は指数の採用だけとは限らない（半導体・バイオなどの個別の値動きを含む）。</div>
+  <div class="h3">需給が大きく（20日分以上）、基準日からあまり動いていない銘柄</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>銘柄</th><th class="r">需要の日数</th><th class="r">8月末比</th><th class="r">PER</th><th class="r">PBR</th><th class="r">利回り</th><th>値札</th><th>当商会の見方</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="nw"><strong>ヨネックス</strong>（7906）</td><td class="r mn">20日</td><td class="r mn">▲14.0%</td><td class="r mn">14.4倍</td><td class="r mn">2.39倍</td><td class="r mn">1.17%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B+</span> 幅・小（941円で「中」）</td></tr>
+      <tr class="hl"><td class="nw"><strong>西川ゴム工業</strong>（5161）</td><td class="r mn">35日</td><td class="r mn">▲8.3%</td><td class="r mn">19.2倍</td><td class="r mn">1.43倍</td><td class="r mn">5.35%</td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,412円で「中」）</td></tr>
+      <tr><td class="nw">日本マクドナルドHD（2702）</td><td class="r mn">28日</td><td class="r mn">▲4.8%</td><td class="r mn">29.2倍</td><td class="r mn">3.49倍</td><td class="r mn">0.83%</td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">東映アニメーション（4816）</td><td class="r mn">33日</td><td class="r mn">▲4.2%</td><td class="r mn">33.0倍</td><td class="r mn">3.55倍</td><td class="r mn">1.51%</td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">中央自動車工業（8117）</td><td class="r mn">21日</td><td class="r mn">▲3.9%</td><td class="r mn">12.3倍</td><td class="r mn">1.85倍</td><td class="r mn">2.97%</td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">セリア（2782）</td><td class="r mn">28日</td><td class="r mn">▲3.4%</td><td class="r mn">17.4倍</td><td class="r mn">2.83倍</td><td class="r mn">1.87%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="nw"><strong>フクダ電子</strong>（6960）</td><td class="r mn">48日</td><td class="r mn">▲3.3%</td><td class="r mn">18.0倍</td><td class="r mn">1.66倍</td><td class="r mn">1.95%</td><td class="sm2"><span class="tg tg-b">2倍以下</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（6,170円で「中」）</td></tr>
+      <tr class="hl"><td class="nw"><strong>ナカニシ</strong>（7716）</td><td class="r mn">42日</td><td class="r mn">▲3.3%</td><td class="r mn">18.3倍</td><td class="r mn">2.03倍</td><td class="r mn">1.99%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（635円で「中」）</td></tr>
+      <tr><td class="nw">沖縄セルラー電話（9436）</td><td class="r mn">48日</td><td class="r mn">▲1.6%</td><td class="r mn">28.2倍</td><td class="r mn">3.78倍</td><td class="r mn">1.71%</td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">ヱスビー食品（2805）</td><td class="r mn">39日</td><td class="r mn">▲0.7%</td><td class="r mn">20.3倍</td><td class="r mn">1.67倍</td><td class="r mn">0.88%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">日本電技（1723）</td><td class="r mn">31日</td><td class="r mn">▲0.5%</td><td class="r mn">17.2倍</td><td class="r mn">3.18倍</td><td class="r mn">2.38%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点</td></tr>
+      <tr><td class="nw">ＭＴＧ（7806）</td><td class="r mn">27日</td><td class="r mn">+1.4%</td><td class="r mn">33.5倍</td><td class="r mn">6.10倍</td><td class="r mn">0.40%</td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点</td></tr>
+      <tr class="hl"><td class="nw"><strong>テクノ菱和</strong>（1965）</td><td class="r mn">36日</td><td class="r mn">+2.6%</td><td class="r mn">12.4倍</td><td class="r mn">2.16倍</td><td class="r mn">2.50%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（949円で「中」）</td></tr>
+      <tr class="hl"><td class="nw"><strong>日本精機</strong>（7287）</td><td class="r mn">49日</td><td class="r mn">+3.1%</td><td class="r mn">15.2倍</td><td class="r mn">0.65倍</td><td class="r mn">3.19%</td><td class="sm2"><span class="tg tg-a">1倍割れ</span></td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小（1,743円で「中」）</td></tr>
+      <tr><td class="nw">上村工業（4966）</td><td class="r mn">34日</td><td class="r mn">+10.8%</td><td class="r mn">24.3倍</td><td class="r mn">3.08倍</td><td class="r mn">1.31%</td><td class="sm2"><span class="tg tg-c">中間</span></td><td class="sm2">未採点・先に上昇</td></tr>
+      <tr><td class="nw">サン電子（6736）</td><td class="r mn">50日</td><td class="r mn">+15.8%</td><td class="r mn">27.8倍</td><td class="r mn">4.29倍</td><td class="r mn">—</td><td class="sm2"><span class="tg tg-r">高い</span></td><td class="sm2">未採点・先に上昇</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 需給が大きい側の多くは、公表の日まであまり動いていなかった（サン電子と上村工業は10%以上、先に上がっている）。<strong>「先回りされていない」ことは確認できるが、それは値札が安いことを意味しない</strong>。この中でPBRが1倍を割っているのは日本精機だけで、その日本精機も直近5年のPBRの上端にいる。採点した6社は、6社とも幅が「小」だった。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">採点した6社 ── どの株価で幅が出るか</h2><span class="sb bg-pu">6社とも幅・小</span></div>
+  <div class="tx">需給の大きい側から6社を選び、有価証券報告書・決算短信・適時開示を読んで、当商会の規則で採点した。規則は「上値＝1株純資産×min（直近5年のPBRの高値、同業の中央値）」「下値＝株価より下の候補で最も深いもの」「6軸18点の確度」。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>銘柄</th><th class="r">株価</th><th class="r">PBR</th><th class="r">PER</th><th class="r">利回り</th><th class="r">確度</th><th>ランク</th><th class="r">上値</th><th class="r">下値</th><th class="r">幅が「中」になる株価</th><th class="r">幅が「大」になる株価</th><th class="r">需要の日数</th></tr></thead>
+    <tbody>
+      <tr><td class="nw"><strong>日本精機</strong>（7287）</td><td class="r mn">2,819円</td><td class="r mn">0.68倍</td><td class="r mn">15.2倍</td><td class="r mn">3.19%</td><td class="r mn">11点</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小</td><td class="r mn">2,988円（+6.0%）</td><td class="r mn">913円（▲68%）</td><td class="r mn">1,743円</td><td class="r mn">1,431円</td><td class="r mn">24〜48日</td></tr>
+      <tr><td class="nw"><strong>フクダ電子</strong>（6960）</td><td class="r mn">11,820円</td><td class="r mn">1.66倍</td><td class="r mn">18.0倍</td><td class="r mn">1.95%</td><td class="r mn">11点</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小</td><td class="r mn">10,651円（▲9.9%）</td><td class="r mn">3,184円（▲73%）</td><td class="r mn">6,170円</td><td class="r mn">5,050円</td><td class="r mn">17〜43日</td></tr>
+      <tr><td class="nw"><strong>ナカニシ</strong>（7716）</td><td class="r mn">1,511円</td><td class="r mn">2.10倍</td><td class="r mn">18.5倍</td><td class="r mn">1.99%</td><td class="r mn">11点</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小</td><td class="r mn">1,380円（▲8.7%）</td><td class="r mn">139円（▲91%）</td><td class="r mn">635円</td><td class="r mn">449円</td><td class="r mn">14〜42日</td></tr>
+      <tr><td class="nw"><strong>テクノ菱和</strong>（1965）</td><td class="r mn">2,374円</td><td class="r mn">2.16倍</td><td class="r mn">12.4倍</td><td class="r mn">2.50%</td><td class="r mn">11点</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小</td><td class="r mn">1,780円（▲25.0%）</td><td class="r mn">395円（▲83%）</td><td class="r mn">949円</td><td class="r mn">741円</td><td class="r mn">26〜36日</td></tr>
+      <tr><td class="nw"><strong>西川ゴム工業</strong>（5161）</td><td class="r mn">3,440円</td><td class="r mn">1.43倍</td><td class="r mn">19.2倍</td><td class="r mn">5.35%</td><td class="r mn">12点</td><td class="sm2"><span class="tg tg-s">B++</span> 幅・小</td><td class="r mn">2,594円（▲24.6%）</td><td class="r mn">625円（▲82%）</td><td class="r mn">1,412円</td><td class="r mn">1,117円</td><td class="r mn">28〜34日</td></tr>
+      <tr><td class="nw"><strong>ヨネックス</strong>（7906）</td><td class="r mn">2,390円</td><td class="r mn">2.39倍</td><td class="r mn">14.4倍</td><td class="r mn">1.17%</td><td class="r mn">9点</td><td class="sm2"><span class="tg tg-s">B+</span> 幅・小</td><td class="r mn">2,051円（▲14.2%）</td><td class="r mn">202円（▲92%）</td><td class="r mn">941円</td><td class="r mn">664円</td><td class="r mn">9〜22日</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>6社とも幅は「小」で、5社がB++、ヨネックスがB+</strong>。日本精機は上値が+6%、残りの5社は規則どおりの上値が株価より下になる（ナカニシ▲9%、フクダ電子▲10%、ヨネックス▲14%、テクノ菱和と西川ゴム工業は▲25%）。「買えるかどうか」を当商会の物差しで言い直すと、<strong>いまの株価では幅が出ず、幅が「中」になるのは表の株価まで下がったとき</strong>、となる。指数の買い需要はこの計算に入れていない。</div>
+  <div class="h3">6軸の内訳</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>軸</th><th class="r">日本精機</th><th class="r">フクダ電子</th><th class="r">ナカニシ</th><th class="r">テクノ菱和</th><th class="r">西川ゴム工業</th><th class="r">ヨネックス</th></tr></thead>
+    <tbody>
+      <tr><td class="nw">🦦安さ</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td></tr>
+      <tr><td class="nw">🦉財務</td><td class="r mn">2点</td><td class="r mn">3点</td><td class="r mn">2点</td><td class="r mn">3点</td><td class="r mn">3点</td><td class="r mn">3点</td></tr>
+      <tr><td class="nw">🦫モート</td><td class="r mn">2点</td><td class="r mn">3点</td><td class="r mn">3点</td><td class="r mn">2点</td><td class="r mn">2点</td><td class="r mn">3点</td></tr>
+      <tr><td class="nw">🐊触媒</td><td class="r mn">3点</td><td class="r mn">2点</td><td class="r mn">3点</td><td class="r mn">2点</td><td class="r mn">2点</td><td class="r mn">1点</td></tr>
+      <tr><td class="nw">🐝インカム</td><td class="r mn">2点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">3点</td><td class="r mn">0点</td></tr>
+      <tr><td class="nw">🦞リスク</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">1点</td><td class="r mn">2点</td><td class="r mn">1点</td><td class="r mn">1点</td></tr>
+      <tr class="hl"><td class="nw"><strong>確度（18点満点）</strong></td><td class="r mn"><strong>11点</strong></td><td class="r mn"><strong>11点</strong></td><td class="r mn"><strong>11点</strong></td><td class="r mn"><strong>11点</strong></td><td class="r mn"><strong>12点</strong></td><td class="r mn"><strong>9点</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">指数の買いのあとに残るもの</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>銘柄</th><th>指数の買いが終わったあとに残る材料</th><th>気をつける点</th><th>完全版</th></tr></thead>
+    <tbody>
+      <tr><td class="nw"><strong>日本精機</strong></td><td class="sm2">二輪車用計器とHUDで世界首位（会社資料）。9月に100億円の自社株買い、10月に500億円の買収。ネットキャッシュは借入超過に変わった</td><td class="sm2">四輪は3期連続の営業赤字。ホンダ向けが約4割へ</td><td class="sm2"><a href="/analysis/nippon-seiki-7287">レポート</a></td></tr>
+      <tr><td class="nw"><strong>フクダ電子</strong></td><td class="sm2">在宅医療のレンタルと消耗品で売上の7割超。利益率は5期続けて18〜19%、自己資本比率84%。元会長の辞任を機にガバナンス改革が始まった</td><td class="sm2">PBRは自社の直近5年の高値を上回る。第三者委員会の報告が未公表。元会長が20.6%の筆頭株主</td><td class="sm2"><a href="/analysis/fukuda-denshi-6960">レポート</a></td></tr>
+      <tr><td class="nw"><strong>ナカニシ</strong></td><td class="sm2">歯科用ハンドピースで歯科事業の利益率33%、海外売上88%。総還元性向70%の方針で、8月に上方修正・自社株買い・分割</td><td class="sm2">2025年にのれん138億円を減損した翌年に、新しい買収でのれんが179億円へ。関税と為替</td><td class="sm2"><a href="/analysis/nakanishi-7716">レポート</a></td></tr>
+      <tr><td class="nw"><strong>テクノ菱和</strong></td><td class="sm2">営業利益は3年で5倍、手持工事は売上の1年分超。実質無借金。10月に1→3の分割</td><td class="sm2">利益率16%は過去の3倍。会社の今期予想は利益横ばい</td><td class="sm2"><a href="/analysis/techno-ryowa-1965">レポート</a></td></tr>
+      <tr><td class="nw"><strong>西川ゴム工業</strong></td><td class="sm2">DOE8%の配当で利回り5%台。ネットキャッシュは時価総額の22%。北米が黒字化</td><td class="sm2">配当が純利益を上回る。メキシコの更正決定通知 約110億円（引当なし）</td><td class="sm2"><a href="/analysis/nishikawa-rubber-5161">レポート</a></td></tr>
+      <tr><td class="nw"><strong>ヨネックス</strong></td><td class="sm2">バドミントンが売上の62%。売上は4年で2.2倍、ROEは5期続けて13〜16%。3年後の試算は6社でいちばん高い</td><td class="sm2">中国向けが売上の47.5%。還元は薄く利回り1.2%。PBRは同業の中央値より上</td><td class="sm2"><a href="/analysis/yonex-7906">レポート</a></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">日本精機は10月6日終値、ほかの5社は10月7日終値で採点した。需要の日数の上側は、有価証券報告書の大株主から固定的な株主を引いて当商会が置いた浮動株比率（日本精機80%、ナカニシ72%、ヨネックス70%、西川ゴム工業61%、テクノ菱和57%、フクダ電子49%）による。2章の一覧は株探の大株主から機械的に置いた比率なので、同じ銘柄でも日数が少し違う。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">ルールと日程</h2><span class="sb bg-bl">10月30日実施</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="nw">公表</td><td class="sm2">2026年10月7日（取引終了後）、JPX総研「TOPIX等の株価指数における構成銘柄の定期入替等について」</td></tr>
+      <tr><td class="nw">実施</td><td class="sm2">2026年10月30日（10月の最終営業日）。基準日は8月の最終営業日</td></tr>
+      <tr><td class="nw">新規追加</td><td class="sm2">35銘柄（スタンダード23、グロース12）。プライム以外の市場から流動性で選ぶ最初の回</td></tr>
+      <tr><td class="nw">追加基準</td><td class="sm2">年間売買代金回転率0.2以上、かつ浮動株時価総額の累積比率が上位96%以内（今回は約610億円）</td></tr>
+      <tr><td class="nw">継続基準</td><td class="sm2">回転率0.14以上、かつ累積比率が上位97%以内（約420億円）。すでに構成銘柄である会社に適用</td></tr>
+      <tr><td class="nw">移行措置銘柄</td><td class="sm2">継続基準を満たさなかった構成銘柄。2026年10月から四半期ごとに8回でウエイトを下げる。2027年10月に再評価し、基準を満たせば低減を止める</td></tr>
+      <tr><td class="nw">銘柄数</td><td class="sm2">入替前1,636 → 入替後1,669（うち移行措置683）→ 移行完了時（2028年7月末）986＋再評価で残る銘柄</td></tr>
+      <tr><td class="nw">次回</td><td class="sm2">定期入替は年1回（10月末）。2回目は2028年10月</td></tr>
+      <tr><td class="nw">連動資産</td><td class="sm2">約160兆円（2026年6月）。構成銘柄の浮動株時価総額は775兆円（2026年8月末）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 新規追加は35銘柄だが、<strong>ウエイトを下げられる移行措置銘柄は683ある</strong>。指数に連動する資金にとっては、35銘柄を買う一方で683銘柄を2年かけて売っていく入替である。今回の資料は追加側だけを扱っている。</div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">注記と検算メモ</h2><span class="sb bg-am">必読</span></div>
+
+  <div class="card" style="border:2px solid var(--rd);border-radius:10px;padding:14px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0;color:var(--rd)">この資料の位置づけ</div>
+    <ul class="note">
+      <li><strong>売買の推奨ではない。</strong>「需給」「値札」のタグと「当商会の見方」は、数字を仕分けた結果で、買い・売りの判断を示すものではない</li>
+      <li><strong>需要の日数は値上がりの幅ではない。</strong>連動資産のすべてが10月30日に指数どおり買うわけではなく、先回りの買いがあり、実施日を過ぎれば買いは止まる</li>
+      <li><strong>採点したのは6社だけ。</strong>残りの29銘柄は株探の指標で並べただけで、決算書も開示も読んでいない</li>
+    </ul>
+  </div>
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年10月）</div>
+    <ul class="note">
+      <li>新規追加35銘柄、追加・継続の基準、銘柄数、連動資産約160兆円、浮動株時価総額775兆円はJPX総研の公表資料（2026年10月7日）と別紙</li>
+      <li>株価は2026年10月7日の終値、8月末比は8月31日の終値との比較、売買代金は直近40営業日の終値×出来高の平均（いずれも株探の日足から当商会が計算）。PER・PBR・利回り・時価総額は株探の表示</li>
+      <li><strong>需要の概算は当商会の割り算</strong>：連動資産160兆円÷浮動株時価総額775兆円＝20.6%を、銘柄ごとの浮動株時価総額（時価総額×（1−固定株主の比率））に掛けた。固定株主の比率は株探の大株主上位10者から名前で仕分けたもので（holders.py）、<strong>JPXの浮動株比率ではない</strong>。上位10者より下の固定的な株主は拾えていないので、需要は多めに出る</li>
+      <li>2026年10月8日に計算方法を改めた。最初の版は全銘柄に同じ需要（下限の約126億円）を当てていたため、時価総額の大きいフクダ電子・ナカニシ・沖縄セルラー電話などの順位が低く出ていた</li>
+      <li>採点した6社の数字は各社の完全版レポートと同じ（score.json）。日本精機は9月の自社株買いと10月の買収を反映、ナカニシは8月の自社株買いと10月1日の株式分割（1→2）後、テクノ菱和は10月1日の株式分割（1→3）後、フクダ電子は自己株式（発行済みの28%）を除いた株数</li>
+      <li><strong>当商会の置き</strong>：需給と値札の区切り（20日・10日、PBR1倍・2倍・3.5倍、PER20倍・25倍）、「先に上昇」を10%としたこと</li>
+      <li><strong>未確認</strong>：JPXが各銘柄に使う浮動株比率、10月8日以降の値動き、採点していない29銘柄の中身、ウエイトを下げられる移行措置銘柄683の一覧（公表資料にあるが今回は扱っていない）</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではなく、特定銘柄の売買を推奨するものではありません。需給・値札の仕分け、買い需要の概算、ランク・上値・下値は当商会の計算で、将来の株価を示すものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: JPX総研「TOPIX等の株価指数における構成銘柄の定期入替等について」（2026年10月7日）・別紙／株探（確定値・日足・指標）／採点した6社は各社の決算短信・有価証券報告書・適時開示 · 2026.10
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#nav .tb'));
+  var pans=[].slice.call(document.querySelectorAll('.pn'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    pans.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    tabs.forEach(function(x){var on=x.getAttribute('data-p')===id;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      show(b.getAttribute('data-p'));
+      var nav=document.getElementById('nav');
+      var top=nav.getBoundingClientRect().top+window.pageYOffset;
+      if(window.pageYOffset>top) window.scrollTo(0,top);
+    });
+  });
+  if(location.hash) show(location.hash.slice(1));
+})();
+</script>
+
+</body>
+</html>

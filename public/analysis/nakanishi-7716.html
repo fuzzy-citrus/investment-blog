@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ナカニシ（7716）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+<style id="tab-fallback">
+.pn{display:block;scroll-margin-top:56px}
+html.js .pn{display:none}
+html.js .pn.on{display:block}
+a.tb{text-decoration:none}
+.tn{flex-wrap:wrap}
+.tn .tb{padding:11px 14px}
+html:not(.js) .pn{margin-bottom:34px}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 7716 東証スタンダード · 2026.10.07 · 株価 1,511円（10/7終値）</p>
+      <h1 class="ht">ナカニシ <em>（7716）</em><br>統合投資分析レポート</h1>
+      <p class="hs">歯科用ハンドピースの会社。海外売上88%、歯科事業の営業利益率33%<br>2025年は買収先ののれんを138億円減損して最終赤字。2026年は上方修正・自社株買い・1→2の分割。一次資料で数えた</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>幅・小／確度11点</small></div>
+      <div class="vt">
+        <strong>PBR2.10倍・PER18.5倍・利回り1.99%</strong><br>
+        上値1,380円（▲8.7%）／下値139円（▲91%）。<br>
+        PBRは医療機器の中央値より上。<br>
+        TOPIXの買い需要は売買代金の14〜42日分。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価（10/7終値）</div><div class="kn am">1,511円</div><div class="ks">8月末から▲3.3%</div></div>
+    <div class="kv"><div class="kl">時価総額</div><div class="kn bl">2,787億円</div><div class="ks">売買代金は1日8.7億円</div></div>
+    <div class="kv"><div class="kl">PBR</div><div class="kn am">2.10倍</div><div class="ks">5年レンジ1.28〜2.86倍</div></div>
+    <div class="kv"><div class="kl">PER／利回り</div><div class="kn gn">18.5倍／1.99%</div><div class="ks">配当30円（予想）</div></div>
+    <div class="kv"><div class="kl">ネットキャッシュ</div><div class="kn gn">190億円</div><div class="ks">時価総額の8%</div></div>
+    <div class="kv"><div class="kl">TOPIXの買い需要</div><div class="kn bl">126〜366億円</div><div class="ks">売買代金の14〜42日分（概算）</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <a class="tb on" href="#p1" data-p="p1"><span class="d" style="background:var(--gn2)"></span>結論</a>
+  <a class="tb" href="#p2" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札とBS</a>
+  <a class="tb" href="#p3" data-p="p3"><span class="d" style="background:var(--or2)"></span>稼ぐ力</a>
+  <a class="tb" href="#p4" data-p="p4"><span class="d" style="background:var(--bl2)"></span>事業の強み</a>
+  <a class="tb" href="#p5" data-p="p5"><span class="d" style="background:var(--gn2)"></span>還元と資本政策</a>
+  <a class="tb" href="#p6" data-p="p6"><span class="d" style="background:var(--bl2)"></span>TOPIX採用と買い需要</a>
+  <a class="tb" href="#p7" data-p="p7"><span class="d" style="background:var(--pu2)"></span>3年後の3ケース</a>
+  <a class="tb" href="#p8" data-p="p8"><span class="d" style="background:var(--am2)"></span>レンジとランク</a>
+  <a class="tb" href="#p9" data-p="p9"><span class="d" style="background:var(--rd)"></span>リスクと検算</a>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 稼ぐ本業と、買収の後始末</h2><span class="sb bg-gn">B++</span></div>
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">結論 01 · 事業</div><span class="ci">🦷</span>
+      <div class="ct">歯科用ハンドピース。歯科事業の利益率は33%</div>
+      <div class="tx">歯科医が歯を削るときに持つ器具が主力。2026年1〜6月は歯科・DCI・外科・機工の4事業すべてが2桁増収で、売上472億円（+20.5%）、営業利益100億円（+32.0%）。<strong>通期予想を8月に上方修正し、営業利益186億円（+32.4%）を見込む</strong>。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">結論 02 · 値札</div><span class="ci">🏷️</span>
+      <div class="ct">PBR2.10倍は同業の中央値1.92倍より上</div>
+      <div class="tx">1年前は957円（52週安値）で、そこから1.6倍。直近5年のPBRのレンジは1.28〜2.86倍で、その真ん中あたりにいる。<strong>規則どおりの上値は1,380円（▲8.7%）で、いまの株価より下になる</strong>。上値が株価より下になった4社の中では、距離がいちばん近い。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">結論 03 · 買収</div><span class="ci">🧾</span>
+      <div class="ct">138億円を減損した翌年に、のれんが3倍になった</div>
+      <div class="tx">2023年に買った米国DCI社ののれんを、2025年12月期に137.7億円減損して最終赤字になった。<strong>2026年3月に別の米国企業2社を買収し、のれんは54億円から179億円に増えている</strong>。借入金は339億円。買収で伸ばす会社で、その成否が利益を振らせる。</div>
+    </div>
+  </div>
+  <div class="inf">📌 当商会の採点は<strong>B++</strong>（幅・小／確度11点）。本業の強さと還元の方針は明確で、触媒は満点にした。ただ<strong>値札は同業の中央値より上で、買収の結果が1株純資産を削った前例がある</strong>。規則で数える上値がないので、ランクは伸びない。同じ確度のまま幅が「中」になるのは635円、「大」になるのは449円。</div>
+  <div class="note">株価は2026年10月7日の終値1,511円（株探の確定値）。TOPIXへの新規採用は10月7日の取引終了後に公表された。2026年10月1日に1株を2株に分割しており、1株あたりの数字は分割後。貸借対照表は2026年6月末から、8月18日の自己株式取得（40.0億円）を引いた概算。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札と貸借対照表</h2><span class="sb bg-am">PBR2.10倍</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">株価（2026年10月7日終値）</td><td class="r mn">1,511円</td><td class="sm2">52週の高値1,692円・安値957円</td></tr>
+      <tr><td class="">時価総額</td><td class="r mn">2,787億円</td><td class="sm2">自己株式を除くと2,472億円（16,361万株）</td></tr>
+      <tr class="hl"><td class=""><strong>PBR</strong></td><td class="r mn"><strong>2.10倍</strong></td><td class="sm2">1株純資産719円。直近5年のレンジは1.28〜2.86倍</td></tr>
+      <tr><td class="">PER（会社予想）</td><td class="r mn">18.5倍</td><td class="">1株利益81.5円</td></tr>
+      <tr><td class="">配当利回り</td><td class="r mn">1.99%</td><td class="sm2">年30円の予想。配当性向は約37%</td></tr>
+      <tr><td class="">現預金・有価証券 − 借入金</td><td class="r mn">190億円</td><td class="sm2">時価総額（自己株式を除く）の8%。現預金等529億円、借入金339億円</td></tr>
+      <tr><td class="">投資有価証券</td><td class="r mn">50億円</td><td class="">上場株式など。金額は小さい。時価で計上済み</td></tr>
+      <tr><td class="">清原式ネットキャッシュ比率</td><td class="r mn">0.19倍</td><td class="sm2">（流動資産952億円＋投資有価証券×70%−負債525億円）÷時価総額</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 現預金等は約529億円あるが、借入金が339億円あり、<strong>ネットキャッシュは190億円（時価総額の8%）</strong>。総資産1,746億円のうち、のれんが179億円、顧客関連資産などの無形資産が145億円を占める。会社は手元流動性を月商の8か月分程度に保つ方針を掲げている。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">稼ぐ力 ── 本業は33%、買収先は減損</h2><span class="sb bg-or">今期は32%増益予想</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">ROE</th></tr></thead>
+    <tbody>
+      <tr><td class="">2021年12月期</td><td class="r mn">449億円</td><td class="r mn">—</td><td class="r mn">101.0億円</td><td class="r mn">58.4円</td><td class="r mn">12.7%</td></tr>
+      <tr><td class="">2022年12月期</td><td class="r mn">487億円</td><td class="r mn">153.9億円</td><td class="r mn">124.7億円</td><td class="r mn">72.7円</td><td class="r mn">14.4%</td></tr>
+      <tr><td class="">2023年12月期</td><td class="r mn">597億円</td><td class="r mn">142.5億円</td><td class="r mn">228.0億円</td><td class="r mn">133.8円</td><td class="r mn">22.4%</td></tr>
+      <tr><td class="">2024年12月期</td><td class="r mn">770億円</td><td class="r mn">146.0億円</td><td class="r mn">85.8億円</td><td class="r mn">50.7円</td><td class="r mn">7.3%</td></tr>
+      <tr><td class="">2025年12月期</td><td class="r mn">812億円</td><td class="r mn">140.9億円</td><td class="r mn">▲24.0億円</td><td class="r mn">-14.4円</td><td class="r mn">-2.0%</td></tr>
+      <tr class="hl"><td class="">2026年12月期（予）</td><td class="r mn">945億円</td><td class="r mn">186.5億円</td><td class="r mn">135.4億円</td><td class="r mn">81.6円</td><td class="r mn">—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">1株利益は2026年10月の株式分割（1→2）後に直した数字。2025年12月期の最終赤字は、DCI社ののれんの減損137.7億円による（営業利益は140.9億円で黒字）。2026年12月期の予想は8月7日に上方修正されたもの。</div>
+  <div class="h3">事業別（2026年12月期の上半期）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>事業（2026年1〜6月）</th><th class="r">売上高</th><th class="r">前年同期比</th><th class="r">営業利益</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="">歯科事業</td><td class="r mn">269.6億円</td><td class="r mn">+14.6%</td><td class="r mn">89.6億円</td><td class="sm2">歯科用ハンドピースなど。国内・北米・欧州・アジアのすべてで増収。利益率33%</td></tr>
+      <tr><td class="">DCI事業</td><td class="r mn">121.6億円</td><td class="r mn">+23.6%</td><td class="r mn">6.7億円</td><td class="sm2">2023年に買収した米国の歯科用チェア・ユニットの会社。値上げ前の駆け込みで増収。<strong>2025年12月期にのれん137.7億円を減損</strong></td></tr>
+      <tr><td class="">外科事業</td><td class="r mn">39.1億円</td><td class="r mn">+53.4%</td><td class="r mn">14.7億円</td><td class="sm2">外科用の骨を削るドリル。2026年3月に米国の頭蓋骨穿孔器メーカーを買収</td></tr>
+      <tr><td class="">機工事業</td><td class="r mn">42.1億円</td><td class="r mn">+28.6%</td><td class="r mn">11.4億円</td><td class="">工業用の切削・研削機器</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>利益の9割近くを歯科事業が稼いでいる</strong>。DCI事業は売上が2番目に大きいが、利益は6.7億円にとどまり、前の期は通期で4.9億円の営業損失だった。上半期の増収率20.5%のうち、為替の影響を除くと12.3%である。なお、2026年から研究開発費を各事業に配る方法に変えたため、利益の数字は前の期までと単純には比べられない。</div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">事業の強み ── 歯を削る道具で世界へ</h2><span class="sb bg-bl">海外売上88%</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">製品</td><td class="sm2">歯科用ハンドピース（歯を削る回転器具）と関連機器。ブランドはNSK。超高速で回る小さな軸受と回転の技術が核</td></tr>
+      <tr><td class="">地域</td><td class="sm2">2025年12月期の売上812億円のうち、北米326億円、欧州213億円、日本94億円、アジア87億円、その他93億円。海外が88%</td></tr>
+      <tr><td class="">顧客</td><td class="sm2">歯科の世界的な卸であるHenry Schein向けが124億円（売上の15%）</td></tr>
+      <tr><td class="">横展開</td><td class="sm2">外科（骨を削るドリル）と機工（工業用の切削・研削）。外科は上半期+53.4%で、利益率は38%</td></tr>
+      <tr><td class="">中期計画NV2030</td><td class="sm2">2027年に売上880〜950億円・EBITDA220〜250億円、2030年に売上1,000〜1,200億円・EBITDA250〜330億円。ROE12%、総還元性向70%。今期の予想（売上945億円・EBITDA243億円）は2027年の目標にほぼ届く</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 歯科医が毎日使う器具で、世界中に売っている。歯科事業だけで見れば利益率33%の高収益の会社である。<strong>課題は、その現金を買収に回したときの成績</strong>で、チェア・ユニットのDCI社は買って2年で減損になった。</div>
+  <div class="note">歯科用ハンドピースの世界シェアの数値は、今回読んだ開示資料（決算短信・有価証券報告書）には書かれておらず、当商会では確認できていない。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">還元と資本政策 ── 総還元性向70%、分割と自社株買い</h2><span class="sb bg-gn">利回り1.99%</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">還元方針</td><td class="sm2">中期計画NV2030で総還元性向70%を基本方針に（有価証券報告書の配当政策には「総還元性向50%」の記載も残る）。ROEの目標は12%</td></tr>
+      <tr><td class="">自社株買い</td><td class="sm2">2026年2月に150万株・25億円の枠を決議、8月7日に200万株・40億円へ拡大。8月18日にToSTNeT-3で1,244,100株（分割前）を1株3,215円・40.0億円で取得して終了</td></tr>
+      <tr><td class="">株式分割</td><td class="sm2">2026年10月1日に1株→2株。投資単位は約30万円から約15万円へ</td></tr>
+      <tr><td class="">配当（分割後）</td><td class="sm2">2025年12月期27円 → 2026年12月期30円（予想。中間30円は分割前、期末15円は分割後）</td></tr>
+      <tr><td class="">買収</td><td class="sm2">2023年8月にDCI International（米国）、2026年3月にAcra Cut社とIntech社（米国・外科）。後者の取得価額は非開示</td></tr>
+      <tr><td class="">買収への対応方針</td><td class="">導入していない（ガバナンス報告書）</td></tr>
+      <tr><td class="">大株主</td><td class="sm2">ナカニシE&N 5.45%、中西千代氏5.25%、NSKナカニシ財団4.48%、オフィスナカニシ3.76%、中西英一氏3.37%、中西賢介氏3.34%、足利銀行2.73%（2025年12月末）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 上方修正に合わせて自社株買いの枠を広げ、10日ほどで使い切った。<strong>「利益が増えたら還元も増やす」という動きが実際に見えている</strong>。一方で、同じ年に借入金を増やして買収もしており、還元と買収を同時に進めている。自己資本比率は2023年12月末の80.1%から69.6%に下がった。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">TOPIX採用と買い需要 ── 売買代金の何日分か</h2><span class="sb bg-bl">当商会の概算</span></div>
+  <div class="tx">2026年10月7日、JPX総研がTOPIXの初回定期入替の結果を公表した。新規に追加されたのは35銘柄（スタンダード23、グロース12）で、実施は10月30日。ナカニシはその一つである。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>出所・前提</th></tr></thead>
+    <tbody>
+      <tr><td class="">TOPIXに連動する資産 ÷ 構成銘柄の浮動株時価総額</td><td class="r mn">20.6%</td><td class="sm2">約160兆円÷775兆円（JPX総研の別紙）。<strong>割り算は当商会</strong></td></tr>
+      <tr><td class="">追加基準の下限（浮動株時価総額）</td><td class="r mn">約610億円</td><td class="">累積比率の上位96%以内</td></tr>
+      <tr><td class="">浮動株時価総額（当商会の置き）</td><td class="r mn">約1,771億円</td><td class="sm2">自己株式を除く時価総額×72%。大株主のうち固定的とみた株主（ナカニシE&N 5.45%、中西千代氏 5.25%、NSKナカニシ財団 4.48%、オフィスナカニシ 3.76%、中西英一氏 3.37%、中西賢介氏 3.34%、足利銀行 2.73%）を引いただけの粗い置き</td></tr>
+      <tr class="hl"><td class=""><strong>買い需要の概算</strong></td><td class="r mn"><strong>126〜366億円</strong></td><td class="sm2">下限は基準の610億円、上側は当商会の置きに20.6%を掛けた</td></tr>
+      <tr class="hl"><td class=""><strong>1日の売買代金に対して</strong></td><td class="r mn"><strong>14〜42日分</strong></td><td class="">直近40営業日の平均は1日8.7億円</td></tr>
+      <tr><td class="">基準日（8月31日）からの値動き</td><td class="r mn">▲3.3%</td><td class="">1,562円 → 1,511円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 需要は売買代金に対して大きいが、<strong>この数字をそのまま値上がりの幅と読むことはできない</strong>。①連動資産のすべてが10月30日の引けで指数どおりに買うわけではない。②選定ルールは2024年9月に公表済みで、先回りの買いがある。③実施日を過ぎると買いは止まる。この会社は基準日から▲3.3%。8月の上方修正で付けた高値1,692円からは1割ほど下の位置にいる。</div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">3年後の3ケース ── ベア・ベース・ブル</h2><span class="sb bg-pu">2029年</span></div>
+  <div class="tx">3年後（2029年秋）の株価を<strong>1株純資産×PBR</strong>で3通りに置く。1株純資産は、いまの719円に3年分の内部留保（1株利益−配当）を足す。確率は当商会の置きである。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>ケース</th><th>前提</th><th class="r">3年後の1株純資産</th><th class="r">PBR</th><th class="r">株価</th><th class="r">騰落</th><th class="r">配当込み</th></tr></thead>
+    <tbody>
+      <tr><td class=""><strong>ベア</strong>（25%）</td><td class="sm2">円高と関税で純利益82億円/年へ。新しい買収でも減損が出て1株あたり約100円（約164億円）を失う。PBRは直近5年の安値1.28倍</td><td class="r mn">679円</td><td class="r mn">1.28倍</td><td class="r mn">869円</td><td class="r mn">▲42%</td><td class="r mn">▲37%</td></tr>
+      <tr class="hl"><td class=""><strong>ベース</strong>（50%）</td><td class="sm2">今期予想並みの純利益139億円/年が続く。PBRは医療機器10社の中央値1.92倍</td><td class="r mn">878円</td><td class="r mn">1.92倍</td><td class="r mn">1,685円</td><td class="r mn">+12%</td><td class="r mn">+18%</td></tr>
+      <tr><td class=""><strong>ブル</strong>（25%）</td><td class="sm2">2030年の目標（EBITDA250〜330億円）に沿って純利益172億円/年。PBRは2.5倍（直近5年の高値は2.86倍）</td><td class="r mn">914円</td><td class="r mn">2.50倍</td><td class="r mn">2,284円</td><td class="r mn">+51%</td><td class="r mn">+59%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 3ケースを確率で均すと1,631円（+7.9%）、3年分の配当を足して+14.6%。<strong>ベースで+12%、配当込みで2割弱</strong>。5社の中では均した数字がいちばん高い。ただし幅も大きく、下は「次の買収でも減損が出る」場合を置いた。この会社を見るときの論点は、本業ではなく買収の成績である。</div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr><td class="">🦦安さ</td><td class="r mn">1点</td><td class="sm2">PBR2.10倍は医療機器10社の中央値1.92倍より高い。PERは18.5倍。ネットキャッシュは時価総額の8%で、のれんと無形資産が336億円ある</td></tr>
+      <tr><td class="">🦉財務</td><td class="r mn">2点</td><td class="sm2">自己資本比率69.6%。現預金等は約529億円あるが、買収で借入金が339億円に増えた。2025年12月期はのれんの減損で最終赤字</td></tr>
+      <tr><td class="">🦫モート</td><td class="r mn">3点</td><td class="sm2">歯科用ハンドピースが主力で、歯科事業の営業利益率は33%。海外売上が88%で、北米・欧州・アジアに広く売っている。外科・機工へ「削る」技術を横展開</td></tr>
+      <tr><td class="">🐊触媒</td><td class="r mn">3点</td><td class="sm2">中期計画で総還元性向70%とROE12%を掲げ、2026年8月に通期予想を上方修正、自己株式40億円を取得、10月に1株を2株へ分割。買収への対応方針は導入していない</td></tr>
+      <tr><td class="">🐝インカム</td><td class="r mn">1点</td><td class="sm2">利回り1.99%。配当は分割後で27円→30円（予想）。還元の半分は自社株買い</td></tr>
+      <tr><td class="">🦞リスク</td><td class="r mn">1点</td><td class="sm2">2023年に買ったDCIで137.7億円の減損を出した翌年に、次の買収でのれんが54億円→179億円に増えた。米国の関税、為替、最大の顧客Henry Scheinが売上の15%</td></tr>
+      <tr class="hl"><td class=""><strong>確度</strong></td><td class="r mn"><strong>11点</strong></td><td class="">18点満点。13点以上が「高」、8点以上が「中」</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">上値と下値</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>上値の置き方</th><th class="r">PBR</th><th class="r">株価</th><th class="r">いまから</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="">同業の中央値1.92倍（規則で採用）</td><td class="r mn">1.92倍</td><td class="r mn">1,380円</td><td class="r mn">▲8.7%</td></tr>
+      <tr><td class="">直近5年の高値2.86倍</td><td class="r mn">2.86倍</td><td class="r mn">2,055円</td><td class="r mn">+36.0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>下値の置き方</th><th class="r">株価</th><th class="r">下値</th><th class="r">非対称比</th><th class="r">幅</th><th class="r">ランク</th></tr></thead>
+    <tbody>
+      <tr><td class="">52週安値</td><td class="r mn">957円</td><td class="r mn">▲37%</td><td class="r mn">-0.24</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+      <tr><td class="">PBR下限1.28倍×BPS</td><td class="r mn">920円</td><td class="r mn">▲39%</td><td class="r mn">-0.22</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+      <tr><td class="">PER下限8.56倍×予想EPS</td><td class="r mn">698円</td><td class="r mn">▲54%</td><td class="r mn">-0.16</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+      <tr class="hl"><td class="">床（1株あたり金融資産）（規則で採用）</td><td class="r mn">139円</td><td class="r mn">▲91%</td><td class="r mn">-0.10</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">上値は「1株純資産×min（直近5年のPBRの高値、同業の中央値）」。同業はテルモ 2.04倍、栄研化学 1.80倍、リオン 1.21倍、日本光電工業 1.46倍、シスメックス 2.34倍、ＪＭＳ 0.26倍、マニー 2.53倍、オリンパス 2.83倍、朝日インテック 5.16倍、松風 1.55倍（株探・10月7日）。下値は、株価より下にある候補のうち最も深いもの。</div>
+  <div class="inf">📌 <strong>規則どおりの上値は1,380円で、いまの株価より▲8.7%</strong>。直近5年のPBRの高値は2.86倍だが、同業10社の中央値1.92倍のほうが低いので、規則では同業を採る。下値は規則どおり「最も深いもの」で1株あたり金融資産の139円になるが、借入金を引いた現金が少ないために極端に出ている。PBRの安値で置けば920円（▲39%）で、どちらでも幅は「小」。確度11点でB++。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>株価</th><th>幅</th><th>ランク</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td class="">1,511円（いま）</td><td class="">小</td><td class=""><strong>B++</strong></td><td class="">—</td></tr>
+      <tr><td class="">635円</td><td class="">中</td><td class="">B++</td><td class="">52週安値957円より下</td></tr>
+      <tr><td class="">449円</td><td class="">大</td><td class="">A-</td><td class="sm2">直近5年の安値878円（2025年4月・分割後）の半分ほど</td></tr>
+    </tbody>
+  </table></div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">6つのリスク</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>リスク</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">買収とのれん</td><td class="sm2">DCI社で137.7億円を減損（2025年12月期）。2026年3月の買収でのれんは54億円→179億円。取得価額は非開示で、採算は外から検証できない</td></tr>
+      <tr><td class="">米国の関税</td><td class="sm2">DCI社の減損の理由は「米国政府による関税政策の影響で利益率が低下」。北米の売上は全体の4割</td></tr>
+      <tr><td class="">為替</td><td class="sm2">海外売上88%。上半期の増収20.5%のうち8ポイントは為替。経常利益には為替差益11.3億円が入っている</td></tr>
+      <tr><td class="">顧客の集中</td><td class="">Henry Schein向けが売上の15%</td></tr>
+      <tr><td class="">借入金</td><td class="sm2">短期161億円、1年内の長期86億円、長期92億円の計339億円。短期借入金はこの半年で78億円から161億円に増えた</td></tr>
+      <tr><td class="">IRBANKの指標</td><td class="sm2">分割の調整がずれ、同サイトのPBR・PERは実際の2分の1で表示されている。本資料では検算して2倍に直した</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年10月）</div>
+    <ul class="note">
+      <li>株価1,511円は2026年10月7日の終値（株探の確定値・分割後）。発行済184,436,400株（分割後）。自己株式は6月末の9,166,718株に8月18日の取得1,244,100株を足し、2倍した</li>
+      <li>6月末の現金及び預金563.76億円・有価証券5.22億円、借入金（短期161.19億円・1年内長期85.72億円・長期91.90億円）、のれん178.81億円、自己資本1,215.64億円は2026年12月期第2四半期決算短信（8月7日）。そこから自己株式の取得額40.0億円を引いた</li>
+      <li>通期予想（売上944.80億円・営業利益186.49億円・純利益135.44億円・1株利益81.55円）と配当は同短信と8月7日の開示（上方修正、株式分割、取得枠の拡大）。自己株式の取得結果は8月18日の開示</li>
+      <li>のれんの減損137.66億円は2月12日の開示。Acra Cut社・Intech社の買収は3月5日の開示（取得価額は非開示）</li>
+      <li>5期の業績・ROE、地域別の売上、Henry Schein向けの売上、大株主、中期計画NV2030の目標は有価証券報告書（2025年12月期）。営業利益は株探の業績表</li>
+      <li><strong>IRBANKのPBR・PERは分割調整のずれで2分の1になっている</strong>。2025年12月期の高値2,619円（分割前）÷1株純資産1,368.88円＝1.91倍で、表示の0.96倍の2倍と一致することを確かめた。直近5年のレンジ1.28〜2.86倍、PERの安値8.56倍はこの補正後</li>
+      <li>同業10社は当商会が選んだ医療機器（フクダ電子と同じ顔ぶれ）</li>
+      <li><strong>当商会の置き</strong>：浮動株比率72%、連動資産の比率20.6%、3ケースの1株利益・PBR・確率、ベアで置いた追加の減損164億円</li>
+      <li><strong>未確認</strong>：歯科用ハンドピースの世界シェア、2026年の買収の取得価額と採算、7〜9月の業績、JPXが使う浮動株比率、10月8日の終値以降の値動き</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言ではなく、特定銘柄の売買を推奨するものではありません。ランク・上値・下値・3年後の株価・買い需要の概算は当商会の計算で、将来の株価を示すものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: ナカニシ 2026年12月期第2四半期決算短信・2025年12月期決算短信・有価証券報告書（2025年12月期）・コーポレート・ガバナンス報告書／適時開示（業績予想の上方修正、株式分割、自己株式の取得、のれんの減損、子会社による株式取得）／JPX総研（TOPIX定期入替）／株探（確定値・週足・同業の指標）／IRBANK（PBR・PERレンジ） · 2026.10
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#nav .tb'));
+  var pans=[].slice.call(document.querySelectorAll('.pn'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    pans.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    tabs.forEach(function(x){var on=x.getAttribute('data-p')===id;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      show(b.getAttribute('data-p'));
+      var nav=document.getElementById('nav');
+      var top=nav.getBoundingClientRect().top+window.pageYOffset;
+      if(window.pageYOffset>top) window.scrollTo(0,top);
+    });
+  });
+  if(location.hash) show(location.hash.slice(1));
+})();
+</script>
+
+</body>
+</html>

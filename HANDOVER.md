@@ -874,3 +874,12 @@ AdSense の審査で「ポリシー違反：有用性の低いコンテンツ」
 罠
 - 差し込むHTMLの `style="…"` の中で `"` を使わない（フォント名を `"` で囲んで属性が途中で切れ、帯の背景が消えた）
 - `npx astro build` だと postbuild が走らず、完全版の帯も検索も入らない。必ず `npm run build`
+
+## 2026-10-08｜TOPIX新規採用35銘柄のまとめ記事を公開（Claude）
+
+- 公開：`topix-new35-2026-10`（2026-10-08 12:40）。一覧資料 `public/analysis/topix-new35-2026-10.html` と、採点した6社の完全版（nippon-seiki-7287／fukuda-denshi-6960／nakanishi-7716／techno-ryowa-1965／nishikawa-rubber-5161／yonex-7906）も同時に公開
+- **6社の個別記事は下書きのまま。** まとめ記事の銘柄リンクは完全版レポート（/analysis/<slug>）へ向けてある。個別記事を出したら `py build_summary.py --publish <日時> --links-blog` で記事へのリンクに切り替えられる
+- 公表翌日（10/8）の値動きは **11:30時点の場中の参考値**で公開した（35銘柄中32が下落）。引け後に `py today.py` → `py build_summary.py --publish 2026-10-08T12:40` で終値に差し替える
+- 作り方・数え方・未確認事項は `numasoko-reports-backup/06_銘柄調査/topix-2026-10/README.md`。共通エンジン `engine.py`（銘柄ごとの config.py から採点・完全版・記事を出す）
+- 山本の希望は「下がったところで拾える銘柄のPR」だったが、採点が6社とも幅・小なので、買いを勧める書き方にはせず「需給×値札の順位」と「幅が中になる株価までの距離」を載せた
+- 下書きの在庫が増えている：reverse-value-03-okamoto-glass、reverse-value-04-erth-group、nippon-seiki-7287、nishikawa-rubber-5161、techno-ryowa-1965、fukuda-denshi-6960、nakanishi-7716、yonex-7906
