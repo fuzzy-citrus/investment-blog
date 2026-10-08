@@ -1,6 +1,7 @@
 import { castPortraits } from './src/data/castPortraits.mjs';
 import {
 	sceneArt,
+	sceneOverrides,
 	SCENE_WIDTH,
 	SCENE_HEIGHT,
 	SCENE_MAX_PER_POST,
@@ -212,8 +213,10 @@ function sceneFigure(scene) {
 }
 
 function rehypeSceneEyecatch() {
-	return (tree) => {
+	return (tree, file) => {
 		const kids = tree.children;
+		const slug = String(file?.path ?? file?.history?.[0] ?? '').split(/[\\/]/).pop().replace(/\.mdx?$/, '');
+		const override = sceneOverrides[slug];
 		const heads = [];
 		kids.forEach((n, i) => {
 			if (n.type === 'element' && n.tagName === 'h2') heads.push(i);
@@ -229,8 +232,11 @@ function rehypeSceneEyecatch() {
 			const section = kids.slice(heads[h], heads[h + 1] ?? kids.length).map(nodeText).join('');
 			const isRivalSection = /乱入|ライバル|反論/.test(text);
 			if (h - last <= SCENE_MIN_GAP && !isRivalSection) continue;
+			// 記事ごとの指定があれば、乱入の立ち絵以外はその指定だけを使う
+			const fixedId = override?.find(([re]) => re.test(text))?.[1];
 			const scene = sceneArt.find((s) => !used.has(s.id) && (
-				s.portrait ? isRivalSection && s.match.test(section) : s.match.test(text)
+				s.portrait ? isRivalSection && s.match.test(section)
+					: override ? s.id === fixedId : s.match.test(text)
 			));
 			if (!scene) continue;
 			used.add(scene.id);

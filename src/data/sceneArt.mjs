@@ -18,6 +18,81 @@ export const sceneArt = [
 		alt: `${name}の全身イラスト`, caption: `${name}、会議に参加。`,
 		match, portrait: true, width: 640, height: 768,
 	})),
+	// ── 2026-10-08 追加：Codex制作・山本採用OKの12枚（アイキャッチ拡充_20261007 の 01〜12）。
+	//    横1280へ縮小しただけ。古い11枚より前に置き、内容が合う章ではこちらを先に使う。
+	//    13〜20（アイキャッチ追加_20261008）は公開承認がまだなので入れていない。
+	{
+		id: 'ec01-excavation', src: '/images/scenes/eyecatch-01-v1.webp',
+		alt: '古い書庫の引き出しから、刷毛で工場の模型を掘り出すカワウソの河内と、隣で図面を読むワニの待伏',
+		caption: '🦦 河内拾造 ＋ 🐊 待伏静江 ——古い帳簿の下に、まだ数えられていないものがある',
+		match: /発掘|掘り出|隠れ資産|含み益|含み資産|土地|簿価|取得時期/,
+	},
+	{
+		id: 'ec02-inspection', src: '/images/scenes/eyecatch-02-v1.webp',
+		alt: '検査台を流れてくるビルの模型を虫眼鏡で調べるフクロウの夜見と、赤い札を上げるザリガニの守田',
+		caption: '🦉 夜見賢三 ＋ 🦞 守田退三 ——通す前に、ひびを探す',
+		match: /点検|検査|開いた|開いて|財務とリスク|貸借対照表|ＢＳ|BS|のれん|減損|後始末/,
+	},
+	{
+		id: 'ec03-harvest', src: '/images/scenes/eyecatch-03-v1.webp',
+		alt: '港の見える市場で、はかりに金貨をのせるミツバチの花岡と、野菜のかごを提げたフラミンゴの優田',
+		caption: '🐝 花岡利次郎 ＋ 🦩 優田 ——受け取る実りを、量ってみる',
+		match: /優待|配当と分割|配当が|配当は|還元は|還元と|ＤＯＥ|DOE|利回り/,
+	},
+	{
+		id: 'ec04-watergate', src: '/images/scenes/eyecatch-04-v1.webp',
+		alt: '水車小屋のある川で、石造りの水門を指し棒で示すビーバーの堀田',
+		caption: '🦫 堀田独占 ——水をせき止めているのは、どこか',
+		match: /参入障壁|堀|モート|ニッチ|シェア|独占|寡占|利益率|ぶれない|稼いでいるのは/,
+	},
+	{
+		id: 'ec05-sorting', src: '/images/scenes/eyecatch-05-v1.webp',
+		alt: '机いっぱいの資料を、タブレットを見ながら3つの箱へ仕分けていくイカの墨田',
+		caption: '🦑 墨田 ——並べ直すと、同じ資料が別のものに見える',
+		match: /仕分け|分類|整理|全部調べ|全部並べ|その後|回を|統計|バックテスト|検証/,
+	},
+	{
+		id: 'ec06-fair', src: '/images/scenes/eyecatch-06-v1.webp',
+		alt: '産業見本市で、工場の模型を示すビーバーの堀田と、光る半導体チップを指さすテック番長',
+		caption: '🦫 堀田独占 ＋ 🦍 テック番長 ——古い工場と新しい技術、どちらが堀か',
+		match: /技術と堀|技術の堀|AIに|ＡＩに|代替され|半導体のクリーンルーム|レーザーとAI/,
+	},
+	{
+		id: 'ec07-rainy-watch', src: '/images/scenes/eyecatch-07-v1.webp',
+		alt: '雨の窓辺で砂時計を横に、株主のつながりを描いた図を静かに眺めるワニの待伏',
+		caption: '🐊 待伏静江 ——雨の日は、動かずに見ている',
+		match: /下げた|急落|売られ|株主と|株主構成|大株主|持ち合い|ＴＯＢ|TOB|ＭＢＯ|MBO|待つ|待ち/,
+	},
+	{
+		id: 'ec08-price-and-content', src: '/images/scenes/eyecatch-08-v1.webp',
+		alt: '骨董の机で値札をつまみ上げるカワウソの河内と、箱の中の歯車を虫眼鏡でのぞくビーバーの堀田',
+		caption: '🦦 河内拾造 ＋ 🦫 堀田独占 ——値札と中身は、別々に見る',
+		match: /値札と|値札｜|値段と|中身|順位|安さの|割安|需給と/,
+	},
+	{
+		id: 'ec09-keep-margin', src: '/images/scenes/eyecatch-09-v1.webp',
+		alt: '夕暮れの港で、小舟に積む荷物の間隔を海図で確かめるザリガニの守田と、家の模型を抱えたミツバチの花岡',
+		caption: '🦞 守田退三 ＋ 🐝 花岡利次郎 ——積みすぎない。余白も荷物のうち',
+		match: /余力|余裕|余白|資金管理|現金比率|配分|上限|建玉|維持率|サイズ/,
+	},
+	{
+		id: 'ec10-primary-source', src: '/images/scenes/eyecatch-10-v1.webp',
+		alt: '図書館で古い資料のグラフを掲げるフクロウの夜見と、タブレットを手に大きな本を開くイカの墨田',
+		caption: '🦉 夜見賢三 ＋ 🦑 墨田 ——もとの資料まで戻る',
+		match: /一次資料|有価証券報告書|有報|開示|出所|いくらあるのか|数え方|逆算|逆から解/,
+	},
+	{
+		id: 'ec11-daily-life', src: '/images/scenes/eyecatch-11-v1.webp',
+		alt: '台所の食卓で、買い物かごと優待券を持つフラミンゴの優田と、びんに硬貨を入れる積立ひつじ',
+		caption: '🦩 優田 ＋ 🐑 積立ひつじ ——暮らしの中で続くかたち',
+		match: /積立ひつじ|暮らし|家計|続ける|続けら|ＮＩＳＡ|NISA|新NISA/,
+	},
+	{
+		id: 'ec12-wide-and-deep', src: '/images/scenes/eyecatch-12-v1.webp',
+		alt: '世界地図の箱庭を囲み、虫眼鏡で一か所をのぞくカワウソの河内と、翼を広げて全体を示すオルカン鸚鵡',
+		caption: '🦦 河内拾造 ＋ 🦜 オルカン鸚鵡 ——広く持つ人と、深く見る人',
+		match: /買われる|売られる683|分散|指数|ＴＯＰＩＸ|TOPIX|広く|全世界株/,
+	},
 	{
 		id: 'rival-roundtable',
 		src: '/images/scenes/scene-rival-roundtable-v1.webp',
@@ -105,3 +180,13 @@ export const SCENE_HEIGHT = 720;
 export const SCENE_MAX_PER_POST = 3;
 export const SCENE_MIN_GAP = 1;
 export const SCENE_MIN_HEADINGS = 4;
+
+// 記事ごとの指定（スラッグ → [見出しに当てる正規表現, 絵のid] の並び）。
+// ここに書いた記事は、指定した章にだけ指定した絵を入れる（自動の当てはめは使わない）。
+// 乱入の章の立ち絵（portrait）は従来どおり自動で入る。
+export const sceneOverrides = {
+	'topix-new35-2026-10': [
+		[/需給と値札を足した順位/, 'ec08-price-and-content'],
+		[/買われる35/, 'ec12-wide-and-deep'],
+	],
+};
