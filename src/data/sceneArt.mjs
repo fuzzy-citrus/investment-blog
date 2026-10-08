@@ -189,4 +189,8 @@ export const sceneOverrides = {
 		[/需給と値札を足した順位/, 'ec08-price-and-content'],
 		[/買われる35/, 'ec12-wide-and-deep'],
 	],
+	'tsutsumi-7937': [
+		[/何が起きたか/, 'ec07-rainy-watch'],
+		[/採点/, 'ec03-harvest'],
+	],
 };

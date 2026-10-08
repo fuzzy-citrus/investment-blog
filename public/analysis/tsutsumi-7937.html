@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ツツミ（7937）投資分析｜沼底バリュー商会</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --bg:#f5f4ee;--bg2:#eceae1;--bg3:#dedad0;
+  --ink:#111217;--ink2:#272830;--ink3:#636470;
+  --gn:#1a6640;--gn2:#239052;--gn3:#e6f4ec;
+  --rd:#b42c2c;--rd3:#fce8e8;
+  --am:#8a5510;--am2:#bc7a18;--am3:#fef3e0;
+  --bl:#153480;--bl2:#1e48b8;--bl3:#dfe8f8;
+  --or:#c46814;--or2:#e68020;--or3:#fef0e0;
+  --pu:#7a1a6a;--pu2:#a83090;--pu3:#f5e0f5;
+  --rule:rgba(17,18,23,.1);
+  --lt:rgba(246,245,239,.95);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --head:'Space Grotesk','Noto Sans JP',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.75}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ca{transition:none}}
+
+/* HERO */
+.hero{background:var(--ink2);padding:44px 56px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;bottom:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+.hi{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.he{font:500 9px/1.4 var(--mono);letter-spacing:.2em;color:rgba(246,245,239,.36);text-transform:uppercase;margin-bottom:14px}
+.ht{font:700 32px/1.15 var(--head);letter-spacing:-.022em;color:var(--lt);margin-bottom:10px;text-wrap:balance}
+.ht em{color:var(--or2);font-style:normal}
+.hs{font-size:11.5px;color:rgba(246,245,239,.5);line-height:1.8}
+.vb{background:rgba(35,144,82,.13);border:1px solid rgba(35,144,82,.3);border-radius:var(--r);padding:18px 24px;min-width:250px}
+.vs{font:700 48px/1 var(--mono);color:var(--gn2);margin-bottom:4px}
+.vs small{font:600 12px/1 var(--mono);color:rgba(246,245,239,.55);letter-spacing:.08em;margin-left:6px}
+.vt{font-size:11.5px;color:rgba(246,245,239,.68);line-height:1.8}
+.vt strong{color:var(--lt)}
+
+/* KPI */
+.kb{background:var(--ink);padding:0 56px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kr{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(255,255,255,.04)}
+.kv{background:rgba(17,18,23,.5);padding:12px 14px}
+.kl{font:500 8px/1.3 var(--mono);letter-spacing:.14em;color:rgba(246,245,239,.34);text-transform:uppercase;margin-bottom:5px}
+.kn{font:600 15px/1 var(--mono)}
+.gn{color:#72cc8e}.rd{color:#e09090}.am{color:var(--or2)}.bl{color:#90b4ec}
+.ks{font-size:9px;color:rgba(246,245,239,.32);margin-top:3px;line-height:1.4}
+
+/* TABS */
+.tn{position:sticky;top:env(safe-area-inset-top,0px);z-index:200;background:var(--ink);display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.06)}
+.tn::-webkit-scrollbar{display:none}
+.tb{font:600 9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(246,245,239,.38);padding:15px 18px;cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;flex-shrink:0;transition:color .18s,border-color .18s;display:flex;align-items:center;gap:7px}
+.tb:hover{color:rgba(246,245,239,.72)}
+.tb:focus-visible{outline:2px solid var(--or2);outline-offset:-2px}
+.tb.on{color:var(--lt);border-bottom-color:var(--or2)}
+.tb .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* BODY */
+.bd{max-width:1080px;margin:0 auto;padding:38px 56px 88px}
+.pn{display:none}.pn.on{display:block}
+
+/* SECTION HEAD */
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sn{font:600 9px/1 var(--mono);color:var(--ink3);letter-spacing:.14em}
+.st{font:700 20px/1.2 var(--head);letter-spacing:-.018em;text-wrap:balance}
+.sb{font:700 9px/1.3 var(--mono);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.bg-gn{background:var(--gn3);color:var(--gn)}.bg-am{background:var(--am3);color:var(--am)}
+.bg-or{background:var(--or3);color:var(--or)}.bg-rd{background:var(--rd3);color:var(--rd)}
+.bg-bl{background:var(--bl3);color:var(--bl)}.bg-pu{background:var(--pu3);color:var(--pu)}
+.h3{font-size:11px;font-weight:600;margin-bottom:11px;color:var(--ink2)}
+
+/* CARDS */
+.c{background:var(--bg2);border:.5px solid var(--bg3);border-radius:var(--r);padding:18px 22px}
+.cdk{background:var(--ink2);border-radius:var(--r);padding:22px 28px}
+.cl-gn{border-left:3px solid var(--gn)}.cl-am{border-left:3px solid var(--am)}
+.cl-or{border-left:3px solid var(--or)}.cl-bl{border-left:3px solid var(--bl)}
+.cl-rd{border-left:3px solid var(--rd)}.cl-pu{border-left:3px solid var(--pu)}
+.cf-gn{background:#eef9f3;border:.5px solid #a8dabc}
+.cf-am{background:var(--am3);border:.5px solid #f0d080}
+.cf-bl{background:var(--bl3);border:.5px solid #9ab4e8}
+.cf-or{background:var(--or3);border:.5px solid #f0c870}
+.tx{font-size:12px;color:var(--ink2);line-height:1.85}
+.tx strong{color:var(--ink)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mb{margin-bottom:16px}
+
+/* METRIC */
+.mc{text-align:center;padding:16px 12px}
+.ml{font:500 9px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.mv{font:600 22px/1.1 var(--mono);margin-bottom:4px}
+.mv.gn{color:var(--gn)}.mv.rd{color:var(--rd)}.mv.am{color:var(--am)}.mv.or{color:var(--or)}.mv.bl{color:var(--bl)}.mv.pu{color:var(--pu)}
+.ms{font-size:10.5px;color:var(--ink3);line-height:1.45}
+
+/* TABLE */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.t{width:100%;border-collapse:collapse;font-size:12.5px}
+.t th{font:600 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:2px solid var(--ink);text-align:left;white-space:nowrap}
+.t th.r,.t td.r{text-align:right;white-space:nowrap}
+.t td{padding:8px 10px;border-bottom:.5px solid var(--rule);vertical-align:top}
+.t tr:hover td{background:var(--bg3)}
+.t tr.hl td{background:var(--gn3)}.t tr.sm td{background:var(--bg3);font-weight:600}
+.t td.nw{white-space:nowrap}
+.hgn{color:var(--gn);font-weight:600}.hrd{color:var(--rd);font-weight:600}
+.ham{color:var(--am);font-weight:600}.hor{color:var(--or);font-weight:600}.hbl{color:var(--bl);font-weight:600}
+.mn{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sm2{font-size:11px;color:var(--ink3)}
+
+/* SCENARIO */
+.sc{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--bg3);border-radius:var(--r);overflow:hidden;margin:16px 0;background:var(--bg2)}
+.sc.s4{grid-template-columns:repeat(4,1fr)}
+.sc-c{padding:16px 17px;border-right:.5px solid var(--rule)}
+.sc-c:last-child{border-right:none}
+.sc-l{font:700 9px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-bottom:7px;margin-bottom:9px;border-bottom:2px solid}
+.sc-l.br{border-color:var(--rd);color:var(--rd)}.sc-l.bs{border-color:var(--am);color:var(--am)}
+.sc-l.bu{border-color:var(--gn);color:var(--gn)}.sc-l.bm{border-color:var(--bl);color:var(--bl)}
+.sc-p{font:700 28px/1 var(--mono);margin-bottom:4px}
+.sc-p.br{color:var(--rd)}.sc-p.bs{color:var(--am)}.sc-p.bu{color:var(--gn)}.sc-p.bm{color:var(--bl)}
+.sc-s{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.sc-i{font-size:11.5px;padding:4px 0;border-bottom:.5px solid var(--rule);color:var(--ink2);line-height:1.5}
+.sc-i:last-child{border:none}
+.sc-i::before{content:'→ ';color:var(--ink3)}
+
+/* CATALYST CARDS */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:14px}
+.ca{background:var(--ink2);border-radius:9px;padding:22px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.ca:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.22)}
+.ca::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.cc-gn::before{background:var(--gn2)}.cc-or::before{background:var(--or2)}.cc-am::before{background:var(--am2)}
+.cc-bl::before{background:var(--bl2)}.cc-pu::before{background:var(--pu2)}.cc-rd::before{background:var(--rd)}
+.cn{font:700 9px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.5;color:var(--lt);margin-bottom:10px}
+.ci{font-size:26px;display:block;margin-bottom:11px;line-height:1}
+.ct{font:700 14px/1.35 var(--head);color:var(--lt);margin-bottom:8px}
+.cb{font:700 30px/1.05 var(--mono);margin-bottom:3px}
+.cb.gn{color:var(--gn2)}.cb.or{color:var(--or2)}.cb.am{color:var(--am2)}.cb.bl{color:#90b4ec}.cb.pu{color:#e08ad0}
+.cu{font:500 9px/1.4 var(--mono);color:rgba(246,245,239,.45);margin-bottom:10px}
+.cp{font-size:11.5px;color:rgba(246,245,239,.62);line-height:1.72}
+.cp strong{color:rgba(246,245,239,.92)}
+.tgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tg{font:600 8px/1.2 var(--mono);padding:3px 8px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.tg-gn{background:rgba(35,144,82,.2);color:#72cc8e}.tg-or{background:rgba(196,104,20,.2);color:var(--or2)}
+.tg-am{background:rgba(188,122,24,.2);color:var(--am2)}.tg-bl{background:rgba(30,72,184,.25);color:#90b4ec}
+.tg-pu{background:rgba(168,48,144,.22);color:#e08ad0}
+
+/* BARS */
+.bg{margin-bottom:13px}
+.br2{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px}
+.bt{background:var(--bg3);border-radius:3px;overflow:hidden;height:9px}
+.bf{border-radius:3px;height:100%}
+
+/* TIMELINE */
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--rule)}
+.ti{position:relative;margin-bottom:14px}
+.td2{position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--bg)}
+.td2.gn{background:var(--gn)}.td2.am{background:var(--am)}.td2.or{background:var(--or)}.td2.rd{background:var(--rd)}.td2.bl{background:var(--bl)}
+.td2.pu{background:var(--pu)}
+.tdate{font:600 10px/1.2 var(--mono);color:var(--ink3);margin-bottom:3px}
+.ttext{font-size:12px;line-height:1.65}
+
+/* CHART */
+.chb{position:relative;height:280px;width:100%}
+.chb.tall{height:340px}
+.chb.short{height:230px}
+
+/* MISC */
+.note{font-size:10.5px;color:var(--ink3);border-top:.5px solid var(--rule);padding-top:8px;margin-top:10px;line-height:1.6}
+.bge{display:inline-block;font:700 9px/1.3 var(--mono);padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.be-gn{background:var(--gn3);color:var(--gn)}.be-am{background:var(--am3);color:var(--am)}
+.be-or{background:var(--or3);color:var(--or)}.be-rd{background:var(--rd3);color:var(--rd)}.be-bl{background:var(--bl3);color:var(--bl)}.be-pu{background:var(--pu3);color:var(--pu)}
+.inf{background:var(--am3);border:.5px solid #f0d090;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--am);line-height:1.65;margin-bottom:16px}
+.ok{background:var(--gn3);border:.5px solid #96d0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--gn);line-height:1.65;margin-bottom:16px}
+.ng{background:var(--rd3);border:.5px solid #eab0b0;border-radius:var(--r);padding:11px 16px;font-size:12px;color:var(--rd);line-height:1.65;margin-bottom:16px}
+.grd{font:700 18px/1 var(--mono)}
+.grd.a{color:var(--gn)}.grd.b{color:var(--bl)}.grd.c{color:var(--am)}.grd.d{color:var(--rd)}
+
+/* CONCLUSION */
+.conc{background:var(--ink);border-radius:9px;padding:30px 34px}
+.conc-h{font:700 19px/1.2 var(--head);letter-spacing:-.015em;color:var(--lt);margin-bottom:20px}
+.conc-h span{color:var(--or2)}
+.conc-lbl{font:500 10px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(246,245,239,.38);margin-bottom:7px}
+.conc-b{font-size:12px;line-height:1.9;color:rgba(246,245,239,.68)}
+.conc-b strong{color:var(--lt)}
+.cg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:24px}
+.cg4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.cbox{text-align:center;padding:14px 10px;background:rgba(246,245,239,.05);border-radius:5px}
+.cbox .l{font:600 8px/1.3 var(--mono);color:rgba(246,245,239,.38);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.cbox .v{font:700 22px/1.1 var(--mono)}
+.cbox .s{font-size:10px;color:rgba(246,245,239,.42);margin-top:4px}
+.in3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8}
+.in3>div{padding:10px;background:var(--bg3);border-radius:4px}
+
+@media(max-width:860px){
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .cg{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .g2,.g3,.g4,.cg,.sc,.sc.s4,.cg3,.in3{grid-template-columns:1fr}
+  .cg4{grid-template-columns:1fr 1fr}
+  .ca[style*="span 2"]{grid-column:auto!important}
+  .hi{grid-template-columns:1fr}
+  .bd,.hero,.kb{padding-left:16px;padding-right:16px}
+  .kr{grid-template-columns:repeat(2,1fr)}
+  .ht{font-size:25px}
+  .sc-c{border-right:none;border-bottom:.5px solid var(--rule)}
+  .conc{padding:22px 18px}
+  .vb{min-width:0}
+}
+</style>
+<style id="mobile-readability-boost">
+/* === スマホ可読性ブースト（max-width:600pxのみ・デスクトップ不変） === */
+@media (max-width:600px){
+  html{font-size:15px}
+  body{line-height:1.7}
+  p,li,td,.tbl,.tbl td,.mc-s,.note,.kpi-s,.sc-sub,.sc-li,.hero-sub,
+  .blrow,.fuel-label,.fuel-val,.verdict-text,.tl-text,.tl-date,
+  .conc-body,.notice,.warn,.bullet,.li,.txt,.small{font-size:14px}
+  .tbl th,.mc-l,.ch-num,.kpi-l,.conc-lbl,.sc-lbl,.badge,.ch-badge,.mnb,.stab,.tl-date,.hero-label{font-size:11px}
+  /* インラインstyleの極小フォントも底上げ（!importantでインライン指定に勝つ） */
+  [style*="font-size:8px"],[style*="font-size: 8px"]{font-size:12px !important}
+  [style*="font-size:9px"],[style*="font-size: 9px"]{font-size:13px !important}
+  [style*="font-size:9.5px"]{font-size:13px !important}
+  [style*="font-size:10px"],[style*="font-size: 10px"]{font-size:13.5px !important}
+  [style*="font-size:11px"],[style*="font-size: 11px"]{font-size:13.5px !important}
+  [style*="font-size:12px"],[style*="font-size: 12px"]{font-size:14px !important}
+  /* font: ショートハンド指定（例 font:600 9px/1）の極小も底上げ */
+  [style*=" 8px/"]{font-size:11px !important}
+  [style*=" 9px/"]{font-size:11px !important}
+  [style*=" 10px/"]{font-size:11.5px !important}
+  [style*=" 11px/"]{font-size:13px !important}
+  [style*=" 12px/"]{font-size:14px !important}
+  .hero-title{font-size:26px;line-height:1.15}
+  .ch-title{font-size:18px}
+  .conc-head{font-size:16px}
+  .sc-grid,.conc-3,.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr !important}
+  .sc-col{border-right:none;border-bottom:.5px solid rgba(0,0,0,.1)}
+  .sc-col:last-child{border-bottom:none}
+  .fuel-meter{grid-template-columns:80px 1fr 50px;gap:8px}
+  .body{padding:24px 14px 64px}
+  .card,.mc{padding:14px 14px}
+  .tbl,table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+}
+@media (max-width:380px){
+  html{font-size:14.5px}
+  .hero-title{font-size:23px}
+}
+</style>
+<style id="tab-fallback">
+.pn{display:block;scroll-margin-top:112px}
+html.js .pn{display:none}
+html.js .pn.on{display:block}
+a.tb{text-decoration:none}
+.tn{flex-wrap:wrap}
+.tn .tb{padding:11px 14px}
+html:not(.js) .pn{margin-bottom:34px}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<header class="hero">
+  <div class="hi">
+    <div>
+      <p class="he">Investment Research · 7937 東証スタンダード · 2026.10.08 · 株価 2,384円（10/8終値）</p>
+      <h1 class="ht">ツツミ <em>（7937）</em><br>統合投資分析レポート</h1>
+      <p class="hs">現金251億円と宝飾品の在庫302億円に対し、時価総額は373億円。借入金はない<br>議決権の7割は支配株主の側にある。資産・在庫と金・株主・税・非公開化・金との比較まで一次資料で数えた</p>
+    </div>
+    <div class="vb">
+      <div class="vs">B++<small>幅・小／確度12点</small></div>
+      <div class="vt">
+        <strong>PBR0.54倍・PER13.3倍・利回り4.82%</strong><br>
+        上値3,409円（+43.0%）／下値1,495円（▲37%）。<br>
+        株価は3月の高値3,455円から▲31%、金は▲23%。<br>
+        支配株主が40%超のため、リスクの軸は0点。
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="kb">
+  <div class="kr">
+    <div class="kv"><div class="kl">株価（10/8終値）</div><div class="kn am">2,384円</div><div class="ks">高値3,455円から▲31%</div></div>
+    <div class="kv"><div class="kl">時価総額</div><div class="kn bl">373億円</div><div class="ks">売買代金は1日約3,973万円</div></div>
+    <div class="kv"><div class="kl">PBR</div><div class="kn am">0.54倍</div><div class="ks">5年レンジ0.41〜0.77倍</div></div>
+    <div class="kv"><div class="kl">PER／利回り</div><div class="kn gn">13.3倍／4.82%</div><div class="ks">配当115円（予想）</div></div>
+    <div class="kv"><div class="kl">現金及び預金</div><div class="kn gn">251億円</div><div class="ks">時価総額の67%・無借金</div></div>
+    <div class="kv"><div class="kl">棚卸資産</div><div class="kn am">302億円</div><div class="ks">宝飾品と地金。原価</div></div>
+  </div>
+</div>
+
+<nav class="tn" id="nav" aria-label="レポート目次">
+  <a class="tb on" href="#p1" data-p="p1"><span class="d" style="background:var(--gn2)"></span>結論</a>
+  <a class="tb" href="#p2" data-p="p2"><span class="d" style="background:var(--am2)"></span>値札とBS</a>
+  <a class="tb" href="#p3" data-p="p3"><span class="d" style="background:var(--am2)"></span>在庫と金</a>
+  <a class="tb" href="#p4" data-p="p4"><span class="d" style="background:var(--or2)"></span>稼ぐ力</a>
+  <a class="tb" href="#p5" data-p="p5"><span class="d" style="background:var(--bl2)"></span>株主と相続</a>
+  <a class="tb" href="#p6" data-p="p6"><span class="d" style="background:var(--gn2)"></span>還元と税</a>
+  <a class="tb" href="#p7" data-p="p7"><span class="d" style="background:var(--pu2)"></span>非公開化の算数</a>
+  <a class="tb" href="#p8" data-p="p8"><span class="d" style="background:var(--am2)"></span>金か、この株か</a>
+  <a class="tb" href="#p9" data-p="p9"><span class="d" style="background:var(--rd)"></span>売られた理由</a>
+  <a class="tb" href="#p10" data-p="p10"><span class="d" style="background:var(--pu2)"></span>3年後の3ケース</a>
+  <a class="tb" href="#p11" data-p="p11"><span class="d" style="background:var(--am2)"></span>レンジとランク</a>
+  <a class="tb" href="#p12" data-p="p12"><span class="d" style="background:var(--rd)"></span>リスクと検算</a>
+</nav>
+
+<main class="bd">
+
+<section class="pn on" id="p1">
+  <div class="sh"><span class="sn">01</span><h2 class="st">結論 ── 金庫は厚い。鍵は外の株主にない</h2><span class="sb bg-gn">B++</span></div>
+  <div class="cg">
+    <div class="ca cc-gn">
+      <div class="cn">結論 01 · 資産</div><span class="ci">🏦</span>
+      <div class="ct">現金だけで時価総額の67%。借入金はない</div>
+      <div class="tx">6月末の現金及び預金は251億円、時価総額は373億円。ほかに宝飾品と地金の在庫が302億円あり、負債は18億円しかない。<strong>流動資産から負債を全部引いた額は時価総額の1.49倍</strong>。PBRは0.54倍。</div>
+    </div>
+    <div class="ca cc-or">
+      <div class="cn">結論 02 · 利益</div><span class="ci">🥇</span>
+      <div class="ct">利益は金の値段と一緒に動く</div>
+      <div class="tx">売上は4年で165億円から352億円へ。地金のネックレスとブレスレットが伸びた。<strong>金は3月3日に高値を付け、6月末には3月末から10%下げた。4〜6月は原材料と仕掛品に4.82億円の評価損が出て、営業利益は46%減った</strong>。今期の会社予想は24%の営業減益。</div>
+    </div>
+    <div class="ca cc-bl">
+      <div class="cn">結論 03 · 株主</div><span class="ci">🔑</span>
+      <div class="ct">議決権の70.89%を支配株主の側が持つ</div>
+      <div class="tx">筆頭株主が51.21%、合算対象を足して70.89%、創業者の名を冠した財団が6.39%。<strong>市場に出ている株は2割強</strong>。配当は4年で30円から115円になったが、自社株買いは2022年3月期を最後に止まっている。会社が自分で配分を変えない限り、現金は外の株主に届かない。</div>
+    </div>
+  </div>
+  <div class="inf">📌 当商会の採点は<strong>B++</strong>（幅・小／確度12点）。安さ・財務・インカムは満点の3点だが、<strong>支配株主が40%を超える会社はリスクの軸が0点になる</strong>。上値は1株純資産4,427円×直近5年のPBR高値0.77倍で3,409円（+43.0%）、下値は1,495円（▲37%）。同じ確度のまま幅が「中」になるのは2,260円、「大」になるのは1,973円。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>問い</th><th>当商会の答え</th><th>章</th></tr></thead>
+    <tbody>
+      <tr><td class="">資産は厚いか</td><td class="sm2">厚い。現金251億円と在庫302億円で、時価総額373億円を大きく超える</td><td class="">02・03</td></tr>
+      <tr><td class="">在庫に含み益はあるか</td><td class="sm2">見込めない。製品は1年弱で入れ替わり、作った時期の金の平均はいまの値段と同じかやや高い</td><td class="">03</td></tr>
+      <tr><td class="">稼ぐ力は</td><td class="sm2">ROEは最高でも5.4%。利益は金の値段と地金ジュエリーの人気に連動する</td><td class="">04</td></tr>
+      <tr><td class="">ミニマムタックスは効くか</td><td class="sm2">配当には効かない。効くのは個人が株を売るとき。売る側に回る開示はない</td><td class="">06</td></tr>
+      <tr><td class="">非公開化はあり得るか</td><td class="">資金も議決権も足りている。ただし動機を示す開示はない</td><td class="">07</td></tr>
+      <tr><td class="">金の代わりになるか</td><td class="sm2">ならない。5年で金は3.4倍、株は+16%（配当込み+31%）。別の商品として見る</td><td class="">08</td></tr>
+      <tr><td class="">なぜ売られたか</td><td class="">金の下げ、減益予想、評価損、中間配当の権利落ちが重なった</td><td class="">09</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">株価は2026年10月8日の終値2,384円（株探の確定値）。貸借対照表は2026年6月末（2027年3月期第1四半期決算短信）。金の値段は田中貴金属工業の公表値。</div>
+
+</section>
+<section class="pn" id="p2">
+  <div class="sh"><span class="sn">02</span><h2 class="st">値札と貸借対照表</h2><span class="sb bg-am">PBR0.54倍</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">株価（2026年10月8日終値）</td><td class="r mn">2,384円</td><td class="sm2">52週の高値3,455円（3月2日）・安値2,196円。高値から▲31%</td></tr>
+      <tr><td class="">時価総額</td><td class="r mn">373億円</td><td class="">発行済み1,563万株。自己株式は3,359株だけ</td></tr>
+      <tr class="hl"><td class=""><strong>PBR</strong></td><td class="r mn"><strong>0.54倍</strong></td><td class="sm2">1株純資産4,427円。直近5年のレンジは0.41〜0.77倍</td></tr>
+      <tr><td class="">PER（会社予想）</td><td class="r mn">13.3倍</td><td class="sm2">1株利益179.2円。前期の実績236.2円で割ると10.1倍</td></tr>
+      <tr><td class="">配当利回り</td><td class="r mn">4.82%</td><td class="sm2">年115円（中間45円・期末70円）の予想。配当性向は約64%</td></tr>
+      <tr class="hl"><td class="">現金及び預金</td><td class="r mn">251億円</td><td class="">時価総額の67%。借入金はゼロ</td></tr>
+      <tr><td class="">棚卸資産</td><td class="r mn">302億円</td><td class="sm2">商品及び製品223億円、仕掛品17億円、原材料及び貯蔵品63億円</td></tr>
+      <tr><td class="">清原式ネットキャッシュ比率</td><td class="r mn">1.49倍</td><td class="sm2">（流動資産573億円−負債18億円）÷時価総額。投資有価証券はほとんど持っていない</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">1株2,384円の中身（2026年6月末）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>1株あたり</th><th class="r">金額</th><th>株価に対して</th></tr></thead>
+    <tbody>
+      <tr><td class="">現金及び預金</td><td class="r mn">1,608円</td><td class="">株価の67%</td></tr>
+      <tr><td class="">棚卸資産（原価）</td><td class="r mn">1,933円</td><td class="sm2">うち製品1,425円、原材料と仕掛品508円</td></tr>
+      <tr><td class="">土地（自社使用）</td><td class="r mn">322円</td><td class="">本社・工場（蕨市）と関東の店舗。簿価</td></tr>
+      <tr><td class="">投資不動産</td><td class="r mn">176円</td><td class="sm2">賃貸中のオフィスビルなど。3月末の時価は簿価より3.7億円低い</td></tr>
+      <tr><td class="">負債</td><td class="r mn">▲112円</td><td class="">買掛金、未払費用など</td></tr>
+      <tr class="hl"><td class=""><strong>1株純資産</strong></td><td class="r mn"><strong>4,427円</strong></td><td class="">売掛金・敷金などを含む合計</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>株価2,384円から1株あたりの現金1,608円を引くと776円。この776円で、原価1,933円の在庫と土地と145の店を買っている計算になる</strong>。負債を足し戻しても、在庫を原価の46%で買っているのと同じである。</div>
+  <div class="h3">現金は12年で165億円減った</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>3月末</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">現金及び預金</th><th class="r">棚卸資産</th><th class="r">純資産</th><th class="r">発行済株式</th></tr></thead>
+    <tbody>
+      <tr><td class="">2014年</td><td class="r mn">275.5億円</td><td class="r mn">36.2億円</td><td class="r mn">415.8億円</td><td class="r mn">188.3億円</td><td class="r mn">783.3億円</td><td class="r mn">2,008万株</td></tr>
+      <tr><td class="">2016年</td><td class="r mn">217.6億円</td><td class="r mn">15.4億円</td><td class="r mn">384.7億円</td><td class="r mn">188.3億円</td><td class="r mn">—</td><td class="r mn">2,008万株</td></tr>
+      <tr><td class="">2018年</td><td class="r mn">175.7億円</td><td class="r mn">9.7億円</td><td class="r mn">389.0億円</td><td class="r mn">171.4億円</td><td class="r mn">—</td><td class="r mn">2,008万株</td></tr>
+      <tr><td class="">2020年</td><td class="r mn">187.0億円</td><td class="r mn">7.8億円</td><td class="r mn">394.9億円</td><td class="r mn">151.4億円</td><td class="r mn">—</td><td class="r mn">2,008万株</td></tr>
+      <tr><td class="">2022年</td><td class="r mn">164.8億円</td><td class="r mn">10.7億円</td><td class="r mn">388.6億円</td><td class="r mn">150.4億円</td><td class="r mn">660.9億円</td><td class="r mn">2,008万株</td></tr>
+      <tr><td class="">2024年</td><td class="r mn">199.1億円</td><td class="r mn">16.7億円</td><td class="r mn">365.4億円</td><td class="r mn">175.1億円</td><td class="r mn">669.1億円</td><td class="r mn">1,563万株</td></tr>
+      <tr><td class="">2025年</td><td class="r mn">248.4億円</td><td class="r mn">24.1億円</td><td class="r mn">336.4億円</td><td class="r mn">209.6億円</td><td class="r mn">678.0億円</td><td class="r mn">1,563万株</td></tr>
+      <tr><td class="">2026年</td><td class="r mn">352.3億円</td><td class="r mn">52.4億円</td><td class="r mn">322.3億円</td><td class="r mn">257.8億円</td><td class="r mn">701.0億円</td><td class="r mn">1,563万株</td></tr>
+      <tr class="hl"><td class="">2026年6月末</td><td class="r mn">—</td><td class="r mn">—</td><td class="r mn">251.2億円</td><td class="r mn">302.1億円</td><td class="r mn">691.8億円</td><td class="r mn">1,563万株</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">現金が減った理由は3つある。①2015年から2021年にかけての自社株買い（4回、約343万株・約80億円）。②2024年3月期からの在庫の積み増し（棚卸資産は150億円から302億円へ）。③増配。2026年4〜6月だけで現金は71億円減り、製品在庫が50億円増えた。法人税の納付（約17億円）と期末配当（約11億円）もこの四半期に出ている。</div>
+
+</section>
+<section class="pn" id="p3">
+  <div class="sh"><span class="sn">03</span><h2 class="st">在庫と金 ── 302億円の中身</h2><span class="sb bg-am">含み益は見込めない</span></div>
+  <div class="tx">ツツミは金・プラチナと宝石を自分で仕入れ、蕨市の工場で製品にして、自社の145店で売る。在庫は地金相場の影響を二重に受ける。売れるまでの間は原価のまま載り、相場が大きく下がれば評価損になる。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>棚卸資産</th><th class="r">2025年3月末</th><th class="r">2026年3月末</th><th class="r">2026年6月末</th><th>評価の方法</th></tr></thead>
+    <tbody>
+      <tr><td class="">商品及び製品</td><td class="r mn">150.4億円</td><td class="r mn">172.7億円</td><td class="r mn"><strong>222.7億円</strong></td><td class="">個別法（製造ロット別）の原価</td></tr>
+      <tr><td class="">仕掛品</td><td class="r mn">12.5億円</td><td class="r mn">18.5億円</td><td class="r mn">16.7億円</td><td class="">同上</td></tr>
+      <tr><td class="">原材料及び貯蔵品</td><td class="r mn">46.7億円</td><td class="r mn">66.5億円</td><td class="r mn">62.8億円</td><td class="">地金は移動平均法の原価</td></tr>
+      <tr><td class="">　うち金・プラチナ</td><td class="r mn">23.3億円</td><td class="r mn">42.9億円</td><td class="r mn">—</td><td class="">四半期では内訳の開示なし</td></tr>
+      <tr><td class="">　うち貴石・半貴石</td><td class="r mn">—</td><td class="r mn">20.4億円</td><td class="r mn">—</td><td class=""></td></tr>
+      <tr class="hl"><td class=""><strong>合計</strong></td><td class="r mn"><strong>209.6億円</strong></td><td class="r mn"><strong>257.8億円</strong></td><td class="r mn"><strong>302.1億円</strong></td><td class="">収益性が下がれば簿価を切り下げる</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">在庫に含み益はあるか</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>確かめたこと</th><th class="r">数字</th><th>読み方</th></tr></thead>
+    <tbody>
+      <tr><td class="">製造原価に占める材料費</td><td class="r mn">93.9%</td><td class="sm2">2026年3月期。外注加工費2.3%、労務費3.3%。在庫の原価はほぼ材料の値段</td></tr>
+      <tr><td class="">製品在庫の回転</td><td class="r mn">年1.2回</td><td class="sm2">売上原価199億円÷製品在庫の期中平均162億円。製品は平均して10か月ほどで入れ替わる</td></tr>
+      <tr><td class="">その間の金の平均</td><td class="r mn">約21,300〜22,400円/g</td><td class="sm2">田中貴金属の参考小売価格（税抜）の月平均。2025年7月〜2026年6月の12か月と、直近10か月の単純平均</td></tr>
+      <tr><td class="">いまの金</td><td class="r mn">約21,000円/g</td><td class="sm2">10月8日の店頭小売価格23,105円（税込）を税抜に直した</td></tr>
+      <tr><td class="">原材料と仕掛品</td><td class="r mn">6月末に評価替え</td><td class="sm2">4〜6月に4.82億円の評価損。6月末の金は税込23,125円で、いまとほぼ同じ</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>在庫の原価は、いまの金の値段と同じか、2〜7%ほど高い水準にあるとみる</strong>。製品は1年弱で入れ替わり、その間の金の平均がいまの値段を少し上回るからである。原材料と仕掛品は6月末の相場まで切り下げ済み。金が何年も前の安い値段で眠っているわけではないので、<strong>在庫の含み益を純資産に上乗せする計算はしなかった</strong>。製品には4割を超える粗利が乗るため、この程度の差で製品の評価損にはならないが、金がここから大きく下がれば話が変わる。</div>
+  <div class="note">重量は開示されていない。上の読みは金額と回転からの推定で、製品ごとの在庫期間（指輪は長く、地金のネックレスは短いはず）は分からない。評価損は期中洗替え法で、相場が戻れば戻し入れられると会社は書いている。</div>
+  <div class="h3">金・プラチナは在庫のどれくらいか（当商会の置き）</div>
+  <div class="tx">在庫302億円のうち材料費を92%、その6〜7割を金とプラチナと置くと、<strong>約167〜195億円（1株あたり約1,067〜1,245円）</strong>になる。3月末の原材料は金・プラチナ42.9億円に対し貴石・半貴石20.4億円で、金属が68%だった。製品の内訳は開示がなく、この比率は粗い置きである。</div>
+
+</section>
+<section class="pn" id="p4">
+  <div class="sh"><span class="sn">04</span><h2 class="st">稼ぐ力 ── 金と一緒に動く利益</h2><span class="sb bg-or">ROE5.4%</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>決算期</th><th class="r">売上高</th><th class="r">営業利益</th><th class="r">純利益</th><th class="r">EPS</th><th class="r">ROE</th><th class="r">配当</th></tr></thead>
+    <tbody>
+      <tr><td class="">2022年3月期</td><td class="r mn">164.8億円</td><td class="r mn">10.7億円</td><td class="r mn">6.8億円</td><td class="r mn">43.3円</td><td class="r mn">1.0%</td><td class="r mn">30円</td></tr>
+      <tr><td class="">2023年3月期</td><td class="r mn">181.2億円</td><td class="r mn">14.7億円</td><td class="r mn">9.1億円</td><td class="r mn">58.2円</td><td class="r mn">1.4%</td><td class="r mn">40円</td></tr>
+      <tr><td class="">2024年3月期</td><td class="r mn">199.1億円</td><td class="r mn">16.7億円</td><td class="r mn">11.6億円</td><td class="r mn">74.0円</td><td class="r mn">1.7%</td><td class="r mn">60円</td></tr>
+      <tr><td class="">2025年3月期</td><td class="r mn">248.4億円</td><td class="r mn">24.1億円</td><td class="r mn">19.9億円</td><td class="r mn">127.1円</td><td class="r mn">2.9%</td><td class="r mn">80円</td></tr>
+      <tr><td class="">2026年3月期</td><td class="r mn">352.3億円</td><td class="r mn">52.4億円</td><td class="r mn">36.9億円</td><td class="r mn">236.2円</td><td class="r mn">5.4%</td><td class="r mn">115円</td></tr>
+      <tr class="hl"><td class="">2027年3月期（予）</td><td class="r mn">313.0億円</td><td class="r mn">40.0億円</td><td class="r mn">28.0億円</td><td class="r mn">179.2円</td><td class="r mn">—</td><td class="r mn">115円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">非連結。2027年3月期の予想は5月14日の公表から変えていない（8月7日時点）。会社の期初予想は控えめに出る傾向があり、2026年3月期は期初に売上250億円・営業利益22億円と置いて、3回の上方修正を経て352億円・52.4億円で着地した。</div>
+  <div class="h3">品目別の売上（2026年3月期）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>品目</th><th class="r">売上高</th><th class="r">前期比</th><th class="r">構成比</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class=""><strong>ネックレス・ブレスレット</strong></td><td class="r mn"><strong>219.1億円</strong></td><td class="r mn">+59.7%</td><td class="r mn">62%</td><td class="">地金ものが中心。伸びの8割はここ</td></tr>
+      <tr><td class="">指輪</td><td class="r mn">77.7億円</td><td class="r mn">+21.2%</td><td class="r mn">22%</td><td class=""></td></tr>
+      <tr><td class="">小物（ピアス・ペンダントなど）</td><td class="r mn">57.4億円</td><td class="r mn">+17.3%</td><td class="r mn">16%</td><td class=""></td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">四半期ごとの粗利</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>四半期</th><th class="r">売上高</th><th class="r">売上総利益</th><th class="r">粗利率</th><th class="r">営業利益</th><th>メモ</th></tr></thead>
+    <tbody>
+      <tr><td class="">2025年4〜6月</td><td class="r mn">61.3億円</td><td class="r mn">26.6億円</td><td class="r mn">43.3%</td><td class="r mn">4.4億円</td><td class=""></td></tr>
+      <tr><td class="">7〜9月</td><td class="r mn">75.4億円</td><td class="r mn">31.9億円</td><td class="r mn">42.3%</td><td class="r mn">7.1億円</td><td class=""></td></tr>
+      <tr><td class="">10〜12月</td><td class="r mn">115.4億円</td><td class="r mn">47.9億円</td><td class="r mn">41.5%</td><td class="r mn">20.7億円</td><td class="">クリスマス商戦</td></tr>
+      <tr><td class="">2026年1〜3月</td><td class="r mn">100.2億円</td><td class="r mn">46.6億円</td><td class="r mn">46.5%</td><td class="r mn">20.2億円</td><td class="">金は3月3日に高値</td></tr>
+      <tr class="hl"><td class="">2026年4〜6月</td><td class="r mn">63.1億円</td><td class="r mn">25.4億円</td><td class="r mn">40.3%</td><td class="r mn">2.4億円</td><td class="">評価損4.82億円を含む</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 4〜6月の粗利率40.3%は評価損4.82億円を引いたあとの数字で、<strong>評価損を除くと粗利は30.2億円（粗利率47.9%）、営業利益は7.2億円になり、前年の4.4億円を上回る</strong>。会社も「評価損を除いた粗利額は昨年を上回る状況」と書いている。売上は3.0%増で、金が下げても店の売れ行きは落ちていない。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>会社が書いていること</th><th>出所</th></tr></thead>
+    <tbody>
+      <tr><td class="">諸物価の高騰で消費者の購買行動が変わり、地金のネックレスやブレスレットの人気が高まった。市場の商品が品薄になる中、豊富な在庫を持つことで売上が上振れた</td><td class="">2025年11月7日 業績予想の修正</td></tr>
+      <tr><td class="">地金価格が上昇する中でも販売価格への転嫁を抑えた。売上総利益率は計画を下回るが、売上の増加で利益は計画を上回る</td><td class="">同上、2026年2月6日、5月8日</td></tr>
+      <tr><td class="">第1四半期末にかけて地金相場の急激な下落により、原材料・仕掛品の評価損482百万円を計上</td><td class="">2026年8月7日 第1四半期決算短信</td></tr>
+      <tr><td class="">次期は売上313億円（▲11.1%）、営業利益40億円（▲23.7%）、純利益28億円（▲24.1%）</td><td class="">2026年5月14日 決算短信</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 前期の利益は、金が上がり続ける局面で「値上げを抑えて在庫を厚く持つ」やり方が当たった結果である。<strong>ROEは直近13年で最も高い5.4%でも、会社が自分で置く資本コスト6.4〜8.1%に届かない</strong>。自己資本692億円のうち251億円が現金で、利益を生んでいないためである。</div>
+
+</section>
+<section class="pn" id="p5">
+  <div class="sh"><span class="sn">05</span><h2 class="st">株主と相続 ── 77%が動かない</h2><span class="sb bg-bl">支配株主70.89%</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>株主（2026年3月末）</th><th class="r">株数</th><th class="r">比率</th><th>区分</th></tr></thead>
+    <tbody>
+      <tr><td class="">堤 倭子氏</td><td class="r mn">800.3万株</td><td class="r mn">51.21%</td><td class="">支配株主（直接所有分）</td></tr>
+      <tr><td class="">互 夕希子氏</td><td class="r mn">153.9万株</td><td class="r mn">9.84%</td><td class="">個人</td></tr>
+      <tr><td class="">石花 千花氏</td><td class="r mn">152.1万株</td><td class="r mn">9.73%</td><td class="">個人</td></tr>
+      <tr><td class="">公益財団法人 堤征二記念奨学財団</td><td class="r mn">100.0万株</td><td class="r mn">6.39%</td><td class="">理事長は代表取締役社長の互 智司氏</td></tr>
+      <tr><td class="">日本マスタートラスト信託銀行（信託口）</td><td class="r mn">52.3万株</td><td class="r mn">3.34%</td><td class=""></td></tr>
+      <tr class="hl"><td class=""><strong>上位4者の合計</strong></td><td class="r mn"><strong>1,206万株</strong></td><td class="r mn"><strong>77.17%</strong></td><td class=""></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">会社の「支配株主等に関する事項」（5月22日）は、支配株主の議決権を直接所有分51.21%、合算対象分19.68%、計70.89%と開示している。合算対象の内訳は書かれていない。</div>
+  <div class="h3">名簿が変わった経緯（有価証券報告書の記載）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>時点</th><th>出来事</th></tr></thead>
+    <tbody>
+      <tr><td class="">2014年3月末</td><td class="sm2">創業者の堤 征二氏が973.2万株（48.46%）。発行済みは2,008万株</td></tr>
+      <tr><td class="">2015〜2021年</td><td class="sm2">自社株買いを4回。158万株（43.5億円、2015年6月）、91万株（16.9億円、2016年12月）、49万株（10億円、2018〜19年）、44万株（10億円、2021年）</td></tr>
+      <tr><td class="">2022年11月27日</td><td class="sm2">堤 征二氏が逝去（2024年3月期の有価証券報告書の注記）</td></tr>
+      <tr><td class="">2023年3月期</td><td class="sm2">自己株式445万株を消却。発行済みは1,563万株に。征二氏の比率は62.27%と表示</td></tr>
+      <tr><td class="">2024年3月末</td><td class="sm2">堤 倭子氏800.3万株（51.21%）、互 夕希子氏153.9万株、石花 千花氏152.1万株が大株主に</td></tr>
+      <tr><td class="">2024年6月</td><td class="">財団の名称をツツミ奨学財団から堤征二記念奨学財団に変更</td></tr>
+      <tr><td class="">2023年3月期以降</td><td class="sm2">取締役会決議による自社株買いはない。配当は40円→60円→80円→115円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">流通株式はどれくらいか（当商会の推定）</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>数え方</th><th class="r">流通株式比率</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td class="">広めに数える</td><td class="r mn">約42%</td><td class="sm2">10%以上を持つ主要株主51.21%、その他の法人6.89%（財団を含む）、役員0.24%だけを引いた</td></tr>
+      <tr><td class="">狭めに数える</td><td class="r mn">約22%</td><td class="sm2">上に加えて、9.84%と9.73%の個人も流通株式から外れる場合</td></tr>
+      <tr class="hl"><td class="">スタンダード市場の基準</td><td class="r mn">25%以上</td><td class="">会社は基準に適合していない旨の開示をしていない</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>支配株主の側だけで特別決議（3分の2）を通せる</strong>。外の株主が議決権で経営に働きかける道はない。一方で、自社株買いをすれば市場の株がさらに減る。還元が配当に寄っているのは、この名簿の形と無関係ではないとみる。</div>
+  <div class="note">流通株式の定義では、役員の配偶者や二親等内の血族の持ち分は流通株式から外れる。9.84%と9.73%の個人がこれに当たるかは、開示から確認できない。取締役は5名で、筆頭株主は取締役ではない。</div>
+
+</section>
+<section class="pn" id="p6">
+  <div class="sh"><span class="sn">06</span><h2 class="st">還元とミニマムタックス</h2><span class="sb bg-gn">利回り4.82%</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">配当方針</td><td class="sm2">「安定的な配当を継続して行う」。配当性向やDOEの数値目標はない</td></tr>
+      <tr><td class="">配当の推移</td><td class="sm2">30円（2022年3月期）→40円→60円→80円→115円（2026年3月期）→115円（予想）。4年で3.8倍</td></tr>
+      <tr><td class="">配当の総額</td><td class="sm2">年18.0億円。支配株主と合算対象の分が約12.7億円、うち筆頭株主の直接所有分が約9.2億円</td></tr>
+      <tr><td class="">純資産配当率（DOE）</td><td class="sm2">約2.6%。1株純資産4,427円に対して115円</td></tr>
+      <tr><td class="">自社株買い</td><td class="sm2">2015〜2021年に4回・約80億円。2023年3月期以降はない。自己株式は3,359株</td></tr>
+      <tr><td class="">資本コスト</td><td class="sm2">会社の推定は6.4〜8.1%。「ROEが推定資本コストを下回りPBRが1倍を割り込んでいる状況を真摯に受け止め」ると記載（6月30日）。数値目標や期限は示していない</td></tr>
+      <tr><td class="">株主優待</td><td class="sm2">100株以上で商品代金の15%割引券1枚、500株以上で2枚。2026年2月に電子化を公表</td></tr>
+      <tr><td class="">買収への対応方針</td><td class="">導入していない</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">ミニマムタックス（2027年分から強化）はこの会社に効くか</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>場面</th><th>効くか</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td class="">大株主が配当を受け取る</td><td class="">効かない</td><td class="sm2">発行済みの3%以上を持つ個人の配当は総合課税で、もともと税率が高い。追加の負担が出る仕組みではない</td></tr>
+      <tr class="hl"><td class="">大株主が市場やTOBで株を売る</td><td class=""><strong>効く</strong></td><td class="sm2">売却益は約20%の分離課税。2027年分からは（所得−1.65億円）×30%と比べて高いほうになる。上場株の売却益だけなら約3.3億円から効き始める</td></tr>
+      <tr><td class="">非公開化で大株主が買う側に回る</td><td class="">効かない</td><td class="">買う側に売却益は出ない</td></tr>
+      <tr><td class="">相続で渡す</td><td class="">効かない</td><td class="">相続では譲渡益課税が生じない</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tx">筆頭株主の直接所有分は、2026年10月8日の株価で約191億円。9.8%前後を持つ2人の個人はそれぞれ約37億円。<strong>どちらも改正後の目安3.3億円を大きく超える</strong>ので、仮に売る場合は2026年中と2027年以降で税額が変わる。売却益が大きいほど、税率の差（約20%と30%）がそのまま効く。</div>
+  <div class="inf">📌 ただし、<strong>大株主が売る側に回ることを示す開示は何もない</strong>。自社株買いに応じて売った形跡も、名簿が変わった2024年3月期以降にはない。この会社でミニマムタックスが意味を持つのは「誰かがこの会社を買いに来て、大株主が応じる」場合に限られる。配当を受け取り続ける限り、税制の改正は名簿を動かす理由にならない。</div>
+  <div class="note">当商会の「ミニマムタックス2027」の記事の枠組みを当てはめた。相続で取得した株には、相続税の申告期限から3年以内に売ると相続税の一部を取得費に足せる特例がある（一般則）。個別の適用の有無は分からない。税務の助言ではない。</div>
+
+</section>
+<section class="pn" id="p7">
+  <div class="sh"><span class="sn">07</span><h2 class="st">非公開化の算数</h2><span class="sb bg-pu">現金で足りる</span></div>
+  <div class="tx">支配株主の側が議決権の7割を持つ会社では、外から買収を仕掛けることができない。非公開化が起きるとすれば、支配株主の側が残りを買う形になる。その算数だけを先に済ませておく。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>項目</th><th class="r">数字</th><th>前提</th></tr></thead>
+    <tbody>
+      <tr><td class="">支配株主（合算）と財団の持ち分</td><td class="r mn">77.28%</td><td class="">70.89%＋6.39%</td></tr>
+      <tr><td class="">その外にある株</td><td class="r mn">約355万株</td><td class="">自己株式を除く1,562.7万株の22.72%</td></tr>
+      <tr class="hl"><td class="">4割の上乗せで買う場合</td><td class="r mn">約118億円</td><td class="sm2">2,384円×1.4＝3,338円。PBRでは0.75倍</td></tr>
+      <tr class="hl"><td class="">1株純資産で買う場合</td><td class="r mn">約157億円</td><td class="">4,427円。PBR1.0倍</td></tr>
+      <tr><td class="">会社の現金及び預金</td><td class="r mn">251億円</td><td class="">2026年6月末。借入金はゼロ</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>外にある株をPBR1倍で全部買っても、会社の現金の6割ほどで足りる</strong>。借入をしなくても済む規模で、議決権の面でも障害がない。算数としては、いつでもできる状態にある。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>起きやすくする事情</th><th>起きにくくする事情</th></tr></thead>
+    <tbody>
+      <tr><td class="">流通株式が2割強と少なく、上場を続ける利点が小さい</td><td class="">非公開化を検討しているという開示はない</td></tr>
+      <tr><td class="">資金は手元の現金で足りる</td><td class="sm2">配当を4年で3.8倍にしている。上場したまま配当で受け取る道を選んでいるとも読める</td></tr>
+      <tr><td class="">買収への対応方針がなく、資本コストの開示で「PBR1倍割れ」に触れている</td><td class="sm2">自社株買いが止まっている。流通株式を減らす方向の動きは避けているように見える</td></tr>
+      <tr><td class="">個人が過半を直接持つ名簿で、いずれ承継の論点が出る</td><td class="sm2">支配株主が買う場合、買付価格を低くしたい側と少数株主の利益が対立する。公正性の手続きが重くなる</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">左の列は構造の指摘で、時期や意向は分からない。この章は非公開化を予想するものではない。3年後の3ケース（10章）にも、非公開化は入れていない。</div>
+
+</section>
+<section class="pn" id="p8">
+  <div class="sh"><span class="sn">08</span><h2 class="st">金を買うか、この株を買うか</h2><span class="sb bg-am">5年で金は3.4倍</span></div>
+  <div class="tx">「金が上がると思うなら、金そのものを買えばよい。なぜツツミの株なのか」。この問いに、過去の値動きと中身の両方から答える。</div>
+  <div class="tw"><svg viewBox="0 0 760 300" role="img" aria-label="金の小売価格とツツミの株価（2021年1月を100とした指数）" style="width:100%;min-width:520px;height:auto;display:block"><line x1="46" x2="744" y1="210.5" y2="210.5" stroke="#8884" stroke-width="1"/><text x="40" y="214.5" font-size="11" fill="#888" text-anchor="end">100</text><line x1="46" x2="744" y1="150.9" y2="150.9" stroke="#8884" stroke-width="1"/><text x="40" y="154.9" font-size="11" fill="#888" text-anchor="end">200</text><line x1="46" x2="744" y1="91.4" y2="91.4" stroke="#8884" stroke-width="1"/><text x="40" y="95.4" font-size="11" fill="#888" text-anchor="end">300</text><line x1="46" x2="744" y1="31.9" y2="31.9" stroke="#8884" stroke-width="1"/><text x="40" y="35.9" font-size="11" fill="#888" text-anchor="end">400</text><text x="46.0" y="292" font-size="11" fill="#888" text-anchor="middle">2021年</text><text x="169.2" y="292" font-size="11" fill="#888" text-anchor="middle">2022年</text><text x="292.4" y="292" font-size="11" fill="#888" text-anchor="middle">2023年</text><text x="415.5" y="292" font-size="11" fill="#888" text-anchor="middle">2024年</text><text x="538.7" y="292" font-size="11" fill="#888" text-anchor="middle">2025年</text><text x="661.9" y="292" font-size="11" fill="#888" text-anchor="middle">2026年</text><path d="M46.0,210.5 L56.3,211.2 L66.5,212.5 L76.8,211.2 L87.1,207.9 L97.3,207.8 L107.6,208.8 L117.9,209.6 L128.1,209.6 L138.4,208.4 L148.6,206.2 L158.9,207.6 L169.2,205.9 L179.4,204.4 L189.7,199.2 L200.0,195.1 L210.2,197.0 L220.5,194.5 L230.8,197.0 L241.0,196.8 L251.3,196.1 L261.6,194.9 L271.8,194.6 L282.1,195.5 L292.4,193.9 L302.6,194.2 L312.9,191.7 L323.1,188.2 L333.4,186.3 L343.7,185.8 L353.9,185.8 L364.2,184.7 L374.5,183.2 L384.7,182.3 L395.0,178.9 L405.3,180.0 L415.5,178.7 L425.8,177.2 L436.1,171.1 L446.3,160.3 L456.6,157.3 L466.9,157.5 L477.1,154.4 L487.4,159.2 L497.6,157.5 L507.9,146.9 L518.2,145.2 L528.4,145.9 L538.7,140.3 L549.0,135.6 L559.2,134.4 L569.5,127.7 L579.8,124.4 L590.0,121.7 L600.3,119.8 L610.6,118.0 L620.8,104.7 L631.1,81.8 L641.4,76.0 L651.6,64.0 L661.9,39.6 L672.1,31.5 L682.4,31.7 L692.7,38.6 L702.9,46.5 L713.2,60.0 L723.5,66.2 L733.7,55.0 L744.0,61.8" fill="none" stroke="#c9962b" stroke-width="2.4"/><path d="M46.0,210.5 L56.3,201.7 L66.5,199.0 L76.8,194.1 L87.1,190.6 L97.3,195.6 L107.6,192.0 L117.9,192.7 L128.1,199.5 L138.4,200.8 L148.6,202.5 L158.9,206.6 L169.2,211.2 L179.4,208.1 L189.7,208.6 L200.0,208.6 L210.2,205.2 L220.5,205.2 L230.8,198.8 L241.0,203.3 L251.3,204.2 L261.6,202.1 L271.8,206.2 L282.1,208.1 L292.4,207.5 L302.6,205.0 L312.9,194.3 L323.1,196.5 L333.4,203.2 L343.7,193.3 L353.9,192.2 L364.2,191.6 L374.5,190.1 L384.7,195.0 L395.0,200.1 L405.3,195.4 L415.5,200.4 L425.8,202.0 L436.1,201.7 L446.3,196.9 L456.6,200.9 L466.9,198.9 L477.1,199.3 L487.4,197.0 L497.6,200.9 L507.9,201.0 L518.2,202.1 L528.4,197.8 L538.7,193.2 L549.0,195.1 L559.2,196.6 L569.5,194.6 L579.8,197.1 L590.0,197.5 L600.3,197.0 L610.6,196.7 L620.8,197.3 L631.1,196.2 L641.4,189.4 L651.6,186.9 L661.9,184.0 L672.1,159.2 L682.4,174.4 L692.7,176.7 L702.9,179.8 L713.2,186.6 L723.5,186.7 L733.7,182.9 L744.0,188.4" fill="none" stroke="#3b7dd8" stroke-width="2.4"/><text x="744.0" y="53.8" font-size="12" font-weight="700" fill="#c9962b" text-anchor="end">金 349</text><text x="744.0" y="180.4" font-size="12" font-weight="700" fill="#3b7dd8" text-anchor="end">ツツミ株 136</text></svg></div>
+  <div class="note">2021年1月を100とした指数。金は田中貴金属工業の参考小売価格（税抜）の月平均、株価は株探の月末終値（配当は含まない）。2026年9月まで。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>期間</th><th class="r">金</th><th class="r">ツツミ株</th><th class="r">配当を足すと</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="">5年（2021年9月→2026年9月）</td><td class="r mn">3.4倍（6,368円→21,953円）</td><td class="r mn">+16%（2,160円→2,500円）</td><td class="r mn">+31%（5期分の配当325円）</td></tr>
+      <tr><td class="">1年（2025年9月→2026年9月）</td><td class="r mn">+26%</td><td class="r mn">+12%（2,230円→2,500円）</td><td class="r mn">+17%（配当115円）</td></tr>
+      <tr><td class="">高値から（3月初め→10月8日）</td><td class="r mn">▲23%（税込29,969円→23,105円）</td><td class="r mn">▲31%（3,455円→2,384円）</td><td class="r mn">—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>5年で金は3.4倍になったが、ツツミの株は配当を足しても3割しか上がっていない</strong>。株が金に付いていったのは2025年11月から2026年3月の4か月だけで、下げでは金より大きく下げた。値動きを見る限り、金の代わりにはなっていない。有価証券報告書の株主総利回りも5年で149.7%、配当込みTOPIXの202.2%を下回る。</div>
+  <div class="h3">100万円で何が手に入るか</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th></th><th>金を買う</th><th>ツツミの株を買う</th></tr></thead>
+    <tbody>
+      <tr><td class="">手に入るもの</td><td class="sm2">金 約43.3g（10月8日の店頭小売価格23,105円/g）</td><td class="">約419株</td></tr>
+      <tr><td class="">その裏にある現金</td><td class="">なし</td><td class="">約67万円（会社の現金の持ち分）</td></tr>
+      <tr><td class="">その裏にある在庫</td><td class="">金そのもの</td><td class="sm2">原価で約81万円（宝飾品・地金）。うち金・プラチナは約45〜52万円（当商会の置き）</td></tr>
+      <tr><td class="">毎年の受け取り</td><td class="">なし</td><td class="">配当 約4.8万円（予想、税引前）</td></tr>
+      <tr><td class="">金が動いたとき</td><td class="">そのまま動く</td><td class="sm2">在庫は原価のまま。売れたときに利益になり、大きく下がれば評価損</td></tr>
+      <tr><td class="">自分で取り出せるか</td><td class="">売ればいつでも現金になる</td><td class="sm2">現金も在庫も会社のもの。配分は議決権の7割を持つ側が決める</td></tr>
+      <tr><td class="">売買のしやすさ</td><td class="">店頭の売値と買値の差は1.5%ほど</td><td class="">1日の売買代金は約3,973万円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>この株を選ぶ理由になること</th><th>ならないこと</th></tr></thead>
+    <tbody>
+      <tr><td class="">金が下がっても、株価の3分の2は現金で裏打ちされている</td><td class="">金が上がっても、株価が同じだけ上がる仕組みはない</td></tr>
+      <tr><td class="">持っている間、年4.8%の配当がある。金は何も生まない</td><td class="sm2">配当は会社が決める。方針は「安定的」とあるだけで、下限の約束はない</td></tr>
+      <tr><td class="">在庫を原価の半分以下で買っている計算になる</td><td class="">その在庫も現金も、外の株主は取り出せない</td></tr>
+      <tr><td class="">金が上がる局面では地金ジュエリーが売れ、利益が増える（前期は営業利益2.2倍）</td><td class="sm2">金が下がる局面では評価損が出て、売れ行きも鈍る可能性がある</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 まとめると、<strong>ツツミの株は「金の代わり」ではなく、「現金が3分の2、金に連動する在庫と商売が3分の1、配当つき、ただし鍵は別の人が持っている」という別の商品</strong>である。金の値上がりを取りたいなら金のほうが素直で、金が下がったときの傷の浅さと配当を取りたいならこちらに理由がある。どちらが良いかは、金をどう見るかより、鍵を持っていないことをどう値付けするかで決まる。</div>
+
+</section>
+<section class="pn" id="p9">
+  <div class="sh"><span class="sn">09</span><h2 class="st">売られた理由 ── 高値から▲31%</h2><span class="sb bg-rd">当商会の推測</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>日付</th><th>出来事</th><th>株価</th><th>金（税込・円/g）</th></tr></thead>
+    <tbody>
+      <tr><td class="">2月</td><td class="">月間で+29%。2月6日に2回目の上方修正</td><td class="">2,637円→3,395円</td><td class="">月初26,712円→月末28,734円</td></tr>
+      <tr class="hl"><td class="">3月2〜3日</td><td class="sm2"><strong>株は3月2日に高値3,455円、金は3月3日に高値29,969円</strong></td><td class="">3,455円</td><td class="">29,969円</td></tr>
+      <tr><td class="">3月24日</td><td class="">金が3週間で17%下げる</td><td class="">月末2,930円</td><td class="">24,777円</td></tr>
+      <tr><td class="">5月14日</td><td class="">本決算。今期は売上▲11%、営業利益▲24%の予想</td><td class="">5月末2,765円</td><td class="">5月末25,489円</td></tr>
+      <tr><td class="">6月末</td><td class="">金が3月末から10%下げる</td><td class="">2,557円</td><td class="">23,125円</td></tr>
+      <tr><td class="">8月7日</td><td class="">4〜6月は営業利益▲46%。評価損4.82億円</td><td class="">8月末2,671円</td><td class="">8月末25,417円</td></tr>
+      <tr><td class="">9月29日</td><td class="">中間配当45円の権利落ち。前日比▲85円</td><td class="">2,491円</td><td class="">23,085円</td></tr>
+      <tr class="hl"><td class="">10/8</td><td class="">年初来安値2,378円（取引時間中）</td><td class=""><strong>2,384円</strong></td><td class="">23,105円</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>理由（当商会の推測）</th><th>確からしさ</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class=""><strong>金そのものが下げた</strong></td><td class="">高い</td><td class="sm2">高値の日が1日違いで、その後の下げ幅も近い（金▲23%、株▲31%）。2月の上げも金と同時だった</td></tr>
+      <tr><td class="">今期の減益予想</td><td class="">高い</td><td class="sm2">5月14日に営業利益▲24%を公表。前期は3回の上方修正で期待が上がっていた</td></tr>
+      <tr><td class="">4〜6月の評価損</td><td class="">中</td><td class="sm2">8月7日に営業利益▲46%。見出しの数字が悪い。ただし発表後の8月は月間で+4.6%だった</td></tr>
+      <tr><td class="">中間配当の権利落ち</td><td class="">高い（一部）</td><td class="sm2">9月29日に45円の落ち。9月28日の2,576円からの下げ192円のうち45円分</td></tr>
+      <tr><td class="">信用買いの整理</td><td class="">未確認</td><td class="sm2">信用倍率は7.49倍。1日の売買は約1.5万株で、少しの売りで値が動く</td></tr>
+      <tr><td class="">2月に上がりすぎた反動</td><td class="">中</td><td class="sm2">2月の1か月で+29%。PBRは0.77倍と直近5年の上限まで買われた</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 <strong>売られた一番の理由は、会社の中身が悪くなったことではなく、金が下げたことだとみる</strong>。株価は2025年11月から金に連動する株として買われ、金の高値と一緒に天井を付けた。4〜6月の店の売上は増えており、評価損を除けば粗利も増えている。</div>
+  <div class="note">金の値段は田中貴金属工業の店頭小売価格（税込、9時30分公表）。株価は株探の月足と日足。理由はすべて当商会の推測で、売った投資家の意図を確かめたものではない。</div>
+
+</section>
+<section class="pn" id="p10">
+  <div class="sh"><span class="sn">10</span><h2 class="st">3年後の3ケース ── 金の値段で分ける</h2><span class="sb bg-pu">2029年</span></div>
+  <div class="tx">3年後（2029年秋）の株価を<strong>1株純資産×PBR</strong>で3通りに考える。この会社の利益は金の値段と一緒に動くので、ケースを金の値段で分けた。1株純資産は、いまの4,427円に3年分の内部留保（1株利益−配当）を足す。確率は当商会の置きである。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>ケース</th><th>前提</th><th class="r">3年後の1株純資産</th><th class="r">PBR</th><th class="r">株価</th><th class="r">騰落</th><th class="r">配当込み</th></tr></thead>
+    <tbody>
+      <tr><td class=""><strong>金が3割安</strong>（25%）</td><td class="sm2">地金ジュエリーの売れ行きが鈍り、在庫の評価損も出る。1株利益100円、配当80円。PBRは直近5年の安値0.41倍</td><td class="r mn">4,487円</td><td class="r mn">0.41倍</td><td class="r mn">1,840円</td><td class="r mn">▲23%</td><td class="r mn">▲13%</td></tr>
+      <tr class="hl"><td class=""><strong>金が横ばい</strong>（50%）</td><td class="sm2">今期の会社予想並みの利益が続く。配当115円。PBRはいまと同じ0.55倍</td><td class="r mn">4,622円</td><td class="r mn">0.55倍</td><td class="r mn">2,542円</td><td class="r mn">+7%</td><td class="r mn">+21%</td></tr>
+      <tr><td class=""><strong>金が3割高</strong>（25%）</td><td class="sm2">前期並みの利益。配当140円。PBRは前期の高値0.77倍</td><td class="r mn">4,727円</td><td class="r mn">0.77倍</td><td class="r mn">3,640円</td><td class="r mn">+53%</td><td class="r mn">+70%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="inf">📌 3ケースを確率で均すと2,641円（+10.8%）、3年分の配当を足して+24.9%。<strong>金が横ばいなら、株価の上げは小さく、リターンの大半が配当になる</strong>。金が3割下げる場合でも配当込みで▲13%にとどまる計算だが、これは「配当を80円に減らす」置きに頼っている。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>3年間の金</th><th class="r">金を持つ</th><th class="r">ツツミ株を持つ（配当込み）</th></tr></thead>
+    <tbody>
+      <tr><td class="">3割安</td><td class="r mn">▲30%</td><td class="r mn">▲13%</td></tr>
+      <tr class="hl"><td class="">横ばい</td><td class="r mn">0%</td><td class="r mn">+21%</td></tr>
+      <tr><td class="">3割高</td><td class="r mn">+30%</td><td class="r mn">+70%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">右の列は、利益・配当・PBRがすべて当商会の置きどおりになった場合の数字で、金のように値段がそのまま返ってくるものではない。「3割高」の0.77倍は、前期の高値と同じPBRまで買われる置きである。非公開化、配当方針の変更、自社株買いの再開は、どのケースにも入れていない。</div>
+
+</section>
+<section class="pn" id="p11">
+  <div class="sh"><span class="sn">11</span><h2 class="st">検証済みレンジとランク</h2><span class="sb bg-am">B++</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>軸</th><th class="r">点</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr><td class="">🦦安さ</td><td class="r mn">3点</td><td class="sm2">PBR0.55倍。流動資産から負債を全部引いた額が時価総額の1.47倍、現金だけで時価総額の67%</td></tr>
+      <tr><td class="">🦉財務</td><td class="r mn">3点</td><td class="sm2">借入金なし。自己資本比率97.5%。負債は18億円しかない</td></tr>
+      <tr><td class="">🦫モート</td><td class="r mn">1点</td><td class="sm2">宝石の買い付けから製造、145店での販売まで自社で行う。ただしROEは直近13年で最も高い前期でも5.4%で、会社が置く資本コスト6.4〜8.1%に届かない</td></tr>
+      <tr><td class="">🐊触媒</td><td class="r mn">2点</td><td class="sm2">配当は4年で30円から115円へ。ガバナンス報告書で資本コストとPBR1倍割れに触れている。自社株買いは2022年3月期を最後に止まっている</td></tr>
+      <tr><td class="">🐝インカム</td><td class="r mn">3点</td><td class="">予想配当115円で利回り4.77%。配当性向は約64%</td></tr>
+      <tr><td class="">🦞リスク</td><td class="r mn">0点</td><td class="sm2">支配株主と合算対象の議決権が70.89%（規則で0点）。利益も在庫の評価も金の値段に左右される</td></tr>
+      <tr class="hl"><td class=""><strong>確度</strong></td><td class="r mn"><strong>12点</strong></td><td class="">18点満点。13点以上が「高」、8点以上が「中」</td></tr>
+    </tbody>
+  </table></div>
+  <div class="h3">上値と下値</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>上値の置き方</th><th class="r">PBR</th><th class="r">株価</th><th class="r">いまから</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="">直近5年の高値0.77倍（規則で採用）</td><td class="r mn">0.77倍</td><td class="r mn">3,409円</td><td class="r mn">+43.0%</td></tr>
+      <tr><td class="">同業の中央値1.26倍</td><td class="r mn">1.26倍</td><td class="r mn">5,578円</td><td class="r mn">+134.0%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>下値の置き方</th><th class="r">株価</th><th class="r">下値</th><th class="r">非対称比</th><th class="r">幅</th><th class="r">ランク</th></tr></thead>
+    <tbody>
+      <tr><td class="">52週安値</td><td class="r mn">2,196円</td><td class="r mn">▲8%</td><td class="r mn">5.45</td><td class="r mn">大</td><td class="r mn">A</td></tr>
+      <tr><td class="">PBR下限0.41倍×BPS</td><td class="r mn">1,815円</td><td class="r mn">▲24%</td><td class="r mn">1.80</td><td class="r mn">中</td><td class="r mn">B++</td></tr>
+      <tr><td class="">PER下限8.41倍×予想EPS</td><td class="r mn">1,507円</td><td class="r mn">▲37%</td><td class="r mn">1.17</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+      <tr class="hl"><td class="">床（1株あたり現金−負債）（規則で採用）</td><td class="r mn">1,495円</td><td class="r mn">▲37%</td><td class="r mn">1.15</td><td class="r mn">小</td><td class="r mn">B++</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">上値は「1株純資産×min（直近5年のPBRの高値、同業の中央値）」。同業はエステールHD 0.57倍、光・彩 0.84倍、ヨンドシーHD 1.12倍、フェスタリアHD 1.26倍、クロスフォー 1.34倍、NEW ART HD 2.11倍、ナガホリ 2.50倍（株探・10月8日）。宝飾品の上場会社は規模と業態の差が大きく、中央値に強い意味はない。下値は、株価より下にある候補のうち最も深いもの。</div>
+  <div class="inf">📌 <strong>上値は3,409円（+43.0%）で、3月の高値3,455円とほぼ同じ場所になる</strong>。7章の「4割の上乗せ」3,338円とも重なる。下値は規則どおり、候補のうち最も深い「1株あたりの現金−負債」の1,495円（▲37%）。PERの下限で出した1,507円とほぼ同じ場所で、資産の床と利益の床が重なっている。幅は「小」、確度12点でB++。リスクが0点の銘柄は、当商会の規則で1銘柄の上限が運用資産の1%になる。</div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>株価</th><th>幅</th><th>ランク</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td class="">2,384円（いま）</td><td class="">小</td><td class=""><strong>B++</strong></td><td class="">—</td></tr>
+      <tr><td class="">2,260円</td><td class="">中</td><td class="">B++</td><td class="sm2">いまから▲5%。52週安値2,196円の少し上</td></tr>
+      <tr><td class="">1,973円</td><td class="">大</td><td class="">A-</td><td class="">2025年4月の安値1,986円とほぼ同じ</td></tr>
+    </tbody>
+  </table></div>
+
+</section>
+<section class="pn" id="p12">
+  <div class="sh"><span class="sn">12</span><h2 class="st">リスクと検算メモ</h2><span class="sb bg-rd">7つのリスク</span></div>
+  <div class="tw"><table class="t">
+    <thead><tr><th>リスク</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td class="">支配株主</td><td class="sm2">議決権の70.89%を支配株主と合算対象が持つ。配当も自社株買いも非公開化も、決めるのはこの側である。外の株主が働きかける手段はない</td></tr>
+      <tr><td class="">金の値段</td><td class="sm2">利益も在庫の評価も金に連動する。金が下がれば評価損が出る。4〜6月は3月末から10%の下げで4.82億円だった</td></tr>
+      <tr><td class="">在庫の積み増し</td><td class="sm2">棚卸資産は2年で175億円から302億円へ。現金が在庫に置き換わっている。金の高値圏で積んだ在庫は、相場が下がれば重荷になる</td></tr>
+      <tr><td class="">現金の減少</td><td class="sm2">現金は12年で416億円から251億円に減った。この先も在庫と配当に出ていけば、「現金が時価総額の3分の2」という前提が薄くなる</td></tr>
+      <tr><td class="">流動性</td><td class="sm2">1日の売買代金は約4,000万円。まとまった株数は数日では売れない</td></tr>
+      <tr><td class="">非公開化の価格</td><td class="sm2">支配株主の側が買う場合、買付価格は低いほうが買う側に有利になる。純資産より大幅に低い価格で提案される例は珍しくない</td></tr>
+      <tr><td class="">消費</td><td class="sm2">宝飾品は生活に必須のものではない。店は145店で4年前から18店減っており、ショッピングセンターの集客に左右される</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card" style="border:1px dashed #888;border-radius:10px;padding:12px 16px;margin:14px 0">
+    <div class="h3" style="margin-top:0">検算メモ（沼底バリュー商会・2026年10月）</div>
+    <ul class="note">
+      <li>株価2,384円は2026年10月8日の終値（scripts/price.py による株探の確定値）</li>
+      <li>発行済15,630,000株、自己株式3,359株、純資産691.76億円、現金及び預金251.20億円、商品及び製品222.65億円、仕掛品16.68億円、原材料及び貯蔵品62.76億円、負債17.57億円、第1四半期の損益と評価損482百万円は2027年3月期第1四半期決算短信（2026年8月7日）</li>
+      <li>通期予想（売上313億円・営業利益40億円・純利益28億円・1株利益179.18円）と配当115円は2026年3月期決算短信（5月14日）と第1四半期決算短信</li>
+      <li>5期の業績・ROE・配当・株主総利回り、品目別の売上、製造原価明細書、原材料の内訳（金・プラチナ4,288百万円）、棚卸資産の評価方法、大株主、役員、配当政策、賃貸等不動産は有価証券報告書（2026年3月期）</li>
+      <li>2014年以降の現金・棚卸資産・自社株買い・大株主の推移は、2014年3月期から2026年3月期までの有価証券報告書13本。堤 征二氏の逝去の日付は2024年3月期の有価証券報告書（大株主の状況の注記）</li>
+      <li>四半期ごとの売上と粗利は、2026年3月期の第1四半期・中間期・第3四半期の決算短信の累計値から差し引きで計算した</li>
+      <li>支配株主の議決権70.89%は「支配株主等に関する事項について」（5月22日）。資本コスト6.4〜8.1%と買収への対応方針はコーポレート・ガバナンス報告書（6月30日）</li>
+      <li>金の値段は田中貴金属工業の月次（参考小売価格・税抜）と日次（店頭小売価格・税込）。2026年10月8日・9日に取得</li>
+      <li>直近5年のPBRの高値0.77倍・安値0.41倍は、有価証券報告書の各期の最高・最低株価を期末の1株純資産で割った。PERの下限8.41倍は2026年3月期の最低株価1,986円÷1株利益236.2円</li>
+      <li><strong>当商会の置き</strong>：在庫に占める金・プラチナの比率（材料費92%×6〜7割）、在庫の原価がいまの金の値段に近いという読み、流通株式比率の幅、3ケースの1株利益・配当・PBR・確率、非公開化の上乗せ率4割</li>
+      <li><strong>未確認</strong>：金・プラチナの在庫の重量、製品ごとの在庫期間、JPXが使う流通株式比率、合算対象分19.68%の内訳、信用買い残の推移、11月の中間決算の内容、10月8日の終値以降の値動き</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer style="background:var(--ink2);color:rgba(246,245,239,.36);text-align:center;padding:18px 16px;font:500 9px/1.8 var(--mono);letter-spacing:.07em">
+  本資料は情報提供のみを目的として作成されています。投資助言・税務の助言ではなく、特定銘柄や金の売買を推奨するものではありません。ランク・上値・下値・3年後の株価・在庫の中身の推定・非公開化の試算は当商会の計算で、将来の株価や会社・株主の意向を示すものではありません。投資判断はご自身の責任においてお願いいたします。<br>
+  Data: ツツミ 2027年3月期第1四半期決算短信・2026年3月期決算短信・有価証券報告書（2014〜2026年3月期）・コーポレート・ガバナンス報告書・適時開示（業績予想の修正、支配株主等に関する事項）／田中貴金属工業（金の価格推移）／株探（確定値・月足・同業の指標） · 2026.10
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#nav .tb'));
+  var pans=[].slice.call(document.querySelectorAll('.pn'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    pans.forEach(function(p){p.classList.toggle('on',p.id===id);});
+    tabs.forEach(function(x){var on=x.getAttribute('data-p')===id;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');});
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      show(b.getAttribute('data-p'));
+      var nav=document.getElementById('nav');
+      var top=nav.getBoundingClientRect().top+window.pageYOffset;
+      if(window.pageYOffset>top) window.scrollTo(0,top);
+    });
+  });
+  if(location.hash) show(location.hash.slice(1));
+})();
+</script>
+
+</body>
+</html>
