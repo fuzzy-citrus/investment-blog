@@ -1,5 +1,7 @@
 ﻿---
 import CastIcon from '../components/CastIcon.astro';
+import VideoButton from '../components/VideoButton.astro';
+import VideoDialog from '../components/VideoDialog.astro';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -27,6 +29,7 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
         <h1>バリュー商会</h1>
         <p class="subtitle">割安日本個別株・TOB発掘・競合優位性・インカム運用</p>
         <p class="tagline">インデックスに物足りない、でも米株はどのリスクは怖い——その中間地帯のための投資記録</p>
+        <VideoButton id="members" label="4班の紹介動画を見る" duration="2分" align="center" />
       </div>
 
       <div class="org-chart">
@@ -192,7 +195,13 @@ const ART = new Set(['nomura','numata','hinata','kawachi','yomi','hotta','machib
         </div>
 
       </div>
-    </main>
+          <VideoDialog
+        id="members"
+        src="/videos/members-intro.mp4"
+        poster="/videos/members-intro-poster.jpg"
+        label="沼底バリュー商会のメンバー紹介"
+      />
+</main>
         <Footer />
   </body>
 </html>

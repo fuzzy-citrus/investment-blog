@@ -4,6 +4,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BookSidebar from '../components/BookSidebar.astro';
+import VideoButton from '../components/VideoButton.astro';
+import VideoDialog from '../components/VideoDialog.astro';
 import { characters, rivalOrgs, teamLabels } from '../data/characters';
 
 const founder  = characters.filter(c => c.team === 'founder');
@@ -55,6 +57,7 @@ const opCast = [
       <div class="page-header">
         <h1>メンバー一覧</h1>
         <p class="lead">バリュー商会の投資担当たちをご紹介します。</p>
+        <VideoButton id="members" label="4班の紹介動画を見る" duration="2分" />
         <a href="/org" class="org-link">🗂 組織図で見る →</a>
       </div>
 
@@ -179,7 +182,13 @@ const opCast = [
           </div>
         ))}
       </section>
-    </main>
+          <VideoDialog
+        id="members"
+        src="/videos/members-intro.mp4"
+        poster="/videos/members-intro-poster.jpg"
+        label="沼底バリュー商会のメンバー紹介"
+      />
+</main>
     <BookSidebar />
     <Footer />
 

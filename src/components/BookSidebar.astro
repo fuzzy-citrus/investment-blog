@@ -1,5 +1,6 @@
 ---
 import CastIcon from './CastIcon.astro';
+import VideoDialog from './VideoDialog.astro';
 import { getCollection } from 'astro:content';
 import AdUnit from './AdUnit.astro';
 import { ADSENSE_CLIENT, ADSENSE_SIDEBAR_SLOT } from '../consts';
@@ -31,7 +32,13 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     <div class="info-sb-author">
       <div class="info-sb-author-top">
         <div class="info-sb-author-name">沼田課長</div>
-        <div class="info-sb-avatar"><CastIcon id="numata" name="沼田課長" /></div>
+        <div class="info-sb-author-media">
+          <div class="info-sb-avatar"><CastIcon id="numata" name="沼田課長" /></div>
+          <button type="button" class="info-sb-play" data-video-open="author" aria-label="筆者の自己紹介動画を見る（33秒）">
+            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+            <span class="info-sb-play-text">33秒</span>
+          </button>
+        </div>
       </div>
       <div class="info-sb-author-title">課長・プレイングマネージャー</div>
       <div class="info-sb-author-bio">野村信用を活用したバリュー株×TOB待ち伏せ戦略。TOBヒット20件超。<span class="info-sb-goal">【目標】4,308万円 → 2億円（2030年）</span></div>
@@ -95,6 +102,13 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
 
 </div>
 
+<VideoDialog
+  id="author"
+  src="/videos/numata-author-intro.mp4"
+  poster="/videos/numata-author-intro-poster.jpg"
+  label="筆者・沼田堅一の自己紹介"
+/>
+
 <style is:global>
   .info-sb {
     position: fixed;
@@ -152,6 +166,13 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     justify-content: space-between;
     align-items: flex-start;
   }
+  .info-sb-author-media {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
   .info-sb-avatar {
     --cast-size: 40px;
     width: 40px;
@@ -161,7 +182,35 @@ const showAd = Boolean(ADSENSE_CLIENT && ADSENSE_SIDEBAR_SLOT);
     border: 1px solid rgba(232,184,75,0.4);
     background: #fffdf7;
     margin-top: -8px;
-    margin-right: 12px;
+  }
+  .info-sb-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    width: 34px;
+    height: 34px;
+    margin-top: -8px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(232,184,75,0.55);
+    background: rgba(232,184,75,0.14);
+    color: #f5d47a;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .info-sb-play svg { margin-left: 1px; }
+  .info-sb-play-text {
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .info-sb-play:hover,
+  .info-sb-play:focus-visible {
+    background: rgba(232,184,75,0.3);
+    transform: scale(1.06);
   }
   .info-sb-author-name {
     font-size: 0.6em;

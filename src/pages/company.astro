@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import InlineVideo from '../components/InlineVideo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { brokerSnapshot } from '../data/assetHistory';
@@ -26,6 +27,15 @@ const nowPct = (nowMan / goalMan) * 100;
 				<h1>会社紹介</h1>
 				<p class="company-desc">バリュー商会の成績です</p>
 			</section>
+
+			<InlineVideo
+				src="/videos/company-intro.mp4"
+				poster="/videos/company-intro-poster.jpg"
+				heading="はじめましての会議"
+				lead="どんな会社を、どうやって探しているのか。沼田と日向が50秒で案内します。"
+				duration="50秒"
+				label="沼底バリュー商会の会社紹介動画"
+			/>
 
 			<section class="about-blog">
 				<h2>バリュー商会とは</h2>

@@ -16,6 +16,8 @@ const paths = [
 	['/map#tob-event', '🐊', 'TOB・再編', '資本政策、大量保有報告書、MBOなどを追う'],
 	['/map#risk-leverage', '🦞', '投資実務', '資金管理、信用維持率、暴落時の余力を確認する'],
 ];
+import VideoButton from '../components/VideoButton.astro';
+import VideoDialog from '../components/VideoDialog.astro';
 ---
 <!doctype html>
 <html lang="ja">
@@ -28,6 +30,7 @@ const paths = [
 			<span class="eyebrow">START HERE</span>
 			<h1>初めての方へ</h1>
 			<p class="lead">沼底バリュー商会は、<strong>安い理由を数字と一次資料で確かめる</strong>投資ブログです。個別銘柄だけでなく、資産・事業・外圧・資金管理まで分けて検証し、紹介後の値動きや訂正も残しています。</p>
+			<VideoButton id="company" label="まず動画で会社紹介" duration="50秒" align="center" />
 			<div class="promise"><strong>このサイトの約束</strong><br />無料ブログでは個別分析と答え合わせを公開し、noteでは銘柄そのものではなく、再現できる手順・判断基準・チェックリストを扱います。</div>
 		</section>
 		<section>
@@ -58,6 +61,12 @@ const paths = [
 			<h2><span>6</span> 最新状況から入りたい方へ</h2>
 			<div class="actions center"><a href="/blog/">最新記事を見る →</a><a href="/map">コンテンツマップを見る →</a><a href="/search">記事を検索する →</a></div>
 		</section>
+		<VideoDialog
+			id="company"
+			src="/videos/company-intro.mp4"
+			poster="/videos/company-intro-poster.jpg"
+			label="沼底バリュー商会の会社紹介"
+		/>
 	</main>
 	<Footer />
 </body>

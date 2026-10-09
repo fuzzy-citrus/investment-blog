@@ -31,6 +31,7 @@ export const seriesList: Series[] = [
 			'weekly-2026w38-week-summary',
 			'weekly-2026w39-week-summary',
 			'weekly-2026w40-week-summary',
+			'weekly-2026w41-week-summary',
 		],
 		labels: [
 			'2026年8月30日〜9月5日',
@@ -47,10 +48,13 @@ export const seriesList: Series[] = [
 		slugs: [
 			'small-short-overvaluation-2026',
 			'reverse-value-02-short-screening',
+			'reverse-value-03-okamoto-glass',
+			'reverse-value-04-erth-group',
 		],
 		labels: [
 			'第1回｜なぜ少量ずつ売るのか',
 			'第2回｜高PERの4つの型',
+			'第3回｜急騰した株を売る側から点検する',
 		],
 	},
 	{

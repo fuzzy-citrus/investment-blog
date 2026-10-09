@@ -1,5 +1,7 @@
 ---
 import CastIcon from '../components/CastIcon.astro';
+import VideoDialog from '../components/VideoDialog.astro';
+import VideoButton from '../components/VideoButton.astro';
 import Comments from '../components/Comments.astro';
 import StockRankSummary from '../components/StockRankSummary.astro';
 import BaseHead from '../components/BaseHead.astro';
@@ -138,6 +140,14 @@ const memberHints = [
 			<section class="hero">
 				<figure class="hero-visual">
 					<img src="/images/brand/numasoko-research-room-20260914.png" alt="沼底バリュー商会のメンバーが一次資料や決算書を囲んで企業価値を調べるイラスト" loading="eager" fetchpriority="high" />
+					<button type="button" class="hero-play" data-video-open="company" aria-label="会社紹介の動画を見る（50秒）">
+						<span class="hero-play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+						<span class="hero-play-label">会社紹介 50秒</span>
+					</button>
+					<button type="button" class="hero-play hero-play-members" data-video-open="members" aria-label="部下たちの紹介動画を見る（2分3秒）">
+						<span class="hero-play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+						<span class="hero-play-label">部下紹介 2分</span>
+					</button>
 				</figure>
 				<div class="hero-badge">🌱 沼底バリュー商会</div>
 				<h1>見えない価値を、見つけにいこう。</h1>
@@ -283,6 +293,7 @@ const memberHints = [
 				<h2>メンバー紹介</h2>
 				<p>バリュー商会には8人の分析担当と、見習いが1人います</p>
 				<p class="member-hint-guide">キャラにカーソルを合わせるか、タップすると担当の由来が読めます。</p>
+				<VideoButton id="members" label="4班の紹介動画を見る" duration="2分" />
 				<div class="member-emojis">
 					{memberHints.map(c => (
 						<details class:list={['member-item', { 'is-trainee': c.trainee }]}>
@@ -324,7 +335,19 @@ const memberHints = [
 				</div>
 			</div>
 
-			</main>
+				<VideoDialog
+				id="company"
+				src="/videos/company-intro.mp4"
+				poster="/videos/company-intro-poster.jpg"
+				label="沼底バリュー商会の会社紹介"
+			/>
+			<VideoDialog
+				id="members"
+				src="/videos/members-intro.mp4"
+				poster="/videos/members-intro-poster.jpg"
+				label="沼底バリュー商会のメンバー紹介"
+			/>
+		</main>
 		<Footer />
 
 	</body>
@@ -828,7 +851,63 @@ const memberHints = [
 		box-shadow: 0 14px 34px rgba(24, 56, 45, 0.14);
 		border: 1px solid rgba(53, 103, 76, 0.18);
 	}
+	.hero-visual { position: relative; }
 	.hero-visual img { display:block; width:100%; height:auto; }
+	.hero-play {
+		position: absolute;
+		left: 3%;
+		top: 13%;
+		transform: translateY(-50%);
+		width: max(54px, 7.6%);
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
+	.hero-play-circle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		border: 3px solid #fff;
+		background: rgba(20, 45, 33, 0.38);
+		color: #fff;
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+		transition: background 0.15s ease, transform 0.15s ease;
+	}
+	.hero-play svg { width: 42%; height: auto; margin-left: 8%; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)); }
+	.hero-play-label {
+		position: absolute;
+		top: calc(100% + 5px);
+		left: 0;
+		padding: 0.15em 0.6em;
+		border-radius: 999px;
+		background: rgba(20, 45, 33, 0.38);
+		font-size: clamp(10px, 1.05vw, 13px);
+		font-weight: 800;
+		color: #fff;
+		white-space: nowrap;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 0 0 6px rgba(0, 0, 0, 0.55);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+	}
+	.hero-play-members {
+		left: auto;
+		right: 3%;
+		top: 85%;
+	}
+	.hero-play-members .hero-play-label {
+		top: auto;
+		bottom: calc(100% + 5px);
+		left: auto;
+		right: 0;
+	}
+	.hero-play:hover .hero-play-circle,
+	.hero-play:focus-visible .hero-play-circle {
+		background: rgba(20, 45, 33, 0.62);
+		transform: scale(1.08);
+	}
 	.hero-badge {
 		display: inline-block;
 		background: var(--accent-light);
@@ -1014,6 +1093,9 @@ const memberHints = [
 	}
 
 	@media (max-width: 720px) {
+		.hero-play { width: 44px; top: max(13%, 27px); }
+		.hero-play-members { top: min(85%, calc(100% - 30px)); }
+		.hero-play-label { font-size: 10px; padding: 0.1em 0.45em; }
 		.hero { padding: 1.15em 0.7em 1.25em; margin-bottom: 1.25em; }
 		.hero-visual { margin: -0.2em auto 0.8em; border-radius: 10px; box-shadow: 0 8px 20px rgba(24,56,45,.11); }
 		.hero-badge { font-size: 0.72rem; margin-bottom: 0.65em; padding: 0.22em 0.75em; }
