@@ -85,6 +85,10 @@ const recordSeries = recordSeriesIds
 			.reverse(),
 	}));
 
+const latestWeekly = [...weeklyRecords]
+	.filter((r) => r.slug && byId.has(r.slug))
+	.sort((a, b) => a.date.localeCompare(b.date))
+	.pop();
 const updated = jpDate(latest.date);
 ---
 
@@ -104,8 +108,21 @@ const updated = jpDate(latest.date);
 				<p class="lead">
 					沼底バリュー商会は、紹介した銘柄を<strong>実口座で売買</strong>しています。ここには、週次運用記録で公開した数字をそのまま並べています。良い週も悪い週も、同じ物差しで置きます。
 				</p>
+				<nav class="pf-pills" aria-label="関連ページ">
+					<a href="/holdings">📊 いま何を持っているか（最新ポートフォリオ）</a>
+					{latestWeekly && <a href={`/blog/${latestWeekly.slug}/`}>🗓️ 直近1週間の売買（週次運用記録）</a>}
+				</nav>
 			</div>
 
+<style>
+	.pf-pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
+	.pf-pills a {
+		display: inline-block; padding: 7px 13px; border: 1px solid var(--line, #ddd);
+		border-radius: 999px; background: var(--panel, #fff); font-size: 14px;
+		font-weight: 600; text-decoration: none; color: #185FA5;
+	}
+	.pf-pills a:hover, .pf-pills a:focus-visible { border-color: #0F6E56; color: #0F6E56; }
+</style>
 			<section class="pf-now">
 				<p class="pf-now-head">直近の数字（{updated}時点）</p>
 				<div class="pf-cards">

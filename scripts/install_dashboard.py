@@ -79,6 +79,10 @@ def build_backlink():
             '🗓️ 直近1週間の売買を見る（週次運用記録）</a>'
             % (wk[0], _PILL)
         )
+    pills.append(
+        '<a href="/performance/" style="%scolor:#854F0B;font-weight:600">'
+        '📈 資産の推移を見る（実績報告）</a>' % _PILL
+    )
     return (
         '<nav id="%s" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">%s</nav>\n'
         % (BACKLINK_ID, ''.join(pills))
@@ -203,6 +207,58 @@ def move_stress(html):
     return html, '保有銘柄の下へ移動'
 
 
+def article_map():
+    """公開済みの銘柄記事を 銘柄コード -> スラッグ で返す。
+    スラッグ末尾の4桁（例 tobu-network-9036）を銘柄コードとみなす。下書きは入れない。
+    記事を公開するたび、ダッシュボードのリンクが自動で増える。"""
+    out = {}
+    if not os.path.isdir(BLOG_DIR):
+        return out
+    for name in sorted(os.listdir(BLOG_DIR)):
+        if not name.endswith('.md'):
+            continue
+        text = io.open(os.path.join(BLOG_DIR, name), encoding='utf-8').read(1800)
+        if re.search(r'^draft:\s*true', text, re.M):
+            continue
+        m = re.search(r'-(\d{3}[0-9A-Z])$', name[:-3])
+        if m:
+            out[m.group(1)] = name[:-3]
+    return out
+
+
+NAME_CELL = '<b>${p.code}</b> ${p.name}'
+
+
+def add_article_links(html):
+    """保有銘柄の名前から、その銘柄の記事へ飛べるようにする。
+    記事がある銘柄だけリンクになり、無い銘柄は今までどおり素のまま表示する。
+
+    注意が2つある。
+    ・ヘルパーは <head> の直前に「グローバルな関数宣言」で置く。表を描く処理は
+      入れ子の奥にあるので、ローカル定数で置くと見えないことがある。
+    ・置換を先にやってからヘルパーを入れる。逆にすると、ヘルパー自身の
+      フォールバック（素の銘柄名）まで置換されて無限再帰になる。"""
+    amap = article_map()
+    if not amap or NAME_CELL not in html:
+        return html, 'スキップ（対象なし）'
+    n = html.count(NAME_CELL)
+    html = html.replace(NAME_CELL, '${artLink(p)}')
+    lines = [
+        '<script>',
+        'window.__ART=%s;' % json.dumps(amap, ensure_ascii=False, sort_keys=True),
+        ('function artLink(p){var s=(window.__ART||{})[p.code];'
+         'return s?"<b>"+p.code+"</b> <a href=\'/blog/"+s+"/\' class=\'artlink\' '
+         'title=\'"+p.name+"の記事を読む\'>"+p.name+"</a>"'
+         ':"<b>"+p.code+"</b> "+p.name;}'),
+        '</script>',
+        ('<style>.artlink{color:#185FA5;text-decoration:underline;text-underline-offset:2px}'
+         '.artlink:hover{color:#0F6E56}</style>'),
+        '',
+    ]
+    html = html.replace('</head>', '\n'.join(lines) + '</head>', 1)
+    return html, '%d銘柄ぶん（差し替え%d箇所）' % (len(amap), n)
+
+
 def pick_source(argv):
     if len(argv) > 1:
         return argv[1]
@@ -239,6 +295,7 @@ def main():
     html = add_character_guide(html)
     html, cal_msg = rebuild_calendar(html)
     html, mv_msg = move_stress(html)
+    html, art_msg = add_article_links(html)
 
     # 直前版は public/ の外へ退避する（public/ に置くとそのまま公開されてしまう）
     if os.path.exists(DEST):
@@ -257,6 +314,7 @@ def main():
         else ('あり（トップ／コラム）' if BACKLINK_ID in html else 'なし')))
     print('  呼称        : %s' % ('最新ポートフォリオへ変更 %d箇所' % renamed if renamed else '生成側で対応済み'))
     print('  権利確定月  : %s' % cal_msg)
+    print('  銘柄→記事リンク: %s' % art_msg)
     print('  ストレステスト: %s' % mv_msg)
     print('このあと npm run build → wrangler pages deploy で本番へ。')
     return 0
