@@ -151,6 +151,10 @@ const memberHints = [
 						<span class="hero-play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
 						<span class="hero-play-label">部下紹介 2分</span>
 					</button>
+					<button type="button" class="hero-play hero-play-concept" data-video-open="concept" aria-label="経営コンセプトの動画を見る（3分7秒）">
+						<span class="hero-play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+						<span class="hero-play-label">経営コンセプト 3分</span>
+					</button>
 				</figure>
 				<div class="hero-badge">🌱 沼底バリュー商会</div>
 				<h1>見えない価値を、見つけにいこう。</h1>
@@ -173,11 +177,12 @@ const memberHints = [
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
-					<a href="/concept/" class="hero-concept-btn">
-						<span class="hero-concept-icon">💎</span>
+					<a href="/youtube/" class="hero-concept-btn is-new">
+						<span class="hero-concept-icon">▶️</span>
 						<span class="hero-concept-text">
-							<span class="hero-concept-label">経営コンセプト</span>
-							<span class="hero-concept-sub">投資哲学と買い方</span>
+							<span class="hero-concept-new">NEW</span>
+							<span class="hero-concept-label">YouTube 動画</span>
+							<span class="hero-concept-sub">調べ方を会議の形で</span>
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
@@ -206,11 +211,10 @@ const memberHints = [
 						</span>
 						<span class="hero-concept-arrow">→</span>
 					</a>
-					<a href="/note/" class="hero-concept-btn is-new">
+					<a href="/note/" class="hero-concept-btn">
 						<span class="hero-concept-icon">📕</span>
 						<span class="hero-concept-text">
-							<span class="hero-concept-new">NEW</span>
-							<span class="hero-concept-label">note を始めました</span>
+							<span class="hero-concept-label">note（有料記事）</span>
 							<span class="hero-concept-sub">銘柄ではなく手順を売る</span>
 						</span>
 						<span class="hero-concept-arrow">→</span>
@@ -363,6 +367,14 @@ const memberHints = [
 				src="/videos/members-intro.mp4"
 				poster="/videos/members-intro-poster.jpg"
 				label="沼底バリュー商会のメンバー紹介"
+			/>
+			<VideoDialog
+				id="concept"
+				src="/videos/concept-intro.mp4"
+				poster="/videos/concept-intro-poster.jpg"
+				label="沼底バリュー商会の経営コンセプト"
+				linkHref="/concept/"
+				linkLabel="経営コンセプトの全文を読む"
 			/>
 		</main>
 		<Footer />
@@ -930,6 +942,9 @@ const memberHints = [
 		left: auto;
 		right: 0;
 	}
+	/* 経営コンセプト（左下）。ラベルは丸の上に出す */
+	.hero-play-concept { top: 85%; }
+	.hero-play-concept .hero-play-label { top: auto; bottom: calc(100% + 5px); }
 	.hero-play:hover .hero-play-circle,
 	.hero-play:focus-visible .hero-play-circle {
 		background: rgba(20, 45, 33, 0.62);
@@ -1121,7 +1136,7 @@ const memberHints = [
 
 	@media (max-width: 720px) {
 		.hero-play { width: 44px; top: max(13%, 27px); }
-		.hero-play-members { top: min(85%, calc(100% - 30px)); }
+		.hero-play-members, .hero-play-concept { top: min(85%, calc(100% - 30px)); }
 		.hero-play-label { font-size: 10px; padding: 0.1em 0.45em; }
 		.hero { padding: 1.15em 0.7em 1.25em; margin-bottom: 1.25em; }
 		.hero-visual { margin: -0.2em auto 0.8em; border-radius: 10px; box-shadow: 0 8px 20px rgba(24,56,45,.11); }

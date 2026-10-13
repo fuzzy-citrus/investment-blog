@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import VideoButton from '../components/VideoButton.astro';
+import VideoDialog from '../components/VideoDialog.astro';
 ---
 
 <!doctype html>
@@ -17,6 +19,7 @@ import Footer from '../components/Footer.astro';
 				<h1>経営コンセプト<span class="concept-badge-full">完全版</span></h1>
 				<p class="concept-desc">古典的バリュー株投資への徹底したこだわり</p>
 				<a href="/blog/value-concept/" class="concept-column-link">📖 対話形式のコラム版はこちら →</a>
+				<div class="concept-video"><VideoButton id="concept" label="動画で見る" duration="3分" align="center" /></div>
 			</section>
 
 			<section class="concept-section">
@@ -197,12 +200,20 @@ import Footer from '../components/Footer.astro';
 				</div>
 			</section>
 
+			<VideoDialog
+				id="concept"
+				src="/videos/concept-intro.mp4"
+				poster="/videos/concept-intro-poster.jpg"
+				label="沼底バリュー商会の経営コンセプト"
+			/>
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
+	.concept-video { margin-top: 1em; }
+	.concept-video :global(.video-button) { margin-bottom: 0; }
 .concept-hero {
 	text-align: center;
 	padding: 2.5em 1em 2em;
