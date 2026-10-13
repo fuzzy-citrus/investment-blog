@@ -13,6 +13,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import { siteUpdates } from '../data/siteUpdates';
 import { Picture } from 'astro:assets';
 import { comics } from '../data/comics';
+import { videos } from '../data/videos';
 
 const allPosts = (await getCollection('blog'))
 	.filter(p => !p.data.draft)
@@ -21,6 +22,8 @@ const posts = allPosts.slice(0, 10);
 // 四コマは新しい順。横スクロールで2話ぶんずつ見せる
 const comicStrip = [...comics].sort((a, b) => b.episode - a.episode);
 const latestComic = comicStrip[0];
+// YouTube の最新動画（トップの案内に出す）
+const latestVideo = videos[0];
 const comicDate = (() => {
 	const [y, m, d] = latestComic.pubDate.split('-').map(Number);
 	return `${y}年${m}月${d}日`;
@@ -266,6 +269,19 @@ const memberHints = [
 				</div>
 			</section>
 
+			<section class="yt-teaser" aria-labelledby="yt-teaser-title">
+				<div class="yt-teaser-copy">
+					<span class="first-visit-kicker">動画で見る・YouTube</span>
+					<h2 id="yt-teaser-title">調べ方を、会議の形で動画に</h2>
+					<p>筆者と部下たちが、決算短信と有価証券報告書を開いて確かめます。最新は「{latestVideo.shortTitle}」（{latestVideo.duration}）。</p>
+					<a href="/youtube/" class="first-visit-main">動画一覧を見る（{videos.length}本） →</a>
+				</div>
+				<a class="yt-teaser-thumb" href={`/youtube/#${latestVideo.slug}`} aria-label={`動画「${latestVideo.shortTitle}」を見る`}>
+					<Picture src={latestVideo.thumb} alt="" formats={['avif', 'webp']} widths={[290, 580]} sizes="290px" loading="lazy" decoding="async" />
+					<span class="yt-teaser-play" aria-hidden="true">▶</span>
+				</a>
+			</section>
+
 			<div class="wl-col-grid">
 
 				<StockRankSummary posts={allPosts} />
@@ -294,6 +310,7 @@ const memberHints = [
 				<p>バリュー商会には8人の分析担当と、見習いが1人います</p>
 				<p class="member-hint-guide">キャラにカーソルを合わせるか、タップすると担当の由来が読めます。</p>
 				<VideoButton id="members" label="4班の紹介動画を見る" duration="2分" />
+				<p class="yt-intro-link"><a href="/youtube/#intro-members">▶ YouTube版で見る：筆者とメンバーの紹介（7分）</a></p>
 				<div class="member-emojis">
 					{memberHints.map(c => (
 						<details class:list={['member-item', { 'is-trainee': c.trainee }]}>
@@ -491,6 +508,16 @@ const memberHints = [
 	.comics-teaser-latest a:hover,.comics-teaser-latest a:focus-visible{text-decoration:underline}
 	.comics-teaser-date{display:block;color:rgb(var(--gray));font-weight:400}
 	@media(max-width:640px){.comics-teaser{grid-template-columns:1fr}.comics-teaser-strip{width:100%}.comics-teaser-list li{flex:0 0 46%}}
+
+	/* ── YouTube 動画への入口 ── */
+	.yt-teaser{display:grid;grid-template-columns:1fr auto;gap:1em;align-items:center;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #e3dcc4;border-left:4px solid #b3261e;border-radius:10px;background:#fffdf6}
+	.yt-teaser h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
+	.yt-teaser p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
+	.yt-teaser-thumb{position:relative;display:block;width:290px;border-radius:8px;overflow:hidden;border:1px solid #e3dcc4;line-height:0}
+	.yt-teaser-thumb :global(img){display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+	.yt-teaser-thumb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+	.yt-teaser-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:52px;height:36px;border-radius:10px;background:#d93025;color:#fff;font-size:15px;line-height:1;padding-left:2px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+	@media(max-width:640px){.yt-teaser{grid-template-columns:1fr}.yt-teaser-thumb{width:100%}}
 
 	/* ── Asset Status ── */
 	.asset-status {

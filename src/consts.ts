@@ -2,6 +2,9 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = '沼底バリュー商会';
+// YouTube チャンネル（2026-10-11 開設）
+export const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@numasoko-value';
+export const YOUTUBE_INTRO_VIDEO_URL = 'https://youtu.be/1qzNNqoHCHI';
 export const SITE_DESCRIPTION = '野村の錬金術　〜低金利×レバレッジ×安全域＝インフレ期のお守り〜';
 
 // Google AdSense の発行者ID（例: 'ca-pub-0000000000000000'）。

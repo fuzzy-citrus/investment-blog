@@ -1,0 +1,235 @@
+---
+// YouTube 動画の一覧ページ。動画のデータは src/data/videos.ts（新しい動画は配列の先頭に足すだけ）。
+// プレーヤーは押されるまで読み込まない（サムネイルは自サイトの画像。押すと youtube-nocookie.com の埋め込みに替わる）。
+import { Picture } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { YOUTUBE_CHANNEL_URL } from '../consts';
+import { videos, chapterSeconds, videoDateLabel, YOUTUBE_CHANNEL_NAME } from '../data/videos';
+
+const latest = videos[0];
+const pageTitle = 'YouTube動画一覧｜日本の割安株を決算書から読む「沼底バリュー商会」';
+const pageDesc = `投資ブログ「沼底バリュー商会」のYouTube動画一覧。${videos.map((v) => v.shortTitle).join('、')}。各動画の要点、チャプター、元になったブログ記事へのリンクをまとめています。`;
+
+// 検索エンジン・AI検索向けの構造化データ（動画ごとの VideoObject）
+const ld = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: '沼底バリュー商会のYouTube動画',
+	itemListElement: videos.map((v, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		item: {
+			'@type': 'VideoObject',
+			name: v.title,
+			description: v.summary,
+			thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`,
+			uploadDate: v.published,
+			duration: v.isoDuration,
+			embedUrl: `https://www.youtube.com/embed/${v.id}`,
+			url: `https://www.youtube.com/watch?v=${v.id}`,
+			inLanguage: 'ja',
+			publisher: { '@type': 'Organization', name: YOUTUBE_CHANNEL_NAME, url: 'https://numasoko-value.com/' },
+		},
+	})),
+};
+
+const nextReads = [
+	['/start/', '🔰', '初めての方へ', 'ブログの読み方を5分で'],
+	['/blog/?type=stock', '🏷️', '銘柄紹介', '数字の出典と完全版レポートつき'],
+	['/value/', '🦦', 'バリュー株の魅力', '資産性と収益性の全体像'],
+	['/comics/', '🐊', '四コマで学ぶ', '1話2ページで投資のキホン'],
+];
+---
+<!doctype html>
+<html lang="ja">
+<head>
+	<BaseHead title={pageTitle} description={pageDesc} image={latest.thumb} />
+	<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</head>
+<body>
+	<Header />
+	<main>
+		<section class="hero">
+			<span class="eyebrow">YOUTUBE</span>
+			<h1>YouTube 動画</h1>
+			<p class="lead">ブログで書いている調べ方を、<strong>筆者と部下たちの会議</strong>の形で動画にしています。数字は決算短信と有価証券報告書から取り直し、基準日を画面に出します。</p>
+			<div class="hero-actions">
+				<a class="channel-btn" href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+					<span>チャンネルを見る・登録する</span>
+				</a>
+				<span class="hero-meta">公開中 {videos.length}本／最新 {videoDateLabel(latest.published)}</span>
+			</div>
+			<div class="promise"><strong>動画で扱うこと</strong><br />動画は、資料のどこを開いて何を確かめるか、という読み方の話です。評価ランクや株価の見立ては動画では言わず、ブログの記事と完全版レポートに書いています。</div>
+		</section>
+
+		<nav class="toc" aria-label="動画の目次">
+			{videos.map((v) => (
+				<a href={`#${v.slug}`}><span class={`kind kind-${v.kind}`}>{v.kind}</span>{v.shortTitle}<small>{v.duration}</small></a>
+			))}
+		</nav>
+
+		{videos.map((v, i) => (
+			<article class="video" id={v.slug}>
+				<header class="video-head">
+					<p class="video-meta"><span class={`kind kind-${v.kind}`}>{v.kind}</span>{i === 0 && <span class="new">最新</span>}<time datetime={v.published}>{videoDateLabel(v.published)} 公開</time><span>{v.duration}</span></p>
+					<h2>{v.title}</h2>
+				</header>
+				<div class="yt-player" data-yt={v.id} data-title={v.title}>
+					<button type="button" class="yt-play" aria-label={`再生する：${v.shortTitle}`}>
+						<Picture src={v.thumb} alt={`動画「${v.shortTitle}」のサムネイル`} formats={['avif', 'webp']} widths={[480, 800, 1280]} sizes="(max-width: 960px) 100vw, 920px" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+						<span class="yt-play-icon" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48"><rect width="68" height="48" rx="13" fill="#d93025"/><path d="M27 34.5 45 24 27 13.5z" fill="#fff"/></svg></span>
+					</button>
+				</div>
+				<p class="yt-open">再生ボタンを押すと、このページの中で YouTube の動画を読み込みます。<a href={`https://youtu.be/${v.id}`} target="_blank" rel="noopener">YouTube で開く ↗</a></p>
+
+				<p class="summary">{v.summary}</p>
+
+				<div class="video-cols">
+					<div class="points">
+						<h3>この動画で分かること</h3>
+						<ul>{v.points.map((p) => <li>{p}</li>)}</ul>
+					</div>
+					<div class="chapters">
+						<h3>チャプター</h3>
+						<ol>
+							{v.chapters.map((c) => (
+								<li><a href={`https://youtu.be/${v.id}?t=${chapterSeconds(c.time)}`} target="_blank" rel="noopener" data-yt-seek={chapterSeconds(c.time)}><span class="t">{c.time}</span>{c.title}</a></li>
+							))}
+						</ol>
+					</div>
+				</div>
+
+				{v.note && <p class="video-note">{v.note}</p>}
+
+				<div class="related">
+					<h3>ブログで詳しく読む</h3>
+					<div class="related-links">{v.related.map((r) => <a href={r.href}>{r.label} →</a>)}</div>
+				</div>
+			</article>
+		))}
+
+		<section class="next">
+			<h2>動画のあとに読む</h2>
+			<p class="sub">動画は入口です。数字の出典、完全版レポート、紹介後の答え合わせはブログにあります。</p>
+			<div class="grid">{nextReads.map(([href, icon, title, desc]) => <a href={href} class="card"><b class="icon">{icon}</b><strong>{title}</strong><p>{desc}</p></a>)}</div>
+		</section>
+
+		<section class="about-video">
+			<h2>動画について</h2>
+			<ul>
+				<li>動画は個人の投資記録と情報提供で、特定の銘柄の売買を勧めるものではありません。筆者は投資助言・代理業の登録をしていません。投資の判断はご自身の責任でお願いします。</li>
+				<li>数字は各動画の公開時点のものです。基準日は動画の中と、このページの各動画の注記に書いています。その後の変化はブログの記事で更新します。</li>
+				<li>登場人物は架空のキャラクターです。「インデックス宗教法人」「本場モメンタムチンパンジー組合」も架空の組織で、実在の団体とは関係ありません。</li>
+				<li>音声は合成音声、イラストは画像生成AIを使って制作しています。</li>
+				<li>当サイトと当チャンネルは、動画で取り上げた各社と関係ありません。社名とロゴは各社のものです。</li>
+			</ul>
+		</section>
+	</main>
+	<Footer />
+	<script is:inline>
+		// サムネイルを押したら YouTube の埋め込みに差し替える（押されるまで YouTube へは何も読みに行かない）。
+		// 別の動画を押したら、先に再生していたほうはサムネイルに戻す（音が重ならないように）。
+		(() => {
+			const boxes = [...document.querySelectorAll('.yt-player')];
+			const original = new Map(boxes.map((b) => [b, b.innerHTML]));
+			const load = (box, start) => {
+				boxes.forEach((b) => { if (b !== box && b.querySelector('iframe')) b.innerHTML = original.get(b); });
+				const f = document.createElement('iframe');
+				f.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.yt + '?autoplay=1&rel=0' + (start ? '&start=' + start : '');
+				f.title = box.dataset.title || 'YouTube 動画';
+				f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+				f.allowFullscreen = true;
+				f.referrerPolicy = 'strict-origin-when-cross-origin';
+				box.replaceChildren(f);
+			};
+			document.addEventListener('click', (e) => {
+				const btn = e.target.closest('.yt-play');
+				if (btn) { load(btn.closest('.yt-player'), 0); return; }
+				const a = e.target.closest('[data-yt-seek]');
+				const box = a && a.closest('.video') && a.closest('.video').querySelector('.yt-player');
+				if (!box) return;
+				e.preventDefault();
+				load(box, a.dataset.ytSeek);
+				box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			});
+		})();
+	</script>
+</body>
+</html>
+<style>
+	main{width:min(920px,calc(100% - 2em));margin:0 auto;padding:0 0 64px}
+	.hero{text-align:center;padding:54px 0 8px}
+	.eyebrow{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.16em;color:#a3231a;background:#fdecea;border:1px solid #f3b8b2;border-radius:999px;padding:5px 12px}
+	h1{margin:14px 0 12px;font-size:clamp(2rem,7vw,3rem);color:var(--accent-dark)}
+	.lead{max-width:720px;margin:0 auto;font-size:1rem;line-height:1.9;color:rgb(var(--gray-dark))}
+	.hero-actions{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:center;align-items:center;margin-top:20px}
+	.channel-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#d93025;color:#fff;font-weight:800;font-size:.95rem;border-radius:999px;padding:11px 20px}
+	.channel-btn:hover{background:#b3261e;color:#fff}
+	.hero-meta{font-size:.8rem;color:rgb(var(--gray))}
+	.promise{max-width:720px;margin:22px auto 0;padding:15px 18px;border:1px solid #B5D4F4;background:#F5FAFE;border-radius:12px;text-align:left;line-height:1.8;font-size:.9rem}
+	.promise strong{color:#185FA5}
+
+	.toc{display:grid;gap:8px;margin-top:30px}
+	.toc a{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid #DDE3E8;background:#fff;border-radius:10px;color:inherit;text-decoration:none;font-weight:700;font-size:.9rem;line-height:1.5}
+	.toc a:hover{border-color:#9BB7CC;background:#FAFCFD}
+	.toc small{margin-left:auto;flex:none;font-weight:400;font-size:.76rem;color:rgb(var(--gray))}
+
+	.kind{flex:none;display:inline-block;font-size:.7rem;font-weight:800;border-radius:5px;padding:2px 8px;color:#fff;background:#5f6b76}
+	.kind-銘柄{background:#185FA5}
+	.kind-紹介{background:#0F6E56}
+	.kind-手法{background:#8a5a00}
+	.new{display:inline-block;font-size:.7rem;font-weight:800;border-radius:5px;padding:2px 8px;color:#a3231a;background:#fdecea;border:1px solid #f3b8b2}
+
+	.video{margin-top:46px;padding-top:6px;scroll-margin-top:16px}
+	.video-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 8px;font-size:.8rem;color:rgb(var(--gray))}
+	.video h2{margin:0 0 14px;font-size:clamp(1.15rem,4vw,1.5rem);line-height:1.5;color:var(--accent-dark)}
+	.yt-player{position:relative;aspect-ratio:16/9;background:#111;border-radius:12px;overflow:hidden;border:1px solid #DDE3E8}
+	.yt-play{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;position:relative}
+	.yt-player :global(picture),.yt-player :global(img){display:block;width:100%;height:100%;object-fit:cover}
+	.yt-player :global(iframe){position:absolute;inset:0;width:100%;height:100%;border:0}
+	.yt-play-icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));transition:transform .15s}
+	.yt-play:hover .yt-play-icon,.yt-play:focus-visible .yt-play-icon{transform:translate(-50%,-50%) scale(1.1)}
+	.yt-play:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+	.yt-open{margin:8px 0 0;font-size:.76rem;color:rgb(var(--gray));line-height:1.7}
+	.yt-open a{font-weight:700;white-space:nowrap;color:#185FA5}
+	.summary{margin:16px 0 0;line-height:1.9;font-size:.95rem;color:rgb(var(--gray-dark))}
+	.video-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+	.points,.chapters,.related{border:1px solid #DDE3E8;background:#fff;border-radius:12px;padding:16px 18px}
+	.video h3{margin:0 0 8px;font-size:.92rem;color:var(--accent-dark)}
+	.points ul{margin:0;padding-left:1.2em}
+	.points li{font-size:.86rem;line-height:1.75;margin-bottom:.35em}
+	.chapters ol{list-style:none;margin:0;padding:0}
+	.chapters li{border-top:1px dashed #E3E7EB}
+	.chapters li:first-child{border-top:0}
+	.chapters a{display:flex;gap:10px;padding:6px 0;font-size:.86rem;line-height:1.6;text-decoration:none;color:inherit}
+	.chapters a:hover{color:#185FA5}
+	.chapters .t{flex:none;font-variant-numeric:tabular-nums;font-weight:800;color:#185FA5}
+	.video-note{margin:14px 0 0;padding:11px 14px;border-left:4px solid #E2C57A;background:#FFFCF2;border-radius:0 8px 8px 0;font-size:.82rem;line-height:1.75;color:rgb(var(--gray-dark))}
+	.related{margin-top:14px}
+	.related-links{display:flex;flex-wrap:wrap;gap:8px}
+	.related-links a{display:inline-block;text-decoration:none;border:1px solid #B5D4F4;border-radius:9px;padding:9px 13px;font-weight:700;font-size:.84rem;color:#185FA5;background:#F5FAFE;line-height:1.5}
+	.related-links a:hover{background:#E8F2FB}
+
+	.next,.about-video{margin-top:54px}
+	.next h2,.about-video h2{font-size:clamp(1.15rem,4vw,1.45rem);color:var(--accent-dark);margin:0 0 10px}
+	.sub{color:rgb(var(--gray));font-size:.86rem;margin:0 0 12px}
+	.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+	.card{display:block;color:inherit;text-decoration:none;border:1px solid #DDE3E8;background:#fff;border-radius:12px;padding:16px}
+	.card:hover{border-color:#9BB7CC;background:#FAFCFD}
+	.icon{display:block;font-size:1.5rem;margin-bottom:6px}
+	.card strong{display:block}
+	.card p{margin:6px 0 0;font-size:.8rem;line-height:1.7;color:rgb(var(--gray))}
+	.about-video ul{margin:0;padding-left:1.2em}
+	.about-video li{font-size:.84rem;line-height:1.85;margin-bottom:.5em;color:rgb(var(--gray-dark))}
+
+	@media(max-width:760px){.video-cols{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+	@media(max-width:480px){.hero{padding-top:36px}.toc a{font-size:.84rem}}
+
+	/* 1100px以上では左右に固定サイドバー（各161px）が出る。本文がその下に潜らないよう、この幅帯だけ上限を決める */
+	@media (min-width: 1100px) {
+		main { width: min(920px, calc(100vw - 380px)); }
+	}
+</style>
