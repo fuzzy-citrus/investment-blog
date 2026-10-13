@@ -1,0 +1,114 @@
+---
+// 動画をモーダルで再生する箱。ページ側に <VideoDialog id="xxx" ... /> を置き、
+// 開くボタンには data-video-open="xxx" を付ける。ボタンの見た目はページ側の自由。
+interface Props {
+	/** data-video-open の値と対になる識別子 */
+	id: string;
+	src: string;
+	poster: string;
+	/** スクリーンリーダー向けのダイアログ名 */
+	label: string;
+	/** 動画の下に出すリンク（全文ページなど）。無ければ出さない */
+	linkHref?: string;
+	linkLabel?: string;
+}
+const { id, src, poster, label, linkHref, linkLabel } = Astro.props;
+---
+
+<dialog class="video-dialog" data-video-dialog={id} aria-label={label}>
+	<form method="dialog" class="video-dialog-close-wrap">
+		<button class="video-dialog-close" aria-label="閉じる">×</button>
+	</form>
+	<video
+		class="video-dialog-player"
+		src={src}
+		poster={poster}
+		controls
+		preload="none"
+		playsinline
+		width="1280"
+		height="720"
+	></video>
+	{linkHref && <p class="video-dialog-link"><a href={linkHref}>{linkLabel ?? '詳しく読む'} →</a></p>}
+</dialog>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-video-open]').forEach((btn) => {
+		const id = btn.dataset.videoOpen;
+		const dialog = document.querySelector<HTMLDialogElement>(`[data-video-dialog="${id}"]`);
+		if (!dialog) return;
+		const video = dialog.querySelector('video');
+		btn.addEventListener('click', () => {
+			dialog.showModal();
+			video?.play().catch(() => {});
+		});
+	});
+
+	document.querySelectorAll<HTMLDialogElement>('[data-video-dialog]').forEach((dialog) => {
+		const video = dialog.querySelector('video');
+		// 背景（::backdrop側）のクリックで閉じる
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+		// 閉じたら必ず止めて先頭に戻す
+		dialog.addEventListener('close', () => {
+			if (!video) return;
+			video.pause();
+			video.currentTime = 0;
+		});
+	});
+</script>
+
+<style is:global>
+	.video-dialog {
+		width: min(900px, 92vw);
+		padding: 0;
+		border: none;
+		border-radius: 12px;
+		background: #10261c;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+		overflow: hidden;
+	}
+	.video-dialog::backdrop {
+		background: rgba(10, 20, 15, 0.72);
+	}
+	.video-dialog-close-wrap {
+		display: flex;
+		justify-content: flex-end;
+		margin: 0;
+	}
+	.video-dialog-close {
+		width: 36px;
+		height: 36px;
+		border: none;
+		background: transparent;
+		color: rgba(255, 255, 255, 0.75);
+		font-size: 22px;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.video-dialog-close:hover {
+		color: #fff;
+	}
+	.video-dialog-link {
+		margin: 0;
+		padding: 0.7em 1em 0.8em;
+		text-align: center;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+	.video-dialog-link a {
+		color: #f3d48a;
+		text-decoration: none;
+	}
+	.video-dialog-link a:hover {
+		text-decoration: underline;
+	}
+	.video-dialog-player {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		background: #000;
+	}
+</style>

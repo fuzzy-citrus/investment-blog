@@ -1,0 +1,89 @@
+---
+// ページ本文に直接置く動画プレーヤー。再生ボタンを押すまで読み込まない（preload="none"）。
+interface Props {
+	src: string;
+	poster: string;
+	/** 見出しの文言。見出しを出したくないときは null */
+	heading?: string | null;
+	/** 見出しの下に置く一文 */
+	lead?: string;
+	/** h2 か h3 か。ページの見出し階層に合わせる */
+	headingLevel?: 'h2' | 'h3';
+	/** 「33秒」「50秒」などのバッジ文言 */
+	duration: string;
+	/** スクリーンリーダー向けの説明 */
+	label: string;
+}
+const { src, poster, heading = null, lead, headingLevel = 'h2', duration, label } = Astro.props;
+const Heading = headingLevel;
+---
+
+<section class="inline-video">
+	{heading && <Heading class="inline-video-title">{heading}</Heading>}
+	{lead && <p class="inline-video-lead">{lead}</p>}
+	<video
+		class="inline-video-player"
+		src={src}
+		poster={poster}
+		controls
+		preload="none"
+		playsinline
+		width="1280"
+		height="720"
+		aria-label={label}
+	>
+		<p>
+			お使いの環境では動画を再生できません。
+			<a href={src} download>動画ファイルをダウンロードする</a>
+		</p>
+	</video>
+	<p class="inline-video-note">
+		<span class="inline-video-time">{duration}・音声あり</span>
+	</p>
+</section>
+
+<style>
+	.inline-video {
+		margin: 0 0 3em;
+	}
+	.inline-video-title {
+		font-size: 1.3em;
+		color: var(--accent-dark);
+		border-left: 4px solid var(--accent);
+		padding-left: 0.6em;
+		margin: 0 0 0.6em;
+	}
+	.inline-video-lead {
+		margin: 0 0 0.8em;
+		font-size: 0.95em;
+		color: rgb(var(--gray-dark));
+	}
+	.inline-video-player {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		background: #1b3a2b;
+		border-radius: 12px;
+		border: 1px solid rgba(var(--gray), 25%);
+		box-shadow: 0 2px 10px rgba(var(--gray), 20%);
+	}
+	.inline-video-note {
+		margin: 0.6em 0 0;
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+	}
+	.inline-video-time {
+		display: inline-block;
+		padding: 0.1em 0.5em;
+		border-radius: 999px;
+		background: var(--accent-light);
+		color: var(--accent-dark);
+		font-weight: 700;
+	}
+	@media (max-width: 720px) {
+		.inline-video-player {
+			border-radius: 8px;
+		}
+	}
+</style>

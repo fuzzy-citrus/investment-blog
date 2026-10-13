@@ -1,0 +1,79 @@
+---
+// 動画をモーダルで開く小さな再生ボタン（横長のピル型）。
+// 同じページに <VideoDialog id="同じID" ... /> を置くこと。
+interface Props {
+	/** VideoDialog の id と一致させる */
+	id: string;
+	/** ボタンに出す文言 */
+	label: string;
+	/** 「50秒」「2分」など */
+	duration: string;
+	/** 配置の微調整用 */
+	align?: 'left' | 'center';
+}
+const { id, label, duration, align = 'left' } = Astro.props;
+---
+
+<button
+	type="button"
+	class:list={['video-button', { 'is-center': align === 'center' }]}
+	data-video-open={id}
+	aria-label={`${label}（${duration}）`}
+>
+	<span class="video-button-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+	<span class="video-button-text">{label}</span>
+	<span class="video-button-time">{duration}</span>
+</button>
+
+<style>
+	.video-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		margin: 0 0 1.2em;
+		padding: 0.45em 1em 0.45em 0.6em;
+		border-radius: 999px;
+		border: 1px solid rgba(var(--gray), 30%);
+		background: #fff;
+		color: var(--accent-dark);
+		font-size: 0.85em;
+		font-weight: 700;
+		cursor: pointer;
+		box-shadow: 0 2px 8px rgba(var(--gray), 18%);
+		transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+	}
+	.video-button.is-center {
+		display: flex;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.video-button-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.7em;
+		height: 1.7em;
+		flex-shrink: 0;
+		border-radius: 50%;
+		background: #1b3a2b;
+		color: #fff;
+	}
+	.video-button-icon svg {
+		width: 0.8em;
+		height: auto;
+		margin-left: 0.1em;
+	}
+	.video-button-time {
+		padding: 0.05em 0.5em;
+		border-radius: 999px;
+		background: var(--accent-light);
+		font-size: 0.85em;
+		font-weight: 800;
+	}
+	.video-button:hover,
+	.video-button:focus-visible {
+		background: var(--accent-light);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(var(--gray), 25%);
+	}
+</style>
