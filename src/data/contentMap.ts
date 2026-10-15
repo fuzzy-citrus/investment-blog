@@ -157,6 +157,7 @@ export const contentThemes: ContentTheme[] = [
       'virtual-mortgage-strategy',
       'debt-credit-trading-strategy',
       'kioxia-285a-crash-analysis',
+      'kioxia-tekscend-semis-selloff-2026-10-15',
     ],
     note: '創業者の原点。低金利で借りて、割安で買う。資金管理テーマから分離した',
   },

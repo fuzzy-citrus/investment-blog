@@ -48,6 +48,7 @@ export const columnAuthors: Record<string, ColumnAuthor> = {
   'activist-front-running-real-cases': C.machibuse,
   'holdings-status-05-crash-entry': C.numata,
   'kioxia-285a-crash-analysis': C.nomura,
+  'kioxia-tekscend-semis-selloff-2026-10-15': C.nomura,
   'margin-maintenance-rate-balance': C.nomura,
   'disaster-recovery-demand-value-stocks': C.numata,
   'security-sector-consolidation': C.numata,
