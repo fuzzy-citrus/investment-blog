@@ -151,6 +151,7 @@ export const contentThemes: ContentTheme[] = [
     fill: '#F0E7D8', text: '#33240F', sub: '#6E5320', border: '#DCC8A8',
     slugs: [
       'nomura-margin-rate-1-69-alchemy',
+      'policy-shift-margin-to-spot-2026-10',
       'jreit-rate-hike-shock-2026',
       'margin-carry-10year-model',
       'margin-maintenance-rate-balance',
