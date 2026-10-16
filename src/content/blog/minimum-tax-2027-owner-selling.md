@@ -5,6 +5,7 @@ cardDesc: "<span class='card-highlight'>2027年分からミニマムタックス
 pubDate: "2026-09-22T08:30:00+09:00"
 related: ["inflation-deepvalue-tob-2026-09", "kozosodo-hd-7868", "tobu-network-9036", "value-tob-strategy-2026", "activist-front-running-01", "netcash-ratio-21-deep-value-screening-2026-09"]
 draft: false
+updatedDate: "2026-10-16T22:00:00+09:00"
 ---
 
 > 🧑‍💼 「来年から、大株主の税金が上がる。**だから今年のうちに動く人が出る**」
@@ -158,16 +159,7 @@ draft: false
 
 ---
 
-## 🚚 第7章｜東部ネットワークと、割安分析で測った会社たち
-
-🐊<strong>待伏</strong>「タイプAの代表として、商会が前から見ている会社を1つ」
-
-> 🚚 **東部ネットワーク（9036）**
-> ・時価総額 **70億円** ／ PBR 0.32倍 ／ 予想配当利回り 1.63%
-> ・個人の筆頭株主が **24.61%**、個人合計で **26.70%**
-> ・その持ち分の時価は **18.8億円**。改正後の目安（約3.3億円）を大きく超える
-
-🦦<strong>河内</strong>「[東部ネットワークの銘柄記事](/blog/tobu-network-9036/)で書いたとおり、<strong>不動産の含みが厚く、株価は中身より安い</strong>というのが元々の話でした。そこに『個人が4分の1を持っている』が重なります」
+## 🚚 第7章｜割安分析で測った会社たち
 
 🧑‍💼<strong>沼田</strong>「ここからが今日の追加だ。<strong>銘柄記事にしていない会社にも、同じ物差しを当てる</strong>」
 
