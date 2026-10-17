@@ -6,6 +6,7 @@
 import type { ImageMetadata } from 'astro';
 import introMembers from '../assets/youtube/intro-members.jpg';
 import tobuTokai from '../assets/youtube/tobu-tokai.jpg';
+import wallet from '../assets/youtube/wallet.jpg';
 
 export const YOUTUBE_CHANNEL_NAME = '沼底バリュー商会';
 
@@ -40,6 +41,44 @@ export interface VideoEntry {
 }
 
 export const videos: VideoEntry[] = [
+  {
+    id: 't1euarRTOWI',
+    slug: 'wallet',
+    kind: '手法',
+    title: '100万円入りの財布が80万円なら買う？｜お宝銘柄を見抜くための作法',
+    shortTitle: '100万円の財布で、割安株の考え方を最初から最後まで',
+    published: '2026-10-15T21:00:00+09:00',
+    duration: '8分49秒',
+    isoDuration: 'PT8M49S',
+    thumb: wallet,
+    summary:
+      '100万円が入った財布が、80万円で売られていたら。株の「割安」を、財布と炊飯器のたとえで最初から最後まで説明します。中身を自分で数えること、税金や見込み違いの分を先に引くこと、待ち方を先に決めることを順に扱います。',
+    points: [
+      '株を買うのは、会社の財布を買うこと',
+      '中身は自分で数える（期限切れの商品券、在庫、売掛金）',
+      '税金を引くと余白は縮む。保有株の値下がりで含み益も減るので、数えた時点を確かめる',
+      '買取店が1万円の炊飯器を6,000円でしか買わない理由（安全余裕）',
+      '少し高くても買える「増える財布」',
+      'ずれがいつ埋まるかは選べない。だから待ち方を先に決める',
+    ],
+    chapters: [
+      { time: '00:00', title: '100万円が80万円？' },
+      { time: '00:28', title: '会社の財布を開ける' },
+      { time: '01:53', title: '本当に100万円ある？' },
+      { time: '03:12', title: '税金で変わる余白' },
+      { time: '04:22', title: '買取店は、なぜ安く買う？' },
+      { time: '05:41', title: '毎年、増える財布' },
+      { time: '06:51', title: '開けられない財布' },
+      { time: '07:58', title: '買う前の点検表' },
+    ],
+    related: [
+      { href: '/blog/value-concept/', label: '資産性バリューと収益性バリューの違いとは' },
+      { href: '/comics/wallet/', label: '四コマ「80万円の財布」' },
+      { href: '/comics/margin/', label: '四コマ「買取店の6,000円」' },
+      { href: '/concept/', label: '経営コンセプト' },
+    ],
+    note: '財布と炊飯器の金額は、説明のためのたとえ話です。実例の数字は当商会の推定で、各決算時点のものです。',
+  },
   {
     id: 'nHUOTKBo2eM',
     slug: 'tobu-tokai',

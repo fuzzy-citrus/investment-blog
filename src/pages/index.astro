@@ -13,7 +13,8 @@ import FormattedDate from '../components/FormattedDate.astro';
 import { siteUpdates } from '../data/siteUpdates';
 import { Picture } from 'astro:assets';
 import { comics } from '../data/comics';
-import { videos } from '../data/videos';
+import { videos, videoDateLabel } from '../data/videos';
+import conceptPoster from '../assets/youtube/concept-intro.jpg';
 
 const allPosts = (await getCollection('blog'))
 	.filter(p => !p.data.draft)
@@ -24,6 +25,8 @@ const comicStrip = [...comics].sort((a, b) => b.episode - a.episode);
 const latestComic = comicStrip[0];
 // YouTube の最新動画（トップの案内に出す）
 const latestVideo = videos[0];
+// 動画枠にピン留めするPR動画。最新動画と同じものは「最新」行に出るので外す
+const prStock = videos.find((v) => v.slug === 'tobu-tokai' && v.slug !== latestVideo.slug);
 const comicDate = (() => {
 	const [y, m, d] = latestComic.pubDate.split('-').map(Number);
 	return `${y}年${m}月${d}日`;
@@ -142,7 +145,7 @@ const memberHints = [
 		<main>
 			<section class="hero">
 				<figure class="hero-visual">
-					<img src="/images/brand/numasoko-research-room-20260914.png" alt="沼底バリュー商会のメンバーが一次資料や決算書を囲んで企業価値を調べるイラスト" loading="eager" fetchpriority="high" />
+					<img src="/images/brand/numasoko-research-room-20261013.png" alt="沼底バリュー商会のメンバーが一次資料や決算書を囲んで企業価値を調べるイラスト" loading="eager" fetchpriority="high" />
 					<button type="button" class="hero-play" data-video-open="company" aria-label="会社紹介の動画を見る（50秒）">
 						<span class="hero-play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
 						<span class="hero-play-label">会社紹介 50秒</span>
@@ -277,13 +280,43 @@ const memberHints = [
 				<div class="yt-teaser-copy">
 					<span class="first-visit-kicker">動画で見る・YouTube</span>
 					<h2 id="yt-teaser-title">調べ方を、会議の形で動画に</h2>
-					<p>筆者と部下たちが、決算短信と有価証券報告書を開いて確かめます。最新は「{latestVideo.shortTitle}」（{latestVideo.duration}）。</p>
+					<p>筆者と部下たちが、決算短信と有価証券報告書を開いて確かめます。はじめての方は上の2本からどうぞ。</p>
 					<a href="/youtube/" class="first-visit-main">動画一覧を見る（{videos.length}本） →</a>
 				</div>
-				<a class="yt-teaser-thumb" href={`/youtube/#${latestVideo.slug}`} aria-label={`動画「${latestVideo.shortTitle}」を見る`}>
-					<Picture src={latestVideo.thumb} alt="" formats={['avif', 'webp']} widths={[290, 580]} sizes="290px" loading="lazy" decoding="async" />
-					<span class="yt-teaser-play" aria-hidden="true">▶</span>
-				</a>
+				<div class="yt-teaser-list">
+					{prStock && (
+						<a class="yt-row" href={`/youtube/#${prStock.slug}`}>
+							<span class="yt-row-thumb">
+								<Picture src={prStock.thumb} alt="" formats={['avif', 'webp']} widths={[80, 160]} sizes="80px" loading="lazy" decoding="async" />
+								<span class="yt-row-play" aria-hidden="true">▶</span>
+							</span>
+							<span class="yt-row-text">
+								<span class="yt-row-head"><span class="yt-row-tag">主力2社</span><span class="yt-row-date">{prStock.duration}</span></span>
+								<span class="yt-row-title">東部ネットワークと東海エレクトロニクス</span>
+							</span>
+						</a>
+					)}
+					<button type="button" class="yt-row" data-video-open="concept" aria-label="経営コンセプトの動画を見る（3分7秒）">
+						<span class="yt-row-thumb">
+							<Picture src={conceptPoster} alt="" formats={['avif', 'webp']} widths={[80, 160]} sizes="80px" loading="lazy" decoding="async" />
+							<span class="yt-row-play" aria-hidden="true">▶</span>
+						</span>
+						<span class="yt-row-text">
+							<span class="yt-row-head"><span class="yt-row-tag">経営コンセプト</span><span class="yt-row-date">3分7秒</span></span>
+							<span class="yt-row-title">何を買って、何を買わないかの決め方</span>
+						</span>
+					</button>
+					<a class="yt-row" href={`/youtube/#${latestVideo.slug}`}>
+						<span class="yt-row-thumb">
+							<Picture src={latestVideo.thumb} alt="" formats={['avif', 'webp']} widths={[80, 160]} sizes="80px" loading="lazy" decoding="async" />
+							<span class="yt-row-play" aria-hidden="true">▶</span>
+						</span>
+						<span class="yt-row-text">
+							<span class="yt-row-head"><span class="yt-row-tag yt-row-tag-latest">最新</span><span class="yt-row-date">{videoDateLabel(latestVideo.published)} 更新</span></span>
+							<span class="yt-row-title">{latestVideo.shortTitle}</span>
+						</span>
+					</a>
+				</div>
 			</section>
 
 			<div class="wl-col-grid">
@@ -525,11 +558,20 @@ const memberHints = [
 	.yt-teaser{display:grid;grid-template-columns:1fr auto;gap:1em;align-items:center;margin:0 0 2em;padding:1.15em 1.25em;border:1px solid #e3dcc4;border-left:4px solid #b3261e;border-radius:10px;background:#fffdf6}
 	.yt-teaser h2{border:0;padding:0;margin:0 0 .45em;font-size:1.05em}
 	.yt-teaser p{margin:0 0 .8em;font-size:.8em;line-height:1.75;color:rgb(var(--gray-dark))}
-	.yt-teaser-thumb{position:relative;display:block;width:290px;border-radius:8px;overflow:hidden;border:1px solid #e3dcc4;line-height:0}
-	.yt-teaser-thumb :global(img){display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-	.yt-teaser-thumb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-	.yt-teaser-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:52px;height:36px;border-radius:10px;background:#d93025;color:#fff;font-size:15px;line-height:1;padding-left:2px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-	@media(max-width:640px){.yt-teaser{grid-template-columns:1fr}.yt-teaser-thumb{width:100%}}
+	.yt-teaser-list{width:290px;display:flex;flex-direction:column;gap:7px}
+	.yt-row{display:grid;grid-template-columns:80px 1fr;gap:.5em;align-items:center;margin:0;padding:0;border:0;border-radius:6px;background:none;color:inherit;font:inherit;text-align:left;text-decoration:none;cursor:pointer}
+	.yt-row:hover .yt-row-title{text-decoration:underline}
+	.yt-row:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+	.yt-row-thumb{position:relative;display:block;border-radius:5px;overflow:hidden;border:1px solid #e3dcc4;line-height:0}
+	.yt-row-thumb :global(img){display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+	.yt-row-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:26px;height:18px;border-radius:4px;background:#d93025;color:#fff;font-size:8px;line-height:1;padding-left:1px;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+	.yt-row-text{display:block;min-width:0}
+	.yt-row-head{display:flex;align-items:center;gap:.45em;margin:0 0 .2em}
+	.yt-row-tag{display:inline-block;padding:.1em .45em;border-radius:3px;background:#efe7cf;color:var(--accent-dark);font-size:.62em;font-weight:700;line-height:1.5;white-space:nowrap}
+	.yt-row-tag-latest{background:#b3261e;color:#fff}
+	.yt-row-date{font-size:.64em;color:rgb(var(--gray));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+	.yt-row-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.72em;line-height:1.35;font-weight:700;color:rgb(var(--gray-dark))}
+	@media(max-width:640px){.yt-teaser{grid-template-columns:1fr}.yt-teaser-list{width:100%}}
 
 	/* ── Asset Status ── */
 	.asset-status {

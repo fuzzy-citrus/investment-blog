@@ -78,6 +78,16 @@ export const weeklyRecords: WeeklyRecord[] = [
 		maintenance: 53.4,
 		slug: 'weekly-2026w41-week-summary',
 	},
+	{
+		date: '2026-10-16',
+		netAssets: 4232,
+		combinedAssets: 4264,
+		cashReserve: 32,
+		totalPosition: 10111,
+		unrealized: -62,
+		maintenance: 56.2,
+		slug: 'policy-shift-margin-to-spot-2026-10',
+	},
 ];
 
 /** 各月の最終確認残高（2026年9月分から数える）。口座間移動は運用利益に数えない。月末前は確認日を表示する。 */
